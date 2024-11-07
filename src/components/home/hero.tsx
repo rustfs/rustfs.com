@@ -97,9 +97,9 @@ export default function HomeHero() {
             FEATURES.map(({ icon: Icon, title }) => (
               <div
                 key={title}
-                className="group flex cursor-pointer flex-wrap items-center gap-4 text-neutral-800 hover:text-neutral-600 lg:gap-6 dark:hover:text-neutral-400"
+                className="group flex cursor-pointer flex-wrap items-center gap-4 text-neutral-800 hover:text-neutral-600 lg:gap-6 dark:text-neutral-300 dark:hover:text-neutral-100"
               >
-                <div className="flex items-center justify-center rounded-full bg-neutral-800 p-2 text-neutral-100 dark:bg-neutral-600">
+                <div className="flex items-center justify-center rounded-full bg-neutral-800 p-2 text-neutral-100 dark:bg-neutral-50 dark:text-neutral-500">
                   <Icon className="size-4 group-hover:text-neutral-400 md:size-6" />
                 </div>
                 <span className="text-2xl font-bold">{title}</span>
