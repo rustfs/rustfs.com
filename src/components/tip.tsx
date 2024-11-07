@@ -1,7 +1,7 @@
 export function TipGood({ children }) {
   return (
-    <div className="flex items-start my-6 space-x-4">
-      <div className="relative mt-1 w-4 h-4 rounded-full bg-cyan-500 text-white flex items-center justify-center ring-2 ring-cyan-500 dark:bg-sky-500 dark:ring-sky-500">
+    <div className="my-6 flex items-start space-x-4">
+      <div className="relative mt-1 flex size-4 items-center justify-center rounded-full bg-cyan-500 text-white ring-2 ring-cyan-500 dark:bg-sky-500 dark:ring-sky-500">
         <svg width="6" height="4.5" className="overflow-visible" aria-hidden="true">
           <path
             d="M6 0L2 4.5L0 2.5"
@@ -12,7 +12,7 @@ export function TipGood({ children }) {
             strokeLinejoin="round"
           />
         </svg>
-        <div className="absolute top-full mt-1 left-[0.46875rem] w-px h-[1.375rem] bg-cyan-500/30 rounded-full dark:bg-sky-400/30" />
+        <div className="absolute left-[0.46875rem] top-full mt-1 h-[1.375rem] w-px rounded-full bg-cyan-500/30 dark:bg-sky-400/30" />
       </div>
       <p className="m-0 flex-1 text-base font-semibold text-slate-900 dark:text-slate-200">
         {children}
@@ -23,8 +23,8 @@ export function TipGood({ children }) {
 
 export function TipBad({ children }) {
   return (
-    <div className="flex items-start my-6 space-x-4">
-      <div className="relative mt-1 w-4 h-4 rounded-full bg-rose-400 text-white flex items-center justify-center ring-2 ring-rose-400 dark:bg-red-400 dark:ring-red-400">
+    <div className="my-6 flex items-start space-x-4">
+      <div className="relative mt-1 flex size-4 items-center justify-center rounded-full bg-rose-400 text-white ring-2 ring-rose-400 dark:bg-red-400 dark:ring-red-400">
         <svg width="6" height="6" className="overflow-visible" aria-hidden="true">
           <path
             d="M0 0L6 6M6 0L0 6"
@@ -35,7 +35,7 @@ export function TipBad({ children }) {
             strokeLinejoin="round"
           />
         </svg>
-        <div className="absolute top-full mt-1 left-[0.46875rem] w-px h-[1.375rem] bg-rose-200 rounded-full dark:bg-red-200/25" />
+        <div className="absolute left-[0.46875rem] top-full mt-1 h-[1.375rem] w-px rounded-full bg-rose-200 dark:bg-red-200/25" />
       </div>
       <p className="m-0 flex-1 text-base font-semibold text-slate-900 dark:text-slate-200">
         {children}
@@ -46,7 +46,7 @@ export function TipBad({ children }) {
 
 export function TipCompat({ children }) {
   return (
-    <div className="text-sm bg-sky-100 text-sky-800 font-medium px-4 py-3 mb-4 rounded-xl">
+    <div className="mb-4 rounded-xl bg-sky-100 px-4 py-3 text-sm font-medium text-sky-800">
       <div className="flex items-start space-x-3">
         <svg width="20" height="20" className="text-sky-500" fill="currentColor">
           <path
@@ -63,9 +63,9 @@ export function TipCompat({ children }) {
 
 export function TipInfo({ children }) {
   return (
-    <div className="mt-6 -mb-1 flex space-x-2">
+    <div className="-mb-1 mt-6 flex space-x-2">
       <svg
-        className="flex-none w-5 h-5 text-slate-400 dark:text-slate-600"
+        className="size-5 flex-none text-slate-400 dark:text-slate-600"
         viewBox="0 0 20 20"
         fill="currentColor"
         aria-hidden="true"
@@ -77,7 +77,7 @@ export function TipInfo({ children }) {
         />
       </svg>
 
-      <p className="m-0 text-slate-700 text-sm font-medium dark:text-slate-200">{children}</p>
+      <p className="m-0 text-sm font-medium text-slate-700 dark:text-slate-200">{children}</p>
     </div>
   )
 }

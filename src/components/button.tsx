@@ -48,6 +48,7 @@ export function Button({
 
   return (
     <Link
+      href={props.href}
       className={clsx(
         'group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2',
         colorClasses[0],

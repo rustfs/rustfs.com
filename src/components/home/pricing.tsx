@@ -2,8 +2,8 @@ export default function HomePricing() {
   return (
     <>
       {/* Features */}
-      <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 py-12 lg:py-20 mx-auto">
-        <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+      <div className="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+        <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
             开源？商业？我们都支持
           </h2>
@@ -12,12 +12,12 @@ export default function HomePricing() {
           </p>
         </div>
 
-        <div className="relative xl:w-10/12 xl:mx-auto">
+        <div className="relative xl:mx-auto xl:w-10/12">
           {/* Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
             <div>
               {/* Card */}
-              <div className="p-4 relative z-10 bg-white border rounded-xl md:p-10 dark:bg-neutral-900 dark:border-neutral-800">
+              <div className="relative z-10 rounded-xl border bg-white p-4 md:p-10 dark:border-neutral-800 dark:bg-neutral-900">
                 <h3 className="text-xl font-bold text-gray-800 dark:text-neutral-200">
                   Professional
                 </h3>
@@ -35,13 +35,13 @@ export default function HomePricing() {
                     USD / monthly
                   </span>
                 </div>
-                <div className="mt-5 grid sm:grid-cols-2 gap-y-2 py-4 first:pt-0 last:pb-0 sm:gap-x-6 sm:gap-y-0">
+                <div className="mt-5 grid gap-y-2 py-4 first:pt-0 last:pb-0 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-0">
                   {/* List */}
                   <ul className="space-y-2 text-sm sm:text-base">
                     <li className="flex gap-x-3">
-                      <span className="mt-0.5 size-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                      <span className="mt-0.5 flex size-5 items-center justify-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
                         <svg
-                          className="shrink-0 size-3.5"
+                          className="size-3.5 shrink-0"
                           xmlns="http://www.w3.org/2000/svg"
                           width={24}
                           height={24}
@@ -60,9 +60,9 @@ export default function HomePricing() {
                       </span>
                     </li>
                     <li className="flex gap-x-3">
-                      <span className="mt-0.5 size-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                      <span className="mt-0.5 flex size-5 items-center justify-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
                         <svg
-                          className="shrink-0 size-3.5"
+                          className="size-3.5 shrink-0"
                           xmlns="http://www.w3.org/2000/svg"
                           width={24}
                           height={24}
@@ -81,9 +81,9 @@ export default function HomePricing() {
                       </span>
                     </li>
                     <li className="flex gap-x-3">
-                      <span className="mt-0.5 size-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                      <span className="mt-0.5 flex size-5 items-center justify-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
                         <svg
-                          className="shrink-0 size-3.5"
+                          className="size-3.5 shrink-0"
                           xmlns="http://www.w3.org/2000/svg"
                           width={24}
                           height={24}
@@ -106,9 +106,9 @@ export default function HomePricing() {
                   {/* List */}
                   <ul className="space-y-2 text-sm sm:text-base">
                     <li className="flex gap-x-3">
-                      <span className="size-5 flex justify-center items-center rounded-full bg-gray-50 text-gray-500 dark:bg-neutral-800 dark:text-neutral-500">
+                      <span className="flex size-5 items-center justify-center rounded-full bg-gray-50 text-gray-500 dark:bg-neutral-800 dark:text-neutral-500">
                         <svg
-                          className="shrink-0 size-3.5"
+                          className="size-3.5 shrink-0"
                           xmlns="http://www.w3.org/2000/svg"
                           width={24}
                           height={24}
@@ -128,9 +128,9 @@ export default function HomePricing() {
                       </span>
                     </li>
                     <li className="flex gap-x-3">
-                      <span className="size-5 flex justify-center items-center rounded-full bg-gray-50 text-gray-500 dark:bg-neutral-800 dark:text-neutral-500">
+                      <span className="flex size-5 items-center justify-center rounded-full bg-gray-50 text-gray-500 dark:bg-neutral-800 dark:text-neutral-500">
                         <svg
-                          className="shrink-0 size-3.5"
+                          className="size-3.5 shrink-0"
                           xmlns="http://www.w3.org/2000/svg"
                           width={24}
                           height={24}
@@ -150,9 +150,9 @@ export default function HomePricing() {
                       </span>
                     </li>
                     <li className="flex gap-x-3">
-                      <span className="size-5 flex justify-center items-center rounded-full bg-gray-50 text-gray-500 dark:bg-neutral-800 dark:text-neutral-500">
+                      <span className="flex size-5 items-center justify-center rounded-full bg-gray-50 text-gray-500 dark:bg-neutral-800 dark:text-neutral-500">
                         <svg
-                          className="shrink-0 size-3.5"
+                          className="size-3.5 shrink-0"
                           xmlns="http://www.w3.org/2000/svg"
                           width={24}
                           height={24}
@@ -186,7 +186,7 @@ export default function HomePricing() {
                   <div className="flex justify-end">
                     <button
                       type="button"
-                      className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                      className="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
                     >
                       Start free trial
                     </button>
@@ -197,14 +197,14 @@ export default function HomePricing() {
             </div>
             <div>
               {/* Card */}
-              <div className="shadow-xl shadow-gray-200 p-5 relative z-10 bg-white border rounded-xl md:p-10 dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-gray-900/20">
+              <div className="relative z-10 rounded-xl border bg-white p-5 shadow-xl shadow-gray-200 md:p-10 dark:border-neutral-800 dark:bg-neutral-900 dark:shadow-gray-900/20">
                 <h3 className="text-xl font-bold text-gray-800 dark:text-neutral-200">
                   Teams
                 </h3>
                 <div className="text-sm text-gray-500 dark:text-neutral-500">
                   For growing businesses.
                 </div>
-                <span className="absolute top-0 end-0 rounded-se-xl rounded-es-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-white dark:text-neutral-800">
+                <span className="absolute end-0 top-0 rounded-es-xl rounded-se-xl bg-gray-800 px-3 py-1.5 text-xs font-medium text-white dark:bg-white dark:text-neutral-800">
                   Most popular
                 </span>
                 <div className="mt-5">
@@ -218,13 +218,13 @@ export default function HomePricing() {
                     USD / monthly
                   </span>
                 </div>
-                <div className="mt-5 grid sm:grid-cols-2 gap-y-2 py-4 first:pt-0 last:pb-0 sm:gap-x-6 sm:gap-y-0">
+                <div className="mt-5 grid gap-y-2 py-4 first:pt-0 last:pb-0 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-0">
                   {/* List */}
                   <ul className="space-y-2 text-sm sm:text-base">
                     <li className="flex gap-x-3">
-                      <span className="mt-0.5 size-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                      <span className="mt-0.5 flex size-5 items-center justify-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
                         <svg
-                          className="shrink-0 size-3.5"
+                          className="size-3.5 shrink-0"
                           xmlns="http://www.w3.org/2000/svg"
                           width={24}
                           height={24}
@@ -243,9 +243,9 @@ export default function HomePricing() {
                       </span>
                     </li>
                     <li className="flex gap-x-3">
-                      <span className="mt-0.5 size-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                      <span className="mt-0.5 flex size-5 items-center justify-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
                         <svg
-                          className="shrink-0 size-3.5"
+                          className="size-3.5 shrink-0"
                           xmlns="http://www.w3.org/2000/svg"
                           width={24}
                           height={24}
@@ -264,9 +264,9 @@ export default function HomePricing() {
                       </span>
                     </li>
                     <li className="flex gap-x-3">
-                      <span className="mt-0.5 size-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                      <span className="mt-0.5 flex size-5 items-center justify-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
                         <svg
-                          className="shrink-0 size-3.5"
+                          className="size-3.5 shrink-0"
                           xmlns="http://www.w3.org/2000/svg"
                           width={24}
                           height={24}
@@ -289,9 +289,9 @@ export default function HomePricing() {
                   {/* List */}
                   <ul className="space-y-2 text-sm sm:text-base">
                     <li className="flex gap-x-3">
-                      <span className="mt-0.5 size-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                      <span className="mt-0.5 flex size-5 items-center justify-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
                         <svg
-                          className="shrink-0 size-3.5"
+                          className="size-3.5 shrink-0"
                           xmlns="http://www.w3.org/2000/svg"
                           width={24}
                           height={24}
@@ -310,9 +310,9 @@ export default function HomePricing() {
                       </span>
                     </li>
                     <li className="flex gap-x-3">
-                      <span className="mt-0.5 size-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                      <span className="mt-0.5 flex size-5 items-center justify-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
                         <svg
-                          className="shrink-0 size-3.5"
+                          className="size-3.5 shrink-0"
                           xmlns="http://www.w3.org/2000/svg"
                           width={24}
                           height={24}
@@ -331,9 +331,9 @@ export default function HomePricing() {
                       </span>
                     </li>
                     <li className="flex gap-x-3">
-                      <span className="mt-0.5 size-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
+                      <span className="mt-0.5 flex size-5 items-center justify-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
                         <svg
-                          className="shrink-0 size-3.5"
+                          className="size-3.5 shrink-0"
                           xmlns="http://www.w3.org/2000/svg"
                           width={24}
                           height={24}
@@ -366,7 +366,7 @@ export default function HomePricing() {
                   <div className="flex justify-end">
                     <button
                       type="button"
-                      className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                      className="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-medium text-white hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                     >
                       Start free trial
                     </button>
@@ -378,9 +378,9 @@ export default function HomePricing() {
           </div>
           {/* End Grid */}
           {/* SVG Element */}
-          <div className="hidden md:block absolute top-0 end-0 translate-y-16 translate-x-16">
+          <div className="absolute end-0 top-0 hidden translate-x-16 translate-y-16 md:block">
             <svg
-              className="w-16 h-auto text-orange-500"
+              className="h-auto w-16 text-orange-500"
               width={121}
               height={135}
               viewBox="0 0 121 135"
@@ -409,9 +409,9 @@ export default function HomePricing() {
           </div>
           {/* End SVG Element */}
           {/* SVG Element */}
-          <div className="hidden md:block absolute bottom-0 start-0 translate-y-16 -translate-x-16">
+          <div className="absolute bottom-0 start-0 hidden -translate-x-16 translate-y-16 md:block">
             <svg
-              className="w-56 h-auto text-cyan-500"
+              className="h-auto w-56 text-cyan-500"
               width={347}
               height={188}
               viewBox="0 0 347 188"
@@ -434,13 +434,13 @@ export default function HomePricing() {
         {/* End Features */}
 
         {/* Button Group */}
-        <div className="mt-8 md:mt-12 flex justify-center items-center gap-x-3">
+        <div className="mt-8 flex items-center justify-center gap-x-3 md:mt-12">
           <p className="text-sm text-gray-500 dark:text-neutral-400">
             Need a custom plan?
           </p>
           <button
             type="button"
-            className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+            className="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
           >
             Contact us
           </button>

@@ -1,10 +1,17 @@
-import { Listbox } from '@headlessui/react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { useIsomorphicLayoutEffect } from '@hooks/useIsomorphicLayoutEffect'
+import { RiSunLine } from '@remixicon/react'
 import clsx from 'clsx'
 import { Fragment, useEffect, useRef } from 'react'
 import { create } from 'zustand'
 
-const useSetting = create((set) => ({
+interface SettingState {
+  setting: string | null;
+  setSetting: (setting: string) => void;
+}
+
+const useSetting = create<SettingState>((set) => ({
   setting: null,
   setSetting: (setting) => set({ setting }),
 }))
@@ -97,7 +104,7 @@ function PcIcon({ selected, ...props }) {
         strokeWidth="2"
         strokeLinejoin="round"
         className={
-          selected ? 'stroke-sky-500 fill-sky-400/20' : 'stroke-slate-400 dark:stroke-slate-500'
+          selected ? 'fill-sky-400/20 stroke-sky-500' : 'stroke-slate-400 dark:stroke-slate-500'
         }
       />
       <path
@@ -143,7 +150,7 @@ function useTheme() {
     if (mediaQuery?.addEventListener) {
       mediaQuery.addEventListener('change', update)
     } else {
-      mediaQuery.addListener(update)
+      mediaQuery.addEventListener('change', update)
     }
 
     function onStorage() {
@@ -161,70 +168,70 @@ function useTheme() {
       if (mediaQuery?.removeEventListener) {
         mediaQuery.removeEventListener('change', update)
       } else {
-        mediaQuery.removeListener(update)
+        mediaQuery.removeEventListener('change', update)
       }
 
       window.removeEventListener('storage', onStorage)
     }
   }, [])
 
-  return [setting, setSetting]
+  return [setting, setSetting] as const
 }
 
 export function ThemeToggle({ panelClassName = 'mt-4' }) {
-  let [setting, setSetting] = useTheme()
+  const [setting, setSetting] = useTheme()
 
   return (
-    <Listbox value={setting} onChange={setSetting}>
-      <Listbox.Label className="sr-only">Theme</Listbox.Label>
-      <Listbox.Button type="button" className="relative">
+    <Listbox value={setting || ''} onChange={(value: string) => setSetting(value)}>
+      <Label className="sr-only">Theme</Label>
+      <ListboxButton type="button" className="relative">
         <span className="dark:hidden">
-          <SunIcon className="w-6 h-6" selected={setting !== 'system'} />
+          <SunIcon className="size-6" selected={setting !== 'system'} />
         </span>
         <span className="hidden dark:inline">
-          <MoonIcon className="w-6 h-6" selected={setting !== 'system'} />
+          <MoonIcon className="size-6" selected={setting !== 'system'} />
         </span>
-      </Listbox.Button>
-      <Listbox.Options
+      </ListboxButton>
+      <ListboxOptions
         className={clsx(
           'absolute z-50 top-full right-0 bg-white rounded-lg ring-1 ring-slate-900/10 shadow-lg overflow-hidden w-36 py-1 text-sm text-slate-700 font-semibold dark:bg-slate-800 dark:ring-0 dark:highlight-white/5 dark:text-slate-300',
           panelClassName
         )}
       >
         {settings.map(({ value, label, icon: Icon }) => (
-          <Listbox.Option key={value} value={value} as={Fragment}>
-            {({ active, selected }) => (
+          <ListboxOption key={value} value={value} as={Fragment}>
+            {({ focus, selected }) => (
               <div
                 className={clsx(
                   'py-1 px-2 flex items-center cursor-pointer',
                   selected && 'text-sky-500',
-                  active && 'bg-slate-50 dark:bg-slate-600/30'
+                  focus && 'bg-slate-50 dark:bg-slate-600/30'
                 )}
               >
-                <Icon selected={selected} className="w-6 h-6 mr-2" />
+                <Icon selected={selected} className="mr-2 size-6" />
                 {label}
               </div>
             )}
-          </Listbox.Option>
+          </ListboxOption>
         ))}
-      </Listbox.Options>
+      </ListboxOptions>
     </Listbox>
   )
 }
 
 export function ThemeSelect() {
-  let [setting, setSetting] = useTheme()
+  const [setting, setSetting] = useTheme()
 
   let { label } = settings.find((x) => x.value === setting)
 
   return (
     <div className="flex items-center justify-between">
-      <label htmlFor="theme" className="text-slate-700 font-normal dark:text-slate-400">
+      <label htmlFor="theme" className="font-normal text-slate-700 dark:text-slate-400">
         Switch theme
       </label>
-      <div className="relative flex items-center ring-1 ring-slate-900/10 rounded-lg shadow-sm p-2 text-slate-700 font-semibold dark:bg-slate-600 dark:ring-0 dark:highlight-white/5 dark:text-slate-200">
-        <SunIcon className="w-6 h-6 mr-2 dark:hidden" />
-        <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 mr-2 hidden dark:block">
+      <div className="dark:highlight-white/5 relative flex items-center rounded-lg p-2 font-semibold text-slate-700 shadow-sm ring-1 ring-slate-900/10 dark:bg-slate-600 dark:text-slate-200 dark:ring-0">
+        <RiSunLine className="mr-2 size-6 dark:hidden" />
+        <svg viewBox="0 0 24 24" fill="none" className="mr-2 hidden size-6 dark:block">
           <path
             fillRule="evenodd"
             clipRule="evenodd"
@@ -243,7 +250,7 @@ export function ThemeSelect() {
           />
         </svg>
         {label}
-        <svg className="w-6 h-6 ml-2 text-slate-400" fill="none">
+        <svg className="ml-2 size-6 text-slate-400" fill="none">
           <path
             d="m15 11-3 3-3-3"
             stroke="currentColor"
@@ -254,9 +261,9 @@ export function ThemeSelect() {
         </svg>
         <select
           id="theme"
-          value={setting}
-          onChange={(e) => setSetting(e.target.value)}
-          className="absolute appearance-none inset-0 w-full h-full opacity-0"
+          value={setting || ''}
+          onChange={(e) => setSetting(e.target.value as string)}
+          className="absolute inset-0 size-full appearance-none opacity-0"
         >
           {settings.map(({ value, label }) => (
             <option key={value} value={value}>

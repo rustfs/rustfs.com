@@ -1,12 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
 import { ChevronRightIcon } from "lucide-react";
 
 export default function RecentNews() {
   return (
     <>
       {/* Card Blog */}
-      <div className="max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-20 mx-auto">
+      <div className="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
         {/* Title */}
-        <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+        <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
             最新动态
           </h2>
@@ -16,16 +17,16 @@ export default function RecentNews() {
         </div>
         {/* End Title */}
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {/* Card */}
           <a className="group flex flex-col focus:outline-none" href="#">
-            <div className="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
+            <div className="relative overflow-hidden rounded-xl pt-[50%] sm:pt-[70%]">
               <img
-                className="size-full absolute top-0 start-0 object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl"
+                className="absolute start-0 top-0 size-full rounded-xl object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 group-focus:scale-105"
                 src="https://images.unsplash.com/photo-1586232702178-f044c5f4d4b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80"
                 alt="Blog Image"
               />
-              <span className="absolute top-0 end-0 rounded-se-xl rounded-es-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-neutral-900">
+              <span className="absolute end-0 top-0 rounded-es-xl rounded-se-xl bg-gray-800 px-3 py-1.5 text-xs font-medium text-white dark:bg-neutral-900">
                 Sponsored
               </span>
             </div>
@@ -34,13 +35,13 @@ export default function RecentNews() {
                 Studio by Preline
               </h3>
               <p className="mt-3 text-gray-800 dark:text-neutral-200">
-                Produce professional, reliable streams easily leveraging Preline's
+                Produce professional, reliable streams easily leveraging Preline&apos;s
                 innovative broadcast studio
               </p>
-              <p className="mt-5 inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 group-hover:underline group-focus:underline font-medium dark:text-blue-500">
+              <p className="mt-5 inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 group-hover:underline group-focus:underline dark:text-blue-500">
                 Read more
                 <svg
-                  className="shrink-0 size-4"
+                  className="size-4 shrink-0"
                   xmlns="http://www.w3.org/2000/svg"
                   width={24}
                   height={24}
@@ -59,9 +60,9 @@ export default function RecentNews() {
           {/* End Card */}
           {/* Card */}
           <a className="group flex flex-col focus:outline-none" href="#">
-            <div className="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
+            <div className="relative overflow-hidden rounded-xl pt-[50%] sm:pt-[70%]">
               <img
-                className="size-full absolute top-0 start-0 object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl"
+                className="absolute start-0 top-0 size-full rounded-xl object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 group-focus:scale-105"
                 src="https://images.unsplash.com/photo-1542125387-c71274d94f0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80"
                 alt="Blog Image"
               />
@@ -74,10 +75,10 @@ export default function RecentNews() {
                 Optimize your in-person experience with best-in-class capabilities
                 like badge printing and lead retrieval
               </p>
-              <p className="mt-5 inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 group-hover:underline group-focus:underline font-medium dark:text-blue-500">
+              <p className="mt-5 inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 group-hover:underline group-focus:underline dark:text-blue-500">
                 Read more
                 <svg
-                  className="shrink-0 size-4"
+                  className="size-4 shrink-0"
                   xmlns="http://www.w3.org/2000/svg"
                   width={24}
                   height={24}
@@ -105,11 +106,11 @@ export default function RecentNews() {
                 about economic and technological advancement.
               </h3>
             </div>
-            <div className="pt-0 p-4 md:p-6">
+            <div className="p-4 pt-0 md:p-6">
               <div className="inline-flex items-center gap-2 text-sm font-medium text-white group-hover:text-white/70 group-focus:text-white/70">
                 Visit the site
                 <svg
-                  className="shrink-0 size-4"
+                  className="size-4 shrink-0"
                   xmlns="http://www.w3.org/2000/svg"
                   width={24}
                   height={24}
@@ -130,12 +131,12 @@ export default function RecentNews() {
         {/* End Grid */}
 
         {/* Read more */}
-        <div className="text-center mt-12">
-          <div className="inline-block bg-white border shadow-sm rounded-full dark:bg-neutral-900 dark:border-neutral-800">
-            <div className="py-3 px-4 flex items-center gap-x-2">
+        <div className="mt-12 text-center">
+          <div className="inline-block rounded-full border bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+            <div className="flex items-center gap-x-2 px-4 py-3">
               <p className="text-gray-600 dark:text-neutral-400">浏览更多动态?</p>
               <a
-                className="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
+                className="inline-flex items-center gap-x-1.5 font-medium text-blue-600 decoration-2 hover:underline focus:underline focus:outline-none dark:text-blue-500"
                 href="../docs/index.html"
               >
                 阅读更多

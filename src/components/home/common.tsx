@@ -1,10 +1,21 @@
-import clsx from 'clsx'
-import { Button } from '../Button'
+import clsx from 'clsx';
+import { Button } from '../button';
 
-export function IconContainer({ as: Component = 'div', className = '', light, dark, ...props }) {
+import { ComponentType, ReactNode } from 'react';
+
+interface IconContainerProps {
+  as?: ComponentType<any> | string;
+  className?: string;
+  light?: string;
+  dark?: string;
+  children?: ReactNode;
+  [key: string]: any;
+}
+
+export function IconContainer({ as: Component = 'div', className = '', light, dark, ...props }: IconContainerProps) {
   return (
     <Component
-      className={`w-16 h-16 p-[0.1875rem] rounded-full ring-1 ring-slate-900/10 shadow overflow-hidden ${className}`}
+      className={`size-16 overflow-hidden rounded-full p-[0.1875rem] shadow ring-1 ring-slate-900/10 ${className}`}
       {...props}
     >
       {light && (
@@ -17,7 +28,7 @@ export function IconContainer({ as: Component = 'div', className = '', light, da
       )}
       {dark && (
         <div
-          className="hidden aspect-w-1 aspect-h-1 bg-[length:100%] dark:block"
+          className="aspect-w-1 aspect-h-1 hidden bg-[length:100%] dark:block"
           style={{
             backgroundImage: `url(${dark})`,
           }}
@@ -34,30 +45,32 @@ export function Caption({ className = '', ...props }) {
 export function BigText({ className = '', ...props }) {
   return (
     <p
-      className={`mt-4 text-3xl sm:text-4xl text-slate-900 font-extrabold tracking-tight dark:text-slate-50 ${className}`}
+      className={`mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-slate-50 ${className}`}
       {...props}
     />
   )
 }
 
-export function Paragraph({ as: Component = 'p', className = '', ...props }) {
+import { HTMLAttributes } from 'react';
+
+export function Paragraph({ as: Component = 'p', className = '', ...props }: { as?: ComponentType<any> | string; className?: string; } & HTMLAttributes<HTMLElement>) {
   return <Component className={`mt-4 max-w-3xl space-y-6 ${className}`} {...props} />
 }
 
-export function Link({ className, ...props }) {
-  return <Button className={clsx('mt-8', className)} {...props} />
+export function Link({ className, children, ...props }) {
+  return <Button className={clsx('mt-8', className)} {...props}>{children}</Button>
 }
 
 export function InlineCode({ className = '', ...props }) {
   return (
     <code
-      className={`font-mono text-slate-900 font-medium dark:text-slate-200 ${className}`}
+      className={`font-mono font-medium text-slate-900 dark:text-slate-200 ${className}`}
       {...props}
     />
   )
 }
 
-export { Widont } from '@/components/Widont'
+export { Widont } from '@/components/widont';
 
 export let themeTabs = {
   Simple: (selected) => (

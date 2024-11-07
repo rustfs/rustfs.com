@@ -9,14 +9,14 @@ export function TabBar({
   children,
 }) {
   return (
-    <div className="flex text-slate-400 text-xs leading-6">
-      <div className="flex-none text-sky-300 border-t border-b border-t-transparent border-b-sky-300 px-4 py-1 flex items-center">
+    <div className="flex text-xs leading-6 text-slate-400">
+      <div className="flex flex-none items-center border-y border-b-sky-300 border-t-transparent px-4 py-1 text-sky-300">
         {primary.name}
         {showTabMarkers &&
           (primary.saved ? (
             <svg
               viewBox="0 0 4 4"
-              className="ml-2.5 flex-none w-1 h-1 text-slate-500 overflow-visible"
+              className="ml-2.5 size-1 flex-none overflow-visible text-slate-500"
             >
               <path
                 d="M-1 -1L5 5M5 -1L-1 5"
@@ -26,7 +26,7 @@ export function TabBar({
               />
             </svg>
           ) : (
-            <div className="ml-2.5 flex-none w-1 h-1 rounded-full bg-current" />
+            <div className="ml-2.5 size-1 flex-none rounded-full bg-current" />
           ))}
       </div>
       <div
@@ -45,7 +45,7 @@ export function TabBar({
           </div>
         ))}
         {children && (
-          <div className="flex-auto flex items-center justify-end px-4 space-x-4">{children}</div>
+          <div className="flex flex-auto items-center justify-end space-x-4 px-4">{children}</div>
         )}
       </div>
     </div>

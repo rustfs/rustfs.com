@@ -17,9 +17,9 @@ export default function Subscribe() {
   return (
     <>
       {/* Subscribe */}
-      <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 flex flex-col justify-center">
+      <div className="mx-auto flex max-w-[85rem] flex-col justify-center px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
         {/* Title */}
-        <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+        <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
             订阅 & 咨询
           </h2>
@@ -29,7 +29,7 @@ export default function Subscribe() {
         </div>
 
         <div className="mt-8 text-center">
-          <div id="kit-form" className='flex flex-col items-center w-full min-w-screen'></div>
+          <div id="kit-form" className='min-w-screen flex w-full flex-col items-center'></div>
           <p className="mt-3 text-sm text-neutral-500 dark:text-neutral-500">
             我们不会向您发送垃圾邮件，您可以随时取消订阅
           </p>

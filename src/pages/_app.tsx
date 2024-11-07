@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Footer from '@/components/footer'
 import ProgressBar from '@badrap/bar-of-progress'
 import Header from '@components/header'

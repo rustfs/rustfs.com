@@ -5,6 +5,7 @@ import { Feed } from 'feed'
 import fs from 'fs'
 import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider'
 import ReactDOMServer from 'react-dom/server'
+import siteConfig from '../../config'
 
 export default async function buildRss() {
   const baseUrl = 'https://rustfs.com'
@@ -47,6 +48,10 @@ export default async function buildRss() {
     image = image
       ? `${baseUrl}${image.default?.src ?? image.src ?? image}`
       : `${baseUrl}/api/og?path=/blog/${slug}`
+
+    if (meta.authors.length === 0) {
+      meta.authors.push(siteConfig.defaultAuthor)
+    }
 
     feed.addItem({
       title: meta.title,

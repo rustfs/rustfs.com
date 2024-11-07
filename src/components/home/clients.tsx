@@ -4,10 +4,10 @@ export default function Clients() {
   return (
     <>
       {/* Clients */}
-      <div className="max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-20 mx-auto">
+      <div className="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
         {/* Title */}
         {/* Title */}
-        <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+        <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
             值得信赖的开源软件<br /><span className="text-blue-500">超过 99,000 位用户的选择</span>
           </h2>
@@ -17,9 +17,9 @@ export default function Clients() {
         </div>
         {/* End Title */}
         {/* Grid */}
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-x-6">
+        <div className="grid grid-cols-3 gap-x-6 md:grid-cols-6">
           <svg
-            className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto text-gray-500 dark:text-neutral-500"
+            className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500"
             enableBackground="new 0 0 2499 614"
             viewBox="0 0 2499 614"
             xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ export default function Clients() {
             />
           </svg>
           <svg
-            className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto text-gray-500 dark:text-neutral-500"
+            className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="-4.126838974812941 0.900767442746961 939.436838974813 230.18142889845947"
             width={2500}
@@ -42,7 +42,7 @@ export default function Clients() {
             />
           </svg>
           <svg
-            className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto text-gray-500 dark:text-neutral-500"
+            className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 2428 1002"
@@ -73,7 +73,7 @@ export default function Clients() {
             />
           </svg>
           <svg
-            className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto text-gray-500 dark:text-neutral-500"
+            className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500"
             viewBox="0 -8.881784197001252e-16 267.51517722360785 65.24679557585003"
             xmlns="http://www.w3.org/2000/svg"
             width={2500}
@@ -85,7 +85,7 @@ export default function Clients() {
             />
           </svg>
           <svg
-            className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto text-gray-500 dark:text-neutral-500"
+            className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 127 33"
@@ -108,7 +108,7 @@ export default function Clients() {
             />
           </svg>
           <svg
-            className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto text-gray-500 dark:text-neutral-500"
+            className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 120 32"
@@ -130,9 +130,9 @@ export default function Clients() {
         </div>
         {/* End Grid */}
         {/* Grid */}
-        <div className="grid grid-cols-3 md:grid-cols-5 gap-x-6 sm:gap-x-6">
+        <div className="grid grid-cols-3 gap-x-6 sm:gap-x-6 md:grid-cols-5">
           <svg
-            className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto text-gray-500 dark:text-neutral-500"
+            className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500"
             xmlns="http://www.w3.org/2000/svg"
             x={0}
             y={0}
@@ -163,7 +163,7 @@ export default function Clients() {
             />
           </svg>
           <svg
-            className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto text-gray-500 dark:text-neutral-500"
+            className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 151 32"
@@ -174,7 +174,7 @@ export default function Clients() {
             />
           </svg>
           <svg
-            className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto text-gray-500 dark:text-neutral-500"
+            className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 107 32"
@@ -194,7 +194,7 @@ export default function Clients() {
             </g>
           </svg>
           <svg
-            className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto text-gray-500 dark:text-neutral-500"
+            className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500"
             xmlns="http://www.w3.org/2000/svg"
             width={2500}
             height={1036}
@@ -218,7 +218,7 @@ export default function Clients() {
             />
           </svg>
           <svg
-            className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto text-gray-500 dark:text-neutral-500"
+            className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500"
             width={2500}
             height={728}
             viewBox="0 0 512 149"
@@ -237,7 +237,7 @@ export default function Clients() {
         {/* End Grid */}
         <div className="mt-8 text-center">
           <a
-            className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+            className="inline-flex items-center gap-x-2 rounded-full border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
             href="#"
           >
             了解更多客户案例

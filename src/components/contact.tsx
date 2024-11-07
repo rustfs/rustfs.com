@@ -3,21 +3,21 @@ export default function Contact() {
     <>
       {/* Hero */}
       <div id="contact" className="overflow-hidden">
-        <div className="max-w-[65rem] mx-auto px-4 sm:px-6 lg:px-12 py-12 lg:py-20">
-          <div className="relative mx-auto max-w-4xl grid space-y-5 sm:space-y-10">
+        <div className="mx-auto max-w-[65rem] px-4 py-12 sm:px-6 lg:px-12 lg:py-20">
+          <div className="relative mx-auto grid max-w-4xl space-y-5 sm:space-y-10">
             {/* Title */}
             <div className="text-center">
-              <p className="text-sm font-semibold text-gray-500 tracking-wide uppercase mb-3 dark:text-orange-500">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-orange-500">
                 立即免费体验
               </p>
-              <h1 className="text-3xl text-gray-800 font-bold sm:text-5xl lg:text-6xl lg:leading-tight dark:text-neutral-200">
+              <h1 className="text-3xl font-bold text-gray-800 sm:text-5xl lg:text-6xl lg:leading-tight dark:text-neutral-200">
                 快速体验 RustFS 的 <br />
                 <span className="text-blue-500">高安全性，高并发和极致性能</span>
               </h1>
             </div>
             {/* End Title */}
             {/* Avatar Group */}
-            <div className="sm:flex sm:justify-center sm:items-center text-center sm:text-start">
+            <div className="text-center sm:flex sm:items-center sm:justify-center sm:text-start">
               <div className="shrink-0 pb-5 sm:flex sm:pb-0 sm:pe-5">
                 {/* Avatar Group */}
                 <div className="flex justify-center -space-x-3">
@@ -41,16 +41,16 @@ export default function Contact() {
                     src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
                     alt="Avatar"
                   />
-                  <span className="inline-flex items-center justify-center size-8 rounded-full ring-2 ring-white bg-gray-800 dark:bg-neutral-900 dark:ring-neutral-900">
-                    <span className="text-xs font-medium leading-none text-white uppercase">
+                  <span className="inline-flex size-8 items-center justify-center rounded-full bg-gray-800 ring-2 ring-white dark:bg-neutral-900 dark:ring-neutral-900">
+                    <span className="text-xs font-medium uppercase leading-none text-white">
                       100+
                     </span>
                   </span>
                 </div>
                 {/* End Avatar Group */}
               </div>
-              <div className="border-t sm:border-t-0 sm:border-s border-gray-200 w-32 h-px sm:w-auto sm:h-full mx-auto sm:mx-0 dark:border-neutral-700" />
-              <div className="pt-5 sm:pt-0 sm:ps-5">
+              <div className="mx-auto h-px w-32 border-t border-gray-200 sm:mx-0 sm:h-full sm:w-auto sm:border-s sm:border-t-0 dark:border-neutral-700" />
+              <div className="pt-5 sm:ps-5 sm:pt-0">
                 <div className="text-sm text-gray-500 dark:text-neutral-500">
                   超过 100 企业用户已经开始使用 RustFS
                 </div>
@@ -58,15 +58,15 @@ export default function Contact() {
             </div>
             {/* End Avatar Group */}
 
-            
+
 
             {/* SVG Element */}
             <div
-              className="hidden absolute top-2/4 start-0 transform -translate-y-2/4 -translate-x-40 md:block lg:-translate-x-80"
+              className="absolute start-0 top-2/4 hidden -translate-x-40 -translate-y-2/4 md:block lg:-translate-x-80"
               aria-hidden="true"
             >
               <svg
-                className="w-52 h-auto"
+                className="h-auto w-52"
                 width={717}
                 height={653}
                 viewBox="0 0 717 653"
@@ -93,11 +93,11 @@ export default function Contact() {
             {/* End SVG Element */}
             {/* SVG Element */}
             <div
-              className="hidden absolute top-2/4 end-0 transform -translate-y-2/4 translate-x-40 md:block lg:translate-x-80"
+              className="absolute end-0 top-2/4 hidden -translate-y-2/4 translate-x-40 md:block lg:translate-x-80"
               aria-hidden="true"
             >
               <svg
-                className="w-72 h-auto"
+                className="h-auto w-72"
                 width={1115}
                 height={636}
                 viewBox="0 0 1115 636"

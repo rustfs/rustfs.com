@@ -1,27 +1,40 @@
-export function PageHeader({ title, description, repo, badge = {}, section }) {
+interface Badge {
+  key?: string;
+  value?: string;
+}
+
+interface PageHeaderProps {
+  title: string;
+  description?: string;
+  repo?: string;
+  badge?: Badge;
+  section?: string;
+}
+
+export function PageHeader({ title, description, repo, badge = {}, section }: PageHeaderProps) {
   if (!title && !description) return null
 
   return (
     <header id="header" className="relative z-20">
       <div>
         {section && (
-          <p className="mb-2 text-sm leading-6 font-semibold text-sky-500 dark:text-sky-400">
+          <p className="mb-2 text-sm font-semibold leading-6 text-sky-500 dark:text-sky-400">
             {section}
           </p>
         )}
         <div className="flex items-center">
-          <h1 className="inline-block text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight dark:text-slate-200">
+          <h1 className="inline-block text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl dark:text-slate-200">
             {title}
           </h1>
           {repo && (
             <a
               href={repo}
-              className="ml-3 block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 sm:mt-1 sm:ml-4"
+              className="ml-3 block text-slate-400 hover:text-slate-500 sm:ml-4 sm:mt-1 dark:hover:text-slate-300"
             >
               <span className="sr-only">View on GitHub</span>
               <svg
                 viewBox="0 0 16 16"
-                className="w-5 h-5 sm:w-6 sm:h-6"
+                className="size-5 sm:size-6"
                 fill="currentColor"
                 aria-hidden="true"
               >
@@ -31,7 +44,7 @@ export function PageHeader({ title, description, repo, badge = {}, section }) {
           )}
         </div>
         {badge.key && badge.value && (
-          <dl className="ml-3 mt-1.5 align-top inline-flex items-center px-3 py-1 rounded-full text-sm font-medium leading-4 bg-cyan-100 text-cyan-900 tracking-tight">
+          <dl className="ml-3 mt-1.5 inline-flex items-center rounded-full bg-cyan-100 px-3 py-1 align-top text-sm font-medium leading-4 tracking-tight text-cyan-900">
             <dt className="sr-only">{badge.key}</dt>
             <dd>{badge.value}</dd>
           </dl>

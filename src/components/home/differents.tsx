@@ -4,8 +4,8 @@ export default function HomePricing() {
   return (
     <>
       {/* Features */}
-      <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 py-12 lg:py-20 mx-auto">
-        <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+      <div className="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+        <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
             与其他存储产品的对比
           </h2>
@@ -14,39 +14,39 @@ export default function HomePricing() {
           </p>
         </div>
 
-        <div className="relative w-full xl:w-10/12 xl:mx-auto flex flex-col lg:flex-row gap-6">
-          <div className="border rounded-xl md:w-1/2 lg:text-right relative bg-white dark:bg-neutral-800">
-            <h3 className="p-4 lg:p-8 text-xl lg:text-3xl font-semibold">其他对象存储</h3>
+        <div className="relative flex w-full flex-col gap-6 lg:flex-row xl:mx-auto xl:w-10/12">
+          <div className="relative rounded-xl border bg-white md:w-1/2 lg:text-right dark:bg-neutral-800">
+            <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">其他对象存储</h3>
             <div className="text-muted-foreground">
-              <div className="flex items-center md:flex-row-reverse gap-2 py-4 px-4 lg:px-8 bg-neutral-100 dark:bg-neutral-900">
+              <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
                 <span>使用 Go 或者 C 语言开发，内容GC/内存泄漏等</span>
               </div>
-              <div className="flex items-center md:flex-row-reverse gap-2 py-4 px-4 lg:px-8 ">
+              <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
                 <XIcon className="text-neutral-500" />
                 <span>向其他第三国上报日志，违反国家安全法</span>
               </div>
-              <div className="flex items-center md:flex-row-reverse gap-2 py-4 px-4 lg:px-8 bg-neutral-100 dark:bg-neutral-900">
+              <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
                 <span>AGPL V3 等协议、污染开源和协议陷阱，侵犯知识产权</span>
               </div>
-              <div className="flex items-center md:flex-row-reverse gap-2 py-4 px-4 lg:px-8 ">
+              <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
                 <XIcon className="text-neutral-500" />
                 <span> S3 支持和功能完善，不支持中国云厂商</span>
               </div>
-              <div className="flex items-center md:flex-row-reverse gap-2 py-4 px-4 lg:px-8 bg-neutral-100 dark:bg-neutral-900">
+              <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
                 <span>不完全支持国产信创设备</span>
               </div>
-              <div className="flex items-center md:flex-row-reverse gap-2 py-4 px-4 lg:px-8 ">
+              <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
                 <XIcon className="text-neutral-500" />
                 <span>每年涨价，价格高达数百万人民币</span>
               </div>
             </div>
 
-            <div className="hidden md:block absolute bottom-0 start-0 translate-y-16 -translate-x-16">
+            <div className="absolute bottom-0 start-0 hidden -translate-x-16 translate-y-16 md:block">
               <svg
-                className="w-56 h-auto text-cyan-500"
+                className="h-auto w-56 text-cyan-500"
                 width={347}
                 height={188}
                 viewBox="0 0 347 188"
@@ -63,42 +63,42 @@ export default function HomePricing() {
             </div>
           </div>
 
-          <div className="border rounded-xl md:w-1/2 text-left relative bg-white dark:bg-neutral-800">
-            <h3 className="p-4 lg:p-8 text-xl lg:text-3xl font-semibold">RustFS</h3>
+          <div className="relative rounded-xl border bg-white text-left md:w-1/2 dark:bg-neutral-800">
+            <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">RustFS</h3>
             <div className="text-muted-foreground">
-              <div className="flex items-center gap-2 py-4 px-4 lg:px-8 bg-neutral-100 dark:bg-neutral-900">
+              <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
                 <CheckIcon className="text-green-500" />
                 <span>基于 Rust 语言开发，内存更安全</span>
               </div>
-              <div className="flex items-center gap-2 py-4 px-4 lg:px-8 ">
+              <div className="flex items-center gap-2 p-4 lg:px-8 ">
                 <CheckIcon className="text-green-500" />
                 <span>不向其他第三国上报日志</span>
               </div>
-              <div className="flex items-center gap-2 py-4 px-4 lg:px-8 bg-neutral-100 dark:bg-neutral-900">
+              <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
                 <CheckIcon className="text-green-500" />
                 <span>Apache协议，商用支持更友好</span>
               </div>
-              <div className="flex items-center gap-2 py-4 px-4 lg:px-8 ">
+              <div className="flex items-center gap-2 p-4 lg:px-8 ">
                 <CheckIcon className="text-green-500" />
                 <span>S3 支持和功能完善，支持国内云厂商</span>
               </div>
-              <div className="flex items-center gap-2 py-4 px-4 lg:px-8 bg-neutral-100 dark:bg-neutral-900">
+              <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
                 <CheckIcon className="text-green-500" />
                 <span>支持国产信创设备和保密系统</span>
               </div>
-              <div className="flex items-center gap-2 py-4 px-4 lg:px-8 ">
+              <div className="flex items-center gap-2 p-4 lg:px-8 ">
                 <CheckIcon className="text-green-500" />
                 <span>商用和技术支持和价格稳定</span>
               </div>
             </div>
 
-            <span className="absolute top-0 end-0 rounded-se-xl rounded-es-xl text-xs font-medium bg-green-500 text-white py-1.5 px-3">
+            <span className="absolute end-0 top-0 rounded-es-xl rounded-se-xl bg-green-500 px-3 py-1.5 text-xs font-medium text-white">
               最佳选择
             </span>
 
-            <div className="hidden md:block absolute top-0 end-0 translate-y-16 translate-x-16">
+            <div className="absolute end-0 top-0 hidden translate-x-16 translate-y-16 md:block">
               <svg
-                className="w-16 h-auto text-orange-500"
+                className="h-auto w-16 text-orange-500"
                 width={121}
                 height={135}
                 viewBox="0 0 121 135"

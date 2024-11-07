@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ContentsContext } from '@/layouts/contents-layout'
 import clsx from 'clsx'
 import { useContext, useEffect } from 'react'
@@ -13,7 +14,7 @@ export function Heading({
   nextElement,
   ...props
 }) {
-  let Component = `h${level}`
+  const Component = `h${level}` as keyof JSX.IntrinsicElements
   const context = useContext(ContentsContext)
 
   useEffect(() => {

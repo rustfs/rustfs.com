@@ -2,8 +2,8 @@ export default function Stats() {
   return (
     <>
       {/* Features */}
-      <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 py-12 lg:py-20 mx-auto">
-        <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+      <div className="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+        <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
             强大的性能，卓越的安全性
           </h2>
@@ -12,15 +12,15 @@ export default function Stats() {
           </p>
         </div>
         {/* Grid */}
-        <div className="grid items-center lg:grid-cols-12 gap-6 lg:gap-12">
+        <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             {/* Stats */}
             <div className="lg:pe-6 xl:pe-12">
               <p className="text-6xl font-bold leading-10 text-blue-600">
                 92%
-                <span className="ms-1 inline-flex items-center gap-x-1 bg-gray-200 font-medium text-gray-800 text-xs leading-4 rounded-full py-0.5 px-2 dark:bg-neutral-800 dark:text-neutral-300">
+                <span className="ms-1 inline-flex items-center gap-x-1 rounded-full bg-gray-200 px-2 py-0.5 text-xs font-medium leading-4 text-gray-800 dark:bg-neutral-800 dark:text-neutral-300">
                   <svg
-                    className="shrink-0 size-4"
+                    className="size-4 shrink-0"
                     xmlns="http://www.w3.org/2000/svg"
                     width={16}
                     height={16}
@@ -32,15 +32,15 @@ export default function Stats() {
                   +7% 读写速度
                 </span>
               </p>
-              <p className="mt-2 sm:mt-3 text-gray-500 dark:text-neutral-500">
+              <p className="mt-2 text-gray-500 sm:mt-3 dark:text-neutral-500">
                 来自 Rust 的高性能，高安全性，高并发性能
               </p>
             </div>
             {/* End Stats */}
           </div>
           {/* End Col */}
-          <div className="lg:col-span-8 relative lg:before:absolute lg:before:top-0 lg:before:-start-12 lg:before:w-px lg:before:h-full lg:before:bg-gray-200 lg:before:dark:bg-neutral-700">
-            <div className="grid gap-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-3 sm:gap-8">
+          <div className="relative lg:col-span-8 lg:before:absolute lg:before:-start-12 lg:before:top-0 lg:before:h-full lg:before:w-px lg:before:bg-gray-200 lg:before:dark:bg-neutral-700">
+            <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4 lg:grid-cols-3">
               {/* Stats */}
               <div>
                 <p className="text-3xl font-semibold text-blue-600">99.99%</p>

@@ -5,7 +5,7 @@ export function DocsFooter({ children, previous, next }: { children?: React.Reac
   return (
     <footer className={clsx('text-sm leading-6', previous || next ? 'mt-12' : 'mt-16')}>
       {(previous || next) && (
-        <div className="mb-10 text-slate-700 font-semibold flex items-center dark:text-slate-200">
+        <div className="mb-10 flex items-center font-semibold text-slate-700 dark:text-slate-200">
           {previous && (
             <Link
               href={previous.href}
@@ -13,7 +13,7 @@ export function DocsFooter({ children, previous, next }: { children?: React.Reac
             >
               <svg
                 viewBox="0 0 3 6"
-                className="mr-3 w-auto h-1.5 text-slate-400 overflow-visible group-hover:text-slate-600 dark:group-hover:text-slate-300"
+                className="mr-3 h-1.5 w-auto overflow-visible text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300"
               >
                 <path
                   d="M3 0L0 3L3 6"
@@ -35,7 +35,7 @@ export function DocsFooter({ children, previous, next }: { children?: React.Reac
               {next.shortTitle || next.title}
               <svg
                 viewBox="0 0 3 6"
-                className="ml-3 w-auto h-1.5 text-slate-400 overflow-visible group-hover:text-slate-600 dark:group-hover:text-slate-300"
+                className="ml-3 h-1.5 w-auto overflow-visible text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300"
               >
                 <path
                   d="M0 0L3 3L0 6"
@@ -50,7 +50,7 @@ export function DocsFooter({ children, previous, next }: { children?: React.Reac
           )}
         </div>
       )}
-      <div className="pt-10 pb-28 border-t border-slate-200 sm:flex justify-between text-slate-500 dark:border-slate-200/5">
+      <div className="justify-between border-t border-slate-200 pb-28 pt-10 text-slate-500 sm:flex dark:border-slate-200/5">
         <div className="mb-6 sm:mb-0 sm:flex">
           <p>Copyright &copy; {new Date().getFullYear()} RustFS Inc.</p>
           {/* <p className="sm:ml-4 sm:pl-4 sm:border-l sm:border-slate-200 dark:sm:border-slate-200/5">

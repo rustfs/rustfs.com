@@ -107,6 +107,8 @@ export function SearchProvider({ children }) {
                   'product',
                   'product_category',
                 ],
+                indexName: INDEX_NAME,
+                type: 'default',
               }}
               placeholder="Search documentation"
               onClose={onClose}

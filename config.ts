@@ -18,7 +18,11 @@ const siteConfig = {
     appId: '',
     apiKey: '',
     indexName: '',
-  }
+  },
+  defaultAuthor: {
+    name: 'RustFS',
+    twitter: '@rustfs',
+  },
 };
 
 export default siteConfig;

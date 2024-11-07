@@ -1,31 +1,29 @@
 export function Tabs({ tabs, selected, onChange, className, iconClassName }) {
   return (
-    <div className="flex overflow-auto -mx-4 sm:mx-0">
+    <div className="-mx-4 flex overflow-auto sm:mx-0">
       <ul
-        className="flex-none inline-grid gap-x-2 px-4 sm:px-0 xl:gap-x-6"
+        className="inline-grid flex-none gap-x-2 px-4 sm:px-0 xl:gap-x-6"
         style={{ gridTemplateColumns: `repeat(${Object.keys(tabs).length}, minmax(6rem, 1fr))` }}
       >
-        {Object.entries(tabs).map(([name, icon]) => (
+        {Object.entries(tabs).map(([name, Icon]: [string, React.ComponentType<{ selected: boolean }>]) => (
           <li key={name}>
             <button
               type="button"
               onClick={() => onChange(name)}
-              className={`group text-sm font-semibold w-full flex flex-col items-center ${
-                selected === name ? className : ''
-              }`}
+              className={`group flex w-full flex-col items-center text-sm font-semibold ${selected === name ? className : ''
+                }`}
             >
               <svg
                 width="48"
                 height="48"
                 fill="none"
                 aria-hidden="true"
-                className={`mb-6 ${
-                  selected === name
-                    ? iconClassName
-                    : 'text-slate-300 group-hover:text-slate-400 dark:text-slate-600 dark:group-hover:text-slate-500'
-                }`}
+                className={`mb-6 ${selected === name
+                  ? iconClassName
+                  : 'text-slate-300 group-hover:text-slate-400 dark:text-slate-600 dark:group-hover:text-slate-500'
+                  }`}
               >
-                {icon(selected === name)}
+                <Icon selected={selected === name} />
               </svg>
               {name}
             </button>

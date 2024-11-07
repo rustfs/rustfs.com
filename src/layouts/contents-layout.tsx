@@ -1,4 +1,3 @@
-import { ClassTable } from '@/components/class-table'
 import { DocsFooter } from '@/components/docs-footer'
 import { PageHeader } from '@/components/page-header'
 import { mdxComponents } from '@/utils/mdxComponents'
@@ -8,7 +7,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { createContext, Fragment, useCallback, useEffect, useState } from 'react'
 
-export const ContentsContext = createContext({})
+export const ContentsContext = createContext({
+  registerHeading: (id) => { },
+  unregisterHeading: (id) => { },
+})
 
 function TableOfContents({ tableOfContents, currentSection }) {
 
@@ -30,10 +32,10 @@ function TableOfContents({ tableOfContents, currentSection }) {
   return (
     <>
       <div className="px-8">
-        <h5 className="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-100">
+        <h5 className="mb-4 text-sm font-semibold leading-6 text-slate-900 dark:text-slate-100">
           On this page
         </h5>
-        <ul className="text-slate-700 text-sm leading-6">
+        <ul className="text-sm leading-6 text-slate-700">
           {tableOfContents.map((section) => (
             <Fragment key={section.slug}>
               <li>
@@ -67,7 +69,7 @@ function TableOfContents({ tableOfContents, currentSection }) {
                       width="3"
                       height="24"
                       viewBox="0 -9 3 24"
-                      className="mr-2 text-slate-400 overflow-visible group-hover:text-slate-600 dark:text-slate-600 dark:group-hover:text-slate-500"
+                      className="mr-2 overflow-visible text-slate-400 group-hover:text-slate-600 dark:text-slate-600 dark:group-hover:text-slate-500"
                     >
                       <path
                         d="M0 0L3 3L0 6"
@@ -130,8 +132,7 @@ function useTableOfContents(tableOfContents) {
     }
 
     window.addEventListener('scroll', onScroll, {
-      capture: true,
-      passive: true,
+      capture: true
     })
 
     onScroll()
@@ -147,7 +148,6 @@ function useTableOfContents(tableOfContents) {
       resizeObserver.disconnect()
       window.removeEventListener('scroll', onScroll, {
         capture: true,
-        passive: true,
       })
     }
   }, [headings, tableOfContents])
@@ -183,7 +183,7 @@ export function ContentsLayout({ children, meta, classes, tableOfContents, secti
   const { currentSection, registerHeading, unregisterHeading } = useTableOfContents(toc)
 
   return (
-    <div className="max-w-3xl mx-auto pt-10 xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
+    <div className="mx-auto max-w-3xl pt-10 xl:ml-0 xl:mr-[15.5rem] xl:max-w-none xl:pr-16">
       <PageHeader
         title={meta.title}
         description={meta.description}
@@ -192,24 +192,12 @@ export function ContentsLayout({ children, meta, classes, tableOfContents, secti
         section={section}
       />
       <ContentsContext.Provider value={{ registerHeading, unregisterHeading }}>
-        {classes ? (
-          <>
-            <ClassTable {...classes} />
-            <div
-              id="content-wrapper"
-              className="relative z-20 prose prose-slate mt-12 dark:prose-dark"
-            >
-              <MDXProvider components={mdxComponents}>{children}</MDXProvider>
-            </div>
-          </>
-        ) : (
-          <div
-            id="content-wrapper"
-            className="relative z-20 prose prose-slate mt-8 dark:prose-dark"
-          >
-            <MDXProvider components={mdxComponents}>{children}</MDXProvider>
-          </div>
-        )}
+        <div
+          id="content-wrapper"
+          className="prose prose-slate dark:prose-dark relative z-20 mt-8"
+        >
+          <MDXProvider components={mdxComponents}>{children}</MDXProvider>
+        </div>
       </ContentsContext.Provider>
 
       <DocsFooter>
@@ -221,7 +209,7 @@ export function ContentsLayout({ children, meta, classes, tableOfContents, secti
         </Link>
       </DocsFooter>
 
-      <div className="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 overflow-y-auto hidden xl:block">
+      <div className="fixed bottom-0 right-[max(0px,calc(50%-45rem))] top-[3.8125rem] z-20 hidden w-[19.5rem] overflow-y-auto py-10 xl:block">
         {toc.length > 0 && (
           <TableOfContents tableOfContents={toc} currentSection={currentSection} />
         )}

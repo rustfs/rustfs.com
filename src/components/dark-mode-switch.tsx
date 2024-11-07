@@ -1,6 +1,6 @@
-import { useState } from 'react'
 import { Switch } from '@headlessui/react'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 export function DarkModeSwitch() {
   const [enabled, setEnabled] = useState(false)
@@ -31,15 +31,14 @@ export function DarkModeSwitch() {
       <Switch
         checked={enabled}
         onChange={setEnabled}
-        className={`inline-flex items-center px-0.5 rounded-full w-18 h-9 ${
-          enabled ? 'justify-end' : ''
-        }`}
+        className={`w-18 inline-flex h-9 items-center rounded-full px-0.5 ${enabled ? 'justify-end' : ''
+          }`}
         style={{ backgroundColor: enabled ? '#000' : '#60D360' }}
       >
         <span className="sr-only">Enable dark mode</span>
         <motion.span
           layout
-          className="bg-white rounded-full w-8 h-8"
+          className="size-8 rounded-full bg-white"
           style={{ boxShadow: '0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 1px rgba(0, 0, 0, 0.1)' }}
         />
       </Switch>

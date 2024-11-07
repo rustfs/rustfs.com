@@ -17,16 +17,16 @@ export default function PostItem({ title, category, slug, date, children, wide =
         'pt-8': category,
       })}
     >
-      <h3 className="mb-4 text-xl text-slate-900 tracking-tight font-bold dark:text-slate-200">
+      <h3 className="mb-4 text-xl font-bold tracking-tight text-slate-900 dark:text-slate-200">
         <Link href={`/blog/${slug}`}>{title}</Link>
       </h3>
-      <div className="mb-6 prose prose-slate dark:prose-dark">{children}</div>
+      <div className="prose prose-slate dark:prose-dark mb-6">{children}</div>
       <div className="mt-auto flex flex-row-reverse items-center justify-end">
         <dl>
           {category && (
             <>
               <dt className="sr-only">Category</dt>
-              <dd className="absolute top-0 left-0 text-sm leading-6 font-semibold text-cyan-500">
+              <dd className="absolute left-0 top-0 text-sm font-semibold leading-6 text-cyan-500">
                 {category}
               </dd>
             </>

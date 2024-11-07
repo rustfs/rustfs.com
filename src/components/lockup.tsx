@@ -2,7 +2,7 @@ export function Lockup() {
   return (
     <div className="grid grid-cols-2 grid-rows-[4.5rem_auto_min(1fr,4.5rem)]">
       <div className="col-start-1 row-start-2 row-end-4">
-        <div className="w-full h-[200px] bg-blue-500" />
+        <div className="h-[200px] w-full bg-blue-500" />
         <div className="h-[4.5rem]" />
       </div>
       <div className="col-start-2 row-start-1 row-end-3">

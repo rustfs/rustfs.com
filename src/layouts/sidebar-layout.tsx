@@ -38,6 +38,8 @@ const NavItem = forwardRef(({ href, children, isActive, isPublished, fallbackHre
   )
 })
 
+NavItem.displayName = 'NavItem'
+
 /**
  * Find the nearest scrollable ancestor (or self if scrollable)
  *
@@ -106,11 +108,11 @@ function Nav({ nav, children, fallbackHref, mobile = false }) {
   }, [router.pathname])
 
   return (
-    <nav ref={scrollRef} id="nav" className="lg:text-sm lg:leading-6 relative">
-      <div className="sticky top-0 -ml-0.5 pointer-events-none">
+    <nav ref={scrollRef} id="nav" className="relative lg:text-sm lg:leading-6">
+      <div className="pointer-events-none sticky top-0 -ml-0.5">
         {!mobile && <div className="h-10" />}
-        <div className="relative pointer-events-auto">
-          <SearchButton className="hidden w-full lg:flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 hover:ring-slate-300 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700">
+        <div className="pointer-events-auto relative">
+          <SearchButton className="dark:highlight-white/5 hidden w-full items-center rounded-md py-1.5 pl-2 pr-3 text-sm leading-6 text-slate-400 shadow-sm ring-1 ring-slate-900/10 hover:ring-slate-300 lg:flex dark:bg-slate-800 dark:hover:bg-slate-700">
             {({ actionKey }) => (
               <>
                 <svg
@@ -139,7 +141,7 @@ function Nav({ nav, children, fallbackHref, mobile = false }) {
                 </svg>
                 Quick search...
                 {actionKey && (
-                  <span className="ml-auto pl-3 flex-none text-xs font-semibold">
+                  <span className="ml-auto flex-none pl-3 text-xs font-semibold">
                     {actionKey[0]}K
                   </span>
                 )}
@@ -246,7 +248,7 @@ function TopLevelLink({
                 : 'dark:bg-slate-800 dark:highlight-white/5'
           )}
         >
-          <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none">
+          <svg className="size-6" viewBox="0 0 24 24" fill="none">
             {icon}
           </svg>
         </div>
@@ -342,6 +344,8 @@ function TopLevelNav({ mobile }) {
             />
           </>
         }
+        isActive={pathname.startsWith('/discussions')}
+        activeBackground="dark:bg-violet-500"
       >
         Community
       </TopLevelLink>
@@ -366,7 +370,7 @@ export function SidebarLayout({
     <SidebarContext.Provider value={{ nav, navIsOpen, setNavIsOpen }}>
       <Wrapper allowOverflow={allowOverflow}>
         <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
-          <div className="hidden lg:block fixed z-20 inset-0 top-[4rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19rem] pb-10 pl-8 pr-6 overflow-y-auto">
+          <div className="fixed inset-0 left-[max(0px,calc(50%-45rem))] right-auto top-16 z-20 hidden w-[19rem] overflow-y-auto pb-10 pl-8 pr-6 lg:block">
             <Nav nav={nav} fallbackHref={fallbackHref}>
               {sidebar}
             </Nav>
@@ -377,17 +381,17 @@ export function SidebarLayout({
       <Dialog
         open={navIsOpen}
         onClose={() => setNavIsOpen(false)}
-        className="fixed z-50 inset-0 overflow-y-auto lg:hidden"
+        className="fixed inset-0 z-50 overflow-y-auto lg:hidden"
       >
         <div className="fixed inset-0 bg-black/20 backdrop-blur-sm dark:bg-slate-900/80" />
-        <DialogPanel className="relative bg-white w-80 max-w-[calc(100%-3rem)] p-6 dark:bg-slate-800">
+        <DialogPanel className="relative w-80 max-w-[calc(100%-3rem)] bg-white p-6 dark:bg-slate-800">
           <button
             type="button"
             onClick={() => setNavIsOpen(false)}
-            className="absolute z-10 top-5 right-5 w-8 h-8 flex items-center justify-center text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
+            className="absolute right-5 top-5 z-10 flex size-8 items-center justify-center text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
           >
             <span className="sr-only">Close navigation</span>
-            <svg viewBox="0 0 10 10" className="w-2.5 h-2.5 overflow-visible">
+            <svg viewBox="0 0 10 10" className="size-2.5 overflow-visible">
               <path
                 d="M0 0L10 10M10 0L0 10"
                 fill="none"

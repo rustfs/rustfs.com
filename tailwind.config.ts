@@ -47,11 +47,6 @@ module.exports = {
     },
     extend: {
       colors: {
-        code: {
-          highlight: 'rgb(125 211 252 / 0.1)',
-        },
-      },
-      colors: {
         primary: {
           '50': '#eff6ff',
           '100': '#dbeafe',
@@ -107,7 +102,10 @@ module.exports = {
         'color-2': 'hsl(var(--color-2))',
         'color-3': 'hsl(var(--color-3))',
         'color-4': 'hsl(var(--color-4))',
-        'color-5': 'hsl(var(--color-5))'
+        'color-5': 'hsl(var(--color-5))',
+        code: {
+          highlight: 'rgb(125 211 252 / 0.1)',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',

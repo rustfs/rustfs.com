@@ -14,9 +14,9 @@ const dateFormat = {
 
 export default function Blog({ posts }) {
   return (
-    <main className="max-w-[52rem] mx-auto px-4 pb-28 sm:px-6 md:px-8 xl:px-12 lg:max-w-6xl">
+    <main className="mx-auto max-w-[52rem] px-4 pb-28 sm:px-6 md:px-8 lg:max-w-6xl xl:px-12">
       <header className="py-16 sm:text-center">
-        <h1 className="mb-4 text-3xl sm:text-4xl tracking-tight text-neutral-900 font-extrabold dark:text-neutral-200">
+        <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl dark:text-neutral-200">
           Latest Updates
         </h1>
         <p className="text-lg text-neutral-700 dark:text-neutral-400">
@@ -27,15 +27,15 @@ export default function Blog({ posts }) {
           <NewsletterForm action="https://app.convertkit.com/forms/3181837/subscriptions" />
         </section> */}
       </header>
-      <div className="relative sm:pb-12 sm:ml-[calc(2rem+1px)] md:ml-[calc(3.5rem+1px)] lg:ml-[max(calc(14.5rem+1px),calc(100%-48rem))]">
-        <div className="hidden absolute top-3 bottom-0 right-full mr-7 md:mr-[3.25rem] w-px bg-neutral-200 dark:bg-neutral-800 sm:block" />
+      <div className="relative sm:ml-[calc(2rem+1px)] sm:pb-12 md:ml-[calc(3.5rem+1px)] lg:ml-[max(calc(14.5rem+1px),calc(100%-48rem))]">
+        <div className="absolute bottom-0 right-full top-3 mr-7 hidden w-px bg-neutral-200 sm:block md:mr-[3.25rem] dark:bg-neutral-800" />
         <div className="space-y-16">
           {posts.map(({ slug, meta, preview }) => (
-            <article key={slug} className="relative group">
-              <div className="absolute -inset-y-2.5 -inset-x-4 md:-inset-y-4 md:-inset-x-6 sm:rounded-2xl group-hover:bg-neutral-50/70 dark:group-hover:bg-neutral-800/50" />
+            <article key={slug} className="group relative">
+              <div className="absolute -inset-x-4 -inset-y-2.5 group-hover:bg-neutral-50/70 sm:rounded-2xl md:-inset-x-6 md:-inset-y-4 dark:group-hover:bg-neutral-800/50" />
               <svg
                 viewBox="0 0 9 9"
-                className="hidden absolute right-full mr-6 top-2 text-neutral-200 dark:text-neutral-600 md:mr-12 w-[calc(0.5rem+1px)] h-[calc(0.5rem+1px)] overflow-visible sm:block"
+                className="absolute right-full top-2 mr-6 hidden size-[calc(0.5rem+1px)] overflow-visible text-neutral-200 sm:block md:mr-12 dark:text-neutral-600"
               >
                 <circle
                   cx="4.5"
@@ -47,11 +47,11 @@ export default function Blog({ posts }) {
                 />
               </svg>
               <div className="relative">
-                <h3 className="text-base font-semibold tracking-tight text-neutral-900 dark:text-neutral-200 pt-8 lg:pt-0">
+                <h3 className="pt-8 text-base font-semibold tracking-tight text-neutral-900 lg:pt-0 dark:text-neutral-200">
                   {meta.title}
                 </h3>
                 <div
-                  className="mt-2 mb-4 prose prose-neutral prose-a:relative prose-a:z-10 dark:prose-dark line-clamp-2"
+                  className="prose prose-neutral prose-a:relative prose-a:z-10 dark:prose-dark mb-4 mt-2 line-clamp-2"
                   dangerouslySetInnerHTML={{ __html: preview }}
                 />
                 <dl className="absolute left-0 top-0 lg:left-auto lg:right-full lg:mr-[calc(6.5rem+1px)]">
@@ -63,14 +63,14 @@ export default function Blog({ posts }) {
               </div>
               <Link
                 href={`/blog/${slug}`}
-                className="flex items-center text-sm text-sky-500 font-medium"
+                className="flex items-center text-sm font-medium text-sky-500"
               >
-                <span className="absolute -inset-y-2.5 -inset-x-4 md:-inset-y-4 md:-inset-x-6 sm:rounded-2xl" />
+                <span className="absolute -inset-x-4 -inset-y-2.5 sm:rounded-2xl md:-inset-x-6 md:-inset-y-4" />
                 <span className="relative">
                   Read more<span className="sr-only">, {meta.title}</span>
                 </span>
                 <svg
-                  className="relative mt-px overflow-visible ml-2.5 text-sky-300 dark:text-sky-700"
+                  className="relative ml-2.5 mt-px overflow-visible text-sky-300 dark:text-sky-700"
                   width="3"
                   height="6"
                   viewBox="0 0 3 6"

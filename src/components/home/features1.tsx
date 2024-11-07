@@ -4,19 +4,19 @@ export default function HomeFeatures1() {
   return (
     <>
       {/* Icon Blocks */}
-      <div className="max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-20 mx-auto">
+      <div className="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
         {/* Grid */}
-        <div className="grid md:grid-cols-2 gap-12">
-          <div className="lg:w-3/4 relative">
-            <h2 className="text-3xl text-neutral-800 font-bold lg:text-4xl dark:text-white">
+        <div className="grid gap-12 md:grid-cols-2">
+          <div className="relative lg:w-3/4">
+            <h2 className="text-3xl font-bold text-neutral-800 lg:text-4xl dark:text-white">
               真正的多云存储
             </h2>
-            <p className="mt-3 text-muted-foreground">
+            <p className="text-muted-foreground mt-3">
               多云对象存储允许企业在任何云上构建与 AWS S3 兼容的数据基础设施。结果是数据和应用程序的一致、可移植的接口 - 这意味着您可以在任何地方运行，从边缘到公共云，而无需更改一行代码。
             </p>
             <p className="mt-5">
               <a
-                className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
+                className="inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 hover:underline focus:underline focus:outline-none dark:text-blue-500"
                 href="#contact"
               >
                 联系我们获取更多信息
@@ -25,11 +25,11 @@ export default function HomeFeatures1() {
             </p>
 
             <div
-              className="hidden lg:block absolute bottom-0 start-0 transform lg:translate-x-32"
+              className="absolute bottom-0 start-0 hidden lg:block lg:translate-x-32"
               aria-hidden="true"
             >
               <svg
-                className="w-40 h-auto sm:w-72"
+                className="h-auto w-40 sm:w-72"
                 width={1115}
                 height={636}
                 viewBox="0 0 1115 636"
@@ -59,14 +59,14 @@ export default function HomeFeatures1() {
             {/* Icon Block */}
             <div className="flex gap-x-5 sm:gap-x-8">
               {/* Icon */}
-              <span className="shrink-0 inline-flex justify-center items-center size-12 lg:size-20 rounded-full border border-neutral-200 bg-white text-blue-500 shadow-sm mx-auto dark:bg-neutral-900 dark:border-neutral-700">
+              <span className="mx-auto inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white text-blue-500 shadow-sm lg:size-20 dark:border-neutral-700 dark:bg-neutral-900">
                 <EarthIcon className="size-6 lg:size-8" />
               </span>
               <div className="grow">
-                <h3 className="text-base sm:text-lg font-semibold text-neutral-800 dark:text-neutral-200">
+                <h3 className="text-base font-semibold text-neutral-800 sm:text-lg dark:text-neutral-200">
                   公有云
                 </h3>
-                <p className="mt-1 text-muted-foreground text-sm lg:text-lg">
+                <p className="text-muted-foreground mt-1 text-sm lg:text-lg">
                   RustFS 由 Kubernetes 提供支持，为每个公共云提供可扩展、安全、兼容 S3 的对象存储。将自己从供应商的束缚中解放出来，并对待云的本质 - 商用计算、网络和驱动器。
                 </p>
               </div>
@@ -75,14 +75,14 @@ export default function HomeFeatures1() {
             {/* Icon Block */}
             <div className="flex gap-x-5 sm:gap-x-8">
               {/* Icon */}
-              <span className="shrink-0 inline-flex justify-center items-center size-12 lg:size-20 rounded-full border border-neutral-200 bg-white text-blue-500 shadow-sm mx-auto dark:bg-neutral-900 dark:border-neutral-700">
+              <span className="mx-auto inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white text-blue-500 shadow-sm lg:size-20 dark:border-neutral-700 dark:bg-neutral-900">
                 <EarthLockIcon className="size-6 lg:size-8" />
               </span>
               <div className="grow">
-                <h3 className="text-base sm:text-lg font-semibold text-neutral-800 dark:text-neutral-200">
+                <h3 className="text-base font-semibold text-neutral-800 sm:text-lg dark:text-neutral-200">
                   私有云
                 </h3>
-                <p className="mt-1 text-muted-foreground text-sm lg:text-lg">
+                <p className="text-muted-foreground mt-1 text-sm lg:text-lg">
                   从 OpenShift 到 Tanzu，RustFS 是唯一一个作为领先 Kubernetes 发行版基础设施基础部分的对象存储。凭借其庞大的集成应用程序组合 RustFS 完善了软件定义的画面。
                 </p>
               </div>
@@ -91,14 +91,14 @@ export default function HomeFeatures1() {
             {/* Icon Block */}
             <div className="flex gap-x-5 sm:gap-x-8">
               {/* Icon */}
-              <span className="shrink-0 inline-flex justify-center items-center size-12 lg:size-20 rounded-full border border-neutral-200 bg-white text-blue-500 shadow-sm mx-auto dark:bg-neutral-900 dark:border-neutral-700">
+              <span className="mx-auto inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white text-blue-500 shadow-sm lg:size-20 dark:border-neutral-700 dark:bg-neutral-900">
                 <HexagonIcon className="size-6 lg:size-8" />
               </span>
               <div className="grow">
-                <h3 className="text-base sm:text-lg font-semibold text-neutral-800 dark:text-neutral-200">
+                <h3 className="text-base font-semibold text-neutral-800 sm:text-lg dark:text-neutral-200">
                   边缘
                 </h3>
-                <p className="mt-1 text-muted-foreground text-sm lg:text-lg">
+                <p className="text-muted-foreground mt-1 text-sm lg:text-lg">
                   RustFS 多云存储的完整二进制文件不到 100MB，能够为任何地方的对象存储提供支持 - 从 ARM SOC、5G POP 和边缘缓存设备到迷你数据中心。这就是 RustFS 主导边缘存储市场的原因。
                 </p>
               </div>
