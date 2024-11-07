@@ -82,8 +82,9 @@ export default function HomeHero() {
             <SparkleIcon className="size-4" />
           </a>
 
-          <a href="#" className='relative inline-flex items-center justify-center gap-x-2 rounded-lg bg-white px-8 py-3 text-sm font-medium text-neutral-800 shadow-xl hover:bg-neutral-100 focus:bg-neutral-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50'>
-            免费下载
+          <a href="https://tb.53kf.com/code/client/3ae82624ac86c32c1db8d311cd6d2a659/2" className='relative inline-flex items-center justify-center gap-x-2 rounded-lg bg-white px-8 py-3 text-sm font-medium text-neutral-800 shadow-xl hover:bg-neutral-100 focus:bg-neutral-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50'>
+            {/* 免费下载 */}
+            免费咨询
             <ArrowRightIcon className="size-4" />
           </a>
         </div>
