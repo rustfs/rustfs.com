@@ -34,7 +34,7 @@ export default function HomeHero() {
         repeatDelay={1}
         className={clsx(
           "[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]",
-          "inset-x-0 inset-y-[-30%] h-[200%]",
+          "inset-x-0 inset-y-0 h-[200%]",
         )}
       />
 
