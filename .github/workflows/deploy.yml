@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - nam: Install dependencies
+      - name: Install dependencies
         run: pnpm install
       - name: Build
         run: pnpm run build
