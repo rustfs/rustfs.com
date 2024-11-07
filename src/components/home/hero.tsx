@@ -1,3 +1,4 @@
+import AnimatedGridPattern from "@components/ui/animated-grid-pattern"
 import clsx from "clsx"
 import { ArrowRightIcon, BoxesIcon, ChevronRightIcon, ClockArrowUpIcon, MousePointerClickIcon, ShieldCheckIcon, SparkleIcon } from "lucide-react"
 import AnimatedGradientText from "../ui/animated-gradient-text"
@@ -26,7 +27,7 @@ export default function HomeHero() {
   return (
     <section className="relative flex flex-col items-center justify-center overflow-hidden border-b pt-16 md:h-screen md:pt-0 dark:border-neutral-800">
       {/* Animated grid pattern */}
-      {/* <AnimatedGridPattern
+      <AnimatedGridPattern
         numSquares={300}
         maxOpacity={0.1}
         duration={1}
@@ -35,7 +36,7 @@ export default function HomeHero() {
           "[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]",
           "inset-x-0 inset-y-[-30%] h-[200%]",
         )}
-      /> */}
+      />
 
       {/* Globe */}
       {/* <Globe className="absolute bottom-0 mt-[30vh] w-full max-w-full" /> */}
