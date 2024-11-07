@@ -29,7 +29,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dependencies
-        run: pnpm install
+        run: npm install -g pnpm && pnpm install
       - name: Build
         run: pnpm run build
       - name: Upload to oss
