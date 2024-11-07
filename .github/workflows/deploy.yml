@@ -28,10 +28,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - run: |
-          ls
-          pwd
-
+      - nam: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
       - name: Upload to oss
         id: upload_to_oss
         uses: JohnGuan/oss-upload-action@main
