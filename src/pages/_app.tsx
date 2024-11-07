@@ -5,6 +5,7 @@ import Header from '@components/header'
 import { Description, OgDescription, OgTitle, Title } from '@components/meta'
 import * as Fathom from 'fathom-client'
 import 'focus-visible'
+import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
 import Router, { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
@@ -82,7 +83,7 @@ export default function App({ Component, pageProps, router }) {
     )?.[0]
 
   return (
-    <>
+    <ThemeProvider enableSystem attribute="class">
       <Title>{meta.metaTitle || meta.title} </Title>
       {meta.ogTitle && <OgTitle>{meta.ogTitle} </OgTitle>}
       <Description>{description} </Description>
@@ -117,6 +118,6 @@ export default function App({ Component, pageProps, router }) {
           <Footer />
         )
       }
-    </>
+    </ThemeProvider>
   )
 }

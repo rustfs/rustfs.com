@@ -1,35 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
-import { useIsomorphicLayoutEffect } from '@hooks/useIsomorphicLayoutEffect'
 import { RiSunLine } from '@remixicon/react'
 import clsx from 'clsx'
-import { Fragment, useEffect, useRef } from 'react'
-import { create } from 'zustand'
-
-interface SettingState {
-  setting: string | null;
-  setSetting: (setting: string) => void;
-}
-
-const useSetting = create<SettingState>((set) => ({
-  setting: null,
-  setSetting: (setting) => set({ setting }),
-}))
-
-function update() {
-  document.documentElement.classList.add('changing-theme')
-  if (
-    localStorage.theme === 'dark' ||
-    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-  ) {
-    document.documentElement.classList.add('dark')
-  } else {
-    document.documentElement.classList.remove('dark')
-  }
-  window.setTimeout(() => {
-    document.documentElement.classList.remove('changing-theme')
-  })
-}
+import { useTheme } from 'next-themes'
+import { Fragment } from 'react'
 
 let settings = [
   {
@@ -118,78 +92,18 @@ function PcIcon({ selected, ...props }) {
   )
 }
 
-function useTheme() {
-  let { setting, setSetting } = useSetting()
-  let initial = useRef(true)
-
-  useIsomorphicLayoutEffect(() => {
-    let theme = localStorage.theme
-    if (theme === 'light' || theme === 'dark') {
-      setSetting(theme)
-    } else {
-      setSetting('system')
-    }
-  }, [])
-
-  useIsomorphicLayoutEffect(() => {
-    if (setting === 'system') {
-      localStorage.removeItem('theme')
-    } else if (setting === 'light' || setting === 'dark') {
-      localStorage.theme = setting
-    }
-    if (initial.current) {
-      initial.current = false
-    } else {
-      update()
-    }
-  }, [setting])
-
-  useEffect(() => {
-    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-
-    if (mediaQuery?.addEventListener) {
-      mediaQuery.addEventListener('change', update)
-    } else {
-      mediaQuery.addEventListener('change', update)
-    }
-
-    function onStorage() {
-      update()
-      let theme = localStorage.theme
-      if (theme === 'light' || theme === 'dark') {
-        setSetting(theme)
-      } else {
-        setSetting('system')
-      }
-    }
-    window.addEventListener('storage', onStorage)
-
-    return () => {
-      if (mediaQuery?.removeEventListener) {
-        mediaQuery.removeEventListener('change', update)
-      } else {
-        mediaQuery.removeEventListener('change', update)
-      }
-
-      window.removeEventListener('storage', onStorage)
-    }
-  }, [])
-
-  return [setting, setSetting] as const
-}
-
 export function ThemeToggle({ panelClassName = 'mt-4' }) {
-  const [setting, setSetting] = useTheme()
+  const { resolvedTheme, theme, setTheme } = useTheme()
 
   return (
-    <Listbox value={setting || ''} onChange={(value: string) => setSetting(value)}>
+    <Listbox value={resolvedTheme} onChange={setTheme}>
       <Label className="sr-only">Theme</Label>
       <ListboxButton type="button" className="relative">
         <span className="dark:hidden">
-          <SunIcon className="size-6" selected={setting !== 'system'} />
+          <SunIcon className="size-6" selected={theme !== 'system'} />
         </span>
         <span className="hidden dark:inline">
-          <MoonIcon className="size-6" selected={setting !== 'system'} />
+          <MoonIcon className="size-6" selected={theme !== 'system'} />
         </span>
       </ListboxButton>
       <ListboxOptions
@@ -220,9 +134,9 @@ export function ThemeToggle({ panelClassName = 'mt-4' }) {
 }
 
 export function ThemeSelect() {
-  const [setting, setSetting] = useTheme()
+  const { theme, setTheme } = useTheme()
 
-  let { label } = settings.find((x) => x.value === setting)
+  let { label } = settings.find((x) => x.value === theme)
 
   return (
     <div className="flex items-center justify-between">
@@ -261,8 +175,8 @@ export function ThemeSelect() {
         </svg>
         <select
           id="theme"
-          value={setting || ''}
-          onChange={(e) => setSetting(e.target.value as string)}
+          value={theme || ''}
+          onChange={(e) => setTheme(e.target.value as string)}
           className="absolute inset-0 size-full appearance-none opacity-0"
         >
           {settings.map(({ value, label }) => (

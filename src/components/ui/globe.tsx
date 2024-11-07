@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import createGlobe, { COBEOptions } from "cobe";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import clsx from "clsx";
+import { useTheme } from "next-themes";
 
 const GLOBE_CONFIG: COBEOptions = {
   width: 800,
@@ -15,6 +17,7 @@ const GLOBE_CONFIG: COBEOptions = {
   dark: 0,
   diffuse: 0.4,
   mapSamples: 16000,
+  opacity: 0.95,
   mapBrightness: 1.2,
   baseColor: [1, 1, 1],
   markerColor: [251 / 255, 100 / 255, 21 / 255],
@@ -45,6 +48,7 @@ export default function Globe({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointerInteracting = useRef(null);
   const pointerInteractionMovement = useRef(0);
+  const { resolvedTheme } = useTheme();
   const [r, setR] = useState(0);
 
   const updatePointerInteraction = (value: any) => {
@@ -84,6 +88,10 @@ export default function Globe({
 
     const globe = createGlobe(canvasRef.current!, {
       ...config,
+      ...(resolvedTheme === "dark" ? {
+        baseColor: [51 / 255, 65 / 255, 85 / 255],
+        glowColor: [2 / 255, 6 / 255, 23 / 255],
+      } : {}),
       width: width * 2,
       height: width * 2,
       onRender,
@@ -91,7 +99,7 @@ export default function Globe({
 
     setTimeout(() => (canvasRef.current!.style.opacity = "1"));
     return () => globe.destroy();
-  }, []);
+  }, [resolvedTheme]);
 
   return (
     <div
