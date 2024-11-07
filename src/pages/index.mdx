@@ -10,6 +10,12 @@ import RecentNews from "@components/home/recent-news"
 import Reviews from "@components/home/reviews"
 import Stats from "@components/home/stats"
 import Subscribe from "@components/subscribe"
+import siteConfig from "../../config.ts"
+
+export const meta = {
+  title: siteConfig.title,
+  description: siteConfig.description,
+}
 
 <div className="absolute top-0 w-full z-50">
 <Header />

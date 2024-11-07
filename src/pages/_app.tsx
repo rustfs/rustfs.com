@@ -70,7 +70,12 @@ export default function App({ Component, pageProps, router }) {
     : {}
   const showHeader = router.pathname !== '/' && router.pathname.startsWith('/careers') === false
   const showFooter = true;
-  const meta = Component.layoutProps?.meta || {}
+  const meta = {
+    title: siteConfig.title,
+    description: siteConfig.description,
+    ...(Component.layoutProps?.meta || {}),
+  }
+
   const description =
     meta.metaDescription ||
     meta.description || siteConfig.description
@@ -91,7 +96,6 @@ export default function App({ Component, pageProps, router }) {
       <Head>
         <meta key="twitter:card" name="twitter:card" content="summary_large_image" />
         <meta key="twitter:site" name="twitter:site" content="@rustfs" />
-        {/* <meta key="twitter:image" name="twitter:image" content={image} /> */}
         <meta key="twitter:creator" name="twitter:creator" content="@rustfs" />
         <meta
           key="og:url"
