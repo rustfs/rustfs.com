@@ -1,6 +1,5 @@
 import { DocsFooter } from '@/components/docs-footer'
 import { PageHeader } from '@/components/page-header'
-import { mdxComponents } from '@/utils/mdxComponents'
 import { MDXProvider } from '@mdx-js/react'
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -194,7 +193,7 @@ export function ContentsLayout({ children, meta, classes, tableOfContents, secti
       <ContentsContext.Provider value={{ registerHeading, unregisterHeading }}>
         <div
           id="content-wrapper"
-          className="prose prose-slate dark:prose-dark relative z-20 mt-8"
+          className="prose prose-slate dark:prose-invert relative z-20 mt-8"
         >
           <MDXProvider components={mdxComponents}>{children}</MDXProvider>
         </div>

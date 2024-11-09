@@ -1,5 +1,5 @@
-import { getAllPosts } from '@/utils/getAllPosts'
-import { mdxComponents } from '@/utils/mdxComponents'
+import { mdxComponents } from '@/mdx-components'
+import { getAllPosts } from '@/utils/contents'
 import { MDXProvider } from '@mdx-js/react'
 import { Feed } from 'feed'
 import fs from 'fs'

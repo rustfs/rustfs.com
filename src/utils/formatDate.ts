@@ -1,14 +1,15 @@
-export function formatDate(dateString, options) {
-  const date = new Date(dateString);
-  const defaultTimeZoneOptions = options?.hour
-    ? {
-      timeZoneName: 'shortGeneric',
-      timeZone: 'Asia/Beijing',
-    }
-    : {};
+import dayjs from 'dayjs';
 
-  return new Intl.DateTimeFormat("zh-CN", {
-    ...defaultTimeZoneOptions,
-    ...options,
-  }).format(date);
+export function formatDate(dateString, format = 'YYYY-MM-DD') {
+  const date = new Date(dateString);
+  return dayjs(date).format(format);
+}
+
+export function parseDate(dateString) {
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) {
+    return null;
+  }
+
+  return date;
 }
