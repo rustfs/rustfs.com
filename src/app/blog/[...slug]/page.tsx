@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
   return meta
 }
 
-export default async function Page({ params }) {
+export default async function BlogPage({ params }) {
   const { slug } = await params
   const { meta, content } = getBlogBySlug(slug.join('/'))
 

@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm'
 import { createLoader } from 'simple-functional-loader'
 import { recmaImportImages } from './recma/importImages.mjs'
 import { withLinkRoles } from './rehype/withLinkRoles.mjs'
+import { withTableOfContents } from './remark/withTableOfContents.mjs'
 
 const fallbackLayouts = {
   'src/pages/docs/**/*': ['@/layouts/documentation-layout', 'DocumentationLayout'],
@@ -23,7 +24,7 @@ const withMDX = createMDX({
       remarkGfm,
       rehypeUnwrapImages,
       // withExamples,
-      // withTableOfContents,
+      withTableOfContents,
       // withSyntaxHighlighting,
       // withSmartQuotes,
     ],

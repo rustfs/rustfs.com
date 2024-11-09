@@ -1,6 +1,6 @@
 import { Logo } from '@/components/logo'
-import { documentationNav } from '@/navs/documentation'
 import Link from 'next/link'
+import { documentationNav } from '../../../contents/docs/navs'
 
 const footerNav = [
   {
