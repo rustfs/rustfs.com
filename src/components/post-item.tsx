@@ -20,7 +20,7 @@ export default function PostItem({ title, category, slug, date, children, wide =
       <h3 className="mb-4 text-xl font-bold tracking-tight text-slate-900 dark:text-slate-200">
         <Link href={`/blog/${slug}`}>{title}</Link>
       </h3>
-      <div className="prose prose-slate dark:prose-dark mb-6">{children}</div>
+      <div className="prose prose-slate dark:prose-invert mb-6">{children}</div>
       <div className="mt-auto flex flex-row-reverse items-center justify-end">
         <dl>
           {category && (

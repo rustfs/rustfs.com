@@ -4,7 +4,7 @@ import { visit } from 'unist-util-visit'
 
 const JsxParser = Parser.extend(acornJsx())
 
-export default () => {
+const withExamples = () => {
   return (tree) => {
     visit(tree, 'code', (node, nodeIndex, parentNode) => {
       if (node.lang !== 'html') {
@@ -60,3 +60,5 @@ export default () => {
     })
   }
 }
+
+export default withExamples

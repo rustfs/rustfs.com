@@ -1,3 +1,4 @@
+'use client'
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ContentsContext } from '@/layouts/contents-layout'
 import clsx from 'clsx'

@@ -24,8 +24,8 @@
       "@components/*": [
         "./src/components/*"
       ],
-      "@pages/*": [
-        "./src/pages/*"
+      "@content/*": [
+        "./content/*"
       ],
       "@styles/*": [
         "./src/styles/*"
@@ -36,14 +36,20 @@
       "@hooks/*": [
         "./src/hooks/*"
       ]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "next-env.d.ts",
     "next.config.ts",
-    "postcss.config.js"
+    "postcss.config.js",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

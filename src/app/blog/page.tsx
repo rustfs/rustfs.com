@@ -1,10 +1,8 @@
-import buildRss from '@/scripts/build-rss'
-import { formatDate } from '@/utils/formatDate'
-import { getAllPostPreviews } from '@/utils/getAllPosts'
+import { getAllBlogPosts } from '@/utils/contents'
 import { Widont } from '@components/widont'
 import clsx from 'clsx'
+import dayjs from 'dayjs'
 import Link from 'next/link'
-import { renderToStaticMarkup } from 'react-dom/server'
 
 const dateFormat = {
   month: 'long',
@@ -12,7 +10,16 @@ const dateFormat = {
   year: 'numeric',
 }
 
-export default function Blog({ posts }) {
+export function generateMetadata() {
+  return {
+    title: 'Blog',
+    description: 'All the latest RustFS news, straight from the team.',
+  }
+}
+
+export default function Blog() {
+  const posts = getAllBlogPosts()
+
   return (
     <main className="mx-auto max-w-[52rem] px-4 pb-28 sm:px-6 md:px-8 lg:max-w-6xl xl:px-12">
       <header className="py-16 sm:text-center">
@@ -30,8 +37,8 @@ export default function Blog({ posts }) {
       <div className="relative sm:ml-[calc(2rem+1px)] sm:pb-12 md:ml-[calc(3.5rem+1px)] lg:ml-[max(calc(14.5rem+1px),calc(100%-48rem))]">
         <div className="absolute bottom-0 right-full top-3 mr-7 hidden w-px bg-neutral-200 sm:block md:mr-[3.25rem] dark:bg-neutral-800" />
         <div className="space-y-16">
-          {posts.map(({ slug, meta, preview }) => (
-            <article key={slug} className="group relative">
+          {posts.map(({ meta }) => (
+            <article key={meta.slug} className="group relative">
               <div className="absolute -inset-x-4 -inset-y-2.5 group-hover:bg-neutral-50/70 sm:rounded-2xl md:-inset-x-6 md:-inset-y-4 dark:group-hover:bg-neutral-800/50" />
               <svg
                 viewBox="0 0 9 9"
@@ -52,17 +59,17 @@ export default function Blog({ posts }) {
                 </h3>
                 <div
                   className="prose prose-neutral prose-a:relative prose-a:z-10 dark:prose-dark mb-4 mt-2 line-clamp-2"
-                  dangerouslySetInnerHTML={{ __html: preview }}
+                  dangerouslySetInnerHTML={{ __html: meta.excerpt }}
                 />
                 <dl className="absolute left-0 top-0 lg:left-auto lg:right-full lg:mr-[calc(6.5rem+1px)]">
-                  <dt className="sr-only">Date</dt>
+                  <dt className="sr-only">Published At</dt>
                   <dd className={clsx('whitespace-nowrap text-sm leading-6 dark:text-neutral-400')}>
-                    <time dateTime={meta.date}>{formatDate(meta.date, dateFormat)}</time>
+                    <time dateTime={meta.published_at}>{dayjs(meta.published_at).format('YY-MM-DD')}</time>
                   </dd>
                 </dl>
               </div>
               <Link
-                href={`/blog/${slug}`}
+                href={`/blog/${meta.slug}`}
                 className="flex items-center text-sm font-medium text-sky-500"
               >
                 <span className="absolute -inset-x-4 -inset-y-2.5 sm:rounded-2xl md:-inset-x-6 md:-inset-y-4" />
@@ -89,27 +96,4 @@ export default function Blog({ posts }) {
       </div>
     </main>
   )
-}
-
-Blog.layoutProps = {
-  meta: {
-    title: 'Blog',
-    description: 'All the latest RustFS news, straight from the team.',
-  },
-}
-
-export async function getStaticProps() {
-  if (process.env.NODE_ENV === 'production') {
-    await buildRss()
-  }
-
-  return {
-    props: {
-      posts: (await getAllPostPreviews()).map(({ slug, module }) => ({
-        slug,
-        meta: module.meta,
-        preview: renderToStaticMarkup(<module.default />),
-      })),
-    },
-  }
 }
