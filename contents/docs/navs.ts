@@ -1,6 +1,9 @@
 import { getAllDocsPages } from "@/utils/contents";
 
-const pages = {}
+export type DocsNavItemType = { title: string; href: string }
+export type DocsNavType = Record<string, DocsNavItemType[]>
+
+const pages: Record<string, DocsNavItemType> = {}
 
 getAllDocsPages().map(post => {
   pages[post.meta.slug] = {
@@ -9,7 +12,7 @@ getAllDocsPages().map(post => {
   }
 })
 
-const navs = {
+const navs: DocsNavType = {
   'Getting Started': [
     pages['installation'],
     pages['introduction'],

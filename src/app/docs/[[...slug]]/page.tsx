@@ -1,8 +1,9 @@
 
-import { DocsFooter } from '@/components/docs-footer';
-import { useMDXComponents } from '@/components/mdx-components';
+import { DocsFooter } from '@/components/docs/docs-footer';
 import { PageHeader } from '@/components/page-header';
 import { getAllDocsPages, getDocBySlug } from '@/utils/contents';
+import { mdxComponents } from '@/utils/mdx-components';
+import navs from '@contents/docs/navs';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
 
@@ -48,12 +49,12 @@ export default async function DocPage({ params }) {
 
       <div
         id="content-wrapper"
-        className="relative z-20 prose prose-slate mt-8 dark:prose-dark"
+        className="prose prose-slate dark:prose-dark relative z-20 mt-8"
       >
-        <MDXRemote source={content} components={useMDXComponents} />
+        <MDXRemote source={content} components={mdxComponents} />
       </div>
 
-      <DocsFooter>
+      <DocsFooter navs={navs}>
         <Link
           href={`https://github.com/rustfs/rustfs.com/edit/main/contents${pathname}.mdx`}
           className="hover:text-slate-900 dark:hover:text-slate-400"
@@ -62,7 +63,7 @@ export default async function DocPage({ params }) {
         </Link>
       </DocsFooter>
 
-      <div className="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 overflow-y-auto hidden xl:block">
+      <div className="fixed bottom-0 right-[max(0px,calc(50%-45rem))] top-[3.8125rem] z-20 hidden w-[19.5rem] overflow-y-auto py-10 xl:block">
         {/* {toc.length > 0 && (
           <TableOfContents tableOfContents={toc} />
         )} */}

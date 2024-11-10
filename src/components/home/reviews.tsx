@@ -1,5 +1,6 @@
-import reviews from "@/data/reviews.json";
+/* eslint-disable @next/next/no-img-element */
 import Marquee from "@components/ui/marquee";
+import reviews from "@contents/data/reviews.json";
 import clsx from "clsx";
 
 // split reviews into 3 rows

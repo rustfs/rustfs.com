@@ -1,3 +1,5 @@
+import authors from '@contents/data/authors.json';
+
 const siteConfig = {
   title: "RustFS | MinIO国产化替代方案, 高性能分布式存储",
   description: "RustFS使用全球最热,性能最好的内存安全Rust语言开发的高性能对象存储是开源的、兼容S3、oss 的Kubernetes原生云存储,专为 AI 等云原生工作负载而设计。适合企业构建私有云存储、混合云存储和分布式存储,也是是MinIO的国产化替代方案。",
@@ -19,10 +21,7 @@ const siteConfig = {
     apiKey: '',
     indexName: '',
   },
-  defaultAuthor: {
-    name: 'RustFS',
-    twitter: '@rustfs',
-  },
+  defaultAuthor: authors['rustfs'],
 };
 
 export default siteConfig;
