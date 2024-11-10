@@ -3,19 +3,9 @@ import type { NextConfig } from 'next'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
 import remarkGfm from 'remark-gfm'
 import { createLoader } from 'simple-functional-loader'
-import { recmaImportImages } from './recma/importImages.mjs'
-import { withLinkRoles } from './rehype/withLinkRoles.mjs'
-
-const fallbackLayouts = {
-  'src/pages/docs/**/*': ['@/layouts/documentation-layout', 'DocumentationLayout'],
-}
-
-const fallbackDefaultExports = {
-  'src/pages/{docs,components}/**/*': ['@/layouts/contents-layout', 'ContentsLayout'],
-  'src/pages/blog/**/*': ['@/layouts/blog-post-layout', 'BlogPostLayout'],
-}
-
-const fallbackGetStaticProps = {}
+import { recmaImportImages } from './src/plugins/recma/importImages.mjs'
+import { withLinkRoles } from './src/plugins/rehype/withLinkRoles.mjs'
+import { withTableOfContents } from './src/plugins/remark/withTableOfContents.mjs'
 
 const withMDX = createMDX({
   options: {
@@ -23,7 +13,7 @@ const withMDX = createMDX({
       remarkGfm,
       rehypeUnwrapImages,
       // withExamples,
-      // withTableOfContents,
+      withTableOfContents,
       // withSyntaxHighlighting,
       // withSmartQuotes,
     ],

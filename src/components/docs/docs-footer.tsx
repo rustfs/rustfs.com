@@ -1,14 +1,19 @@
+'use client'
+import { usePrevNext } from '@/hooks/usePrevNext';
+import { DocsNavType } from '@contents/docs/navs';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-export function DocsFooter({ children, previous, next }: { children?: React.ReactNode; previous?: any; next?: any }) {
+export function DocsFooter({ children, navs }: { children?: React.ReactNode; navs: DocsNavType }) {
+  let { prev, next } = usePrevNext({ navs })
+
   return (
-    <footer className={clsx('text-sm leading-6', previous || next ? 'mt-12' : 'mt-16')}>
-      {(previous || next) && (
+    <footer className={clsx('text-sm leading-6', prev || next ? 'mt-12' : 'mt-16')}>
+      {(prev || next) && (
         <div className="mb-10 flex items-center font-semibold text-slate-700 dark:text-slate-200">
-          {previous && (
+          {prev && (
             <Link
-              href={previous.href}
+              href={prev.href}
               className="group flex items-center hover:text-slate-900 dark:hover:text-white"
             >
               <svg
@@ -24,7 +29,7 @@ export function DocsFooter({ children, previous, next }: { children?: React.Reac
                   strokeLinejoin="round"
                 />
               </svg>
-              {previous.shortTitle || previous.title}
+              {prev.shortTitle || prev.title}
             </Link>
           )}
           {next && (

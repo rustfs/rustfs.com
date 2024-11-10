@@ -1,14 +1,14 @@
 import { Logo } from '@/components/logo'
-import { documentationNav } from '@/navs/documentation'
+import navs from '@contents/docs/navs'
 import Link from 'next/link'
 
 const footerNav = [
   {
-    'Getting Started': documentationNav['Getting Started'],
-    'Core Concepts': documentationNav['Core Concepts'],
+    'Getting Started': navs['Getting Started'],
+    'Core Concepts': navs['Core Concepts'],
   },
   {
-    Customization: documentationNav['Customization'],
+    Customization: navs['Customization'],
     Community: [
       { title: 'GitHub', href: 'https://github.com/rustfs/rustfs' },
       { title: 'Discord', href: '/discord' },

@@ -6,9 +6,7 @@ import { parseDate } from './formatDate';
 import { kebabToTitleCase } from './kebabToTitleCase';
 
 function getMDXFiles(dir) {
-  return globSync('**/*.mdx', {
-    cwd: dir
-  })
+  return globSync('**/*.mdx', { cwd: dir })
 }
 
 function getExcerpt(content) {
@@ -35,6 +33,8 @@ function getExcerpt(content) {
 function readMDXFile(filePath) {
   let rawContent = fs.readFileSync(filePath, 'utf-8')
   let { data: meta, content } = matter(rawContent)
+
+  content = content.trim()
 
   // if no title is provided, use the h1 of the content, if no h1 is found, use the filename
   if (!meta.title) {
@@ -84,22 +84,27 @@ function getMDXData(dir) {
   let mdxFiles = getMDXFiles(dir)
   return mdxFiles.map((file) => {
     return readMDXFile(path.join(dir, file))
-  }).sort((a, b) => {
-    return b.meta.published_at.getTime() - a.meta.published_at.getTime()
   })
 }
 
 export function getAllBlogPosts() {
-  return getMDXData(process.cwd() + '/contents/blog').filter((post) => {
-    return post.meta.slug !== 'index'
-  })
+  return getMDXData(process.cwd() + '/contents/blog')
+    .sort((a, b) => {
+      return b.meta.published_at.getTime() - a.meta.published_at.getTime()
+    })
+    .filter((post) => {
+      return post.meta.slug !== 'index'
+    })
 }
 
-export function getAllDocsPosts() {
+export function getAllDocsPages() {
   return getMDXData(process.cwd() + '/contents/docs')
 }
 
-
 export function getBlogBySlug(slug) {
   return getAllBlogPosts().find((post) => post.meta.slug === slug)
+}
+
+export function getDocBySlug(slug) {
+  return getAllDocsPages().find((post) => post.meta.slug === slug)
 }

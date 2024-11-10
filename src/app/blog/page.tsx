@@ -17,7 +17,7 @@ export function generateMetadata() {
   }
 }
 
-export default function Blog() {
+export default function BlogIndex() {
   const posts = getAllBlogPosts()
 
   return (

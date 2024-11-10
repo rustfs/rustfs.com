@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import features from '@/data/features'
+import features from '@contents/data/features'
 import clsx from 'clsx'
 import { CheckCircleIcon, QuoteIcon } from "lucide-react"
 import { useState } from "react"

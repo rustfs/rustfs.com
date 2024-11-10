@@ -1,13 +1,23 @@
+/* eslint-disable @next/next/no-img-element */
 
-import { useMDXComponents } from '@/components/mdx-components';
 import { Widont } from '@/components/widont';
+import buildRss from '@/utils/build-rss';
 import { getAllBlogPosts, getBlogBySlug } from '@/utils/contents';
+import { mdxComponents } from '@/utils/mdx-components';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
 export async function generateStaticParams() {
-  return await getAllBlogPosts().map(({ meta }) => {
+  const posts = await getAllBlogPosts()
+
+  try {
+    await buildRss(posts)
+  } catch (error) {
+    console.error('Error building RSS feed:', error)
+  }
+
+  return posts.map(({ meta }) => {
     return {
       slug: meta.href.split('/').slice(1),
     }
@@ -20,7 +30,7 @@ export async function generateMetadata({ params }) {
   return meta
 }
 
-export default async function Page({ params }) {
+export default async function BlogPage({ params }) {
   const { slug } = await params
   const { meta, content } = getBlogBySlug(slug.join('/'))
 
@@ -74,7 +84,7 @@ export default async function Page({ params }) {
         </ul>
       </div>
       <div className={clsx('mt-12 prose prose-slate dark:prose-dark')}>
-        <MDXRemote source={content} components={useMDXComponents} />
+        <MDXRemote source={content} components={mdxComponents()} />
       </div>
     </article>
   )

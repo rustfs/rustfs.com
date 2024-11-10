@@ -1,8 +1,6 @@
 'use client'
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ContentsContext } from '@/layouts/contents-layout'
 import clsx from 'clsx'
-import { useContext, useEffect } from 'react'
 
 export function Heading({
   level,
@@ -16,15 +14,6 @@ export function Heading({
   ...props
 }) {
   const Component = `h${level}` as keyof JSX.IntrinsicElements
-  const context = useContext(ContentsContext)
-
-  useEffect(() => {
-    if (!context) return
-    context.registerHeading(id)
-    return () => {
-      context.unregisterHeading(id)
-    }
-  }, [id, context?.registerHeading, context?.unregisterHeading])
 
   return (
     <Component

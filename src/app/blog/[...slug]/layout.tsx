@@ -2,13 +2,6 @@
 import { NewsletterForm } from '@components/newsletter-form'
 import Link from 'next/link'
 
-const dateFormat = {
-  weekday: 'long',
-  month: 'long',
-  day: 'numeric',
-  year: 'numeric',
-}
-
 export default function BlogPostLayout({ children }) {
   return (
     <div className="overflow-hidden">

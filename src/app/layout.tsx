@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
   const description = meta.description || siteConfig.description
 
   return (
-    <html lang='zh-CN'>
+    <html lang='zh-CN' suppressHydrationWarning>
       <head>
         <Title>{meta.title} </Title>
         <meta key="description" content={description} />
@@ -39,13 +39,13 @@ export default function RootLayout({ children }) {
         <link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="/feeds/atom.xml" />
         <link rel="alternate" type="application/json" title="JSON Feed" href="/feeds/feed.json" />
       </head>
-      <ThemeProvider enableSystem attribute="class">
-        <body className={clsx('antialiased text-neutral-500 dark:text-neutral-400')}>
+      <body className={clsx('antialiased text-neutral-500 dark:text-neutral-400')}>
+        <ThemeProvider enableSystem attribute="class">
           <Header />
           {children}
           <Footer />
-        </body>
-      </ThemeProvider>
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

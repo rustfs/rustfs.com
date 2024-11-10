@@ -1,9 +1,8 @@
-import Prism from 'prismjs'
-import loadLanguages from 'prismjs/components/index.js'
-import redent from 'redent'
 import { parse } from 'acorn'
+import Prism from 'prismjs'
+import redent from 'redent'
 
-loadLanguages()
+// loadLanguages()
 
 const HTML_TAG =
   /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/gi
@@ -202,10 +201,9 @@ export function highlightCode(code, prismLanguage) {
         .map((line, index) =>
           stringify(
             line,
-            `language-${language} ${
-              addedLines.includes(index)
-                ? 'inserted'
-                : removedLines.includes(index)
+            `language-${language} ${addedLines.includes(index)
+              ? 'inserted'
+              : removedLines.includes(index)
                 ? 'deleted'
                 : 'unchanged'
             }`
@@ -217,10 +215,9 @@ export function highlightCode(code, prismLanguage) {
         .map((line, index) =>
           stringify(
             line,
-            `block${
-              highlightedLines.includes(index)
-                ? ' -mx-5 pl-4 pr-5 border-l-4 border-sky-400 bg-sky-300/[0.15]'
-                : ''
+            `block${highlightedLines.includes(index)
+              ? ' -mx-5 pl-4 pr-5 border-l-4 border-sky-400 bg-sky-300/[0.15]'
+              : ''
             }`
           )
         )
@@ -232,9 +229,9 @@ export function highlightCode(code, prismLanguage) {
 
   return language === 'html'
     ? code.replace(
-        /\*\*(.*?)\*\*/g,
-        (_, text) => `<span class="code-highlight bg-code-highlight">${text}</span>`
-      )
+      /\*\*(.*?)\*\*/g,
+      (_, text) => `<span class="code-highlight bg-code-highlight">${text}</span>`
+    )
     : code
 }
 
