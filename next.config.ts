@@ -24,6 +24,7 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   output: 'export',
+  trailingSlash: true,
   pageExtensions: ['ts', 'tsx', 'mdx'],
   experimental: {
     scrollRestoration: true,
