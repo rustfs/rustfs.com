@@ -33,76 +33,74 @@ function getExcerpt(content) {
 function readMDXFile(filePath) {
   console.log(`parsing file: ${filePath}`);
   let rawContent = fs.readFileSync(filePath, 'utf-8')
-  let { data: meta, content } = matter(rawContent)
+  let { data: metadata, content } = matter(rawContent)
 
   content = content.trim()
 
   // if no title is provided, use the h1 of the content, if no h1 is found, use the filename
-  if (!meta.title) {
+  if (!metadata.title) {
     const h1 = content.match(/^#\s+(.*)$/m)
-    meta.title = h1 ? h1[1] : kebabToTitleCase(path.basename(filePath, path.extname(filePath)))
+    metadata.title = h1 ? h1[1] : kebabToTitleCase(path.basename(filePath, path.extname(filePath)))
   }
 
-  meta.excerpt = meta.excerpt || meta.descriotion || getExcerpt(content)
+  metadata.excerpt = metadata.excerpt || metadata.descriotion || getExcerpt(content)
 
   // if no description is provided, use the excerpt, if no excerpt is found, use the first 140 characters of the content
-  if (!meta.description) {
-    meta.description = meta.excerpt
+  if (!metadata.description) {
+    metadata.description = metadata.excerpt
   }
 
   // if no publishedAt is provided, use the file creation date
-  if (!meta.publishedAt) {
-    meta.publishedAt = fs.statSync(filePath).birthtime.toISOString()
+  if (!metadata.publishedAt) {
+    metadata.publishedAt = fs.statSync(filePath).birthtime.toISOString()
   }
 
   // if no tags is provided, use an empty array
-  if (!meta.tags) {
-    meta.tags = []
+  if (!metadata.tags) {
+    metadata.tags = []
   }
 
   // contents/blog/2021-01-01-slug/index.mdx
-  meta.relativePath = filePath.match(/contents\/(.*)\.mdx$/)?.[0]
+  metadata.relativePath = filePath.match(/contents\/(.*)\.mdx$/)?.[0]
 
-  meta.href = filePath.match(/contents\/(.*)\.mdx$/)?.[1].replace(/\/index$/, '')
-  meta.match = new RegExp(meta.href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
-  meta.publishedAt = parseDate(meta.publishedAt)
+  metadata.href = filePath.match(/contents\/(.*)\.mdx$/)?.[1].replace(/\/index$/, '')
+  metadata.match = new RegExp(metadata.href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+  metadata.publishedAt = parseDate(metadata.publishedAt)
 
   // if no slug is provided, use the filename
-  if (!meta.slug) {
-    const segments = meta.href.split('/').slice(1)
-    // `undefined` is used to represent the index page
-    meta.slug = segments.length ? segments : undefined;
-  }
+  const segments = metadata.href.split('/').slice(1)
+  // `undefined` is used to represent the index page
+  metadata.slug = segments.length ? segments : undefined;
 
   // if meta.image is provided, use it as is, if not, use the first image found in the content
-  if (!meta.image) {
+  if (!metadata.image) {
     const match = content.match(/!\[.*?\]\((.*?)\)/)
 
     if (match) {
-      meta.image = match[1]
+      metadata.image = match[1]
     }
   }
 
   // resolve image path
-  if (meta.image) {
-    if (!meta.image.startsWith('http')) {
+  if (metadata.image) {
+    if (!metadata.image.startsWith('http')) {
       // contents path + image path
-      meta.image = `/@contents/` + path.join(meta.href, meta.image)
+      metadata.image = `/@contents/` + path.join(metadata.href, metadata.image)
     }
   } else {
-    meta.image = null
+    metadata.image = null
   }
 
   // if title is H1, remove it from the content
-  if (content.startsWith(`# ${meta.title}`)) {
+  if (content.startsWith(`# ${metadata.title}`)) {
     content = content.replace(/^# .*$/m, '').trim()
   }
 
   return {
-    meta,
+    metadata,
     content,
     filePath,
-    relativePath: meta.relativePath,
+    relativePath: metadata.relativePath,
   }
 }
 
@@ -117,10 +115,10 @@ function getMDXData(dir) {
 export function getAllBlogPosts() {
   return getMDXData(process.cwd() + '/contents/blog/')
     .sort((a, b) => {
-      return b.meta.publishedAt.getTime() - a.meta.publishedAt.getTime()
+      return b.metadata.publishedAt.getTime() - a.metadata.publishedAt.getTime()
     })
     .filter((post) => {
-      return post.meta.slug !== 'index'
+      return post.metadata.slug !== 'index'
     })
 }
 
@@ -131,19 +129,19 @@ export function getAllDocsPages() {
 export function getBlogBySlug(slug) {
   return getAllBlogPosts().find((post) => {
     if (slug === undefined) {
-      return post.meta.slug === undefined
+      return post.metadata.slug === undefined
     }
 
-    return post.meta.slug.join('/') === slug.join('/')
+    return post.metadata.slug?.join('/') === slug.join('/')
   })
 }
 
 export function getDocBySlug(slug) {
   return getAllDocsPages().find((post) => {
     if (slug === undefined) {
-      return post.meta.slug === undefined
+      return post.metadata.slug === undefined
     }
 
-    return post.meta.slug.join('/') === slug.join('/')
+    return post.metadata.slug?.join('/') === slug.join('/')
   })
 }

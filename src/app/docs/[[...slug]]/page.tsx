@@ -8,42 +8,42 @@ import Link from 'next/link';
 export async function generateStaticParams() {
   const pages = await getAllDocsPages()
 
-  return pages.map(({ meta }) => {
-    return { slug: meta.slug }
+  return pages.map(({ metadata }) => {
+    return { slug: metadata.slug }
   })
 }
 
 export async function generateMetadata({ params }) {
   let { slug } = await params
-  const { meta } = getDocBySlug(slug)
-  return meta
+  const { metadata } = getDocBySlug(slug)
+  return metadata
 }
 
 async function importDoc(slug) {
-  const { meta, relativePath } = getDocBySlug(slug)
+  const { metadata, relativePath } = getDocBySlug(slug)
 
   const filePath = relativePath.replace(/^contents\/docs\//, '')
-  const module = await import(`@contents/docs/${filePath}`)
+  const mdx = await import(`@contents/docs/${filePath}`)
 
   return {
-    meta,
-    Content: module.default
+    metadata,
+    Content: mdx.default
   }
 }
 
 export default async function DocPage({ params }) {
   let { slug } = await params
-  const { meta, Content } = await importDoc(slug)
-  const pathname = meta.href
-  const toc = meta.toc ?? []
+  const { metadata, Content } = await importDoc(slug)
+  const pathname = metadata.href
+  const toc = metadata.toc ?? []
 
   return (
     <>
       <PageHeader
-        title={meta.title}
-        description={meta.description}
-        repo={meta.repo}
-        badge={{ key: 'RustFS version', value: meta.featureVersion }}
+        title={metadata.title}
+        description={metadata.description}
+        repo={metadata.repo}
+        badge={{ key: 'RustFS version', value: metadata.featureVersion }}
       // section={section}
       />
 

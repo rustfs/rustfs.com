@@ -6,9 +6,9 @@ export type DocsNavType = Record<string, DocsNavItemType[]>
 const pages: Record<string, DocsNavItemType> = {}
 
 getAllDocsPages().map(post => {
-  pages[post.meta.slug] = {
-    title: post.meta.title,
-    href: `/${post.meta.href}`,
+  pages[post.metadata.slug] = {
+    title: post.metadata.title,
+    href: `/${post.metadata.href}`,
   }
 })
 

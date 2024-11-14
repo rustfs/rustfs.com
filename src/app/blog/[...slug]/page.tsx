@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import dayjs from 'dayjs';
 
 export async function generateStaticParams() {
-  const posts = await getAllBlogPosts().filter((post) => post.meta.slug && post.meta.slug !== 'index');
+  const posts = await getAllBlogPosts().filter((post) => post.metadata.slug && post.metadata.slug !== 'index');
 
   try {
     await buildRss(posts)
@@ -15,34 +15,34 @@ export async function generateStaticParams() {
     console.error('Error building RSS feed:', error)
   }
 
-  return posts.map(({ meta }) => {
+  return posts.map(({ metadata }) => {
     return {
-      slug: meta.slug
+      slug: metadata.slug
     }
   })
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  const { meta } = getBlogBySlug(slug)
-  return meta
+  const { metadata } = getBlogBySlug(slug)
+  return metadata
 }
 
 async function importBlog(slug) {
-  const { meta, relativePath } = getBlogBySlug(slug)
+  const { metadata, relativePath } = getBlogBySlug(slug)
 
   const filePath = relativePath.replace(/^contents\/blog\//, '')
-  const module = await import(`@contents/blog/${filePath}`)
+  const mdx = await import(`@contents/blog/${filePath}`)
 
   return {
-    meta,
-    Content: module.default
+    metadata,
+    Content: mdx.default
   }
 }
 
 export default async function BlogPage({ params }) {
   const { slug } = await params
-  const { meta, Content } = await importBlog(slug)
+  const { metadata, Content } = await importBlog(slug)
 
   return (
     <article className="relative pt-10">
@@ -51,7 +51,7 @@ export default async function BlogPage({ params }) {
           'text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-200 md:text-3xl '
         )}
       >
-        <Widont>{meta.title}</Widont>
+        <Widont>{metadata.title}</Widont>
       </h1>
       <div className="text-sm leading-6">
         <dl>
@@ -59,15 +59,15 @@ export default async function BlogPage({ params }) {
           <dd
             className={clsx('absolute top-0 inset-x-0 text-slate-700 dark:text-slate-400')}
           >
-            <time dateTime={meta.publishedAt}>
-              {dayjs(meta.publishedAt).format('YY-MM-DD')}
+            <time dateTime={metadata.publishedAt}>
+              {dayjs(metadata.publishedAt).format('YY-MM-DD')}
             </time>
           </dd>
         </dl>
       </div>
       <div className="mt-6">
         <ul className={clsx('flex flex-wrap text-sm leading-6 -mt-6 -mx-5')}>
-          {(meta.authors ?? []).map((author) => (
+          {(metadata.authors ?? []).map((author) => (
             <li
               key={author.twitter}
               className="mt-6 flex items-center whitespace-nowrap px-5 font-medium"

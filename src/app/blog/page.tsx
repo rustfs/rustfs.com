@@ -37,8 +37,8 @@ export default function BlogIndex() {
       <div className="relative sm:ml-[calc(2rem+1px)] sm:pb-12 md:ml-[calc(3.5rem+1px)] lg:ml-[max(calc(14.5rem+1px),calc(100%-48rem))]">
         <div className="absolute bottom-0 right-full top-3 mr-7 hidden w-px bg-neutral-200 sm:block md:mr-[3.25rem] dark:bg-neutral-800" />
         <div className="space-y-16">
-          {posts.map(({ meta }) => (
-            <article key={meta.slug} className="group relative">
+          {posts.map(({ metadata }) => (
+            <article key={metadata.slug} className="group relative">
               <div className="absolute -inset-x-4 -inset-y-2.5 group-hover:bg-neutral-50/70 sm:rounded-2xl md:-inset-x-6 md:-inset-y-4 dark:group-hover:bg-neutral-800/50" />
               <svg
                 viewBox="0 0 9 9"
@@ -55,26 +55,26 @@ export default function BlogIndex() {
               </svg>
               <div className="relative">
                 <h3 className="pt-8 text-base font-semibold tracking-tight text-neutral-900 lg:pt-0 dark:text-neutral-200">
-                  {meta.title}
+                  {metadata.title}
                 </h3>
                 <div
                   className="prose prose-neutral prose-a:relative prose-a:z-10 dark:prose-dark mb-4 mt-2 line-clamp-2"
-                  dangerouslySetInnerHTML={{ __html: meta.excerpt }}
+                  dangerouslySetInnerHTML={{ __html: metadata.excerpt }}
                 />
                 <dl className="absolute left-0 top-0 lg:left-auto lg:right-full lg:mr-[calc(6.5rem+1px)]">
                   <dt className="sr-only">发布于</dt>
                   <dd className={clsx('whitespace-nowrap text-sm leading-6 dark:text-neutral-400')}>
-                    <time dateTime={meta.publishedAt}>{dayjs(meta.publishedAt).format('YY-MM-DD')}</time>
+                    <time dateTime={metadata.publishedAt}>{dayjs(metadata.publishedAt).format('YY-MM-DD')}</time>
                   </dd>
                 </dl>
               </div>
               <Link
-                href={`/blog/${meta.slug}`}
+                href={`/blog/${metadata.slug}`}
                 className="flex items-center text-sm font-medium text-sky-500"
               >
                 <span className="absolute -inset-x-4 -inset-y-2.5 sm:rounded-2xl md:-inset-x-6 md:-inset-y-4" />
                 <span className="relative">
-                  阅读全文<span className="sr-only">, {meta.title}</span>
+                  阅读全文<span className="sr-only">, {metadata.title}</span>
                 </span>
                 <svg
                   className="relative ml-2.5 mt-px overflow-visible text-sky-300 dark:text-sky-700"

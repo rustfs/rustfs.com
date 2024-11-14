@@ -3,6 +3,7 @@ import { getAllBlogPosts } from "@/utils/contents";
 import { randomInt } from "crypto";
 import { ChevronRightIcon } from "lucide-react";
 import Image from "next/image";
+import { BlogPost } from "../../../types/metadata";
 
 export default async function RecentNews() {
   const posts = getAllBlogPosts().slice(0, 3);
@@ -26,7 +27,7 @@ export default async function RecentNews() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {/* Card */}
           {posts.map((post: BlogPost) => (
-            <a className="group flex flex-col focus:outline-none" key={post.meta.href} href={post.meta.href}>
+            <a className="group flex flex-col focus:outline-none" key={post.metadata.href} href={post.metadata.href}>
               <div className="relative overflow-hidden rounded-xl pt-[50%] sm:pt-[70%]">
                 <Image
                   className="absolute start-0 top-0 size-full rounded-xl object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 group-focus:scale-105"
@@ -41,10 +42,10 @@ export default async function RecentNews() {
               </div>
               <div className="mt-7">
                 <h3 className="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-neutral-300 dark:group-hover:text-white">
-                  {post.meta.title}
+                  {post.metadata.title}
                 </h3>
                 <p className="mt-3 text-gray-800 dark:text-neutral-200">
-                  {post.meta.excerpt}
+                  {post.metadata.excerpt}
                 </p>
                 <p className="mt-5 inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 group-hover:underline group-focus:underline dark:text-blue-500">
                   阅读全文
