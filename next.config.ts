@@ -29,6 +29,7 @@ const nextConfig: NextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  trailingSlash: true,
   images: {
     dangerouslyAllowSVG: true,
     unoptimized: true
