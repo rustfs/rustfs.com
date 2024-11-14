@@ -12,8 +12,8 @@ const siteConfig = {
     { name: "生态", href: "#", },
     { name: "AI", href: "#", },
     { name: "数据湖", href: "#", },
-    { name: "文档", href: "/docs", },
-    { name: "博客", href: "/blog", },
+    { name: "文档", href: "/docs/", },
+    { name: "博客", href: "/blog/", },
     { name: "关于我们", href: "#", }
   ],
   algolia: {

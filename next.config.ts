@@ -1,38 +1,38 @@
-import createMDX from '@next/mdx'
-import type { NextConfig } from 'next'
-import rehypeUnwrapImages from 'rehype-unwrap-images'
-import remarkGfm from 'remark-gfm'
-import { createLoader } from 'simple-functional-loader'
-import { recmaImportImages } from './src/plugins/recma/importImages.mjs'
-import { withLinkRoles } from './src/plugins/rehype/withLinkRoles.mjs'
-import { withTableOfContents } from './src/plugins/remark/withTableOfContents.mjs'
+import createMDX from '@next/mdx';
+import type { NextConfig } from 'next';
+import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from 'remark-gfm';
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
+import { createLoader } from 'simple-functional-loader';
+import { recmaImportImages } from './src/plugins/recma/importImages.mjs';
+// import { withSyntaxHighlighting } from './src/plugins/remark/withSyntaxHighlighting.mjs';
+// import { withTableOfContents } from './src/plugins/remark/withTableOfContents.mjs';
 
 const withMDX = createMDX({
   options: {
     remarkPlugins: [
       remarkGfm,
-      rehypeUnwrapImages,
-      // withExamples,
-      withTableOfContents,
+      remarkFrontmatter,
+      [remarkMdxFrontmatter as any, { name: 'metadata' }],
+      // rehypeUnwrapImages,
+      // withTableOfContents,
       // withSyntaxHighlighting,
-      // withSmartQuotes,
     ],
-    rehypePlugins: [withLinkRoles],
+    // rehypePlugins: [withLinkRoles],
     recmaPlugins: [[recmaImportImages, { property: 'src' }]],
   },
 })
 
 const nextConfig: NextConfig = {
   output: 'export',
-  trailingSlash: true,
   pageExtensions: ['ts', 'tsx', 'mdx'],
   experimental: {
     scrollRestoration: true,
   },
   images: {
     dangerouslyAllowSVG: true,
+    unoptimized: true
   },
-  transpilePackages: ['next-mdx-remote'],
   webpack(config, options) {
     config.module.rules.push({
       test: /\.mp4$/i,

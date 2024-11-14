@@ -3,13 +3,11 @@
 import { Widont } from '@/components/widont';
 import buildRss from '@/utils/build-rss';
 import { getAllBlogPosts, getBlogBySlug } from '@/utils/contents';
-import { mdxComponents } from '@/utils/mdx-components';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
-import { MDXRemote } from 'next-mdx-remote/rsc';
 
 export async function generateStaticParams() {
-  const posts = await getAllBlogPosts()
+  const posts = await getAllBlogPosts().filter((post) => post.meta.slug && post.meta.slug !== 'index');
 
   try {
     await buildRss(posts)
@@ -19,20 +17,32 @@ export async function generateStaticParams() {
 
   return posts.map(({ meta }) => {
     return {
-      slug: meta.href.split('/').slice(1),
+      slug: meta.slug
     }
   })
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  const { meta } = getBlogBySlug(slug.join('/'))
+  const { meta } = getBlogBySlug(slug)
   return meta
+}
+
+async function importBlog(slug) {
+  const { meta, relativePath } = getBlogBySlug(slug)
+
+  const filePath = relativePath.replace(/^contents\/blog\//, '')
+  const module = await import(`@contents/blog/${filePath}`)
+
+  return {
+    meta,
+    Content: module.default
+  }
 }
 
 export default async function BlogPage({ params }) {
   const { slug } = await params
-  const { meta, content } = getBlogBySlug(slug.join('/'))
+  const { meta, Content } = await importBlog(slug)
 
   return (
     <article className="relative pt-10">
@@ -49,8 +59,8 @@ export default async function BlogPage({ params }) {
           <dd
             className={clsx('absolute top-0 inset-x-0 text-slate-700 dark:text-slate-400')}
           >
-            <time dateTime={meta.published_at}>
-              {dayjs(meta.published_at).format('YY-MM-DD')}
+            <time dateTime={meta.publishedAt}>
+              {dayjs(meta.publishedAt).format('YY-MM-DD')}
             </time>
           </dd>
         </dl>
@@ -80,11 +90,12 @@ export default async function BlogPage({ params }) {
                 </div>
               </div>
             </li>
-          ))}
+          ))
+          }
         </ul>
       </div>
       <div className={clsx('mt-12 prose prose-slate dark:prose-dark')}>
-        <MDXRemote source={content} components={mdxComponents()} />
+        <Content />
       </div>
     </article>
   )

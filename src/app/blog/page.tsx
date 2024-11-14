@@ -24,10 +24,10 @@ export default function BlogIndex() {
     <main className="mx-auto max-w-[52rem] px-4 pb-28 sm:px-6 md:px-8 lg:max-w-6xl xl:px-12">
       <header className="py-16 sm:text-center">
         <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl dark:text-neutral-200">
-          Latest Updates
+          最近更新
         </h1>
         <p className="text-lg text-neutral-700 dark:text-neutral-400">
-          <Widont>All the latest RustFS news, straight from the team.</Widont>
+          <Widont>所有最新的 RustFS 新闻，来自 RustFS 团队。</Widont>
         </p>
         {/* <section className="mt-3 max-w-sm sm:mx-auto sm:px-4">
           <h2 className="sr-only">Sign up for our newsletter</h2>
@@ -62,9 +62,9 @@ export default function BlogIndex() {
                   dangerouslySetInnerHTML={{ __html: meta.excerpt }}
                 />
                 <dl className="absolute left-0 top-0 lg:left-auto lg:right-full lg:mr-[calc(6.5rem+1px)]">
-                  <dt className="sr-only">Published At</dt>
+                  <dt className="sr-only">发布于</dt>
                   <dd className={clsx('whitespace-nowrap text-sm leading-6 dark:text-neutral-400')}>
-                    <time dateTime={meta.published_at}>{dayjs(meta.published_at).format('YY-MM-DD')}</time>
+                    <time dateTime={meta.publishedAt}>{dayjs(meta.publishedAt).format('YY-MM-DD')}</time>
                   </dd>
                 </dl>
               </div>
@@ -74,7 +74,7 @@ export default function BlogIndex() {
               >
                 <span className="absolute -inset-x-4 -inset-y-2.5 sm:rounded-2xl md:-inset-x-6 md:-inset-y-4" />
                 <span className="relative">
-                  Read more<span className="sr-only">, {meta.title}</span>
+                  阅读全文<span className="sr-only">, {meta.title}</span>
                 </span>
                 <svg
                   className="relative ml-2.5 mt-px overflow-visible text-sky-300 dark:text-sky-700"

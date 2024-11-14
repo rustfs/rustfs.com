@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable @next/next/no-img-element */
 import features from '@contents/data/features'
 import clsx from 'clsx'

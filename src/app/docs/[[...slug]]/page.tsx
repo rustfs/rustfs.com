@@ -2,39 +2,39 @@
 import { DocsFooter } from '@/components/docs/docs-footer';
 import { PageHeader } from '@/components/page-header';
 import { getAllDocsPages, getDocBySlug } from '@/utils/contents';
-import { mdxComponents } from '@/utils/mdx-components';
 import navs from '@contents/docs/navs';
-import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
 
 export async function generateStaticParams() {
-  return await getAllDocsPages().map(({ meta }) => {
-    return {
-      slug: meta.href.split('/').slice(1),
-    }
+  const pages = await getAllDocsPages()
+
+  return pages.map(({ meta }) => {
+    return { slug: meta.slug }
   })
 }
 
 export async function generateMetadata({ params }) {
   let { slug } = await params
-
-  if (!slug || slug.length === 0) {
-    slug = ['index']
-  }
-
-  const { meta } = getDocBySlug(slug.join('/'))
+  const { meta } = getDocBySlug(slug)
   return meta
+}
+
+async function importDoc(slug) {
+  const { meta, relativePath } = getDocBySlug(slug)
+
+  const filePath = relativePath.replace(/^contents\/docs\//, '')
+  const module = await import(`@contents/docs/${filePath}`)
+
+  return {
+    meta,
+    Content: module.default
+  }
 }
 
 export default async function DocPage({ params }) {
   let { slug } = await params
-
-  if (!slug || slug.length === 0) {
-    slug = ['index']
-  }
-
-  const { meta, content } = getDocBySlug(slug.join('/'))
-  const pathname = slug.join('/')
+  const { meta, Content } = await importDoc(slug)
+  const pathname = meta.href
   const toc = meta.toc ?? []
 
   return (
@@ -51,12 +51,12 @@ export default async function DocPage({ params }) {
         id="content-wrapper"
         className="prose prose-slate dark:prose-dark relative z-20 mt-8"
       >
-        <MDXRemote source={content} components={mdxComponents} />
+        <Content />
       </div>
 
       <DocsFooter navs={navs}>
         <Link
-          href={`https://github.com/rustfs/rustfs.com/edit/main/contents${pathname}.mdx`}
+          href={`https://github.com/rustfs/rustfs.com/edit/main/contents/${pathname}.mdx`}
           className="hover:text-slate-900 dark:hover:text-slate-400"
         >
           Edit this page on GitHub

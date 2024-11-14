@@ -1,3 +1,5 @@
+'use client'
+
 import Logo from "@components/svgs/logo.svg";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
