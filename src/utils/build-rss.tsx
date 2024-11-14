@@ -17,25 +17,25 @@ export default async function buildRss(posts) {
     generator: 'RustFS',
   })
 
-  posts.forEach(async ({ meta, content }) => {
+  posts.forEach(async ({ meta: metadata }) => {
     // let image = meta.ogImage ?? meta.image
     // image = image
     //   ? `${baseUrl}${image.default?.src ?? image.src ?? image}`
     //   : `${baseUrl}/api/og?path=/blog/${meta.slug}`
 
-    if (!meta.authors || meta.authors?.length === 0) {
-      meta.authors = [siteConfig.defaultAuthor]
+    if (!metadata.authors || metadata.authors?.length === 0) {
+      metadata.authors = [siteConfig.defaultAuthor]
     }
 
     feed.item({
-      title: meta.title,
-      url: `${blogUrl}/${meta.slug}`,
-      description: meta.description,
-      author: meta.authors.map(({ name, twitter }) => ({
+      title: metadata.title,
+      url: `${blogUrl}/${metadata.slug}`,
+      description: metadata.description,
+      author: metadata.authors.map(({ name, twitter }) => ({
         name,
         link: `https://twitter.com/${twitter}`,
       })),
-      date: new Date(meta.date),
+      date: new Date(metadata.date),
       // enclosure: {
       //   url: post.imageUrl, // 文章的图片，如果有的话
       // }
