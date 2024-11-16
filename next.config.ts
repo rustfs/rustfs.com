@@ -1,12 +1,14 @@
 import createMDX from '@next/mdx';
 import type { NextConfig } from 'next';
+import rehypeUnwrapImages from 'rehype-unwrap-images';
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from 'remark-gfm';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import { createLoader } from 'simple-functional-loader';
 import { recmaImportImages } from './src/plugins/recma/importImages.mjs';
-// import { withSyntaxHighlighting } from './src/plugins/remark/withSyntaxHighlighting.mjs';
-// import { withTableOfContents } from './src/plugins/remark/withTableOfContents.mjs';
+import { withLinkRoles } from './src/plugins/rehype/withLinkRoles.mjs';
+import { withSyntaxHighlighting } from './src/plugins/remark/withSyntaxHighlighting.mjs';
+import { withTableOfContents } from './src/plugins/remark/withTableOfContents.mjs';
 
 const withMDX = createMDX({
   options: {
@@ -14,11 +16,10 @@ const withMDX = createMDX({
       remarkGfm,
       remarkFrontmatter,
       [remarkMdxFrontmatter as any, { name: 'metadata' }],
-      // rehypeUnwrapImages,
-      // withTableOfContents,
-      // withSyntaxHighlighting,
+      withTableOfContents,
+      withSyntaxHighlighting,
     ],
-    // rehypePlugins: [withLinkRoles],
+    rehypePlugins: [withLinkRoles, rehypeUnwrapImages],
     recmaPlugins: [[recmaImportImages, { property: 'src' }]],
   },
 })

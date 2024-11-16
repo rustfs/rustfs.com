@@ -1,6 +1,7 @@
 import { Heading } from '@/components/heading'
 import type { MDXComponents } from 'mdx/types'
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
+import { AnchorHTMLAttributes, DetailedHTMLProps } from 'react'
 
 function Img(props) {
   return (
@@ -12,27 +13,14 @@ function Img(props) {
   )
 }
 
-function CustomLink(props) {
-  let href = props.href
-
-  if (href.startsWith('/')) {
-    return (
-      <Link href={href} {...props}>
-        {props.children}
-      </Link>
-    )
-  }
-
-  if (href.startsWith('#')) {
-    return <a {...props} />
-  }
-
-  return <a target="_blank" rel="noopener noreferrer" {...props} />
+function CustomLink(props: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> & LinkProps) {
+  return <Link {...props} />
 }
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    Heading,
+    Heading,// 依赖 plugins/remark/withTableOfContents 插件
+    h1: () => null,
     a: CustomLink,
     img: Img,
     Img,

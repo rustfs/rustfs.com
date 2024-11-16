@@ -7,13 +7,20 @@ import clsx from 'clsx';
 import dayjs from 'dayjs';
 
 export async function generateStaticParams() {
-  const posts = await getAllBlogPosts().filter((post) => post.metadata.slug && post.metadata.slug !== 'index');
+  const posts = (await getAllBlogPosts()).filter((post) => post.metadata.slug && post.metadata.slug !== 'index');
 
   try {
     await buildRss(posts)
   } catch (error) {
     console.error('Error building RSS feed:', error)
   }
+
+  console.log(posts.map(({ metadata }) => {
+    return {
+      slug: metadata.slug
+    }
+  }));
+
 
   return posts.map(({ metadata }) => {
     return {
@@ -24,25 +31,13 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  const { metadata } = getBlogBySlug(slug)
-  return metadata
-}
-
-async function importBlog(slug) {
-  const { metadata, relativePath } = getBlogBySlug(slug)
-
-  const filePath = relativePath.replace(/^contents\/blog\//, '')
-  const mdx = await import(`@contents/blog/${filePath}`)
-
-  return {
-    metadata,
-    Content: mdx.default
-  }
+  return (await getBlogBySlug(slug)).metadata
 }
 
 export default async function BlogPage({ params }) {
   const { slug } = await params
-  const { metadata, Content } = await importBlog(slug)
+  const { metadata, mdx } = await getBlogBySlug(slug)
+  const Content = mdx.default
 
   return (
     <article className="relative pt-10">
@@ -55,7 +50,7 @@ export default async function BlogPage({ params }) {
       </h1>
       <div className="text-sm leading-6">
         <dl>
-          <dt className="sr-only">Date</dt>
+          <dt className="sr-only">发布于</dt>
           <dd
             className={clsx('absolute top-0 inset-x-0 text-slate-700 dark:text-slate-400')}
           >

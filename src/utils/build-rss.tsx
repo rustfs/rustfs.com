@@ -17,7 +17,7 @@ export default async function buildRss(posts) {
     generator: 'RustFS',
   })
 
-  posts.forEach(async ({ meta: metadata }) => {
+  posts.forEach(async ({ metadata }) => {
     // let image = meta.ogImage ?? meta.image
     // image = image
     //   ? `${baseUrl}${image.default?.src ?? image.src ?? image}`

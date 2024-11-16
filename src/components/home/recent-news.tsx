@@ -6,8 +6,10 @@ import Image from "next/image";
 import { BlogPost } from "../../../types/metadata";
 
 export default async function RecentNews() {
-  const posts = getAllBlogPosts().slice(0, 3);
+  const posts = (await getAllBlogPosts()).slice(0, 3);
   const randomNo = () => randomInt(1, 11);
+
+  console.log(posts);
 
   return (
     <>

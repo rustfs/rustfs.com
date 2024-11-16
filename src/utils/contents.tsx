@@ -1,7 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import fs from 'fs';
 import { globSync } from 'glob';
 import matter from 'gray-matter';
 import path from 'path';
+import siteConfig from '../../config';
 import { parseDate } from './formatDate';
 import { kebabToTitleCase } from './kebabToTitleCase';
 
@@ -30,10 +32,14 @@ function getExcerpt(content) {
   return ''
 }
 
-function readMDXFile(filePath) {
+async function readMDXFile(filePath, category) {
   console.log(`parsing file: ${filePath}`);
+
   let rawContent = fs.readFileSync(filePath, 'utf-8')
+
   let { data: metadata, content } = matter(rawContent)
+
+  console.log(`metadata:`, metadata);
 
   content = content.trim()
 
@@ -63,12 +69,12 @@ function readMDXFile(filePath) {
   // contents/blog/2021-01-01-slug/index.mdx
   metadata.relativePath = filePath.match(/contents\/(.*)\.mdx$/)?.[0]
 
-  metadata.href = filePath.match(/contents\/(.*)\.mdx$/)?.[1].replace(/\/index$/, '')
+  metadata.href = filePath.match(/contents(.*)\.mdx$/)?.[1].replace(/\/index$/, '')
   metadata.match = new RegExp(metadata.href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
   metadata.publishedAt = parseDate(metadata.publishedAt)
 
   // if no slug is provided, use the filename
-  const segments = metadata.href.split('/').slice(1)
+  const segments = metadata.href.split('/').slice(2)
   // `undefined` is used to represent the index page
   metadata.slug = segments.length ? segments : undefined;
 
@@ -81,53 +87,63 @@ function readMDXFile(filePath) {
     }
   }
 
-  // resolve image path
-  if (metadata.image) {
-    if (!metadata.image.startsWith('http')) {
-      // contents path + image path
-      metadata.image = `/@contents/` + path.join(metadata.href, metadata.image)
-    }
-  } else {
-    metadata.image = null
-  }
-
   // if title is H1, remove it from the content
   if (content.startsWith(`# ${metadata.title}`)) {
     content = content.replace(/^# .*$/m, '').trim()
   }
 
+  let mdx = null;
+  let contentsRelativePath = metadata.relativePath.substring('contents'.length + category.length + 2);
+
+  if (category === 'blog') {
+    mdx = await import(`@contents/blog/${contentsRelativePath}`)
+  } else {
+    mdx = await import(`@contents/docs/${contentsRelativePath}`)
+  }
+
+  metadata.authors = metadata.authors || [siteConfig.defaultAuthor]
+
   return {
     metadata,
     content,
-    filePath,
-    relativePath: metadata.relativePath,
+    mdx
   }
 }
 
-function getMDXData(dir) {
+async function getMDXData(category) {
+  const dir = `${process.cwd()}/contents/${category}/`
   let mdxFiles = getMDXFiles(dir)
 
-  return mdxFiles.map((file) => {
-    return readMDXFile(path.join(dir, file))
+  return Promise.allSettled(mdxFiles.map(async (file) => {
+    return await readMDXFile(`${dir}${file}`, category)
+  })).then((results) => {
+    return results.map((result) => {
+      if (result.status === 'fulfilled') {
+        return result.value
+      }
+      console.error(result.reason);
+    })
   })
 }
 
-export function getAllBlogPosts() {
-  return getMDXData(process.cwd() + '/contents/blog/')
+export async function getAllBlogPosts() {
+  const posts = await getMDXData('blog')
+  return posts
     .sort((a, b) => {
       return b.metadata.publishedAt.getTime() - a.metadata.publishedAt.getTime()
     })
     .filter((post) => {
-      return post.metadata.slug !== 'index'
+      return post.metadata.slug !== undefined
     })
 }
 
-export function getAllDocsPages() {
-  return getMDXData(process.cwd() + '/contents/docs/')
+export async function getAllDocsPages() {
+  return await getMDXData('docs')
 }
 
-export function getBlogBySlug(slug) {
-  return getAllBlogPosts().find((post) => {
+export async function getBlogBySlug(slug) {
+  const posts = await getAllBlogPosts()
+  return posts.find((post) => {
     if (slug === undefined) {
       return post.metadata.slug === undefined
     }
@@ -136,8 +152,9 @@ export function getBlogBySlug(slug) {
   })
 }
 
-export function getDocBySlug(slug) {
-  return getAllDocsPages().find((post) => {
+export async function getDocBySlug(slug) {
+  const posts = await getAllDocsPages()
+  return posts.find((post) => {
     if (slug === undefined) {
       return post.metadata.slug === undefined
     }

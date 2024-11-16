@@ -6,14 +6,15 @@ export type Metadata = {
   tags: string[]
   authors: string[]
   publishedAt: string
-  image: string | null
+  image: function | null
+  imageUrl: string | null
 }
 
 
 export type Content = {
   metadata: Meta
   content: string
-  filePath: string
+  mdx: any
 }
 
 export type BlogPost = Content

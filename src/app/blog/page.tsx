@@ -17,8 +17,8 @@ export function generateMetadata() {
   }
 }
 
-export default function BlogIndex() {
-  const posts = getAllBlogPosts()
+export default async function BlogIndex() {
+  const posts = await getAllBlogPosts()
 
   return (
     <main className="mx-auto max-w-[52rem] px-4 pb-28 sm:px-6 md:px-8 lg:max-w-6xl xl:px-12">
@@ -69,7 +69,7 @@ export default function BlogIndex() {
                 </dl>
               </div>
               <Link
-                href={`/blog/${metadata.slug}`}
+                href={metadata.href}
                 className="flex items-center text-sm font-medium text-sky-500"
               >
                 <span className="absolute -inset-x-4 -inset-y-2.5 sm:rounded-2xl md:-inset-x-6 md:-inset-y-4" />

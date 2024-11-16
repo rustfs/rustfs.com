@@ -15,25 +15,14 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   let { slug } = await params
-  const { metadata } = getDocBySlug(slug)
-  return metadata
+  return (await getDocBySlug(slug)).metadata
 }
 
-async function importDoc(slug) {
-  const { metadata, relativePath } = getDocBySlug(slug)
-
-  const filePath = relativePath.replace(/^contents\/docs\//, '')
-  const mdx = await import(`@contents/docs/${filePath}`)
-
-  return {
-    metadata,
-    Content: mdx.default
-  }
-}
 
 export default async function DocPage({ params }) {
   let { slug } = await params
-  const { metadata, Content } = await importDoc(slug)
+  const { metadata, mdx } = await getDocBySlug(slug)
+  const Content = mdx.default
   const pathname = metadata.href
   const toc = metadata.toc ?? []
 
