@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="43px" viewBox="0 0 36 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>问题</title>
+    <g id="页面-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="解决方案-工业生产" transform="translate(-1096, -565)" fill="#FFFFFF">
+            <g id="3" transform="translate(0, 55)">
+                <g id="编组-3" transform="translate(0, 289)">
+                    <g id="编组" transform="translate(1050, 187)">
+                        <g id="问题" transform="translate(46, 34)">
+                            <path d="M36,40 L0,40 L0,0 L25.4671692,0 L36,10.1430761 L36,40 Z M25.6263227,4.12365866 L25.6263227,10.5825243 L32.2220612,10.5825243 L25.6263227,4.12365866 Z M20.8177997,7.80020439 L5.29120162,7.80020439 L5.29120162,10.4036791 L20.8177997,10.4036791 L20.8177997,7.80020439 Z M30.7583708,15.2018396 L5.24684737,15.2018396 L5.24684737,17.8027593 L30.7583708,17.8027593 L30.7583708,15.2018396 L30.7583708,15.2018396 Z" id="形状" fill-rule="nonzero" opacity="0.420184181"></path>
+                            <text id="01" font-family="PingFangSC-Medium, PingFang SC" font-size="18" font-weight="400">
+                                <tspan x="15.428" y="37">01</tspan>
+                            </text>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

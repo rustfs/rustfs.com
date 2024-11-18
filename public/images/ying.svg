@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="18px" viewBox="0 0 27 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>形状</title>
+    <defs>
+        <linearGradient x1="0.147466059%" y1="49.8525339%" x2="99.8525339%" y2="49.8525339%" id="linearGradient-1">
+            <stop stop-color="#F6178E" offset="0%"></stop>
+            <stop stop-color="#1637B7" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="解决方案-可扩展" transform="translate(-352, -427)" fill="url(#linearGradient-1)" fill-rule="nonzero">
+            <g id="编组" transform="translate(350, 427)">
+                <g id="“" transform="translate(2, 0)">
+                    <path d="M27,3.2 C26.53125,3.46666667 26.140625,3.68 25.828125,3.84 C23.5885417,5.12 22.1041667,6.72 21.375,8.64 L25.671875,8.64 L25.671875,18 L17,18 L17,11.6 C17,7.01333333 19.4739583,3.14666667 24.421875,0 L27,3.2 Z M10,3.2 C9.53125,3.46666667 9.140625,3.68 8.828125,3.84 C6.58854167,5.12 5.10416667,6.72 4.375,8.64 L8.671875,8.64 L8.671875,18 L0,18 L0,11.6 C0,7.01333333 2.47395833,3.14666667 7.421875,0 L10,3.2 Z" id="形状"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

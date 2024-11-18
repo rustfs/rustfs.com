@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="466px" viewBox="0 0 1920 466" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>三角形</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="1920" height="466"></rect>
+        <linearGradient x1="9.39639207%" y1="39.80097%" x2="83.2355574%" y2="45.7016219%" id="linearGradient-3">
+            <stop stop-color="#0B6C36" offset="0%"></stop>
+            <stop stop-color="#133B4B" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-5.2%" y="-7.7%" width="110.4%" height="115.4%" filterUnits="objectBoundingBox" id="filter-4">
+            <feGaussianBlur stdDeviation="41.0514772 28.5442852" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="三角形">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="蒙版" fill="#0A0B14" xlink:href="#path-1"></use>
+            <path d="M627.758244,1215.15585 C958.852952,1215.15585 1227.25824,946.750559 1227.25824,615.655851 C1227.25824,610.007093 2162.57564,576.871931 2154.82628,575.38488 C1548.41645,459.018751 1576.32369,468.997998 1636.30641,394.991732 C1715.77154,296.94822 916.561977,49.0284831 810.552207,114.68014 C320.847859,417.953147 235.553358,322.785525 -123.973945,384.035411 C-483.501249,445.285297 296.663537,1215.15585 627.758244,1215.15585 Z" id="椭圆形" fill="url(#linearGradient-3)" opacity="0.796781994" filter="url(#filter-4)" mask="url(#mask-2)" transform="translate(969.1337, 659.461) scale(-1, 1) rotate(1) translate(-969.1337, -659.461)"></path>
+        </g>
+    </g>
+</svg>
