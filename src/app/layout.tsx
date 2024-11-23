@@ -1,15 +1,16 @@
 'use client'
 /* eslint-disable react-hooks/exhaustive-deps */
-import Footer from '@/components/footer'
-import { Title } from '@/components/meta'
-import Header from '@components/header'
-import clsx from 'clsx'
-import 'focus-visible'
-import { ThemeProvider } from 'next-themes'
-import { usePathname } from 'next/navigation'
-import siteConfig from '../../config'
-import '../css/fonts.css'
-import '../css/main.css'
+import Footer from '@/components/footer';
+import { Title } from '@/components/meta';
+import Header from '@components/header';
+import PrelineScript from "@components/preline";
+import clsx from 'clsx';
+import 'focus-visible';
+import { ThemeProvider } from 'next-themes';
+import { usePathname } from 'next/navigation';
+import siteConfig from '../../config';
+import '../css/fonts.css';
+import '../css/main.css';
 
 export default function RootLayout({ children }) {
   const pathname = usePathname()
@@ -46,6 +47,7 @@ export default function RootLayout({ children }) {
           <Footer />
         </ThemeProvider>
       </body>
+      <PrelineScript />
     </html>
   )
 }

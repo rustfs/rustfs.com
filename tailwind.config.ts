@@ -6,7 +6,8 @@ const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenCo
 module.exports = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mjs,mdx,html}',
-    './remark/**/*.{js,ts,tsx,mjs}'
+    './remark/**/*.{js,ts,tsx,mjs}',
+    './node_modules/preline/preline.js',
   ],
   blocklist: [
     '[html:has(&)]:bg-blue-500',
@@ -422,6 +423,7 @@ module.exports = {
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms')({ strategy: 'class' }),
+    require('preline/plugin'),
     function ({ addVariant }) {
       addVariant(
         'supports-backdrop-blur',
