@@ -1,26 +1,14 @@
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import clsx from "clsx";
 
 /* eslint-disable @next/next/no-img-element */
-export default function S3Compatibility() {
+export default function Distributed() {
   return (
-    <div>
-      {/* Background Banner Section */}
-      <div className="bg-banner-1 relative">
-        <AnimatedGridPattern
-          numSquares={300}
-          maxOpacity={0.1}
-          duration={1}
-          repeatDelay={1}
-          className={clsx(
-            "[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]",
-            "inset-x-0 inset-y-0 h-[200%]",
-          )}
-        />
-        <div className="px-6 py-16 text-center">
-          <h3 className="text-foreground text-4xl font-bold">大规模数据的基础 基础设施</h3>
+    <div className="space-y-8 leading-loose">
+      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-2.png)' }}>
+        <div className="relative z-10 px-6 py-20 text-center">
+          <h3 className="text-5xl font-bold">大规模数据的基础设施</h3>
           <p className="mt-4 text-lg">
-            RustFS 专为扩展而设计。技术规模、运营规模和经济规模。基础规模。
+            RustFS 专为扩展而设计。技术规模、运营规模和经济
+            规模。基础规模。
           </p>
         </div>
       </div>

@@ -1,34 +1,21 @@
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import clsx from "clsx";
 
 /* eslint-disable @next/next/no-img-element */
-export default function Versioning() {
+export default function Encryption() {
   return (
     <div className="space-y-8 leading-loose">
-      {/* Background Banner Section */}
-      <div className="bg-banner-1 relative">
-        <AnimatedGridPattern
-          numSquares={300}
-          maxOpacity={0.1}
-          duration={1}
-          repeatDelay={1}
-          className={clsx(
-            "[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]",
-            "inset-x-0 inset-y-0 h-[200%] z-10",
-          )}
-        />
-        <div className="relative z-50 px-6 py-16 text-center">
-          <h3 className="text-foreground text-5xl font-bold">大规模数据的基础 基础设施</h3>
+      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-5.png)' }}>
+        <div className="relative z-10 px-6 py-20 text-center">
+          <h1 className="text-5xl font-bold">大规模数据的基础设施</h1>
           <p className="mt-4 text-lg">
             RustFS 专为扩展而设计。技术规模、运营规模和经济规模。基础规模。
           </p>
         </div>
       </div>
 
-      <div className="mx-auto max-w-screen-xl">
-        <p className="text-xl font-bold text-center">在对象存储领域，需要强大的加密才能在谈判桌上占有一席之地。RustFS 通过最高级别的加密以及广泛的优化提供更多功能，几乎消除了通常与存储加密操作相关的开销。</p>
+      <div className="mx-auto max-w-screen-xl space-y-10">
+        <p className="text-center text-xl font-bold">在对象存储领域，需要强大的加密才能在谈判桌上占有一席之地。RustFS 通过最高级别的加密以及广泛的优化提供更多功能，几乎消除了通常与存储加密操作相关的开销。</p>
 
-        <div className="p-8 border rounded-xl shadow">
+        <div className="rounded-xl border p-8 shadow">
           <img src="/images/s-5/s5-1.png" alt="" />
         </div>
         <p>
@@ -38,8 +25,8 @@ export default function Versioning() {
 
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
-        <div className="container mx-auto py-12 space-y-6 leading-loose">
-          <h2 className="text-3xl font-bold text-center">网络加密</h2>
+        <div className="container mx-auto space-y-6 py-12 leading-loose">
+          <h2 className="text-center text-3xl font-bold">网络加密</h2>
           <div className="space-y-2">
             <p>
               当数据在对象存储和应用程序之间传输时，它可能会在任意数量的未知和/或不受信任的网络之间反弹。在数据通过网络传输时对其进行加密（也称为“线合”）可成功缓解中间人攻击，并确保无论采用何种路由，数据都保持安全。
@@ -58,8 +45,8 @@ export default function Versioning() {
 
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
-        <div className="container mx-auto py-12 space-y-6 leading-loose">
-          <h2 className="text-3xl font-bold text-center">对象加密</h2>
+        <div className="container mx-auto space-y-6 py-12 leading-loose">
+          <h2 className="text-center text-3xl font-bold">对象加密</h2>
           <div className="space-y-2">
             <p>
               存储在磁盘上的数据完全依赖于磁盘的安全性，并延伸到主机系统来确保数据的安全。RustFS
@@ -84,8 +71,8 @@ export default function Versioning() {
 
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
-        <div className="container mx-auto py-12 space-y-6 leading-loose bg-gray-100 p-12">
-          <h2 className="text-3xl font-bold text-center">RustFS密钥加密服务</h2>
+        <div className="container mx-auto space-y-6 bg-gray-100 p-12 leading-loose">
+          <h2 className="text-center text-3xl font-bold">RustFS密钥加密服务</h2>
           <div className="space-y-2">
             <p>
               RustFS 提供了用于密钥加密的内置选项。RustFS 的密钥加密服务 （KES） 是一种用于高性能应用程序的无状态分布式密钥管理系统。它被设计为在 Kubernetes 中运行并将加密密钥分发给应用程序。KES 是 RustFS
@@ -103,21 +90,21 @@ export default function Versioning() {
       </div>
 
       <div className="mx-auto max-w-screen-xl">
-        <div className="p-8 border rounded-xl shadow">
-          <img src="/images/s-5/s5-2.png" alt="" className="max-w-3xl mx-auto" />
+        <div className="rounded-xl border p-8 shadow">
+          <img src="/images/s-5/s5-2.png" alt="" className="mx-auto max-w-3xl" />
         </div>
       </div>
 
       <div className="bg-gray-100">
-        <div className="container max-w-screen-xl mx-auto py-12 space-y-6">
-          <h2 className="text-3xl font-bold text-center">支持的外部密钥管理系统</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
-            <img src="/images/s-5/s5i-1.png" alt="" className="border rounded" />
-            <img src="/images/s-5/s5i-2.png" alt="" className="border rounded" />
-            <img src="/images/s-5/s5i-3.png" alt="" className="border rounded" />
-            <img src="/images/s-5/s5i-4.png" alt="" className="border rounded" />
-            <img src="/images/s-5/s5i-5.png" alt="" className="border rounded" />
-            <img src="/images/s-5/s5i-6.png" alt="" className="border rounded" />
+        <div className="container mx-auto max-w-screen-xl space-y-6 py-12">
+          <h2 className="text-center text-3xl font-bold">支持的外部密钥管理系统</h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+            <img src="/images/s-5/s5i-1.png" alt="" className="rounded border" />
+            <img src="/images/s-5/s5i-2.png" alt="" className="rounded border" />
+            <img src="/images/s-5/s5i-3.png" alt="" className="rounded border" />
+            <img src="/images/s-5/s5i-4.png" alt="" className="rounded border" />
+            <img src="/images/s-5/s5i-5.png" alt="" className="rounded border" />
+            <img src="/images/s-5/s5i-6.png" alt="" className="rounded border" />
           </div>
         </div>
       </div>

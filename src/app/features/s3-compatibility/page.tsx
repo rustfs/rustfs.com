@@ -1,24 +1,11 @@
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import clsx from "clsx";
 
 /* eslint-disable @next/next/no-img-element */
 export default function S3Compatibility() {
   return (
-    <div>
-      {/* Background Banner Section */}
-      <div className="bg-banner-1 relative">
-        <AnimatedGridPattern
-          numSquares={300}
-          maxOpacity={0.1}
-          duration={1}
-          repeatDelay={1}
-          className={clsx(
-            "[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]",
-            "inset-x-0 inset-y-0 h-[200%]",
-          )}
-        />
-        <div className="px-6 py-16 text-center">
-          <h3 className="text-foreground text-4xl font-bold">亚马逊云 S3 兼容性</h3>
+    <div className="space-y-8 leading-loose">
+      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-1.png)' }}>
+        <div className="relative z-10 px-6 py-20 text-center">
+          <h1 className="text-5xl font-bold">亚马逊云 S3 兼容性</h1>
           <p className="mt-4 text-lg">
             S3包容性是云原生应用的硬性要求。RustFS坚定不移地坚持使用API并拥有数以万计的用户<br />
             包括商业用户和社区，RustFS的S3实现是世界上最广泛测试和实施的替代AWS S3。

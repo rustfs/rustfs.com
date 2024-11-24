@@ -1,25 +1,12 @@
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { RiBarChartBoxLine, RiFileList3Line } from "@remixicon/react";
-import clsx from "clsx";
 
 /* eslint-disable @next/next/no-img-element */
-export default function Versioning() {
+export default function Logs() {
   return (
     <div className="space-y-8 leading-loose">
-      {/* Background Banner Section */}
-      <div className="bg-banner-1 relative">
-        <AnimatedGridPattern
-          numSquares={300}
-          maxOpacity={0.1}
-          duration={1}
-          repeatDelay={1}
-          className={clsx(
-            "[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]",
-            "inset-x-0 inset-y-0 h-[200%] z-10",
-          )}
-        />
-        <div className="relative z-50 px-6 py-16 text-center">
-          <h3 className="text-foreground text-5xl font-bold">来自 RustFS 的可扩展可升级后的对象不变性</h3>
+      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-7.png)' }}>
+        <div className="relative z-10 px-6 py-20 text-center">
+          <h1 className="text-5xl font-bold">日志和审计</h1>
           <p className="mt-4 text-lg">
           </p>
         </div>
@@ -48,8 +35,8 @@ export default function Versioning() {
 
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
-        <div className="container mx-auto py-12 space-y-6 leading-loose">
-          <h2 className="text-3xl font-bold text-center">监控指标</h2>
+        <div className="container mx-auto space-y-6 py-12 leading-loose">
+          <h2 className="text-center text-3xl font-bold">监控指标</h2>
           <div className="space-y-2">
             <p>
               RustFS 通过与 Prometheus 兼容的指标端点导出范围广泛的细粒度硬件和软件指标。 Prometheus是一个由多维数据模型组成的云原生监控平台 具有由指标名称和键/值对标识的时间序列数据。 RustFS
@@ -70,8 +57,8 @@ export default function Versioning() {
 
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
-        <div className="container mx-auto py-12 space-y-6 leading-loose">
-          <h2 className="text-3xl font-bold text-center">日志记录</h2>
+        <div className="container mx-auto space-y-6 py-12 leading-loose">
+          <h2 className="text-center text-3xl font-bold">日志记录</h2>
           <div className="space-y-2">
             <p>
               启用 RustFS 审计日志记录指示 RustFS 为集群上的每个操作生成日志。 每个操作都会生成一个审计日志，其中包含唯一 ID 以及有关客户端、对象、存储桶和所有其他与操作相关的元数据的详细信息。 RustFS
@@ -91,22 +78,22 @@ export default function Versioning() {
 
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
-        <div className="container mx-auto py-12 space-y-6 leading-loose">
-          <h2 className="text-3xl font-bold text-center">架构</h2>
+        <div className="container mx-auto space-y-6 py-12 leading-loose">
+          <h2 className="text-center text-3xl font-bold">架构</h2>
           <div className="space-y-6">
             <p className="text-xl font-bold">
               RustFS 通过与 Prometheus 兼容的 HTTP(S) 端点公开其指标，其中 Prometheus 服务提供对这些指标的推/拉访问。 RustFS Kubernetes Operator 为每个预配置的 RustFS 租户部署一个独立的 Prometheus
               服务，以抓取租户指标。 组织还可以部署或利用他们自己的集中式 Prometheus 服务来抓取租户指标。
             </p>
-            <p className="rounded-lg shadow border my-6 p-8">
-              <img src="/images/s-7/s7-1.png" alt="" className="max-w-[800px] mx-auto"></img>
+            <p className="my-6 rounded-lg border p-8 shadow">
+              <img src="/images/s-7/s7-1.png" alt="" className="mx-auto max-w-[800px]"></img>
             </p>
             <p>
               RustFS Lambda 通知自动将事件通知推送到支持的目标服务，例如 Kafka、Elasticsearch 或 PostgreSQL。 管理员可以定义桶级通知规则，其中包含 S3 事件和 RustFS 为其生成事件的对象的细粒度过滤器。 RustFS
               Lambda 通知内置于 RustFS 对象存储服务中，只需要访问远程通知目标。
             </p>
-            <p className="rounded-lg shadow border my-6 p-8">
-              <img src="/images/s-7/s7-2.png" alt="" className="max-w-[800px] mx-auto"></img>
+            <p className="my-6 rounded-lg border p-8 shadow">
+              <img src="/images/s-7/s7-2.png" alt="" className="mx-auto max-w-[800px]"></img>
             </p>
           </div>
         </div>
@@ -114,26 +101,26 @@ export default function Versioning() {
 
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
-        <div className="container mx-auto py-12 space-y-6 leading-loose bg-cyan-200 p-4 rounded-lg">
-          <h2 className="text-4xl font-bold text-center text-primary">要求</h2>
+        <div className="container mx-auto space-y-6 rounded-lg bg-cyan-200 p-4 py-12 leading-loose">
+          <h2 className="text-primary text-center text-4xl font-bold">要求</h2>
           <div className="space-y-2">
-            <div className="border-b border-cyan-300 px-12 xl:px-24 py-12 relative">
-              <div className="font-bold text-2xl text-foreground relative pl-4">
-                <span className="h-3 w-3 bg-blue-500 rounded-full absolute top-2 -left-2"></span>
+            <div className="relative border-b border-cyan-300 p-12 xl:px-24">
+              <div className="text-foreground relative pl-4 text-2xl font-bold">
+                <span className="absolute -left-2 top-2 size-3 rounded-full bg-blue-500"></span>
                 <h4>对于指标</h4>
               </div>
               <p className="pl-4">BYO Prometheus *或*使用 Kubernetes Operator 为每个租户自动部署/配置。</p>
             </div>
-            <div className="border-b border-cyan-300 px-12 xl:px-24 py-12 relative">
-              <div className="font-bold text-2xl text-foreground relative pl-4">
-                <span className="h-3 w-3 bg-blue-500 rounded-full absolute top-2 -left-2"></span>
+            <div className="relative border-b border-cyan-300 p-12 xl:px-24">
+              <div className="text-foreground relative pl-4 text-2xl font-bold">
+                <span className="absolute -left-2 top-2 size-3 rounded-full bg-blue-500"></span>
                 <h4>对于日志搜索</h4>
               </div>
               <p className="pl-4">BYO PostgreSQL *或*使用 Kubernetes Operator 为每个租户自动部署/配置。</p>
             </div>
-            <div className="px-12 xl:px-24 py-12 relative">
-              <div className="font-bold text-2xl text-foreground relative pl-4">
-                <span className="h-3 w-3 bg-blue-500 rounded-full absolute top-2 -left-2"></span>
+            <div className="relative p-12 xl:px-24">
+              <div className="text-foreground relative pl-4 text-2xl font-bold">
+                <span className="absolute -left-2 top-2 size-3 rounded-full bg-blue-500"></span>
                 <h4>对于日志</h4>
               </div>
               <p className="pl-4">支持第三方通知目标。</p>

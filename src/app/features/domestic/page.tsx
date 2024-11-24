@@ -1,25 +1,12 @@
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { RiComputerLine, RiPieChart2Line, RiShieldStarLine, RiUDiskLine } from "@remixicon/react";
-import clsx from "clsx";
 
 /* eslint-disable @next/next/no-img-element */
-export default function Versioning() {
+export default function Demestic() {
   return (
     <div className="space-y-8 leading-loose">
-      {/* Background Banner Section */}
-      <div className="bg-banner-1 relative">
-        <AnimatedGridPattern
-          numSquares={300}
-          maxOpacity={0.1}
-          duration={1}
-          repeatDelay={1}
-          className={clsx(
-            "[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]",
-            "inset-x-0 inset-y-0 h-[200%] z-10",
-          )}
-        />
-        <div className="relative z-50 px-6 py-16 text-center">
-          <h3 className="text-foreground text-5xl font-bold">国产信创和通用机加密套件解决方案</h3>
+      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-10.png)' }}>
+        <div className="relative z-10 px-6 py-20 text-center">
+          <h1 className="text-5xl font-bold">国产信创和通用机加密套件解决方案</h1>
           <p className="mt-4 text-lg">
             全面提供从硬件、操作系统到涉密、加密的全套存储解决方案
           </p>

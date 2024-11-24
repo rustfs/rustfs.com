@@ -1,33 +1,21 @@
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import clsx from "clsx";
 
 /* eslint-disable @next/next/no-img-element */
-export default function S3Compatibility() {
+export default function HDFS() {
   return (
-    <div>
-      {/* Background Banner Section */}
-      <div className="bg-banner-1 relative">
-        <AnimatedGridPattern
-          numSquares={300}
-          maxOpacity={0.1}
-          duration={1}
-          repeatDelay={1}
-          className={clsx(
-            "[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]",
-            "inset-x-0 inset-y-0 h-[200%]",
-          )}
-        />
-        <div className="px-6 py-16 text-center">
-          <h3 className="text-foreground text-4xl font-bold">用现代对象存储替换 Hadoop HDFS</h3>
+    <div className="space-y-8 leading-loose">
+      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-bg/banner-3.png)' }}>
+        <div className="relative z-10 px-6 py-20 text-center">
+          <h3 className="text-5xl font-bold">用现代对象存储<br />
+            替换 Hadoop HDFS</h3>
           <p className="mt-4 text-lg">
-            未来是分解的，S3兼容和Kubernetes原生 - 换句话说，<br />
-            除了Hadoop HDFS之外的东西。
+            现代数据湖和数据湖仓一体建立在现代对象存储之上。<br />
+            这意味着它们建立在 RustFS 之上。
           </p>
         </div>
       </div>
 
       <div className="mx-auto max-w-screen-xl">
-        <div className="container mx-auto space-y-12 py-12 xl:py-24">
+        <div className="container mx-auto space-y-12 py-12 xl:py-12">
           <h4 className="text-foreground text-center text-xl font-bold">RustFS 是唯一一个具有性能和规模的对象存储平台， 可以介入并取代传统但任务关键型的 Hadoop HDFS 部署。</h4>
         </div>
 
@@ -38,7 +26,7 @@ export default function S3Compatibility() {
               <p>如今，将计算和存储分开已经很有意义了。存储需要超过计算 - 高达 10-1。计算节点是无状态的，并使用更多的 CPU 内核和内存进行了优化。存储节点是有状态的，可以使用更多更密集的驱动器和更高的带宽进行 I/O 优化。通过分解，企业可以实现卓越的经济效益、更好的可管理性、更高的可扩展性和更高的总拥有成本。HDFS 无法进行此转换。当你离开数据局部性时，Hadoop HDFS的优势就变成了它的弱点。</p>
             </div>
             <div>
-              <img src="/images/p-3/31.png" alt="" className="mx-auto w-full max-w-lg" />
+              <img src="/images/p-3/31.png" alt="" className="mx-auto w-full max-w-sm" />
             </div>
           </div>
         </div>
@@ -46,7 +34,7 @@ export default function S3Compatibility() {
         <div className="container mx-auto py-12 xl:py-24">
           <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-2">
             <div>
-              <img src="/images/p-3/32.png" alt="" className="mx-auto w-full max-w-lg" />
+              <img src="/images/p-3/32.png" alt="" className="mx-auto w-full max-w-sm" />
             </div>
             <div className="flex flex-col gap-8">
               <h4 className="text-foreground text-2xl font-bold">云原生</h4>

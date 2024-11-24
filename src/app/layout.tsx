@@ -1,5 +1,6 @@
 'use client'
 /* eslint-disable react-hooks/exhaustive-deps */
+import FixedContactButton from '@/components/fixed-contact-button';
 import Footer from '@/components/footer';
 import { Title } from '@/components/meta';
 import Header from '@components/header';
@@ -46,6 +47,7 @@ export default function RootLayout({ children }) {
           {children}
           <Footer />
         </ThemeProvider>
+        <FixedContactButton />
       </body>
       <PrelineScript />
     </html>

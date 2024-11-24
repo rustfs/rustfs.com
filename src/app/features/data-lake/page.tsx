@@ -1,26 +1,13 @@
 import GoogleSearch from "@/components/google-search";
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import Marquee from "@/components/ui/marquee";
-import clsx from "clsx";
 
 /* eslint-disable @next/next/no-img-element */
-export default function S3Compatibility() {
+export default function Datalake() {
   return (
     <div>
-      {/* Background Banner Section */}
-      <div className="bg-banner-1 relative">
-        <AnimatedGridPattern
-          numSquares={300}
-          maxOpacity={0.1}
-          duration={1}
-          repeatDelay={1}
-          className={clsx(
-            "[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]",
-            "inset-x-0 inset-y-0 h-[200%]",
-          )}
-        />
-        <div className="px-6 py-16 text-center">
-          <h3 className="text-foreground text-4xl font-bold">面向现代数据湖的 RustFS</h3>
+      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-bg/banner-1.png)' }}>
+        <div className="space-y-20 px-6 py-16 text-center">
+          <h1 className="text-5xl font-bold">面向现代数据湖的 RustFS</h1>
           <p className="mt-4 text-lg">
             现代数据湖和数据湖仓一体建立在现代对象存储之上。<br />
             这意味着它们建立在 RustFS 之上。

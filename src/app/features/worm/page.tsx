@@ -1,24 +1,11 @@
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import clsx from "clsx";
 
 /* eslint-disable @next/next/no-img-element */
-export default function Versioning() {
+export default function Worm() {
   return (
     <div className="space-y-8 leading-loose">
-      {/* Background Banner Section */}
-      <div className="bg-banner-1 relative">
-        <AnimatedGridPattern
-          numSquares={300}
-          maxOpacity={0.1}
-          duration={1}
-          repeatDelay={1}
-          className={clsx(
-            "[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]",
-            "inset-x-0 inset-y-0 h-[200%] z-10",
-          )}
-        />
-        <div className="relative z-50 px-6 py-16 text-center">
-          <h3 className="text-foreground text-5xl font-bold">来自 RustFS 的对象不变性</h3>
+      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-9.png)' }}>
+        <div className="relative z-10 px-6 py-20 text-center">
+          <h1 className="text-5xl font-bold">来自 RustFS 的对象不变性</h1>
           <p className="mt-4 text-lg">
           </p>
         </div>

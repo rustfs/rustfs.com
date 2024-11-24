@@ -1,25 +1,12 @@
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import Marquee from "@/components/ui/marquee";
-import clsx from "clsx";
 
 /* eslint-disable @next/next/no-img-element */
-export default function S3Compatibility() {
+export default function AI() {
   return (
-    <div>
-      {/* Background Banner Section */}
-      <div className="bg-banner-1 relative">
-        <AnimatedGridPattern
-          numSquares={300}
-          maxOpacity={0.1}
-          duration={1}
-          repeatDelay={1}
-          className={clsx(
-            "[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]",
-            "inset-x-0 inset-y-0 h-[200%]",
-          )}
-        />
-        <div className="px-6 py-16 text-center">
-          <h3 className="text-foreground text-4xl font-bold">AI 革命由 GPU 和高性能对象存储提供支持。</h3>
+    <div className="space-y-8 leading-loose">
+      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-bg/banner-2.png)' }}>
+        <div className="relative z-10 px-6 py-20 text-center">
+          <h1 className="text-5xl font-bold">AI 革命由 GPU <br />和高性能对象存储提供支持。</h1>
           <p className="mt-4 text-lg">
             我们是高性能对象存储
           </p>
