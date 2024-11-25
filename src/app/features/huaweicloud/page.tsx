@@ -34,7 +34,7 @@ export default function Huaweicloud() {
 
       <div className="mx-auto max-w-screen-xl">
         <div className="container mx-auto space-y-12 py-12 xl:py-24">
-          <h2 className="text-foreground text-center text-4xl font-bold">建筑</h2>
+          <h2 className="text-center  text-4xl font-bold text-neutral-800">建筑</h2>
           <div className="space-y-10">
             <p>华为云 CCE 是一项托管服务，可用于在 AWS 上运行 Kubernetes，而无需安装、操作和维护自己的 Kubernetes 控制平面或节点。</p>
             <p>RustFS 在所有主要的 Kubernetes 平台（阿里云ACK、Tanzu、Azure、GCP、阿里云 ACK）上提供可移植的高性能对象存储系统。在华为云 CCE 上，RustFS 与 华为云 CCE 服务原生集成，从而更轻松地将自己的大规模多租户对象存储即服务运行。RustFS 是 AWS S3 存储即服务的完全替代品。</p>
@@ -49,7 +49,7 @@ export default function Huaweicloud() {
       <div className="bg-neutral-100">
         <div className="mx-auto max-w-screen-xl">
           <div className="container mx-auto space-y-12 py-12 xl:py-24">
-            <h2 className="text-foreground text-center text-4xl font-bold">RustFS Operator 与 TKE 功能原生集成，以提供：</h2>
+            <h2 className="text-center  text-4xl font-bold text-neutral-800">RustFS Operator 与 TKE 功能原生集成，以提供：</h2>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
               <div>
                 <a href="#hash1" className="flex flex-col justify-center rounded-lg border bg-white p-6 text-center">

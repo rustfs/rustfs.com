@@ -16,7 +16,7 @@ export default function ColdArchiving() {
 
       <div className="bg-gray-100">
         <div className="mx-auto max-w-screen-xl py-20">
-          <h2 className="text-foreground text-center text-3xl font-bold">冷归档存储<span className="text-pink-600">痛点</span></h2>
+          <h2 className="text-center  text-3xl font-bold text-neutral-800">冷归档存储<span className="text-pink-600">痛点</span></h2>
 
           <div className="flex items-center gap-6 py-12 text-left">
             <div className="w-full p-6 md:w-1/2">
@@ -51,11 +51,11 @@ export default function ColdArchiving() {
 
         <div className="container mx-auto space-y-10 py-12 xl:py-24">
           <h3 className="text-primary mb-10 text-center text-3xl font-bold">低能耗</h3>
-          <p className="text-foreground text-center text-xl">单机柜工作功率160W，待机功率仅7W，大大降低电费投入，绿色节能</p>
+          <p className="text-center  text-xl text-neutral-800">单机柜工作功率160W，待机功率仅7W，大大降低电费投入，绿色节能</p>
 
           <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-2">
             <div className="flex flex-col gap-8">
-              <h4 className="text-foreground text-2xl font-bold">大中型数据中心能耗测算</h4>
+              <h4 className="text-2xl  font-bold text-neutral-800">大中型数据中心能耗测算</h4>
               <p>据估计，一个2000个机架的数据中心一年电费成本5256万元，以PUE为2.0测算时，整体能耗成本高达每年1.05亿元</p>
               <p>蓝光光盘库无需空调降温设备，工作功耗约170W，待机功耗仅为7W，运行环境:发热量低，无需空凋制冷恒温恒湿环境，常温条件运行</p>
               <p className="text-pink-500">同等存储力的蓝光机柜能耗是磁存储机柜的22.6%</p>

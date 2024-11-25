@@ -16,7 +16,7 @@ export default function MultiClouds() {
       <div className="bg-neutral-100">
         <div className="mx-auto max-w-screen-xl">
           <div className="container mx-auto space-y-12 py-12 xl:py-24">
-            <h2 className="text-foreground text-center text-4xl font-bold">成功的多云存储策略利用能够在各种环境中运行的架构和工具。</h2>
+            <h2 className="text-center  text-4xl font-bold text-neutral-800">成功的多云存储策略利用能够在各种环境中运行的架构和工具。</h2>
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
               <div className="space-y-6">
                 <div className="flex items-center gap-2">
@@ -52,7 +52,7 @@ export default function MultiClouds() {
 
       <div className="mx-auto max-w-screen-xl">
         <div className="container mx-auto space-y-12 py-12 xl:py-24">
-          <h2 className="text-foreground text-center text-4xl font-bold">使用 RustFS 的多云架构</h2>
+          <h2 className="text-center  text-4xl font-bold text-neutral-800">使用 RustFS 的多云架构</h2>
           <div className="">
             <img src="/images/p-6/61.png" alt="" className="mx-auto max-w-lg" />
           </div>
@@ -61,7 +61,7 @@ export default function MultiClouds() {
 
       <div className="mx-auto max-w-screen-xl">
         <div className="container mx-auto space-y-12 py-12 xl:py-24">
-          <h2 className="text-foreground text-center text-4xl font-bold">混合/多云存储的属性</h2>
+          <h2 className="text-center  text-4xl font-bold text-neutral-800">混合/多云存储的属性</h2>
           <p>多云存储遵循公有云建立的模式，公有云提供商一致采用云原生对象存储。公有云的成功有效地使文件和块存储过时了。每个新应用程序都是为 AWS S3 API 编写的，而不是为 POSIX 编写的。为了像云原生技术一样进行扩展和执行，必须针对 S3 API 重写较旧的应用程序，并将其重构为微服务，以便与容器兼容。</p>
           <div className="flex items-start gap-6">
             <div className="sticky top-8 flex w-[240px] shrink-0 flex-col gap-4 border p-4">

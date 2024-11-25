@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-5">
           {/* Architecture Support Column */}
           <div className="space-y-4">
-            <h3 className="font-medium text-gray-900">架构支持</h3>
+            <h3 className="text-muted-foreground font-medium">架构支持</h3>
             <ul className="space-y-2">
               <li><a href="/features/baremetal" className="text-sm text-gray-600 hover:text-gray-900">裸金属和虚拟化</a></li>
               <li><a href="/features/aliyun" className="text-sm text-gray-600 hover:text-gray-900">阿里云</a></li>
@@ -23,7 +23,7 @@ export default function Footer() {
 
           {/* Product Features Column */}
           <div className="space-y-4">
-            <h3 className="font-medium text-gray-900">产品功能</h3>
+            <h3 className="text-muted-foreground font-medium">产品功能</h3>
             <ul className="space-y-2">
               <li><a href="/features/distributed" className="text-sm text-gray-600 hover:text-gray-900">分布式</a></li>
               <li><a href="/features/aliyun" className="text-sm text-gray-600 hover:text-gray-900">日志管理</a></li>
@@ -38,7 +38,7 @@ export default function Footer() {
 
           {/* Solutions Column */}
           <div className="space-y-4">
-            <h3 className="font-medium text-gray-900">解决方案</h3>
+            <h3 className="text-muted-foreground font-medium">解决方案</h3>
             <ul className="space-y-2">
               <li><a href="/features/data-lake" className="text-sm text-gray-600 hover:text-gray-900">现代数据湖</a></li>
               <li><a href="/features/ai" className="text-sm text-gray-600 hover:text-gray-900">AI 和机器学习</a></li>
@@ -55,7 +55,7 @@ export default function Footer() {
 
           {/* About Us Column */}
           <div className="space-y-4">
-            <h3 className="font-medium text-gray-900">关于我们</h3>
+            <h3 className="text-muted-foreground font-medium">关于我们</h3>
             <ul className="space-y-2">
               <li><a href="/about" className="text-sm text-gray-600 hover:text-gray-900">关于我们</a></li>
               <li><a href="/about" className="text-sm text-gray-600 hover:text-gray-900">投资和合作</a></li>
@@ -66,7 +66,7 @@ export default function Footer() {
 
           {/* Contact Us Column */}
           <div className="space-y-4">
-            <h3 className="font-medium text-gray-900">联系我们</h3>
+            <h3 className="text-muted-foreground font-medium">联系我们</h3>
             <ul className="space-y-2">
               <li className="flex items-center space-x-2">
                 <span className="text-sm text-gray-600">hello@rustfs.com</span>

@@ -4,7 +4,7 @@ import { RiBuilding2Fill, RiDatabase2Fill, RiDoubleQuotesL, RiFileCopy2Line, RiF
 export default function Copy() {
   return (
     <div className="space-y-8 leading-loose">
-      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-9.png)' }}>
+      <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-9.png)' }}>
         <div className="relative z-10 px-6 py-20 text-center">
           <h1 className="text-5xl font-bold">用于对象存储的多站点、主动活动复制</h1>
           <p className="mt-4 text-lg">
@@ -83,7 +83,7 @@ export default function Copy() {
           <div className="container mx-auto space-y-12 p-12 leading-loose">
             <div className="space-y-6">
               <h2 className="text-primary text-center text-4xl font-bold">实施 RustFS的主动-主动复制时要考虑的事项</h2>
-              <p className="text-foreground text-center text-xl">
+              <p className="text-center  text-xl text-neutral-800">
                 在最基本的层面上，任何设计都需要考虑基础设施、带宽、延迟、<br />
                 弹性和规模。让我们按顺序检查它们：
               </p>

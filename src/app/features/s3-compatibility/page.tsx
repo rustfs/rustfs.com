@@ -3,7 +3,7 @@
 export default function S3Compatibility() {
   return (
     <div className="space-y-8 leading-loose">
-      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-1.png)' }}>
+      <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-1.png)' }}>
         <div className="relative z-10 px-6 py-20 text-center">
           <h1 className="text-5xl font-bold">亚马逊云 S3 兼容性</h1>
           <p className="mt-4 text-lg">
@@ -19,7 +19,7 @@ export default function S3Compatibility() {
         <div className="container mx-auto my-12">
           <div className="flex flex-wrap items-center">
             <div className="w-full p-6 md:w-1/2">
-              <h3 className="text-foreground mb-4 text-3xl font-bold">
+              <h3 className="mb-4  text-3xl font-bold text-neutral-800">
                 RustFS和S3 API-专为多云存储而设计
               </h3>
               <p>
@@ -37,7 +37,7 @@ export default function S3Compatibility() {
               <img src="/images/s-1/s1-2.png" alt="" className="mx-auto h-64 object-scale-down" />
             </div>
             <div className="w-full p-6 md:w-1/2">
-              <h3 className="text-foreground mb-4 text-3xl font-bold">S3 兼顾混合和多云计算</h3>
+              <h3 className="mb-4  text-3xl font-bold text-neutral-800">S3 兼顾混合和多云计算</h3>
               <p>
                 实现多云和混合云兼容性只有一条途径，那就是 S3。 作为 RESTful API
                 标准，S3 彻底改变了应用程序、数据和基础架构之间的交互。 此外，容器化和 Kubernetes 编排的双重力量也是围绕 RESTful API
@@ -54,7 +54,7 @@ export default function S3Compatibility() {
 
           <div className="flex flex-wrap items-center">
             <div className="w-full p-6 md:w-1/2">
-              <h3 className="text-foreground mb-4 text-3xl font-bold">
+              <h3 className="mb-4  text-3xl font-bold text-neutral-800">
                 裸机工作负载的 S3 包容性
               </h3>
               <p>
@@ -72,7 +72,7 @@ export default function S3Compatibility() {
 
         {/* Benefits Section */}
         <div className="container mx-auto my-12">
-          <h3 className="text-foreground mb-4 text-3xl font-bold">Benefits of RustFS 可扩展对象存储</h3>
+          <h3 className="mb-4  text-3xl font-bold text-neutral-800">Benefits of RustFS 可扩展对象存储</h3>
           <p className="mb-4">
             云原生应用程序使用 S3 API 与对象存储进行通信。 但并非所有 S3 的包容性都是相同的——许多对象存储供应商只支持一小部分整体功能——这会导致应用程序失败。
             其他人声称全面覆盖，但他们的专有软件或设备模型限制了这一声称，因为只有一小部分应用程序、硬件和软件经过测试。

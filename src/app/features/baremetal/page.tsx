@@ -7,7 +7,7 @@ export default function Baremetal() {
   return (
     <div>
       {/* Background Banner Section */}
-      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/framework/banner-3.png)' }}>
+      <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/framework/banner-3.png)' }}>
         <div className="relative z-10 space-y-20 px-6 py-16 text-center xl:py-24">
           <div className="space-y-12">
             <h1 className="text-5xl font-bold">支持windows/Linux的裸金属和虚拟化部署</h1>
@@ -35,7 +35,7 @@ export default function Baremetal() {
 
       <div className="mx-auto max-w-screen-xl">
         <div className="container mx-auto space-y-12 py-12 xl:py-24">
-          <h2 className="text-foreground text-center text-4xl font-bold">特征</h2>
+          <h2 className="text-center  text-4xl font-bold text-neutral-800">特征</h2>
           <div className="space-y-10">
             <p>RustFS的企业级功能代表了对象存储空间中的标准。从 AWS S3 API 到 S3 Select，以及我们的内联纠删码和安全性实施，我们的代码广受赞誉，并经常被一些技术和业务领域的知名人士复制。</p>
           </div>
@@ -144,7 +144,7 @@ export default function Baremetal() {
 
       <div className="mx-auto max-w-screen-xl">
         <div className="container mx-auto space-y-12 py-12 xl:py-24">
-          <h2 className="text-foreground text-center text-4xl font-bold">建筑</h2>
+          <h2 className="text-center  text-4xl font-bold text-neutral-800">建筑</h2>
           <div className="space-y-10">
             <p>RustFS 被设计为云原生，可以作为由 Kubernetes 等外部编排服务管理的轻量级容器运行。整个服务器是一个 ~40 MB 的静态二进制文件，即使在高负载下也能高效地使用 CPU 和内存资源。结果是，你可以在共享硬件上共同托管大量租户。</p>
             <div className="rounded-xl border p-8 shadow">

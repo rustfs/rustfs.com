@@ -4,7 +4,7 @@ import { RiBarChartBoxLine, RiFileList3Line } from "@remixicon/react";
 export default function Logs() {
   return (
     <div className="space-y-8 leading-loose">
-      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-7.png)' }}>
+      <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-7.png)' }}>
         <div className="relative z-10 px-6 py-20 text-center">
           <h1 className="text-5xl font-bold">日志和审计</h1>
           <p className="mt-4 text-lg">
@@ -105,21 +105,21 @@ export default function Logs() {
           <h2 className="text-primary text-center text-4xl font-bold">要求</h2>
           <div className="space-y-2">
             <div className="relative border-b border-cyan-300 p-12 xl:px-24">
-              <div className="text-foreground relative pl-4 text-2xl font-bold">
+              <div className="relative  pl-4 text-2xl font-bold text-neutral-800">
                 <span className="absolute -left-2 top-2 size-3 rounded-full bg-blue-500"></span>
                 <h4>对于指标</h4>
               </div>
               <p className="pl-4">BYO Prometheus *或*使用 Kubernetes Operator 为每个租户自动部署/配置。</p>
             </div>
             <div className="relative border-b border-cyan-300 p-12 xl:px-24">
-              <div className="text-foreground relative pl-4 text-2xl font-bold">
+              <div className="relative  pl-4 text-2xl font-bold text-neutral-800">
                 <span className="absolute -left-2 top-2 size-3 rounded-full bg-blue-500"></span>
                 <h4>对于日志搜索</h4>
               </div>
               <p className="pl-4">BYO PostgreSQL *或*使用 Kubernetes Operator 为每个租户自动部署/配置。</p>
             </div>
             <div className="relative p-12 xl:px-24">
-              <div className="text-foreground relative pl-4 text-2xl font-bold">
+              <div className="relative  pl-4 text-2xl font-bold text-neutral-800">
                 <span className="absolute -left-2 top-2 size-3 rounded-full bg-blue-500"></span>
                 <h4>对于日志</h4>
               </div>

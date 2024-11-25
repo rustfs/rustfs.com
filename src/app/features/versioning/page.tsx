@@ -3,7 +3,7 @@
 export default function Versioning() {
   return (
     <div className="space-y-8 leading-loose">
-      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-8.png)' }}>
+      <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-8.png)' }}>
         <div className="relative z-10 px-6 py-20 text-center">
           <h1 className="text-5xl font-bold">桶和对象版本控制</h1>
           <p className="mt-4 text-lg">
@@ -14,7 +14,7 @@ export default function Versioning() {
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
         <div className="container mx-auto py-12">
-          <h3 className="text-foreground mb-4 text-center text-4xl font-bold">
+          <h3 className="mb-4  text-center text-4xl font-bold text-neutral-800">
             RustFS 对象存储提供 AWS S3 版本控制兼容性
           </h3>
           <div className="flex flex-wrap items-center">
@@ -41,7 +41,7 @@ export default function Versioning() {
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
         <div className="container mx-auto my-12">
-          <h3 className="text-foreground mb-4 text-center text-4xl font-bold">RustFS支持具有三种不同存储桶状态的对象版本控制</h3>
+          <h3 className="mb-4  text-center text-4xl font-bold text-neutral-800">RustFS支持具有三种不同存储桶状态的对象版本控制</h3>
           <div className="my-12 flex flex-wrap items-center">
             <div className="w-full p-6 md:w-1/2">
               <img src="/images/s-8/s8-2.png" alt="" className="mx-auto h-full object-scale-down" />

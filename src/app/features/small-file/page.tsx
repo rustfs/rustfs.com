@@ -23,7 +23,7 @@ export default function File() {
               <img src="/images/p-9/91.png" alt="" className="mx-auto w-full max-w-sm" />
             </div>
             <div className="flex flex-col gap-8">
-              <h4 className="text-foreground text-2xl font-bold">背景</h4>
+              <h4 className="text-2xl  font-bold text-neutral-800">背景</h4>
               <p>RustFS小文件优化 非常适合需要 IOPS 和吞吐量性能的工作负载。在现代架构中，这越来越意味着 AI/ML 工作负载。在没有缓存的情况下，I/O 可能成为 GPU 的瓶颈。</p>
               <p>使用企业缓存，可以将包含训练、验证和测试数据集的存储桶保存在内存中，以提供基于</p>
             </div>
@@ -35,7 +35,7 @@ export default function File() {
       <div className="bg-neutral-100">
         <div className="mx-auto max-w-screen-xl">
           <div className="container mx-auto space-y-12 py-12 xl:py-24">
-            <h2 className="text-foreground text-center text-4xl font-bold">特征</h2>
+            <h2 className="text-center  text-4xl font-bold text-neutral-800">特征</h2>
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <div className="space-y-8">
                 <div className="inline-block rounded-full bg-pink-500 p-4 text-center text-sm text-white">

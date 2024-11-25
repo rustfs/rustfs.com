@@ -3,7 +3,7 @@
 export default function Encryption() {
   return (
     <div className="space-y-8 leading-loose">
-      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-5.png)' }}>
+      <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-5.png)' }}>
         <div className="relative z-10 px-6 py-20 text-center">
           <h1 className="text-5xl font-bold">大规模数据的基础设施</h1>
           <p className="mt-4 text-lg">

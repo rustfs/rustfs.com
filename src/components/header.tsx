@@ -49,7 +49,7 @@ const GroupedMegaMenu = ({ item }) => {
           <div className="gap-4 py-1 md:grid md:grid-cols-2 md:p-2 lg:grid-cols-4 lg:p-6">
             {item.children.map((child) => (
               <div className="flex flex-col p-2" key={child.name + child.href}>
-                <div className="text-primary border-b px-3 pb-2 font-bold">{child.name}</div>
+                <div className="text-primary border-b border-neutral-100 px-3 pb-2 font-bold dark:border-neutral-700">{child.name}</div>
                 <div className="space-y-2 py-2">
                   {
                     child.children.map((grated) => (

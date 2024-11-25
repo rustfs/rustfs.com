@@ -4,7 +4,7 @@ import { RiDoubleQuotesL } from "@remixicon/react";
 export default function Scalable() {
   return (
     <div className="space-y-8 leading-loose">
-      <div className="text-primary-foreground relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-3.png)' }}>
+      <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-3.png)' }}>
         <div className="relative z-10 px-6 py-20 text-center">
           <h1 className="text-5xl font-bold">来自 RustFS 的可扩展可升级后的对象不变性</h1>
           <p className="mt-4 text-lg">
@@ -29,12 +29,12 @@ export default function Scalable() {
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
         <div className="container mx-auto py-12">
-          <h3 className="text-foreground mb-4 text-center text-4xl font-bold">
+          <h3 className="mb-4  text-center text-4xl font-bold text-neutral-800">
             Benefits of RustFS 可扩展对象存储
           </h3>
           <div className="flex flex-wrap items-center">
             <div className="w-full space-y-4 p-6 md:w-1/2">
-              <h3 className="text-foreground text-2xl font-bold">消除再平衡</h3>
+              <h3 className="text-2xl  font-bold text-neutral-800">消除再平衡</h3>
               <p>
                 再平衡是一种既昂贵又耗时的传统方法。 RustFS 将现有数据保留在其原始池中，而新数据可以安全地流向新池。 这消除了数据存储层长时间处于降级和潜在风险状态而潜在的 TB 或 PB
                 数据在网络中移动的重新平衡操作。

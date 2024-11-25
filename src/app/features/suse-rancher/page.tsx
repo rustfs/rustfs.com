@@ -33,7 +33,7 @@ export default function Aliyun() {
 
       <div className="mx-auto max-w-screen-xl">
         <div className="container mx-auto space-y-12 py-12 xl:py-24">
-          <h2 className="text-foreground text-center text-4xl font-bold">建筑</h2>
+          <h2 className="text-center  text-4xl font-bold text-neutral-800">建筑</h2>
           <div className="space-y-10">
             <p>红帽® OpenShift® 是一个企业级 Kubernetes 容器平台，具有全栈自动化运维功能，可管理混合云、多云和边缘部署。OpenShift 包括企业级 Linux 操作系统、容器运行时、网络、监控、注册表以及身份验证和授权解决方案。</p>
             <p>RustFS 原生集成了 OpenShift，可以更轻松地将自己的大规模多租户对象存储作为服务进行操作。RustFS Operator 可与 OpenShift 工具链（例如 OpenShift Cluster Manager CLI 和 Quay 容器注册表）配合使用，确保您从 OpenShift 生态系统的投资中获得最大收益。
@@ -50,7 +50,7 @@ export default function Aliyun() {
       <div className="bg-neutral-100">
         <div className="mx-auto max-w-screen-xl">
           <div className="container mx-auto space-y-12 py-12 xl:py-24">
-            <h2 className="text-foreground text-center text-4xl font-bold">RustFS Operator 与 OpenShift 功能原生集成，以提供：</h2>
+            <h2 className="text-center  text-4xl font-bold text-neutral-800">RustFS Operator 与 OpenShift 功能原生集成，以提供：</h2>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
               <div>
                 <a href="#hash1" className="flex flex-col justify-center rounded-lg border bg-white p-6 text-center">

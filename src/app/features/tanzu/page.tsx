@@ -48,7 +48,7 @@ export default function Tanzu() {
       <div className="bg-neutral-100">
         <div className="mx-auto max-w-screen-xl">
           <div className="container mx-auto space-y-12 py-12 xl:py-24">
-            <h2 className="text-foreground text-center text-4xl font-bold">RustFS Operator 与 VMWare Tanzu 功能原生集成，以提供：</h2>
+            <h2 className="text-center  text-4xl font-bold text-neutral-800">RustFS Operator 与 VMWare Tanzu 功能原生集成，以提供：</h2>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
               <div>
                 <a href="#hash1" className="flex flex-col justify-center rounded-lg border bg-white p-6 text-center">
