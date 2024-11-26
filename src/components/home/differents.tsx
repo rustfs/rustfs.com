@@ -20,7 +20,7 @@ export default function HomePricing() {
             <div className="text-muted-foreground">
               <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
-                <span>使用 Go 或者 C 语言开发，内容GC/内存泄漏等</span>
+                <span>使用 Go 或者 C 语言开发，内存垃圾回收异常 / 内存泄漏等</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
                 <XIcon className="text-neutral-500" />
