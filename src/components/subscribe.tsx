@@ -9,10 +9,13 @@ export default function Subscribe() {
     script.src = 'https://unique-trader-2189.ck.page/4e5692208c/index.js';
     script.async = true;
     script.setAttribute('data-uid', '4e5692208c');
-    if (document.getElementById('kit-form').childNodes.length > 0) {
+    const kitForm = document.getElementById('kit-form');
+
+    if (kitForm && kitForm.childNodes.length > 0) {
       return;
     }
-    document.getElementById('kit-form').appendChild(script);
+
+    kitForm?.appendChild(script);
   }, [])
   return (
     <>

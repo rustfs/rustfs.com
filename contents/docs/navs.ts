@@ -6,18 +6,20 @@ export type DocsNavType = Record<string, DocsNavItemType[]>
 const pages: Record<string, DocsNavItemType> = await (async () => {
   let results = {};
 
-  (await getAllDocsPages()).map(post => {
-    results[post.metadata.href.substring('/docs'.length + 1) || '/'] = {
-      title: post.metadata.title,
-      href: post.metadata.href,
-    } as DocsNavItemType
-  });
+  (await getAllDocsPages())
+    .map(post => {
+      if (!post || !post.metadata.href) {
+        return
+      }
+
+      return results[post.metadata.href.substring('/docs'.length + 1) || '/'] = {
+        title: post.metadata.title,
+        href: post.metadata.href,
+      } as DocsNavItemType
+    });
 
   return results;
 })();
-
-console.log(pages);
-
 
 const navs: DocsNavType = {
   'Getting Started': [

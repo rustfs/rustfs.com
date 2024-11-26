@@ -1,10 +1,18 @@
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '大规模数据的基础设施',
+  description: 'RustFS 专为扩展而设计。技术规模、运营规模和经济规模。基础规模。'
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function Distributed() {
   return (
     <div className="space-y-8 leading-loose">
       <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-2.png)' }}>
-        <div className="relative z-10 px-6 py-20 text-center">
+        <div className="relative z-10 px-6 py-20 text-center text-white">
           <h3 className="text-5xl font-bold">大规模数据的基础设施</h3>
           <p className="mt-4 text-lg">
             RustFS 专为扩展而设计。技术规模、运营规模和经济
@@ -13,12 +21,12 @@ export default function Distributed() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-screen-xl">
+      <div className="mx-auto max-w-screen-xl py-12">
         <div className="container mx-auto my-12 flex flex-col gap-8">
           <p>
             RustFS 被设计为云原生，可以作为由 Kubernetes 等外部编排服务管理的轻量级容器运行。整个服务器是一个 ~100MB 的静态二进制文件，即使在高负载下也能高效地使用 CPU 和内存资源。结果是，你可以在共享硬件上共同托管大量租户。
           </p>
-          <p className="rounded-lg border p-4 shadow lg:p-8">
+          <p className="rounded-lg border bg-white p-4 shadow lg:p-8">
             <img src="/images/s-2/s2-1.png" alt="" className="mx-auto w-full max-w-5xl" />
           </p>
           <p>

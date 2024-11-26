@@ -1,10 +1,18 @@
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '亚马逊云 S3 兼容性',
+  description: 'S3包容性是云原生应用的硬性要求。RustFS坚定不移地坚持使用API并拥有数以万计的用户'
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function S3Compatibility() {
   return (
     <div className="space-y-8 leading-loose">
       <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-1.png)' }}>
-        <div className="relative z-10 px-6 py-20 text-center">
+        <div className="relative z-10 px-6 py-20 text-center text-white">
           <h1 className="text-5xl font-bold">亚马逊云 S3 兼容性</h1>
           <p className="mt-4 text-lg">
             S3包容性是云原生应用的硬性要求。RustFS坚定不移地坚持使用API并拥有数以万计的用户<br />
@@ -13,13 +21,12 @@ export default function S3Compatibility() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-screen-xl">
-
+      <div className="mx-auto max-w-screen-xl py-12">
         {/* Standard Boxes Section */}
         <div className="container mx-auto my-12">
           <div className="flex flex-wrap items-center">
             <div className="w-full p-6 md:w-1/2">
-              <h3 className="mb-4  text-3xl font-bold text-neutral-800">
+              <h3 className="text-primary  mb-4 text-3xl font-bold">
                 RustFS和S3 API-专为多云存储而设计
               </h3>
               <p>
@@ -37,7 +44,7 @@ export default function S3Compatibility() {
               <img src="/images/s-1/s1-2.png" alt="" className="mx-auto h-64 object-scale-down" />
             </div>
             <div className="w-full p-6 md:w-1/2">
-              <h3 className="mb-4  text-3xl font-bold text-neutral-800">S3 兼顾混合和多云计算</h3>
+              <h3 className="text-primary  mb-4 text-3xl font-bold">S3 兼顾混合和多云计算</h3>
               <p>
                 实现多云和混合云兼容性只有一条途径，那就是 S3。 作为 RESTful API
                 标准，S3 彻底改变了应用程序、数据和基础架构之间的交互。 此外，容器化和 Kubernetes 编排的双重力量也是围绕 RESTful API
@@ -54,7 +61,7 @@ export default function S3Compatibility() {
 
           <div className="flex flex-wrap items-center">
             <div className="w-full p-6 md:w-1/2">
-              <h3 className="mb-4  text-3xl font-bold text-neutral-800">
+              <h3 className="text-primary  mb-4 text-3xl font-bold">
                 裸机工作负载的 S3 包容性
               </h3>
               <p>
@@ -72,7 +79,7 @@ export default function S3Compatibility() {
 
         {/* Benefits Section */}
         <div className="container mx-auto my-12">
-          <h3 className="mb-4  text-3xl font-bold text-neutral-800">Benefits of RustFS 可扩展对象存储</h3>
+          <h3 className="text-primary  mb-4 text-3xl font-bold">Benefits of RustFS 可扩展对象存储</h3>
           <p className="mb-4">
             云原生应用程序使用 S3 API 与对象存储进行通信。 但并非所有 S3 的包容性都是相同的——许多对象存储供应商只支持一小部分整体功能——这会导致应用程序失败。
             其他人声称全面覆盖，但他们的专有软件或设备模型限制了这一声称，因为只有一小部分应用程序、硬件和软件经过测试。
@@ -91,7 +98,7 @@ export default function S3Compatibility() {
         {/* Color Boxes Section */}
         <div className="container mx-auto my-12">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div className="relative flex flex-col gap-4 rounded-xl bg-gray-100 bg-gradient-to-b from-[#4242ec] to-[#63ccff] p-6 text-white xl:p-12">
+            <div className="bg-muted relative flex flex-col gap-4 rounded-xl bg-gradient-to-b from-[#4242ec] to-[#63ccff] p-6 text-white xl:p-12">
               <h4 className="mb-2 text-2xl font-bold">S3 选择</h4>
               <p className="my-4">
                 S3 Select 取决于复杂查询的大规模性能，而RustFS性能特征可以充分利用
@@ -100,7 +107,7 @@ export default function S3Compatibility() {
               </p>
               <img src="/images/s-1/s1-4.png" alt="S3 Select" className="w-full self-end" />
             </div>
-            <div className="relative flex flex-col gap-4 rounded-xl bg-gray-100 bg-gradient-to-b from-[#9466ff] to-[#f22ac2] p-6 text-white xl:p-12">
+            <div className="bg-muted relative flex flex-col gap-4 rounded-xl bg-gradient-to-b from-[#9466ff] to-[#f22ac2] p-6 text-white xl:p-12">
               <h4 className="mb-2 text-2xl font-bold">亚马逊Signature V4</h4>
               <p className="my-4">
                 应用程序和客户端必须进行身份验证才能访问任何RustFS管理 API。RustFS是第一个支持 AWS 签名版本
@@ -114,7 +121,7 @@ export default function S3Compatibility() {
 
         {/* Closing Section */}
         <div className="container mx-auto my-12">
-          <h3 className="mb-4 text-center text-3xl font-bold">AWS S3 API 和 RustFS</h3>
+          <h3 className="text-primary mb-4 text-center text-3xl font-bold">AWS S3 API 和 RustFS</h3>
           <p className="mb-4">
             RustFS是世界上最快的对象存储。 再加上它的 S3
             包容性，确保它可以运行业内最广泛的用例集。这包括现代应用程序工作负载，例如 GitHub 和 GitLab

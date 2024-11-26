@@ -1,10 +1,18 @@
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '数据生命周期管理和分层',
+  description: '随着数据的不断增长，针对访问、安全性和经济性进行协同优化的能力成为一项硬性要求，而不是锦上添花。这就是生命周期数据管理的作用。RustFS 提供了一套独特的功能来保护云内部和云之间的数据 - 包括公共和私有云。'
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function Lifecycle() {
   return (
     <div className="space-y-8 leading-loose">
       <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-9.png)' }}>
-        <div className="relative z-10 px-6 py-20 text-center">
+        <div className="relative z-10 px-6 py-20 text-center text-white">
           <h1 className="text-5xl font-bold">数据生命周期管理和分层</h1>
           <p className="mt-4 text-lg">
           </p>

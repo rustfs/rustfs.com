@@ -1,12 +1,20 @@
 import Faq from "@/components/home/faq";
 import { RiBrush2Line, RiPuzzleLine, RiRamLine, RiRefreshLine, RiShadowLine } from "@remixicon/react";
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '小文件优化',
+  description: '为超高性能工作负载 创建内存对象存储'
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function File() {
   return (
     <div className="leading-loose">
       {/* Background Banner Section */}
-      <div className="text-primary-foreground relative bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-bg/banner-9.png)' }}>
+      <div className="relative bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-bg/banner-9.png)' }}>
         <div className="relative z-10 space-y-10 px-6 py-16 text-center xl:py-24">
           <h1 className="text-5xl font-bold">小文件优化</h1>
           <p className="text-lg">为超高性能工作负载 创建内存对象存储</p>
@@ -23,7 +31,7 @@ export default function File() {
               <img src="/images/p-9/91.png" alt="" className="mx-auto w-full max-w-sm" />
             </div>
             <div className="flex flex-col gap-8">
-              <h4 className="text-2xl  font-bold text-neutral-800">背景</h4>
+              <h4 className="text-primary  text-2xl font-bold">背景</h4>
               <p>RustFS小文件优化 非常适合需要 IOPS 和吞吐量性能的工作负载。在现代架构中，这越来越意味着 AI/ML 工作负载。在没有缓存的情况下，I/O 可能成为 GPU 的瓶颈。</p>
               <p>使用企业缓存，可以将包含训练、验证和测试数据集的存储桶保存在内存中，以提供基于</p>
             </div>
@@ -32,10 +40,10 @@ export default function File() {
 
       </div>
 
-      <div className="bg-neutral-100">
+      <div className="bg-muted">
         <div className="mx-auto max-w-screen-xl">
           <div className="container mx-auto space-y-12 py-12 xl:py-24">
-            <h2 className="text-center  text-4xl font-bold text-neutral-800">特征</h2>
+            <h2 className="text-primary  text-center text-4xl font-bold">特征</h2>
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <div className="space-y-8">
                 <div className="inline-block rounded-full bg-pink-500 p-4 text-center text-sm text-white">

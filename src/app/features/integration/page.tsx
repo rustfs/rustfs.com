@@ -1,11 +1,19 @@
 import { RiAlarmWarningFill, RiCloudFill, RiEarthFill, RiExpandWidthFill, RiIdCardFill, RiNotification3Fill, RiOpenaiFill, RiRecordMailFill, RiSendBackward, RiShieldKeyholeFill } from "@remixicon/react";
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '与 RustFS 集成',
+  description: '现代数据堆栈是连接的数据堆栈。浏览我们广泛的集成列表，其中包含相关文档的链接。'
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function Integration() {
   return (
     <div className="leading-loose">
       {/* Background Banner Section */}
-      <div className="text-primary relative bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/integration/banner.png)' }}>
+      <div className="relative bg-cover bg-center bg-no-repeat text-black" style={{ backgroundImage: 'url(/images/integration/banner.png)' }}>
         <div className="relative z-10 space-y-10 px-6 py-16 text-center xl:py-24">
           <img src="/images/integration/hbr.svg" alt="" className="mx-auto w-auto max-w-48" />
           <h1 className="text-5xl font-bold">与 RustFS 集成</h1>
@@ -16,7 +24,7 @@ export default function Integration() {
       </div>
 
       <div className="mx-auto max-w-screen-xl">
-        <div className="container mx-auto space-y-20 py-12 xl:py-24">
+        <div className="container mx-auto space-y-20 py-12">
           <div className="xl grid grid-cols-1 items-center gap-6 font-bold lg:grid-cols-3 xl:grid-cols-5">
             <a className="flex flex-col items-center justify-center" href="#icon1">
               <RiIdCardFill className="text-blue-500" />
@@ -62,9 +70,9 @@ export default function Integration() {
         </div>
       </div>
 
-      <div className="bg-neutral-100">
+      <div className="bg-muted">
         <div className="mx-auto max-w-screen-xl">
-          <div className="container mx-auto divide-y py-12 xl:py-24">
+          <div className="container mx-auto divide-y py-12">
             <div className="py-8" id="icon1">
               <h3 className="text-primary text-2xl font-bold">外部身份提供程序</h3>
               <p className="text-muted-foreground">受信任的身份提供程序是单点登录的关键组件。RustFS 通过以下集成支持应用程序和用户身份。</p>

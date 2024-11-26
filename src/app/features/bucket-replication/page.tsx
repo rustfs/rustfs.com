@@ -1,11 +1,19 @@
 import { RiBuilding2Fill, RiDatabase2Fill, RiDoubleQuotesL, RiFileCopy2Line, RiFolderLockLine, RiHourglass2Fill, RiNotificationBadgeLine, RiShareForward2Line, RiSpeedUpFill } from "@remixicon/react";
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '用于对象存储的多站点、主动活动复制',
+  description: 'RustFS 支持同步和近乎同步的复制，具体取决于架构选择和数据的变化率。在上述每种情况下，复制都必须尽可能接近严格一致（考虑到带宽注意事项和更改率）。'
+})
 
 /* eslint-disable @next/next/no-img-element */
-export default function Copy() {
+export default function BucketReplication() {
   return (
     <div className="space-y-8 leading-loose">
       <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-9.png)' }}>
-        <div className="relative z-10 px-6 py-20 text-center">
+        <div className="relative z-10 px-6 py-20 text-center text-white">
           <h1 className="text-5xl font-bold">用于对象存储的多站点、主动活动复制</h1>
           <p className="mt-4 text-lg">
           </p>
@@ -29,7 +37,7 @@ export default function Copy() {
 
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
-        <div className="container mx-auto space-y-6 bg-gray-100 p-12 leading-loose">
+        <div className="bg-muted container mx-auto space-y-6 p-12 leading-loose">
           <h2 className="text-center text-3xl font-bold">RustFS 的数据复制专为大规模弹性而设计。主要功能包括：</h2>
           <div className="grid space-y-2 lg:grid-cols-2">
             <div className="flex items-center gap-4">
@@ -58,32 +66,32 @@ export default function Copy() {
           <h2 className="text-center text-3xl font-bold">RustFS 的数据复制专为大规模弹性而设计。主要功能包括：</h2>
           <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-4">
             <div className="flex flex-col items-center gap-4 rounded-lg border p-4">
-              <div className="flex items-center justify-center rounded-full bg-neutral-50 p-4"><RiShareForward2Line className="size-12" /></div>
+              <div className="dark:bg-muted flex items-center justify-center rounded-full bg-neutral-50 p-4"><RiShareForward2Line className="size-12" /></div>
               <div>源存储桶和目标存储桶具有相同名称的能力。对于必须透明地故障转移到远程站点而不会造成任何中断的应用程序，这是必需的。</div>
             </div>
             <div className="flex flex-col items-center gap-4 rounded-lg border p-4">
-              <div className="flex items-center justify-center rounded-full bg-neutral-50 p-4"><RiFolderLockLine className="size-12" /></div>
+              <div className="dark:bg-muted flex items-center justify-center rounded-full bg-neutral-50 p-4"><RiFolderLockLine className="size-12" /></div>
               <div>本机支持跨源和目标的自动对象锁定/保留复制。</div>
             </div>
             <div className="flex flex-col items-center gap-4 rounded-lg border p-4">
-              <div className="flex items-center justify-center rounded-full bg-neutral-50 p-4"><RiFileCopy2Line className="size-12" /></div>
+              <div className="dark:bg-muted flex items-center justify-center rounded-full bg-neutral-50 p-4"><RiFileCopy2Line className="size-12" /></div>
               <div>近乎同步的复制，可在存储桶发生任何突变后立即更新对象。RustFS 遵循数据中心内的严格一致性和数据中心之间的最终一div护数据。</div>
             </div>
             <div className="flex flex-col items-center gap-4 rounded-lg border p-4">
-              <div className="flex items-center justify-center rounded-full bg-neutral-50 p-4"><RiNotificationBadgeLine className="size-12" /></div>
+              <div className="dark:bg-muted flex items-center justify-center rounded-full bg-neutral-50 p-4"><RiNotificationBadgeLine className="size-12" /></div>
               <div>用于推送复制失败事件的通知功能。应用程序可以订阅这些事件并提醒运营团队。</div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="bg-neutral-100">
+      <div className="bg-muted">
         <div className="mx-auto max-w-screen-xl">
           {/* Standard Boxes Section */}
           <div className="container mx-auto space-y-12 p-12 leading-loose">
             <div className="space-y-6">
               <h2 className="text-primary text-center text-4xl font-bold">实施 RustFS的主动-主动复制时要考虑的事项</h2>
-              <p className="text-center  text-xl text-neutral-800">
+              <p className="text-primary  text-center text-xl">
                 在最基本的层面上，任何设计都需要考虑基础设施、带宽、延迟、<br />
                 弹性和规模。让我们按顺序检查它们：
               </p>
@@ -128,7 +136,7 @@ export default function Copy() {
         <div className="container mx-auto space-y-12 p-12 leading-loose">
           <div className="space-y-6">
             <h2 className="text-primary text-center text-4xl font-bold">RustFS 支持在每个数据中心进行非常大的部署，<br /> 包括源和目标， 上述考虑因素将决定规模。</h2>
-            <div className="rounded-xl border p-8 shadow">
+            <div className="rounded-xl border bg-white p-8 shadow">
               <img src="/images/s-6/s6-2.png" alt="" className="mx-auto max-w-3xl" />
             </div>
           </div>

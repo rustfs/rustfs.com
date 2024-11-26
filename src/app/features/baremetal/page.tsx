@@ -1,6 +1,13 @@
-'use client'
+import { RiEarthLine, RiFileCopy2Line, RiIdCardLine, RiVerifiedBadgeLine } from "@remixicon/react";
 
-import { RiEarthLine, RiFileCopy2Line, RiIdCardLine, RiVerifiedBadgeLine } from "@remixicon/react"
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '裸金属',
+  description: '支持windows/Linux的裸金属和虚拟化部署，开源，兼容 S3，企业强化，而且速度非常快。',
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function Baremetal() {
@@ -8,7 +15,7 @@ export default function Baremetal() {
     <div>
       {/* Background Banner Section */}
       <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/framework/banner-3.png)' }}>
-        <div className="relative z-10 space-y-20 px-6 py-16 text-center xl:py-24">
+        <div className="relative z-10 space-y-20 px-6 py-16 text-center text-white xl:py-24">
           <div className="space-y-12">
             <h1 className="text-5xl font-bold">支持windows/Linux的裸金属和虚拟化部署</h1>
             <p className="mt-4 text-2xl">开源，兼容 S3，企业强化，而且速度非常快。</p>
@@ -19,7 +26,7 @@ export default function Baremetal() {
                 <div className="shrink-0 overflow-hidden px-6 xl:px-10">
                   <img src="/images/framework/svg.png" alt="" className="-mt-16 max-w-xs object-contain" />
                 </div>
-                <div className="text-primary-foreground flex-1 space-y-6 p-4 leading-loose lg:p-12">
+                <div className="flex-1 space-y-6 p-4 leading-loose lg:p-12">
                   <p>RustFS 是一种高性能的分布式对象存储系统。它是软件定义的，在行业标准硬件上运行，并且是 100% 开源的，主要许可证是 GNU AGPL v3。</p>
                   <p>
                     RustFS的不同之处在于，它从一开始就被设计为私有云/混合云对象存储的标准。由于 RustFS
@@ -35,7 +42,7 @@ export default function Baremetal() {
 
       <div className="mx-auto max-w-screen-xl">
         <div className="container mx-auto space-y-12 py-12 xl:py-24">
-          <h2 className="text-center  text-4xl font-bold text-neutral-800">特征</h2>
+          <h2 className="text-primary text-center text-4xl font-bold">特征</h2>
           <div className="space-y-10">
             <p>RustFS的企业级功能代表了对象存储空间中的标准。从 AWS S3 API 到 S3 Select，以及我们的内联纠删码和安全性实施，我们的代码广受赞誉，并经常被一些技术和业务领域的知名人士复制。</p>
           </div>
@@ -47,13 +54,13 @@ export default function Baremetal() {
               <p>在 N/2 的最大奇偶校验下，RustFS 的实现可以确保在部署中仅使用 （（N/2）+1） 个操作驱动器进行不间断的读取和写入操作。例如，在 12 个驱动器设置中，RustFS 在 6 个数据驱动器和 6 个奇偶校验驱动器之间对对象进行分片，并且可以在部署中仅剩下 7 个驱动器的情况下可靠地写入新对象或重建现有对象</p>
             </div>
             <div className="w-full p-6 md:w-1/2">
-              <img src="/images/framework/sec2-1.png" alt="" className="mx-auto max-w-sm" />
+              <img src="/images/framework/sec2-1.png" alt="" className="mx-auto max-w-sm bg-white" />
             </div>
           </div>
 
           <div className="flex flex-wrap items-center">
             <div className="w-full p-6 md:w-1/2">
-              <img src="/images/framework/sec2-2.png" alt="" className="mx-auto max-w-sm" />
+              <img src="/images/framework/sec2-2.png" alt="" className="mx-auto max-w-sm bg-white" />
             </div>
             <div className="w-full space-y-4 p-6 md:w-1/2">
               <h3 className="text-2xl font-bold">Bitrot 保护</h3>
@@ -70,7 +77,7 @@ export default function Baremetal() {
               <p>如果客户端请求 SSE-S3 或启用自动加密，RustFS 服务器会使用唯一的对象密钥对每个对象进行加密，该密钥由 KMS 管理的主密钥保护。鉴于开销极低，可以为每个应用程序和实例启用自动加密。</p>
             </div>
             <div className="w-full p-6 md:w-1/2">
-              <img src="/images/framework/sec2-3.png" alt="" className="mx-auto max-w-sm" />
+              <img src="/images/framework/sec2-3.png" alt="" className="mx-auto max-w-sm bg-white" />
             </div>
           </div>
 
@@ -86,7 +93,7 @@ export default function Baremetal() {
         </div>
       </div>
 
-      <div className="bg-neutral-100">
+      <div className="bg-muted">
         <div className="mx-auto max-w-screen-xl">
           <div className="container mx-auto space-y-12 p-12 leading-loose">
             <div className="grid gap-6 lg:grid-cols-2">
@@ -144,10 +151,10 @@ export default function Baremetal() {
 
       <div className="mx-auto max-w-screen-xl">
         <div className="container mx-auto space-y-12 py-12 xl:py-24">
-          <h2 className="text-center  text-4xl font-bold text-neutral-800">建筑</h2>
+          <h2 className="text-primary  text-center text-4xl font-bold">建筑</h2>
           <div className="space-y-10">
             <p>RustFS 被设计为云原生，可以作为由 Kubernetes 等外部编排服务管理的轻量级容器运行。整个服务器是一个 ~40 MB 的静态二进制文件，即使在高负载下也能高效地使用 CPU 和内存资源。结果是，你可以在共享硬件上共同托管大量租户。</p>
-            <div className="rounded-xl border p-8 shadow">
+            <div className="rounded-xl border bg-white p-8 shadow">
               <img src="/images/framework/sec2-4.png" alt="" className="mx-auto max-w-3xl" />
             </div>
             <p>RustFS 在具有本地连接驱动器 （JBOD/JBOF） 的商用服务器上运行。群集中的所有服务器在功能上都是相等的（完全对称的体系结构）。没有名称节点或元数据服务器。</p>
@@ -158,7 +165,7 @@ export default function Baremetal() {
         </div>
       </div>
 
-      <div className="text-primary-foreground bg-neutral-700 bg-cover bg-center bg-no-repeat py-20" style={{ backgroundImage: 'url(/images/framework/banner-4.png)' }}>
+      <div className="bg-neutral-700 bg-cover bg-center bg-no-repeat py-20 text-white" style={{ backgroundImage: 'url(/images/framework/banner-4.png)' }}>
         <div className="mx-auto max-w-screen-xl space-y-8 text-center">
           <h3 className="text-4xl font-bold">企业级软件的企业级支持</h3>
           <p>RustFS 订阅网络将商业许可证与与众不同的支持体验相结合。</p>

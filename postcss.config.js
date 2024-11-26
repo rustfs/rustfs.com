@@ -5,6 +5,5 @@ module.exports = {
     'tailwindcss',
     'postcss-focus-visible',
     'autoprefixer',
-    require.resolve('./has-fixup.ts'),
   ],
 }

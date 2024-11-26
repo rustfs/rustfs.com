@@ -2,7 +2,7 @@ import authors from '@contents/data/authors.json';
 
 const siteConfig = {
   title: "RustFS | MinIO国产化替代方案, 高性能分布式存储",
-  description: "RustFS使用全球最热,性能最好的内存安全Rust语言开发的高性能对象存储是开源的、兼容S3、oss 的Kubernetes原生云存储,专为 AI 等云原生工作负载而设计。适合企业构建私有云存储、混合云存储和分布式存储,也是是MinIO的国产化替代方案。",
+  description: "RustFS使用全球最热,性能最好的内存安全Rust语言开发的高性能对象存储是开源的、兼容S3、oss 的Kubernetes原生云存储,专为 AI 等云原生工作负载而设计。适合企业构建私有云存储、混合云存储和分布式存储,也是 MinIO 的国产化替代方案。",
   url: "https://rustfs.com",
   keywords: "对象存储,MinIO国产化替代,ceph国产化替代方案，分布式存储,MinIO的国产化,混合云存储,oss,oss私有化, minio国产化替代方案,分布式云存储，云存储、私有云存储,混合云存储，多云, 混合云, 对象存储, 用于AI的对象存储, 云存储,开源存储,sds, oss私有化, 跨云存储, 块存储, NAS,juicefs,  Gluster, 备份存储,私有云存储,同城灾备存储, 跨云存储",
   topNavLinks: [
@@ -76,7 +76,7 @@ const siteConfig = {
     {
       name: "解决方案", id: 'solutions', href: "#", type: 'dropdown', groupd: false, children: [
         { name: '现代数据湖', href: "/features/data-lake", description: "现代数据湖和数据湖仓一体建立在现代对象存储之上。这意味着它们建立在 RustFS 之上。" },
-        { name: '云原生', href: "/features/cloud", description: "混合/多云架构可实现一致的性能、安全性 和经济性。任何关于多云的讨论都需要从一个定义开始。 它不仅仅是一个单一的公共云和本地。" },
+        { name: '云原生', href: "/features/cloud-native", description: "混合/多云架构可实现一致的性能、安全性 和经济性。任何关于多云的讨论都需要从一个定义开始。 它不仅仅是一个单一的公共云和本地。" },
         { name: '制造业降本', href: "/features/industry", description: "制造业通过的AI质检、视频存储、图像存储中需要大量进行高清图片和高清视频的存储，急需降低存储成本。" },
         { name: 'AI 和机器学习', href: "/features/ai", description: "我们是高性能对象存储。" },
         { name: 'HDFS', href: "/features/hdfs", description: "未来是分解的，S3兼容和Kubernetes原生 - 换句话说， 除了Hadoop HDFS之外的东西。" },

@@ -4,6 +4,7 @@ import { globSync } from 'glob';
 import matter from 'gray-matter';
 import path from 'path';
 import siteConfig from '../../config';
+import { Content } from '../../types/metadata';
 import { parseDate } from './formatDate';
 import { kebabToTitleCase } from './kebabToTitleCase';
 
@@ -126,8 +127,8 @@ async function getMDXData(category) {
   })
 }
 
-export async function getAllBlogPosts() {
-  const posts = await getMDXData('blog')
+export async function getAllBlogPosts(): Promise<Content[]> {
+  const posts = await getMDXData('blog') as Content[]
   return posts
     .sort((a, b) => {
       return b.metadata.publishedAt.getTime() - a.metadata.publishedAt.getTime()
@@ -137,28 +138,41 @@ export async function getAllBlogPosts() {
     })
 }
 
-export async function getAllDocsPages() {
-  return await getMDXData('docs')
+export async function getAllDocsPages(): Promise<Content[]> {
+  return await getMDXData('docs') as Content[]
 }
 
-export async function getBlogBySlug(slug) {
-  const posts = await getAllBlogPosts()
-  return posts.find((post) => {
+export async function getBlogBySlug(slug): Promise<Content> {
+  const posts = await getAllBlogPosts() as Content[]
+
+  const post = posts.find((post) => {
     if (slug === undefined) {
       return post.metadata.slug === undefined
     }
 
     return post.metadata.slug?.join('/') === slug.join('/')
   })
+
+  if (!post) {
+    throw new Error(`Post with slug ${slug} not found`)
+  }
+
+  return post
 }
 
-export async function getDocBySlug(slug) {
+export async function getDocBySlug(slug): Promise<Content> {
   const posts = await getAllDocsPages()
-  return posts.find((post) => {
+  const post = posts.find((post) => {
     if (slug === undefined) {
       return post.metadata.slug === undefined
     }
 
     return post.metadata.slug?.join('/') === slug.join('/')
   })
+
+  if (!post) {
+    throw new Error(`Post with slug ${slug} not found`)
+  }
+
+  return post
 }

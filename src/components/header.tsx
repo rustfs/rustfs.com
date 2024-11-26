@@ -44,7 +44,7 @@ const GroupedMegaMenu = ({ item }) => {
       >
         <span>{item.name}</span>
       </button>
-      <div className="hs-dropdown-menu hs-dropdown-open:opacity-100 relative start-0 top-full z-50 hidden w-full min-w-60 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-top-5 before:start-0 before:h-5 before:w-full md:duration-150" role="menu" aria-orientation="vertical" aria-labelledby={`mega-menu-${item.id}`}>
+      <div className="hs-dropdown-menu hs-dropdown-open:opacity-100 relative start-0 top-full z-50 hidden w-full min-w-60 opacity-0 transition-[opacity,margin] before:absolute before:-top-5 before:start-0 before:h-5 before:w-full md:duration-150" role="menu" aria-orientation="vertical" aria-labelledby={`mega-menu-${item.id}`}>
         <div className="md:mx-6 md:rounded-lg md:bg-white md:shadow-md lg:mx-8 dark:md:bg-neutral-800">
           <div className="gap-4 py-1 md:grid md:grid-cols-2 md:p-2 lg:grid-cols-4 lg:p-6">
             {item.children.map((child) => (
@@ -77,7 +77,7 @@ const MegaMenu = ({ item }) => {
       >
         <span>{item.name}</span>
       </button>
-      <div className="hs-dropdown-menu hs-dropdown-open:opacity-100 relative start-0 top-full z-50 hidden w-full min-w-60 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-top-5 before:start-0 before:h-5 before:w-full md:duration-150" role="menu" aria-orientation="vertical" aria-labelledby={`mega-menu-${item.id}`}>
+      <div className="hs-dropdown-menu hs-dropdown-open:opacity-100 relative start-0 top-full z-50 hidden w-full min-w-60 opacity-0 transition-[opacity,margin] before:absolute before:-top-5 before:start-0 before:h-5 before:w-full md:duration-150" role="menu" aria-orientation="vertical" aria-labelledby={`mega-menu-${item.id}`}>
         <div className="md:mx-6 md:rounded-lg md:bg-white md:shadow-md lg:mx-8 dark:md:bg-neutral-800">
           <div className="gap-4 py-1 md:grid md:grid-cols-2 md:p-2 lg:grid-cols-4 lg:p-6">
             {

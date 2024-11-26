@@ -1,4 +1,11 @@
+import withMetadata from "@/utils/metadata";
 import { RiArrowRightLine } from "@remixicon/react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = withMetadata({
+  title: '面向红帽 OpenShift 容器平台的 RustFS',
+  description: 'RustFS 原生集成了 OpenShift，可以更轻松地将自己的大规模多租户对象存储作为服务进行操作。'
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function Aliyun() {
@@ -6,22 +13,22 @@ export default function Aliyun() {
     <div>
       {/* Background Banner Section */}
       <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/framework/banner-1.png)' }}>
-        <div className="relative z-10 space-y-20 px-6 py-16 text-center">
-          <h1 className="text-primary-foreground text-5xl font-bold">面向红帽 OpenShift 容器平台的 RustFS</h1>
+        <div className="relative z-10 space-y-20 px-6 py-16 text-center text-white">
+          <h1 className="text-5xl font-bold">面向红帽 OpenShift 容器平台的 RustFS</h1>
           <p className="mt-4 text-lg"></p>
           <div className="mx-auto max-w-screen-xl">
             <div className="space-y-20 rounded-lg bg-black/60 p-4 shadow lg:p-20">
-              <h2 className="text-primary-foreground text-4xl font-bold">客户在红帽 OpenShift 上运行 RustFS 有三个原因。</h2>
+              <h2 className="text-4xl font-bold">客户在红帽 OpenShift 上运行 RustFS 有三个原因。</h2>
               <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-3">
-                <div className="text-primary-foreground space-y-10">
+                <div className="space-y-10">
                   <h4 className="text-4xl text-blue-500">01</h4>
                   <p>创建和控制类似 AWS 的基础设施，其中 Kubernetes 提供计算基础设施，RustFS 提供对象存储。</p>
                 </div>
-                <div className="text-primary-foreground space-y-10">
+                <div className="space-y-10">
                   <h4 className="text-4xl text-blue-500">02</h4>
                   <p>统一不同的孤岛（企业 IT、数据/HDFS 和现代工作负载/应用），以提高效率、安全性和弹性。</p>
                 </div>
-                <div className="text-primary-foreground space-y-10">
+                <div className="space-y-10">
                   <h4 className="text-4xl text-blue-500">03</h4>
                   <p>在 OpenShift 上运行 RustFS 可以灵活地 控制软件堆栈，从而避免云锁定。</p>
                 </div>
@@ -33,13 +40,13 @@ export default function Aliyun() {
 
       <div className="mx-auto max-w-screen-xl">
         <div className="container mx-auto space-y-12 py-12 xl:py-24">
-          <h2 className="text-center  text-4xl font-bold text-neutral-800">建筑</h2>
+          <h2 className="text-primary  text-center text-4xl font-bold">建筑</h2>
           <div className="space-y-10">
             <p>红帽® OpenShift® 是一个企业级 Kubernetes 容器平台，具有全栈自动化运维功能，可管理混合云、多云和边缘部署。OpenShift 包括企业级 Linux 操作系统、容器运行时、网络、监控、注册表以及身份验证和授权解决方案。</p>
             <p>RustFS 原生集成了 OpenShift，可以更轻松地将自己的大规模多租户对象存储作为服务进行操作。RustFS Operator 可与 OpenShift 工具链（例如 OpenShift Cluster Manager CLI 和 Quay 容器注册表）配合使用，确保您从 OpenShift 生态系统的投资中获得最大收益。
 
             </p>
-            <div className="rounded-xl border p-8 shadow">
+            <div className="rounded-xl border bg-white p-8 shadow">
               <img src="/images/framework/sec1-1.png" alt="" className="mx-auto max-w-3xl" />
             </div>
             <p>RustFS 提供了一个一致、高性能和可扩展的对象存储，因为它在设计上是 Kubernetes 原生的，并且从一开始就与 S3 兼容。开发人员可以轻松地为在 OpenShift 上运行的所有云原生应用程序获取与 Amazon S3 兼容的持久存储服务。与 AWS S3 不同，RustFS 使应用程序能够跨任何多云和混合云基础设施进行扩展，并且仍然可以在 OpenShift 生态系统中进行管理，而不会受到公有云的锁定。</p>
@@ -47,55 +54,55 @@ export default function Aliyun() {
         </div>
       </div>
 
-      <div className="bg-neutral-100">
+      <div className="bg-muted">
         <div className="mx-auto max-w-screen-xl">
           <div className="container mx-auto space-y-12 py-12 xl:py-24">
-            <h2 className="text-center  text-4xl font-bold text-neutral-800">RustFS Operator 与 OpenShift 功能原生集成，以提供：</h2>
+            <h2 className="text-primary  text-center text-4xl font-bold">RustFS Operator 与 OpenShift 功能原生集成，以提供：</h2>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
               <div>
-                <a href="#hash1" className="flex flex-col justify-center rounded-lg border bg-white p-6 text-center">
+                <a href="#hash1" className="bg-background flex flex-col justify-center rounded-lg border p-6 text-center">
                   <div className="mx-auto mb-4 text-pink-500"><img src="/images/framework/icon1.svg" alt="" /></div>
                   <div className="text-xl font-semibold">存储类和分层</div>
                   <p className="mt-2 text-gray-600">跨 NVMe、HDD 和公有云存储进行分层。</p>
                 </a>
               </div>
               <div>
-                <a href="#hash2" className="flex flex-col justify-center rounded-lg border bg-white p-6 text-center">
+                <a href="#hash2" className="bg-background flex flex-col justify-center rounded-lg border p-6 text-center">
                   <div className="mx-auto mb-4 text-pink-500"><img src="/images/framework/icon2.svg" alt="" /></div>
                   <div className="text-xl font-semibold">外部负载均衡</div>
                   <p className="mt-2 text-gray-600">跨 NVMe、HDD 和公有云存储进行分层。</p>
                 </a>
               </div>
               <div>
-                <a href="#hash3" className="flex flex-col justify-center rounded-lg border bg-white p-6 text-center">
+                <a href="#hash3" className="bg-background flex flex-col justify-center rounded-lg border p-6 text-center">
                   <div className="mx-auto mb-4 text-pink-500"><img src="/images/framework/icon3.svg" alt="" /></div>
                   <div className="text-xl font-semibold">加密密钥管理</div>
                   <p className="mt-2 text-gray-600">跨 NVMe、HDD 和公有云存储进行分层。</p>
                 </a>
               </div>
               <div>
-                <a href="#hash4" className="flex flex-col justify-center rounded-lg border bg-white p-6 text-center">
+                <a href="#hash4" className="bg-background flex flex-col justify-center rounded-lg border p-6 text-center">
                   <div className="mx-auto mb-4 text-pink-500"><img src="/images/framework/icon4.svg" alt="" /></div>
                   <div className="text-xl font-semibold">身份管理</div>
                   <p className="mt-2 text-gray-600">跨 NVMe、HDD 和公有云存储进行分层。</p>
                 </a>
               </div>
               <div>
-                <a href="#hash5" className="flex flex-col justify-center rounded-lg border bg-white p-6 text-center">
+                <a href="#hash5" className="bg-background flex flex-col justify-center rounded-lg border p-6 text-center">
                   <div className="mx-auto mb-4 text-pink-500"><img src="/images/framework/icon5.svg" alt="" /></div>
                   <div className="text-xl font-semibold">证书管理</div>
                   <p className="mt-2 text-gray-600">跨 NVMe、HDD 和公有云存储进行分层。</p>
                 </a>
               </div>
               <div>
-                <a href="#hash6" className="flex flex-col justify-center rounded-lg border bg-white p-6 text-center">
+                <a href="#hash6" className="bg-background flex flex-col justify-center rounded-lg border p-6 text-center">
                   <div className="mx-auto mb-4 text-pink-500"><img src="/images/framework/icon6.svg" alt="" /></div>
                   <div className="text-xl font-semibold">监视和警报</div>
                   <p className="mt-2 text-gray-600">跨 NVMe、HDD 和公有云存储进行分层。</p>
                 </a>
               </div>
               <div>
-                <a href="#hash7" className="flex flex-col justify-center rounded-lg border bg-white p-6 text-center">
+                <a href="#hash7" className="bg-background flex flex-col justify-center rounded-lg border p-6 text-center">
                   <div className="mx-auto mb-4 text-pink-500"><img src="/images/framework/icon7.svg" alt="" /></div>
                   <div className="text-xl font-semibold">日志记录和审核</div>
                   <p className="mt-2 text-gray-600">跨 NVMe、HDD 和公有云存储进行分层。</p>

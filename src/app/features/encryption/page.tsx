@@ -1,10 +1,18 @@
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '大规模数据的基础设施',
+  description: 'RustFS 专为扩展而设计。技术规模、运营规模和经济规模。基础规模。'
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function Encryption() {
   return (
     <div className="space-y-8 leading-loose">
       <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-5.png)' }}>
-        <div className="relative z-10 px-6 py-20 text-center">
+        <div className="relative z-10 px-6 py-20 text-center text-white">
           <h1 className="text-5xl font-bold">大规模数据的基础设施</h1>
           <p className="mt-4 text-lg">
             RustFS 专为扩展而设计。技术规模、运营规模和经济规模。基础规模。
@@ -15,7 +23,7 @@ export default function Encryption() {
       <div className="mx-auto max-w-screen-xl space-y-10">
         <p className="text-center text-xl font-bold">在对象存储领域，需要强大的加密才能在谈判桌上占有一席之地。RustFS 通过最高级别的加密以及广泛的优化提供更多功能，几乎消除了通常与存储加密操作相关的开销。</p>
 
-        <div className="rounded-xl border p-8 shadow">
+        <div className="rounded-xl border bg-white p-8 shadow">
           <img src="/images/s-5/s5-1.png" alt="" />
         </div>
         <p>
@@ -69,9 +77,9 @@ export default function Encryption() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-screen-xl">
+      <div className="mx-auto max-w-screen-xl py-12">
         {/* Standard Boxes Section */}
-        <div className="container mx-auto space-y-6 bg-gray-100 p-12 leading-loose">
+        <div className="bg-muted container mx-auto space-y-6 p-12 leading-loose">
           <h2 className="text-center text-3xl font-bold">RustFS密钥加密服务</h2>
           <div className="space-y-2">
             <p>
@@ -87,15 +95,13 @@ export default function Encryption() {
             <p>对于 Kubernetes 环境，RustFS Kubernetes Operator 支持为每个租户部署和配置 KES，启用 SSE-S3 作为每个租户部署的一部分。</p>
           </div>
         </div>
-      </div>
 
-      <div className="mx-auto max-w-screen-xl">
-        <div className="rounded-xl border p-8 shadow">
+        <div className="rounded-xl border bg-white p-8 shadow">
           <img src="/images/s-5/s5-2.png" alt="" className="mx-auto max-w-3xl" />
         </div>
       </div>
 
-      <div className="bg-gray-100">
+      <div className="bg-muted">
         <div className="container mx-auto max-w-screen-xl space-y-6 py-12">
           <h2 className="text-center text-3xl font-bold">支持的外部密钥管理系统</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">

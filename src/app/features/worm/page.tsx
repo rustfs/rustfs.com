@@ -1,10 +1,18 @@
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '来自 RustFS 的对象不变性',
+  description: '对象存储保留规则可确保对象在一段时间内受到 WORM 保护。对象存储保留策略指定在对象版本上设置的保留期，可以显式或通过存储桶默认设置。在存储桶级别设置的默认锁定配置适用于随后创建的对象，并且不追溯适用于之前创建的对象的版本。'
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function Worm() {
   return (
     <div className="space-y-8 leading-loose">
       <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-9.png)' }}>
-        <div className="relative z-10 px-6 py-20 text-center">
+        <div className="relative z-10 px-6 py-20 text-center text-white">
           <h1 className="text-5xl font-bold">来自 RustFS 的对象不变性</h1>
           <p className="mt-4 text-lg">
           </p>
@@ -49,7 +57,7 @@ export default function Worm() {
         </div>
       </div>
 
-      <div className="bg-neutral-100">
+      <div className="bg-muted">
         <div className="mx-auto max-w-screen-xl">
           {/* Standard Boxes Section */}
           <div className="container mx-auto space-y-6 p-12 leading-loose">

@@ -1,10 +1,17 @@
+import withMetadata from "@/utils/metadata";
+import { Metadata } from "next";
+
+export const metadata: Metadata = withMetadata({
+  title: '桶和对象版本控制',
+  description: '版本控制是一项重大改进。 版本控制不仅提供数据保护，还是对象锁定、不可变性、分层和生命周期管理等强大功能的基础。'
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function Versioning() {
   return (
     <div className="space-y-8 leading-loose">
       <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-8.png)' }}>
-        <div className="relative z-10 px-6 py-20 text-center">
+        <div className="relative z-10 px-6 py-20 text-center text-white">
           <h1 className="text-5xl font-bold">桶和对象版本控制</h1>
           <p className="mt-4 text-lg">
           </p>
@@ -14,7 +21,7 @@ export default function Versioning() {
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
         <div className="container mx-auto py-12">
-          <h3 className="mb-4  text-center text-4xl font-bold text-neutral-800">
+          <h3 className="text-primary  mb-4 text-center text-4xl font-bold">
             RustFS 对象存储提供 AWS S3 版本控制兼容性
           </h3>
           <div className="flex flex-wrap items-center">
@@ -41,7 +48,7 @@ export default function Versioning() {
       <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
         <div className="container mx-auto my-12">
-          <h3 className="mb-4  text-center text-4xl font-bold text-neutral-800">RustFS支持具有三种不同存储桶状态的对象版本控制</h3>
+          <h3 className="text-primary  mb-4 text-center text-4xl font-bold">RustFS支持具有三种不同存储桶状态的对象版本控制</h3>
           <div className="my-12 flex flex-wrap items-center">
             <div className="w-full p-6 md:w-1/2">
               <img src="/images/s-8/s8-2.png" alt="" className="mx-auto h-full object-scale-down" />
@@ -60,7 +67,7 @@ export default function Versioning() {
       </div>
 
       <div className="mx-auto max-w-screen-xl">
-        <div className="container rounded-xl bg-gray-100 px-6 py-8 xl:p-12">
+        <div className="bg-muted container rounded-xl px-6 py-8 xl:p-12">
           <h4 className="mx-auto mb-4 w-2/3 text-center text-3xl font-bold">
             除了其数据保护优势外，RustFS的对象存储版本控制还是其他关键功能的基础，包括：
           </h4>
@@ -76,7 +83,7 @@ export default function Versioning() {
       <div className="mx-auto max-w-screen-xl">
         <div className="container mx-auto py-8">
           <h3 className="mb-6 text-center text-4xl font-bold">架构</h3>
-          <div className="mb-8 flex justify-center rounded-xl border p-8">
+          <div className="mb-8 flex justify-center rounded-xl border bg-white p-8">
             <img src="/images/s-8/s8-3.png" alt="架构" className="w-full max-w-full" />
           </div>
           <p className="text-center text-base">

@@ -1,11 +1,18 @@
 import { RiBarChartBoxLine, RiFileList3Line } from "@remixicon/react";
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '审计日志',
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function Logs() {
   return (
     <div className="space-y-8 leading-loose">
       <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-7.png)' }}>
-        <div className="relative z-10 px-6 py-20 text-center">
+        <div className="relative z-10 px-6 py-20 text-center text-white">
           <h1 className="text-5xl font-bold">日志和审计</h1>
           <p className="mt-4 text-lg">
           </p>
@@ -18,25 +25,23 @@ export default function Logs() {
       </div>
 
       {/* Color Boxes Section */}
-      <div className="mx-auto max-w-screen-xl">
+      <div className="mx-auto max-w-screen-xl py-12">
         <div className="container mx-auto my-12">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div className="relative flex items-center justify-center gap-4 rounded-xl bg-gray-100 bg-gradient-to-b from-[#4242ec] to-[#63ccff] p-6 text-white xl:p-12">
+            <div className="bg-muted relative flex items-center justify-center gap-4 rounded-xl bg-gradient-to-b from-[#4242ec] to-[#63ccff] p-6 text-white xl:p-12">
               <RiBarChartBoxLine className="text-6xl" />
               <h4 className="text-2xl font-bold">监控指标</h4>
             </div>
-            <div className="relative flex items-center justify-center gap-4 rounded-xl bg-gray-100 bg-gradient-to-b from-[#9466ff] to-[#f22ac2] p-6 text-white xl:p-12">
+            <div className="bg-muted relative flex items-center justify-center gap-4 rounded-xl bg-gradient-to-b from-[#9466ff] to-[#f22ac2] p-6 text-white xl:p-12">
               <RiFileList3Line className="text-6xl" />
               <h4 className="text-2xl font-bold">日志记录</h4>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
         <div className="container mx-auto space-y-6 py-12 leading-loose">
-          <h2 className="text-center text-3xl font-bold">监控指标</h2>
+          <h2 className="text-primary text-center text-3xl font-bold">监控指标</h2>
           <div className="space-y-2">
             <p>
               RustFS 通过与 Prometheus 兼容的指标端点导出范围广泛的细粒度硬件和软件指标。 Prometheus是一个由多维数据模型组成的云原生监控平台 具有由指标名称和键/值对标识的时间序列数据。 RustFS
@@ -53,12 +58,10 @@ export default function Logs() {
             <p>RustFS 还提供了一个用于探测节点和集群活性的健康检查端点。 一个简单的 CURL 语句可以指示给定节点是否健康或集群是否具有读/写仲裁。</p>
           </div>
         </div>
-      </div>
 
-      <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
         <div className="container mx-auto space-y-6 py-12 leading-loose">
-          <h2 className="text-center text-3xl font-bold">日志记录</h2>
+          <h2 className="text-primary text-center text-3xl font-bold">日志记录</h2>
           <div className="space-y-2">
             <p>
               启用 RustFS 审计日志记录指示 RustFS 为集群上的每个操作生成日志。 每个操作都会生成一个审计日志，其中包含唯一 ID 以及有关客户端、对象、存储桶和所有其他与操作相关的元数据的详细信息。 RustFS
@@ -74,52 +77,48 @@ export default function Logs() {
             <p>RustFS 还支持通过 RustFS 控制台和 RustFS mc admin trace shell 命令实时跟踪 HTTP/S 操作。</p>
           </div>
         </div>
-      </div>
 
-      <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
         <div className="container mx-auto space-y-6 py-12 leading-loose">
-          <h2 className="text-center text-3xl font-bold">架构</h2>
+          <h2 className="text-primary text-center text-3xl font-bold">架构</h2>
           <div className="space-y-6">
             <p className="text-xl font-bold">
               RustFS 通过与 Prometheus 兼容的 HTTP(S) 端点公开其指标，其中 Prometheus 服务提供对这些指标的推/拉访问。 RustFS Kubernetes Operator 为每个预配置的 RustFS 租户部署一个独立的 Prometheus
               服务，以抓取租户指标。 组织还可以部署或利用他们自己的集中式 Prometheus 服务来抓取租户指标。
             </p>
-            <p className="my-6 rounded-lg border p-8 shadow">
+            <p className="my-6 rounded-lg border bg-white p-8 shadow">
               <img src="/images/s-7/s7-1.png" alt="" className="mx-auto max-w-[800px]"></img>
             </p>
             <p>
               RustFS Lambda 通知自动将事件通知推送到支持的目标服务，例如 Kafka、Elasticsearch 或 PostgreSQL。 管理员可以定义桶级通知规则，其中包含 S3 事件和 RustFS 为其生成事件的对象的细粒度过滤器。 RustFS
               Lambda 通知内置于 RustFS 对象存储服务中，只需要访问远程通知目标。
             </p>
-            <p className="my-6 rounded-lg border p-8 shadow">
+            <p className="my-6 rounded-lg border bg-white p-8 shadow">
               <img src="/images/s-7/s7-2.png" alt="" className="mx-auto max-w-[800px]"></img>
             </p>
           </div>
         </div>
-      </div>
 
-      <div className="mx-auto max-w-screen-xl">
         {/* Standard Boxes Section */}
-        <div className="container mx-auto space-y-6 rounded-lg bg-cyan-200 p-4 py-12 leading-loose">
+        <div className="container mx-auto space-y-6 rounded-lg bg-cyan-200 p-4 py-12 leading-loose dark:bg-cyan-900">
           <h2 className="text-primary text-center text-4xl font-bold">要求</h2>
           <div className="space-y-2">
-            <div className="relative border-b border-cyan-300 p-12 xl:px-24">
-              <div className="relative  pl-4 text-2xl font-bold text-neutral-800">
+            <div className="relative border-b border-cyan-300 p-12 xl:px-24 dark:border-cyan-950">
+              <div className="text-primary  relative pl-4 text-2xl font-bold">
                 <span className="absolute -left-2 top-2 size-3 rounded-full bg-blue-500"></span>
                 <h4>对于指标</h4>
               </div>
               <p className="pl-4">BYO Prometheus *或*使用 Kubernetes Operator 为每个租户自动部署/配置。</p>
             </div>
-            <div className="relative border-b border-cyan-300 p-12 xl:px-24">
-              <div className="relative  pl-4 text-2xl font-bold text-neutral-800">
+            <div className="relative border-b border-cyan-300 p-12 xl:px-24 dark:border-cyan-950">
+              <div className="text-primary  relative pl-4 text-2xl font-bold">
                 <span className="absolute -left-2 top-2 size-3 rounded-full bg-blue-500"></span>
                 <h4>对于日志搜索</h4>
               </div>
               <p className="pl-4">BYO PostgreSQL *或*使用 Kubernetes Operator 为每个租户自动部署/配置。</p>
             </div>
             <div className="relative p-12 xl:px-24">
-              <div className="relative  pl-4 text-2xl font-bold text-neutral-800">
+              <div className="text-primary  relative pl-4 text-2xl font-bold">
                 <span className="absolute -left-2 top-2 size-3 rounded-full bg-blue-500"></span>
                 <h4>对于日志</h4>
               </div>

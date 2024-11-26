@@ -1,4 +1,11 @@
 import { RiArrowRightLine } from "@remixicon/react";
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '适用于 阿里云 Kubernetes Service的 RustFS',
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function Aliyun() {
@@ -6,23 +13,23 @@ export default function Aliyun() {
     <div>
       {/* Background Banner Section */}
       <div className="relative bg-gradient-to-t from-blue-600 to-blue-200 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/framework/banner-1.png)' }}>
-        <div className="relative z-10 space-y-20 px-6 py-16 text-center">
-          <h1 className="text-primary-foreground text-5xl font-bold">适用于 阿里云<br />
+        <div className="relative z-10 space-y-20 px-6 py-16 text-center text-white">
+          <h1 className="text-5xl font-bold">适用于 阿里云<br />
             Kubernetes Service的 RustFS</h1>
           <p className="mt-4 text-lg"></p>
           <div className="mx-auto max-w-screen-xl">
             <div className="space-y-20 rounded-lg bg-black/60 p-4 shadow lg:p-20">
-              <h2 className="text-primary-foreground text-4xl font-bold">客户在阿里云上运行 RustFS 有三个原因。</h2>
+              <h2 className="text-4xl font-bold">客户在阿里云上运行 RustFS 有三个原因。</h2>
               <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-3">
-                <div className="text-primary-foreground space-y-10">
+                <div className="space-y-10">
                   <h4 className="text-4xl text-blue-500">01</h4>
                   <p>RustFS 在混合云或多云部署场景中充当一致的存储层。</p>
                 </div>
-                <div className="text-primary-foreground space-y-10">
+                <div className="space-y-10">
                   <h4 className="text-4xl text-blue-500">02</h4>
                   <p>RustFS 是 Kubernetes 原生的高性能产品，可以在公有云、私有云和边缘云环境中提供可预测的性能。</p>
                 </div>
-                <div className="text-primary-foreground space-y-10">
+                <div className="space-y-10">
                   <h4 className="text-4xl text-blue-500">03</h4>
                   <p>在 EKS 上运行 RustFS 可以控制软件堆栈，并具有避免云锁定所需的灵活性。</p>
                 </div>
@@ -34,7 +41,7 @@ export default function Aliyun() {
 
       <div className="mx-auto max-w-screen-xl">
         <div className="container mx-auto space-y-12 py-12 xl:py-24">
-          <h2 className="text-center  text-4xl font-bold text-neutral-800">建筑</h2>
+          <h2 className="text-primary  text-center text-4xl font-bold">建筑</h2>
           <div className="space-y-10">
             <p>阿里云 ACK 是一项托管服务，可用于在 AWS 上运行 Kubernetes，而无需安装、操作和维护自己的 Kubernetes 控制平面或节点。</p>
             <p>RustFS 在所有主要的 Kubernetes 平台（阿里云ACK、Tanzu、Azure、GCP、阿里云 ACK）上提供可移植的高性能对象存储系统。在 阿里云 上，RustFS 与 阿里云 ACK 服务原生集成，从而更轻松地将自己的大规模多租户对象存储即服务运行。RustFS 是 AWS S3 存储即服务的完全替代品。</p>
@@ -46,10 +53,10 @@ export default function Aliyun() {
         </div>
       </div>
 
-      <div className="bg-neutral-100">
+      <div className="bg-muted">
         <div className="mx-auto max-w-screen-xl">
           <div className="container mx-auto space-y-12 py-12 xl:py-24">
-            <h2 className="text-center  text-4xl font-bold text-neutral-800">RustFS Operator 与 阿里云 ACK 功能原生集成，以提供：</h2>
+            <h2 className="text-primary  text-center text-4xl font-bold">RustFS Operator 与 阿里云 ACK 功能原生集成，以提供：</h2>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
               <div>
                 <a href="#hash1" className="flex flex-col justify-center rounded-lg border bg-white p-6 text-center">

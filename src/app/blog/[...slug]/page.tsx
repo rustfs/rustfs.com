@@ -5,9 +5,13 @@ import buildRss from '@/utils/build-rss';
 import { getAllBlogPosts, getBlogBySlug } from '@/utils/contents';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
+import { Content } from '../../../../types/metadata';
 
 export async function generateStaticParams() {
-  const posts = (await getAllBlogPosts()).filter((post) => post.metadata.slug && post.metadata.slug !== 'index');
+  let posts = await getAllBlogPosts()
+  posts = posts.filter((post) => {
+    return post && post.metadata && post.metadata.slug && post.metadata.slug !== 'index'
+  });
 
   try {
     await buildRss(posts)
@@ -15,14 +19,7 @@ export async function generateStaticParams() {
     console.error('Error building RSS feed:', error)
   }
 
-  console.log(posts.map(({ metadata }) => {
-    return {
-      slug: metadata.slug
-    }
-  }));
-
-
-  return posts.map(({ metadata }) => {
+  return (posts as Content[]).map(({ metadata }) => {
     return {
       slug: metadata.slug
     }
@@ -31,7 +28,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  return (await getBlogBySlug(slug)).metadata
+  const post = (await getBlogBySlug(slug)) as Content
+  return post.metadata
 }
 
 export default async function BlogPage({ params }) {

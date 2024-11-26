@@ -1,11 +1,19 @@
 import { RiArrowRightLine, RiCheckFill, RiCloudyLine, RiComputerLine, RiDvdAiLine, RiShieldCheckLine, RiWindow2Line } from "@remixicon/react";
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '量化交易文件存储解决方案',
+  description: '如果希望进一步了解，我们可以安排 1:1 会议为你介绍和演示'
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function QuantitativeTrading() {
   return (
     <div className="leading-loose">
       {/* Background Banner Section */}
-      <div className="text-primary-foreground relative bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-bg/banner-8.png)' }}>
+      <div className="relative bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-bg/banner-8.png)' }}>
         <div className="relative z-10 space-y-10 px-6 py-16 text-center xl:py-24">
           <h1 className="text-5xl font-bold">量化交易文件存储解决方案</h1>
           <p className="text-lg">
@@ -62,7 +70,7 @@ export default function QuantitativeTrading() {
         </div>
       </div>
 
-      <div className="bg-neutral-100">
+      <div className="bg-muted">
         <div className="mx-auto max-w-screen-xl">
           <div className="container mx-auto space-y-20 py-12 xl:py-24">
             <h2 className="text-center text-5xl font-bold">Why RustFS？</h2>

@@ -3,13 +3,15 @@ import Marquee from "@components/ui/marquee";
 import reviews from "@contents/data/reviews.json";
 import clsx from "clsx";
 
+type SlideItem = { name: string; position: string; body: string; img: string; }
+
 // split reviews into 3 rows
 const [firstRow, secondRow, thirdRow, fourthRow] = reviews.reduce(
-  (acc, review, i) => {
+  (acc: SlideItem[][], review, i) => {
     acc[i % 4].push(review);
     return acc;
   },
-  [[], [], [], []],
+  [[], [], [], []] as SlideItem[][],
 );
 
 const ReviewCard = ({

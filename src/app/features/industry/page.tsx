@@ -1,10 +1,18 @@
+import { Metadata } from "next";
+
+import withMetadata from "@/utils/metadata";
+
+export const metadata: Metadata = withMetadata({
+  title: '工业生产解决方案',
+  description: '工业生产中海量数据的存储、质检、追踪等海量数据的长久保存，降本增效'
+})
 
 /* eslint-disable @next/next/no-img-element */
 export default function Industry() {
   return (
     <div className="leading-loose">
       {/* Background Banner Section */}
-      <div className="text-primary-foreground relative bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/banner-s/s-12.png)' }}>
+      <div className="relative bg-cover bg-center bg-no-repeat text-white" style={{ backgroundImage: 'url(/images/banner-s/s-12.png)' }}>
         <div className="relative z-10 space-y-10 px-6 py-16 text-center xl:py-24">
           <h1 className="text-5xl font-bold">工业生产解决方案</h1>
           <p className="text-lg">
@@ -13,9 +21,9 @@ export default function Industry() {
         </div>
       </div>
 
-      <div className="bg-gray-100">
+      <div className="bg-muted">
         <div className="mx-auto max-w-screen-xl py-20">
-          <h2 className="text-center  text-3xl font-bold text-neutral-800">工业生产中海量数据的长久保存，给<span className="text-pink-600">成本</span>带来了巨大的<span className="text-pink-600">烦恼</span></h2>
+          <h2 className="text-primary  text-center text-3xl font-bold">工业生产中海量数据的长久保存，给<span className="text-pink-600">成本</span>带来了巨大的<span className="text-pink-600">烦恼</span></h2>
 
           <div className="flex items-center gap-6 py-12 text-left">
             <div className="w-full p-6 md:w-1/2">
@@ -44,7 +52,7 @@ export default function Industry() {
           <h3 className="mb-10 text-center text-3xl font-bold">解决方案</h3>
           <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-2">
             <div className="flex flex-col gap-8">
-              <h4 className="text-2xl  font-bold text-neutral-800">SSD 和HDD 分层存储降低成本</h4>
+              <h4 className="text-primary  text-2xl font-bold">SSD 和HDD 分层存储降低成本</h4>
               <p>
                 SSD提供快速的读写速度，适合需要高I/O性能的应用，而HDD则成本较低，适合大容量存储。通过将频繁访问的数据存储在SSD上，而将不经常访问的数据存储在HDD上，可以在不牺牲性能的情况下降低成本。</p>
             </div>
@@ -58,7 +66,7 @@ export default function Industry() {
               <img src="/images/s-12/s12-3.png" alt="" className="mx-auto w-full max-w-lg" />
             </div>
             <div className="flex flex-col gap-8">
-              <h4 className="text-2xl  font-bold text-neutral-800">冷备存储降低成本</h4>
+              <h4 className="text-primary  text-2xl font-bold">冷备存储降低成本</h4>
               <p>与传统的磁带存储相比，蓝光光盘的存储成本较低，尤其是在大量存储时。蓝光技术的成本效益使其成为大规模数据归档的理想选择。</p>
               <p>蓝光存储设备在运行时的能耗远低于硬盘驱动器（HDD）或固态驱动器（SSD），这意味着能源成本较低</p>
             </div>
@@ -66,7 +74,7 @@ export default function Industry() {
 
           <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-2">
             <div className="flex flex-col gap-8">
-              <h4 className="text-2xl  font-bold text-neutral-800">多云转换降低成本</h4>
+              <h4 className="text-primary  text-2xl font-bold">多云转换降低成本</h4>
               <p>
                 与传统的磁带存储相比，蓝光光盘的存储成本较低，尤其是在大量存储时。蓝光技术的成本效益使其成为大规模数据归档的理想选择。</p>
               <p>蓝光存储设备在运行时的能耗远低于硬盘驱动器（HDD）或固态驱动器（SSD），这意味着能源成本较低</p>

@@ -460,7 +460,7 @@ module.exports = {
       let backgroundImage = (color) =>
         `linear-gradient(135deg, ${color} 10%, transparent 10%, transparent 50%, ${color} 50%, ${color} 60%, transparent 60%, transparent 100%)`
       let colors = Object.entries(theme('backgroundColor')).filter(
-        ([, value]) => typeof value === 'object' && value[400] && value[500]
+        ([, value]) => value && typeof value === 'object' && value[400] && value[500]
       )
 
       addUtilities(
