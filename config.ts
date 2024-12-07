@@ -89,9 +89,9 @@ const siteConfig = {
         { name: '国产信创和 SM 方案', href: "/features/domestic", description: "全面提供从硬件、操作系统到涉密、加密的全套存储解决方案" },
       ]
     },
-    { name: "集成", href: "/features/integration", },
-    { name: "AI 支持", href: "/features/ai", },
-    { name: "数据湖", href: "/features/data-lake", },
+    { name: "集成", href: "/features/integration", classNames: ['hidden', 'lg:block'] },
+    { name: "AI 支持", href: "/features/ai", classNames: ['hidden', 'lg:block'] },
+    { name: "数据湖", href: "/features/data-lake", classNames: ['hidden', 'lg:block'] },
     { name: "文档", href: "/docs/", },
     { name: "博客", href: "/blog/", },
     { name: "关于我们", href: "/about", }
