@@ -51,9 +51,9 @@ export default function Stats() {
               {/* End Stats */}
               {/* Stats */}
               <div>
-                <p className="text-3xl font-semibold text-blue-600">2,000+</p>
+                <p className="text-3xl font-semibold text-blue-600">100%</p>
                 <p className="mt-1 text-gray-500 dark:text-neutral-500">
-                  企业用户
+                  S3 兼容性
                 </p>
               </div>
               {/* End Stats */}
@@ -69,9 +69,9 @@ export default function Stats() {
 
               {/* Stats */}
               <div>
-                <p className="text-3xl font-semibold text-blue-600">10000+</p>
+                <p className="text-3xl font-semibold text-blue-600">0</p>
                 <p className="mt-1 text-gray-500 dark:text-neutral-500">
-                  GitHub Stars
+                  知识产权风险
                 </p>
               </div>
               {/* End Stats */}
@@ -87,9 +87,9 @@ export default function Stats() {
 
               {/* Stats */}
               <div>
-                <p className="text-3xl font-semibold text-blue-600">5000+</p>
+                <p className="text-3xl font-semibold text-blue-600">1000+</p>
                 <p className="mt-1 text-gray-500 dark:text-neutral-500">
-                  GitHub 贡献者
+                  GitHub 提交
                 </p>
               </div>
               {/* End Stats */}

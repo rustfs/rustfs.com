@@ -1,6 +1,6 @@
 import AnimatedGridPattern from "@components/ui/animated-grid-pattern"
 import clsx from "clsx"
-import { ArrowRightIcon, BoxesIcon, ChevronRightIcon, ClockArrowUpIcon, MousePointerClickIcon, ShieldCheckIcon, SparkleIcon } from "lucide-react"
+import { ArrowRightIcon, BoxesIcon, ChevronRightIcon, ClockArrowUpIcon, MousePointerClickIcon, ShieldCheckIcon } from "lucide-react"
 import AnimatedGradientText from "../ui/animated-gradient-text"
 import GradualSpacing from '../ui/gradual-spacing'
 
@@ -54,7 +54,7 @@ export default function HomeHero() {
                 `inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent truncate`,
               )}
             >
-              RustFS 1.0 发布，支持国产保密设备和系统
+              RustFS 开源版即将发布，100% 支持保密设备和系统
             </span>
             <ChevronRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
           </AnimatedGradientText>
@@ -76,10 +76,10 @@ export default function HomeHero() {
 
         {/* CTA */}
         <div className="flex flex-col gap-4 space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0 lg:mb-16 lg:flex-row lg:gap-6">
-          <a href="#" className='relative inline-flex items-center justify-center gap-x-2 rounded-lg bg-blue-600 px-8 py-3 text-sm font-medium text-white shadow-xl hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50'>
+          {/* <a href="#" className='relative inline-flex items-center justify-center gap-x-2 rounded-lg bg-blue-600 px-8 py-3 text-sm font-medium text-white shadow-xl hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50'>
             在线体验
             <SparkleIcon className="size-4" />
-          </a>
+          </a> */}
 
           <a href="https://tb.53kf.com/code/client/3ae82624ac86c32c1db8d311cd6d2a659/2" className='relative inline-flex items-center justify-center gap-x-2 rounded-lg bg-white px-8 py-3 text-sm font-medium text-neutral-800 shadow-xl hover:bg-neutral-100 focus:bg-neutral-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50'>
             {/* 免费下载 */}
