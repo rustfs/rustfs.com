@@ -39,7 +39,7 @@ jobs:
           key-id: ${{ secrets.ALICLOUDOSS_KEY_ID }}
           key-secret: ${{ secrets.ALICLOUDOSS_KEY_SECRET }}
           region: oss-cn-beijing
-          bucket: rustfs
+          bucket: rustfs-dev
           assets: |
             ./out/**:/
       #    bucket: rustfs
