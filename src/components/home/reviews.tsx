@@ -3,13 +3,15 @@ import Marquee from "@components/ui/marquee";
 import reviews from "@contents/data/reviews.json";
 import clsx from "clsx";
 
+type SlideItem = { name: string; position: string; body: string; img: string; }
+
 // split reviews into 3 rows
 const [firstRow, secondRow, thirdRow, fourthRow] = reviews.reduce(
-  (acc, review, i) => {
+  (acc: SlideItem[][], review, i) => {
     acc[i % 4].push(review);
     return acc;
   },
-  [[], [], [], []],
+  [[], [], [], []] as SlideItem[][],
 );
 
 const ReviewCard = ({
@@ -50,7 +52,7 @@ export default function HomeReviews() {
       <div className="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
-            他们这样评价 RustFS
+            客户这样评价 RustFS
           </h2>
           <p className="mt-4 text-neutral-600 dark:text-neutral-400">
             精致的服务，专业的团队, 为您提供最好的服务

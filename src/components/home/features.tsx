@@ -1,9 +1,11 @@
+'use client'
+
 /* eslint-disable @next/next/no-img-element */
 import features from '@contents/data/features'
 import clsx from 'clsx'
 import { CheckCircleIcon, QuoteIcon } from "lucide-react"
 import { useState } from "react"
-import GridPattern from "../ui/animated-grid-pattern"
+import AnimatedGridPattern from "../ui/animated-grid-pattern"
 
 export default function HomeFeatures() {
   const [currentFeature, setCurrentFeature] = useState(features[0]);
@@ -47,7 +49,7 @@ export default function HomeFeatures() {
           </div>
 
           <div className="relative mt-4 w-full overflow-hidden md:mt-0">
-            <GridPattern
+            <AnimatedGridPattern
               numSquares={300}
               maxOpacity={0.1}
               duration={1}

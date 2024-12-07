@@ -7,7 +7,7 @@ function getTop(id) {
 
 export default function useTableOfContents(tableOfContents) {
   let [currentSection, setCurrentSection] = useState(tableOfContents[0]?.slug)
-  let [headings, setHeadings] = useState([])
+  let [headings, setHeadings] = useState<{ id: any; top: number }[]>([])
 
   const registerHeading = useCallback((id) => {
     setHeadings((headings) => [...headings.filter((h) => id !== h.id), { id, top: getTop(id) }])

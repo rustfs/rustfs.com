@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="18px" viewBox="0 0 10 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>路径</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="价格" transform="translate(-368, -1653)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="为什么我们的客户购买RustFS？备份-2" transform="translate(0, 1405)">
+                <g id="下一页备份" transform="translate(374, 257) scale(-1, 1) translate(-374, -257)translate(353, 236)">
+                    <path d="M26.5569286,20.271 L18.8500544,12.297 C18.4673202,11.901 17.8323294,11.901 17.4495953,12.297 C17.0668611,12.693 17.0668611,13.35 17.4495953,13.746 L24.4518907,21 L17.4408968,28.254 C17.0581626,28.65 17.0581626,29.307 17.4408968,29.703 C17.8236309,30.099 18.4586217,30.099 18.8413559,29.703 L26.5482301,21.729 C26.9483613,21.324 26.9396628,20.676 26.5569286,20.271 L26.5569286,20.271 Z" id="路径"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

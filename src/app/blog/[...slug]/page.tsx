@@ -3,13 +3,15 @@
 import { Widont } from '@/components/widont';
 import buildRss from '@/utils/build-rss';
 import { getAllBlogPosts, getBlogBySlug } from '@/utils/contents';
-import { mdxComponents } from '@/utils/mdx-components';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import { Content } from '../../../../types/metadata';
 
 export async function generateStaticParams() {
-  const posts = await getAllBlogPosts()
+  let posts = await getAllBlogPosts()
+  posts = posts.filter((post) => {
+    return post && post.metadata && post.metadata.slug && post.metadata.slug !== 'index'
+  });
 
   try {
     await buildRss(posts)
@@ -17,22 +19,23 @@ export async function generateStaticParams() {
     console.error('Error building RSS feed:', error)
   }
 
-  return posts.map(({ meta }) => {
+  return (posts as Content[]).map(({ metadata }) => {
     return {
-      slug: meta.href.split('/').slice(1),
+      slug: metadata.slug
     }
   })
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  const { meta } = getBlogBySlug(slug.join('/'))
-  return meta
+  const post = (await getBlogBySlug(slug)) as Content
+  return post.metadata
 }
 
 export default async function BlogPage({ params }) {
   const { slug } = await params
-  const { meta, content } = getBlogBySlug(slug.join('/'))
+  const { metadata, mdx } = await getBlogBySlug(slug)
+  const Content = mdx.default
 
   return (
     <article className="relative pt-10">
@@ -41,23 +44,23 @@ export default async function BlogPage({ params }) {
           'text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-200 md:text-3xl '
         )}
       >
-        <Widont>{meta.title}</Widont>
+        <Widont>{metadata.title}</Widont>
       </h1>
       <div className="text-sm leading-6">
         <dl>
-          <dt className="sr-only">Date</dt>
+          <dt className="sr-only">发布于</dt>
           <dd
             className={clsx('absolute top-0 inset-x-0 text-slate-700 dark:text-slate-400')}
           >
-            <time dateTime={meta.published_at}>
-              {dayjs(meta.published_at).format('YY-MM-DD')}
+            <time dateTime={metadata.publishedAt}>
+              {dayjs(metadata.publishedAt).format('YY-MM-DD')}
             </time>
           </dd>
         </dl>
       </div>
       <div className="mt-6">
         <ul className={clsx('flex flex-wrap text-sm leading-6 -mt-6 -mx-5')}>
-          {(meta.authors ?? []).map((author) => (
+          {(metadata.authors ?? []).map((author) => (
             <li
               key={author.twitter}
               className="mt-6 flex items-center whitespace-nowrap px-5 font-medium"
@@ -80,11 +83,12 @@ export default async function BlogPage({ params }) {
                 </div>
               </div>
             </li>
-          ))}
+          ))
+          }
         </ul>
       </div>
       <div className={clsx('mt-12 prose prose-slate dark:prose-dark')}>
-        <MDXRemote source={content} components={mdxComponents()} />
+        <Content />
       </div>
     </article>
   )

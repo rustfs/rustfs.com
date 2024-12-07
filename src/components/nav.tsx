@@ -101,7 +101,7 @@ export default function Nav({ navs, mobile = false }) {
                     )}
                   >
                     {subItems.map((item, i) => {
-                      let isActive = item.href === pathname
+                      let isActive = item.href === pathname || item.href === pathname + '/' || item.href + '/' === pathname
                       return (
                         <NavItem
                           key={i}

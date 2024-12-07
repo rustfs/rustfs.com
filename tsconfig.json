@@ -33,6 +33,9 @@
       "@utils/*": [
         "./src/utils/*"
       ],
+      "@plugins/*": [
+        "./src/plugins/*"
+      ],
       "@hooks/*": [
         "./src/hooks/*"
       ]
@@ -41,7 +44,8 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true
   },
   "include": [
     "**/*.ts",

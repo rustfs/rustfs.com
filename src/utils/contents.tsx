@@ -1,0 +1,178 @@
+/* eslint-disable @next/next/no-img-element */
+import fs from 'fs';
+import { globSync } from 'glob';
+import matter from 'gray-matter';
+import path from 'path';
+import siteConfig from '../../config';
+import { Content } from '../../types/metadata';
+import { parseDate } from './formatDate';
+import { kebabToTitleCase } from './kebabToTitleCase';
+
+function getMDXFiles(dir) {
+  return globSync('**/*.mdx', { cwd: dir })
+}
+
+function getExcerpt(content) {
+  // by <!-- more --> separator
+  const match = content.match(/<!--\s*more\s*-->/)
+
+  if (match) {
+    return content.slice(0, match.index)
+  }
+
+  // get first paragraph excluding headings
+  const paragraphs = content.split('\n\n')
+
+  for (let i = 0; i < paragraphs.length; i++) {
+    const paragraph = paragraphs[i].trim()
+    if (!paragraph.startsWith('#') && !paragraph.startsWith('---')) {
+      return paragraph.substring(0, 140)
+    }
+  }
+
+  return ''
+}
+
+async function readMDXFile(filePath, category) {
+  console.log(`parsing file: ${filePath}`);
+
+  let rawContent = fs.readFileSync(filePath, 'utf-8')
+
+  let { data: metadata, content } = matter(rawContent)
+
+  console.log(`metadata:`, metadata);
+
+  content = content.trim()
+
+  // if no title is provided, use the h1 of the content, if no h1 is found, use the filename
+  if (!metadata.title) {
+    const h1 = content.match(/^#\s+(.*)$/m)
+    metadata.title = h1 ? h1[1] : kebabToTitleCase(path.basename(filePath, path.extname(filePath)))
+  }
+
+  metadata.excerpt = metadata.excerpt || metadata.descriotion || getExcerpt(content)
+
+  // if no description is provided, use the excerpt, if no excerpt is found, use the first 140 characters of the content
+  if (!metadata.description) {
+    metadata.description = metadata.excerpt
+  }
+
+  // if no publishedAt is provided, use the file creation date
+  if (!metadata.publishedAt) {
+    metadata.publishedAt = fs.statSync(filePath).birthtime.toISOString()
+  }
+
+  // if no tags is provided, use an empty array
+  if (!metadata.tags) {
+    metadata.tags = []
+  }
+
+  // contents/blog/2021-01-01-slug/index.mdx
+  metadata.relativePath = filePath.match(/contents\/(.*)\.mdx$/)?.[0]
+
+  metadata.href = filePath.match(/contents(.*)\.mdx$/)?.[1].replace(/\/index$/, '')
+  metadata.match = new RegExp(metadata.href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+  metadata.publishedAt = parseDate(metadata.publishedAt)
+
+  // if no slug is provided, use the filename
+  const segments = metadata.href.split('/').slice(2)
+  // `undefined` is used to represent the index page
+  metadata.slug = segments.length ? segments : undefined;
+
+  // if meta.image is provided, use it as is, if not, use the first image found in the content
+  if (!metadata.image) {
+    const match = content.match(/!\[.*?\]\((.*?)\)/)
+
+    if (match) {
+      metadata.image = match[1]
+    }
+  }
+
+  // if title is H1, remove it from the content
+  if (content.startsWith(`# ${metadata.title}`)) {
+    content = content.replace(/^# .*$/m, '').trim()
+  }
+
+  let mdx = null;
+  let contentsRelativePath = metadata.relativePath.substring('contents'.length + category.length + 2);
+
+  if (category === 'blog') {
+    mdx = await import(`@contents/blog/${contentsRelativePath}`)
+  } else {
+    mdx = await import(`@contents/docs/${contentsRelativePath}`)
+  }
+
+  metadata.authors = metadata.authors || [siteConfig.defaultAuthor]
+
+  return {
+    metadata,
+    content,
+    mdx
+  }
+}
+
+async function getMDXData(category) {
+  const dir = `${process.cwd()}/contents/${category}/`
+  let mdxFiles = getMDXFiles(dir)
+
+  return Promise.allSettled(mdxFiles.map(async (file) => {
+    return await readMDXFile(`${dir}${file}`, category)
+  })).then((results) => {
+    return results.map((result) => {
+      if (result.status === 'fulfilled') {
+        return result.value
+      }
+      console.error(result.reason);
+    })
+  })
+}
+
+export async function getAllBlogPosts(): Promise<Content[]> {
+  const posts = await getMDXData('blog') as Content[]
+  return posts
+    .sort((a, b) => {
+      return b.metadata.publishedAt.getTime() - a.metadata.publishedAt.getTime()
+    })
+    .filter((post) => {
+      return post.metadata.slug !== undefined
+    })
+}
+
+export async function getAllDocsPages(): Promise<Content[]> {
+  return await getMDXData('docs') as Content[]
+}
+
+export async function getBlogBySlug(slug): Promise<Content> {
+  const posts = await getAllBlogPosts() as Content[]
+
+  const post = posts.find((post) => {
+    if (slug === undefined) {
+      return post.metadata.slug === undefined
+    }
+
+    return post.metadata.slug?.join('/') === slug.join('/')
+  })
+
+  if (!post) {
+    throw new Error(`Post with slug ${slug} not found`)
+  }
+
+  return post
+}
+
+export async function getDocBySlug(slug): Promise<Content> {
+  const posts = await getAllDocsPages()
+  const post = posts.find((post) => {
+    if (slug === undefined) {
+      return post.metadata.slug === undefined
+    }
+
+    return post.metadata.slug?.join('/') === slug.join('/')
+  })
+
+  if (!post) {
+    throw new Error(`Post with slug ${slug} not found`)
+  }
+
+  return post
+}

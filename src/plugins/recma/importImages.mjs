@@ -1,5 +1,5 @@
-import { visit } from 'estree-util-visit'
 import { slugifyWithCounter } from '@sindresorhus/slugify'
+import { visit } from 'estree-util-visit'
 
 const slugify = slugifyWithCounter()
 const EXTERNAL_URL = /^[a-z]+:\/\//i

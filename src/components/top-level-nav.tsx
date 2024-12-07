@@ -61,7 +61,7 @@ function TopLevelLink({
 
 
 export default function TopLevelNav({ mobile }) {
-  let pathname = usePathname()
+  let pathname = usePathname() || ''
 
   return (
     <>

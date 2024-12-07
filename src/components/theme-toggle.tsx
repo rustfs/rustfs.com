@@ -136,7 +136,7 @@ export function ThemeToggle({ panelClassName = 'mt-4' }) {
 export function ThemeSelect() {
   const { theme, setTheme } = useTheme()
 
-  let { label } = settings.find((x) => x.value === theme)
+  let label = settings.find((x) => x.value === theme)?.label || 'Unknown'
 
   return (
     <div className="flex items-center justify-between">

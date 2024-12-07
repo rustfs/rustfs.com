@@ -27,7 +27,7 @@ const SearchContext = createContext({
 export function SearchProvider({ children }) {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
-  const [initialQuery, setInitialQuery] = useState(null)
+  const [initialQuery, setInitialQuery] = useState('')
 
   const onOpen = useCallback(() => {
     setIsOpen(true)
@@ -55,7 +55,7 @@ export function SearchProvider({ children }) {
     if (!isOpen) {
       let key = `__DOCSEARCH_RECENT_SEARCHES__${INDEX_NAME}`
       try {
-        let data = JSON.parse(window.localStorage.getItem(key))
+        let data = JSON.parse(window.localStorage.getItem(key) || 'null')
         window.localStorage.setItem(key, JSON.stringify(data))
       } catch { }
     }
@@ -189,7 +189,7 @@ function Hit({ hit, children }) {
 }
 
 export function SearchButton({ children, ...props }) {
-  let searchButtonRef = useRef()
+  let searchButtonRef = useRef<HTMLButtonElement>(null)
   let actionKey = useActionKey()
   let { onOpen, onInput } = useContext(SearchContext)
 

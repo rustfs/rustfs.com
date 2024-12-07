@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>1备份 2</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#EB2588" offset="0%"></stop>
+            <stop stop-color="#F0B2D5" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="解决方案-冷归档" transform="translate(-350, -2586)">
+            <g id="3备份" transform="translate(0, 1054)">
+                <g id="编组-7" transform="translate(0, 1296)">
+                    <g id="编组-4" transform="translate(350, 170)">
+                        <g id="1备份-2" transform="translate(0, 66)">
+                            <circle id="椭圆形" fill="url(#linearGradient-1)" cx="22" cy="22" r="22"></circle>
+                            <g id="icon1-44" transform="translate(12, 13)" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M15.8337313,0 L3.16865654,0 L0.00238784207,4.74820957 L19,4.74820957 L15.8337313,0 Z M0,9.49641915 L19,9.49641915 L19,5.69832893 L0,5.69832893 L0,9.49641915 Z M14.7783084,6.64844828 L16.8891542,6.64844828 L16.8891542,8.55823596 L14.7783084,8.55823596 L14.7783084,6.64844828 Z M0,14.2446287 L19,14.2446287 L19,10.4465385 L0,10.4465385 L0,14.2446287 Z M14.7783084,11.3966579 L16.8891542,11.3966579 L16.8891542,13.2945093 L14.7783084,13.2945093 L14.7783084,11.3966579 Z M0,19 L19,19 L19,15.1947481 L0,15.1947481 L0,19 Z M14.7783084,16.1353185 L16.8891542,16.1353185 L16.8891542,18.0451062 L14.7783084,18.0451062 L14.7783084,16.1353185 Z" id="形状"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

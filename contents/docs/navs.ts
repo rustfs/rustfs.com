@@ -3,14 +3,23 @@ import { getAllDocsPages } from "@/utils/contents";
 export type DocsNavItemType = { title: string; href: string }
 export type DocsNavType = Record<string, DocsNavItemType[]>
 
-const pages: Record<string, DocsNavItemType> = {}
+const pages: Record<string, DocsNavItemType> = await (async () => {
+  let results = {};
 
-getAllDocsPages().map(post => {
-  pages[post.meta.slug] = {
-    title: post.meta.title,
-    href: `/${post.meta.href}`,
-  }
-})
+  (await getAllDocsPages())
+    .map(post => {
+      if (!post || !post.metadata.href) {
+        return
+      }
+
+      return results[post.metadata.href.substring('/docs'.length + 1) || '/'] = {
+        title: post.metadata.title,
+        href: post.metadata.href,
+      } as DocsNavItemType
+    });
+
+  return results;
+})();
 
 const navs: DocsNavType = {
   'Getting Started': [
