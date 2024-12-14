@@ -75,7 +75,7 @@ export default function Footer() {
                 <span className="text-sm text-gray-600">400-033-5363</span>
               </li>
               <li className="flex items-center space-x-2">
-                <span className="text-sm text-gray-600">北京市海淀区宝盛北里唐家岭创大厦3楼</span>
+                <span className="text-sm text-gray-600">北京市海淀区西小口路66号中关村东升科技园北领地C区</span>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="text-sm text-gray-600">客服时间：9:00-18:00</span>
