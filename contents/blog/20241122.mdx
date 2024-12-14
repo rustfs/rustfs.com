@@ -3,37 +3,62 @@ publishedAt: 2024-11-22
 ---
 # RustFS安装后这两个步骤别忘了
 
-RustFS作为全球最出名的MinIO平替产品，安装完RustFS之后，很多人会忘记这两个步骤。但对于安全来说又很重要。
-
-
-## Markdown
-
-<ins>Inserted text</ins>
-
-==Marked text==
-
-Footnote 1 link[^first].
-
-Footnote 2 link[^second].
-
-
-RustFS作为全球最出名的MinIO平替产品，安装完RustFS之后，很多人会忘记这两个步骤。但对于安全来说又很重要。
+RustFS作为全球最出名的RustFS平替产品，安装完RustFS之后，很多人会忘记这两个步骤。但对于安全来说又很重要。
 
 主要有两步：
 1. 修改RustFS的默认用户名和密码；
 2. 设置桶的访问权限。
 
+二、设置存储桶的访问权限
 
-Inline footnote^[Text of inline footnote] definition.
+如果存储桶设置成public会导致存储桶中的目录可被遍历（直接访问桶根目录，能看到所有文件）。
 
-Duplicated footnote reference[^second].
+需要通过自定义权限进行控制，路径如下：
 
-[^first]: Footnote **can have markup**
+打开链接（其中[app-file]需要换成你的存储桶名称）：
 
-    and multiple paragraphs.
+http://127.0.0.1:9001/buckets/[app-file]/admin/summary
 
-[^second]: Footnote text.
+在页面中，点击Access Policy，弹窗里面将Access Policy修改为Custom,在下面的输入框里面输入如下json。
 
-Term 1
+~~~
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "*"
+                ]
+            },
+            "Action": [
+                "s3:GetBucketLocation"
+            ],
+            "Resource": [
+                "arn:aws:s3:::app-file"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "*"
+                ]
+            },
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::app-file/*"
+            ]
+        }
+    ]
+}
+~~~
 
-:   Definition 1
+
+
+设置之后，重启一下RustFS服务。
+
+大功告成！
