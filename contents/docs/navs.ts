@@ -22,14 +22,42 @@ const pages: Record<string, DocsNavItemType> = await (async () => {
 })();
 
 const navs: DocsNavType = {
-  'Getting Started': [
-    pages['installation'],
+  'Install and Deploy': [
     pages['introduction'],
-    pages['requirements'],
+    pages['architecture'],
+    pages['comparing'],
+    pages['license'],
+    pages['hardwareselection'],
   ],
-  // 'Core Concepts': [
-
-  // ],
+  'Quick Start': [
+    pages['install/install'],
+    pages['install/windows'],
+    pages['install/linux'],
+    pages['install/snnd'],
+    pages['install/snmd'],
+    pages['install/mnmd'],
+    pages['install/docker'],
+    pages['install/macos'],
+  ],
+  'Check List': [
+    pages['deployment/checklists'],
+    pages['deployment/hard-checklists'],
+    pages['deployment/security-checklists'],
+    pages['deployment/software-checklists'],
+  ],
+  'Core Concepts': [
+    pages['core/glossary'],
+    pages['core/availability-and-resiliency'],
+    pages['core/erasure-coding'],
+    pages['core/object-healing'],
+    pages['core/object-scanner'],
+    pages['core/limit'],
+  ],
+  'Recover after Hardware Failure': [
+    pages['failure/driver'],
+    pages['failure/node'],
+    pages['failure/cluster'],
+  ],
   // 'foo': [
   //  pages['foo']
 }
