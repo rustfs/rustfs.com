@@ -78,7 +78,7 @@ export default function Nav({ navs, mobile = false }) {
         {!mobile && <div className="h-8" />}
       </div> */}
       <ul className="max-h-[80vh] overflow-y-auto p-1">
-        <TopLevelNav mobile={mobile} />
+        {/* <TopLevelNav mobile={mobile} /> */}
         {navs &&
           Object.keys(navs)
             .map((category) => {
