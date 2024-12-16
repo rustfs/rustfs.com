@@ -45,7 +45,7 @@ export default async function DocPage({ params }) {
 
       <DocsFooter navs={navs}>
         <Link
-          href={`https://github.com/rustfs/rustfs.com/edit/main/contents/${pathname}.mdx`}
+          href={`https://github.com/rustfs/rustfs/edit/main/contents/${pathname}.mdx`}
           className="hover:text-slate-900 dark:hover:text-slate-400"
         >
           Edit this page on GitHub

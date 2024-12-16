@@ -103,7 +103,7 @@ export default function TopLevelNav({ mobile }) {
       </TopLevelLink>
       <TopLevelLink
         mobile={mobile}
-        href="https://github.com/rustfs/rustfs/discussions"
+        href="https://github.com/rustfs/rustfs/issues"
         className="mb-4"
         shadow="group-hover:shadow-violet-200 dark:group-hover:bg-violet-500"
         icon={
