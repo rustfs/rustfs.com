@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function BlogPostLayout({ children }) {
   return (
     <div className="overflow-hidden">
-      <div className="max-w-8xl mx-auto">
+      <div className="mx-auto max-w-5xl">
         <div className="flex px-4 pb-10 pt-8 lg:px-8">
           <Link
             href="/blog"

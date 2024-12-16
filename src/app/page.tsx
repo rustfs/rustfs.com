@@ -13,10 +13,6 @@ import Subscribe from "@components/subscribe"
 export default function Home() {
   return (
     <>
-      <div className="absolute top-0 z-50 w-full">
-        <Header />
-      </div>
-
       <Hero />
 
       <div className="bg-neutral-50 dark:bg-neutral-900">

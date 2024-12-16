@@ -7,11 +7,11 @@ export default function DocsLayout({
   return (
     <div>
       <div>
-        <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
-          <div className="fixed inset-0 left-[max(0px,calc(50%-45rem))] right-auto top-16 z-20 hidden w-[19rem] overflow-y-auto pb-10 pl-8 pr-6 lg:block">
+        <div className="max-w-8xl relative mx-auto flex px-4 sm:px-6 md:px-8">
+          <div className="sticky left-[max(0px,calc(50%-45rem))] right-auto top-16 z-20 hidden w-[19rem] shrink-0 pb-10 pl-8 pr-6 lg:block">
             <Nav navs={navs} />
           </div>
-          <div className="lg:pl-[19.5rem]">{children}</div>
+          <div className="flex-1">{children}</div>
         </div>
       </div>
       {/* <Dialog

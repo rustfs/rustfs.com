@@ -3,7 +3,6 @@ import clsx from "clsx"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { forwardRef } from "react"
-import { SearchButton } from "./search"
 import TopLevelNav from "./top-level-nav"
 
 const NavItem = forwardRef(({ href, children, isActive, isPublished }: {
@@ -35,8 +34,8 @@ NavItem.displayName = 'NavItem'
 export default function Nav({ navs, mobile = false }) {
   const pathname = usePathname()
   return (
-    <nav id="nav" className="relative lg:text-sm lg:leading-6">
-      <div className="pointer-events-none sticky top-0 -ml-0.5">
+    <nav id="nav" className="relative py-10 lg:text-sm lg:leading-6">
+      {/* <div className="pointer-events-none sticky top-0 -ml-0.5">
         {!mobile && <div className="h-10" />}
         <div className="pointer-events-auto relative">
           <SearchButton className="dark:highlight-white/5 hidden w-full items-center rounded-md py-1.5 pl-2 pr-3 text-sm leading-6 text-slate-400 shadow-sm ring-1 ring-slate-900/10 hover:ring-slate-300 lg:flex dark:bg-slate-800 dark:hover:bg-slate-700">
@@ -77,8 +76,8 @@ export default function Nav({ navs, mobile = false }) {
           </SearchButton>
         </div>
         {!mobile && <div className="h-8" />}
-      </div>
-      <ul>
+      </div> */}
+      <ul className="max-h-[80vh] overflow-y-auto p-1">
         <TopLevelNav mobile={mobile} />
         {navs &&
           Object.keys(navs)

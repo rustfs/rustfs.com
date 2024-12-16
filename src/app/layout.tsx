@@ -30,7 +30,9 @@ export default function RootLayout({ children }) {
       </head>
       <body className={clsx('antialiased text-neutral-700 dark:text-neutral-400')}>
         <ThemeProvider enableSystem attribute="class">
-          <Header />
+          <div className="relative z-50 w-full">
+            <Header />
+          </div>
           {children}
           <Footer />
         </ThemeProvider>
