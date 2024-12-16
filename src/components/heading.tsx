@@ -17,7 +17,7 @@ export function Heading({
 
   return (
     <Component
-      className={clsx('flex whitespace-pre-wrap not-prose', className, {
+      className={clsx('flex whitespace-pre-wrap', className, {
         'mb-2 text-sm leading-6 text-sky-500 font-semibold tracking-normal dark:text-sky-400':
           level === 2 && nextElement?.type === 'heading' && nextElement?.depth === 3,
       })}

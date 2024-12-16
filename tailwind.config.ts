@@ -6,6 +6,7 @@ const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenCo
 module.exports = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mjs,mdx,html}',
+    './contents/**/*.{js,ts,jsx,tsx,mjs,mdx,html}',
     './remark/**/*.{js,ts,tsx,mjs}',
     './node_modules/preline/preline.js',
   ],
@@ -420,21 +421,9 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-animate"),
-    require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms')({ strategy: 'class' }),
     require('preline/plugin'),
-    function ({ addVariant }) {
-      addVariant(
-        'supports-backdrop-blur',
-        '@supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0))'
-      )
-      addVariant('supports-scrollbars', '@supports selector(::-webkit-scrollbar)')
-      addVariant('children', '& > *')
-      addVariant('scrollbar', '&::-webkit-scrollbar')
-      addVariant('scrollbar-track', '&::-webkit-scrollbar-track')
-      addVariant('scrollbar-thumb', '&::-webkit-scrollbar-thumb')
-      addVariant('demo-dark', '.demo-dark &')
-    },
+    require('@tailwindcss/typography'),
   ],
 }

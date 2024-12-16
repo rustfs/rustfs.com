@@ -105,7 +105,7 @@ export default function Header() {
           href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <Logo />
+          <Logo className="h-5 w-auto" />
           <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
           </span>
         </a>

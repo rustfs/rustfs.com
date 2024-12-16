@@ -24,7 +24,7 @@ export default function BlogPostLayout({ children }) {
                 strokeLinejoin="round"
               />
             </svg>
-            Go back
+            返回
           </Link>
         </div>
       </div>
