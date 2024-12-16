@@ -64,6 +64,7 @@ export default function TopLevelNav({ mobile }) {
   let pathname = usePathname() || ''
 
   return (
+    /*
     <>
       <TopLevelLink
         mobile={mobile}
@@ -152,5 +153,6 @@ export default function TopLevelNav({ mobile }) {
         Community
       </TopLevelLink>
     </>
+    */
   )
 }
