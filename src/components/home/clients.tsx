@@ -238,9 +238,9 @@ export default function Clients() {
         <div className="mt-8 text-center">
           <a
             className="inline-flex items-center gap-x-2 rounded-full border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-            href="#"
+            href="/features/integration"
           >
-            了解更多客户案例
+            了解更多集成产品
             <ChevronRightIcon />
           </a>
         </div>
