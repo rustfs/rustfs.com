@@ -22,14 +22,13 @@ const pages: Record<string, DocsNavItemType> = await (async () => {
 })();
 
 const navs: DocsNavType = {
-  'Install and Deploy': [
-    pages['introduction'],
+  'RustFS概述': [
     pages['architecture'],
     pages['comparing'],
     pages['license'],
     pages['hardwareselection'],
   ],
-  'Quick Start': [
+  '快速开始': [
     pages['install/install'],
     pages['install/windows'],
     pages['install/linux'],
@@ -39,13 +38,13 @@ const navs: DocsNavType = {
     pages['install/docker'],
     pages['install/macos'],
   ],
-  'Check List': [
+  '检查列表': [
     pages['deployment/checklists'],
     pages['deployment/hard-checklists'],
     pages['deployment/security-checklists'],
     pages['deployment/software-checklists'],
   ],
-  'Core Concepts': [
+  '核心概念': [
     pages['core/glossary'],
     pages['core/availability-and-resiliency'],
     pages['core/erasure-coding'],
@@ -53,7 +52,7 @@ const navs: DocsNavType = {
     pages['core/object-scanner'],
     pages['core/limit'],
   ],
-  'Recover after Hardware Failure': [
+  '故障恢复': [
     pages['failure/driver'],
     pages['failure/node'],
     pages['failure/cluster'],

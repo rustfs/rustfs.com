@@ -103,12 +103,12 @@ export default function Pricing() {
                     <p className="text-muted-foreground text-xs">根据Fortune Business Insights的报告，全球数据存储市场预计将从2024年的2183.3亿美元增长到2032年的7740亿美元，在此期间的年复合增长率为17.1%</p>
                   </div>
                   <div className="space-y-20 px-12">
-                    <h3 className="text-primary mb-10 text-4xl font-bold">RustFS 为全球提供安全、 可靠的分布式存储方案</h3>
+                    <h3 className="text-primary mb-10 text-4xl font-bold text-white">RustFS 为全球提供安全、 可靠的分布式存储方案</h3>
                     <div className="space-y-4">
                       <div className="text-xl font-bold text-pink-500">投资RustFS</div>
                       <div className="flex items-center gap-2">
                         <RiMailLine className="size-8 text-blue-500" />
-                        <div>联系：hello@rustfs.com</div>
+                        <div className="text-white">联系：hello@rustfs.com</div>
                       </div>
                     </div>
                   </div>

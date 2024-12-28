@@ -84,7 +84,7 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.0.3",
     "estree-util-visit": "^2.0.0",
-    "glyphhanger": "^5.0.0",
+    "glyphhanger": "^3.1.0",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",

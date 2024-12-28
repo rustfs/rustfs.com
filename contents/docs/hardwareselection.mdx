@@ -1,33 +1,36 @@
 ---
 title: 硬件选择
-description: Learn about the system requirements for RustFS.
+description: 我可以使用哪些硬件运行RustFS
 ---
 
-## 硬件选择
+> RustFS更低的内存需求和更稳定的内存抖动。
 
-- Node.js 10.0.0 or later
-- MacOS, Windows (including WSL), and Linux are supported
-- Yarn (optional but recommended)
 
-## Installation
+## 测试环境硬件选择
 
-To install RustFS in your project, you can use npm or yarn:
+- CPU核心：1核+ 
+- CPU类型：X86、ARM等多种CPU架构
+- 内存：1GB+
+- 硬盘：HDD、SSD均可
+- 操作系统：Windows、Linux、MacOS均可
+- Docker支持：支持
+- 网络要求：以实际使用为准
 
-```bash
-npm install rustfs
-```
+## 生产环境硬件选择
 
-```bash
-yarn add rustfs
-```
+- CPU核心：2 x 12核+
+- CPU类型：X86、ARM等多种CPU架构
+- 内存：64GB+
+- 硬盘：HDD、SSD均可（SSD优先）
+- 操作系统：Windows、Linux、MacOS均可
+- Kubernetes支持：支持
+- 网络要求：以实际吞吐和并发进行评估
 
-Once installed, you can import RustFS in your project:
 
-```javascript
-import rustfs from 'rustfs';
-```
+## 硬件评估
 
-## License
+如果您提心您的的硬件环境是否可以满足实际的生产需求。
+可向RustFS团队提问和发起专家咨询。
 
-This project is not licensed under an open-source license and is the intellectual property of Rustfs Inc. The source is available only as an educational resource and to accept fixes for minor mistakes.
+
 
