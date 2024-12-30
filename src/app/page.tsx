@@ -1,5 +1,4 @@
 import Contact from "@components/contact"
-import Header from "@components/header"
 import Clients from "@components/home/clients"
 import Differents from "@components/home/differents"
 import Features from "@components/home/features"

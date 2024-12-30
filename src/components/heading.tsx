@@ -1,6 +1,19 @@
 'use client'
 /* eslint-disable react-hooks/exhaustive-deps */
-import clsx from 'clsx'
+import clsx from 'clsx';
+
+
+interface HeadingProps {
+  level: number;
+  id?: string;
+  children: React.ReactNode;
+  className?: string;
+  hidden?: boolean;
+  ignore?: boolean;
+  style?: React.CSSProperties;
+  nextElement?: any;
+  [key: string]: any;
+}
 
 export function Heading({
   level,
@@ -12,8 +25,8 @@ export function Heading({
   style = {},
   nextElement,
   ...props
-}) {
-  const Component = `h${level}` as keyof JSX.IntrinsicElements
+}: HeadingProps) {
+  const Component = `h${level}` as any;
 
   return (
     <Component
