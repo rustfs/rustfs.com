@@ -16,7 +16,7 @@ const features =
       "review": {
         "name": '王小明',
         "position": 'CTO',
-        "img": 'https://i.pravatar.cc/150?u=wangxiaoming',
+        "img": '/images/face/wangxiaoming.jpeg',
         "review": 'RustFS的跨云支持能够很好的防止单云故障，造成重大的损失',
       }
     },
@@ -34,7 +34,7 @@ const features =
       "review": {
         "name": '孙立',
         "position": 'CTO',
-        "img": 'https://i.pravatar.cc/150?u=sunli',
+        "img": '/images/face/sunli.jpeg',
         "review": 'RustFS与Vault产品集成非常方便，保障了我们的数据合规和安全加密的需要',
       }
     },
@@ -52,7 +52,7 @@ const features =
       "review": {
         "name": '李在恒',
         "position": '高级工程师',
-        "img": 'https://i.pravatar.cc/150?u=lizaiheng',
+        "img": '/images/face/lizaiheng.jpeg',
         "review": '由于每个版本都保存在对象存储中，因此备份和恢复过程变得更加简单',
       }
     },
@@ -70,7 +70,7 @@ const features =
       "review": {
         "name": '吴景宇',
         "position": '数据库工程师',
-        "img": 'https://i.pravatar.cc/150?u=wujingyu',
+        "img": '/images/face/wujingyu.jpeg',
         "review": '任何节点的中断和损坏都不会影响到数据的安全',
       }
     },
@@ -88,7 +88,7 @@ const features =
       "review": {
         "name": '魏一鸣',
         "position": 'CEO',
-        "img": 'https://i.pravatar.cc/150?u=weiyiming',
+        "img": '/images/face/weiyiming.jpeg',
         "review": '我们的数据不准许被删除，更加符合法律的规定',
       }
     },
@@ -106,7 +106,7 @@ const features =
       "review": {
         "name": '张小龙',
         "position": 'CEO',
-        "img": 'https://i.pravatar.cc/150?u=sunli',
+        "img": '/images/face/sunli.jpeg',
         "review": '在非结构化数据上，比传统的SAN存储节省了更多的成本',
       }
     },
