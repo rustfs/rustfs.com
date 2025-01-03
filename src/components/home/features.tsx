@@ -19,7 +19,7 @@ export default function HomeFeatures() {
             基于 Rust 的超强性能<br /><span className="text-blue-500">最靠谱的分布式文件系统</span>
           </h2>
           <p className="text-muted-foreground mt-4">
-            {/* 我们的产品已经被超过 99,000 位用户选择，我们的产品值得信赖 */}
+            {/* 超过 1,000+款开源软件适配 */}
           </p>
         </div>
         {/* End Title */}
