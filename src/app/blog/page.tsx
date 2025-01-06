@@ -12,8 +12,8 @@ const dateFormat = {
 
 export function generateMetadata() {
   return {
-    title: 'Blog',
-    description: 'All the latest RustFS news, straight from the team.',
+    title: 'RustFS博客',
+    description: 'RustFS最新官方博客和RustFS团队新闻报道',
   }
 }
 
