@@ -27,7 +27,7 @@ export default function Baremetal() {
                   <img src="/images/framework/svg.png" alt="" className="-mt-16 max-w-xs object-contain" />
                 </div>
                 <div className="flex-1 space-y-6 p-4 leading-loose lg:p-12">
-                  <p>RustFS 是一种高性能的分布式对象存储系统。它是软件定义的，在行业标准硬件上运行，并且是 100% 开源的，主要许可证是 GNU AGPL v3。</p>
+                  <p>RustFS 是一种高性能的分布式对象存储系统。它是软件定义的，在行业标准硬件上运行，并且是 100% 开源的，主要许可证是 Apache V2.0开源许可证。</p>
                   <p>
                     RustFS的不同之处在于，它从一开始就被设计为私有云/混合云对象存储的标准。由于 RustFS
                     是专门为仅服务对象而构建的，因此单层架构可以实现所有必要的功能，而不会影响。其结果是一个同时具有高性能、可扩展性和轻量级的云原生对象服务器。
