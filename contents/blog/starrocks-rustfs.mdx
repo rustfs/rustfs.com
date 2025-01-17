@@ -1,0 +1,162 @@
+# StarRocks x RustFS 对接性能测试
+
+传统的HDFS存储一体架构给企业的扩容和降本造成了很大的压力。
+
+近年开始存算分离与湖仓一体（Lakehouse）越来越火。特别是2024年数据架构蓬勃发展的一年，越来越多的企业选择将数据湖作为统一的存储层，并在之上构建包括BI、AI在内的丰富的数据应用。
+Apache Iceberg 作为数据湖领域内炙手可热的开源项目在2024年同样取得显著的进步，社区主导的 Rest Catalog 变得越来越完善，iceberg V3 格式也趋向成熟，包括 Snowflake, AWS，Apple，Databricks在内的公司都将 Iceberg 作为其首选的数据湖表格式，这无疑推动着 Iceberg 逐步成为数据湖表格式的标准。
+
+
+
+## Star Rocks介绍
+
+StarRocks 是一款新一代的极速全场景 MPP (Massively Parallel Processing) 数据库。它主要面向数据分析领域，提供了高性能、实时分析的能力。
+
+它的优点非常之多，包括：
+
+- 节省成本：分离计算和存储可以实现独立扩展和优化资源利用率，从而显着节省成本。
+- 高性能：StarRocks 使用了列式存储和分布式架构，具有高吞吐量和低延迟的特点。
+- 可扩展性：它还提供了独立扩展对象存储和计算的能力，从而实现更好的敏捷性并最终实现更精确的扩展。
+- 高效的 SQL 查询：StarRocks 提供了多种查询优化技术，如列式存储、索引、查询计划优化等，使得 SQL 查询效率提高。
+- 支持多种数据源：StarRocks 支持多种数据源，如 MySQL、Hive、HBase 等，可以轻松地导入数据。
+- 支持多种数据格式：StarRocks 支持多种数据格式，如 Parquet、ORC
+- 灵活性：解耦可以实现更大的运营灵活性，使企业能够选择最适合特定任务的工具和服务。
+- 存算分离支持： 全面支持S3本地部署的存储系统，如MinIO、RustFS等。
+
+
+## 先决条件
+
+下载并运行RustFS。
+
+创建一个桶：
+
+在 SQL 客户端中运行以下命令，确保使用之前在 RustFS 控制台中创建的访问密钥和机密：
+
+~~~
+CREATE STORAGE VOLUME shared
+TYPE = S3
+LOCATIONS = ("s3://starrocks/shared/")
+PROPERTIES
+(
+   "enabled" = "true",
+   "aws.s3.endpoint" = "http://rustfs:9000",
+   "aws.s3.use_aws_sdk_default_behavior" = "false",
+   "aws.s3.enable_ssl" = "false",
+   "aws.s3.use_instance_profile" = "false",
+   "aws.s3.access_key" = "{YOUR ACCESS KEY}",
+   "aws.s3.secret_key"= "{YOUR SECRET KEY}"
+);
+
+SET shared AS DEFAULT STORAGE VOLUME;
+
+~~~
+
+
+
+## 入门
+
+打开终端并运行此命令来创建要处理的目录并下载 Docker 撰写文件。
+
+~~~
+mkdir sr-quickstart
+cd sr-quickstart
+curl -O https://raw.githubusercontent.com/StarRocks/demo/master/documentation-samples/quickstart/docker-compose.yml
+~~~
+
+
+
+## 下载数据
+
+在终端窗口中运行以下命令以在starrocks-fe容器中打开 Bash shell，从而允许您与容器的文件系统交互并在其中执行命令。
+
+~~~
+docker compose exec starrocks-fe bash
+~~~
+
+运行这些命令以在容器内创建快速启动目录。
+
+~~~
+mkdir quickstart
+cd quickstart
+~~~
+
+运行这些命令将两个数据集下载到您刚刚创建的文件夹中。
+
+
+~~~
+curl -O https://raw.githubusercontent.com/StarRocks/demo/master/documentation-samples/quickstart/datasets/NYPD_Crash_Data.csv
+
+curl -O https://raw.githubusercontent.com/StarRocks/demo/master/documentation-samples/quickstart/datasets/72505394728.csv
+
+~~~
+
+
+## 创建表
+
+~~~
+CREATE TABLE `t3` (
+  `id` int(11) NULL COMMENT ""
+) ENGINE=OLAP 
+DUPLICATE KEY(`id`)
+COMMENT "OLAP"
+DISTRIBUTED BY RANDOM
+PROPERTIES (
+"bucket_size" = "4294967296",
+"compression" = "LZ4",
+"datacache.enable" = "true",
+"enable_async_write_back" = "false",
+"replication_num" = "1",
+"storage_volume" = "rustfs"
+);
+~~~
+
+## RustFS 机器配置
+
+| 硬件 |规格说明|
+| --- | --- |
+| 供应商 | 阿里云 |
+| 区域 | 杭州 |
+| 机型 | ECS.c6g.8xlarge |
+| CPU |8 vCPU |
+|内存 |64GB |
+|磁盘 |1.8T NVMe SSD|
+|网络 |基础 2.5Gbps|
+
+
+## 批量导入性能
+
+总计耗时约 8min 42s：
+
+~~~
+*************************** 2. row ***************************
+         JobId: 14778
+         Label: store_sales
+         State: FINISHED
+      Progress: ETL:100%; LOAD:100%
+          Type: BROKER
+      Priority: NORMAL
+      ScanRows: 2879987999
+  FilteredRows: 0
+UnselectedRows: 0
+      SinkRows: 2879987999
+       EtlInfo: NULL
+      TaskInfo: resource:N/A; timeout(s):144000; max_filter_ratio:0.0
+      ErrorMsg: NULL
+    CreateTime: 2025-01-14 16:59:42
+  EtlStartTime: 2025-01-14 16:59:43
+ EtlFinishTime: 2025-01-14 16:59:43
+ LoadStartTime: 2025-01-14 16:59:43
+LoadFinishTime: 2025-01-14 17:08:24
+   TrackingSQL: 
+    JobDetails: {"All backends":{"bb10190d-67a6-4637-8d08-68e800c64b73":[10065,10066,10067,10068,10069,10070]},"FileNumber":400,"FileSize":259169829133,"InternalTableLoadBytes":481093033465,"InternalTableLoadRows":2879987999,"ScanBytes":259169829133,"ScanRows":2879987999,"TaskNumber":1,"Unfinished backends":{"bb10190d-67a6-4637-8d08-68e800c64b73":[]}}
+     Warehouse: default_warehouse
+2 rows in set (0.00 sec)
+~~~
+
+<img src="/images/blog/starrocks-rustfs.png" title="性能监控" />
+
+
+## 结论
+
+Star Rocks 与RustFS 在MPP的存算分离上的测试结果和性能表现非常优秀。
+
+更多内容投稿请联系：hello@rustfs.com。 
