@@ -27,6 +27,7 @@ const navs: DocsNavType = {
     pages['comparing'],
     pages['license'],
     pages['hardwareselection'],
+    pages['mode'],
   ],
   '快速开始': [
     pages['install/install'],
