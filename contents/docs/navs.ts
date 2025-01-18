@@ -29,7 +29,7 @@ const navs: DocsNavType = {
     pages['hardwareselection'],
     pages['mode'],
   ],
-  '快速开始': [
+  '快速安装': [
     pages['install/install'],
     pages['install/windows'],
     pages['install/macos'],
