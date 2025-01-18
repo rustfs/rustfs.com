@@ -32,12 +32,9 @@ const navs: DocsNavType = {
   '快速开始': [
     pages['install/install'],
     pages['install/windows'],
-    pages['install/linux'],
-    pages['install/snnd'],
-    pages['install/snmd'],
-    pages['install/mnmd'],
-    pages['install/docker'],
     pages['install/macos'],
+    pages['install/linux'],
+    pages['install/docker'],
   ],
   '检查列表': [
     pages['deployment/checklists'],
