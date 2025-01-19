@@ -72,7 +72,7 @@ export default function Pricing() {
                   <div className="space-y-4">
                     <div className="flex items-center gap-2">
                       <RiMapPinLine className="size-8 text-blue-500" />
-                      <div>北京市海淀区龙岗路51号院M51科创中心2006室</div>
+                      <div>北京市海淀区西小口路66号中关村东升科技园北领地C区</div>
                     </div>
                     <div className="flex items-center gap-2">
                       <RiPhoneLine className="size-8 text-blue-500" />
