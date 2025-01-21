@@ -76,7 +76,7 @@ export default function Pricing() {
                     </div>
                     <div className="flex items-center gap-2">
                       <RiPhoneLine className="size-8 text-blue-500" />
-                      <div>电话：4008-566-339</div>
+                      <div>电话：400-033-5363</div>
                     </div>
                     <div className="flex items-center gap-2">
                       <RiMailLine className="size-8 text-blue-500" />
