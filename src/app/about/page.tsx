@@ -80,7 +80,7 @@ export default function Pricing() {
                     </div>
                     <div className="flex items-center gap-2">
                       <RiMailLine className="size-8 text-blue-500" />
-                      <div>邮箱：sales@rustfs.com</div>
+                      <div>邮箱：hello@rustfs.com</div>
                     </div>
                   </div>
                 </div>

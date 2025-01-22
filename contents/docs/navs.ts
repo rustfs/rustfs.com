@@ -41,6 +41,7 @@ const navs: DocsNavType = {
     pages['deployment/hard-checklists'],
     pages['deployment/security-checklists'],
     pages['deployment/software-checklists'],
+    pages['deployment/network-checklists'],
   ],
   '核心概念': [
     pages['core/glossary'],
