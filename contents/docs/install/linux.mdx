@@ -1,6 +1,129 @@
 ---
 title: "Linux安装RustFS"
-description: "RustFS是一款简单、高效、分布式的对象存储。它100%兼容S3，使用Apache2 许可证发行的开源软件。"
+description: "使用Linux操作系统安装RustFS的快速指导"
 ---
 
-> 即将发布，文档疯狂更新中....
+## 一、 安装前必读
+
+本页面包含了RustFS的三种安装模式的全部文档和说明。其中，多机多盘的模式包含了企业级可用的性能、安全性和扩展性。并且，提供了生产工作负载需要的架构图。
+请装前请阅读，我们的启动模式与检查清单，如下：
+
+1. 启动模式， 前明确您的Linux启动模式；
+
+2. 检查清单， 检查各项指标是否符合生产指导特征，若不需要生产标准可不阅读此指导；
+
+
+## 二、 先决条件
+
+1. 操作系统版本；
+
+2. 防火墙；
+
+3. 主机名；
+
+4. 内存条件；
+
+5. 时间同步；
+
+6. 容量规划；
+
+7. 磁盘规划；
+
+8. 容量规划；
+
+9. 数据分层规划。
+
+### 2.1. 操作系统版本
+
+我们推荐Linux内核为4.x 及以上的版本，但是5.x 及以上的版本可以获得更好的IO吞吐和网络性能。
+
+您可以使用Ubuntu 20.04 和RHEL88.x 来安装RustFS。
+
+### 2.2 防火墙
+
+Linux系统默认开启防火墙，您可以使用以下命令查看防火墙状态：
+
+```bash
+systemctl status firewalld
+```
+
+如果您的防火墙状态为“active”，您可以使用以下命令禁用防火墙：
+
+```bash
+systemctl stop firewalld
+systemctl disable firewalld
+```
+
+或者放行RustFS的9000端口：
+
+```bash
+firewall-cmd --zone=public --add-port=9000/tcp --permanent
+firewall-cmd --reload
+```
+部署中的所有RustFS服务器 **必须** 使用相同的监听端口。如果您使用的是9000端口，其他服务器的所有端口均需要为9000端口。
+
+
+
+
+### 2.3 主机名
+
+创建RustFS集群必须要使用 **相同的、具备连续性** 的主机名。有两种方式实现连续性的主机名：
+
+1. DNS配置；
+
+2. HOSTS配置。
+
+
+```bash
+
+vim  /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.168.1.1 node1
+192.168.1.2 node2
+192.168.1.3 node3
+192.168.1.4 node4
+
+```
+
+
+
+### 2.4 内存条件
+
+RustFS需要至少2GB的内存来运行。
+
+### 2.5 时间同步
+
+RustFS需要时间同步，您可以使用以下命令检查时间同步状态：
+
+```bash
+timedatectl status
+```
+
+如果状态为“synchronized”，则表示时间同步正常。
+
+```
+
+
+
+## 三、配置用户名
+
+
+
+## 四、下载安装包
+
+
+## 五、安装RustFS
+
+
+## 六、配置RustFS
+
+
+## 七、启动RustFS
+
+
+> 文档正在疯狂编写中
+
+
+
+
