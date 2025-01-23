@@ -90,9 +90,11 @@ vim  /etc/hosts
 
 ### 2.4 内存条件
 
-RustFS需要至少2GB的内存来运行。
+RustFS需要至少2GB的内存来运行测试环境，生产的环境最低需要64GB的内存。
 
 ### 2.5 时间同步
+
+多节点的一致性必须要使用时间服务器维护时间的一致性，不然可能会出现无法启动服务的情况。相关时间服务器例如使用 `ntp` , `timedatectl` , 或者 `timesyncd` 。
 
 RustFS需要时间同步，您可以使用以下命令检查时间同步状态：
 
@@ -108,7 +110,9 @@ timedatectl status
 
 ## 三、配置用户名
 
+RustFS启动，我们建议您配置一个专门的无登录权限的用户进行启动RustFS的服务。在rustfs.service启动控制脚本中，默认的用户和用户组是 `rustfs-user` 和 `rustfs-user` 。
 
+ 您可以使用 groupadd 和 useradd 命令创建用户和组. 以下示例创建用户、组并设置权限以访问RustFS指定的数据目录。
 
 ## 四、下载安装包
 
