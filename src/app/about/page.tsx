@@ -86,7 +86,7 @@ export default function Pricing() {
                 </div>
 
                 <div>
-                  <img src="/images/about/sec-3.png" alt="" className="mx-auto max-w-lg" />
+                  <img src="/images/about/sec-3-1.png" alt="" className="mx-auto max-w-lg" />
                 </div>
               </div>
             </div>
