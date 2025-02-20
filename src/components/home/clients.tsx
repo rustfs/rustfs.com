@@ -19,12 +19,12 @@ export default function Clients() {
         {/* Grid */}
         <div className="grid grid-cols-3 gap-x-6 md:grid-cols-6">
 
-          <img src="/images/inter/tensorflow.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
+          <img src="/images/inter/TensorFlow.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
           <img src="/images/inter/docker.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
           <img src="/images/inter/elastic.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
           <img src="/images/inter/grafana.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
           <img src="/images/inter/kafka.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
-          <img src="/images/inter/mysql.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
+          <img src="/images/inter/MySQL.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
    
 
        
@@ -32,8 +32,8 @@ export default function Clients() {
         {/* End Grid */}
         {/* Grid */}
         <div className="grid grid-cols-3 gap-x-6 sm:gap-x-6 md:grid-cols-5">
-          <img src="/images/inter/nginx.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
-          <img src="/images/inter/postgresql.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
+          <img src="/images/inter/NGINX.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
+          <img src="/images/inter/PostgreSQL.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
           <img src="/images/inter/spark.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
           <img src="/images/inter/prometheus.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
           <img src="/images/inter/webhooks.svg" className="mx-auto h-auto w-16 py-3 text-gray-500 md:w-20 lg:w-24 lg:py-5 dark:text-neutral-500" />
