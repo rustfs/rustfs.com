@@ -34,13 +34,13 @@ function getExcerpt(content) {
 }
 
 async function readMDXFile(filePath, category) {
-  console.log(`parsing file: ${filePath}`);
+  // console.log(`parsing file: ${filePath}`);
 
   let rawContent = fs.readFileSync(filePath, 'utf-8')
 
   let { data: metadata, content } = matter(rawContent)
 
-  console.log(`metadata:`, metadata);
+  // console.log(`metadata:`, metadata);
 
   content = content.trim()
 

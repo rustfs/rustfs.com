@@ -321,6 +321,8 @@ module.exports = {
               flex: 'none',
               minWidth: '100%',
             },
+            'code::before': false,
+            'code::after': false,
             table: {
               fontSize: theme('fontSize.sm')[0],
               lineHeight: theme('fontSize.sm')[1].lineHeight,
