@@ -1,5 +1,9 @@
+import { AppFooter } from "@/components/ui/app-footer";
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import AppHeader from "../components/ui/app-header";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,12 +27,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-CN" suppressHydrationWarning>
+      <head>
+        <meta
+          key="twitter:card"
+          name="twitter:card"
+          content="summary_large_image"
+        />
+        <meta key="twitter:site" name="twitter:site" content="@rustfs" />
+        <meta key="twitter:creator" name="twitter:creator" content="@rustfs" />
+        <meta key="og:type" property="og:type" content="article" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex h-full flex-col`}
       >
-        {children}
+        <ThemeProvider enableSystem attribute="class">
+          <AppHeader />
+          {children}
+          <AppFooter />
+        </ThemeProvider>
       </body>
-    </html>
+      <Script
+        id="baidu-analytics"
+        src="https://hm.baidu.com/hm.js?968e7103a8e28fb30f7d69e42b7c82bc"
+        strategy="afterInteractive" // 确保脚本在页面交互后加载
+      />
+    </html >
   );
 }
