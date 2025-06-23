@@ -1,11 +1,11 @@
-import HomeDifferents from "@/components/ui/home-differents";
-import HomeFeatures from "@/components/ui/home-features";
-import HomeFeatures2 from "@/components/ui/home-features2";
-import HomeStats from "@/components/ui/home-stats";
-import GetStartedToday from "../components/ui/get-started-today";
-import HomeHero from "../components/ui/home-hero";
-import HomeReviews from "../components/ui/reviews";
-import Subscribe from "../components/ui/subscribe";
+import GetStartedToday from "@/app/components/get-started-today";
+import HomeDifferents from "@/app/components/home-differents";
+import HomeFeatures from "@/app/components/home-features";
+import HomeHero from "@/app/components/home-hero";
+import HomeMultiClouds from "@/app/components/home-multi-clouds";
+import HomeStats from "@/app/components/home-stats";
+import HomeReviews from "@/app/components/reviews";
+import Subscribe from "@/app/components/subscribe";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
       <HomeStats />
       <HomeFeatures />
       <HomeDifferents />
-      <HomeFeatures2 />
+      <HomeMultiClouds />
       <GetStartedToday />
       <HomeReviews />
       <Subscribe />

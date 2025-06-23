@@ -2,20 +2,21 @@ import { CheckIcon, XIcon } from "lucide-react"
 
 export default function HomeDifferents() {
   return (
-    <section className="relative pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32 bg-slate-100"
-      style={{
-        backgroundImage: "url('/svgs/backgrounds/gradient-transparent.svg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat"
-      }}>
+    <section className="relative pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32 bg-muted"
+    // style={{
+    //   backgroundImage: "url('/svgs/backgrounds/gradient-transparent.svg')",
+    //   backgroundSize: "cover",
+    //   backgroundPosition: "center",
+    //   backgroundRepeat: "no-repeat"
+    // }}
+    >
       {/* Features */}
       <div className="mx-auto max-w-[85rem] px-4sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-          <h2 className="text-2xl font-bold md:text-4xl md:leading-tight text-primary">
+          <h2 className="text-2xl font-bold md:text-4xl md:leading-tight">
             与其他存储产品的对比
           </h2>
-          <p className="mt-4 text-muted-foreground">
+          <p className="mt-4">
             选择 RustFS，您将获得更多的优势
           </p>
         </div>
@@ -138,6 +139,6 @@ export default function HomeDifferents() {
         </div>
         {/* End Features */}
       </div>
-    </section>
+    </section >
   )
 }

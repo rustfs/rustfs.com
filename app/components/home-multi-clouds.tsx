@@ -1,13 +1,13 @@
 import { ChevronRightIcon, EarthIcon, EarthLockIcon, HexagonIcon } from "lucide-react";
 
-export default function HomeFeatures2() {
+export default function HomeMultiClouds() {
   return (
     <section className="relative pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32">
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         {/* Grid */}
-        <div className="grid gap-12 md:grid-cols-2">
-          <div className="relative lg:w-3/4">
-            <h2 className="text-3xl font-bold text-neutral-800 lg:text-4xl dark:text-white">
+        <div className="grid gap-12 items-center md:grid-cols-2">
+          <div className="relative lg:w-3/4 flex flex-col gap-8">
+            <h2 className="text-3xl font-bold text-primary lg:text-4xl">
               真正的多云存储
             </h2>
             <p className="text-muted-foreground mt-3">
@@ -24,7 +24,7 @@ export default function HomeFeatures2() {
             </p>
 
             <div
-              className="absolute bottom-0 start-0 hidden lg:block lg:translate-x-32"
+              className="absolute bottom-0 start-0 hidden lg:block lg:translate-y-32 lg:translate-x-32"
               aria-hidden="true"
             >
               <svg
@@ -58,7 +58,7 @@ export default function HomeFeatures2() {
             {/* Icon Block */}
             <div className="flex gap-x-5 sm:gap-x-8">
               {/* Icon */}
-              <span className="mx-auto inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white text-blue-500 shadow-sm lg:size-20 dark:border-neutral-700 dark:bg-neutral-900">
+              <span className="mx-auto inline-flex size-12 shrink-0 items-center justify-center rounded-full border text-primary shadow-sm lg:size-20">
                 <EarthIcon className="size-6 lg:size-8" />
               </span>
               <div className="grow">
@@ -74,7 +74,7 @@ export default function HomeFeatures2() {
             {/* Icon Block */}
             <div className="flex gap-x-5 sm:gap-x-8">
               {/* Icon */}
-              <span className="mx-auto inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white text-blue-500 shadow-sm lg:size-20 dark:border-neutral-700 dark:bg-neutral-900">
+              <span className="mx-auto inline-flex size-12 shrink-0 items-center justify-center rounded-full border text- shadow-sm lg:size-20">
                 <EarthLockIcon className="size-6 lg:size-8" />
               </span>
               <div className="grow">
@@ -90,7 +90,7 @@ export default function HomeFeatures2() {
             {/* Icon Block */}
             <div className="flex gap-x-5 sm:gap-x-8">
               {/* Icon */}
-              <span className="mx-auto inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white text-blue-500 shadow-sm lg:size-20 dark:border-neutral-700 dark:bg-neutral-900">
+              <span className="mx-auto inline-flex size-12 shrink-0 items-center justify-center rounded-full border text- shadow-sm lg:size-20">
                 <HexagonIcon className="size-6 lg:size-8" />
               </span>
               <div className="grow">

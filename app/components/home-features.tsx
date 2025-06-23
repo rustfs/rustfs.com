@@ -15,7 +15,7 @@ export default function HomeFeatures() {
         {/* Title */}
         <div className="mx-auto mb-10 text-center lg:mb-14">
           <h2 className="text-3xl font-bold md:text-4xl tracking-wide md:leading-tight dark:text-white">
-            基于 Rust 的超强性能<br /><span className="text-blue-500">最靠谱的分布式文件系统</span>
+            超强性能的<span className="text-blue-500">企业级分布式文件系统</span>
           </h2>
           <p className="text-muted-foreground mt-4">
             全面的功能特性，满足企业级存储需求
@@ -30,9 +30,9 @@ export default function HomeFeatures() {
               key={feature.title}
               type="button"
               className={cn(
-                "w-full flex flex-col gap-2 text-start hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 p-2 sm:p-3 md:p-5 rounded-xl dark:hover:bg-neutral-800 dark:focus:bg-neutral-800",
+                "w-full flex flex-col gap-2 text-start hover:bg-muted focus:outline-hidden focus:bg-muted p-2 sm:p-3 md:p-5 rounded-xl",
                 {
-                  'bg-gray-100 dark:bg-neutral-800 text-blue-600': activeTab === index,
+                  'bg-muted text-blue-600': activeTab === index,
                 }
               )}
               onClick={() => setActiveTab(index)}
@@ -55,7 +55,7 @@ export default function HomeFeatures() {
                   {feature.title}
                 </span>
               </div>
-              <p className="hidden md:block mt-1 text-sm text-gray-600 dark:text-neutral-400">
+              <p className="hidden md:block mt-1 text-sm text-muted-foreground">
                 {feature.description}
               </p>
             </button>

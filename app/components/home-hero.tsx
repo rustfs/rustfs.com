@@ -1,17 +1,19 @@
+'use client'
 /* eslint-disable @next/next/no-img-element */
 import { WordRotate } from "@/components/magicui/word-rotate";
-import { PlayIcon } from "lucide-react";
-import FreeChatButton from "./buttons/free-chat";
+import DemoLink from "./buttons/demo-link";
+import DownloadLink from "./buttons/download-link";
+import GetStartedButton from "./buttons/get-started";
 
 export default function HomeHero() {
   // public/svgs/softwares/*.svg
-  const softwares = ['docker', 'elastic', 'grafana', 'kafka', 'mysql', 'nginx', 'postgresql', 'prometheus', 'spark', 'tensorflow', 'webhooks']
+  const softwares = ['docker', 'elastic', 'grafana', 'kafka', 'mysql', 'nginx', 'postgresql', 'clickhouse', 'prometheus', 'spark', 'tensorflow', 'webhooks']
 
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center lg:pt-32">
-      <h1 className="mx-auto font-display text-5xl font-extrabold tracking-tight text-primary sm:text-7xl">
-        Rust 构建的{/* */}{" "}
-        <span className="relative whitespace-nowrap text-blue-600 inline-flex">
+      <h1 className="mx-auto font-display text-5xl font-extrabold tracking-wide text-primary sm:text-7xl">
+        Rust 驱动的{/* */}{" "}
+        <span className="relative whitespace-nowrap text-blue-600 inline-flex -ml-10">
           <svg
             aria-hidden="true"
             viewBox="0 0 418 42"
@@ -30,14 +32,9 @@ export default function HomeHero() {
         RustFS 用热门安全的 Rust 语言开发，兼容 S3 协议。适用于 AI/ML 及海量数据存储、大数据、互联网、工业和保密存储等全部场景。近乎免费使用。遵循 Apache 2 协议，支持国产保密设备和系统。
       </p>
       <div className="mt-10 flex justify-center gap-x-6">
-        <FreeChatButton />
-        <a
-          className="group inline-flex ring-1 items-center justify-center dark:hover:bg-slate-900 rounded-full py-2 px-4 text-sm ring-slate-200 text-slate-700 dark:text-slate-300 hover:text-slate-900 hover:ring-slate-300 active:bg-slate-100 active:text-slate-600 focus-visible:outline-blue-600 focus-visible:ring-slate-300"
-          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        >
-          <PlayIcon className="h-4" />
-          <span className="ml-2">开始使用</span>
-        </a>
+        <GetStartedButton />
+        <DownloadLink />
+        <DemoLink />
       </div>
       <div className="mt-36 lg:mt-44">
         <p className="font-display text-base text-slate-500 font-bold">

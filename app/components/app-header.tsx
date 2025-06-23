@@ -1,5 +1,7 @@
 'use client'
 
+import LinkGitHub from "./buttons/link-github";
+import LinkTwitter from "./buttons/link-twitter";
 import { Logo } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -61,13 +63,12 @@ export default function AppHeader() {
               })}
             </div>
           </div>
-          <div className="flex items-center gap-x-5 md:gap-x-8">
-            <div className="hidden md:block">
+          <div className="flex items-center gap-x-2 md:gap-x-5">
+            <div className="hidden md:flex items-center gap-x-2 md:gap-x-5">
               <ThemeToggle />
+              <LinkGitHub size="size-5" className="group inline-flex" />
+              <LinkTwitter size="size-5" className="group inline-flex" />
             </div>
-            <a className="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 bg-blue-600 text-white hover:text-slate-100 hover:bg-blue-500 active:bg-blue-800 active:text-blue-100 focus-visible:outline-blue-600" href="/docs">
-              <span>立即开始</span>
-            </a>
             <div className="-mr-1 md:hidden">
               <div data-headlessui-state="">
                 <button className="relative z-10 flex h-8 w-8 items-center justify-center focus:not-data-focus:outline-hidden" aria-label="Toggle Navigation" type="button" aria-expanded="false" data-headlessui-state="" id="headlessui-popover-button-:R5v6fja:">

@@ -11,13 +11,7 @@ const AVATAR_URLS = [
 export default function GetStartedToday() {
   return (
     <section
-      className="relative overflow-hidden py-32 text-white"
-      style={{
-        backgroundImage: "url('/svgs/backgrounds/gradient-1.svg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat"
-      }}
+      className="relative overflow-hidden py-32 bg-accent text-accent-foreground"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
         <div className="mx-auto max-w-lg text-center flex flex-col gap-8">
@@ -55,7 +49,7 @@ export default function GetStartedToday() {
           </div>
           {/* End Avatar Group */}
           <div>
-            <FreeChatButton className="bg-white px-6 py-2 text-slate-900" />
+            <FreeChatButton />
           </div>
         </div>
       </div>
