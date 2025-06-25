@@ -1,0 +1,106 @@
+{
+  "nav": {
+    "Features": "Features",
+    "Architecture": "Architecture",
+    "Solutions": "Solutions",
+    "Integrations": "Integrations",
+    "AI": "AI",
+    "Documentation": "Documentation",
+    "Community": "Community",
+    "About": "About"
+  },
+  "hero": {
+    "Rust-powered": "Rust-powered",
+    "High Performance": "High Performance",
+    "Unlimited Scaling": "Unlimited Scaling",
+    "Secure and Reliable": "Secure and Reliable",
+    "Multi-cloud Storage": "Multi-cloud Storage",
+    "S3 Compatible": "S3 Compatible",
+    "Distributed Storage System": "Distributed Storage System",
+    "RustFS is developed with the popular and secure Rust language, compatible with S3 protocol. Suitable for AI/ML and massive data storage, big data, internet, industrial and confidential storage scenarios. Nearly free to use. Follows Apache 2 license, supports domestic confidential equipment and systems.": "RustFS is developed with the popular and secure Rust language, compatible with S3 protocol. Suitable for AI/ML and massive data storage, big data, internet, industrial and confidential storage scenarios. Nearly free to use. Follows Apache 2 license, supports domestic confidential equipment and systems.",
+    "Trusted open source software, compatible with over 1500+ software protocols": "Trusted open source software, compatible with over 1500+ software protocols"
+  },
+  "buttons": {
+    "Get Started": "Get Started",
+    "Download": "Download",
+    "View Demo": "View Demo"
+  },
+  "features": {
+    "Cross-cloud Support": "Cross-cloud Support",
+    "RustFS leverages distributed architecture and object storage capabilities to provide exceptional performance for AI and advanced analytics workloads, supporting data scaling from TB to EB levels.": "RustFS leverages distributed architecture and object storage capabilities to provide exceptional performance for AI and advanced analytics workloads, supporting data scaling from TB to EB levels.",
+    "Secure and Reliable": "Secure and Reliable",
+    "RustFS integrates with RustyVault to provide high-performance object storage security encryption, supporting multiple encryption modes to ensure data security and transparency.": "RustFS integrates with RustyVault to provide high-performance object storage security encryption, supporting multiple encryption modes to ensure data security and transparency.",
+    "Version Control": "Version Control",
+    "Object storage version control feature assigns unique identifiers to each object version, allowing users to access and manage historical versions through API or management interface.": "Object storage version control feature assigns unique identifiers to each object version, allowing users to access and manage historical versions through API or management interface.",
+    "Unlimited Scaling": "Unlimited Scaling",
+    "RustFS system automatically balances node load, ensures even data distribution, supports dynamic addition or removal of resources based on storage needs, achieving unlimited scaling.": "RustFS system automatically balances node load, ensures even data distribution, supports dynamic addition or removal of resources based on storage needs, achieving unlimited scaling.",
+    "Object Read-only": "Object Read-only",
+    "Supports object locking mode, implementing WORM (Write Once Read Many) functionality, preventing data from being modified or deleted within specified time ranges, ensuring data integrity.": "Supports object locking mode, implementing WORM (Write Once Read Many) functionality, preventing data from being modified or deleted within specified time ranges, ensuring data integrity.",
+    "Active Replication": "Active Replication",
+    "Automatically creates multiple copies when objects are written and distributes them to different nodes, supporting both synchronous and asynchronous replication modes, providing high availability and disaster recovery capabilities.": "Automatically creates multiple copies when objects are written and distributes them to different nodes, supporting both synchronous and asynchronous replication modes, providing high availability and disaster recovery capabilities."
+  },
+  "footer": {
+    "Architecture Support": "Architecture Support",
+    "Bare Metal and Virtualization": "Bare Metal and Virtualization",
+    "Alibaba Cloud": "Alibaba Cloud",
+    "Tencent Cloud": "Tencent Cloud",
+    "Huawei Cloud": "Huawei Cloud",
+    "VMWare Tanzu": "VMWare Tanzu",
+    "International Cloud Providers": "International Cloud Providers",
+    "Product Features": "Product Features",
+    "Distributed": "Distributed",
+    "Log Management": "Log Management",
+    "Version Control": "Version Control",
+    "S3 Compatible": "S3 Compatible",
+    "Object-level and Read-only": "Object-level and Read-only",
+    "Cross-region Replication": "Cross-region Replication",
+    "Encryption": "Encryption",
+    "Lifecycle Management": "Lifecycle Management",
+    "Solutions": "Solutions",
+    "Modern Data Lake": "Modern Data Lake",
+    "AI and Machine Learning": "AI and Machine Learning",
+    "Cloud Native": "Cloud Native",
+    "Big Data Compute-Storage Separation": "Big Data Compute-Storage Separation",
+    "SQL Support": "SQL Support",
+    "Quantitative Trading": "Quantitative Trading",
+    "Manufacturing Cost Reduction": "Manufacturing Cost Reduction",
+    "Cold Archive Storage": "Cold Archive Storage",
+    "Video Storage Solutions": "Video Storage Solutions",
+    "Domestic Innovation and SM Solutions": "Domestic Innovation and SM Solutions",
+    "About Us": "About Us",
+    "Investment and Cooperation": "Investment and Cooperation",
+    "Trademark Usage": "Trademark Usage",
+    "RustFS GitHub": "RustFS GitHub",
+    "Contact Us": "Contact Us",
+    "Customer Service Hours: 9:00-18:00": "Customer Service Hours: 9:00-18:00",
+    "Beijing Haidian District Xixiaokou Road 66": "Beijing Haidian District Xixiaokou Road 66"
+  },
+  "getStarted": {
+    "Experience RustFS": "Experience RustFS",
+    "High security, high concurrency and ultimate performance": "High security, high concurrency and ultimate performance",
+    "Over 100+ enterprise users have started using RustFS": "Over 100+ enterprise users have started using RustFS"
+  },
+  "multiCloud": {
+    "True Multi-Cloud Storage": "True Multi-Cloud Storage",
+    "Multi-cloud object storage allows enterprises to build AWS S3-compatible data infrastructure on any cloud. The result is a consistent, portable interface for data and applications - meaning you can run anywhere, from edge to public cloud, without changing a line of code.": "Multi-cloud object storage allows enterprises to build AWS S3-compatible data infrastructure on any cloud. The result is a consistent, portable interface for data and applications - meaning you can run anywhere, from edge to public cloud, without changing a line of code.",
+    "Contact us for more information": "Contact us for more information",
+    "Public Cloud": "Public Cloud",
+    "RustFS is powered by Kubernetes and provides scalable, secure, S3-compatible object storage for every public cloud. Free yourself from vendor lock-in and treat clouds for what they are - commodity compute, network, and drives.": "RustFS is powered by Kubernetes and provides scalable, secure, S3-compatible object storage for every public cloud. Free yourself from vendor lock-in and treat clouds for what they are - commodity compute, network, and drives.",
+    "Private Cloud": "Private Cloud",
+    "From OpenShift to Tanzu, RustFS is the only object storage that is part of the infrastructure foundation of leading Kubernetes distributions. With its massive portfolio of integrated applications, RustFS completes the software-defined picture.": "From OpenShift to Tanzu, RustFS is the only object storage that is part of the infrastructure foundation of leading Kubernetes distributions. With its massive portfolio of integrated applications, RustFS completes the software-defined picture.",
+    "Edge": "Edge",
+    "The complete RustFS multi-cloud storage binary is less than 100MB, capable of powering object storage anywhere - from ARM SOCs, 5G POPs, and edge cache devices to mini data centers. This is why RustFS dominates the edge storage market.": "The complete RustFS multi-cloud storage binary is less than 100MB, capable of powering object storage anywhere - from ARM SOCs, 5G POPs, and edge cache devices to mini data centers. This is why RustFS dominates the edge storage market."
+  },
+  "reviews": {
+    "What customers say about RustFS": "What customers say about RustFS",
+    "Exquisite service, professional team, providing you with the best service": "Exquisite service, professional team, providing you with the best service"
+  },
+  "theme": {
+    "Switch theme": "Switch theme"
+  },
+  "common": {
+    "Terms": "Terms",
+    "Privacy": "Privacy",
+    "Status": "Status"
+  }
+}

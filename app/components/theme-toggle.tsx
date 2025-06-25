@@ -1,8 +1,12 @@
+'use client'
+
+import { useI18n } from '@/lib/i18n';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useTheme } from 'next-themes';
 
 export function ThemeToggle() {
+  const { tw } = useI18n();
   const { resolvedTheme, setTheme } = useTheme()
 
   const toggleTheme = () => {
@@ -14,7 +18,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       className="relative p-0 text-muted-foreground hover:text-primary transition-colors"
-      aria-label="切换主题"
+      aria-label={tw('切换主题', 'Toggle theme')}
     >
       <div className="relative size-5">
         <AnimatePresence mode="wait">

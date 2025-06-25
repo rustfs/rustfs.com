@@ -1,4 +1,7 @@
+'use client'
+
 /* eslint-disable @next/next/no-img-element */
+import { useI18n } from "@/lib/i18n";
 import FreeChatButton from "./buttons/free-chat";
 
 const AVATAR_URLS = [
@@ -9,15 +12,17 @@ const AVATAR_URLS = [
 ];
 
 export default function GetStartedToday() {
+  const { tw } = useI18n();
+
   return (
     <section
       className="relative overflow-hidden py-32 bg-accent text-accent-foreground"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
-        <div className="mx-auto max-w-lg text-center flex flex-col gap-8">
+        <div className="mx-auto text-center flex flex-col gap-8">
           <h2 className="font-display text-2xl tracking-wide sm:text-4xl font-semibold leading-tight">
-            快速体验 RustFS 的 <br />
-            高安全性，高并发和极致性能
+            {tw('快速体验 RustFS 的', 'Experience RustFS')} <br />
+            {tw('高安全性，高并发和极致性能', 'High security, high concurrency and ultimate performance')}
           </h2>
 
           {/* Avatar Group */}
@@ -43,7 +48,7 @@ export default function GetStartedToday() {
             </div>
             <div className="pt-5 sm:ps-5 sm:pt-0 lg:border-l">
               <div className="text-sm">
-                超过 100+ 企业用户已经开始使用 RustFS
+                {tw('超过 100+ 企业用户已经开始使用 RustFS', 'Over 100+ enterprise users have started using RustFS')}
               </div>
             </div>
           </div>

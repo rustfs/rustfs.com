@@ -1,12 +1,14 @@
 'use client'
 
 /* eslint-disable @next/next/no-img-element */
-import features from '@/data/features'
-import { cn } from '@/lib/utils'
-import { CheckCircleIcon, QuoteIcon } from "lucide-react"
-import { useState } from "react"
+import features from '@/data/features';
+import { useI18n } from "@/lib/i18n";
+import { cn } from '@/lib/utils';
+import { CheckCircleIcon, QuoteIcon } from "lucide-react";
+import { useState } from 'react';
 
 export default function HomeFeatures() {
+  const { tw, locale } = useI18n();
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -15,10 +17,10 @@ export default function HomeFeatures() {
         {/* Title */}
         <div className="mx-auto mb-10 text-center lg:mb-14">
           <h2 className="text-3xl font-bold md:text-4xl tracking-wide md:leading-tight dark:text-white">
-            超强性能的<span className="text-blue-500">企业级分布式文件系统</span>
+            {tw('超强性能的', 'High-performance')} <span className="text-blue-500">{tw('企业级分布式文件系统', 'enterprise-grade distributed file system')}</span>
           </h2>
           <p className="text-muted-foreground mt-4">
-            全面的功能特性，满足企业级存储需求
+            {tw('全面的功能特性，满足企业级存储需求', 'Comprehensive features to meet enterprise-grade storage requirements')}
           </p>
         </div>
         {/* End Title */}
@@ -27,7 +29,7 @@ export default function HomeFeatures() {
         <nav className="mx-auto grid grid-cols-3 gap-2 md:gap-4" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
           {features.map((feature, index) => (
             <button
-              key={feature.title}
+              key={feature.title[locale]}
               type="button"
               className={cn(
                 "w-full flex flex-col gap-2 text-start hover:bg-muted focus:outline-hidden focus:bg-muted p-2 sm:p-3 md:p-5 rounded-xl",
@@ -52,11 +54,11 @@ export default function HomeFeatures() {
                     'text-blue-600 dark:text-blue-500': activeTab === index,
                   }
                 )}>
-                  {feature.title}
+                  {feature.title[locale]}
                 </span>
               </div>
               <p className="hidden md:block mt-1 text-sm text-muted-foreground">
-                {feature.description}
+                {feature.description[locale]}
               </p>
             </button>
           ))}
@@ -67,7 +69,7 @@ export default function HomeFeatures() {
         <div className="mt-12 md:mt-16">
           {features.map((feature, index) => (
             <div
-              key={feature.title}
+              key={feature.title[locale]}
               className={cn(
                 {
                   'hidden': activeTab !== index,
@@ -82,10 +84,10 @@ export default function HomeFeatures() {
                     <feature.icon className="size-16 text-blue-500" />
                     <div>
                       <h4 className="text-2xl font-bold text-neutral-800 dark:text-white mb-2">
-                        {feature.title}
+                        {feature.title[locale]}
                       </h4>
                       <p className="text-muted-foreground">
-                        {feature.featureDescription}
+                        {feature.featureDescription[locale]}
                       </p>
                     </div>
                   </div>
@@ -94,7 +96,7 @@ export default function HomeFeatures() {
                     {feature.features.map((item, itemIndex) => (
                       <li className="flex gap-3 items-start" key={itemIndex}>
                         <CheckCircleIcon className="size-5 shrink-0 text-blue-500 mt-1" />
-                        <span>{item}</span>
+                        <span>{item[locale]}</span>
                       </li>
                     ))}
                   </ul>
@@ -103,15 +105,15 @@ export default function HomeFeatures() {
                     <div className="flex items-center gap-4">
                       <QuoteIcon className="size-8 rotate-180 text-blue-500 opacity-15" />
                       <p className="text-muted-foreground flex-1 text-lg italic">
-                        &ldquo;{feature.review.review}&rdquo;
+                        &ldquo;{feature.review.review[locale]}&rdquo;
                       </p>
                       <div className="flex items-center gap-4">
                         <div className="text-right">
                           <p className="font-semibold text-neutral-800 dark:text-white">
-                            {feature.review.name}
+                            {feature.review.name[locale]}
                           </p>
                           <p className="text-sm text-muted-foreground">
-                            {feature.review.position}
+                            {feature.review.position[locale]}
                           </p>
                         </div>
                         <img
@@ -133,5 +135,5 @@ export default function HomeFeatures() {
       </div>
       {/* End Tab Content */}
     </section>
-  )
+  );
 }

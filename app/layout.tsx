@@ -1,3 +1,4 @@
+import { I18nProvider } from "@/lib/i18n";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -44,11 +45,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex h-full flex-col`}
       >
-        <ThemeProvider enableSystem attribute="class">
-          <AppHeader />
-          {children}
-          <AppFooter />
-        </ThemeProvider>
+        <I18nProvider>
+          <ThemeProvider enableSystem attribute="class">
+            <AppHeader />
+            {children}
+            <AppFooter />
+          </ThemeProvider>
+        </I18nProvider>
       </body>
     </html >
   );

@@ -1,0 +1,199 @@
+# RustFS.com 项目 Cursor Rules
+
+## 核心目标
+这套 Cursor rule 适用于所有编程任务，要求工程师以**高级工程师的视角**，严格按照流程执行任务，确保代码改动精准、高效，且不会引入问题或不必要的复杂性。
+
+## 规则的五个关键步骤
+
+### 1. 明确任务范围
+- 在写代码前，先分析任务，明确目标
+- 制定清晰的计划，列出需要修改的函数、模块或组件，并说明原因
+- 只有在计划清晰且经过深思熟虑后，才开始写代码
+
+### 2. 精准定位代码修改点
+- 确定需要修改的具体文件和代码行
+- 避免无关文件的改动，若涉及多个文件，需明确说明每个文件的改动理由
+- 除非任务明确要求，否则不创建新抽象或重构代码
+
+### 3. 最小化、隔离化的代码改动
+- 只编写任务直接所需的代码
+- 避免添加不必要的日志、注释、测试、待办事项或错误处理
+- 不要进行"顺手"的额外修改，确保新代码不干扰现有功能
+
+### 4. 严格检查代码
+- 检查代码的正确性、是否符合任务范围，以及是否会引发副作用
+- 确保代码与现有代码风格一致，防止破坏已有功能
+- 评估改动是否会影响下游系统
+
+### 5. 清晰交付成果
+- 总结改动的具体内容和原因
+- 列出所有修改的文件及其具体变更
+- 说明任何假设或潜在风险，供他人审查
+
+## 核心原则
+- **不即兴发挥**：严格按照任务要求执行，不随意创新
+- **不过度设计**：避免复杂化，只做必要的工作
+- **不偏离规则**：始终遵循这套流程，确保代码安全、可靠
+
+---
+
+## 项目技术规范
+
+### 技术栈
+- **框架**: Next.js 15.3.4 (App Router)
+- **语言**: TypeScript (ES2017+)
+- **UI**: Tailwind CSS 4 + shadcn/ui
+- **图标**: Lucide React
+- **主题**: next-themes (支持深色模式)
+- **动画**: motion + tw-animate-css
+- **国际化**: 中文为主 (lang="zh-CN")
+
+### 项目结构约定
+```
+app/                    # Next.js App Router 目录
+├── components/         # 页面级组件
+│   ├── buttons/       # 按钮组件
+│   └── *.tsx         # 功能组件
+├── layout.tsx         # 根布局
+├── page.tsx          # 首页
+└── globals.css       # 全局样式
+
+components/            # 通用组件库
+├── ui/               # shadcn/ui 组件
+└── magicui/         # 自定义 UI 组件
+
+data/                 # 静态数据
+├── features.tsx      # 产品功能数据
+├── reviews.json      # 用户评价
+└── *.json           # 其他配置数据
+
+lib/                  # 工具函数
+└── utils.ts         # Tailwind merge 等工具
+
+public/              # 静态资源
+├── images/          # 图片资源
+└── svgs/           # SVG 图标
+```
+
+### 代码风格规范
+
+#### TypeScript 约定
+- 使用严格模式 (`"strict": true`)
+- 优先使用 ES2017+ 语法
+- 函数组件使用箭头函数或 `export default function`
+- 类型导入使用 `import type { }`
+
+#### React 组件规范
+```typescript
+// ✅ 推荐的组件结构
+'use client' // 客户端组件需要标注
+
+import { ComponentProps } from 'react'
+import { cn } from '@/lib/utils'
+
+interface ComponentNameProps {
+  className?: string
+  children?: React.ReactNode
+}
+
+export default function ComponentName({
+  className,
+  children,
+  ...props
+}: ComponentNameProps) {
+  return (
+    <div className={cn("default-classes", className)}>
+      {children}
+    </div>
+  )
+}
+```
+
+#### Tailwind CSS 规范
+- 使用 `cn()` 函数合并类名
+- 优先使用 Tailwind 类，避免自定义 CSS
+- 响应式设计：`sm:` `md:` `lg:` `xl:`
+- 深色模式：`dark:` 前缀
+- 主题色彩：`primary` `secondary` `muted-foreground` 等语义化颜色
+
+#### 样式约定
+```typescript
+// ✅ 正确的样式写法
+className={cn(
+  "base-classes",
+  "responsive sm:class md:class lg:class",
+  "dark:class dark:hover:class",
+  conditionalClass && "conditional-class",
+  className // 允许外部覆盖
+)}
+```
+
+### 内容规范
+- **语言**: 所有用户界面文本使用中文
+- **术语**: 统一使用 "RustFS" (不是 rustfs 或 Rustfs)
+- **链接**: 文档链接统一指向 `https://docs.rustfs.com`
+- **品牌**: 保持与分布式存储系统的专业形象一致
+
+### 文件命名约定
+- 组件文件：`kebab-case.tsx` (如 `app-header.tsx`)
+- 数据文件：`kebab-case.json` 或 `.tsx`
+- 工具函数：`camelCase.ts`
+- 页面文件：遵循 Next.js App Router 约定
+
+### 导入顺序
+```typescript
+// 1. React 相关
+import React from 'react'
+import { useState } from 'react'
+
+// 2. Next.js 相关
+import Link from 'next/link'
+import Image from 'next/image'
+
+// 3. 第三方库
+import { motion } from 'motion'
+import { ChevronDownIcon } from 'lucide-react'
+
+// 4. 内部组件和工具
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+
+// 5. 类型定义
+import type { ComponentProps } from 'react'
+```
+
+### 性能要求
+- 图片使用 Next.js `Image` 组件优化
+- 客户端组件最小化，优先服务端渲染
+- 懒加载大型组件和数据
+- 避免不必要的重渲染
+
+### 禁止事项
+- ❌ 不要修改 `components.json` shadcn/ui 配置
+- ❌ 不要在组件中硬编码数据，使用 `data/` 目录
+- ❌ 不要破坏现有的深色模式支持
+- ❌ 不要使用内联样式，统一使用 Tailwind
+- ❌ 不要忽略 TypeScript 类型错误
+- ❌ 不要修改已有的 API 接口和配置结构
+
+### 提交要求
+- 每次修改需要说明影响的组件和页面
+- 确保深色模式正常工作
+- 确保响应式布局不被破坏
+- 验证中文内容显示正确
+
+---
+
+## 执行检查清单
+
+在每次代码改动前，请确认：
+1. ✅ 已明确理解任务目标和范围
+2. ✅ 已制定清晰的修改计划
+3. ✅ 代码符合项目技术规范
+4. ✅ 遵循组件和样式约定
+5. ✅ 不会破坏现有功能
+6. ✅ 通过 TypeScript 类型检查
+7. ✅ 响应式和深色模式兼容
+8. ✅ 中文内容正确显示
+
+记住：**精准、高效、不引入复杂性** 是我们的核心要求。

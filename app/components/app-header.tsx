@@ -1,38 +1,38 @@
 'use client'
 
+import { useI18n } from "@/lib/i18n";
 import LinkGitHub from "./buttons/link-github";
 import LinkTwitter from "./buttons/link-twitter";
+import LanguageToggle from "./language-toggle";
 import { Logo } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
 
 export default function AppHeader() {
+  const { tw } = useI18n();
+
   const navs = [
     {
-      label: '产品功能',
+      label: tw('产品功能', 'Features'),
       url: 'https://docs.rustfs.com/docs/features',
     },
     {
-      label: '架构',
+      label: tw('架构', 'Architecture'),
       url: 'https://docs.rustfs.com/docs/architecture',
     },
     {
-      label: '解决方案',
+      label: tw('解决方案', 'Solutions'),
       url: 'https://docs.rustfs.com/docs/solutions',
     },
     {
-      label: '集成',
+      label: tw('集成', 'Integrations'),
       url: 'https://docs.rustfs.com/docs/intergrations'
     },
     {
-      label: 'AI 支持',
+      label: tw('AI 支持', 'AI'),
       url: 'https://docs.rustfs.com/docs/ai'
     },
     {
-      label: '数据湖',
-      url: 'https://docs.rustfs.com/docs/data-lake'
-    },
-    {
-      label: '文档',
+      label: tw('文档', 'Documentation'),
       url: 'https://docs.rustfs.com/docs'
     },
     // {
@@ -40,11 +40,11 @@ export default function AppHeader() {
     //   url: '/blog'
     // },
     {
-      label: '社区',
+      label: tw('社区', 'Community'),
       url: 'https://github.com/rustfs/rustfs/discussions'
     },
     {
-      label: '关于我们',
+      label: tw('关于我们', 'About Us'),
       url: '/about'
     }
   ]
@@ -65,6 +65,7 @@ export default function AppHeader() {
           </div>
           <div className="flex items-center gap-x-2 md:gap-x-5">
             <div className="hidden md:flex items-center gap-x-2 md:gap-x-5">
+              <LanguageToggle />
               <ThemeToggle />
               <LinkGitHub size="size-5" className="group inline-flex" />
               <LinkTwitter size="size-5" className="group inline-flex" />

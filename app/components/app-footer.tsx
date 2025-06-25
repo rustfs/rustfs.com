@@ -1,53 +1,57 @@
+'use client'
+
 import { Logo } from '@/app/components/logo'
+import { useI18n } from "@/lib/i18n"
 import Link from 'next/link'
 import LinkGitHub from './buttons/link-github'
 import LinkTwitter from './buttons/link-twitter'
 
 interface NavItem {
-  title: string
-  href: string
-}
-
-const navs = {
-  '架构支持': [
-    { title: '裸金属和虚拟化', href: 'https://docs.rustfs.com/features/baremetal' },
-    { title: '阿里云', href: 'https://docs.rustfs.com/features/aliyun' },
-    { title: '腾讯云', href: 'https://docs.rustfs.com/features/qcloud' },
-    { title: '华为云', href: 'https://docs.rustfs.com/features/huaweicloud' },
-    { title: 'VMWare Tanzu', href: 'https://docs.rustfs.com/features/tanzu' },
-    { title: '国际云厂商', href: 'https://docs.rustfs.com/features/aws-elastic' },
-  ],
-  '产品功能': [
-    { title: '分布式', href: 'https://docs.rustfs.com/features/distributed' },
-    { title: '日志管理', href: 'https://docs.rustfs.com/features/aliyun' },
-    { title: '版本控制', href: 'https://docs.rustfs.com/features/audit-logging' },
-    { title: 'S3 兼容', href: 'https://docs.rustfs.com/features/s3-compatibility' },
-    { title: '对象级与只读', href: 'https://docs.rustfs.com/features/worm' },
-    { title: '跨区域复制', href: 'https://docs.rustfs.com/features/bucket-replication' },
-    { title: '加密', href: 'https://docs.rustfs.com/features/encryption' },
-    { title: '生命周期管理', href: 'https://docs.rustfs.com/features/lifecycle' },
-  ],
-  '解决方案': [
-    { title: '现代数据湖', href: 'https://docs.rustfs.com/features/data-lake' },
-    { title: 'AI 和机器学习', href: 'https://docs.rustfs.com/features/ai' },
-    { title: '云原生', href: 'https://docs.rustfs.com/features/cloud-native' },
-    { title: '大数据计算存储分离', href: 'https://docs.rustfs.com/features/hdfs' },
-    { title: 'SQL 支持', href: 'https://docs.rustfs.com/features/sql' },
-    { title: '量化交易', href: 'https://docs.rustfs.com/features/quantitative-trading' },
-    { title: '制造业降本', href: 'https://docs.rustfs.com/features/industry' },
-    { title: '冷归档存储', href: 'https://docs.rustfs.com/features/cold-archiving' },
-    { title: '视频存储方案', href: 'https://docs.rustfs.com/features/video' },
-    { title: '国产信创和 SM 解决方案', href: 'https://docs.rustfs.com/features/domestic' },
-  ],
-  '关于我们': [
-    { title: '关于我们', href: 'https://docs.rustfs.com/about' },
-    { title: '投资和合作', href: 'https://docs.rustfs.com/about' },
-    { title: '商标使用', href: 'https://docs.rustfs.com/trademark' },
-    { title: 'RustFS GitHub', href: 'https://github.com/rustfs/rustfs' },
-  ],
+  title: { zh: string; en: string };
+  href: string;
 }
 
 export function AppFooter() {
+  const { tw, locale } = useI18n();
+
+  const navs: Record<string, NavItem[]> = {
+    'architecture-support': [
+      { title: { zh: '裸金属和虚拟化', en: 'Bare Metal and Virtualization' }, href: 'https://docs.rustfs.com/features/baremetal' },
+      { title: { zh: '阿里云', en: 'Alibaba Cloud' }, href: 'https://docs.rustfs.com/features/aliyun' },
+      { title: { zh: '腾讯云', en: 'Tencent Cloud' }, href: 'https://docs.rustfs.com/features/qcloud' },
+      { title: { zh: '华为云', en: 'Huawei Cloud' }, href: 'https://docs.rustfs.com/features/huaweicloud' },
+      { title: { zh: 'AWS、Azure、GCP', en: 'AWS, Azure, GCP' }, href: 'https://docs.rustfs.com/features/aws-azure-gcp' },
+      { title: { zh: '国际云厂商', en: 'International Cloud Providers' }, href: 'https://docs.rustfs.com/features/aws-elastic' },
+    ],
+    'product-features': [
+      { title: { zh: '分布式', en: 'Distributed' }, href: 'https://docs.rustfs.com/features/distributed' },
+      { title: { zh: '日志管理', en: 'Log Management' }, href: 'https://docs.rustfs.com/features/aliyun' },
+      { title: { zh: '版本控制', en: 'Version Control' }, href: 'https://docs.rustfs.com/features/audit-logging' },
+      { title: { zh: 'S3 兼容', en: 'S3 Compatible' }, href: 'https://docs.rustfs.com/features/s3-compatibility' },
+      { title: { zh: '对象级与只读', en: 'Object-level and Read-only' }, href: 'https://docs.rustfs.com/features/worm' },
+      { title: { zh: '跨区域复制', en: 'Cross-region Replication' }, href: 'https://docs.rustfs.com/features/bucket-replication' },
+      { title: { zh: '加密', en: 'Encryption' }, href: 'https://docs.rustfs.com/features/encryption' },
+      { title: { zh: '生命周期管理', en: 'Lifecycle Management' }, href: 'https://docs.rustfs.com/features/lifecycle' },
+    ],
+    'solutions': [
+      { title: { zh: '现代数据湖', en: 'Modern Data Lake' }, href: 'https://docs.rustfs.com/features/data-lake' },
+      { title: { zh: 'AI 和机器学习', en: 'AI and Machine Learning' }, href: 'https://docs.rustfs.com/features/ai' },
+      { title: { zh: '云原生', en: 'Cloud Native' }, href: 'https://docs.rustfs.com/features/cloud-native' },
+      { title: { zh: '大数据计算存储分离', en: 'Big Data Compute-Storage Separation' }, href: 'https://docs.rustfs.com/features/hdfs' },
+      { title: { zh: 'SQL 支持', en: 'SQL Support' }, href: 'https://docs.rustfs.com/features/sql' },
+      { title: { zh: '量化交易', en: 'Quantitative Trading' }, href: 'https://docs.rustfs.com/features/quantitative-trading' },
+      { title: { zh: '制造业降本', en: 'Manufacturing Cost Reduction' }, href: 'https://docs.rustfs.com/features/industry' },
+      { title: { zh: '冷归档存储', en: 'Cold Archive Storage' }, href: 'https://docs.rustfs.com/features/cold-archiving' },
+      { title: { zh: '视频存储方案', en: 'Video Storage Solutions' }, href: 'https://docs.rustfs.com/features/video' },
+      { title: { zh: '国产信创和 SM 解决方案', en: 'Domestic Innovation and SM Solutions' }, href: 'https://docs.rustfs.com/features/domestic' },
+    ],
+    'about-us': [
+      { title: { zh: '关于我们', en: 'About Us' }, href: 'https://docs.rustfs.com/about' },
+      { title: { zh: '投资和合作', en: 'Investment and Cooperation' }, href: 'https://docs.rustfs.com/about' },
+      { title: { zh: '商标使用', en: 'Trademark Usage' }, href: 'https://docs.rustfs.com/trademark' },
+    ],
+  };
+
   return (
     <footer className="mt-auto w-full max-w-[85rem] py-32 px-4 sm:px-6 lg:px-8 mx-auto border-t">
       {/* Grid */}
@@ -61,15 +65,17 @@ export function AppFooter() {
         {/* End Col */}
 
         <div>
-          <h4 className="text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">架构支持</h4>
+          <h4 className="text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">
+            {tw('架构支持', 'Architecture Support')}
+          </h4>
           <div className="mt-3 grid space-y-3 text-sm">
-            {navs['架构支持']?.map((item: NavItem, index: number) => (
+            {navs['architecture-support']?.map((item: NavItem, index: number) => (
               <p key={index}>
                 <Link
                   className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
                   href={item.href}
                 >
-                  {item.title}
+                  {item.title[locale]}
                 </Link>
               </p>
             ))}
@@ -78,15 +84,17 @@ export function AppFooter() {
         {/* End Col */}
 
         <div>
-          <h4 className="text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">产品功能</h4>
+          <h4 className="text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">
+            {tw('产品功能', 'Product Features')}
+          </h4>
           <div className="mt-3 grid space-y-3 text-sm">
-            {navs['产品功能']?.map((item: NavItem, index: number) => (
+            {navs['product-features']?.map((item: NavItem, index: number) => (
               <p key={index}>
                 <Link
                   className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
                   href={item.href}
                 >
-                  {item.title}
+                  {item.title[locale]}
                 </Link>
               </p>
             ))}
@@ -95,15 +103,17 @@ export function AppFooter() {
         {/* End Col */}
 
         <div>
-          <h4 className="text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">解决方案</h4>
+          <h4 className="text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">
+            {tw('解决方案', 'Solutions')}
+          </h4>
           <div className="mt-3 grid space-y-3 text-sm">
-            {navs['解决方案']?.map((item: NavItem, index: number) => (
+            {navs['solutions']?.map((item: NavItem, index: number) => (
               <p key={index}>
                 <Link
                   className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
                   href={item.href}
                 >
-                  {item.title}
+                  {item.title[locale]}
                 </Link>
               </p>
             ))}
@@ -112,15 +122,17 @@ export function AppFooter() {
         {/* End Col */}
 
         <div>
-          <h4 className="text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">关于我们</h4>
+          <h4 className="text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">
+            {tw('关于我们', 'About Us')}
+          </h4>
           <div className="mt-3 grid space-y-3 text-sm">
-            {navs['关于我们']?.map((item: NavItem, index: number) => (
+            {navs['about-us']?.map((item: NavItem, index: number) => (
               <p key={index}>
                 <Link
                   className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
                   href={item.href}
                 >
-                  {item.title}
+                  {item.title[locale]}
                 </Link>
               </p>
             ))}

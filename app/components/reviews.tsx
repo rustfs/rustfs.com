@@ -1,9 +1,12 @@
+'use client'
+
 /* eslint-disable @next/next/no-img-element */
 import { Marquee } from "@/components/magicui/marquee";
 import reviews from "@/data/reviews.json";
+import { useI18n } from "@/lib/i18n";
 import clsx from "clsx";
 
-type SlideItem = { name: string; position: string; body: string; img: string; }
+type SlideItem = { name: { zh: string; en: string; }; position: { zh: string; en: string; }; body: { zh: string; en: string; }; img: string; }
 
 // split reviews into 3 rows
 const [firstRow, secondRow, thirdRow, fourthRow] = reviews.reduce(
@@ -19,7 +22,8 @@ const ReviewCard = ({
   name,
   position,
   body,
-}) => {
+  locale,
+}: SlideItem & { locale: 'zh' | 'en' }) => {
   return (
     <figure
       className={clsx(
@@ -31,14 +35,14 @@ const ReviewCard = ({
         "flex flex-col gap-2"
       )}
     >
-      <blockquote className="text-muted-foreground text-sm tracking-wide">{body}</blockquote>
+      <blockquote className="text-muted-foreground text-sm tracking-wide">{body[locale]}</blockquote>
       <div className="my-2 border-t"></div>
       <div className="flex flex-row items-center justify-between gap-2">
         <div className="flex flex-col">
           <figcaption className="text-sm font-medium dark:text-white">
-            {name}
+            {name[locale]}
           </figcaption>
-          <p className="text-muted-foreground text-xs  font-medium">{position}</p>
+          <p className="text-muted-foreground text-xs  font-medium">{position[locale]}</p>
         </div>
         <img className="rounded-full" width="36" height="36" alt="" src={img} />
       </div>
@@ -47,43 +51,44 @@ const ReviewCard = ({
 };
 
 export default function HomeReviews() {
+  const { tw, locale } = useI18n();
   return (
     <section className="relative overflow-hidden py-32">
       <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl tracking-wide font-bold md:text-4xl md:leading-tight text-primary">
-            客户这样评价 RustFS
+            {tw('客户这样评价 RustFS', 'What customers say about RustFS')}
           </h2>
           <p className="mt-4 text-neutral-600 dark:text-neutral-400">
-            精致的服务，专业的团队, 为您提供最好的服务
+            {tw('精致的服务，专业的团队, 为您提供最好的服务', 'Exquisite service, professional team, providing you with the best service')}
           </p>
         </div>
         <div className="relative flex h-[500px] w-full flex-row items-center justify-center overflow-hidden rounded-lg lg:hidden">
           <Marquee pauseOnHover vertical className="[--duration:60s] [--gap:2rem] lg:hidden">
             {reviews.map((review) => (
-              <ReviewCard key={review.name + review.position} {...review} />
+              <ReviewCard key={review.name[locale] + review.position[locale]} {...review} locale={locale} />
             ))}
           </Marquee>
         </div>
         <div className="relative hidden h-[500px] w-full flex-row items-center justify-center overflow-hidden rounded-lg lg:flex">
           <Marquee pauseOnHover vertical className="[--duration:60s] [--gap:2rem] p-4">
             {firstRow.map((review) => (
-              <ReviewCard key={review.name + review.position} {...review} />
+              <ReviewCard key={review.name[locale] + review.position[locale]} {...review} locale={locale} />
             ))}
           </Marquee>
           <Marquee reverse pauseOnHover vertical className="[--duration:60s] [--gap:2rem] p-4">
             {secondRow.map((review) => (
-              <ReviewCard key={review.name + review.position} {...review} />
+              <ReviewCard key={review.name[locale] + review.position[locale]} {...review} locale={locale} />
             ))}
           </Marquee>
           <Marquee pauseOnHover vertical className="[--duration:60s] [--gap:2rem] p-4">
             {thirdRow.map((review) => (
-              <ReviewCard key={review.name + review.position} {...review} />
+              <ReviewCard key={review.name[locale] + review.position[locale]} {...review} locale={locale} />
             ))}
           </Marquee>
           <Marquee reverse pauseOnHover vertical className="[--duration:60s] [--gap:2rem] p-4">
             {fourthRow.map((review) => (
-              <ReviewCard key={review.name + review.position} {...review} />
+              <ReviewCard key={review.name[locale] + review.position[locale]} {...review} locale={locale} />
             ))}
           </Marquee>
           <div className="dark:from-background pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white"></div>
