@@ -26,7 +26,7 @@ export default function HomeFeatures() {
         {/* End Title */}
 
         {/* Tab Nav */}
-        <nav className="mx-auto grid grid-cols-3 gap-2 md:gap-4" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
+        <nav className="mx-auto grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
           {features.map((feature, index) => (
             <button
               key={feature.title[locale]}
@@ -49,7 +49,7 @@ export default function HomeFeatures() {
                   }
                 )} />
                 <span className={cn(
-                  "block font-semibold text-gray-800 dark:text-neutral-200 text-xl",
+                  "block font-semibold text-gray-800 dark:text-neutral-200 text-sm md:text-xl",
                   {
                     'text-blue-600 dark:text-blue-500': activeTab === index,
                   }
@@ -66,7 +66,7 @@ export default function HomeFeatures() {
         {/* End Tab Nav */}
 
         {/* Tab Content */}
-        <div className="mt-12 md:mt-16">
+        <div className="mt-10 md:mt-16">
           {features.map((feature, index) => (
             <div
               key={feature.title[locale]}
@@ -78,10 +78,10 @@ export default function HomeFeatures() {
               role="tabpanel"
             >
               {/* Feature Detail */}
-              <div className="relative mt-20 overflow-hidden rounded-4xl bg-slate-200 dark:bg-slate-700 px-6 lg:px-14 py-8 lg:py-16 xl:px-16">
-                <div className="flex flex-col rounded-xl bg-background p-8 lg:p-12 shadow-xl ring-1 shadow-slate-900/5 ring-slate-500/10">
+              <div className="relative mt-10 md:mt-20 overflow-hidden rounded-4xl md:bg-slate-200 md:dark:bg-slate-700 md:px-6 lg:px-14 md:py-8 lg:py-16 xl:px-16">
+                <div className="flex flex-col rounded-xl bg-background p-2 md:p-8 lg:p-12 shadow-xl ring-1 shadow-slate-900/5 ring-slate-500/10">
                   <div className="flex items-center gap-6 mb-6">
-                    <feature.icon className="size-16 text-blue-500" />
+                    <feature.icon className="hidden md:block size-12 md:size-16 text-blue-500" />
                     <div>
                       <h4 className="text-2xl font-bold text-neutral-800 dark:text-white mb-2">
                         {feature.title[locale]}
@@ -102,12 +102,12 @@ export default function HomeFeatures() {
                   </ul>
 
                   <div className="border-t dark:border-neutral-700 pt-6">
-                    <div className="flex items-center gap-4">
+                    <div className="flex flex-col md:flex-row items-center gap-4">
                       <QuoteIcon className="size-8 rotate-180 text-blue-500 opacity-15" />
                       <p className="text-muted-foreground flex-1 text-lg italic">
                         &ldquo;{feature.review.review[locale]}&rdquo;
                       </p>
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-4 self-end">
                         <div className="text-right">
                           <p className="font-semibold text-neutral-800 dark:text-white">
                             {feature.review.name[locale]}

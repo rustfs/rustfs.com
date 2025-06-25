@@ -138,12 +138,12 @@ export function AppFooter() {
             ))}
           </div>
 
-          <h4 className="mt-7 text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">联系我们</h4>
+          <h4 className="mt-7 text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">{tw('联系我们', 'Contact Us')}</h4>
           <div className="mt-3 grid space-y-3 text-sm">
             <p className="text-gray-600 dark:text-neutral-400">hello@rustfs.com</p>
             <p className="text-gray-600 dark:text-neutral-400">400-033-5363</p>
-            <p className="text-gray-600 dark:text-neutral-400">北京市海淀区西小口路66号</p>
-            <p className="text-gray-600 dark:text-neutral-400">客服时间：9:00-18:00</p>
+            <p className="text-gray-600 dark:text-neutral-400">{tw('北京市海淀区西小口路66号', 'No.66, Xikou Road, Haidian District, Beijing')}</p>
+            <p className="text-gray-600 dark:text-neutral-400">{tw('客服时间', 'Customer Service Time')}: 9:00-18:00</p>
           </div>
         </div>
         {/* End Col */}

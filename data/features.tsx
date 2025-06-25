@@ -5,7 +5,7 @@ const features =
     {
       "title": {
         "zh": "跨云支持",
-        "en": "Cross-Cloud Support"
+        "en": "Cross-Cloud"
       },
       "description": {
         "zh": "RustFS 利用分布式架构和对象存储功能，为AI和高级分析工作负载提供卓越性能，支持从TB到EB级别的数据扩展。",
@@ -50,7 +50,7 @@ const features =
     {
       "title": {
         "zh": "安全可靠",
-        "en": "Secure and Reliable"
+        "en": "Secure & Reliable"
       },
       "description": {
         "zh": "RustFS 与 RustyVault 集成，提供高性能的对象存储安全加密，支持多种加密模式，确保数据安全性和透明度。",

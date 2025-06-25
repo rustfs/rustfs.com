@@ -93,7 +93,7 @@ export default function HomeStats() {
 
               {/* Stats */}
               <div>
-                <p className="text-5xl font-semibold">～1 天</p>
+                <p className="text-5xl font-semibold">～1 {tw('天', 'day')}</p>
                 <p className="mt-1">
                   {tw('GitHub Issues 平均解决时间', 'GitHub Issues Average Resolution Time')}
                 </p>

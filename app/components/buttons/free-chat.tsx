@@ -16,7 +16,7 @@ export default function FreeChatButton({ className }: {
       href="https://tb.53kf.com/code/client/3ae82624ac86c32c1db8d311cd6d2a659/2"
     >
       <span className="mr-2">{tw('立即免费咨询', 'Free Consultation')}</span>
-      <ArrowRightIcon className="h-3 w-3 flex-none" />
+      <ArrowRightIcon className="h-3 w-3 flex-none" strokeWidth={2.5} />
     </a>
   )
 }

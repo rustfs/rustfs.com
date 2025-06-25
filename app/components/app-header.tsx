@@ -1,6 +1,8 @@
 'use client'
 
 import { useI18n } from "@/lib/i18n";
+import { Popover, Transition } from '@headlessui/react';
+import { Fragment } from 'react';
 import LinkGitHub from "./buttons/link-github";
 import LinkTwitter from "./buttons/link-twitter";
 import LanguageToggle from "./language-toggle";
@@ -71,15 +73,34 @@ export default function AppHeader() {
               <LinkTwitter size="size-5" className="group inline-flex" />
             </div>
             <div className="-mr-1 md:hidden">
-              <div data-headlessui-state="">
-                <button className="relative z-10 flex h-8 w-8 items-center justify-center focus:not-data-focus:outline-hidden" aria-label="Toggle Navigation" type="button" aria-expanded="false" data-headlessui-state="" id="headlessui-popover-button-:R5v6fja:">
-                  <svg aria-hidden="true" className="h-3.5 w-3.5 overflow-visible stroke-slate-700" fill="none" strokeWidth="2" strokeLinecap="round">
-                    <path d="M0 1H14M0 7H14M0 13H14" className="origin-center transition" />
-                    <path d="M2 2L12 12M12 2L2 12" className="origin-center transition scale-90 opacity-0" />
-                  </svg>
-                </button>
-              </div>
-              <div hidden style={{ position: 'fixed', top: '1px', left: '1px', width: '1px', height: 0, padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', borderWidth: 0, display: 'none' }} />
+              <Popover>
+                <Popover.Button className="relative z-10 flex h-8 w-8 items-center justify-center focus:not-data-focus:outline-hidden" aria-label="Toggle Navigation">
+                  {({ open }) => (
+                    <svg aria-hidden="true" className="h-3.5 w-3.5 overflow-visible stroke-slate-700 dark:stroke-slate-300" fill="none" strokeWidth="2" strokeLinecap="round">
+                      <path d="M0 1H14M0 7H14M0 13H14" className={`origin-center transition ${open ? 'scale-90 opacity-0' : ''}`} />
+                      <path d="M2 2L12 12M12 2L2 12" className={`origin-center transition ${open ? '' : 'scale-90 opacity-0'}`} />
+                    </svg>
+                  )}
+                </Popover.Button>
+                <Transition
+                  as={Fragment}
+                  enter="duration-150 ease-out"
+                  enterFrom="opacity-0 scale-95"
+                  enterTo="opacity-100 scale-100"
+                  leave="duration-100 ease-in"
+                  leaveFrom="opacity-100 scale-100"
+                  leaveTo="opacity-0 scale-95"
+                >
+                  <Popover.Panel
+                    focus
+                    className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5 dark:bg-slate-800 dark:text-slate-200 dark:ring-slate-700"
+                  >
+                    {navs.map((item, index) => (
+                      <a key={index} className="block w-full p-2 rounded hover:bg-slate-100/50 dark:hover:bg-slate-700/50" href={item.url}>{item.label}</a>
+                    ))}
+                  </Popover.Panel>
+                </Transition>
+              </Popover>
             </div>
           </div>
         </nav>
