@@ -71,4 +71,4 @@ jobs:
       - name: Show OSS error log if exists
         if: failure()
         run: |
-          cat/home/runner/work/rustfs.com/rustfs.com/ossutil_output/*.report || true
+          cat /home/runner/work/rustfs.com/rustfs.com/ossutil_output/*.report || true
