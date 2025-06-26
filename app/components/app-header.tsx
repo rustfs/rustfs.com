@@ -10,32 +10,32 @@ import { Logo } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
 
 export default function AppHeader() {
-  const { tw } = useI18n();
+  const { tw, locale } = useI18n();
 
   const navs = [
     {
       label: tw('产品功能', 'Features'),
-      url: 'https://docs.rustfs.com/docs/features',
+      url: `https://docs.rustfs.com/${locale}/features/distributed/`,
     },
     {
       label: tw('架构', 'Architecture'),
-      url: 'https://docs.rustfs.com/docs/architecture',
+      url: `https://docs.rustfs.com/${locale}/architecture.html`,
     },
     {
       label: tw('解决方案', 'Solutions'),
-      url: 'https://docs.rustfs.com/docs/solutions',
+      url: `https://docs.rustfs.com/${locale}/features/data-lake/`,
     },
-    {
-      label: tw('集成', 'Integrations'),
-      url: 'https://docs.rustfs.com/docs/intergrations'
-    },
+    // {
+    //   label: tw('集成', 'Integrations'),
+    //   url: `https://docs.rustfs.com/${locale}/intergrations`
+    // },
     {
       label: tw('AI 支持', 'AI'),
-      url: 'https://docs.rustfs.com/docs/ai'
+      url: `https://docs.rustfs.com/${locale}/features/ai`
     },
     {
       label: tw('文档', 'Documentation'),
-      url: 'https://docs.rustfs.com/docs'
+      url: tw('https://docs.rustfs.com/zh/', 'https://docs.rustfs.com/')
     },
     // {
     //   label: '博客',
@@ -47,7 +47,7 @@ export default function AppHeader() {
     },
     {
       label: tw('关于我们', 'About Us'),
-      url: '/about'
+      url: `https://docs.rustfs.com/${locale}/about`
     }
   ]
 
