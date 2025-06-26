@@ -1,4 +1,7 @@
 {
+  "title": "RustFS - MinIO Alternative, High-Performance Distributed Storage",
+  "description": "RustFS is a high-performance object storage developed in the popular and secure Rust language, open-source, and compatible with OSS. It is designed for cloud-native workloads such as AI, suitable for building private cloud storage, hybrid cloud storage, and distributed storage, serving as a domestic alternative to MinIO.",
+  "keywords": "RustFS, MinIO, distributed storage, high performance, high security, high concurrency",
   "nav": {
     "Features": "Features",
     "Architecture": "Architecture",
@@ -7,7 +10,8 @@
     "AI": "AI",
     "Documentation": "Documentation",
     "Community": "Community",
-    "About": "About"
+    "About": "About",
+    "Product Features": "Product Features"
   },
   "hero": {
     "Rust-powered": "Rust-powered",

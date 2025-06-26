@@ -1,5 +1,6 @@
 'use client'
 
+import Cookies from 'js-cookie'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
 // 支持的语言类型
@@ -34,12 +35,16 @@ export const getDictionary = async (locale: Locale): Promise<Dictionary> => {
 
 // i18n 提供者组件
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>('zh')
+  const [locale, setLocaleState] = useState<Locale>(() => {
+    return (Cookies.get('rustfs-locale') as Locale) || 'zh'
+  })
   const [dictionary, setDictionary] = useState<Dictionary>({})
 
   // 从本地存储中读取语言偏好
   useEffect(() => {
-    const savedLocale = localStorage.getItem('rustfs-locale') as Locale | null
+    const savedLocale =
+      (Cookies.get('rustfs-locale') as Locale) ||
+      (localStorage.getItem('rustfs-locale') as Locale | null)
     if (savedLocale && ['zh', 'en'].includes(savedLocale)) {
       setLocaleState(savedLocale)
     }
@@ -54,6 +59,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale)
     localStorage.setItem('rustfs-locale', newLocale)
+    Cookies.set('rustfs-locale', newLocale, { expires: 365 })
   }
 
   // 翻译函数
