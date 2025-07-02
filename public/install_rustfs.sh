@@ -52,18 +52,18 @@ esac
 info "OS and architecture check passed: $ARCH."
 
 # --- glibc Check (x86_64) ---
-USE_MUSL=0
-glibc_ver=""
-if [[ "$CPU_ARCH" == "x86_64" ]]; then
-  if command -v ldd >/dev/null 2>&1; then
-    glibc_ver=$(ldd --version | head -n1 | grep -oE '[0-9]+\.[0-9]+')
-    min_ver=2.17
-    [[ $(echo -e "$glibc_ver\n$min_ver" | sort -V | head -n1) != "$min_ver" ]] && USE_MUSL=1
-  else
-    USE_MUSL=1
-  fi
-fi
-info "glibc check complete."
+USE_MUSL=1
+# glibc_ver=""
+# if [[ "$CPU_ARCH" == "x86_64" ]]; then
+#   if command -v ldd >/dev/null 2>&1; then
+#     glibc_ver=$(ldd --version | head -n1 | grep -oE '[0-9]+\.[0-9]+')
+#     min_ver=2.17
+#     [[ $(echo -e "$glibc_ver\n$min_ver" | sort -V | head -n1) != "$min_ver" ]] && USE_MUSL=1
+#   else
+#     USE_MUSL=1
+#   fi
+# fi
+# info "glibc check complete."
 
 # --- Port Input & Check ---
 read -p "Please enter RustFS service port (e.g. 9000): " RUSTFS_PORT
