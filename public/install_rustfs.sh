@@ -66,7 +66,9 @@ USE_MUSL=1
 # info "glibc check complete."
 
 # --- Port Input & Check ---
-read -p "Please enter RustFS service port (e.g. 9000): " RUSTFS_PORT
+DEFAULT_RUSTFS_PORT=9000
+read -p "Please enter RustFS service port (default: $DEFAULT_RUSTFS_PORT): " RUSTFS_PORT
+RUSTFS_PORT=${RUSTFS_PORT:-$DEFAULT_RUSTFS_PORT}
 PORT_OCCUPIED=0
 case "$PORT_CMD" in
   lsof) lsof -i :$RUSTFS_PORT >/dev/null 2>&1 && PORT_OCCUPIED=1 ;;
@@ -77,8 +79,10 @@ esac
 info "Port $RUSTFS_PORT is available."
 
 # --- Data Directory Input ---
+DEFAULT_RUSTFS_VOLUME="/data/rustfs0"
 echo "Tip: You can use TAB for path completion."
-read -e -p "Please enter data storage directory (e.g. /data/rustfs0): " RUSTFS_VOLUME
+read -e -p "Please enter data storage directory (default: $DEFAULT_RUSTFS_VOLUME): " RUSTFS_VOLUME
+RUSTFS_VOLUME=${RUSTFS_VOLUME:-$DEFAULT_RUSTFS_VOLUME}
 [[ -z "$RUSTFS_VOLUME" ]] && err "No data directory provided."
 [[ ! -d "$RUSTFS_VOLUME" ]] && mkdir -p "$RUSTFS_VOLUME" || true
 [[ ! -d "$RUSTFS_VOLUME" ]] && err "Failed to create directory $RUSTFS_VOLUME."
