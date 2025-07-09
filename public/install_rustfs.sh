@@ -41,7 +41,7 @@ case "$ARCH" in
   x86_64)
     CPU_ARCH="x86_64"
     PKG_X86="https://dl.rustfs.com/artifacts/rustfs/rustfs-release-x86_64-unknown-linux-gnu.zip"
-    PKG_MUSL="https://dl.rustfs.com/artifacts/rustfs/rustfs-aarch64-unknown-linux-musl.zip"
+    PKG_MUSL="https://dl.rustfs.com/artifacts/rustfs/rustfs-x86_64-unknown-linux-musl.zip"
     ;;
   aarch64)
     CPU_ARCH="aarch64"
