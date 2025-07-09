@@ -160,8 +160,8 @@ info "systemd service file created."
 
 # --- RustFS Config File ---
 cat <<EOF > /etc/default/rustfs || err "Failed to write config file."
-RUSTFS_ROOT_USER=rustfsadmin
-RUSTFS_ROOT_PASSWORD=rustfsadmin
+RUSTFS_ACCESS_KEY=rustfsadmin
+RUSTFS_SECRET_KEY=rustfsadmin
 RUSTFS_VOLUMES="$RUSTFS_VOLUME"
 RUSTFS_ADDRESS=":$RUSTFS_PORT"
 RUSTFS_CONSOLE_ADDRESS=":9001"
