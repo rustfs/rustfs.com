@@ -2,7 +2,7 @@
 <svg width="120px" height="32px" viewBox="0 0 120 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>docker</title>
     <g id="docker" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="docker备份" transform="translate(10.000000, 3.000000)" fill="#565E6F" fill-rule="nonzero">
+        <g id="docker备份" transform="translate(10.000000, 3.000000)" fill="currentColor" fill-rule="nonzero">
             <g id="image-(2)备份" transform="translate(0.000000, -0.000000)">
                 <path d="M8.40374334,3.89393586 L10.1725504,3.89385811 C10.7248351,3.8937448 11.1725701,4.34144037 11.1725943,4.89372512 C11.1725943,4.8937548 11.1725943,4.89378448 11.1725053,4.89381416 L11.1724485,6.15273979 C11.1723346,6.70498977 10.7246534,7.15267043 10.1724034,7.15278375 L8.4035964,7.1528615 C7.85131165,7.15297481 7.40357672,6.70527924 7.40355245,6.15299449 C7.40355244,6.15296481 7.40355244,6.15293513 7.40364149,6.15290545 L7.40369825,4.89397982 C7.4038122,4.34172984 7.85149337,3.89404919 8.40374334,3.89393586 Z" id="矩形" transform="translate(9.288073, 5.523360) rotate(0.100000) translate(-9.288073, -5.523360) "></path>
                 <rect id="矩形" x="11.8550459" y="3.89926308" width="3.71376147" height="3.25177077" rx="1"></rect>

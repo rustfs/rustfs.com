@@ -4,13 +4,38 @@ import { useI18n } from '@/lib/i18n';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 export function ThemeToggle() {
   const { tw } = useI18n();
   const { resolvedTheme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  // 确保组件在客户端完全水合后再显示主题状态
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const toggleTheme = () => {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+  }
+
+  // 在服务器端渲染时，显示一个中性的加载状态
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        className="relative p-0 text-muted-foreground hover:text-primary transition-colors"
+        aria-label={tw('切换主题', 'Toggle theme')}
+        disabled
+      >
+        <div className="relative size-5">
+          <div className="absolute inset-0 opacity-50">
+            <SunIcon className="size-5" />
+          </div>
+        </div>
+      </button>
+    )
   }
 
   return (

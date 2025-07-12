@@ -2,6 +2,7 @@
 
 import { useI18n } from "@/lib/i18n";
 import { Popover, Transition } from '@headlessui/react';
+import Link from "next/link";
 import { Fragment } from 'react';
 import LinkGitHub from "./buttons/link-github";
 import LinkTwitter from "./buttons/link-twitter";
@@ -34,6 +35,10 @@ export default function AppHeader() {
       url: `https://docs.rustfs.com/${locale}/features/ai`
     },
     {
+      label: tw('下载', 'Download'),
+      url: '/download'
+    },
+    {
       label: tw('文档', 'Documentation'),
       url: tw('https://docs.rustfs.com/zh/', 'https://docs.rustfs.com/')
     },
@@ -56,9 +61,9 @@ export default function AppHeader() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
-            <a aria-label="Home" href="#">
+            <Link href="/">
               <Logo className="h-5 w-auto" />
-            </a>
+            </Link>
             <div className="hidden md:flex md:gap-x-6">
               {navs.map((item, index) => {
                 return <a key={index} className="inline-block rounded-lg px-2 py-1 text-sm text-primary" href={item.url}>{item.label}</a>

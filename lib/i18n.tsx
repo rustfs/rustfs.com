@@ -35,16 +35,20 @@ export const getDictionary = async (locale: Locale): Promise<Dictionary> => {
 
 // i18n 提供者组件
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => {
-    return (Cookies.get('rustfs-locale') as Locale) || 'zh'
-  })
+  // 初始化时使用默认语言，避免 hydration 问题
+  const [locale, setLocaleState] = useState<Locale>('zh')
   const [dictionary, setDictionary] = useState<Dictionary>({})
+  const [mounted, setMounted] = useState(false)
 
-  // 从本地存储中读取语言偏好
+  // 在客户端完全水合后再从本地存储读取语言偏好
   useEffect(() => {
+    setMounted(true)
+
+    // 从 cookie 或 localStorage 读取保存的语言偏好
     const savedLocale =
       (Cookies.get('rustfs-locale') as Locale) ||
       (localStorage.getItem('rustfs-locale') as Locale | null)
+
     if (savedLocale && ['zh', 'en'].includes(savedLocale)) {
       setLocaleState(savedLocale)
     }
@@ -58,8 +62,10 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   // 设置语言并保存到本地存储
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale)
-    localStorage.setItem('rustfs-locale', newLocale)
-    Cookies.set('rustfs-locale', newLocale, { expires: 365 })
+    if (mounted) {
+      localStorage.setItem('rustfs-locale', newLocale)
+      Cookies.set('rustfs-locale', newLocale, { expires: 365 })
+    }
   }
 
   // 翻译函数
