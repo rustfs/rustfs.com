@@ -1,7 +1,7 @@
 'use client'
 
-import { getAvailablePlatforms, getPlatformById, type PlatformInfo } from "@/data/platforms";
-import { formatReleaseDate, formatVersion, getLatestRelease, type GitHubRelease } from "@/lib/github";
+import { getAvailablePlatforms, getPlatformById, PlatformInfo } from "@/data/platforms";
+import { formatReleaseDate, formatVersion, getLatestRelease, GitHubRelease } from "@/lib/github";
 import { useI18n } from "@/lib/i18n";
 import { BookOpenIcon, MessageCircleIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -9,17 +9,17 @@ import DownloadSection from "./components/download-section";
 import PlatformSelector from "./components/platform-selector";
 
 export default function DownloadPage() {
-  const { tw, locale } = useI18n();
+  const { tw, language } = useI18n();
   const availablePlatforms = getAvailablePlatforms();
 
-  // 状态管理
+  // State management
   const [selectedPlatform, setSelectedPlatform] = useState<PlatformInfo | null>(null);
   const [release, setRelease] = useState<GitHubRelease | null>(null);
   const [isLoadingRelease, setIsLoadingRelease] = useState(true);
 
-  // 初始化选中的平台
+  // Initialize selected platform
   useEffect(() => {
-    // 从 URL 获取平台参数（仅在客户端）
+    // Get platform parameter from URL (client-side only)
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
       const platformParam = urlParams.get('platform');
@@ -33,17 +33,17 @@ export default function DownloadPage() {
       }
     }
 
-    // 如果没有有效的平台参数，使用第一个可用平台
+    // If no valid platform parameter, use first available platform
     if (availablePlatforms.length > 0) {
       setSelectedPlatform(availablePlatforms[0]);
     }
   }, [availablePlatforms]);
 
-  // 处理平台选择变化
+  // Handle platform selection change
   const handlePlatformChange = (platform: PlatformInfo) => {
     setSelectedPlatform(platform);
 
-    // 更新 URL（仅在客户端）
+    // Update URL (client-side only)
     if (typeof window !== 'undefined') {
       const newUrl = new URL(window.location.href);
       newUrl.searchParams.set('platform', platform.id);
@@ -51,7 +51,7 @@ export default function DownloadPage() {
     }
   };
 
-  // 获取最新版本信息
+  // Get latest version information
   useEffect(() => {
     const fetchLatestRelease = async () => {
       try {
@@ -114,7 +114,7 @@ export default function DownloadPage() {
 
               {release && (
                 <span className="text-xs text-muted-foreground">
-                  {tw(`发布于 ${formatReleaseDate(release.published_at, locale)}`, `Released on ${formatReleaseDate(release.published_at, locale)}`)}
+                  {tw(`发布于 ${formatReleaseDate(release.published_at, language)}`, `Released on ${formatReleaseDate(release.published_at, language)}`)}
                 </span>
               )}
 

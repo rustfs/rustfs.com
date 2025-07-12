@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
-import { AppFooter } from "./components/app-footer";
+import AppFooter from "./components/app-footer";
 import AppHeader from "./components/app-header";
 import FixedContactButton from "./components/buttons/fixed-contact-button";
 import "./globals.css";
@@ -77,7 +77,7 @@ export default function RootLayout({
           <Script
             id="baidu-analytics"
             src="https://hm.baidu.com/hm.js?968e7103a8e28fb30f7d69e42b7c82bc"
-            strategy="afterInteractive" // 确保脚本在页面交互后加载
+            strategy="afterInteractive" // Ensure script loads after page interaction
           />
         </ThemeProvider>
       </body>

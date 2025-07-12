@@ -1,74 +1,65 @@
 'use client'
 
-import Cookies from 'js-cookie'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-// 支持的语言类型
-export type Locale = 'zh' | 'en'
+// Supported language types
+type Language = 'zh' | 'en'
 
-// 翻译字典接口
+// Translation dictionary interface
 interface Dictionary {
   [key: string]: string | Dictionary
 }
 
-// i18n 上下文接口
+// i18n context interface
 interface I18nContextType {
-  locale: Locale
-  setLocale: (locale: Locale) => void
+  language: Language
+  setLanguage: (lang: Language) => void
   t: (key: string) => string
   tw: (zh: string, en: string) => string
+  toggleLanguage: () => void
 }
 
-// 创建上下文
+// Create context
 const I18nContext = createContext<I18nContextType | undefined>(undefined)
 
-// 懒加载字典
-const dictionaries: Record<Locale, () => Promise<Dictionary>> = {
-  zh: () => import('../locales/zh.json').then((module) => module.default),
-  en: () => import('../locales/en.json').then((module) => module.default),
+// Lazy load dictionaries
+const dictionaries: Record<Language, () => Promise<Dictionary>> = {
+  zh: () => import('@/locales/zh.json').then(module => module.default),
+  en: () => import('@/locales/en.json').then(module => module.default)
 }
 
-// 获取字典
-export const getDictionary = async (locale: Locale): Promise<Dictionary> => {
-  return dictionaries[locale]()
+// Get dictionary
+const getDictionary = async (language: Language): Promise<Dictionary> => {
+  return dictionaries[language]()
 }
 
-// i18n 提供者组件
+// i18n provider component
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  // 初始化时使用默认语言，避免 hydration 问题
-  const [locale, setLocaleState] = useState<Locale>('zh')
+  // Use default language on initialization to avoid hydration issues
+  const [language, setLanguageState] = useState<Language>('zh')
   const [dictionary, setDictionary] = useState<Dictionary>({})
-  const [mounted, setMounted] = useState(false)
 
-  // 在客户端完全水合后再从本地存储读取语言偏好
+  // Read saved language preference from localStorage after client-side hydration
   useEffect(() => {
-    setMounted(true)
-
-    // 从 cookie 或 localStorage 读取保存的语言偏好
-    const savedLocale =
-      (Cookies.get('rustfs-locale') as Locale) ||
-      (localStorage.getItem('rustfs-locale') as Locale | null)
-
-    if (savedLocale && ['zh', 'en'].includes(savedLocale)) {
-      setLocaleState(savedLocale)
+    // Read language preference from cookie or localStorage
+    const savedLanguage = localStorage.getItem('language') as Language
+    if (savedLanguage && (savedLanguage === 'zh' || savedLanguage === 'en')) {
+      setLanguageState(savedLanguage)
     }
   }, [])
 
-  // 加载字典
+  // Load dictionary
   useEffect(() => {
-    dictionaries[locale]().then(setDictionary)
-  }, [locale])
+    getDictionary(language).then(setDictionary)
+  }, [language])
 
-  // 设置语言并保存到本地存储
-  const setLocale = (newLocale: Locale) => {
-    setLocaleState(newLocale)
-    if (mounted) {
-      localStorage.setItem('rustfs-locale', newLocale)
-      Cookies.set('rustfs-locale', newLocale, { expires: 365 })
-    }
+  // Set language and save to localStorage
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang)
+    localStorage.setItem('language', lang)
   }
 
-  // 翻译函数
+  // Translation function
   const t = (key: string): string => {
     const keys = key.split('.')
     let current: string | Dictionary = dictionary
@@ -77,26 +68,32 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
       if (current && typeof current === 'object' && k in current) {
         current = current[k]
       } else {
-        return key // 如果找不到翻译，返回原始 key
+        return key // Return original key if translation not found
       }
     }
 
     return typeof current === 'string' ? current : key
   }
 
-  // 双语切换函数
+  // Bilingual toggle function
+  const toggleLanguage = () => {
+    const newLang = language === 'zh' ? 'en' : 'zh'
+    setLanguage(newLang)
+  }
+
+  // Bilingual text function
   const tw = (zh: string, en: string): string => {
-    return locale === 'zh' ? zh : en
+    return language === 'zh' ? zh : en
   }
 
   return (
-    <I18nContext.Provider value={{ locale, setLocale, t, tw }}>
+    <I18nContext.Provider value={{ language, setLanguage, t, tw, toggleLanguage }}>
       {children}
     </I18nContext.Provider>
   )
 }
 
-// 使用 i18n 的钩子
+// Hook to use i18n
 export function useI18n() {
   const context = useContext(I18nContext)
   if (context === undefined) {

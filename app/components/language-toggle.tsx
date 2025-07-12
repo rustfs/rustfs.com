@@ -10,7 +10,8 @@ interface LanguageToggleProps {
 }
 
 export default function LanguageToggle({ className }: LanguageToggleProps) {
-  const { locale, setLocale } = useI18n()
+  const { language, setLanguage } = useI18n()
+  // Ensure component displays language state after client-side hydration
   const [mounted, setMounted] = useState(false)
 
   // 确保组件在客户端完全水合后再显示语言状态
@@ -19,10 +20,10 @@ export default function LanguageToggle({ className }: LanguageToggleProps) {
   }, [])
 
   const toggleLanguage = () => {
-    setLocale(locale === 'zh' ? 'en' : 'zh')
+    setLanguage(language === 'zh' ? 'en' : 'zh')
   }
 
-  // 在服务器端渲染时，显示一个中性的加载状态
+  // Display neutral loading state during server-side rendering
   if (!mounted) {
     return (
       <button
@@ -48,11 +49,11 @@ export default function LanguageToggle({ className }: LanguageToggleProps) {
         'inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
         className
       )}
-      aria-label={`Switch to ${locale === 'zh' ? 'English' : '中文'}`}
+      aria-label={`Switch to ${language === 'zh' ? 'English' : '中文'}`}
     >
       <Languages className="h-4 w-4 mr-2" />
       <span className="min-w-[24px] text-center">
-        {locale === 'zh' ? 'EN' : '中文'}
+        {language === 'zh' ? 'EN' : '中文'}
       </span>
     </button>
   )

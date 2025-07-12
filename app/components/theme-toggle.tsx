@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 export function ThemeToggle() {
   const { tw } = useI18n();
   const { resolvedTheme, setTheme } = useTheme()
+  // Ensure component displays theme state after client-side hydration
   const [mounted, setMounted] = useState(false)
 
   // 确保组件在客户端完全水合后再显示主题状态
@@ -20,7 +21,7 @@ export function ThemeToggle() {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
   }
 
-  // 在服务器端渲染时，显示一个中性的加载状态
+  // Display neutral loading state during server-side rendering
   if (!mounted) {
     return (
       <button

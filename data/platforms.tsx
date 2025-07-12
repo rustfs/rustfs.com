@@ -2,11 +2,12 @@ import AppleIcon from "@/public/svgs/brands/apple.svg";
 import DockerIcon from "@/public/svgs/brands/docker.svg";
 import LinuxIcon from "@/public/svgs/brands/linux.svg";
 import WindowsIcon from "@/public/svgs/brands/windows.svg";
+import React from "react";
 
-// 一键安装脚本常量
+// One-click installation script constants
 const ONE_CLICK_INSTALL_SCRIPT = 'curl -O https://rustfs.com/install_rustfs.sh && bash install_rustfs.sh';
 
-// 统一的 Note 类型定义
+// Unified Note type definition
 export interface Note {
   type: 'info' | 'warning' | 'success' | 'tip';
   content: {
@@ -16,14 +17,7 @@ export interface Note {
   url?: string;
 }
 
-// 一键安装提示信息常量
-const ONE_CLICK_INSTALL_TIP: Note = {
-  type: 'tip',
-  content: {
-    zh: '推荐使用一键安装脚本，自动检测架构并处理依赖和环境配置。',
-    en: 'Recommended to use the one-click installation script, which automatically detects architecture and handles dependencies and environment configuration.'
-  }
-};
+
 
 export interface PlatformInfo {
   id: string;
@@ -91,7 +85,6 @@ export const platforms: PlatformInfo[] = [
     ],
     installScript: ONE_CLICK_INSTALL_SCRIPT,
     notes: [
-      ONE_CLICK_INSTALL_TIP,
       {
         type: 'info',
         content: {
@@ -227,8 +220,8 @@ export const platforms: PlatformInfo[] = [
           {
             type: 'tip',
             content: {
-              zh: '针对 Apple Silicon 优化，支持 M1/M2/M3 处理器',
-              en: 'Optimized for Apple Silicon, supports M1/M2/M3 processors'
+              zh: '针对 Apple Silicon 优化，支持 M 系列芯片',
+              en: 'Optimized for Apple Silicon, supports M series chips'
             }
           }
         ]
@@ -247,7 +240,6 @@ export const platforms: PlatformInfo[] = [
     ],
     installScript: ONE_CLICK_INSTALL_SCRIPT,
     notes: [
-      ONE_CLICK_INSTALL_TIP,
       {
         type: 'info',
         content: {
