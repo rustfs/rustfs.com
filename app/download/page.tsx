@@ -4,53 +4,51 @@ import { getAvailablePlatforms, getPlatformById, type PlatformInfo } from "@/dat
 import { formatReleaseDate, formatVersion, getLatestRelease, type GitHubRelease } from "@/lib/github";
 import { useI18n } from "@/lib/i18n";
 import { BookOpenIcon, MessageCircleIcon } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import DownloadSection from "./components/download-section";
 import PlatformSelector from "./components/platform-selector";
 
-function DownloadPageContent() {
+export default function DownloadPage() {
   const { tw, locale } = useI18n();
-  const router = useRouter();
-  const searchParams = useSearchParams();
   const availablePlatforms = getAvailablePlatforms();
 
-  // 从 URL 中获取平台参数，如果没有则使用第一个可用平台
+  // 状态管理
   const [selectedPlatform, setSelectedPlatform] = useState<PlatformInfo | null>(null);
-
-  // GitHub 版本信息状态
   const [release, setRelease] = useState<GitHubRelease | null>(null);
   const [isLoadingRelease, setIsLoadingRelease] = useState(true);
 
   // 初始化选中的平台
   useEffect(() => {
-    const platformParam = searchParams.get('platform');
-    if (platformParam) {
-      const platform = getPlatformById(platformParam);
-      if (platform && platform.available) {
-        setSelectedPlatform(platform);
-      } else {
-        // 如果 URL 中的平台无效，使用第一个可用平台并更新 URL
-        const defaultPlatform = availablePlatforms.length > 0 ? availablePlatforms[0] : null;
-        setSelectedPlatform(defaultPlatform);
-        if (defaultPlatform) {
-          router.replace(`/download?platform=${defaultPlatform.id}`);
+    // 从 URL 获取平台参数（仅在客户端）
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const platformParam = urlParams.get('platform');
+
+      if (platformParam) {
+        const platform = getPlatformById(platformParam);
+        if (platform && platform.available) {
+          setSelectedPlatform(platform);
+          return;
         }
       }
-    } else {
-      // 如果没有平台参数，使用第一个可用平台并更新 URL
-      const defaultPlatform = availablePlatforms.length > 0 ? availablePlatforms[0] : null;
-      setSelectedPlatform(defaultPlatform);
-      if (defaultPlatform) {
-        router.replace(`/download?platform=${defaultPlatform.id}`);
-      }
     }
-  }, [searchParams, router, availablePlatforms]);
+
+    // 如果没有有效的平台参数，使用第一个可用平台
+    if (availablePlatforms.length > 0) {
+      setSelectedPlatform(availablePlatforms[0]);
+    }
+  }, [availablePlatforms]);
 
   // 处理平台选择变化
   const handlePlatformChange = (platform: PlatformInfo) => {
     setSelectedPlatform(platform);
-    router.push(`/download?platform=${platform.id}`);
+
+    // 更新 URL（仅在客户端）
+    if (typeof window !== 'undefined') {
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set('platform', platform.id);
+      window.history.replaceState({}, '', newUrl.toString());
+    }
   };
 
   // 获取最新版本信息
@@ -189,20 +187,5 @@ function DownloadPageContent() {
         </div>
       </section>
     </main>
-  );
-}
-
-export default function DownloadPage() {
-  return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">加载中...</p>
-        </div>
-      </div>
-    }>
-      <DownloadPageContent />
-    </Suspense>
   );
 }
