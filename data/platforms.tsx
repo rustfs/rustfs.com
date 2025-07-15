@@ -56,9 +56,9 @@ export const platforms: PlatformInfo[] = [
       {
         name: 'x86_64',
         architecture: 'x86_64',
-        downloadUrl: 'https://dl.rustfs.com/artifacts/rustfs/rustfs-linux-x86_64-latest.zip',
+        downloadUrl: 'https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-x86_64-latest.zip',
         commands: [
-          'curl -O https://dl.rustfs.com/artifacts/rustfs/rustfs-linux-x86_64-latest.zip',
+          'curl -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-x86_64-latest.zip',
           'unzip rustfs-linux-x86_64-latest.zip',
           './rustfs --version'
         ]
@@ -66,9 +66,9 @@ export const platforms: PlatformInfo[] = [
       {
         name: 'aarch64',
         architecture: 'aarch64',
-        downloadUrl: 'https://dl.rustfs.com/artifacts/rustfs/rustfs-linux-aarch64-latest.zip',
+        downloadUrl: 'https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-aarch64-latest.zip',
         commands: [
-          'curl -O https://dl.rustfs.com/artifacts/rustfs/rustfs-linux-aarch64-latest.zip',
+          'curl -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-aarch64-latest.zip',
           'unzip rustfs-linux-aarch64-latest.zip',
           './rustfs --version'
         ],
@@ -209,9 +209,9 @@ export const platforms: PlatformInfo[] = [
       {
         name: 'Apple Silicon (M1/M2)',
         architecture: 'aarch64',
-        downloadUrl: 'https://dl.rustfs.com/artifacts/rustfs/rustfs-darwin-aarch64-latest.zip',
+        downloadUrl: 'hhttps://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-aarch64-latest.zip',
         commands: [
-          'curl --progress-bar -O https://dl.rustfs.com/artifacts/rustfs/rustfs-darwin-aarch64-latest.zip',
+          'curl --progress-bar -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-aarch64-latest.zip',
           'unzip rustfs-darwin-aarch64-latest.zip',
           'chmod +x rustfs',
           './rustfs --version'
@@ -229,9 +229,9 @@ export const platforms: PlatformInfo[] = [
       {
         name: 'Intel (x86_64)',
         architecture: 'x86_64',
-        downloadUrl: 'https://dl.rustfs.com/artifacts/rustfs/rustfs-darwin-x86_64-latest.zip',
+        downloadUrl: 'https://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-x86_64-latest.zip',
         commands: [
-          'curl --progress-bar -O https://dl.rustfs.com/artifacts/rustfs/rustfs-darwin-x86_64-latest.zip',
+          'curl --progress-bar -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-x86_64-latest.zip',
           'unzip rustfs-darwin-x86_64-latest.zip',
           'chmod +x rustfs',
           './rustfs --version'
