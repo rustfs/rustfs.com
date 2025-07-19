@@ -1,5 +1,4 @@
 'use client'
-/* eslint-disable @next/next/no-img-element */
 import { WordRotate } from "@/components/magicui/word-rotate";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -7,12 +6,42 @@ import DemoLink from "./buttons/demo-link";
 import DownloadLink from "./buttons/download-link";
 import GetStartedButton from "./buttons/get-started";
 
+// 导入所有软件SVG图标
+import ClickhouseIcon from "../../public/svgs/softwares/clickhouse.svg";
+import DockerIcon from "../../public/svgs/softwares/docker.svg";
+import ElasticIcon from "../../public/svgs/softwares/elastic.svg";
+import GrafanaIcon from "../../public/svgs/softwares/grafana.svg";
+import KafkaIcon from "../../public/svgs/softwares/kafka.svg";
+import MysqlIcon from "../../public/svgs/softwares/mysql.svg";
+import NginxIcon from "../../public/svgs/softwares/nginx.svg";
+import PostgresqlIcon from "../../public/svgs/softwares/postgresql.svg";
+import PrometheusIcon from "../../public/svgs/softwares/prometheus.svg";
+import SparkIcon from "../../public/svgs/softwares/spark.svg";
+import TensorflowIcon from "../../public/svgs/softwares/tensorflow.svg";
+import WebhooksIcon from "../../public/svgs/softwares/webhooks.svg";
+
 export default function HomeHero() {
   const { tw, language } = useI18n();
   console.log(language);
 
   // public/svgs/softwares/*.svg
   const softwares = ['docker', 'elastic', 'grafana', 'kafka', 'mysql', 'nginx', 'postgresql', 'clickhouse', 'prometheus', 'spark', 'tensorflow', 'webhooks']
+
+  // 创建图标映射
+  const iconMap = {
+    docker: DockerIcon,
+    elastic: ElasticIcon,
+    grafana: GrafanaIcon,
+    kafka: KafkaIcon,
+    mysql: MysqlIcon,
+    nginx: NginxIcon,
+    postgresql: PostgresqlIcon,
+    clickhouse: ClickhouseIcon,
+    prometheus: PrometheusIcon,
+    spark: SparkIcon,
+    tensorflow: TensorflowIcon,
+    webhooks: WebhooksIcon,
+  };
 
   return (
     <section className="mx-auto max-w-7xl overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center lg:pt-32">
@@ -54,20 +83,21 @@ export default function HomeHero() {
           className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:flex-col sm:gap-x-0 sm:gap-y-10 md:flex-row xl:gap-x-16 xl:gap-y-6"
         >
 
-          {softwares.map((software) => (
-            <li key={software} className="flex">
-              <img
-                alt={software}
-                loading="lazy"
-                width={160}
-                height={80}
-                decoding="async"
-                data-nimg={1}
-                style={{ color: "transparent" }}
-                src={`/svgs/softwares/${software}.svg`}
-              />
-            </li>
-          ))}
+          {softwares.map((software) => {
+            const IconComponent = iconMap[software as keyof typeof iconMap];
+
+            return (
+              <li key={software} className="flex">
+                <div className="w-40 h-20 text-gray-600 transition-colors duration-200 flex items-center justify-center">
+                  <IconComponent
+                    className="w-full h-full"
+                    style={{ color: 'currentColor' }}
+                    fill="currentColor"
+                  />
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section >
