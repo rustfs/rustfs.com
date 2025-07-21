@@ -1,6 +1,7 @@
 'use client'
 
 import { useI18n } from "@/lib/i18n";
+import { docs_url } from "@/lib/utils";
 import { Popover, Transition } from '@headlessui/react';
 import Link from "next/link";
 import { Fragment } from 'react';
@@ -16,15 +17,15 @@ export default function AppHeader() {
   const navs = [
     {
       label: tw('产品功能', 'Features'),
-      url: `https://docs.rustfs.com/${language}/features/distributed/`,
+      url: docs_url('features/distributed/', language),
     },
     {
       label: tw('架构', 'Architecture'),
-      url: `https://docs.rustfs.com/${language}/architecture.html`,
+      url: docs_url('architecture.html', language),
     },
     {
       label: tw('解决方案', 'Solutions'),
-      url: `https://docs.rustfs.com/${language}/features/data-lake/`,
+      url: docs_url('features/data-lake/', language),
     },
     // {
     //   label: tw('集成', 'Integrations'),
@@ -32,7 +33,7 @@ export default function AppHeader() {
     // },
     {
       label: tw('AI 支持', 'AI'),
-      url: `https://docs.rustfs.com/${language}/features/ai`
+      url: docs_url('features/ai', language)
     },
     {
       label: tw('下载', 'Download'),
@@ -40,7 +41,7 @@ export default function AppHeader() {
     },
     {
       label: tw('文档', 'Documentation'),
-      url: tw('https://docs.rustfs.com/zh/', 'https://docs.rustfs.com/')
+      url: docs_url('', language)
     },
     // {
     //   label: 'Blog',
@@ -52,7 +53,7 @@ export default function AppHeader() {
     },
     {
       label: tw('关于我们', 'About Us'),
-      url: `https://docs.rustfs.com/${language}/about`
+      url: docs_url('about', language)
     }
   ]
 
