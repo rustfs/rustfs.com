@@ -56,9 +56,9 @@ info "OS and architecture check passed: $ARCH."
 USE_MUSL=1
 glibc_ver=""
 if command -v ldd >/dev/null 2>&1; then
-  glibc_ver=$(ldd --version 2>/dev/null | head -n1 | grep -oE '[0-9]+\.[0-9]+')
+  glibc_ver=$(ldd --version 2>/dev/null | head -n1 | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' | head -n1)
   min_ver="2.17"
-  if [[ -z "$glibc_ver" ]]; then
+  if [[ -z "$glibc_ver" || ! "$glibc_ver" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
     USE_MUSL=1
     info "glibc version could not be detected, using MUSL build."
   elif [[ $(echo -e "$glibc_ver\n$min_ver" | sort -V | head -n1) == "$min_ver" ]]; then
