@@ -61,12 +61,22 @@ if command -v ldd >/dev/null 2>&1; then
   if [[ -z "$glibc_ver" ]]; then
     USE_MUSL=1
     info "glibc version could not be detected, using MUSL build."
-  elif [[ $(echo -e "$glibc_ver\n$min_ver" | sort -V | head -n1) == "$min_ver" ]]; then
-    USE_MUSL=0
-    info "glibc version $glibc_ver is sufficient, using GNU build."
+  elif command -v dpkg >/dev/null 2>&1; then
+    if dpkg --compare-versions "$glibc_ver" ge "$min_ver"; then
+      USE_MUSL=0
+      info "glibc version $glibc_ver is sufficient, using GNU build."
+    else
+      USE_MUSL=1
+      info "glibc version $glibc_ver is too old, using MUSL build."
+    fi
   else
-    USE_MUSL=1
-    info "glibc version $glibc_ver is too old, using MUSL build."
+    if version_ge "$glibc_ver" "$min_ver"; then
+      USE_MUSL=0
+      info "glibc version $glibc_ver is sufficient, using GNU build."
+    else
+      USE_MUSL=1
+      info "glibc version $glibc_ver is too old, using MUSL build."
+    fi
   fi
 else
   USE_MUSL=1
