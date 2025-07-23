@@ -56,14 +56,17 @@ info "OS and architecture check passed: $ARCH."
 USE_MUSL=1
 glibc_ver=""
 if command -v ldd >/dev/null 2>&1; then
-  glibc_ver=$(ldd --version 2>/dev/null | head -n1 | grep -oE '[0-9]+\.[0-9]+' || echo "0.0")
+  glibc_ver=$(ldd --version 2>/dev/null | head -n1 | grep -oE '[0-9]+\.[0-9]+')
   min_ver="2.17"
-  if [[ -n "$glibc_ver" ]] && [[ $(echo -e "$glibc_ver\n$min_ver" | sort -V | head -n1) == "$min_ver" ]]; then
+  if [[ -z "$glibc_ver" ]]; then
+    USE_MUSL=1
+    info "glibc version could not be detected, using MUSL build."
+  elif [[ $(echo -e "$glibc_ver\n$min_ver" | sort -V | head -n1) == "$min_ver" ]]; then
     USE_MUSL=0
     info "glibc version $glibc_ver is sufficient, using GNU build."
   else
     USE_MUSL=1
-    info "glibc version $glibc_ver is too old or not detected, using MUSL build."
+    info "glibc version $glibc_ver is too old, using MUSL build."
   fi
 else
   USE_MUSL=1
