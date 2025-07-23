@@ -40,30 +40,35 @@ ARCH=$(uname -m)
 case "$ARCH" in
   x86_64)
     CPU_ARCH="x86_64"
-    PKG_X86="https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-x86_64-latest.zip"
-    PKG_MUSL="https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-x86_64-latest.zip"
+    PKG_GNU="https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-x86_64-gnu-latest.zip"
+    PKG_MUSL="https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-x86_64-musl-latest.zip"
     ;;
   aarch64)
     CPU_ARCH="aarch64"
-    PKG_MUSL="https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-aarch64-latest.zip"
+    PKG_GNU="https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-aarch64-gnu-latest.zip"
+    PKG_MUSL="https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-aarch64-musl-latest.zip"
     ;;
   *) err "Unsupported CPU architecture: $ARCH";;
 esac
 info "OS and architecture check passed: $ARCH."
 
-# --- glibc Check (x86_64) ---
+# --- glibc Check ---
 USE_MUSL=1
-# glibc_ver=""
-# if [[ "$CPU_ARCH" == "x86_64" ]]; then
-#   if command -v ldd >/dev/null 2>&1; then
-#     glibc_ver=$(ldd --version | head -n1 | grep -oE '[0-9]+\.[0-9]+')
-#     min_ver=2.17
-#     [[ $(echo -e "$glibc_ver\n$min_ver" | sort -V | head -n1) != "$min_ver" ]] && USE_MUSL=1
-#   else
-#     USE_MUSL=1
-#   fi
-# fi
-# info "glibc check complete."
+glibc_ver=""
+if command -v ldd >/dev/null 2>&1; then
+  glibc_ver=$(ldd --version 2>/dev/null | head -n1 | grep -oE '[0-9]+\.[0-9]+' || echo "0.0")
+  min_ver="2.17"
+  if [[ -n "$glibc_ver" ]] && [[ $(echo -e "$glibc_ver\n$min_ver" | sort -V | head -n1) == "$min_ver" ]]; then
+    USE_MUSL=0
+    info "glibc version $glibc_ver is sufficient, using GNU build."
+  else
+    USE_MUSL=1
+    info "glibc version $glibc_ver is too old or not detected, using MUSL build."
+  fi
+else
+  USE_MUSL=1
+  info "ldd not found, using MUSL build."
+fi
 
 # --- Port Input & Check ---
 DEFAULT_RUSTFS_PORT=9000
@@ -97,10 +102,12 @@ info "Log directory ready: $LOG_DIR."
 # --- Download & Extract ---
 TMP_DIR=$(mktemp -d) || err "Failed to create temp dir."
 cd $TMP_DIR || err "Failed to enter temp dir."
-if [[ "$CPU_ARCH" == "x86_64" ]]; then
-  [[ $USE_MUSL -eq 1 ]] && PKG_URL="$PKG_MUSL" || PKG_URL="$PKG_X86"
-else
+if [[ $USE_MUSL -eq 1 ]]; then
   PKG_URL="$PKG_MUSL"
+  info "Using MUSL build for better compatibility."
+else
+  PKG_URL="$PKG_GNU"
+  info "Using GNU build for optimal performance."
 fi
 info "Downloading RustFS package..."
 if [[ "$DOWNLOAD_CMD" == "wget" ]]; then
