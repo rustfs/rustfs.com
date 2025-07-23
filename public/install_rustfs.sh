@@ -7,6 +7,12 @@ set -euo pipefail
 err() { echo -e "\033[1;31m[ERROR]\033[0m $1" >&2; exit 1; }
 info() { echo -e "\033[1;32m[INFO]\033[0m $1"; }
 
+# Version comparison function
+version_ge() {
+  local ver1=$1 ver2=$2
+  [ "$(printf '%s\n' "$ver2" "$ver1" | sort -V | head -n1)" = "$ver2" ]
+}
+
 # --- Root Check ---
 if [[ $EUID -ne 0 ]]; then
   err "This script must be run as root. Please use sudo or switch to the root user."
@@ -61,13 +67,12 @@ if command -v ldd >/dev/null 2>&1; then
   if [[ -z "$glibc_ver" ]]; then
     USE_MUSL=1
     info "glibc version could not be detected, using MUSL build."
-  if version_ge "$glibc_ver" "$min_ver"; then
+  elif version_ge "$glibc_ver" "$min_ver"; then
     USE_MUSL=0
     info "glibc version $glibc_ver is sufficient, using GNU build."
   else
     USE_MUSL=1
     info "glibc version $glibc_ver is too old, using MUSL build."
-  fi
   fi
 else
   USE_MUSL=1
@@ -104,8 +109,9 @@ LOG_DIR="/var/logs/rustfs"
 info "Log directory ready: $LOG_DIR."
 
 # --- Download & Extract ---
+ORIG_DIR=$(pwd)
 TMP_DIR=$(mktemp -d) || err "Failed to create temp dir."
-cd $TMP_DIR || err "Failed to enter temp dir."
+cd "$TMP_DIR" || err "Failed to enter temp dir."
 if [[ $USE_MUSL -eq 1 ]]; then
   PKG_URL="$PKG_MUSL"
   info "Using MUSL build for better compatibility."
@@ -124,7 +130,8 @@ RUSTFS_BIN=$(find . -type f -name rustfs | head -n1)
 [[ -z "$RUSTFS_BIN" ]] && err "rustfs binary not found in package."
 cp "$RUSTFS_BIN" /usr/local/bin/rustfs || err "Failed to copy binary."
 chmod +x /usr/local/bin/rustfs || err "Failed to set execute permission."
-cd - >/dev/null; rm -rf $TMP_DIR
+cd "$ORIG_DIR" >/dev/null || true
+rm -rf "$TMP_DIR"
 info "RustFS binary installed."
 
 # --- systemd Service File ---
