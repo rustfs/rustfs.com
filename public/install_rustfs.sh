@@ -56,7 +56,7 @@ info "OS and architecture check passed: $ARCH."
 USE_MUSL=1
 glibc_ver=""
 if command -v ldd >/dev/null 2>&1; then
-  glibc_ver=$(ldd --version 2>/dev/null | head -n1 | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' | head -n1)
+  glibc_ver=$(ldd --version 2>/dev/null | head -n1 | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?')
   min_ver="2.17"
   if [[ -z "$glibc_ver" || ! "$glibc_ver" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
     USE_MUSL=1
