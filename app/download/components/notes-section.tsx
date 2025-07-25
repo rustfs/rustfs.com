@@ -75,7 +75,7 @@ export default function NotesSection({ notes, className }: NotesSectionProps) {
               <Alert variant={variant} className={cn("cursor-pointer border-2 hover:border-primary/50", className)}>
                 {icon}
                 <AlertDescription className="flex items-center justify-between">
-                  <span>{tw(note.content.zh, note.content.en)}</span>
+                  <span>{tw(note.content.zh, note.content.en, note.content.tr || note.content.en)}</span>
                   <ExternalLinkIcon className="w-4 h-4 ml-2 opacity-60" />
                 </AlertDescription>
               </Alert>
@@ -88,7 +88,7 @@ export default function NotesSection({ notes, className }: NotesSectionProps) {
           <Alert key={noteIndex} variant={variant} className={className}>
             {icon}
             <AlertDescription>
-              {tw(note.content.zh, note.content.en)}
+              {tw(note.content.zh, note.content.en, note.content.tr || note.content.en)}
             </AlertDescription>
           </Alert>
         );

@@ -17,10 +17,10 @@ export default function HomeFeatures() {
         {/* Title */}
         <div className="mx-auto mb-10 text-center lg:mb-14">
           <h2 className="text-3xl font-bold md:text-4xl tracking-wide md:leading-tight dark:text-white">
-            {tw('超强性能的', 'High-performance')} <span className="text-blue-500">{tw('企业级分布式文件系统', 'enterprise-grade distributed file system')}</span>
+            {tw('超强性能的', 'High-performance', 'Yüksek performanslı')} <span className="text-blue-500">{tw('企业级分布式文件系统', 'enterprise-grade distributed file system', 'kurumsal seviye dağıtık dosya sistemi')}</span>
           </h2>
           <p className="text-muted-foreground mt-4">
-            {tw('全面的功能特性，满足企业级存储需求', 'Comprehensive features to meet enterprise-grade storage requirements')}
+            {tw('全面的功能特性，满足企业级存储需求', 'Comprehensive features to meet enterprise-grade storage requirements', 'Kurumsal seviye depolama gereksinimlerini karşılamak için kapsamlı özellikler')}
           </p>
         </div>
         {/* End Title */}

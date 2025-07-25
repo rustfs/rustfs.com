@@ -2,300 +2,360 @@
   {
     "name": {
       "zh": "Tom",
-      "en": "Tom"
+      "en": "Tom",
+      "tr": "Tom"
     },
     "position": {
       "zh": "技术总监",
-      "en": "Technical Director"
+      "en": "Technical Director",
+      "tr": "Teknik Direktör"
     },
     "body": {
       "zh": "rustfs文件系统真的太好用了！性能方面表现卓越，处理数据速度超快，大大提高了我的工作效率。而且它的安全性也让我很放心，不用担心数据泄露等问题。功能还特别全面，能满足我各种不同的需求，真的很棒！",
-      "en": "RustFS file system is really amazing! It performs excellently, processes data super fast, and greatly improves my work efficiency. Its security also gives me peace of mind, no need to worry about data leaks. The features are comprehensive and can meet all my different needs, really great!"
+      "en": "RustFS file system is really amazing! It performs excellently, processes data super fast, and greatly improves my work efficiency. Its security also gives me peace of mind, no need to worry about data leaks. The features are comprehensive and can meet all my different needs, really great!",
+      "tr": "RustFS dosya sistemi gerçekten harika! Mükemmel performans sergiliyor, verileri süper hızlı işliyor ve çalışma verimliliğimi büyük ölçüde artırıyor. Güvenliği de beni rahatlatıyor, veri sızıntısı gibi sorunları düşünmeme gerek yok. Özellikleri kapsamlı ve tüm farklı ihtiyaçlarımı karşılayabiliyor, gerçekten harika!"
     },
     "img": "/images/faces/liming.jpeg"
   },
   {
     "name": {
       "zh": "王丽华",
-      "en": "Wang Lihua"
+      "en": "Wang Lihua",
+      "tr": "Wang Lihua"
     },
     "position": {
       "zh": "产品经理",
-      "en": "Product Manager"
+      "en": "Product Manager",
+      "tr": "Ürün Müdürü"
     },
     "body": {
       "zh": "用了rustfs之后，感觉真的不一样。它的性能好得没话说，运行起来非常稳定流畅。安全性也极高，保护了我的重要数据。功能全面更是让我在使用过程中得心应手，强烈推荐！",
-      "en": "After using RustFS, it feels really different. Its performance is outstanding, running very stable and smooth. Security is also extremely high, protecting my important data. The comprehensive features make me feel comfortable during use, highly recommended!"
+      "en": "After using RustFS, it feels really different. Its performance is outstanding, running very stable and smooth. Security is also extremely high, protecting my important data. The comprehensive features make me feel comfortable during use, highly recommended!",
+      "tr": "RustFS kullandıktan sonra gerçekten farklı hissediyor. Performansı mükemmel, çok kararlı ve akıcı çalışıyor. Güvenliği de son derece yüksek, önemli verilerimi koruyor. Kapsamlı özellikler kullanım sırasında kendimi rahat hissettiriyor, kesinlikle tavsiye ederim!"
     },
     "img": "/images/faces/wangli.jpeg"
   },
   {
     "name": {
       "zh": "David",
-      "en": "David"
+      "en": "David",
+      "tr": "David"
     },
     "position": {
       "zh": "项目经理",
-      "en": "Project Manager"
+      "en": "Project Manager",
+      "tr": "Proje Müdürü"
     },
     "body": {
       "zh": "不得不说，rustfs文件系统是我用过最好用的之一。性能强劲，不管是大文件还是小文件的处理都很出色。安全性有保障，让我无后顾之忧。功能全面，涵盖了我日常所需的各种功能，真的很不错。",
-      "en": "I have to say, RustFS file system is one of the best I've ever used. Powerful performance, excellent handling of both large and small files. Security is guaranteed, giving me peace of mind. Comprehensive features covering all the functions I need daily, really great."
+      "en": "I have to say, RustFS file system is one of the best I've ever used. Powerful performance, excellent handling of both large and small files. Security is guaranteed, giving me peace of mind. Comprehensive features covering all the functions I need daily, really great.",
+      "tr": "Söylemek zorundayım ki, RustFS dosya sistemi şimdiye kadar kullandığım en iyilerden biri. Güçlü performans, hem büyük hem de küçük dosyaları mükemmel şekilde işliyor. Güvenlik garantili, beni rahatlatıyor. Kapsamlı özellikler günlük ihtiyaç duyduğum tüm fonksiyonları kapsıyor, gerçekten harika."
     },
     "img": "/images/faces/zhangfeng.jpeg"
   },
   {
     "name": {
       "zh": "陈宇轩",
-      "en": "Chen Yuxuan"
+      "en": "Chen Yuxuan",
+      "tr": "Chen Yuxuan"
     },
     "position": {
       "zh": "前端开发工程师",
-      "en": "Frontend Developer"
+      "en": "Frontend Developer",
+      "tr": "Frontend Geliştirici"
     },
     "body": {
       "zh": "rustfs给我留下了深刻的印象。它的性能好，能快速响应各种操作。安全性也做得很棒，数据存储在里面很安心。而且功能全面，无论是工作还是娱乐方面的需求都能满足，赞一个！",
-      "en": "RustFS has left a deep impression on me. Its performance is good, able to quickly respond to various operations. Security is also well done, data storage is very secure. And the features are comprehensive, meeting both work and entertainment needs, thumbs up!"
+      "en": "RustFS has left a deep impression on me. Its performance is good, able to quickly respond to various operations. Security is also well done, data storage is very secure. And the features are comprehensive, meeting both work and entertainment needs, thumbs up!",
+      "tr": "RustFS bende derin bir izlenim bıraktı. Performansı iyi, çeşitli işlemlere hızlı yanıt verebiliyor. Güvenlik de çok iyi yapılmış, veri depolama çok güvenli. Ve özellikler kapsamlı, hem iş hem de eğlence ihtiyaçlarını karşılıyor, harika!"
     },
     "img": "/images/faces/chenyan.jpeg"
   },
   {
     "name": {
       "zh": "刘文刚",
-      "en": "Liu Wengang"
+      "en": "Liu Wengang",
+      "tr": "Liu Wengang"
     },
     "position": {
       "zh": "后端开发工程师",
-      "en": "Backend Developer"
+      "en": "Backend Developer",
+      "tr": "Backend Geliştirici"
     },
     "body": {
       "zh": "我对rustfs文件系统非常满意。它的性能出色，大大缩短了文件读写的时间。安全性可靠，不用担心数据安全问题。功能也很全面，为我提供了很多便利，好用！",
-      "en": "I am very satisfied with RustFS file system. Its excellent performance greatly reduces file read/write time. Reliable security, no need to worry about data safety. Features are also comprehensive, providing me with great convenience, easy to use!"
+      "en": "I am very satisfied with RustFS file system. Its excellent performance greatly reduces file read/write time. Reliable security, no need to worry about data safety. Features are also comprehensive, providing me with great convenience, easy to use!",
+      "tr": "RustFS dosya sisteminden çok memnunum. Mükemmel performansı dosya okuma/yazma süresini büyük ölçüde azaltıyor. Güvenilir güvenlik, veri güvenliği konusunda endişelenmeme gerek yok. Özellikler de kapsamlı, bana büyük kolaylık sağlıyor, kullanımı kolay!"
     },
     "img": "/images/faces/liugang.jpeg"
   },
   {
     "name": {
       "zh": "赵晓霞",
-      "en": "Zhao Xiaoxia"
+      "en": "Zhao Xiaoxia",
+      "tr": "Zhao Xiaoxia"
     },
     "position": {
       "zh": "测试工程师",
-      "en": "Test Engineer"
+      "en": "Test Engineer",
+      "tr": "Test Mühendisi"
     },
     "body": {
       "zh": "rustfs真的很不错，性能好，使用起来很顺畅。安全性高，保护了我的隐私和数据。功能还特别全，满足了我多样化的需求，真心觉得好用。",
-      "en": "RustFS is really good, great performance and smooth to use. High security, protecting my privacy and data. Features are particularly comprehensive, meeting my diverse needs, genuinely feel it's useful."
+      "en": "RustFS is really good, great performance and smooth to use. High security, protecting my privacy and data. Features are particularly comprehensive, meeting my diverse needs, genuinely feel it's useful.",
+      "tr": "RustFS gerçekten çok iyi, harika performans ve kullanımı akıcı. Yüksek güvenlik, gizliliğimi ve verilerimi koruyor. Özellikler özellikle kapsamlı, çeşitli ihtiyaçlarımı karşılıyor, gerçekten faydalı olduğunu hissediyorum."
     },
     "img": "/images/faces/zhaoxia.jpeg"
   },
   {
     "name": {
       "zh": "孙强",
-      "en": "Sun Qiang"
+      "en": "Sun Qiang",
+      "tr": "Sun Qiang"
     },
     "position": {
       "zh": "运维工程师",
-      "en": "DevOps Engineer"
+      "en": "DevOps Engineer",
+      "tr": "DevOps Mühendisi"
     },
     "body": {
       "zh": "用了一段时间的rustfs，感觉它的性能真的很强，运行速度快，不卡顿。安全性也值得信赖，功能全面又实用，是一款非常好的文件系统。",
-      "en": "After using RustFS for a while, I feel its performance is really strong, fast running speed, no lag. Security is also trustworthy, features are comprehensive and practical, it's a very good file system."
+      "en": "After using RustFS for a while, I feel its performance is really strong, fast running speed, no lag. Security is also trustworthy, features are comprehensive and practical, it's a very good file system.",
+      "tr": "RustFS'yi bir süredir kullanıyorum, performansının gerçekten çok güçlü olduğunu hissediyorum, çalışma hızı yüksek, takılmıyor. Güvenlik de güvenilir, özellikler kapsamlı ve pratik, çok iyi bir dosya sistemi."
     },
     "img": "/images/faces/sunqiang.jpeg"
   },
   {
     "name": {
       "zh": "周建林",
-      "en": "Zhou Jianlin"
+      "en": "Zhou Jianlin",
+      "tr": "Zhou Jianlin"
     },
     "position": {
       "zh": "数据分析师",
-      "en": "Data Analyst"
+      "en": "Data Analyst",
+      "tr": "Veri Analisti"
     },
     "body": {
       "zh": "rustfs文件系统好用得超乎想象。性能优异，处理任务高效快捷。安全性有保障，让我放心使用。功能全面，给我的生活和工作都带来了很大的便利，爱了！",
-      "en": "RustFS file system is better than imagined. Excellent performance, efficient and fast task processing. Security is guaranteed, giving me confidence to use. Comprehensive features bring great convenience to both my life and work, love it!"
+      "en": "RustFS file system is better than imagined. Excellent performance, efficient and fast task processing. Security is guaranteed, giving me confidence to use. Comprehensive features bring great convenience to both my life and work, love it!",
+      "tr": "RustFS dosya sistemi hayal ettiğimden daha iyi. Mükemmel performans, verimli ve hızlı görev işleme. Güvenlik garantili, kullanmak için bana güven veriyor. Kapsamlı özellikler hem hayatıma hem de işime büyük kolaylık getiriyor, bayıldım!"
     },
     "img": "/images/faces/zhoulin.jpeg"
   },
   {
     "name": {
       "zh": "吴敏",
-      "en": "Wu Min"
+      "en": "Wu Min",
+      "tr": "Wu Min"
     },
     "position": {
       "zh": "UI设计师",
-      "en": "UI Designer"
+      "en": "UI Designer",
+      "tr": "UI Tasarımcı"
     },
     "body": {
       "zh": "不得不夸赞一下rustfs，性能好，安全性高，功能还那么全面。在使用过程中，真的感受到了它的强大和便捷，是一款不可多得的好文件系统。",
-      "en": "Have to praise RustFS, good performance, high security, and such comprehensive features. During use, I really felt its power and convenience, it's a rare good file system."
+      "en": "Have to praise RustFS, good performance, high security, and such comprehensive features. During use, I really felt its power and convenience, it's a rare good file system.",
+      "tr": "RustFS'yi övmek zorundayım, iyi performans, yüksek güvenlik ve bu kadar kapsamlı özellikler. Kullanım sırasında gerçekten gücünü ve kolaylığını hissettim, nadir bulunan iyi bir dosya sistemi."
     },
     "img": "/images/faces/wumin.jpeg"
   },
   {
     "name": {
       "zh": "郑宇涛",
-      "en": "Zheng Yutao"
+      "en": "Zheng Yutao",
+      "tr": "Zheng Yutao"
     },
     "position": {
       "zh": "架构师",
-      "en": "Architect"
+      "en": "Architect",
+      "tr": "Mimar"
     },
     "body": {
       "zh": "rustfs的性能让我惊艳，速度快，效率高。安全性也很棒，不用担心数据丢失或泄露。功能全面，满足了我在不同场景下的需求，真的很好用。",
-      "en": "RustFS performance amazes me, fast speed and high efficiency. Security is also great, no need to worry about data loss or leakage. Comprehensive features meet my needs in different scenarios, really useful."
+      "en": "RustFS performance amazes me, fast speed and high efficiency. Security is also great, no need to worry about data loss or leakage. Comprehensive features meet my needs in different scenarios, really useful.",
+      "tr": "RustFS'nin performansı beni hayrete düşürüyor, hızlı ve yüksek verimlilik. Güvenlik de harika, veri kaybı veya sızıntısı konusunda endişelenmeme gerek yok. Kapsamlı özellikler farklı senaryolardaki ihtiyaçlarımı karşılıyor, gerçekten faydalı."
     },
     "img": "/images/faces/zhengtao.jpeg"
   },
   {
     "name": {
       "zh": "王华",
-      "en": "Wang Hua"
+      "en": "Wang Hua",
+      "tr": "Wang Hua"
     },
     "position": {
       "zh": "数据库管理员",
-      "en": "Database Administrator"
+      "en": "Database Administrator",
+      "tr": "Veritabanı Yöneticisi"
     },
     "body": {
       "zh": "我觉得rustfs文件系统非常棒，性能出色，操作流畅。安全性好，保护了我的重要文件。功能全面，涵盖了各种实用的功能，用起来很方便，推荐给大家。",
-      "en": "I think RustFS file system is excellent, outstanding performance and smooth operation. Good security, protecting my important files. Comprehensive features covering various practical functions, very convenient to use, recommend to everyone."
+      "en": "I think RustFS file system is excellent, outstanding performance and smooth operation. Good security, protecting my important files. Comprehensive features covering various practical functions, very convenient to use, recommend to everyone.",
+      "tr": "RustFS dosya sisteminin mükemmel olduğunu düşünüyorum, olağanüstü performans ve akıcı çalışma. İyi güvenlik, önemli dosyalarımı koruyor. Çeşitli pratik fonksiyonları kapsayan kapsamlı özellikler, kullanımı çok rahat, herkese tavsiye ederim."
     },
     "img": "/images/faces/wanghua.jpeg"
   },
   {
     "name": {
       "zh": "李小雪",
-      "en": "Li Xiaoxue"
+      "en": "Li Xiaoxue",
+      "tr": "Li Xiaoxue"
     },
     "position": {
       "zh": "算法工程师",
-      "en": "Algorithm Engineer"
+      "en": "Algorithm Engineer",
+      "tr": "Algoritma Mühendisi"
     },
     "body": {
       "zh": "rustfs真的是一款很好用的文件系统，性能好，能快速完成各种文件操作。安全性也很高，让我很放心。功能全面，给我的工作和生活带来了很多便利，很喜欢。",
-      "en": "RustFS is really a very useful file system, good performance and can quickly complete various file operations. Security is also high, giving me peace of mind. Comprehensive features bring much convenience to my work and life, I like it very much."
+      "en": "RustFS is really a very useful file system, good performance and can quickly complete various file operations. Security is also high, giving me peace of mind. Comprehensive features bring much convenience to my work and life, I like it very much.",
+      "tr": "RustFS gerçekten çok kullanışlı bir dosya sistemi, iyi performans ve çeşitli dosya işlemlerini hızla tamamlayabiliyor. Güvenlik de yüksek, beni rahatlatıyor. Kapsamlı özellikler işime ve hayatıma çok kolaylık getiriyor, çok seviyorum."
     },
     "img": "/images/faces/lixue.jpeg"
   },
   {
     "name": {
       "zh": "张宇",
-      "en": "Zhang Yu"
+      "en": "Zhang Yu",
+      "tr": "Zhang Yu"
     },
     "position": {
       "zh": "安全工程师",
-      "en": "Security Engineer"
+      "en": "Security Engineer",
+      "tr": "Güvenlik Mühendisi"
     },
     "body": {
       "zh": "用了rustfs之后，对它的性能、安全性和功能全面性都非常满意。它的表现超出了我的预期，是一款值得信赖的文件系统，会一直使用下去。",
-      "en": "After using RustFS, I am very satisfied with its performance, security and comprehensive features. Its performance exceeded my expectations, it's a trustworthy file system that I will continue to use."
+      "en": "After using RustFS, I am very satisfied with its performance, security and comprehensive features. Its performance exceeded my expectations, it's a trustworthy file system that I will continue to use.",
+      "tr": "RustFS kullandıktan sonra performansı, güvenliği ve kapsamlı özelliklerinden çok memnunum. Performansı beklentilerimi aştı, güvenilir bir dosya sistemi, kullanmaya devam edeceğim."
     },
     "img": "/images/faces/zhangyu.jpeg"
   },
   {
     "name": {
       "zh": "刘进翰",
-      "en": "Liu Jinhan"
+      "en": "Liu Jinhan",
+      "tr": "Liu Jinhan"
     },
     "position": {
       "zh": "网络工程师",
-      "en": "Network Engineer"
+      "en": "Network Engineer",
+      "tr": "Ağ Mühendisi"
     },
     "body": {
       "zh": "rustfs文件系统的性能非常好，运行稳定，速度快。安全性也有保障，不用担心数据安全问题。而且功能很全面，满足了我的日常需求，感觉很不错。",
-      "en": "RustFS file system has excellent performance, stable operation and fast speed. Security is also guaranteed, no need to worry about data security issues. And the features are comprehensive, meeting my daily needs, feels very good."
+      "en": "RustFS file system has excellent performance, stable operation and fast speed. Security is also guaranteed, no need to worry about data security issues. And the features are comprehensive, meeting my daily needs, feels very good.",
+      "tr": "RustFS dosya sisteminin performansı çok iyi, kararlı çalışma ve yüksek hız. Güvenlik de garantili, veri güvenliği sorunları konusunda endişelenmeme gerek yok. Ve özellikler kapsamlı, günlük ihtiyaçlarımı karşılıyor, çok iyi hissediyor."
     },
     "img": "/images/faces/liumei.jpeg"
   },
   {
     "name": {
       "zh": "陈亮",
-      "en": "Chen Liang"
+      "en": "Chen Liang",
+      "tr": "Chen Liang"
     },
     "position": {
       "zh": "系统管理员",
-      "en": "System Administrator"
+      "en": "System Administrator",
+      "tr": "Sistem Yöneticisi"
     },
     "body": {
       "zh": "不得不说，rustfs是一款性能好、安全性高、功能全面的优秀文件系统。在使用过程中，给我带来了很好的体验，会推荐给身边的朋友。",
-      "en": "Have to say, RustFS is an excellent file system with good performance, high security and comprehensive features. During use, it brought me a great experience, I will recommend it to my friends."
+      "en": "Have to say, RustFS is an excellent file system with good performance, high security and comprehensive features. During use, it brought me a great experience, I will recommend it to my friends.",
+      "tr": "Söylemek zorundayım ki, RustFS iyi performans, yüksek güvenlik ve kapsamlı özelliklere sahip mükemmel bir dosya sistemi. Kullanım sırasında bana harika bir deneyim yaşattı, arkadaşlarıma tavsiye edeceğim."
     },
     "img": "/images/faces/chenliang.jpeg"
   },
   {
     "name": {
       "zh": "赵小敏",
-      "en": "Zhao Xiaomin"
+      "en": "Zhao Xiaomin",
+      "tr": "Zhao Xiaomin"
     },
     "position": {
       "zh": "销售经理",
-      "en": "Sales Manager"
+      "en": "Sales Manager",
+      "tr": "Satış Müdürü"
     },
     "body": {
       "zh": "我很喜欢rustfs文件系统，它的性能出色，操作简单方便。安全性也很好，保护了我的隐私。功能全面，能满足我各种不同的需求，真的很棒。",
-      "en": "I really like RustFS file system, its performance is excellent and operation is simple and convenient. Security is also good, protecting my privacy. Comprehensive features can meet my various different needs, really great."
+      "en": "I really like RustFS file system, its performance is excellent and operation is simple and convenient. Security is also good, protecting my privacy. Comprehensive features can meet my various different needs, really great.",
+      "tr": "RustFS dosya sistemini gerçekten seviyorum, performansı mükemmel ve kullanımı basit ve rahat. Güvenlik de iyi, gizliliğimi koruyor. Kapsamlı özellikler çeşitli farklı ihtiyaçlarımı karşılayabiliyor, gerçekten harika."
     },
     "img": "/images/faces/zhaomin.jpeg"
   },
   {
     "name": {
       "zh": "孙丽敏",
-      "en": "Sun Limin"
+      "en": "Sun Limin",
+      "tr": "Sun Limin"
     },
     "position": {
       "zh": "市场专员",
-      "en": "Marketing Specialist"
+      "en": "Marketing Specialist",
+      "tr": "Pazarlama Uzmanı"
     },
     "body": {
       "zh": "rustfs真的太好用了！性能好，安全性高，功能还特别全。在使用过程中，感觉非常流畅，没有出现任何问题，强烈推荐给大家。",
-      "en": "RustFS is really so useful! Good performance, high security, and particularly comprehensive features. During use, it feels very smooth without any problems, strongly recommend to everyone."
+      "en": "RustFS is really so useful! Good performance, high security, and particularly comprehensive features. During use, it feels very smooth without any problems, strongly recommend to everyone.",
+      "tr": "RustFS gerçekten çok kullanışlı! İyi performans, yüksek güvenlik ve özellikle kapsamlı özellikler. Kullanım sırasında çok akıcı hissediyor, hiçbir sorun yaşamadım, herkese kesinlikle tavsiye ederim."
     },
     "img": "/images/faces/sunli.jpeg"
   },
   {
     "name": {
       "zh": "周文杰",
-      "en": "Zhou Wenjie"
+      "en": "Zhou Wenjie",
+      "tr": "Zhou Wenjie"
     },
     "position": {
       "zh": "财务经理",
-      "en": "Finance Manager"
+      "en": "Finance Manager",
+      "tr": "Finans Müdürü"
     },
     "body": {
-      "zh": "用了rustfs之后，才发现它的好。性能强劲，运行速度超快。安全性可靠，数据有保障。功能全面，满足了我的多样化需求，真的是一款很好的文件系统。",
-      "en": "After using RustFS, I discovered its goodness. Powerful performance and super fast running speed. Reliable security with data guarantee. Comprehensive features meeting my diverse needs, really a good file system."
+      "zh": "用了rustfs之后，才发现它的好。性能强劲，运行速度超快。安全性可靠，数据有保障。功能全面，满足了我的多样化需求，真的是一款很好的文件系tem。",
+      "en": "After using RustFS, I discovered its goodness. Powerful performance and super fast running speed. Reliable security with data guarantee. Comprehensive features meeting my diverse needs, really a good file system.",
+      "tr": "RustFS kullandıktan sonra onun iyiliğini keşfettim. Güçlü performans ve süper hızlı çalışma hızı. Güvenilir güvenlik ve veri garantisi. Çeşitli ihtiyaçlarımı karşılayan kapsamlı özellikler, gerçekten iyi bir dosya sistemi."
     },
     "img": "/images/faces/zhoujie.jpeg"
   },
   {
     "name": {
       "zh": "吴娜",
-      "en": "Wu Na"
+      "en": "Wu Na",
+      "tr": "Wu Na"
     },
     "position": {
       "zh": "人力资源专员",
-      "en": "HR Specialist"
+      "en": "HR Specialist",
+      "tr": "İK Uzmanı"
     },
     "body": {
       "zh": "rustfs文件系统给我带来了很大的惊喜。它的性能好，处理文件效率高。安全性也很棒，让我放心存储数据。功能全面，使用起来很方便，真心觉得不错。",
-      "en": "RustFS file system brought me great surprises. Its performance is good with high file processing efficiency. Security is also great, giving me confidence to store data. Comprehensive features and convenient to use, genuinely feel it's good."
+      "en": "RustFS file system brought me great surprises. Its performance is good with high file processing efficiency. Security is also great, giving me confidence to store data. Comprehensive features and convenient to use, genuinely feel it's good.",
+      "tr": "RustFS dosya sistemi bana büyük sürprizler yaşattı. Performansı iyi ve dosya işleme verimliliği yüksek. Güvenlik de harika, veri depolamak için bana güven veriyor. Kapsamlı özellikler ve kullanımı rahat, gerçekten iyi olduğunu hissediyorum."
     },
     "img": "/images/faces/wuna.jpeg"
   },
   {
     "name": {
       "zh": "郑丽",
-      "en": "Zheng Li"
+      "en": "Zheng Li",
+      "tr": "Zheng Li"
     },
     "position": {
       "zh": "行政专员",
-      "en": "Administrative Specialist"
+      "en": "Administrative Specialist",
+      "tr": "İdari Uzman"
     },
     "body": {
       "zh": "我对rustfs非常满意，它的性能出色，安全性高，功能全面。在使用过程中，感觉非常顺畅，为我的工作和生活带来了很多便利，会一直支持。",
-      "en": "I am very satisfied with RustFS, its performance is excellent, security is high, and features are comprehensive. During use, it feels very smooth, bringing much convenience to my work and life, will always support it."
+      "en": "I am very satisfied with RustFS, its performance is excellent, security is high, and features are comprehensive. During use, it feels very smooth, bringing much convenience to my work and life, will always support it.",
+      "tr": "RustFS'den çok memnunum, performansı mükemmel, güvenliği yüksek ve özellikleri kapsamlı. Kullanım sırasında çok akıcı hissediyor, işime ve hayatıma çok kolaylık getiriyor, her zaman destekleyeceğim."
     },
     "img": "/images/faces/zhengli.jpeg"
   }

@@ -13,6 +13,7 @@ export interface Note {
   content: {
     zh: string;
     en: string;
+    tr: string;
   };
   url?: string;
 }
@@ -24,6 +25,7 @@ export interface PlatformInfo {
   description: {
     zh: string;
     en: string;
+    tr: string;
   };
   available: boolean;
   comingSoon?: boolean;
@@ -54,6 +56,7 @@ export const platforms: PlatformInfo[] = [
     description: {
       zh: "适用于各种 Linux 发行版",
       en: "For various Linux distributions",
+      tr: "Çeşitli Linux dağıtımları için",
     },
     available: true,
     variants: [
@@ -82,6 +85,7 @@ export const platforms: PlatformInfo[] = [
             content: {
               zh: "适用于 ARM64 架构（树莓派、云服务器等），功耗更低",
               en: "For ARM64 architecture (Raspberry Pi, cloud servers, etc.) with lower power consumption",
+              tr: "ARM64 mimarisi için (Raspberry Pi, bulut sunucuları vb.) daha düşük güç tüketimi ile",
             },
           },
         ],
@@ -94,12 +98,12 @@ export const platforms: PlatformInfo[] = [
         content: {
           zh: "查看详细安装文档",
           en: "View detailed installation guide",
+          tr: "Detaylı kurulum kılavuzunu görüntüleyin",
         },
         url: "https://docs.rustfs.com/installation/linux",
       },
     ],
   },
-
   {
     id: "docker",
     name: "Docker",
@@ -107,6 +111,7 @@ export const platforms: PlatformInfo[] = [
     description: {
       zh: "使用 Docker 容器快速部署",
       en: "Quick deployment using Docker containers",
+      tr: "Docker konteynerları kullanarak hızlı dağıtım",
     },
     available: true,
     variants: [
@@ -141,6 +146,7 @@ export const platforms: PlatformInfo[] = [
             content: {
               zh: "开发测试版本，包含最新功能但可能不稳定",
               en: "Development version with latest features but may be unstable",
+              tr: "En son özelliklere sahip geliştirme sürümü ancak kararsız olabilir",
             },
           },
         ],
@@ -176,6 +182,7 @@ export const platforms: PlatformInfo[] = [
             content: {
               zh: "每日构建版本，极不稳定，仅供尝鲜使用",
               en: "Daily builds, highly unstable, for early testing only",
+              tr: "Günlük yapılar, son derece kararsız, sadece erken test için",
             },
           },
         ],
@@ -187,6 +194,7 @@ export const platforms: PlatformInfo[] = [
         content: {
           zh: "查看所有可用版本",
           en: "View all available versions",
+          tr: "Tüm mevcut sürümleri görüntüleyin",
         },
         url: "https://hub.docker.com/r/rustfs/rustfs/tags",
       },
@@ -195,6 +203,7 @@ export const platforms: PlatformInfo[] = [
         content: {
           zh: "Docker 快速开始指南",
           en: "Docker quick start guide",
+          tr: "Docker hızlı başlangıç kılavuzu",
         },
         url: "https://docs.rustfs.com/installation/docker",
       },
@@ -207,13 +216,14 @@ export const platforms: PlatformInfo[] = [
     description: {
       zh: "适用于 macOS 10.15 及更新版本",
       en: "For macOS 10.15 and later versions",
+      tr: "macOS 10.15 ve sonraki sürümler için",
     },
     available: true,
     variants: [
       {
         name: "Apple Silicon (M1/M2)",
         architecture: "aarch64",
-        downloadUrl: "hhttps://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-aarch64-latest.zip",
+        downloadUrl: "https://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-aarch64-latest.zip",
         commands: [
           "curl --progress-bar -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-aarch64-latest.zip",
           "unzip rustfs-darwin-aarch64-latest.zip",
@@ -226,6 +236,7 @@ export const platforms: PlatformInfo[] = [
             content: {
               zh: "针对 Apple Silicon 优化，支持 M 系列芯片",
               en: "Optimized for Apple Silicon, supports M series chips",
+              tr: "Apple Silicon için optimize edilmiş, M serisi çipleri destekler",
             },
           },
         ],
@@ -250,7 +261,8 @@ export const platforms: PlatformInfo[] = [
             type: "info",
             content: {
               zh: "请先确保已安装 [Homebrew]",
-              en: "Please ensure that [Hombrew] is installed first",
+              en: "Please ensure that [Homebrew] is installed first",
+              tr: "Lütfen önce [Homebrew]'un yüklü olduğundan emin olun",
             },
             url: "https://brew.sh/",
           },
@@ -263,6 +275,7 @@ export const platforms: PlatformInfo[] = [
         content: {
           zh: "查看 macOS 安装指南",
           en: "View macOS installation guide",
+          tr: "macOS kurulum kılavuzunu görüntüleyin",
         },
         url: "https://docs.rustfs.com/installation/macos",
       },
@@ -275,6 +288,7 @@ export const platforms: PlatformInfo[] = [
     description: {
       zh: "适用于 Windows 10 及更新版本",
       en: "For Windows 10 and later versions",
+      tr: "Windows 10 ve sonraki sürümler için",
     },
     available: false,
     comingSoon: true,

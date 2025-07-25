@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
 // Supported language types
-type Language = 'zh' | 'en'
+type Language = 'zh' | 'en' | 'tr'
 
 // Translation dictionary interface
 interface Dictionary {
@@ -15,7 +15,7 @@ interface I18nContextType {
   language: Language
   setLanguage: (lang: Language) => void
   t: (key: string) => string
-  tw: (zh: string, en: string) => string
+  tw: (zh: string, en: string, tr?: string) => string
   toggleLanguage: () => void
 }
 
@@ -25,7 +25,8 @@ const I18nContext = createContext<I18nContextType | undefined>(undefined)
 // Lazy load dictionaries
 const dictionaries: Record<Language, () => Promise<Dictionary>> = {
   zh: () => import('@/locales/zh.json').then(module => module.default),
-  en: () => import('@/locales/en.json').then(module => module.default)
+  en: () => import('@/locales/en.json').then(module => module.default),
+  tr: () => import('@/locales/tr.json').then(module => module.default),
 }
 
 // Get dictionary
@@ -43,7 +44,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Read language preference from cookie or localStorage
     const savedLanguage = localStorage.getItem('language') as Language
-    if (savedLanguage && (savedLanguage === 'zh' || savedLanguage === 'en')) {
+    if (savedLanguage && (savedLanguage === 'zh' || savedLanguage === 'en' || savedLanguage === 'tr')) {
       setLanguageState(savedLanguage)
     }
   }, [])
@@ -75,15 +76,22 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     return typeof current === 'string' ? current : key
   }
 
-  // Bilingual toggle function
+  // Trilingual toggle function
   const toggleLanguage = () => {
-    const newLang = language === 'zh' ? 'en' : 'zh'
-    setLanguage(newLang)
+    if (language === 'zh') {
+      setLanguage('en')
+    } else if (language === 'en') {
+      setLanguage('tr')
+    } else {
+      setLanguage('zh')
+    }
   }
 
-  // Bilingual text function
-  const tw = (zh: string, en: string): string => {
-    return language === 'zh' ? zh : en
+  // Trilingual text function
+  const tw = (zh: string, en: string, tr?: string): string => {
+    if (language === 'zh') return zh
+    if (language === 'en') return en
+    return tr || en // Fallback to English if Turkish not provided
   }
 
   return (

@@ -16,15 +16,15 @@ export default function AppHeader() {
 
   const navs = [
     {
-      label: tw('产品功能', 'Features'),
+      label: tw('产品功能', 'Features', 'Özellikler'),
       url: docs_url('features/distributed/', language),
     },
     {
-      label: tw('架构', 'Architecture'),
+      label: tw('架构', 'Architecture', 'Mimari'),
       url: docs_url('architecture.html', language),
     },
     {
-      label: tw('解决方案', 'Solutions'),
+      label: tw('解决方案', 'Solutions', 'Çözümler'),
       url: docs_url('features/data-lake/', language),
     },
     // {
@@ -32,15 +32,15 @@ export default function AppHeader() {
     //   url: `https://docs.rustfs.com/${locale}/intergrations`
     // },
     {
-      label: tw('AI 支持', 'AI'),
+      label: tw('AI 支持', 'AI', 'AI'),
       url: docs_url('features/ai', language)
     },
     {
-      label: tw('下载', 'Download'),
+      label: tw('下载', 'Download', 'İndir'),
       url: '/download'
     },
     {
-      label: tw('文档', 'Documentation'),
+      label: tw('文档', 'Documentation', 'Dokümantasyon'),
       url: docs_url('', language)
     },
     // {
@@ -48,11 +48,11 @@ export default function AppHeader() {
     //   url: '/blog'
     // },
     {
-      label: tw('社区', 'Community'),
+      label: tw('社区', 'Community', 'Topluluk'),
       url: 'https://github.com/rustfs/rustfs/discussions'
     },
     {
-      label: tw('关于我们', 'About Us'),
+      label: tw('关于我们', 'About Us', 'Hakkımızda'),
       url: docs_url('about', language)
     }
   ]
