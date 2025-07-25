@@ -21,7 +21,7 @@ export default function PlatformSelector({
   return (
     <div className={cn("flex flex-col space-y-4", className)}>
       <h2 className="text-xl font-semibold text-foreground">
-        {tw('选择您的平台', 'Choose your platform')}
+        {tw('选择您的平台', 'Choose your platform', 'Platformunuzu seçin')}
       </h2>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -62,8 +62,8 @@ export default function PlatformSelector({
               </span>
               <span className="text-sm text-muted-foreground mt-1 text-center">
                 {isAvailable
-                  ? tw(platform.description.zh, platform.description.en)
-                  : tw('即将开放', 'Coming Soon')
+                  ? tw(platform.description.zh, platform.description.en, platform.description.tr || platform.description.en)
+                  : tw('即将开放', 'Coming Soon', 'Yakında')
                 }
               </span>
             </button>

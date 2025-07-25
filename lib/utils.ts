@@ -18,7 +18,7 @@ export function docs_url(path: string, language: string = 'en') {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
 
   // 处理语言参数，确保只有有效值
-  const validLanguages = ['zh', 'en'];
+  const validLanguages = ['zh', 'en', 'tr'];
   const normalizedLanguage = validLanguages.includes(language) ? language : 'en';
 
   // 根据语言返回对应的文档链接

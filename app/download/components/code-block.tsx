@@ -46,7 +46,7 @@ export default function CodeBlock({ code, title, className }: CodeBlockProps) {
         <button
           onClick={copyToClipboard}
           className="absolute top-2 right-2 p-2 rounded-md bg-muted/80 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-          title={tw('复制代码', 'Copy code')}
+          title={tw('复制代码', 'Copy code', 'Kodu kopyala')}
         >
           {copied ? (
             <CheckIcon className="w-4 h-4 text-green-500" />

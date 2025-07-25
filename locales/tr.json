@@ -1,0 +1,110 @@
+{
+  "title": "RustFS - MinIO Alternatifi, Yüksek Performanslı Dağıtık Depolama",
+  "description": "RustFS, popüler ve güvenli Rust programlama diliyle geliştirilmiş, açık kaynaklı ve OSS ile uyumlu yüksek performanslı bir nesne depolama sistemidir. Bulut tabanlı iş yükleri, özellikle AI için tasarlanmıştır ve özel bulut depolama, hibrit bulut depolama ve dağıtık depolama çözümleri sunarak MinIO'ya yerli bir alternatif oluşturur.",
+  "keywords": "RustFS, MinIO, dağıtık depolama, yüksek performans, yüksek güvenlik, yüksek eşzamanlılık",
+  "nav": {
+    "Features": "Özellikler",
+    "Architecture": "Mimari",
+    "Solutions": "Çözümler",
+    "Integrations": "Entegrasyonlar",
+    "AI": "Yapay Zeka",
+    "Documentation": "Dokümantasyon",
+    "Community": "Topluluk",
+    "About": "Hakkında",
+    "Product Features": "Ürün Özellikleri"
+  },
+  "hero": {
+    "Rust-powered": "Rust ile Güçlendirilmiş",
+    "High Performance": "Yüksek Performans",
+    "Unlimited Scaling": "Sınırsız Ölçeklenebilirlik",
+    "Secure and Reliable": "Güvenli ve Güvenilir",
+    "Multi-cloud Storage": "Çoklu Bulut Depolama",
+    "S3 Compatible": "S3 Uyumlu",
+    "Distributed Storage System": "Dağıtık Depolama Sistemi",
+    "RustFS is developed with the popular and secure Rust language, compatible with S3 protocol. Suitable for AI/ML and massive data storage, big data, internet, industrial and confidential storage scenarios. Nearly free to use. Follows Apache 2 license, supports domestic confidential equipment and systems.": "RustFS, popüler ve güvenli Rust diliyle geliştirilmiş ve S3 protokolüyle uyumludur. AI/ML ve büyük veri depolama, büyük veri, internet, endüstriyel ve gizli depolama senaryolarına uygundur. Neredeyse ücretsiz kullanım sunar. Apache 2 lisansı altında olup, yerli gizli ekipman ve sistemleri destekler.",
+    "Trusted open source software, compatible with over 1500+ software protocols": "Güvenilir açık kaynak yazılımı, 1500'den fazla yazılım protokolüyle uyumlu"
+  },
+  "buttons": {
+    "Get Started": "Başlayın",
+    "Download": "İndir",
+    "View Demo": "Demo Görüntüle"
+  },
+  "features": {
+    "Cross-cloud Support": "Çapraz Bulut Desteği",
+    "RustFS leverages distributed architecture and object storage capabilities to provide exceptional performance for AI and advanced analytics workloads, supporting data scaling from TB to EB levels.": "RustFS, dağıtık mimari ve nesne depolama yeteneklerinden yararlanarak AI ve gelişmiş analiz iş yükleri için olağanüstü performans sağlar, veri ölçeklendirmeyi TB'den EB seviyelerine kadar destekler.",
+    "Secure and Reliable": "Güvenli ve Güvenilir",
+    "RustFS integrates with RustyVault to provide high-performance object storage security encryption, supporting multiple encryption modes to ensure data security and transparency.": "RustFS, RustyVault ile entegre olarak yüksek performanslı nesne depolama güvenliği şifreleme sağlar, veri güvenliği ve şeffaflığını sağlamak için çoklu şifreleme modlarını destekler.",
+    "Version Control": "Sürüm Kontrolü",
+    "Object storage version control feature assigns unique identifiers to each object version, allowing users to access and manage historical versions through API or management interface.": "Nesne depolama sürüm kontrol özelliği, her nesne sürümüne benzersiz tanımlayıcılar atar, kullanıcıların API veya yönetim arayüzü aracılığıyla tarihsel sürümlere erişmesini ve yönetmesini sağlar.",
+    "Unlimited Scaling": "Sınırsız Ölçeklenebilirlik",
+    "RustFS system automatically balances node load, ensures even data distribution, supports dynamic addition or removal of resources based on storage needs, achieving unlimited scaling.": "RustFS sistemi, düğüm yükünü otomatik olarak dengeler, veri dağılımını eşitler, depolama ihtiyaçlarına göre kaynakların dinamik olarak eklenmesini veya çıkarılmasını destekleyerek sınırsız ölçeklenebilirlik sağlar.",
+    "Object Read-only": "Nesne Salt Okunur",
+    "Supports object locking mode, implementing WORM (Write Once Read Many) functionality, preventing data from being modified or deleted within specified time ranges, ensuring data integrity.": "Nesne kilitleme modunu destekler, WORM (Bir Kere Yaz Çok Kez Oku) işlevselliğini uygulayarak, belirtilen zaman aralıklarında verilerin değiştirilmesini veya silinmesini önler, veri bütünlüğünü sağlar.",
+    "Active Replication": "Aktif Çoğaltma",
+    "Automatically creates multiple copies when objects are written and distributes them to different nodes, supporting both synchronous and asynchronous replication modes, providing high availability and disaster recovery capabilities.": "Nesneler yazılırken otomatik olarak birden fazla kopyasını oluşturur ve bunları farklı düğümlere dağıtarak, hem senkron hem de asenkron çoğaltma modlarını destekleyerek yüksek kullanılabilirlik ve felaket kurtarma yetenekleri sağlar."
+  },
+  "footer": {
+    "Architecture Support": "Mimari Desteği",
+    "Bare Metal and Virtualization": "Çıplak Metal ve Sanallaştırma",
+    "Alibaba Cloud": "Alibaba Bulut",
+    "Tencent Cloud": "Tencent Bulut",
+    "Huawei Cloud": "Huawei Bulut",
+    "VMWare Tanzu": "VMWare Tanzu",
+    "International Cloud Providers": "Uluslararası Bulut Sağlayıcıları",
+    "Product Features": "Ürün Özellikleri",
+    "Distributed": "Dağıtık",
+    "Log Management": "Günlük Yönetimi",
+    "Version Control": "Sürüm Kontrolü",
+    "S3 Compatible": "S3 Uyumlu",
+    "Object-level and Read-only": "Nesne Seviyesi ve Salt Okunur",
+    "Cross-region Replication": "Çapraz Bölge Çoğaltma",
+    "Encryption": "Şifreleme",
+    "Lifecycle Management": "Yaşam Döngüsü Yönetimi",
+    "Solutions": "Çözümler",
+    "Modern Data Lake": "Modern Veri Gölü",
+    "AI and Machine Learning": "Yapay Zeka ve Makine Öğrenimi",
+    "Cloud Native": "Bulut Yerlisi",
+    "Big Data Compute-Storage Separation": "Büyük Veri Hesaplama-Depolama Ayrımı",
+    "SQL Support": "SQL Desteği",
+    "Quantitative Trading": "Kantitatif Ticaret",
+    "Manufacturing Cost Reduction": "Üretim Maliyetlerinin Azaltılması",
+    "Cold Archive Storage": "Soğuk Arşiv Depolama",
+    "Video Storage Solutions": "Video Depolama Çözümleri",
+    "Domestic Innovation and SM Solutions": "Yerli İnovasyon ve SM Çözümleri",
+    "About Us": "Hakkımızda",
+    "Investment and Cooperation": "Yatırım ve İşbirliği",
+    "Trademark Usage": "Marka Kullanımı",
+    "RustFS GitHub": "RustFS GitHub",
+    "Contact Us": "Bize Ulaşın",
+    "Customer Service Hours: 9:00-18:00": "Müşteri Hizmetleri Saatleri: 9:00-18:00",
+    "Beijing Haidian District Xixiaokou Road 66": "Pekin Haidian Bölgesi Xixiaokou Yolu 66"
+  },
+  "getStarted": {
+    "Experience RustFS": "RustFS Deneyimi",
+    "High security, high concurrency and ultimate performance": "Yüksek güvenlik, yüksek eşzamanlılık ve en üst düzey performans",
+    "Over 100+ enterprise users have started using RustFS": "100'den fazla kurumsal kullanıcı RustFS kullanmaya başladı"
+  },
+  "multiCloud": {
+    "True Multi-Cloud Storage": "Gerçek Çoklu Bulut Depolama",
+    "Multi-cloud object storage allows enterprises to build AWS S3-compatible data infrastructure on any cloud. The result is a consistent, portable interface for data and applications - meaning you can run anywhere, from edge to public cloud, without changing a line of code.": "Çoklu bulut nesne depolama, işletmelerin herhangi bir bulutta AWS S3 uyumlu veri altyapısı oluşturmasına olanak tanır. Sonuç olarak, veri ve uygulamalar için tutarlı, taşınabilir bir arayüz elde edilir - bu da kod satırı değiştirmeden, kenardan genel buluta her yerde çalışabileceğiniz anlamına gelir.",
+    "Contact us for more information": "Daha fazla bilgi için bizimle iletişime geçin",
+    "Public Cloud": "Genel Bulut",
+    "RustFS is powered by Kubernetes and provides scalable, secure, S3-compatible object storage for every public cloud. Free yourself from vendor lock-in and treat clouds for what they are - commodity compute, network, and drives.": "RustFS, Kubernetes tarafından desteklenmekte ve her genel bulut için ölçeklenebilir, güvenli, S3 uyumlu nesne depolama sağlar. Satıcı kilidinden kurtulun ve bulutları oldukları gibi kullanın - emtia hesaplama, ağ ve sürücüler.",
+    "Private Cloud": "Özel Bulut",
+    "From OpenShift to Tanzu, RustFS is the only object storage that is part of the infrastructure foundation of leading Kubernetes distributions. With its massive portfolio of integrated applications, RustFS completes the software-defined picture.": "OpenShift'ten Tanzu'ya kadar, RustFS, önde gelen Kubernetes dağıtımlarının altyapı temelinin bir parçası olan tek nesne depolama sistemidir. Entegrasyonlu uygulamaların geniş portföyüyle RustFS, yazılım tanımlı resmi tamamlar.",
+    "Edge": "Kenar",
+    "The complete RustFS multi-cloud storage binary is less than 100MB, capable of powering object storage anywhere - from ARM SOCs, 5G POPs, and edge cache devices to mini data centers. This is why RustFS dominates the edge storage market.": "Tam RustFS çoklu bulut depolama ikilisi 100MB'tan küçüktür ve nesne depolamayı her yerde güçlendirebilir - ARM SOC'lerden, 5G POPlara ve kenar önbellek cihazlarından mini veri merkezlerine kadar. Bu nedenle RustFS, kenar depolama pazarında hakimdir."
+  },
+  "reviews": {
+    "What customers say about RustFS": "Müşterilerin RustFS hakkında söyledikleri",
+    "Exquisite service, professional team, providing you with the best service": "Özenli hizmet, profesyonel ekip, size en iyi hizmeti sunuyor"
+  },
+  "theme": {
+    "Switch theme": "Tema değiştir"
+  },
+  "common": {
+    "Terms": "Şartlar",
+    "Privacy": "Gizlilik",
+    "Status": "Durum"
+  }
+}

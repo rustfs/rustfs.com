@@ -57,10 +57,10 @@ export default function HomeReviews() {
       <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl tracking-wide font-bold md:text-4xl md:leading-tight text-primary">
-            {tw('客户这样评价 RustFS', 'What customers say about RustFS')}
+            {tw('客户这样评价 RustFS', 'What customers say about RustFS', 'Müşteriler RustFS hakkında ne diyor')}
           </h2>
           <p className="mt-4 text-neutral-600 dark:text-neutral-400">
-            {tw('精致的服务，专业的团队, 为您提供最好的服务', 'Exquisite service, professional team, providing you with the best service')}
+            {tw('精致的服务，专业的团队, 为您提供最好的服务', 'Exquisite service, professional team, providing you with the best service', 'Mükemmel hizmet, profesyonel ekip, size en iyi hizmeti sunuyor')}
           </p>
         </div>
         <div className="relative flex h-[500px] w-full flex-row items-center justify-center overflow-hidden rounded-lg lg:hidden">

@@ -74,14 +74,15 @@ export default function DownloadPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center mb-6">
             <h1 className="text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
-              {tw('下载 RustFS', 'Download RustFS')}
+              {tw('下载 RustFS', 'Download RustFS', 'RustFS İndir')}
             </h1>
           </div>
 
           <p className="mx-auto max-w-3xl text-lg text-muted-foreground">
             {tw(
               '选择适合您系统的 RustFS 版本，支持 Windows、Linux、macOS 和 Docker 部署。开始体验高性能的分布式存储系统。',
-              'Choose the RustFS version that suits your system, supporting Windows, Linux, macOS and Docker deployment. Start experiencing high-performance distributed storage systems.'
+              'Choose the RustFS version that suits your system, supporting Windows, Linux, macOS and Docker deployment. Start experiencing high-performance distributed storage systems.',
+              'Sisteminize uygun RustFS sürümünü seçin, Windows, Linux, macOS ve Docker dağıtımını destekler. Yüksek performanslı dağıtık depolama sistemini deneyimlemeye başlayın.'
             )}
           </p>
 
@@ -97,7 +98,7 @@ export default function DownloadPage() {
               <div className="flex items-center space-x-2">
                 <span className="text-sm font-medium text-foreground">
                   {isLoadingRelease ? (
-                    tw('正在获取最新版本...', 'Loading latest version...')
+                    tw('正在获取最新版本...', 'Loading latest version...', 'En son sürüm yükleniyor...')
                   ) : release ? (
                     formatVersion(release.tag_name)
                   ) : (
@@ -107,14 +108,14 @@ export default function DownloadPage() {
                 {!isLoadingRelease && (
                   <span className="inline-flex items-center space-x-1 px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded-full">
                     <div className="w-1 h-1 bg-green-500 rounded-full"></div>
-                    <span>{tw('最新', 'Latest')}</span>
+                    <span>{tw('最新', 'Latest', 'En son')}</span>
                   </span>
                 )}
               </div>
 
               {release && (
                 <span className="text-xs text-muted-foreground">
-                  {tw(`发布于 ${formatReleaseDate(release.published_at, language)}`, `Released on ${formatReleaseDate(release.published_at, language)}`)}
+                  {tw(`发布于 ${formatReleaseDate(release.published_at, language)}`, `Released on ${formatReleaseDate(release.published_at, language)}`, `Yayınlanma tarihi ${formatReleaseDate(release.published_at, language)}`)}
                 </span>
               )}
 
@@ -150,7 +151,7 @@ export default function DownloadPage() {
       <section className="py-16 bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-foreground mb-8">
-            {tw('需要帮助？', 'Need Help?')}
+            {tw('需要帮助？', 'Need Help?', 'Yardıma mı ihtiyacınız var?')}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -162,10 +163,10 @@ export default function DownloadPage() {
                 <BookOpenIcon className="w-6 h-6 text-primary" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-2">
-                {tw('查看文档', 'Documentation')}
+                {tw('查看文档', 'Documentation', 'Belgelendirme')}
               </h3>
               <p className="text-sm text-muted-foreground">
-                {tw('详细的安装指南和使用说明', 'Detailed installation guides and usage instructions')}
+                {tw('详细的安装指南和使用说明', 'Detailed installation guides and usage instructions', 'Detaylı kurulum kılavuzları ve kullanım talimatları')}
               </p>
             </a>
 
@@ -177,10 +178,10 @@ export default function DownloadPage() {
                 <MessageCircleIcon className="w-6 h-6 text-primary" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-2">
-                {tw('社区支持', 'Community Support')}
+                {tw('社区支持', 'Community Support', 'Topluluk Desteği')}
               </h3>
               <p className="text-sm text-muted-foreground">
-                {tw('加入社区讨论，获取技术支持', 'Join community discussions and get technical support')}
+                {tw('加入社区讨论，获取技术支持', 'Join community discussions and get technical support', 'Topluluk tartışmalarına katılın ve teknik destek alın')}
               </p>
             </a>
           </div>
