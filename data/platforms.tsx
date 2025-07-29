@@ -60,20 +60,20 @@ export const platforms: PlatformInfo[] = [
       {
         name: "x86_64",
         architecture: "x86_64",
-        downloadUrl: "https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-x86_64-latest.zip",
+        downloadUrl: "https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-x86_64-musl-latest.zip",
         commands: [
-          "curl -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-x86_64-latest.zip",
-          "unzip rustfs-linux-x86_64-latest.zip",
+          "curl -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-x86_64-musl-latest.zip",
+          "unzip rustfs-linux-x86_64-musl-latest.zip",
           "./rustfs --version",
         ],
       },
       {
         name: "aarch64",
         architecture: "aarch64",
-        downloadUrl: "https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-aarch64-latest.zip",
+        downloadUrl: "https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-aarch64-musl-latest.zip",
         commands: [
-          "curl -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-aarch64-latest.zip",
-          "unzip rustfs-linux-aarch64-latest.zip",
+          "curl -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-aarch64-musl-latest.zip",
+          "unzip rustfs-linux-aarch64-musl-latest.zip",
           "./rustfs --version",
         ],
         notes: [
