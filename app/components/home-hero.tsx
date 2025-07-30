@@ -70,7 +70,6 @@ export default function HomeHero() {
         {tw('RustFS 用热门安全的 Rust 语言开发，兼容 S3 协议。适用于 AI/ML 及海量数据存储、大数据、互联网、工业和保密存储等全部场景。近乎免费使用。遵循 Apache 2 协议，支持国产保密设备和系统。', 'RustFS is developed with the popular and secure Rust language, compatible with S3 protocol. Suitable for AI/ML and massive data storage, big data, internet, industrial and confidential storage scenarios. Nearly free to use. Follows Apache 2 license, supports domestic confidential equipment and systems.')}
       </p>
       <div className="mt-10 flex justify-center gap-x-6">
-        <GetStartedButton />
         <DownloadLink />
         <DemoLink className="hidden md:inline-flex" />
       </div>
