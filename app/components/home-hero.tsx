@@ -4,7 +4,7 @@ import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import DemoLink from "./buttons/demo-link";
 import DownloadLink from "./buttons/download-link";
-import GetStartedButton from "./buttons/get-started";
+//import GetStartedButton from "./buttons/get-started";
 
 // 导入所有软件SVG图标
 import ClickhouseIcon from "../../public/svgs/softwares/clickhouse.svg";
