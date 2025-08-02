@@ -66,6 +66,15 @@ export const platforms: PlatformInfo[] = [
           "unzip rustfs-linux-x86_64-musl-latest.zip",
           "./rustfs --version",
         ],
+        notes: [
+          {
+            type: "tip",
+            content: {
+              zh: "RustFS 的初始化默认用户名和密码均为 rustfsadmin。建议安装完毕后对用户名和密码进行修改。",
+              en: "The default username and password for RustFS are rustfsadmin. It is recommended to modify the username and password after installation.",
+            },
+          },
+        ],
       },
       {
         name: "aarch64",
@@ -84,6 +93,13 @@ export const platforms: PlatformInfo[] = [
               en: "For ARM64 architecture (Raspberry Pi, cloud servers, etc.) with lower power consumption",
             },
           },
+          {
+            type: "tip",
+            content: {
+              zh: "RustFS 的初始化默认用户名和密码均为 rustfsadmin。建议安装完毕后对用户名和密码进行修改。",
+              en: "The default username and password for RustFS are rustfsadmin. It is recommended to modify the username and password after installation.",
+            },
+          },
         ],
       },
     ],
@@ -96,6 +112,13 @@ export const platforms: PlatformInfo[] = [
           en: "View detailed installation guide",
         },
         url: "https://docs.rustfs.com/installation/linux",
+      },
+      {
+        type: "tip",
+        content: {
+          zh: "RustFS 的初始化默认用户名和密码均为 rustfsadmin。建议安装完毕后对用户名和密码进行修改。",
+          en: "The default username and password for RustFS are rustfsadmin. It is recommended to modify the username and password after installation.",
+        },
       },
     ],
   },
@@ -183,6 +206,13 @@ export const platforms: PlatformInfo[] = [
     ],
     notes: [
       {
+        type: "tip",
+        content: {
+          zh: "RustFS 的初始化默认用户名和密码均为 rustfsadmin。建议安装完毕后对用户名和密码进行修改。",
+          en: "The default username and password for RustFS are rustfsadmin. It is recommended to modify the username and password after installation.",
+        },
+      },
+      {
         type: "info",
         content: {
           zh: "查看所有可用版本",
@@ -224,6 +254,13 @@ export const platforms: PlatformInfo[] = [
           {
             type: "tip",
             content: {
+              zh: "RustFS 的初始化默认用户名和密码均为 rustfsadmin。建议安装完毕后对用户名和密码进行修改。",
+              en: "The default username and password for RustFS are rustfsadmin. It is recommended to modify the username and password after installation.",
+            },
+          },
+          {
+            type: "tip",
+            content: {
               zh: "针对 Apple Silicon 优化，支持 M 系列芯片",
               en: "Optimized for Apple Silicon, supports M series chips",
             },
@@ -239,6 +276,15 @@ export const platforms: PlatformInfo[] = [
           "unzip rustfs-darwin-x86_64-latest.zip",
           "chmod +x rustfs",
           "./rustfs --version",
+        ],
+        notes: [
+          {
+            type: "tip",
+            content: {
+              zh: "RustFS 的初始化默认用户名和密码均为 rustfsadmin。建议安装完毕后对用户名和密码进行修改。",
+              en: "The default username and password for RustFS are rustfsadmin. It is recommended to modify the username and password after installation.",
+            },
+          },
         ],
       },
     ],
@@ -258,6 +304,13 @@ export const platforms: PlatformInfo[] = [
       },
     ],
     notes: [
+      {
+        type: "tip",
+        content: {
+          zh: "RustFS 的初始化默认用户名和密码均为 rustfsadmin。建议安装完毕后对用户名和密码进行修改。",
+          en: "The default username and password for RustFS are rustfsadmin. It is recommended to modify the username and password after installation.",
+        },
+      },
       {
         type: "info",
         content: {
