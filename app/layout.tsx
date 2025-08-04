@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "RustFS - MinIO 国产化替代方案, 高性能分布式存储",
   description: "RustFS 使用全球最热,性能最好的内存安全Rust语言开发的高性能对象存储是开源的、兼容 OSS 的 Kubernetes 原生云存储,专为 AI 等云原生工作负载而设计。适合企业构建私有云存储、混合云存储和分布式存储,也是 MinIO 的国产化替代方案。",
-  keywords: "RustFS, MinIO, 分布式存储, 高性能, 高安全, 高并发",
+  keywords: "RustFS, MinIO, 分布式存储, 高性能, 高安全, 高并发, S3, Rust, 云原生, Cloud Native, Docker,存储桶, Bucket, 存储, 对象存储, MinIO 国产化替代方案",
 };
 
 export default function RootLayout({

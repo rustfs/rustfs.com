@@ -87,9 +87,20 @@ export default function AppFooter() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-4">
               <Logo className="h-8 w-auto" />
-              <div className="text-sm text-muted-foreground">
+              <div className="text-sm text-muted-foreground flex flex-col gap-0.5">
                 <p>{tw('客服时间：9:00-18:00', 'Customer Service Hours: 9:00-18:00')}</p>
-                <p>{tw('北京市海淀区西小口路66号', 'Beijing Haidian District Xixiaokou Road 66')}</p>
+                <div className="flex items-center gap-2">
+                  <span>{tw('北京市海淀区西小口路66号', 'Beijing Haidian District Xixiaokou Road 66')}</span>
+                  <span className="hidden md:inline-block">|</span>
+                  <a
+                    href="https://beian.miit.gov.cn/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                  {tw('京ICP备2024061305号-1', 'Beijing ICP License No. 2024061305-1')}
+                  </a>
+                </div>
               </div>
             </div>
             <div className="flex items-center gap-4">
