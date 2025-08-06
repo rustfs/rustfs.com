@@ -60,24 +60,24 @@ info "OS and architecture check passed: $ARCH."
 
 # --- glibc Check ---
 USE_MUSL=1
-glibc_ver=""
-if command -v ldd >/dev/null 2>&1; then
-  glibc_ver=$(ldd --version 2>/dev/null | head -n1 | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' | awk -F. '{print $1"."$2"."($3?$3:"0")}')
-  min_ver="2.17"
-  if [[ -z "$glibc_ver" ]]; then
-    USE_MUSL=1
-    info "glibc version could not be detected, using MUSL build."
-  elif version_ge "$glibc_ver" "$min_ver"; then
-    USE_MUSL=0
-    info "glibc version $glibc_ver is sufficient, using GNU build."
-  else
-    USE_MUSL=1
-    info "glibc version $glibc_ver is too old, using MUSL build."
-  fi
-else
-  USE_MUSL=1
-  info "ldd not found, using MUSL build."
-fi
+#glibc_ver=""
+#if command -v ldd >/dev/null 2>&1; then
+#  glibc_ver=$(ldd --version 2>/dev/null | head -n1 | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' | awk -F. '{print $1"."$2"."($3?$3:"0")}')
+#  min_ver="2.17"
+#  if [[ -z "$glibc_ver" ]]; then
+#    USE_MUSL=1
+#    info "glibc version could not be detected, using MUSL build."
+#  elif version_ge "$glibc_ver" "$min_ver"; then
+#    USE_MUSL=0
+#    info "glibc version $glibc_ver is sufficient, using GNU build."
+#  else
+#    USE_MUSL=1
+#    info "glibc version $glibc_ver is too old, using MUSL build."
+#  fi
+#else
+#  USE_MUSL=1
+#  info "ldd not found, using MUSL build."
+#fi
 
 # --- Port Input & Check ---
 DEFAULT_RUSTFS_PORT=9000
