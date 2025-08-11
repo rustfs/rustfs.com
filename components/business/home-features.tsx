@@ -8,7 +8,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 export default function HomeFeatures() {
-  const t = useTranslations('features');
+  const t = useTranslations();
   const locale = useLocale() as 'zh' | 'en';
   const [activeTab, setActiveTab] = useState(0);
 
@@ -18,10 +18,10 @@ export default function HomeFeatures() {
         {/* Title */}
         <div className="mx-auto mb-10 text-center lg:mb-14">
           <h2 className="text-3xl font-bold md:text-4xl tracking-wide md:leading-tight dark:text-white">
-            {t('High-performance')} <span className="text-blue-500">{t('enterprise-grade distributed file system')}</span>
+            {t('features.highPerformance')} <span className="text-blue-500">{t('features.enterpriseGradeDistributedFileSystem')}</span>
           </h2>
           <p className="text-muted-foreground mt-4">
-            {t('Comprehensive features to meet enterprise-grade storage requirements')}
+            {t('features.comprehensiveFeaturesDescription')}
           </p>
         </div>
         {/* End Title */}

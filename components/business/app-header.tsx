@@ -17,31 +17,31 @@ export default function AppHeader() {
 
   const navs = [
     {
-      label: t('nav.Product Features'),
+      label: t('nav.features'),
       url: docs_url('features/distributed/', locale),
     },
     {
-      label: t('nav.Architecture'),
+      label: t('nav.architecture'),
       url: docs_url('architecture.html', locale),
     },
     {
-      label: t('nav.Solutions'),
+      label: t('nav.solutions'),
       url: docs_url('features/data-lake/', locale),
     },
     // {
-    //   label: t('nav.Integrations'),
+    //   label: t('nav.integrations'),
     //   url: `https://docs.rustfs.com/${locale}/intergrations`
     // },
     {
-      label: t('nav.AI Support'),
+      label: t('nav.ai'),
       url: docs_url('features/ai', locale)
     },
     {
-      label: t('buttons.Download'),
+      label: t('nav.download'),
       url: `/${locale}/download`
     },
     {
-      label: t('nav.Documentation'),
+      label: t('nav.docs'),
       url: docs_url('', locale)
     },
     // {
@@ -49,11 +49,11 @@ export default function AppHeader() {
     //   url: '/blog'
     // },
     {
-      label: t('nav.Community'),
+      label: t('nav.community'),
       url: 'https://github.com/rustfs/rustfs/discussions'
     },
     {
-      label: t('nav.About Us'),
+      label: t('nav.about'),
       url: docs_url('about', locale)
     }
   ]

@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 
 export default function HomeStats() {
-  const t = useTranslations('stats');
+  const t = useTranslations();
 
   return (
     <section
@@ -19,10 +19,10 @@ export default function HomeStats() {
       <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-20">
           <h2 className="text-3xl font-bold tracking-wide md:text-4xl md:leading-tight ">
-            {t('title')}
+            {t('stats.title')}
           </h2>
           <p className="mt-4 text-muted">
-            {t('subtitle')}
+            {t('stats.subtitle')}
           </p>
         </div>
         {/* Grid */}
@@ -32,7 +32,7 @@ export default function HomeStats() {
             <div className="lg:pe-6 xl:pe-12">
               <p className="text-8xl font-bold leading-10">
                 92%
-                <span className="ms-1 inline-flex items-center gap-x-1 rounded-full bg-background px-4 py-2 text-xs font-medium leading-4 text-gray-800 dark:bg-neutral-800 dark:text-neutral-300">
+                <span className="ms-1 inline-flex items-center gap-x-1 rounded-full bg-background px-4 py-2 text-xs font-medium leading-4 text-gray-800 dark:bg-neutral-800 dark:text-neutral-800 dark:text-neutral-300">
                   <svg
                     className="size-4 shrink-0"
                     xmlns="http://www.w3.org/2000/svg"
@@ -43,11 +43,11 @@ export default function HomeStats() {
                   >
                     <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
                   </svg>
-                  {t('performanceImprovement')}
+                  {t('stats.performanceImprovement')}
                 </span>
               </p>
               <p className="mt-6">
-                {t('performanceDescription')}
+                {t('stats.performanceDescription')}
               </p>
             </div>
             {/* End Stats */}
@@ -60,7 +60,7 @@ export default function HomeStats() {
               <div>
                 <p className="text-5xl font-semibold">99.99%</p>
                 <p className="mt-1">
-                  {t('dataSuccessRate')}
+                  {t('stats.dataSuccessRate')}
                 </p>
               </div>
               {/* End Stats */}
@@ -68,7 +68,7 @@ export default function HomeStats() {
               <div>
                 <p className="text-5xl font-semibold">100%</p>
                 <p className="mt-1">
-                  {t('s3Compatibility')}
+                  {t('stats.s3Compatibility')}
                 </p>
               </div>
               {/* End Stats */}
@@ -77,7 +77,7 @@ export default function HomeStats() {
               <div>
                 <p className="text-5xl font-semibold">95%</p>
                 <p className="mt-1">
-                  {t('userSatisfaction')}
+                  {t('stats.userSatisfaction')}
                 </p>
               </div>
               {/* End Stats */}
@@ -86,16 +86,16 @@ export default function HomeStats() {
               <div>
                 <p className="text-5xl font-semibold">0</p>
                 <p className="mt-1">
-                  {t('ipRisk')}
+                  {t('stats.ipRisk')}
                 </p>
               </div>
               {/* End Stats */}
 
               {/* Stats */}
               <div>
-                <p className="text-5xl font-semibold">～1 {t('day')}</p>
+                <p className="text-5xl font-semibold">～1 {t('stats.day')}</p>
                 <p className="mt-1">
-                  {t('githubIssuesTime')}
+                  {t('stats.githubIssuesResponseTime')}
                 </p>
               </div>
               {/* End Stats */}
@@ -104,7 +104,7 @@ export default function HomeStats() {
               <div>
                 <p className="text-5xl font-semibold">1000+</p>
                 <p className="mt-1">
-                  {t('githubCommits')}
+                  {t('stats.githubCommits')}
                 </p>
               </div>
               {/* End Stats */}

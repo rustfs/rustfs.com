@@ -1,17 +1,19 @@
 'use client'
 
-import { getAllPlatforms, type PlatformInfo } from '@/data/platforms';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import DownloadSection from './download-section';
 import PlatformSelector from './platform-selector';
+import { usePlatformConfig } from './platforms/platform-config';
+import { type PlatformInfoData } from './platforms/platform-info';
 
 export default function DownloadPageClient() {
   const t = useTranslations();
-  const availablePlatforms = getAllPlatforms();
+  const platforms = usePlatformConfig();
+  const availablePlatforms = platforms.filter(p => p.available);
 
   // State management
-  const [selectedPlatform, setSelectedPlatform] = useState<PlatformInfo | null>(null);
+  const [selectedPlatform, setSelectedPlatform] = useState<PlatformInfoData | null>(null);
 
   // Initialize selected platform
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function DownloadPageClient() {
       const platformParam = urlParams.get('platform');
 
       if (platformParam) {
-        const platform = availablePlatforms.find(p => p.id === platformParam);
+        const platform = platforms.find(p => p.id === platformParam);
         if (platform && platform.available) {
           setSelectedPlatform(platform);
           return;
@@ -33,10 +35,10 @@ export default function DownloadPageClient() {
     if (availablePlatforms.length > 0) {
       setSelectedPlatform(availablePlatforms[0]);
     }
-  }, [availablePlatforms]);
+  }, [platforms, availablePlatforms]);
 
   // Handle platform selection change
-  const handlePlatformChange = (platform: PlatformInfo) => {
+  const handlePlatformChange = (platform: PlatformInfoData) => {
     setSelectedPlatform(platform);
 
     // Update URL (client-side only)
@@ -59,7 +61,7 @@ export default function DownloadPageClient() {
           </div>
 
           <p className="mx-auto max-w-3xl text-lg text-muted-foreground">
-            {t('download.description')}
+            {t('download.subtitle')}
           </p>
         </div>
       </section>

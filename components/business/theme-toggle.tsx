@@ -7,7 +7,7 @@ import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
 export function ThemeToggle() {
-  const t = useTranslations('theme');
+  const t = useTranslations();
   const { resolvedTheme, setTheme } = useTheme()
   // Ensure component displays theme state after client-side hydration
   const [mounted, setMounted] = useState(false)
@@ -27,7 +27,7 @@ export function ThemeToggle() {
       <button
         type="button"
         className="relative p-0 text-muted-foreground hover:text-primary transition-colors"
-        aria-label={t('Switch theme')}
+        aria-label={t('theme.switchTheme')}
         disabled
       >
         <div className="relative size-5">
@@ -44,7 +44,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       className="relative p-0 text-muted-foreground hover:text-primary transition-colors"
-      aria-label={t('Switch theme')}
+      aria-label={t('theme.switchTheme')}
     >
       <div className="relative size-5">
         <AnimatePresence mode="wait">

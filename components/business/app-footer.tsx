@@ -12,49 +12,49 @@ export default function AppFooter() {
 
   const footerLinks = [
     {
-      title: t('footer.Architecture Support'),
+      title: t('footer.architectureSupport'),
       links: [
-        { title: t('footer.Bare Metal and Virtualization'), href: docs_url('features/baremetal', locale) },
-        { title: t('footer.Alibaba Cloud'), href: docs_url('features/aliyun', locale) },
-        { title: t('footer.Tencent Cloud'), href: docs_url('features/qcloud', locale) },
-        { title: t('footer.Huawei Cloud'), href: docs_url('features/huaweicloud', locale) },
-        { title: t('footer.International Cloud Providers'), href: docs_url('features/aws-elastic', locale) },
+        { title: t('footer.bareMetalAndVirtualization'), href: docs_url('features/baremetal', locale) },
+        { title: t('footer.alibabaCloud'), href: docs_url('features/aliyun', locale) },
+        { title: t('footer.tencentCloud'), href: docs_url('features/qcloud', locale) },
+        { title: t('footer.huaweiCloud'), href: docs_url('features/huaweicloud', locale) },
+        { title: t('footer.internationalCloudProviders'), href: docs_url('features/aws-elastic', locale) },
       ]
     },
     {
-      title: t('footer.Product Features'),
+      title: t('footer.productFeatures'),
       links: [
-        { title: t('footer.Distributed'), href: docs_url('features/distributed', locale) },
-        { title: t('footer.Log Management'), href: docs_url('features/logging', locale) },
-        { title: t('footer.Version Control'), href: docs_url('features/versioning', locale) },
-        { title: t('footer.S3 Compatible'), href: docs_url('features/s3-compatibility', locale) },
-        { title: t('footer.Object-level and Read-only'), href: docs_url('features/worm', locale) },
-        { title: t('footer.Cross-region Replication'), href: docs_url('features/replication', locale) },
-        { title: t('footer.Encryption'), href: docs_url('features/encryption', locale) },
-        { title: t('footer.Lifecycle Management'), href: docs_url('features/lifecycle', locale) },
+        { title: t('footer.distributed'), href: docs_url('features/distributed', locale) },
+        { title: t('footer.logManagement'), href: docs_url('features/logging', locale) },
+        { title: t('footer.versionControl'), href: docs_url('features/versioning', locale) },
+        { title: t('footer.s3Compatible'), href: docs_url('features/s3-compatibility', locale) },
+        { title: t('footer.objectLevelAndReadOnly'), href: docs_url('features/worm', locale) },
+        { title: t('footer.crossRegionReplication'), href: docs_url('features/replication', locale) },
+        { title: t('footer.encryption'), href: docs_url('features/encryption', locale) },
+        { title: t('footer.lifecycleManagement'), href: docs_url('features/lifecycle', locale) },
       ]
     },
     {
-      title: t('footer.Solutions'),
+      title: t('footer.solutions'),
       links: [
-        { title: t('footer.Modern Data Lake'), href: docs_url('features/data-lake', locale) },
-        { title: t('footer.AI and Machine Learning'), href: docs_url('features/ai', locale) },
-        { title: t('footer.Cloud Native'), href: docs_url('features/cloud-native', locale) },
-        { title: t('footer.Big Data Compute-Storage Separation'), href: docs_url('features/hdfs', locale) },
-        { title: t('footer.SQL Support'), href: docs_url('features/sql-server', locale) },
-        { title: t('footer.Quantitative Trading'), href: docs_url('features/quantitative-trading', locale) },
-        { title: t('footer.Manufacturing Cost Reduction'), href: docs_url('features/industry', locale) },
-        { title: t('footer.Cold Archive Storage'), href: docs_url('features/cold-archiving', locale) },
-        { title: t('footer.Video Storage Solutions'), href: docs_url('features/video', locale) },
-        { title: t('footer.Domestic Innovation and SM Solutions'), href: docs_url('features/domestic', locale) },
+        { title: t('footer.modernDataLake'), href: docs_url('features/data-lake', locale) },
+        { title: t('footer.aiAndMachineLearning'), href: docs_url('features/ai', locale) },
+        { title: t('footer.cloudNative'), href: docs_url('features/cloud-native', locale) },
+        { title: t('footer.bigDataComputeStorageSeparation'), href: docs_url('features/hdfs', locale) },
+        { title: t('footer.sqlSupport'), href: docs_url('features/sql-server', locale) },
+        { title: t('footer.quantitativeTrading'), href: docs_url('features/quantitative-trading', locale) },
+        { title: t('footer.manufacturingCostReduction'), href: docs_url('features/industry', locale) },
+        { title: t('footer.coldArchiveStorage'), href: docs_url('features/cold-archiving', locale) },
+        { title: t('footer.videoStorageSolutions'), href: docs_url('features/video', locale) },
+        { title: t('footer.domesticInnovationAndSMSolutions'), href: docs_url('features/domestic', locale) },
       ]
     },
     {
-      title: t('footer.About Us'),
+      title: t('footer.aboutUs'),
       links: [
-        { title: t('footer.About Us'), href: docs_url('about', locale) },
-        { title: t('footer.Investment and Cooperation'), href: docs_url('about', locale) },
-        { title: t('footer.Trademark Usage'), href: docs_url('trademark', locale) },
+        { title: t('footer.aboutUs'), href: docs_url('about', locale) },
+        { title: t('footer.investmentAndCooperation'), href: docs_url('about', locale) },
+        { title: t('footer.trademarkUsage'), href: docs_url('trademark', locale) },
       ]
     }
   ];
@@ -89,9 +89,9 @@ export default function AppFooter() {
             <div className="flex items-center gap-4">
               <Logo className="h-8 w-auto" />
               <div className="text-sm text-muted-foreground flex flex-col gap-0.5">
-                <p>{t('footer.Customer Service Hours: 9:00-18:00')}</p>
+                <p>{t('footer.customerServiceHours')}</p>
                 <div className="flex items-center gap-2">
-                  <span>{t('footer.Beijing Haidian District Xixiaokou Road 66')}</span>
+                  <span>{t('footer.beijingAddress')}</span>
                   <span className="hidden md:inline-block">|</span>
                   <a
                     href="https://beian.miit.gov.cn/"
