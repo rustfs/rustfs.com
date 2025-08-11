@@ -1,13 +1,13 @@
 'use client'
 
-import { useI18n } from '@/lib/i18n';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
 export function ThemeToggle() {
-  const { tw } = useI18n();
+  const t = useTranslations('theme');
   const { resolvedTheme, setTheme } = useTheme()
   // Ensure component displays theme state after client-side hydration
   const [mounted, setMounted] = useState(false)
@@ -27,7 +27,7 @@ export function ThemeToggle() {
       <button
         type="button"
         className="relative p-0 text-muted-foreground hover:text-primary transition-colors"
-        aria-label={tw('切换主题', 'Toggle theme')}
+        aria-label={t('Switch theme')}
         disabled
       >
         <div className="relative size-5">
@@ -44,7 +44,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       className="relative p-0 text-muted-foreground hover:text-primary transition-colors"
-      aria-label={tw('切换主题', 'Toggle theme')}
+      aria-label={t('Switch theme')}
     >
       <div className="relative size-5">
         <AnimatePresence mode="wait">

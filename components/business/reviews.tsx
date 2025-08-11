@@ -3,8 +3,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { Marquee } from "@/components/magicui/marquee";
 import reviews from "@/data/reviews.json";
-import { useI18n } from "@/lib/i18n";
 import clsx from "clsx";
+import { useLocale, useTranslations } from 'next-intl';
 
 type SlideItem = { name: { zh: string; en: string; }; position: { zh: string; en: string; }; body: { zh: string; en: string; }; img: string; }
 
@@ -51,16 +51,19 @@ const ReviewCard = ({
 };
 
 export default function HomeReviews() {
-  const { tw, language } = useI18n();
+  const t = useTranslations();
+  const locale = useLocale();
+  const language = locale as 'zh' | 'en';
+
   return (
     <section className="relative overflow-hidden py-32">
       <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl tracking-wide font-bold md:text-4xl md:leading-tight text-primary">
-            {tw('客户这样评价 RustFS', 'What customers say about RustFS')}
+            {t('reviews.What customers say about RustFS')}
           </h2>
           <p className="mt-4 text-neutral-600 dark:text-neutral-400">
-            {tw('精致的服务，专业的团队, 为您提供最好的服务', 'Exquisite service, professional team, providing you with the best service')}
+            {t('reviews.Exquisite service, professional team, providing you with the best service')}
           </p>
         </div>
         <div className="relative flex h-[500px] w-full flex-row items-center justify-center overflow-hidden rounded-lg lg:hidden">
@@ -70,7 +73,7 @@ export default function HomeReviews() {
             ))}
           </Marquee>
         </div>
-        <div className="relative hidden h-[500px] w-full flex-row items-center justify-center overflow-hidden rounded-lg lg:flex">
+        <div className="relative hidden h-[500px] w-full w-full flex-row items-center justify-center overflow-hidden rounded-lg lg:flex">
           <Marquee pauseOnHover vertical className="[--duration:60s] [--gap:2rem] p-4">
             {firstRow.map((review) => (
               <ReviewCard key={review.name[language] + review.position[language]} {...review} language={language} />

@@ -1,11 +1,7 @@
-import { I18nProvider } from "@/lib/i18n";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
-import AppFooter from "./components/app-footer";
-import AppHeader from "./components/app-header";
-import FixedContactButton from "./components/buttons/fixed-contact-button";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -30,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <head>
         <meta
           key="twitter:card"
@@ -68,12 +64,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex h-full flex-col`}
       >
         <ThemeProvider enableSystem attribute="class">
-          <I18nProvider>
-            <AppHeader />
-            {children}
-            <AppFooter />
-            <FixedContactButton />
-          </I18nProvider>
+          {children}
           <Script
             id="baidu-analytics"
             src="https://hm.baidu.com/hm.js?968e7103a8e28fb30f7d69e42b7c82bc"

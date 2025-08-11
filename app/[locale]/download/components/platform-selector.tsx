@@ -1,8 +1,8 @@
 'use client'
 
 import { getAllPlatforms, type PlatformInfo } from "@/data/platforms";
-import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { useLocale, useTranslations } from "next-intl";
 
 interface PlatformSelectorProps {
   selectedPlatform: PlatformInfo | null;
@@ -15,13 +15,14 @@ export default function PlatformSelector({
   onPlatformChange,
   className
 }: PlatformSelectorProps) {
-  const { tw } = useI18n();
+  const t = useTranslations();
+  const locale = useLocale();
   const allPlatforms = getAllPlatforms();
 
   return (
     <div className={cn("flex flex-col space-y-4", className)}>
       <h2 className="text-xl font-semibold text-foreground">
-        {tw('选择您的平台', 'Choose your platform')}
+        {t('download.choosePlatform')}
       </h2>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -62,8 +63,8 @@ export default function PlatformSelector({
               </span>
               <span className="text-sm text-muted-foreground mt-1 text-center">
                 {isAvailable
-                  ? tw(platform.description.zh, platform.description.en)
-                  : tw('即将开放', 'Coming Soon')
+                  ? platform.description[locale as 'zh' | 'en']
+                  : t('download.comingSoon')
                 }
               </span>
             </button>

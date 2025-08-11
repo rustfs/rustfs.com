@@ -1,8 +1,8 @@
 'use client'
 
-import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { CheckIcon, CopyIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 interface CodeBlockProps {
@@ -12,7 +12,7 @@ interface CodeBlockProps {
 }
 
 export default function CodeBlock({ code, title, className }: CodeBlockProps) {
-  const { tw } = useI18n();
+  const t = useTranslations();
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async () => {
@@ -46,7 +46,7 @@ export default function CodeBlock({ code, title, className }: CodeBlockProps) {
         <button
           onClick={copyToClipboard}
           className="absolute top-2 right-2 p-2 rounded-md bg-muted/80 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-          title={tw('复制代码', 'Copy code')}
+          title={t('download.copyCode')}
         >
           {copied ? (
             <CheckIcon className="w-4 h-4 text-green-500" />

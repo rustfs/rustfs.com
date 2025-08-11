@@ -2,9 +2,9 @@
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { type Note } from "@/data/platforms";
-import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { AlertTriangleIcon, CheckCircleIcon, ExternalLinkIcon, InfoIcon, LightbulbIcon } from "lucide-react";
+import { useLocale } from "next-intl";
 
 interface NotesSectionProps {
   notes: Note[];
@@ -12,7 +12,7 @@ interface NotesSectionProps {
 }
 
 export default function NotesSection({ notes, className }: NotesSectionProps) {
-  const { tw } = useI18n();
+  const locale = useLocale();
 
   if (!notes || notes.length === 0) {
     return null;
@@ -75,7 +75,7 @@ export default function NotesSection({ notes, className }: NotesSectionProps) {
               <Alert variant={variant} className={cn("cursor-pointer border-2 hover:border-primary/50", className)}>
                 {icon}
                 <AlertDescription className="flex items-center justify-between">
-                  <span>{tw(note.content.zh, note.content.en)}</span>
+                  <span>{note.content[locale as 'zh' | 'en']}</span>
                   <ExternalLinkIcon className="w-4 h-4 ml-2 opacity-60" />
                 </AlertDescription>
               </Alert>
@@ -88,7 +88,7 @@ export default function NotesSection({ notes, className }: NotesSectionProps) {
           <Alert key={noteIndex} variant={variant} className={className}>
             {icon}
             <AlertDescription>
-              {tw(note.content.zh, note.content.en)}
+              {note.content[locale as 'zh' | 'en']}
             </AlertDescription>
           </Alert>
         );

@@ -1,59 +1,60 @@
 'use client'
 
-import { useI18n } from "@/lib/i18n";
+import LanguageToggle from "@/components/ui/language-toggle";
 import { docs_url } from "@/lib/utils";
 import { Popover, Transition } from '@headlessui/react';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from "next/link";
 import { Fragment } from 'react';
 import LinkGitHub from "./buttons/link-github";
 import LinkTwitter from "./buttons/link-twitter";
-import LanguageToggle from "./language-toggle";
 import { Logo } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
 
 export default function AppHeader() {
-  const { tw, language } = useI18n();
+  const t = useTranslations();
+  const locale = useLocale();
 
   const navs = [
     {
-      label: tw('产品功能', 'Features'),
-      url: docs_url('features/distributed/', language),
+      label: t('nav.Product Features'),
+      url: docs_url('features/distributed/', locale),
     },
     {
-      label: tw('架构', 'Architecture'),
-      url: docs_url('architecture.html', language),
+      label: t('nav.Architecture'),
+      url: docs_url('architecture.html', locale),
     },
     {
-      label: tw('解决方案', 'Solutions'),
-      url: docs_url('features/data-lake/', language),
+      label: t('nav.Solutions'),
+      url: docs_url('features/data-lake/', locale),
     },
     // {
-    //   label: tw('集成', 'Integrations'),
+    //   label: t('nav.Integrations'),
     //   url: `https://docs.rustfs.com/${locale}/intergrations`
     // },
     {
-      label: tw('AI 支持', 'AI'),
-      url: docs_url('features/ai', language)
+      label: t('nav.AI Support'),
+      url: docs_url('features/ai', locale)
     },
     {
-      label: tw('下载', 'Download'),
-      url: '/download'
+      label: t('buttons.Download'),
+      url: `/${locale}/download`
     },
     {
-      label: tw('文档', 'Documentation'),
-      url: docs_url('', language)
+      label: t('nav.Documentation'),
+      url: docs_url('', locale)
     },
     // {
     //   label: 'Blog',
     //   url: '/blog'
     // },
     {
-      label: tw('社区', 'Community'),
+      label: t('nav.Community'),
       url: 'https://github.com/rustfs/rustfs/discussions'
     },
     {
-      label: tw('关于我们', 'About Us'),
-      url: docs_url('about', language)
+      label: t('nav.About Us'),
+      url: docs_url('about', locale)
     }
   ]
 
@@ -62,7 +63,7 @@ export default function AppHeader() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
-            <Link href="/">
+            <Link href={`/${locale}`}>
               <Logo className="h-5 w-auto" />
             </Link>
             <div className="hidden md:flex md:gap-x-6">
