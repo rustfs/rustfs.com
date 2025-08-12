@@ -1,13 +1,13 @@
 import AppFooter from '@/components/business/app-footer';
 import AppHeader from '@/components/business/app-header';
 import FixedContactButton from '@/components/business/buttons/fixed-contact-button';
-import { routing } from '@/i18n/routing';
-import { NextIntlClientProvider, hasLocale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { locales, type Locale } from '@/lib/constants';
+import { I18nProvider } from '@/lib/i18n';
+import { getMessages } from '@/lib/i18n-server';
 import { notFound } from 'next/navigation';
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+  return locales.map((locale) => ({ locale }));
 }
 
 export default async function LocaleLayout({
@@ -17,32 +17,23 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  // Ensure that the incoming `locale` is valid
   const { locale } = await params;
-  if (!hasLocale(routing.locales, locale)) {
+  if (!locales.includes(locale as Locale)) {
     notFound();
   }
 
-  // Enable static rendering
-  setRequestLocale(locale);
-
-  // Load messages for the locale
-  let messages;
-  try {
-    messages = (await import(`@/locales/${locale}.json`)).default;
-  } catch {
-    notFound();
-  }
+  // 动态加载语言包
+  const messages = await getMessages(locale as Locale);
 
   return (
     <html lang={locale}>
       <body>
-        <NextIntlClientProvider messages={messages}>
+        <I18nProvider locale={locale as Locale} messages={messages}>
           <AppHeader />
           {children}
           <AppFooter />
           <FixedContactButton />
-        </NextIntlClientProvider>
+        </I18nProvider>
       </body>
     </html>
   );

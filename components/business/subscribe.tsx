@@ -1,10 +1,10 @@
 'use client'
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/i18n";
 import { useEffect } from 'react';
 
 export default function Subscribe() {
-  const t = useTranslations();
+  const { t } = useTranslations('common');
 
   useEffect(() => {
     // <script async data-uid="4e5692208c" src="https://unique-trader-2189.ck.page/4e5692208c/index.js"></script>
@@ -30,17 +30,17 @@ export default function Subscribe() {
         {/* Title */}
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl font-bold md:text-4xl md:leading-tight text-primary">
-            {t('subscribe.title')}
+            {t('Subscribe')}
           </h2>
           <p className="mt-4 text-muted-foreground">
-            {t('subscribe.description')}
+            {t('Stay updated with the latest news and updates')}
           </p>
         </div>
 
         <div className="text-center">
           <div id="kit-form" className='flex w-full flex-col items-center'></div>
           <p className="mt-3 text-sm text-muted-foreground">
-            {t('subscribe.disclaimer')}
+            {t('We respect your privacy')}
           </p>
         </div>
       </div>

@@ -2,12 +2,12 @@
 
 import { cn } from "@/lib/utils";
 import { ArrowRightIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from '@/lib/i18n';
 
 export default function FreeChatButton({ className }: {
   className?: string | string[]
 }) {
-  const t = useTranslations();
+  const { t } = useTranslations('buttons');
 
   return (
     <a
@@ -15,7 +15,7 @@ export default function FreeChatButton({ className }: {
       target="_blank"
       href="https://tb.53kf.com/code/client/3ae82624ac86c32c1db8d311cd6d2a659/2"
     >
-      <span className="mr-2">{t('buttons.freeChat')}</span>
+      <span className="mr-2">{t('freeChat')}</span>
       <ArrowRightIcon className="h-3 w-3 flex-none" strokeWidth={2.5} />
     </a>
   )

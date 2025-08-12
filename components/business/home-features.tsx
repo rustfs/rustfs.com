@@ -4,12 +4,11 @@
 import features from '@/data/features';
 import { cn } from '@/lib/utils';
 import { CheckCircleIcon, QuoteIcon } from "lucide-react";
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/i18n';
 import { useState } from 'react';
 
 export default function HomeFeatures() {
-  const t = useTranslations();
-  const locale = useLocale() as 'zh' | 'en';
+  const { t, locale } = useTranslations('features');
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -18,10 +17,10 @@ export default function HomeFeatures() {
         {/* Title */}
         <div className="mx-auto mb-10 text-center lg:mb-14">
           <h2 className="text-3xl font-bold md:text-4xl tracking-wide md:leading-tight dark:text-white">
-            {t('features.highPerformance')} <span className="text-blue-500">{t('features.enterpriseGradeDistributedFileSystem')}</span>
+            {t('highPerformance')} <span className="text-blue-500">{t('enterpriseGradeDistributedFileSystem')}</span>
           </h2>
           <p className="text-muted-foreground mt-4">
-            {t('features.comprehensiveFeaturesDescription')}
+            {t('comprehensiveFeaturesDescription')}
           </p>
         </div>
         {/* End Title */}

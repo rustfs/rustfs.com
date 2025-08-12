@@ -1,8 +1,8 @@
 'use client'
 
-import { type PlatformInfoData } from "./platform-info";
+import { useTranslations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
+import { type PlatformInfoData } from "./platform-info";
 
 interface WindowsDownloadSectionProps {
   platform: PlatformInfoData;
@@ -10,7 +10,7 @@ interface WindowsDownloadSectionProps {
 }
 
 export default function WindowsDownloadSection({ platform, className }: WindowsDownloadSectionProps) {
-  const t = useTranslations();
+  const { t } = useTranslations('download');
 
   return (
     <div className={cn("text-center py-12", className)}>
@@ -18,10 +18,10 @@ export default function WindowsDownloadSection({ platform, className }: WindowsD
         <div className="opacity-50">{platform.icon}</div>
       </div>
       <h2 className="text-2xl font-bold text-muted-foreground mb-2">{platform.name}</h2>
-      <p className="text-muted-foreground mb-4">{t('download.comingSoon')}</p>
+      <p className="text-muted-foreground mb-4">{t('Coming Soon')}</p>
       <div className="max-w-md mx-auto p-4 bg-muted/30 rounded-lg border border-dashed border-muted-foreground/30">
         <p className="text-sm text-muted-foreground">
-          {t('download.preparingPlatform')}
+          {t('We are preparing this platform for you')}
         </p>
       </div>
     </div>

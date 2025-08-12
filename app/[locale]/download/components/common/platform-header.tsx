@@ -1,26 +1,31 @@
 'use client'
 
-import { type PlatformInfo } from "@/data/platforms";
-import { cn } from "@/lib/utils";
-import { useLocale } from "next-intl";
+import { useTranslations } from '@/lib/i18n'
+import { type PlatformInfoData } from '../platforms/platform-info'
 
 interface PlatformHeaderProps {
-  platform: PlatformInfo;
-  className?: string;
+  platform: PlatformInfoData
+  className?: string
 }
 
 export default function PlatformHeader({ platform, className }: PlatformHeaderProps) {
-  const locale = useLocale();
+  const { t, locale } = useTranslations('download')
 
   return (
-    <div className={cn("flex items-center space-x-4", className)}>
-      <div className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-foreground">
-        {platform.icon}
+    <div className={`text-center space-y-4 ${className || ''}`}>
+      <div className="flex items-center justify-center mb-4">
+        <div className="w-16 h-16 flex items-center justify-center text-4xl">
+          {platform.icon}
+        </div>
       </div>
-      <div>
-        <h2 className="text-2xl font-bold text-foreground">{platform.name}</h2>
-        <p className="text-muted-foreground">{platform.description[locale as 'zh' | 'en']}</p>
-      </div>
+
+      <h2 className="text-2xl font-bold text-foreground">
+        {t('Download for')} {platform.name}
+      </h2>
+
+      <p className="text-muted-foreground max-w-2xl mx-auto">
+        {platform.description[locale as 'zh' | 'en']}
+      </p>
     </div>
-  );
+  )
 }

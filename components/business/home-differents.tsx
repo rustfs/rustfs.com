@@ -1,10 +1,10 @@
 'use client'
 
 import { CheckIcon, XIcon } from "lucide-react";
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/i18n';
 
 export default function HomeDifferents() {
-  const t = useTranslations();
+  const { t } = useTranslations('differents');
 
   return (
     <section className="relative pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32 bg-muted"
@@ -19,39 +19,39 @@ export default function HomeDifferents() {
       <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl font-bold md:text-4xl md:leading-tight">
-            {t('differents.title')}
+            {t('title')}
           </h2>
           <p className="mt-4">
-            {t('differents.subtitle')}
+            {t('subtitle')}
           </p>
         </div>
 
         <div className="relative flex w-full flex-col gap-6 lg:flex-row xl:mx-auto xl:w-10/12">
           <div className="relative rounded-xl bg-white md:w-1/2 lg:text-right dark:bg-neutral-800">
-            <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">{t('differents.otherStorage')}</h3>
+            <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">{t('otherStorage')}</h3>
             <div className="text-muted-foreground">
               <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
-                <span>{t('differents.memoryIssues')}</span>
+                <span>{t('memoryIssues')}</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
                 <XIcon className="text-neutral-500" />
-                <span>{t('differents.foreignLogging')}</span>
+                <span>{t('foreignLogging')}</span>
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
-                <span>{t('differents.agplIssues')}</span>
+                <span>{t('agplIssues')}</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
                 <XIcon className="text-neutral-500" />
-                <span>{t('differents.s3Support')}</span>
+                <span>{t('s3Support')}</span>
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
-                <span>{t('differents.deviceSupport')}</span>
+                <span>{t('deviceSupport')}</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
-                <span>{t('differents.pricing')}</span>
+                <span>{t('pricing')}</span>
               </div>
             </div>
 
@@ -75,36 +75,36 @@ export default function HomeDifferents() {
           </div>
 
           <div className="relative rounded-xl bg-white text-left md:w-1/2 dark:bg-neutral-800">
-            <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">{t('differents.rustFS')}</h3>
+            <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">{t('rustFS')}</h3>
             <div className="text-muted-foreground">
               <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
                 <CheckIcon className="text-green-500" />
-                <span>{t('differents.memorySafe')}</span>
+                <span>{t('memorySafe')}</span>
               </div>
               <div className="flex items-center gap-2 p-4 lg:px-8 ">
                 <CheckIcon className="text-green-500" />
-                <span>{t('differents.noForeignLogging')}</span>
+                <span>{t('noForeignLogging')}</span>
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
                 <CheckIcon className="text-green-500" />
-                <span>{t('differents.apacheLicense')}</span>
+                <span>{t('apacheLicense')}</span>
               </div>
               <div className="flex items-center gap-2 p-4 lg:px-8 ">
                 <CheckIcon className="text-green-500" />
-                <span>{t('differents.fullS3Compatibility')}</span>
+                <span>{t('fullS3Compatibility')}</span>
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
                 <CheckIcon className="text-green-500" />
-                <span>{t('differents.secureSystemSupport')}</span>
+                <span>{t('secureSystemSupport')}</span>
               </div>
               <div className="flex items-center gap-2 p-4 lg:px-8 ">
                 <CheckIcon className="text-green-500" />
-                <span>{t('differents.stablePricing')}</span>
+                <span>{t('stablePricing')}</span>
               </div>
             </div>
 
             <span className="absolute end-0 top-0 rounded-es-xl rounded-se-xl bg-green-500 px-3 py-1.5 text-xs font-medium text-white">
-              {t('differents.bestChoice')}
+              {t('bestChoice')}
             </span>
 
             <div className="absolute end-0 top-0 hidden translate-x-16 translate-y-16 md:block">
@@ -139,7 +139,7 @@ export default function HomeDifferents() {
           </div>
         </div>
         <div className="mt-7 text-center">
-          <p className="text-xs text-neutral-400">{t('differents.disclaimer')}</p>
+          <p className="text-xs text-neutral-400">{t('disclaimer')}</p>
         </div>
         {/* End Features */}
       </div>

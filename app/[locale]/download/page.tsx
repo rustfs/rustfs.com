@@ -1,16 +1,10 @@
-import { routing } from '@/i18n/routing';
-import { setRequestLocale } from 'next-intl/server';
+import { locales } from '@/lib/constants';
 import DownloadPageClient from './components/download-page-client';
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+  return locales.map((locale) => ({ locale }));
 }
 
-export default async function DownloadPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-
-  // Enable static rendering
-  setRequestLocale(locale);
-
+export default async function DownloadPage() {
   return <DownloadPageClient />;
 }

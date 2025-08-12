@@ -1,24 +1,19 @@
 'use client'
 import { Button } from '@/components/ui/button';
-import { useRouter } from '@/i18n/navigation';
-import { routing } from '@/i18n/routing';
+import { locales } from '@/lib/constants';
+import { useTranslations } from '@/lib/i18n';
 import { Globe } from 'lucide-react';
-import { useLocale } from 'next-intl';
-import { usePathname } from 'next/navigation';
 
 export default function LanguageToggle() {
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
+  const { locale, setLocale } = useTranslations();
 
   const handleLanguageChange = (newLocale: string) => {
-    const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/';
-    router.replace(pathWithoutLocale, { locale: newLocale });
+    setLocale(newLocale as 'zh' | 'en');
   };
 
   return (
     <div className="flex items-center gap-2">
-      {routing.locales.map((l) => (
+      {locales.map((l) => (
         <Button
           key={l}
           variant={locale === l ? 'default' : 'ghost'}

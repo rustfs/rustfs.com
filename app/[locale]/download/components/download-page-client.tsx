@@ -1,14 +1,14 @@
 'use client'
 
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/i18n';
 import { useEffect, useState } from 'react';
-import DownloadSection from './download-section';
 import PlatformSelector from './platform-selector';
 import { usePlatformConfig } from './platforms/platform-config';
+import PlatformFactory from './platforms/platform-factory';
 import { type PlatformInfoData } from './platforms/platform-info';
 
 export default function DownloadPageClient() {
-  const t = useTranslations();
+  const { t } = useTranslations('download'); // 使用 download 命名空间
   const platforms = usePlatformConfig();
   const availablePlatforms = platforms.filter(p => p.available);
 
@@ -56,12 +56,12 @@ export default function DownloadPageClient() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center mb-6">
             <h1 className="text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
-              {t('download.title')}
+              {t('Download RustFS')}
             </h1>
           </div>
 
           <p className="mx-auto max-w-3xl text-lg text-muted-foreground">
-            {t('download.subtitle')}
+            {t('Choose your platform')}
           </p>
         </div>
       </section>
@@ -80,7 +80,7 @@ export default function DownloadPageClient() {
       {selectedPlatform && (
         <section className="py-16 bg-muted/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <DownloadSection platform={selectedPlatform} />
+            <PlatformFactory platform={selectedPlatform} />
           </div>
         </section>
       )}

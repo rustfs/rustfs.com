@@ -3,8 +3,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { Marquee } from "@/components/magicui/marquee";
 import reviews from "@/data/reviews.json";
+import { useTranslations } from '@/lib/i18n';
 import clsx from "clsx";
-import { useLocale, useTranslations } from 'next-intl';
 
 type SlideItem = { name: { zh: string; en: string; }; position: { zh: string; en: string; }; body: { zh: string; en: string; }; img: string; }
 
@@ -51,8 +51,7 @@ const ReviewCard = ({
 };
 
 export default function HomeReviews() {
-  const t = useTranslations('reviews');
-  const locale = useLocale();
+  const { t, locale } = useTranslations('reviews');
   const language = locale as 'zh' | 'en';
 
   return (

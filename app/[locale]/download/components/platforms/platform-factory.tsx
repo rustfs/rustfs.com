@@ -1,9 +1,10 @@
 'use client'
 
-import { type PlatformInfoData } from "./platform-info";
+import { useTranslations } from "@/lib/i18n";
 import DockerDownloadSection from "./docker-download-section";
 import LinuxDownloadSection from "./linux-download-section";
 import MacOSDownloadSection from "./macos-download-section";
+import { type PlatformInfoData } from "./platform-info";
 import WindowsDownloadSection from "./windows-download-section";
 
 interface PlatformFactoryProps {
@@ -12,6 +13,8 @@ interface PlatformFactoryProps {
 }
 
 export default function PlatformFactory({ platform, className }: PlatformFactoryProps) {
+  const { t } = useTranslations('download');
+
   switch (platform.id) {
     case 'linux':
       return <LinuxDownloadSection platform={platform} className={className} />;
@@ -29,7 +32,7 @@ export default function PlatformFactory({ platform, className }: PlatformFactory
             <div className="opacity-50">{platform.icon}</div>
           </div>
           <h2 className="text-2xl font-bold text-muted-foreground mb-2">{platform.name}</h2>
-          <p className="text-muted-foreground">Platform not supported yet</p>
+          <p className="text-muted-foreground">{t('Platform not supported')}</p>
         </div>
       );
   }

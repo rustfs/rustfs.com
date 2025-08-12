@@ -1,7 +1,7 @@
 'use client'
 
 /* eslint-disable @next/next/no-img-element */
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/i18n';
 import FreeChatButton from "./buttons/free-chat";
 
 const AVATAR_URLS = [
@@ -12,7 +12,7 @@ const AVATAR_URLS = [
 ];
 
 export default function GetStartedToday() {
-  const t = useTranslations();
+  const { t } = useTranslations('getStarted');
 
   return (
     <section
@@ -21,8 +21,8 @@ export default function GetStartedToday() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
         <div className="mx-auto text-center flex flex-col gap-8">
           <h2 className="font-display text-2xl tracking-wide sm:text-4xl font-semibold leading-tight">
-            {t('getStarted.experienceRustfs')} <br />
-            {t('getStarted.highSecurityHighConcurrencyAndUltimatePerformance')}
+            {t('experienceRustfs')} <br />
+            {t('highSecurityHighConcurrencyAndUltimatePerformance')}
           </h2>
 
           {/* Avatar Group */}
@@ -48,7 +48,7 @@ export default function GetStartedToday() {
             </div>
             <div className="pt-5 sm:ps-5 sm:pt-0 lg:border-l">
               <div className="text-sm">
-                {t('getStarted.over100EnterpriseUsers')}
+                {t('over100EnterpriseUsers')}
               </div>
             </div>
           </div>
