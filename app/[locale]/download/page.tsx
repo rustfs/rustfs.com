@@ -6,12 +6,13 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: { locale: string } }) {
-  const t = await getTranslations({ locale: params.locale, namespace: 'site' });
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'site' });
 
   return {
-    title: t('titles.download') + ' | ' + t('titles.home'),
-    description: t('descriptions.download'),
+    title: t('title_download') + ' | ' + t('title_home'),
+    description: t('description_download'),
   };
 }
 

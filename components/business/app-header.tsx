@@ -52,7 +52,7 @@ export default function AppHeader() {
       url: 'https://github.com/rustfs/rustfs/discussions'
     },
     {
-      label: t('About Us'),
+      label: t('About'),
       url: docs_url('about', locale)
     }
   ]

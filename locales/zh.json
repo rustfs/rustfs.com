@@ -4,18 +4,6 @@
     "tagline": "Rust 驱动的高性能分布式存储系统",
     "description": "RustFS 用热门安全的 Rust 语言开发，兼容 S3 协议。适用于 AI/ML 及海量数据存储、大数据、互联网、工业和保密存储等全部场景。近乎免费使用。遵循 Apache 2 协议，支持国产保密设备和系统。",
     "keywords": "RustFS, 分布式存储, 云存储, S3兼容, 高性能, 开源, MinIO替代方案",
-    "titles": {
-      "home": "RustFS - Rust 驱动的高性能分布式存储系统",
-      "download": "下载 RustFS - 选择您的平台",
-      "features": "RustFS 功能特性 - 高性能分布式存储",
-      "about": "关于 RustFS - 开源分布式存储解决方案"
-    },
-    "descriptions": {
-      "home": "RustFS 用热门安全的 Rust 语言开发，兼容 S3 协议。适用于 AI/ML 及海量数据存储、大数据、互联网、工业和保密存储等全部场景。近乎免费使用。遵循 Apache 2 协议，支持国产保密设备和系统。",
-      "download": "下载 RustFS，支持 Docker、Linux、macOS、Windows 等多种平台，快速部署您的分布式存储系统。",
-      "features": "了解 RustFS 的核心功能特性：高性能、无限扩展、多云支持、S3 兼容、开源等。",
-      "about": "RustFS 是一个值得信赖的开源分布式存储解决方案，拥有超过 1500+ 软件协议兼容性适配。"
-    },
     "author": "RustFS Team",
     "copyright": "© 2024 RustFS. 保留所有权利。",
     "license": "Apache 2.0 许可证",
@@ -23,7 +11,15 @@
     "version": "1.0.0",
     "repository": "https://github.com/rustfs/rustfs",
     "website": "https://rustfs.com",
-    "documentation": "https://docs.rustfs.com"
+    "documentation": "https://docs.rustfs.com/zh/",
+    "title_home": "RustFS - Rust 驱动的高性能分布式存储系统",
+    "title_download": "下载与安装",
+    "title_features": "功能特性",
+    "title_about": "关于我们",
+    "description_home": "RustFS 用热门安全的 Rust 语言开发，兼容 S3 协议。适用于 AI/ML 及海量数据存储、大数据、互联网、工业和保密存储等全部场景。近乎免费使用。遵循 Apache 2 协议，支持国产保密设备和系统。",
+    "description_download": "下载 RustFS，支持 Docker、Linux、macOS、Windows 等多种平台，快速部署您的分布式存储系统。",
+    "description_features": "了解 RustFS 的核心功能特性：高性能、无限扩展、多云支持、S3 兼容、开源等。",
+    "description_about": "RustFS 是一个值得信赖的开源分布式存储解决方案，拥有超过 1500+ 软件协议兼容性适配。"
   },
   "nav": {
     "Features": "产品功能",
@@ -33,14 +29,14 @@
     "Download": "下载",
     "Documentation": "文档",
     "Community": "社区",
-    "About Us": "关于我们"
+    "About": "关于我们"
   },
   "hero": {
     "Rust-powered": "Rust 驱动的",
     "High Performance": "高性能",
     "Unlimited Scaling": "无限扩容",
     "Secure and Reliable": "安全可靠",
-    "Multi-cloud": "多云存储",
+    "Multi-cloud Storage": "多云存储",
     "S3 Compatible": "S3 兼容",
     "Distributed Storage System": "分布式存储系统",
     "RustFS is developed with the popular and secure Rust language, compatible with S3 protocol. Suitable for AI/ML and massive data storage, big data, internet, industrial and confidential storage scenarios. Nearly free to use. Follows Apache 2 license, supports domestic confidential equipment and systems.": "RustFS 用热门安全的 Rust 语言开发，兼容 S3 协议。适用于 AI/ML 及海量数据存储、大数据、互联网、工业和保密存储等全部场景。近乎免费使用。遵循 Apache 2 协议，支持国产保密设备和系统。",
@@ -97,7 +93,16 @@
     "Choose your platform": "选择您的平台",
     "Download RustFS": "下载 RustFS",
     "coming_soon": "即将推出",
-    "not_supported": "平台不支持"
+    "Choose the RustFS version that suits your system": "选择适合您系统的 RustFS 版本，支持 Windows、Linux、macOS 和 Docker 部署。开始体验高性能的分布式存储系统。",
+    "View GitHub Release Page": "查看GitHub发布页面",
+    "Loading latest version...": "正在获取最新版本...",
+    "Latest": "最新",
+    "Released on": "发布于",
+    "Need Help?": "需要帮助？",
+    "Documentation": "查看文档",
+    "Detailed installation guides and usage instructions": "详细的安装指南和使用说明",
+    "Community Support": "社区支持",
+    "Join community discussions and get technical support": "加入社区讨论，获取技术支持"
   },
   "theme": {
     "Light": "浅色",
