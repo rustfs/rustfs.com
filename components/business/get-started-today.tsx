@@ -22,7 +22,7 @@ export default function GetStartedToday() {
         <div className="mx-auto text-center flex flex-col gap-8">
           <h2 className="font-display text-2xl tracking-wide sm:text-4xl font-semibold leading-tight">
             {t('Experience RustFS')} <br />
-            {t('High Security, High Concurrency & Ultimate Performance')}
+            {t('High security, high concurrency and ultimate performance')}
           </h2>
 
           {/* Avatar Group */}
@@ -48,7 +48,7 @@ export default function GetStartedToday() {
             </div>
             <div className="pt-5 sm:ps-5 sm:pt-0 lg:border-l">
               <div className="text-sm">
-                {t('over100EnterpriseUsers')}
+                {t('Over 100+ enterprise users have started using RustFS')}
               </div>
             </div>
           </div>

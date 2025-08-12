@@ -32,7 +32,7 @@ export default function PlatformFactory({ platform, className }: PlatformFactory
             <div className="opacity-50">{platform.icon}</div>
           </div>
           <h2 className="text-2xl font-bold text-muted-foreground mb-2">{platform.name}</h2>
-          <p className="text-muted-foreground">{t('Platform not supported')}</p>
+          <p className="text-muted-foreground">{t('not_supported')}</p>
         </div>
       );
   }

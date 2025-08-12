@@ -16,24 +16,24 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'metadata' });
+  const t = await getTranslations({ locale, namespace: 'site' });
 
   return {
-    title: t('RustFS - High-Performance Distributed Storage System Built with Rust'),
-    description: t('RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.'),
-    keywords: t('RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative'),
-    authors: [{ name: "RustFS Team" }],
+    title: t('titles.home'),
+    description: t('descriptions.home'),
+    keywords: t('keywords'),
+    authors: [{ name: t('author') }],
     openGraph: {
-      title: t('RustFS - High-Performance Distributed Storage System Built with Rust'),
-      description: t('RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.'),
+      title: t('titles.home'),
+      description: t('descriptions.home'),
       type: "website",
       locale: locale,
       alternateLocale: locale === 'zh' ? 'en' : 'zh',
     },
     twitter: {
       card: "summary_large_image",
-      title: t('RustFS - High-Performance Distributed Storage System Built with Rust'),
-      description: t('RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.'),
+      title: t('titles.home'),
+      description: t('descriptions.home'),
     },
   };
 }

@@ -15,12 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: {
-    template: '%s | RustFS',
-    default: 'RustFS - High-Performance Distributed Storage System',
-  },
+  title: 'RustFS - High-Performance Distributed Storage System',
   description: "High-performance distributed storage system built with Rust",
-  keywords: "RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source",
+  keywords: "RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative",
   authors: [{ name: "RustFS Team" }],
   metadataBase: new URL('https://rustfs.com'),
   robots: {
@@ -39,7 +36,7 @@ export default async function RootLayout({
   const { locale } = await params;
 
   return (
-    <html lang={locale || 'zh'}>
+    <html lang={locale || 'zh'} suppressHydrationWarning>
       <head>
         <meta
           key="twitter:card"

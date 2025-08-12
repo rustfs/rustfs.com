@@ -59,10 +59,10 @@ export default function HomeReviews() {
       <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl tracking-wide font-bold md:text-4xl md:leading-tight text-primary">
-            {t('title')}
+            {t('What customers say about RustFS')}
           </h2>
           <p className="mt-4 text-neutral-600 dark:text-neutral-400">
-            {t('subtitle')}
+            {t('Exquisite service, professional team, providing you with the best service')}
           </p>
         </div>
         <div className="relative flex h-[500px] w-full flex-row items-center justify-center overflow-hidden rounded-lg lg:hidden">

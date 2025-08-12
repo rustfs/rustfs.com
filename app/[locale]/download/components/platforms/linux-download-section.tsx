@@ -2,7 +2,7 @@
 
 import { useTranslations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { DownloadIcon } from "lucide-react";
 import CodeBlock from "../code-block";
 import Note from "../common/note";
 import PlatformHeader from "../common/platform-header";
@@ -48,7 +48,7 @@ export default function LinuxDownloadSection({ platform, className }: LinuxDownl
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-              <span>⬇️</span>
+              <DownloadIcon className="w-4 h-4" />
               <span>{t('Download')}</span>
             </a>
           </div>
@@ -81,7 +81,7 @@ export default function LinuxDownloadSection({ platform, className }: LinuxDownl
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-              <span>⬇️</span>
+              <DownloadIcon className="w-4 h-4" />
               <span>{t('Download')}</span>
             </a>
           </div>
@@ -104,18 +104,6 @@ export default function LinuxDownloadSection({ platform, className }: LinuxDownl
             </Note>
           </div>
         </div>
-      </div>
-
-      {/* Platform Notes */}
-      <div className="space-y-2">
-        <Note type="info">
-          <Link href="https://docs.rustfs.com/installation/linux" target="_blank" className="hover:underline">
-            View detailed Linux installation guide
-          </Link>
-        </Note>
-        <Note type="tip">
-          {t('Default credentials: admin / admin123')}
-        </Note>
       </div>
     </div>
   );

@@ -35,8 +35,8 @@ export interface DownloadOption {
 export const appConfig = {
   downloads: {
     windows: 'https://dl.rustfs.com/artifacts/rustfs/rustfs-windows-x86_64-latest.zip',
-    macos: 'https://dl.rustfs.com/artifacts/rustfs/rustfs-darwin-x86_64-latest.zip',
-    linux: 'https://dl.rustfs.com/artifacts/rustfs/rustfs-linux-x86_64-latest.zip',
+    macos: 'https://dl.rustfs.com/artifacts/rustfs/rustfs-macos-aarch64-latest.zip',
+    linux: 'https://dl.rustfs.com/artifacts/rustfs/rustfs-linux-x86_64-musl-latest.zip',
     docker: 'https://hub.docker.com/r/rustfs/rustfs',
     fallback: 'https://github.com/rustfs/rustfs/releases'
   },

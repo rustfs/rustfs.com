@@ -44,12 +44,10 @@ export default function PlatformInfo({ data, isSelected, onClick, className }: P
       )}
     >
       <div className={cn(
-        "w-12 h-12 mb-3 flex items-center justify-center",
+        "w-8 h-8 mb-3 flex items-center justify-center",
         available ? "text-foreground" : "text-muted-foreground"
       )}>
-        <div className={cn(available ? "" : "opacity-50")}>
-          {icon}
-        </div>
+        {icon}
       </div>
       <span className={cn(
         "font-medium",
@@ -60,7 +58,7 @@ export default function PlatformInfo({ data, isSelected, onClick, className }: P
       <span className="text-sm text-muted-foreground mt-1 text-center">
         {available
           ? description[locale as 'zh' | 'en']
-          : comingSoon ? t('Coming Soon') : t('Platform not supported')
+          : comingSoon ? t('coming_soon') : t('not_supported')
         }
       </span>
     </button>

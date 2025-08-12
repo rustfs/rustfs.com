@@ -4,17 +4,17 @@ import { useTranslations } from '@/lib/i18n';
 import FreeChat from "./buttons/free-chat";
 
 export default function HomeMultiClouds() {
-  const { t } = useTranslations('common');
+  const { t } = useTranslations('multiCloud');
 
   return (
     <section className="py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-neutral-100">
-            {t('Multi-Cloud Support')}
+            {t('True Multi-Cloud Storage')}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-neutral-400">
-            {t('Deploy anywhere with our flexible multi-cloud architecture')}
+            {t('Multi-cloud object storage allows enterprises to build AWS S3-compatible data infrastructure on any cloud. The result is a consistent, portable interface for data and applications - meaning you can run anywhere, from edge to public cloud, without changing a line of code.')}
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <FreeChat />
@@ -36,7 +36,7 @@ export default function HomeMultiClouds() {
               </dt>
               <dd className="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-600 dark:text-neutral-400">
                 <p className="flex-auto">
-                  {t('Deploy on AWS, Azure, Google Cloud, and other public cloud providers')}
+                  {t('RustFS is powered by Kubernetes and provides scalable, secure, S3-compatible object storage for every public cloud. Free yourself from vendor lock-in and treat clouds for what they are - commodity compute, network, and drives.')}
                 </p>
 
               </dd>
@@ -52,7 +52,7 @@ export default function HomeMultiClouds() {
               </dt>
               <dd className="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-600 dark:text-neutral-400">
                 <p className="flex-auto">
-                  {t('Run in your own data center with full control and security')}
+                  {t('From OpenShift to Tanzu, RustFS is the only object storage that is part of the infrastructure foundation of leading Kubernetes distributions. With its massive portfolio of integrated applications, RustFS completes the software-defined picture.')}
                 </p>
 
               </dd>
@@ -64,11 +64,11 @@ export default function HomeMultiClouds() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
                   </svg>
                 </div>
-                {t('Edge Computing')}
+                {t('Edge')}
               </dt>
               <dd className="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-600 dark:text-neutral-400">
                 <p className="flex-auto">
-                  {t('Deploy at the edge for low-latency data access')}
+                  {t('The complete RustFS multi-cloud storage binary is less than 100MB, capable of powering object storage anywhere - from ARM SOCs, 5G POPs, and edge cache devices to mini data centers. This is why RustFS dominates the edge storage market.')}
                 </p>
 
               </dd>

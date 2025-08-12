@@ -30,17 +30,18 @@ export function translate(
   if (namespace) {
     // 先尝试在命名空间下查找
     const namespaceMessages = messages[namespace] as Record<string, unknown>;
-    if (namespaceMessages) {
-      message = getNestedValue(namespaceMessages, key);
+    if (namespaceMessages && typeof namespaceMessages === 'object') {
+      // 直接在命名空间对象中查找键
+      message = namespaceMessages[key] as string;
     }
 
     // 如果命名空间下没找到，尝试全局查找
     if (!message) {
-      message = getNestedValue(messages, key);
+      message = messages[key] as string;
     }
   } else {
     // 直接全局查找
-    message = getNestedValue(messages, key);
+    message = messages[key] as string;
   }
 
   // 如果没找到，返回 key

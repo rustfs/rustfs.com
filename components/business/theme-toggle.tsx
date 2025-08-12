@@ -1,8 +1,8 @@
 'use client'
 
+import { useTranslations } from '@/lib/i18n';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
-import { useTranslations } from '@/lib/i18n';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
@@ -21,13 +21,13 @@ export function ThemeToggle() {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
   }
 
-  // Display neutral loading state during server-side rendering
+  // Display neutral loading state during server-side rendering and initial hydration
   if (!mounted) {
     return (
       <button
         type="button"
         className="relative p-0 text-muted-foreground hover:text-primary transition-colors"
-        aria-label={t('toggle')}
+        aria-label={t('Toggle theme')}
         disabled
       >
         <div className="relative size-5">
@@ -39,12 +39,13 @@ export function ThemeToggle() {
     )
   }
 
+  // Only render theme-specific content after hydration is complete
   return (
     <button
       type="button"
       onClick={toggleTheme}
       className="relative p-0 text-muted-foreground hover:text-primary transition-colors"
-      aria-label={t('toggle')}
+      aria-label={t('Toggle theme')}
     >
       <div className="relative size-5">
         <AnimatePresence mode="wait">

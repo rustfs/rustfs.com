@@ -23,9 +23,14 @@ export function useTranslations(namespace?: string) {
 
   const { locale, t: translate, setLocale, isLoading } = context
 
+  // 使用 useCallback 稳定 t 函数的引用
+  const stableTranslate = useCallback((key: string, values?: Record<string, string | number>) => {
+    return translate(key, namespace, values)
+  }, [translate, namespace])
+
   // 返回翻译函数，支持命名空间
   return {
-    t: (key: string, values?: Record<string, string | number>) => translate(key, namespace, values),
+    t: stableTranslate,
     locale,
     setLocale,
     isLoading
@@ -44,6 +49,7 @@ export function I18nProvider({
   const [currentLocale, setCurrentLocale] = useState<Locale>(locale)
   const [currentMessages, setCurrentMessages] = useState<Messages>(initialMessages)
   const [isLoading, setIsLoading] = useState(false)
+  const [isClient, setIsClient] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
 
@@ -67,7 +73,7 @@ export function I18nProvider({
       router.push(segments.join('/'))
 
       // 保存到 localStorage
-      if (typeof window !== 'undefined') {
+      if (isClient) {
         localStorage.setItem('locale', newLocale)
       }
     } catch (error) {
@@ -75,20 +81,50 @@ export function I18nProvider({
     } finally {
       setIsLoading(false)
     }
-  }, [currentLocale, pathname, router])
+  }, [currentLocale, pathname, router, isClient])
 
-  const translateFunction = (key: string, namespace?: string, values?: Record<string, string | number>): string => {
+  const translateFunction = useCallback((key: string, namespace?: string, values?: Record<string, string | number>): string => {
     return translate(currentMessages, key, namespace, values)
-  }
+  }, [currentMessages])
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    setIsClient(true)
+  }, [])
+
+  useEffect(() => {
+    if (isClient) {
       const savedLocale = localStorage.getItem('locale') as Locale
       if (savedLocale && locales.includes(savedLocale) && savedLocale !== currentLocale) {
-        handleSetLocale(savedLocale)
+        // 直接调用逻辑，避免依赖 handleSetLocale 导致的无限循环
+        const changeLocale = async () => {
+          setIsLoading(true)
+          try {
+            // 动态加载新语言包
+            const newMessages = await getMessagesClient(savedLocale)
+            setCurrentLocale(savedLocale)
+            setCurrentMessages(newMessages)
+
+            // 更新路由
+            const segments = pathname.split('/')
+            if (segments[1] && locales.includes(segments[1] as Locale)) {
+              segments[1] = savedLocale
+            } else {
+              segments.splice(1, 0, savedLocale)
+            }
+            router.push(segments.join('/'))
+
+            // 保存到 localStorage
+            localStorage.setItem('locale', savedLocale)
+          } catch (error) {
+            console.error('Failed to change locale:', error)
+          } finally {
+            setIsLoading(false)
+          }
+        }
+        changeLocale()
       }
     }
-  }, [currentLocale, handleSetLocale])
+  }, [currentLocale, isClient, pathname, router])
 
   const value: I18nContextType = {
     locale: currentLocale,

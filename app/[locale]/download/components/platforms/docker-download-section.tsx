@@ -2,7 +2,7 @@
 
 import { useTranslations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import { ExternalLinkIcon } from "lucide-react";
+import { DownloadIcon, ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
 import CodeBlock from "../code-block";
 import Note from "../common/note";
@@ -50,7 +50,7 @@ export default function DockerDownloadSection({ platform, className }: DockerDow
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-              <span>🐳</span>
+              <DownloadIcon className="w-4 h-4" />
               <span>{t('Download')}</span>
             </a>
           </div>
@@ -82,7 +82,7 @@ export default function DockerDownloadSection({ platform, className }: DockerDow
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-              <span>🐳</span>
+              <DownloadIcon className="w-4 h-4" />
               <span>{t('Download')}</span>
             </a>
           </div>
@@ -118,7 +118,7 @@ export default function DockerDownloadSection({ platform, className }: DockerDow
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-              <span>🐳</span>
+              <DownloadIcon className="w-4 h-4" />
               <span>{t('Download')}</span>
             </a>
           </div>
@@ -150,7 +150,7 @@ export default function DockerDownloadSection({ platform, className }: DockerDow
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-              <span>🐳</span>
+              <DownloadIcon className="w-4 h-4" />
               <span>{t('Download')}</span>
             </a>
           </div>

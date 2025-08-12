@@ -1,23 +1,21 @@
 {
-  "metadata": {
-    "RustFS - High-Performance Distributed Storage System Built with Rust": "RustFS - 基于 Rust 的高性能分布式存储系统",
-    "RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.": "RustFS 是一个基于 Rust 语言开发的高性能、无限扩展、安全可靠的分布式存储系统，兼容 S3 协议，支持多云存储。",
-    "RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative": "RustFS, 分布式存储, 云存储, S3兼容, 高性能, 开源, MinIO替代方案",
-    "Download RustFS - Choose Your Platform": "下载 RustFS - 选择您的平台",
-    "Download RustFS, supporting Docker, Linux, macOS, Windows and other platforms, quickly deploy your distributed storage system.": "下载 RustFS，支持 Docker、Linux、macOS、Windows 等多种平台，快速部署您的分布式存储系统。",
-    "RustFS download, Docker deployment, Linux installation, macOS installation, Windows installation": "RustFS下载, Docker部署, Linux安装, macOS安装, Windows安装",
-    "RustFS Features - High-Performance Distributed Storage": "RustFS 功能特性 - 高性能分布式存储",
-    "Learn about RustFS core features: high performance, unlimited scaling, multi-cloud support, S3 compatibility, open source and more.": "了解 RustFS 的核心功能特性：高性能、无限扩展、多云支持、S3 兼容、开源等。",
-    "RustFS features, distributed storage features, high performance storage, S3 compatible": "RustFS功能, 分布式存储特性, 高性能存储, S3兼容",
-    "About RustFS - Open Source Distributed Storage Solution": "关于 RustFS - 开源分布式存储解决方案",
-    "RustFS is a trusted open source distributed storage solution with over 1500+ software protocol compatibility adaptations.": "RustFS 是一个值得信赖的开源分布式存储解决方案，拥有超过 1500+ 软件协议兼容性适配。",
-    "About RustFS, open source storage, distributed storage solution": "关于RustFS, 开源存储, 分布式存储解决方案"
-  },
   "site": {
     "name": "RustFS",
-    "tagline": "基于 Rust 的高性能分布式存储系统",
-    "description": "RustFS 是一个基于 Rust 语言开发的高性能、无限扩展、安全可靠的分布式存储系统，兼容 S3 协议，支持多云存储。",
+    "tagline": "Rust 驱动的高性能分布式存储系统",
+    "description": "RustFS 用热门安全的 Rust 语言开发，兼容 S3 协议。适用于 AI/ML 及海量数据存储、大数据、互联网、工业和保密存储等全部场景。近乎免费使用。遵循 Apache 2 协议，支持国产保密设备和系统。",
     "keywords": "RustFS, 分布式存储, 云存储, S3兼容, 高性能, 开源, MinIO替代方案",
+    "titles": {
+      "home": "RustFS - Rust 驱动的高性能分布式存储系统",
+      "download": "下载 RustFS - 选择您的平台",
+      "features": "RustFS 功能特性 - 高性能分布式存储",
+      "about": "关于 RustFS - 开源分布式存储解决方案"
+    },
+    "descriptions": {
+      "home": "RustFS 用热门安全的 Rust 语言开发，兼容 S3 协议。适用于 AI/ML 及海量数据存储、大数据、互联网、工业和保密存储等全部场景。近乎免费使用。遵循 Apache 2 协议，支持国产保密设备和系统。",
+      "download": "下载 RustFS，支持 Docker、Linux、macOS、Windows 等多种平台，快速部署您的分布式存储系统。",
+      "features": "了解 RustFS 的核心功能特性：高性能、无限扩展、多云支持、S3 兼容、开源等。",
+      "about": "RustFS 是一个值得信赖的开源分布式存储解决方案，拥有超过 1500+ 软件协议兼容性适配。"
+    },
     "author": "RustFS Team",
     "copyright": "© 2024 RustFS. 保留所有权利。",
     "license": "Apache 2.0 许可证",
@@ -28,167 +26,76 @@
     "documentation": "https://docs.rustfs.com"
   },
   "nav": {
-    "Features": "功能",
+    "Features": "产品功能",
     "Architecture": "架构",
-    "Solutions": "方案",
-    "Integrations": "集成",
-    "AI": "AI",
+    "Solutions": "解决方案",
+    "AI": "AI 支持",
     "Download": "下载",
-    "Docs": "文档",
+    "Documentation": "文档",
     "Community": "社区",
-    "About": "关于"
+    "About Us": "关于我们"
   },
   "hero": {
-    "Rust-powered": "基于 Rust 的",
+    "Rust-powered": "Rust 驱动的",
     "High Performance": "高性能",
-    "Unlimited Scaling": "无限扩展",
-    "Secure & Reliable": "安全可靠",
-    "Multi-Cloud Storage": "多云存储",
+    "Unlimited Scaling": "无限扩容",
+    "Secure and Reliable": "安全可靠",
+    "Multi-cloud": "多云存储",
     "S3 Compatible": "S3 兼容",
     "Distributed Storage System": "分布式存储系统",
-    "description": "RustFS 采用流行且安全的 Rust 语言开发，兼容 S3 协议。适用于 AI/ML、海量数据存储、大数据、互联网、工业和机密存储场景。几乎免费使用。遵循 Apache 2 许可证，支持国产机密设备和系统。",
-    "subtitle": "值得信赖的开源软件，拥有超过 1500+ 软件协议兼容性适配",
-    "Trusted open-source software": "值得信赖的开源软件"
+    "RustFS is developed with the popular and secure Rust language, compatible with S3 protocol. Suitable for AI/ML and massive data storage, big data, internet, industrial and confidential storage scenarios. Nearly free to use. Follows Apache 2 license, supports domestic confidential equipment and systems.": "RustFS 用热门安全的 Rust 语言开发，兼容 S3 协议。适用于 AI/ML 及海量数据存储、大数据、互联网、工业和保密存储等全部场景。近乎免费使用。遵循 Apache 2 协议，支持国产保密设备和系统。",
+    "Trusted open source software, compatible with over 1500+ software protocols": "值得信赖的开源软件，超过 1500+ 款软件协议兼容适配"
   },
   "buttons": {
-    "Get Started": "开始使用",
-    "Download": "下载",
-    "Learn More": "了解更多",
+    "Get Started": "快速开始",
+    "Download": "前往下载",
     "Contact Us": "联系我们",
     "View Demo": "查看演示",
-    "Sign Up": "注册",
-    "Sign In": "登录",
-    "Submit": "提交",
-    "Cancel": "取消",
-    "Save": "保存",
-    "Delete": "删除",
-    "Edit": "编辑",
-    "Add": "添加",
-    "View Documentation": "查看文档",
-    "Free Chat": "免费聊天"
+    "Free Consultation": "立即免费咨询"
   },
   "features": {
-    "Features": "功能特性",
-    "Discover the powerful features that make RustFS the preferred choice for modern storage solutions": "发现使 RustFS 成为现代存储解决方案首选的有力功能特性",
-    "High Performance": "高性能",
-    "Enterprise-Grade Distributed File System": "企业级分布式文件系统",
-    "Comprehensive features to meet enterprise storage needs": "全面的功能特性，满足企业级存储需求",
-    "Unlimited Scaling": "无限扩展",
-    "Multi-Cloud": "多云支持",
-    "S3 Compatible": "S3 兼容",
-    "Open Source": "开源",
-    "Enterprise Ready": "企业级",
-    "AI/ML Optimized": "AI/ML 优化",
-    "Secure": "安全",
-    "Reliable": "可靠",
-    "Cost Effective": "成本效益高",
-    "crossCloud": {
-      "title": "跨云支持",
-      "description": "RustFS 利用分布式架构和对象存储功能，为AI和高级分析工作负载提供卓越性能，支持从TB到EB级别的数据扩展。",
-      "featureDescription": "跨云支持能够很好的防止单云故障，造成重大的损失，可以跨云使用RustFS作为通信工具。我们支持桶级别的粒度执行，它用于以下情况：",
-      "features": [
-        "主动-主动跨区域/可用区复制",
-        "法律保留、治理和合规性",
-        "FINRA 规则 4511 和 CFTC 法规"
-      ],
-      "review": {
-        "name": "王小明",
-        "position": "CTO",
-        "review": "RustFS的跨云支持能够很好的防止单云故障，造成重大的损失"
-      }
-    },
-    "secureReliable": {
-      "title": "安全可靠",
-      "description": "RustFS 与 RustyVault 集成，提供高性能的对象存储安全加密，支持多种加密模式，确保数据安全性和透明度。",
-      "featureDescription": "RustyVault 是一个开源的对象存储加密工具，它提供了高性能、跨平台、易于集成和多种加密模式的优点。RustyVault 通过对数据进行加密，保证了数据的安全性和透明度。",
-      "features": [
-        "高性能 - 比其他产品的加解密性能更高",
-        "安全性 - 轮转的方式获得更好的安全性",
-        "易于集成 - RustyVault提供了简单的API和命令行工具"
-      ],
-      "review": {
-        "name": "孙立",
-        "position": "CTO",
-        "review": "RustFS与Vault产品集成非常方便，保障了我们的数据合规和安全加密的需要"
-      }
-    },
-    "versionControl": {
-      "title": "版本控制",
-      "description": "对象存储版本控制功能，为每个对象版本分配唯一标识符，用户可通过API或管理界面访问和管理历史版本。",
-      "featureDescription": "对象存储是一种数据存储架构，它用于存储和管理大量非结构化数据，如图片、视频、文档和备份。版本控制是对象存储的一个功能，它允许用户保存和访问一个对象的多个版本：",
-      "features": [
-        "数据保护和恢复 - 版本控制允许用户恢复到之前的版本",
-        "历史追踪 - 版本控制记录了每个对象的历史变化",
-        "协作和并发编辑 - 多用户不影响主版本独立工作"
-      ],
-      "review": {
-        "name": "李在恒",
-        "position": "高级工程师",
-        "review": "由于每个版本都保存在对象存储中，因此备份和恢复过程变得更加简单"
-      }
-    },
-    "unlimitedScaling": {
-      "title": "无限扩容",
-      "description": "RustFS系统自动平衡节点负载，确保数据均匀分布，支持根据存储需求动态添加或移除资源，实现无限扩容。",
-      "featureDescription": "RustFS支持无限扩容，支持海量数据存储，可以轻松应对大规模数据存储需求。RustFS的存储容量可以随着数据量的增长而无限扩展，不会受到存储容量的限制。",
-      "features": [
-        "分布式架构 - 数据被分散存储在多个节点上",
-        "数据分片 - 大型对象可能会被分割成多个小块",
-        "无中心元数据服务器 - 避免了中心化的元数据服务器损坏和中断服务"
-      ],
-      "review": {
-        "name": "吴景宇",
-        "position": "数据库工程师",
-        "review": "任何节点的中断和损坏都不会影响到数据的安全"
-      }
-    },
-    "objectReadOnly": {
-      "title": "对象只读",
-      "description": "支持对象锁定模式，实现WORM（写一次读多次）功能，防止数据在指定时间范围内被修改或删除，确保数据完整性。",
-      "featureDescription": "对象存储的WORM（Write Once, Read Many）是一种数据存储特性，它确保一旦数据被写入并固化，就无法被修改或删除。 WORM 的好处包括如下特点：",
-      "features": [
-        "数据保护 - 防止数据被意外或故意修改",
-        "合规性 - 某些行业需要遵守特定的法规",
-        "审计和证据保留 - 这对于法律诉讼和调查非常重要"
-      ],
-      "review": {
-        "name": "魏一鸣",
-        "position": "CEO",
-        "review": "我们的数据不准许被删除，更加符合法律的规定"
-      }
-    },
-    "activeReplication": {
-      "title": "主动复制",
-      "description": "对象写入时自动创建多个副本并分布到不同节点，支持同步和异步复制模式，提供高可用性和灾难恢复能力。",
-      "featureDescription": "对象存储的主动复制（Active Replication）是一种数据冗余策略，它涉及在多个地理位置或数据中心之间复制数据，这些副本可以是同步复制的，也可以是异步复制的：",
-      "features": [
-        "高可用性 - 更高的平衡和扩展性保证离用户最近的位置提供服务",
-        "灾难恢复 - 在发生区域性故障或灾难时，其他区域接管",
-        "地理冗余 - 在全球范围为客户提供高可靠的服务"
-      ],
-      "review": {
-        "name": "张小龙",
-        "position": "CEO",
-        "review": "在非结构化数据上，比传统的SAN存储节省了更多的成本"
-      }
-    }
+    "High-performance": "超强性能的",
+    "enterprise-grade distributed file system": "企业级分布式文件系统",
+    "Comprehensive features to meet enterprise-grade storage requirements": "全面的功能特性，满足企业级存储需求"
   },
   "download": {
-    "title": "下载 RustFS",
-    "subtitle": "选择您的平台",
     "platform_selector": "选择您的操作系统或部署方法",
-    "docker": {
-      "title": "Docker 部署",
-      "view_image": "查看镜像",
-      "latest_stable": "最新稳定版",
-      "architecture": "架构",
-      "download": "下载",
-      "installation_commands": "安装命令",
-      "dev_warning": "开发版本 - 不建议生产环境使用",
-      "credentials": "默认凭据：admin / admin123",
-      "view_versions": "在 Docker Hub 上查看所有可用版本",
-      "view_guide": "查看详细的 Docker 安装指南"
-    },
+    "Linux": "Linux",
+    "Docker": "Docker",
+    "macOS": "macOS",
+    "Windows": "Windows",
+    "Ubuntu 18.04+, CentOS 7+, and other Linux distributions": "Ubuntu 18.04+、CentOS 7+ 和其他 Linux 发行版",
+    "Docker 20.10+ with containerized deployment": "Docker 20.10+ 容器化部署",
+    "macOS 10.15+ with native binary support": "macOS 10.15+ 原生二进制支持",
+    "Windows 10/11 with native binary support": "Windows 10/11 原生二进制支持",
+    "Docker Deployment": "Docker 部署",
+    "View Image": "查看镜像",
+    "Latest Stable": "最新稳定版",
+    "Architecture": "架构",
+    "Download": "下载",
+    "Installation Commands": "安装命令",
+    "Development version - not recommended for production use": "开发版本 - 不建议生产环境使用",
+    "Default credentials: admin / admin123": "默认凭据：admin / admin123",
+    "View all available versions on Docker Hub": "在 Docker Hub 上查看所有可用版本",
+    "View detailed Docker installation guide": "查看详细的 Docker 安装指南",
+    "Latest Alpha": "最新 Alpha 版",
+    "Specific Version": "特定版本",
+    "Daily Build": "每日构建",
+    "Daily build - may contain experimental features": "每日构建 - 可能包含实验性功能",
+    "One-click Installation Script": "一键安装脚本",
+    "Binary Downloads": "二进制下载",
+    "ARM64 optimized for better performance": "ARM64 优化，性能更佳",
+    "Homebrew Installation": "Homebrew 安装",
+    "Homebrew Commands": "Homebrew 命令",
+    "Homebrew is required for installation": "安装需要 Homebrew",
+    "Apple Silicon": "Apple Silicon",
+    "Intel": "Intel",
+    "Apple Silicon optimized for better performance": "Apple Silicon 优化，性能更佳",
+    "We are preparing this platform for you": "我们正在为您准备这个平台",
+    "Download for": "下载",
+    "Copy code": "复制代码",
+    "Choose your platform": "选择您的平台",
+    "Download RustFS": "下载 RustFS",
     "coming_soon": "即将推出",
     "not_supported": "平台不支持"
   },
@@ -196,48 +103,9 @@
     "Light": "浅色",
     "Dark": "深色",
     "System": "系统",
-    "toggle": "切换主题"
+    "Toggle theme": "切换主题"
   },
   "common": {
-    "Loading": "加载中",
-    "Error": "错误",
-    "Success": "成功",
-    "Cancel": "取消",
-    "Confirm": "确认",
-    "Save": "保存",
-    "Delete": "删除",
-    "Edit": "编辑",
-    "Add": "添加",
-    "Search": "搜索",
-    "Filter": "筛选",
-    "Sort": "排序",
-    "Refresh": "刷新",
-    "Close": "关闭",
-    "Back": "返回",
-    "Next": "下一步",
-    "Previous": "上一步",
-    "Submit": "提交",
-    "Reset": "重置",
-    "Copy": "复制",
-    "Paste": "粘贴",
-    "Cut": "剪切",
-    "Select All": "全选",
-    "Deselect All": "取消全选",
-    "Ready to get started?": "准备开始使用？",
-    "Join thousands of developers and organizations using RustFS for their storage needs.": "加入数千名使用 RustFS 满足存储需求的开发者和组织。",
-    "Why Choose RustFS?": "为什么选择 RustFS？",
-    "Discover what makes RustFS the preferred choice for modern storage solutions": "发现使 RustFS 成为现代存储解决方案首选的原因",
-    "Built with Rust for maximum speed and efficiency": "使用 Rust 构建，实现最大速度和效率",
-    "Scale horizontally without limits": "无限制水平扩展",
-    "Enterprise-grade security and reliability": "企业级安全性和可靠性",
-    "Multi-Cloud Support": "多云支持",
-    "Deploy anywhere with our flexible multi-cloud architecture": "使用我们灵活的多云架构在任何地方部署",
-    "Public Cloud": "公有云",
-    "Deploy on AWS, Azure, Google Cloud, and other public cloud providers": "在 AWS、Azure、Google Cloud 和其他公有云提供商上部署",
-    "Private Cloud": "私有云",
-    "Run in your own data center with full control and security": "在您自己的数据中心中运行，拥有完全的控制权和安全性",
-    "Edge Computing": "边缘计算",
-    "Deploy at the edge for low-latency data access": "在边缘部署，实现低延迟数据访问",
     "Performance Statistics": "性能统计",
     "Key metrics that demonstrate our excellence": "展示我们卓越性的关键指标",
     "Performance Improvement": "性能提升",
@@ -249,27 +117,62 @@
     "Day": "天",
     "GitHub Issues Response Time": "GitHub 问题响应时间",
     "GitHub Commits": "GitHub 提交",
-    "What Our Users Say": "用户评价",
-    "Join thousands of satisfied users who trust RustFS for their storage needs": "加入数千名信任 RustFS 满足存储需求的满意用户",
     "Subscribe": "订阅",
     "Stay updated with the latest news and updates": "及时了解最新新闻和更新",
-    "We respect your privacy": "我们尊重您的隐私",
-    "RustFS is a high-performance, secure and reliable distributed storage system designed for cloud-native workloads.": "RustFS 是一个专为云原生工作负载设计的高性能、安全可靠的分布式存储系统。",
-    "Product": "产品",
-    "Features": "功能",
-    "Documentation": "文档",
-    "Community": "社区",
-    "Discussions": "讨论",
-    "Issues": "问题",
-    "Company": "公司",
-    "About Us": "关于我们",
-    "Contact Us": "联系我们",
-    "Privacy Policy": "隐私政策",
-    "© 2024 RustFS. All rights reserved.": "© 2024 RustFS. 保留所有权利。"
+    "We respect your privacy": "我们尊重您的隐私"
   },
   "reviews": {
-    "title": "用户评价",
-    "subtitle": "加入数千名信任 RustFS 满足存储需求的满意用户"
+    "What customers say about RustFS": "客户这样评价 RustFS",
+    "Exquisite service, professional team, providing you with the best service": "精致的服务，专业的团队, 为您提供最好的服务"
+  },
+  "stats": {
+    "Powerful Performance, Outstanding Security": "强大的性能，卓越的安全性",
+    "RustFS provides high performance, high security, high concurrency, providing powerful support for your business": "RustFS 提供高性能，高安全性，高并发, 为您的业务提供强大的支持",
+    "+7% Read/Write Speed": "+7% 读写速度",
+    "High security and high concurrency performance improvements from Rust": "来自 Rust 的高安全性，高并发的性能提升",
+    "Data Read/Write Success Rate": "数据读写成功率",
+    "S3 Compatibility": "S3 兼容性",
+    "User Satisfaction": "用户满意度",
+    "Intellectual Property Risk": "知识产权风险",
+    "day": "天",
+    "GitHub Issues Average Resolution Time": "GitHub Issues 平均解决时间",
+    "GitHub Commits": "GitHub 提交"
+  },
+  "differents": {
+    "Comparison with other storage products": "与其他存储产品的对比",
+    "Choose RustFS for more advantages": "选择 RustFS，您将获得更多的优势",
+    "Other object storage": "其他对象存储",
+    "Memory management issues with Go/C": "使用 Go 或者 C 语言开发，内存垃圾回收异常 / 内存泄漏等",
+    "Foreign logging violates security laws": "向其他第三国上报日志，违反国家安全法",
+    "AGPL V3 licensing issues": "AGPL V3 等协议、污染开源和协议陷阱，侵犯知识产权",
+    "Incomplete S3 support for Chinese clouds": "S3 支持和功能完善，不支持中国云厂商",
+    "Limited domestic device support": "不完全支持国产信创设备",
+    "Annual price hikes up to millions": "每年涨价，价格高达数百万人民币",
+    "RustFS": "RustFS",
+    "Memory-safe Rust development": "基于 Rust 语言开发，内存更安全",
+    "No foreign logging": "不向其他第三国上报日志",
+    "Business-friendly Apache license": "Apache协议，商用支持更友好",
+    "Full S3 support for Chinese clouds": "S3 支持和功能完善，支持国内云厂商",
+    "Supports domestic secure systems": "支持国产信创设备和保密系统",
+    "Stable pricing and support": "商用和技术支持和价格稳定",
+    "Best choice": "最佳选择",
+    "* Comparison for reference only": "* 以上对比仅供参考，具体以实际情况为准"
+  },
+  "getStarted": {
+    "Experience RustFS": "快速体验 RustFS 的",
+    "High security, high concurrency and ultimate performance": "高安全性，高并发和极致性能",
+    "Over 100+ enterprise users have started using RustFS": "超过 100+ 企业用户已经开始使用 RustFS"
+  },
+  "multiCloud": {
+    "True Multi-Cloud Storage": "真正的多云存储",
+    "Multi-cloud object storage allows enterprises to build AWS S3-compatible data infrastructure on any cloud. The result is a consistent, portable interface for data and applications - meaning you can run anywhere, from edge to public cloud, without changing a line of code.": "多云对象存储允许企业在任何云上构建与 AWS S3 兼容的数据基础设施。结果是数据和应用程序的一致、可移植的接口 - 这意味着您可以在任何地方运行，从边缘到公共云，而无需更改一行代码。",
+    "Contact us for more information": "联系我们获取更多信息",
+    "Public Cloud": "公有云",
+    "RustFS is powered by Kubernetes and provides scalable, secure, S3-compatible object storage for every public cloud. Free yourself from vendor lock-in and treat clouds for what they are - commodity compute, network, and drives.": "RustFS 由 Kubernetes 提供支持，为每个公共云提供可扩展、安全、兼容 S3 的对象存储。将自己从供应商的束缚中解放出来，并对待云的本质 - 商用计算、网络和驱动器。",
+    "Private Cloud": "私有云",
+    "From OpenShift to Tanzu, RustFS is the only object storage that is part of the infrastructure foundation of leading Kubernetes distributions. With its massive portfolio of integrated applications, RustFS completes the software-defined picture.": "从 OpenShift 到 Tanzu，RustFS 是唯一一个作为领先 Kubernetes 发行版基础设施基础部分的对象存储。凭借其庞大的集成应用程序组合 RustFS 完善了软件定义的画面。",
+    "Edge": "边缘",
+    "The complete RustFS multi-cloud storage binary is less than 100MB, capable of powering object storage anywhere - from ARM SOCs, 5G POPs, and edge cache devices to mini data centers. This is why RustFS dominates the edge storage market.": "RustFS 多云存储的完整二进制文件不到 100MB，能够为任何地方的对象存储提供支持 - 从 ARM SOC、5G POP 和边缘缓存设备到迷你数据中心。这就是 RustFS 主导边缘存储市场的原因。"
   },
   "footer": {
     "Architecture Support": "架构支持",
@@ -289,45 +192,20 @@
     "Lifecycle Management": "生命周期管理",
     "Solutions": "解决方案",
     "Modern Data Lake": "现代数据湖",
-    "AI & Machine Learning": "AI 与机器学习",
+    "AI & Machine Learning": "AI 和机器学习",
     "Cloud Native": "云原生",
     "Big Data Compute-Storage Separation": "大数据计算存储分离",
     "SQL Support": "SQL 支持",
     "Quantitative Trading": "量化交易",
-    "Manufacturing Cost Reduction": "制造业降本增效",
+    "Manufacturing Cost Reduction": "制造业降本",
     "Cold Archive Storage": "冷归档存储",
-    "Video Storage Solutions": "视频存储解决方案",
-    "Domestic Innovation & SM Solutions": "国产创新与信创解决方案",
+    "Video Storage Solutions": "视频存储方案",
+    "Domestic Innovation & SM Solutions": "国产信创和 SM 解决方案",
     "About Us": "关于我们",
-    "Investment & Cooperation": "投资合作",
+    "Investment & Cooperation": "投资和合作",
     "Trademark Usage": "商标使用",
     "Customer Service: Weekdays 9:00-18:00": "客服时间：工作日 9:00-18:00",
     "Beijing Address: Chaoyang District, Beijing": "北京地址：北京市朝阳区",
-    "Beijing ICP License: XXXXXXXXXXXX": "京ICP备2024061305-1号"
-  },
-  "getStarted": {
-    "Experience RustFS": "体验 RustFS",
-    "High Security, High Concurrency & Ultimate Performance": "高安全、高并发、极致性能",
-    "Over 100 Enterprise Users": "超过 100 家企业用户"
-  },
-  "differents": {
-    "Why Choose RustFS?": "为什么选择 RustFS？",
-    "Discover what makes RustFS the preferred choice for modern storage solutions": "发现使 RustFS 成为现代存储解决方案首选的原因",
-    "Other Storage": "其他存储",
-    "Memory Safety Issues": "内存安全问题",
-    "Foreign Logging": "国外日志记录",
-    "AGPL License Issues": "AGPL 许可证问题",
-    "Limited S3 Support": "S3 支持有限",
-    "Limited Device Support": "设备支持有限",
-    "Unstable Pricing": "价格不稳定",
-    "RustFS": "RustFS",
-    "Memory Safe": "内存安全",
-    "No Foreign Logging": "无国外日志记录",
-    "Apache License": "Apache 许可证",
-    "Full S3 Compatibility": "完整 S3 兼容性",
-    "Secure System Support": "安全系统支持",
-    "Stable Pricing": "价格稳定",
-    "Best Choice": "最佳选择",
-    "Disclaimer: The above comparison is based on public information and is for reference only": "免责声明：以上对比基于公开信息，仅供参考"
+    "Beijing ICP License: XXXXXXXXXXXX": "京 ICP 备 2024061305-1 号"
   }
 }

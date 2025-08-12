@@ -2,6 +2,7 @@
 
 import { useTranslations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { DownloadIcon } from "lucide-react";
 import Link from "next/link";
 import CodeBlock from "../code-block";
 import Note from "../common/note";
@@ -55,7 +56,7 @@ export default function MacOSDownloadSection({ platform, className }: MacOSDownl
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-              <span>⬇️</span>
+              <DownloadIcon className="w-4 h-4" />
               <span>{t('Download')}</span>
             </a>
           </div>
@@ -94,7 +95,7 @@ export default function MacOSDownloadSection({ platform, className }: MacOSDownl
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-              <span>⬇️</span>
+              <DownloadIcon className="w-4 h-4" />
               <span>{t('Download')}</span>
             </a>
           </div>
@@ -113,18 +114,6 @@ export default function MacOSDownloadSection({ platform, className }: MacOSDownl
             {t('Default credentials: admin / admin123')}
           </Note>
         </div>
-      </div>
-
-      {/* Platform Notes */}
-      <div className="space-y-2">
-        <Note type="tip">
-          {t('Default credentials: admin / admin123')}
-        </Note>
-        <Note type="info">
-          <Link href="https://docs.rustfs.com/installation/macos" target="_blank" className="hover:underline">
-            {t('View detailed macOS installation guide')}
-          </Link>
-        </Note>
       </div>
     </div>
   );

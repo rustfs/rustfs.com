@@ -40,7 +40,7 @@ export default function AppHeader() {
       url: `/${locale}/download`
     },
     {
-      label: t('Docs'),
+      label: t('Documentation'),
       url: docs_url('', locale)
     },
     // {
@@ -52,7 +52,7 @@ export default function AppHeader() {
       url: 'https://github.com/rustfs/rustfs/discussions'
     },
     {
-      label: t('About'),
+      label: t('About Us'),
       url: docs_url('about', locale)
     }
   ]
