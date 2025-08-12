@@ -1,15 +1,53 @@
 'use client'
 
 /* eslint-disable @next/next/no-img-element */
-import features from '@/data/features';
 import { useTranslations } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
-import { CheckCircleIcon, QuoteIcon } from "lucide-react";
+import { BookCopyIcon, EarthIcon, ExpandIcon, Layers3Icon, LockKeyholeIcon, ShieldIcon, CheckCircleIcon, QuoteIcon } from "lucide-react";
 import { useState } from 'react';
 
 export default function HomeFeatures() {
   const { t } = useTranslations('features');
   const [activeTab, setActiveTab] = useState(0);
+
+  const features = [
+    {
+      "key": "crossCloud",
+      "icon": EarthIcon,
+      "url": "#",
+      "avatar": "/images/faces/wangxiaoming.jpeg"
+    },
+    {
+      "key": "secureReliable",
+      "icon": ShieldIcon,
+      "url": "#",
+      "avatar": "/images/faces/sunli.jpeg"
+    },
+    {
+      "key": "versionControl",
+      "icon": Layers3Icon,
+      "url": "#",
+      "avatar": "/images/faces/lizaiheng.jpeg"
+    },
+    {
+      "key": "unlimitedScaling",
+      "icon": ExpandIcon,
+      "url": "#",
+      "avatar": "/images/faces/wujingyu.jpeg"
+    },
+    {
+      "key": "objectReadOnly",
+      "icon": LockKeyholeIcon,
+      "url": "#",
+      "avatar": "/images/faces/weiyiming.jpeg"
+    },
+    {
+      "key": "activeReplication",
+      "icon": BookCopyIcon,
+      "url": "#",
+      "avatar": "/images/faces/sunli.jpeg"
+    }
+  ];
 
   return (
     <section className="relative pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32">
