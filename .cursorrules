@@ -162,6 +162,7 @@ className={cn(
 
 ### Git 提交规范
 - **提交标准**: 必须使用 [Conventional Commits](https://www.conventionalcommits.org/) 规范
+- **语言要求**: 提交信息必须使用英文
 - **格式要求**: `<type>[optional scope]: <description>`
 - **类型说明**:
   - `feat`: 新功能
@@ -174,10 +175,10 @@ className={cn(
   - `chore`: 构建过程或辅助工具的变动
 - **示例**:
   ```bash
-  feat: 添加用户登录功能
-  fix(auth): 修复登录验证失败问题
-  docs: 更新 API 文档
-  refactor(components): 重构按钮组件结构
+  feat: add user login functionality
+  fix(auth): resolve login validation failure issue
+  docs: update API documentation
+  refactor(components): restructure button component
   ```
 
 ---
@@ -318,6 +319,7 @@ downloadT('Choose Platform')      // 下载选择平台
 - ❌ 在翻译键中使用空格、句号等特殊字符
 - ❌ 使用 `useTranslations()` 而不指定命名空间
 - ❌ 使用不符合 Conventional Commits 规范的提交信息
+- ❌ 使用中文或其他非英文语言编写 Git 提交信息
 
 ### 开发注意事项
 - ❌ 不要进行"顺手"的额外修改
@@ -358,6 +360,7 @@ downloadT('Choose Platform')      // 下载选择平台
 - ✅ 无 TypeScript 错误
 - ✅ 无控制台警告
 - ✅ 提交信息符合 Conventional Commits 规范
+- ✅ 提交信息使用英文编写
 
 ---
 
