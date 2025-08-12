@@ -1,6 +1,6 @@
 'use client'
 
-import LanguageToggle from "@/components/ui/language-toggle";
+import LanguageToggle from "@/components/ui/language-selector";
 import { useTranslations } from '@/lib/i18n';
 import { docs_url } from "@/lib/utils";
 import { Popover, Transition } from '@headlessui/react';
