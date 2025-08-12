@@ -1,7 +1,7 @@
 'use client'
 import { WordRotate } from "@/components/magicui/word-rotate";
-import { cn } from "@/lib/utils";
 import { useTranslations } from '@/lib/i18n';
+import { cn } from "@/lib/utils";
 import DemoLink from "./buttons/demo-link";
 import DownloadLink from "./buttons/download-link";
 //import GetStartedButton from "./buttons/get-started";
