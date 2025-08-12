@@ -97,6 +97,31 @@ pnpm start
 - Support dark mode and responsive design
 - Follow shadcn/ui component standards
 
+### ⚠️ CRITICAL: Style and Structure Protection
+
+**🚨 ABSOLUTE RULE: Do NOT modify styles or structure unless explicitly specified!**
+
+- **NEVER change existing CSS classes, layout structure, or component design**
+- **NEVER simplify complex components or remove visual elements**
+- **NEVER replace custom components with basic UI components**
+- **NEVER modify animations, transitions, or interactive behaviors**
+- **NEVER change responsive design or dark mode implementations**
+
+**When making changes:**
+- ✅ Only modify what is explicitly requested
+- ✅ Preserve ALL existing styles, animations, and interactions
+- ✅ Keep complex layouts and visual hierarchies intact
+- ✅ Maintain all custom component implementations
+
+**This rule applies to ALL development tasks, including:**
+- Internationalization updates
+- Bug fixes
+- Feature additions
+- Code refactoring
+- Performance optimizations
+
+**Violation of this rule will result in immediate rollback and review.**
+
 ### Internationalization
 
 - All user interface text uses Chinese
