@@ -9,12 +9,28 @@ export type Messages = Record<string, unknown>
 interface I18nContextType {
   locale: Locale
   setLocale: (locale: Locale) => void
-  t: (key: string, namespace?: string) => string
+  t: (key: string, namespace?: string, values?: Record<string, string | number>) => string
   messages: Messages
   isLoading: boolean
 }
 
 const I18nContext = createContext<I18nContextType | null>(null)
+
+// 获取嵌套对象的值
+function getNestedValue(obj: Record<string, unknown>, path: string): string | undefined {
+  const keys = path.split('.');
+  let current: unknown = obj;
+
+  for (const key of keys) {
+    if (current && typeof current === 'object' && key in current) {
+      current = (current as Record<string, unknown>)[key];
+    } else {
+      return undefined;
+    }
+  }
+
+  return typeof current === 'string' ? current : undefined;
+}
 
 // 客户端动态加载语言包
 export async function getMessagesClient(locale: Locale): Promise<Messages> {
@@ -53,7 +69,7 @@ export function useTranslations(namespace?: string) {
 
   // 返回翻译函数，支持命名空间
   return {
-    t: (key: string) => translate(key, namespace),
+    t: (key: string, values?: Record<string, string | number>) => translate(key, namespace, values),
     locale,
     setLocale,
     isLoading
@@ -105,17 +121,38 @@ export function I18nProvider({
     }
   }, [currentLocale, pathname, router])
 
-  const translate = (key: string, namespace?: string): string => {
+  const translate = (key: string, namespace?: string, values?: Record<string, string | number>): string => {
+    let message: string | undefined;
+
     if (namespace) {
-      // 如果有命名空间，先查找命名空间下的翻译
-      const namespaceMessages = currentMessages[namespace] as Record<string, unknown>
-      if (namespaceMessages && typeof namespaceMessages[key] === 'string') {
-        return namespaceMessages[key] as string
+      // 先尝试在命名空间下查找
+      const namespaceMessages = currentMessages[namespace] as Record<string, unknown>;
+      if (namespaceMessages) {
+        message = getNestedValue(namespaceMessages, key);
       }
+
+      // 如果命名空间下没找到，尝试全局查找
+      if (!message) {
+        message = getNestedValue(currentMessages, key);
+      }
+    } else {
+      // 直接全局查找
+      message = getNestedValue(currentMessages, key);
     }
 
-    // 如果没有命名空间或命名空间下没有找到，查找全局翻译
-    return (currentMessages[key] as string) || key
+    // 如果没找到，返回 key
+    if (!message) {
+      return key;
+    }
+
+    // 简单的插值支持（类似 next-intl 的 ICU message syntax）
+    if (values) {
+      return message.replace(/\{(\w+)\}/g, (match, key) => {
+        return values[key]?.toString() || match;
+      });
+    }
+
+    return message;
   }
 
   useEffect(() => {

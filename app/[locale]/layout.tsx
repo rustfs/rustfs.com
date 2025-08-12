@@ -26,15 +26,11 @@ export default async function LocaleLayout({
   const messages = await getMessages(locale as Locale);
 
   return (
-    <html lang={locale}>
-      <body>
-        <I18nProvider locale={locale as Locale} messages={messages}>
-          <AppHeader />
-          {children}
-          <AppFooter />
-          <FixedContactButton />
-        </I18nProvider>
-      </body>
-    </html>
+    <I18nProvider locale={locale as Locale} messages={messages}>
+      <AppHeader />
+      {children}
+      <AppFooter />
+      <FixedContactButton />
+    </I18nProvider>
   );
 }

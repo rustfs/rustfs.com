@@ -1,7 +1,7 @@
 'use client'
 
-import { CheckIcon, XIcon } from "lucide-react";
 import { useTranslations } from '@/lib/i18n';
+import { CheckIcon, XIcon } from "lucide-react";
 
 export default function HomeDifferents() {
   const { t } = useTranslations('differents');
@@ -19,39 +19,38 @@ export default function HomeDifferents() {
       <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl font-bold md:text-4xl md:leading-tight">
-            {t('title')}
+            {t('Why Choose RustFS?')}
           </h2>
           <p className="mt-4">
-            {t('subtitle')}
+            {t('Discover what makes RustFS the preferred choice for modern storage solutions')}
           </p>
         </div>
 
         <div className="relative flex w-full flex-col gap-6 lg:flex-row xl:mx-auto xl:w-10/12">
           <div className="relative rounded-xl bg-white md:w-1/2 lg:text-right dark:bg-neutral-800">
-            <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">{t('otherStorage')}</h3>
+            <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">{t('Other Storage')}</h3>
             <div className="text-muted-foreground">
               <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
-                <span>{t('memoryIssues')}</span>
+                <span>{t('Memory Safety Issues')}</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
                 <XIcon className="text-neutral-500" />
-                <span>{t('foreignLogging')}</span>
+                <span>{t('Foreign Logging')}</span>
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
-                <span>{t('agplIssues')}</span>
+                <span>{t('AGPL License Issues')}</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
-                <XIcon className="text-neutral-500" />
-                <span>{t('s3Support')}</span>
+                <span>{t('Limited S3 Support')}</span>
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
-                <span>{t('deviceSupport')}</span>
+                <span>{t('Limited Device Support')}</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
-                <span>{t('pricing')}</span>
+                <span>{t('Unstable Pricing')}</span>
               </div>
             </div>
 
@@ -75,36 +74,36 @@ export default function HomeDifferents() {
           </div>
 
           <div className="relative rounded-xl bg-white text-left md:w-1/2 dark:bg-neutral-800">
-            <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">{t('rustFS')}</h3>
+            <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">{t('RustFS')}</h3>
             <div className="text-muted-foreground">
               <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
                 <CheckIcon className="text-green-500" />
-                <span>{t('memorySafe')}</span>
+                <span>{t('Memory Safe')}</span>
               </div>
               <div className="flex items-center gap-2 p-4 lg:px-8 ">
                 <CheckIcon className="text-green-500" />
-                <span>{t('noForeignLogging')}</span>
+                <span>{t('No Foreign Logging')}</span>
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
                 <CheckIcon className="text-green-500" />
-                <span>{t('apacheLicense')}</span>
+                <span>{t('Apache License')}</span>
               </div>
               <div className="flex items-center gap-2 p-4 lg:px-8 ">
                 <CheckIcon className="text-green-500" />
-                <span>{t('fullS3Compatibility')}</span>
+                <span>{t('Full S3 Compatibility')}</span>
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
                 <CheckIcon className="text-green-500" />
-                <span>{t('secureSystemSupport')}</span>
+                <span>{t('Secure System Support')}</span>
               </div>
               <div className="flex items-center gap-2 p-4 lg:px-8 ">
                 <CheckIcon className="text-green-500" />
-                <span>{t('stablePricing')}</span>
+                <span>{t('Stable Pricing')}</span>
               </div>
             </div>
 
             <span className="absolute end-0 top-0 rounded-es-xl rounded-se-xl bg-green-500 px-3 py-1.5 text-xs font-medium text-white">
-              {t('bestChoice')}
+              {t('Best Choice')}
             </span>
 
             <div className="absolute end-0 top-0 hidden translate-x-16 translate-y-16 md:block">
@@ -139,7 +138,7 @@ export default function HomeDifferents() {
           </div>
         </div>
         <div className="mt-7 text-center">
-          <p className="text-xs text-neutral-400">{t('disclaimer')}</p>
+          <p className="text-xs text-neutral-400">{t('Disclaimer: The above comparison is based on public information and is for reference only')}</p>
         </div>
         {/* End Features */}
       </div>

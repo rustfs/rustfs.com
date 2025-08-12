@@ -21,8 +21,8 @@ export default function GetStartedToday() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
         <div className="mx-auto text-center flex flex-col gap-8">
           <h2 className="font-display text-2xl tracking-wide sm:text-4xl font-semibold leading-tight">
-            {t('experienceRustfs')} <br />
-            {t('highSecurityHighConcurrencyAndUltimatePerformance')}
+            {t('Experience RustFS')} <br />
+            {t('High Security, High Concurrency & Ultimate Performance')}
           </h2>
 
           {/* Avatar Group */}

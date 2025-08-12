@@ -24,11 +24,61 @@ export async function getMessages(locale: Locale): Promise<Messages> {
   }
 }
 
-// 服务端翻译函数（用于 SSR）
-export function t(key: string): string {
-  // 服务端需要同步获取消息，这里保持原有逻辑
-  // 在实际使用中，服务端组件应该通过 getMessages 获取
-  return key
+// 获取嵌套对象的值
+function getNestedValue(obj: Record<string, unknown>, path: string): string | undefined {
+  const keys = path.split('.');
+  let current: unknown = obj;
+
+  for (const key of keys) {
+    if (current && typeof current === 'object' && key in current) {
+      current = (current as Record<string, unknown>)[key];
+    } else {
+      return undefined;
+    }
+  }
+
+  return typeof current === 'string' ? current : undefined;
+}
+
+// 服务端翻译函数 - 参考 next-intl 的 getTranslations
+export async function getTranslations({ locale, namespace }: { locale: string; namespace?: string }) {
+  const messages = await getMessages(locale as Locale);
+
+  const t = (key: string, values?: Record<string, string | number>): string => {
+    let message: string | undefined;
+
+    if (namespace) {
+      // 先尝试在命名空间下查找
+      const namespaceMessages = messages[namespace] as Record<string, unknown>;
+      if (namespaceMessages) {
+        message = getNestedValue(namespaceMessages, key);
+      }
+
+      // 如果命名空间下没找到，尝试全局查找
+      if (!message) {
+        message = getNestedValue(messages, key);
+      }
+    } else {
+      // 直接全局查找
+      message = getNestedValue(messages, key);
+    }
+
+    // 如果没找到，返回 key
+    if (!message) {
+      return key;
+    }
+
+    // 简单的插值支持（类似 next-intl 的 ICU message syntax）
+    if (values) {
+      return message.replace(/\{(\w+)\}/g, (match, key) => {
+        return values[key]?.toString() || match;
+      });
+    }
+
+    return message;
+  };
+
+  return t;
 }
 
 export function getLocale(request: Request): Locale {

@@ -1,8 +1,8 @@
 'use client'
 
+import { useTranslations } from '@/lib/i18n';
 import { cn } from "@/lib/utils";
 import { ArrowRightIcon } from "lucide-react";
-import { useTranslations } from '@/lib/i18n';
 
 export default function FreeChatButton({ className }: {
   className?: string | string[]
@@ -15,7 +15,7 @@ export default function FreeChatButton({ className }: {
       target="_blank"
       href="https://tb.53kf.com/code/client/3ae82624ac86c32c1db8d311cd6d2a659/2"
     >
-      <span className="mr-2">{t('freeChat')}</span>
+      <span className="mr-2">{t('Free Chat')}</span>
       <ArrowRightIcon className="h-3 w-3 flex-none" strokeWidth={2.5} />
     </a>
   )

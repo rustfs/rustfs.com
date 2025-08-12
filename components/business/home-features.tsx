@@ -2,9 +2,9 @@
 
 /* eslint-disable @next/next/no-img-element */
 import features from '@/data/features';
+import { useTranslations } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import { CheckCircleIcon, QuoteIcon } from "lucide-react";
-import { useTranslations } from '@/lib/i18n';
 import { useState } from 'react';
 
 export default function HomeFeatures() {
@@ -17,10 +17,10 @@ export default function HomeFeatures() {
         {/* Title */}
         <div className="mx-auto mb-10 text-center lg:mb-14">
           <h2 className="text-3xl font-bold md:text-4xl tracking-wide md:leading-tight dark:text-white">
-            {t('highPerformance')} <span className="text-blue-500">{t('enterpriseGradeDistributedFileSystem')}</span>
+            {t('High Performance')} <span className="text-blue-500">{t('Enterprise-Grade Distributed File System')}</span>
           </h2>
           <p className="text-muted-foreground mt-4">
-            {t('comprehensiveFeaturesDescription')}
+            {t('Comprehensive features to meet enterprise storage needs')}
           </p>
         </div>
         {/* End Title */}

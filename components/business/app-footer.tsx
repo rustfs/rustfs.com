@@ -1,7 +1,7 @@
 'use client'
 
-import { docs_url } from "@/lib/utils";
 import { useTranslations } from '@/lib/i18n';
+import { docs_url } from "@/lib/utils";
 import LinkGitHub from './buttons/link-github';
 import LinkTwitter from './buttons/link-twitter';
 import { Logo } from './logo';
@@ -11,49 +11,49 @@ export default function AppFooter() {
 
   const footerLinks = [
     {
-      title: t('architectureSupport'),
+      title: t('Architecture Support'),
       links: [
-        { title: t('bareMetalAndVirtualization'), href: docs_url('features/baremetal', locale) },
-        { title: t('alibabaCloud'), href: docs_url('features/aliyun', locale) },
-        { title: t('tencentCloud'), href: docs_url('features/qcloud', locale) },
-        { title: t('huaweiCloud'), href: docs_url('features/huaweicloud', locale) },
-        { title: t('internationalCloudProviders'), href: docs_url('features/aws-elastic', locale) },
+        { title: t('Bare Metal & Virtualization'), href: docs_url('features/baremetal', locale) },
+        { title: t('Alibaba Cloud'), href: docs_url('features/aliyun', locale) },
+        { title: t('Tencent Cloud'), href: docs_url('features/qcloud', locale) },
+        { title: t('Huawei Cloud'), href: docs_url('features/huaweicloud', locale) },
+        { title: t('International Cloud Providers'), href: docs_url('features/aws-elastic', locale) },
       ]
     },
     {
-      title: t('productFeatures'),
+      title: t('Product Features'),
       links: [
-        { title: t('distributed'), href: docs_url('features/distributed', locale) },
-        { title: t('logManagement'), href: docs_url('features/logging', locale) },
-        { title: t('versionControl'), href: docs_url('features/versioning', locale) },
-        { title: t('s3Compatible'), href: docs_url('features/s3-compatibility', locale) },
-        { title: t('objectLevelAndReadOnly'), href: docs_url('features/worm', locale) },
-        { title: t('crossRegionReplication'), href: docs_url('features/replication', locale) },
-        { title: t('encryption'), href: docs_url('features/encryption', locale) },
-        { title: t('lifecycleManagement'), href: docs_url('features/lifecycle', locale) },
+        { title: t('Distributed Storage'), href: docs_url('features/distributed', locale) },
+        { title: t('Log Management'), href: docs_url('features/logging', locale) },
+        { title: t('Version Control'), href: docs_url('features/versioning', locale) },
+        { title: t('S3 Compatible'), href: docs_url('features/s3-compatibility', locale) },
+        { title: t('Object Level Read-Only'), href: docs_url('features/worm', locale) },
+        { title: t('Cross-Region Replication'), href: docs_url('features/replication', locale) },
+        { title: t('Encryption'), href: docs_url('features/encryption', locale) },
+        { title: t('Lifecycle Management'), href: docs_url('features/lifecycle', locale) },
       ]
     },
     {
-      title: t('solutions'),
+      title: t('Solutions'),
       links: [
-        { title: t('modernDataLake'), href: docs_url('features/data-lake', locale) },
-        { title: t('aiAndMachineLearning'), href: docs_url('features/ai', locale) },
-        { title: t('cloudNative'), href: docs_url('features/cloud-native', locale) },
-        { title: t('bigDataComputeStorageSeparation'), href: docs_url('features/hdfs', locale) },
-        { title: t('sqlSupport'), href: docs_url('features/sql-server', locale) },
-        { title: t('quantitativeTrading'), href: docs_url('features/quantitative-trading', locale) },
-        { title: t('manufacturingCostReduction'), href: docs_url('features/industry', locale) },
-        { title: t('coldArchiveStorage'), href: docs_url('features/cold-archiving', locale) },
-        { title: t('videoStorageSolutions'), href: docs_url('features/video', locale) },
-        { title: t('domesticInnovationAndSMSolutions'), href: docs_url('features/domestic', locale) },
+        { title: t('Modern Data Lake'), href: docs_url('features/data-lake', locale) },
+        { title: t('AI & Machine Learning'), href: docs_url('features/ai', locale) },
+        { title: t('Cloud Native'), href: docs_url('features/cloud-native', locale) },
+        { title: t('Big Data Compute-Storage Separation'), href: docs_url('features/hdfs', locale) },
+        { title: t('SQL Support'), href: docs_url('features/sql-server', locale) },
+        { title: t('Quantitative Trading'), href: docs_url('features/quantitative-trading', locale) },
+        { title: t('Manufacturing Cost Reduction'), href: docs_url('features/industry', locale) },
+        { title: t('Cold Archive Storage'), href: docs_url('features/cold-archiving', locale) },
+        { title: t('Video Storage Solutions'), href: docs_url('features/video', locale) },
+        { title: t('Domestic Innovation & SM Solutions'), href: docs_url('features/domestic', locale) },
       ]
     },
     {
-      title: t('aboutUs'),
+      title: t('About Us'),
       links: [
-        { title: t('aboutUs'), href: docs_url('about', locale) },
-        { title: t('investmentAndCooperation'), href: docs_url('about', locale) },
-        { title: t('trademarkUsage'), href: docs_url('trademark', locale) },
+        { title: t('About Us'), href: docs_url('about', locale) },
+        { title: t('Investment & Cooperation'), href: docs_url('about', locale) },
+        { title: t('Trademark Usage'), href: docs_url('about', locale) },
       ]
     }
   ];
@@ -88,9 +88,9 @@ export default function AppFooter() {
             <div className="flex items-center gap-4">
               <Logo className="h-8 w-auto" />
               <div className="text-sm text-muted-foreground flex flex-col gap-0.5">
-                <p>{t('customerServiceHours')}</p>
+                <p>{t('Customer Service: Weekdays 9:00-18:00')}</p>
                 <div className="flex items-center gap-2">
-                  <span>{t('beijingAddress')}</span>
+                  <span>{t('Beijing Address: Chaoyang District, Beijing')}</span>
                   <span className="hidden md:inline-block">|</span>
                   <a
                     href="https://beian.miit.gov.cn/"
@@ -98,7 +98,7 @@ export default function AppFooter() {
                     rel="noopener noreferrer"
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {t('beijingIcpLicense')}
+                    {t('Beijing ICP License: XXXXXXXXXXXX')}
                   </a>
                 </div>
               </div>
