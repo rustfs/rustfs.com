@@ -8,7 +8,7 @@ import { CheckCircleIcon, QuoteIcon } from "lucide-react";
 import { useState } from 'react';
 
 export default function HomeFeatures() {
-  const { t, locale } = useTranslations('features');
+  const { t } = useTranslations('features');
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -29,7 +29,7 @@ export default function HomeFeatures() {
         <nav className="mx-auto grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
           {features.map((feature, index) => (
             <button
-              key={`${feature.title.zh}-${index}`}
+              key={`${feature.key}-${index}`}
               type="button"
               className={cn(
                 "w-full flex flex-col gap-2 text-start hover:bg-muted focus:outline-hidden focus:bg-muted p-2 sm:p-3 md:p-5 rounded-xl",
@@ -54,11 +54,11 @@ export default function HomeFeatures() {
                     'text-blue-600 dark:text-blue-500': activeTab === index,
                   }
                 )}>
-                  {feature.title[locale]}
+                  {t(`${feature.key}.title`)}
                 </span>
               </div>
               <p className="hidden md:block mt-1 text-sm text-muted-foreground">
-                {feature.description[locale]}
+                {t(`${feature.key}.description`)}
               </p>
             </button>
           ))}
@@ -69,7 +69,7 @@ export default function HomeFeatures() {
         <div className="mt-10 md:mt-16">
           {features.map((feature, index) => (
             <div
-              key={`${feature.title.zh}-content-${index}`}
+              key={`${feature.key}-content-${index}`}
               className={cn(
                 {
                   'hidden': activeTab !== index,
@@ -84,19 +84,19 @@ export default function HomeFeatures() {
                     <feature.icon className="hidden md:block size-12 md:size-16 text-blue-500" />
                     <div>
                       <h4 className="text-2xl font-bold text-neutral-800 dark:text-white mb-2">
-                        {feature.title[locale]}
+                        {t(`${feature.key}.title`)}
                       </h4>
                       <p className="text-muted-foreground">
-                        {feature.featureDescription[locale]}
+                        {t(`${feature.key}.featureDescription`)}
                       </p>
                     </div>
                   </div>
 
                   <ul className="text-muted-foreground grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                    {feature.features.map((item, itemIndex) => (
+                    {[0, 1, 2].map((itemIndex) => (
                       <li className="flex gap-3 items-start" key={itemIndex}>
                         <CheckCircleIcon className="size-5 shrink-0 text-blue-500 mt-1" />
-                        <span>{item[locale]}</span>
+                        <span>{t(`${feature.key}.features.${itemIndex}`)}</span>
                       </li>
                     ))}
                   </ul>
@@ -105,15 +105,15 @@ export default function HomeFeatures() {
                     <div className="flex flex-col md:flex-row items-center gap-4">
                       <QuoteIcon className="size-8 rotate-180 text-blue-500 opacity-15" />
                       <p className="text-muted-foreground flex-1 text-lg italic">
-                        &ldquo;{feature.review.review[locale]}&rdquo;
+                        &ldquo;{t(`${feature.key}.review.review`)}&rdquo;
                       </p>
                       <div className="flex items-center gap-4 self-end">
                         <div className="text-right">
                           <p className="font-semibold text-neutral-800 dark:text-white">
-                            {feature.review.name[locale]}
+                            {t(`${feature.key}.review.name`)}
                           </p>
                           <p className="text-sm text-muted-foreground">
-                            {feature.review.position[locale]}
+                            {t(`${feature.key}.review.position`)}
                           </p>
                         </div>
                         <img
@@ -121,7 +121,7 @@ export default function HomeFeatures() {
                           width="48"
                           height="48"
                           alt=""
-                          src={feature.review.img}
+                          src={feature.avatar}
                         />
                       </div>
                     </div>
