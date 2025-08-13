@@ -1,97 +1,96 @@
-# RustFS.com 项目开发规范
+# RustFS.com Project Development Guidelines
 
-## 📋 项目概述
+## 📋 Project Overview
 
-RustFS.com 是一个基于 Next.js 的现代化分布式存储系统官网，采用 TypeScript + Tailwind CSS 技术栈，支持深色模式和响应式设计。
+RustFS.com is a modern distributed storage system website built with Next.js, using TypeScript + Tailwind CSS technology stack, supporting dark mode and responsive design.
 
-## 🎯 核心开发原则
+## 🎯 Core Development Principles
 
-### 五大执行步骤
+### Five Execution Steps
 
-#### 1. 任务分析与规划
-- **明确目标**：在开始编码前，深入理解任务需求和预期结果
-- **制定计划**：列出需要修改的具体文件、组件和函数，说明修改原因
-- **风险评估**：评估改动对现有功能的影响，制定回滚方案
+#### 1. Task Analysis and Planning
+- **Clear Objectives**: Deeply understand task requirements and expected results before starting coding
+- **Plan Development**: List specific files, components, and functions that need modification, explaining the reasons for changes
+- **Risk Assessment**: Evaluate the impact of changes on existing functionality, develop rollback plans
 
-#### 2. 精准代码定位
-- **文件识别**：确定需要修改的具体文件和代码行号
-- **影响分析**：避免无关文件的改动，明确每个文件的修改理由
-- **最小化原则**：除非任务明确要求，否则不创建新的抽象层或重构现有代码
+#### 2. Precise Code Location
+- **File Identification**: Determine specific files and line numbers that need modification
+- **Impact Analysis**: Avoid modifying irrelevant files, clearly state the reason for each file modification
+- **Minimization Principle**: Unless explicitly required by the task, do not create new abstraction layers or refactor existing code
 
-#### 3. 最小化代码改动
-- **专注核心**：只编写任务直接所需的代码
-- **避免冗余**：不添加不必要的日志、注释、测试或错误处理
-- **隔离性**：确保新代码不会干扰现有功能，保持代码的独立性
+#### 3. Minimal Code Changes
+- **Focus on Core**: Only write code directly required by the task
+- **Avoid Redundancy**: Do not add unnecessary logs, comments, tests, or error handling
+- **Isolation**: Ensure new code does not interfere with existing functionality, maintain code independence
 
-#### 4. 严格代码审查
-- **正确性检查**：验证代码逻辑的正确性和完整性
-- **风格一致性**：确保代码符合项目既定的编码风格
-- **副作用评估**：评估改动对下游系统的影响
+#### 4. Strict Code Review
+- **Correctness Check**: Verify the correctness and completeness of code logic
+- **Style Consistency**: Ensure code conforms to established project coding style
+- **Side Effect Assessment**: Evaluate the impact of changes on downstream systems
 
-#### 5. 清晰交付文档
-- **变更总结**：详细说明所有修改的内容和原因
-- **文件清单**：列出所有修改的文件及其具体变更
-- **风险说明**：标注任何假设或潜在风险点
+#### 5. Clear Delivery Documentation
+- **Change Summary**: Detailed explanation of all modifications and reasons
+- **File List**: List all modified files and their specific changes
+- **Risk Statement**: Mark any assumptions or potential risk points
 
-### 核心原则
-- **🎯 精准执行**：严格按照任务要求执行，不随意创新
-- **⚡ 高效开发**：避免过度设计，只做必要的工作
-- **🛡️ 安全可靠**：始终遵循开发流程，确保代码质量和系统稳定性
-- **🔒 谨慎修改**：明确知道需要修改才改，没把握就不要动已有的代码
+### Core Principles
+- **🎯 Precise Execution**: Strictly follow task requirements, no arbitrary innovation
+- **⚡ Efficient Development**: Avoid over-design, only do necessary work
+- **🛡️ Safe and Reliable**: Always follow development processes, ensure code quality and system stability
+- **🔒 Cautious Modification**: Only modify when clearly knowing what needs to be changed and having confidence
 
 ---
 
-## 🛠️ 技术栈规范
+## 🛠️ Technology Stack Standards
 
-### 核心技术
-- **框架**: Next.js 15.3.4 (App Router)
-- **语言**: TypeScript (ES2017+, 严格模式)
-- **样式**: Tailwind CSS 4 + shadcn/ui
-- **图标**: Lucide React
-- **主题**: next-themes (深色模式支持)
-- **动画**: motion + tw-animate-css
-- **国际化**: 中文为主 (lang="zh-CN")
+### Core Technologies
+- **Framework**: Next.js 15.3.4 (App Router)
+- **Language**: TypeScript (ES2017+, strict mode)
+- **Styling**: Tailwind CSS 4 + shadcn/ui
+- **Icons**: Lucide React
+- **Theme**: next-themes (dark mode support)
+- **Animation**: motion + tw-animate-css
+- **Internationalization**: Chinese primary (lang="zh-CN")
 
-### 项目目录结构
+### Project Directory Structure
 ```
 rustfs.com/
-├── app/                    # Next.js App Router 目录
-│   ├── components/         # 页面级组件
-│   │   ├── buttons/       # 按钮组件集合
-│   │   └── *.tsx         # 功能组件
-│   ├── download/          # 下载页面
-│   ├── layout.tsx         # 根布局
-│   ├── page.tsx          # 首页
-│   └── globals.css       # 全局样式
-├── components/            # 通用组件库
-│   ├── ui/               # shadcn/ui 组件
-│   └── magicui/         # 自定义 UI 组件
-├── data/                 # 静态数据
-│   ├── features.tsx      # 产品功能数据
-│   ├── reviews.json      # 用户评价
-│   └── *.json           # 其他配置数据
-├── lib/                  # 工具函数
-│   └── utils.ts         # Tailwind merge 等工具
-└── public/              # 静态资源
-    ├── images/          # 图片资源
-    └── svgs/           # SVG 图标
+├── app/                    # Next.js App Router directory
+│   ├── components/         # Page-level components
+│   │   ├── buttons/       # Button component collection
+│   │   └── *.tsx         # Functional components
+│   ├── download/          # Download page
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx          # Home page
+│   └── globals.css       # Global styles
+├── components/            # Common component library
+│   ├── ui/               # shadcn/ui components
+│   └── magicui/         # Custom UI components
+├── data/                 # Static data
+│   ├── reviews.json      # User reviews
+│   └── *.json           # Other configuration data
+├── lib/                  # Utility functions
+│   └── utils.ts         # Tailwind merge and other utilities
+└── public/              # Static resources
+    ├── images/          # Image resources
+    └── svgs/           # SVG icons
 ```
 
 ---
 
-## 📝 编码规范
+## 📝 Coding Standards
 
-### TypeScript 规范
-- **严格模式**: 启用 `"strict": true` 配置
-- **语法版本**: 优先使用 ES2017+ 语法特性
-- **组件定义**: 使用箭头函数或 `export default function`
-- **类型导入**: 使用 `import type { }` 语法
+### TypeScript Standards
+- **Strict Mode**: Enable `"strict": true` configuration
+- **Syntax Version**: Prioritize ES2017+ syntax features
+- **Component Definition**: Use arrow functions or `export default function`
+- **Type Import**: Use `import type { }` syntax
 
-### React 组件规范
+### React Component Standards
 
-#### 标准组件结构
+#### Standard Component Structure
 ```typescript
-'use client' // 客户端组件必须标注
+'use client' // Client components must be marked
 
 import { ComponentProps } from 'react'
 import { cn } from '@/lib/utils'
@@ -114,123 +113,267 @@ export default function ComponentName({
 }
 ```
 
-#### 导入顺序规范
+#### Import Order Standards
 ```typescript
-// 1. React 相关
+// 1. React related
 import React from 'react'
 import { useState, useEffect } from 'react'
 
-// 2. Next.js 相关
+// 2. Next.js related
 import Link from 'next/link'
 import Image from 'next/image'
 
-// 3. 第三方库
+// 3. Third-party libraries
 import { motion } from 'motion'
 import { ChevronDownIcon } from 'lucide-react'
 
-// 4. 内部组件和工具
+// 4. Internal components and utilities
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
-// 5. 类型定义
+// 5. Type definitions
 import type { ComponentProps } from 'react'
 ```
 
-### Tailwind CSS 规范
+### Tailwind CSS Standards
 
-#### 样式编写约定
+#### Style Writing Conventions
 ```typescript
-// ✅ 推荐的样式写法
+// ✅ Recommended style writing
 className={cn(
   "base-classes",
   "responsive sm:class md:class lg:class",
   "dark:class dark:hover:class",
   conditionalClass && "conditional-class",
-  className // 允许外部覆盖
+  className // Allow external override
 )}
 ```
 
-#### 响应式设计
-- **断点**: `sm:` (640px) `md:` (768px) `lg:` (1024px) `xl:` (1280px)
-- **深色模式**: 使用 `dark:` 前缀
-- **主题色彩**: 使用语义化颜色 `primary` `secondary` `muted-foreground`
+#### Responsive Design
+- **Breakpoints**: `sm:` (640px) `md:` (768px) `lg:` (1024px) `xl:` (1280px)
+- **Dark Mode**: Use `dark:` prefix
+- **Theme Colors**: Use semantic colors `primary` `secondary` `muted-foreground`
 
-### 文件命名规范
-- **组件文件**: `kebab-case.tsx` (如 `app-header.tsx`)
-- **数据文件**: `kebab-case.json` 或 `.tsx`
-- **工具函数**: `camelCase.ts`
-- **页面文件**: 遵循 Next.js App Router 约定
+### File Naming Standards
+- **Component Files**: `kebab-case.tsx` (e.g., `app-header.tsx`)
+- **Data Files**: `kebab-case.json` or `.tsx`
+- **Utility Functions**: `camelCase.ts`
+- **Page Files**: Follow Next.js App Router conventions
 
----
-
-## 🎨 内容与品牌规范
-
-### 语言与术语
-- **界面语言**: 所有用户界面文本使用中文
-- **品牌名称**: 统一使用 "RustFS" (首字母大写)
-- **文档链接**: 统一指向 `https://docs.rustfs.com`
-- **品牌形象**: 保持分布式存储系统的专业形象
-
-### 性能优化要求
-- **图片优化**: 使用 Next.js `Image` 组件
-- **服务端渲染**: 优先使用 SSR，最小化客户端组件
-- **懒加载**: 对大型组件和数据实施懒加载
-- **重渲染优化**: 避免不必要的组件重渲染
-
----
-
-## ⚠️ 禁止事项
-
-### 严格禁止
-- ❌ 修改 `components.json` shadcn/ui 配置文件
-- ❌ 在组件中硬编码数据，必须使用 `data/` 目录
-- ❌ 破坏现有的深色模式支持
-- ❌ 使用内联样式，统一使用 Tailwind CSS
-- ❌ 忽略 TypeScript 类型错误
-- ❌ 修改已有的 API 接口和配置结构
-
-### 开发注意事项
-- ❌ 不要进行"顺手"的额外修改
-- ❌ 不要添加不必要的日志或注释
-- ❌ 不要创建任务范围外的抽象层
-- ❌ **不要修改已有代码，除非明确知道需要修改**
-- ✅ **只有在明确知道需要修改且有把握的情况下才改动现有代码**
+### Git Commit Standards
+- **Commit Standard**: Must use [Conventional Commits](https://www.conventionalcommits.org/) specification
+- **Language Requirement**: Commit messages must be written in English
+- **Format Requirement**: `<type>[optional scope]: <description>`
+- **Type Description**:
+  - `feat`: New features
+  - `fix`: Bug fixes
+  - `docs`: Documentation updates
+  - `style`: Code format adjustments (no functional impact)
+  - `refactor`: Code refactoring
+  - `perf`: Performance optimizations
+  - `test`: Testing related
+  - `chore`: Build process or auxiliary tool changes
+- **Examples**:
+  ```bash
+  feat: add user login functionality
+  fix(auth): resolve login validation failure issue
+  docs: update API documentation
+  refactor(components): restructure button component
+  ```
 
 ---
 
-## 📋 质量检查清单
+## 🎨 Content and Brand Standards
 
-### 代码改动前检查
-1. ✅ **任务理解**: 已明确理解任务目标和范围
-2. ✅ **计划制定**: 已制定清晰的修改计划
-3. ✅ **技术规范**: 代码符合项目技术规范
-4. ✅ **编码风格**: 遵循组件和样式约定
-5. ✅ **功能保护**: 不会破坏现有功能
-6. ✅ **类型安全**: 通过 TypeScript 类型检查
-7. ✅ **响应式兼容**: 响应式布局和深色模式兼容
-8. ✅ **内容正确**: 中文内容显示正确
-9. ✅ **修改必要性**: 明确知道需要修改且有把握
+### Language and Terminology
+- **Interface Language**: All user interface text uses Chinese
+- **Brand Name**: Consistently use "RustFS" (first letter capitalized)
+- **Documentation Links**: Consistently point to `https://docs.rustfs.com`
+- **Brand Image**: Maintain professional image of distributed storage system
 
-### 提交前验证
-- ✅ 所有修改的文件已列出
-- ✅ 深色模式功能正常
-- ✅ 响应式布局无异常
-- ✅ 中文内容显示正确
-- ✅ 无 TypeScript 错误
-- ✅ 无控制台警告
+### 🌍 Internationalization Development Standards
+
+#### Namespace + English Original as Key Structure
+```typescript
+// ✅ Recommended internationalization approach
+const t = useTranslations('nav');  // Specify namespace
+t('Features')                      // Use English original as Key
+t('Architecture')
+t('Get Started')
+
+// ❌ Avoid this approach
+const t = useTranslations();
+t('nav.Features')                 // No need for namespace prefix
+t('nav.Architecture')
+t('nav.Get Started')
+```
+
+#### Localization File Organization Principles
+- **English Version**: key = English original, display English directly
+- **Chinese Version**: key = English original, value = Chinese translation
+- **Namespace**: Organize by functional modules (`nav`, `buttons`, `hero`, `download`)
+- **Key Format**: Use English original as Key, maintain readability and intuitiveness
+
+#### Namespace Organization Suggestions
+```typescript
+// Organize by functional modules, each component uses corresponding namespace
+const navT = useTranslations('nav');
+navT('Features')                  // Navigation features
+navT('Architecture')              // Navigation architecture
+
+const btnT = useTranslations('buttons');
+btnT('Get Started')               // Button get started
+
+const heroT = useTranslations('hero');
+heroT('High Performance')         // Hero section high performance
+
+const downloadT = useTranslations('download');
+downloadT('Choose Platform')      // Download choose platform
+```
+
+#### Internationalization Development Advantages
+- **More Intuitive Code**: English original as Key, clear at a glance
+- **Easier Maintenance**: Developers can directly see the text content to be displayed
+- **Clearer Architecture**: Namespace organized by functional modules
+- **More Efficient Development**: Reduce memory burden, improve development efficiency
+- **Better Compatibility**: Support limitations of internationalization frameworks like next-intl
+- **More Accurate Translation**: English original as Key ensures translation accuracy
+- **Type Safety**: Specifying namespace provides better type inference
+
+#### Localization File Examples
+```json
+// locales/en.json
+{
+  "nav": {
+    "Features": "Features",
+    "Architecture": "Architecture",
+    "Solutions": "Solutions"
+  },
+  "buttons": {
+    "Get Started": "Get Started",
+    "Download": "Download",
+    "View Demo": "View Demo"
+  }
+}
+
+// locales/zh.json
+{
+  "nav": {
+    "Features": "功能",
+    "Architecture": "架构",
+    "Solutions": "方案"
+  },
+  "buttons": {
+    "Get Started": "开始使用",
+    "Download": "下载",
+    "View Demo": "查看演示"
+  }
+}
+```
+
+### Performance Optimization Requirements
+- **Image Optimization**: Use Next.js `Image` component
+- **Server-Side Rendering**: Prioritize SSR, minimize client components
+- **Lazy Loading**: Implement lazy loading for large components and data
+- **Re-render Optimization**: Avoid unnecessary component re-renders
 
 ---
 
-## 🎯 核心要求
+## ⚠️ Prohibited Items
 
-**精准、高效、不引入复杂性** - 这是我们的开发准则。
+### 🚨 Absolutely Forbidden - Style and Structure Protection
 
-每次代码改动都应该：
-- 🎯 **精准**: 只修改任务要求的代码
-- ⚡ **高效**: 避免不必要的复杂化
-- 🛡️ **安全**: 确保系统稳定性和代码质量
-- 🔒 **谨慎**: 明确知道需要修改才改，没把握就不要动已有的代码
+**Under no circumstances, unless explicitly specified, is it absolutely not allowed to modify styles and structures!**
+
+#### Strictly Forbidden Style Changes
+- ❌ Modify existing CSS class names
+- ❌ Change layout structure (grid, flex, position, etc.)
+- ❌ Modify colors, fonts, spacing, and other visual properties
+- ❌ Change responsive breakpoints or media queries
+- ❌ Modify dark mode styles
+
+#### Strictly Forbidden Structure Changes
+- ❌ Simplify complex component designs
+- ❌ Remove visual elements or decorations
+- ❌ Replace custom components with basic UI components
+- ❌ Change component nesting levels
+- ❌ Remove animations, transition effects
+- ❌ Change hover, click, and other interaction behaviors
+
+#### Strictly Forbidden Functional Changes
+- ❌ Remove existing functionality
+- ❌ Simplify complex business logic
+- ❌ Change data flow or state management
+- ❌ Remove error handling or edge cases
+
+### Strictly Forbidden
+- ❌ Modify `components.json` shadcn/ui configuration file
+- ❌ Hardcode data in components, must use `data/` directory
+- ❌ Destroy existing dark mode support
+- ❌ Use inline styles, uniformly use Tailwind CSS
+- ❌ Ignore TypeScript type errors
+- ❌ Modify existing API interfaces and configuration structures
+- ❌ Use ID format internationalization key names, such as `t('features')`
+- ❌ Mix different namespace translation keys in components
+- ❌ Hardcode Chinese/English text, must use internationalization system
+- ❌ Use spaces, periods, and other special characters in translation keys
+- ❌ Use `useTranslations()` without specifying namespace
+- ❌ Use commit messages that don't conform to Conventional Commits specification
+- ❌ Use Chinese or other non-English languages to write Git commit messages
+
+### Development Notes
+- ❌ Don't make "convenient" additional modifications
+- ❌ Don't add unnecessary logs or comments
+- ❌ Don't create abstraction layers outside the task scope
+- ❌ **Don't modify existing code unless you clearly know what needs to be modified**
+- ✅ **Only modify existing code when you clearly know what needs to be changed and have confidence**
 
 ---
 
-*最后更新: 2024年12月*
+## 📋 Quality Checklist
+
+### Pre-Code Change Checks
+1. ✅ **Task Understanding**: Clearly understand task objectives and scope
+2. ✅ **Plan Development**: Develop clear modification plan
+3. ✅ **Technical Standards**: Code conforms to project technical standards
+4. ✅ **Coding Style**: Follow component and style conventions
+5. ✅ **Function Protection**: Won't destroy existing functionality
+6. ✅ **Type Safety**: Pass TypeScript type checking
+7. ✅ **Responsive Compatibility**: Responsive layout and dark mode compatibility
+8. ✅ **Content Correctness**: Chinese content displays correctly
+9. ✅ **Modification Necessity**: Clearly know what needs to be modified and have confidence
+10. ✅ **Internationalization Standards**: Use namespace + English original as Key structure
+11. ✅ **Translation Completeness**: Chinese and English translation keys completely correspond
+12. ✅ **Namespace Consistency**: Same component uses unified namespace
+13. ✅ **Key Format Correctness**: Use English original as Key, maintain readability
+14. ✅ **Style Protection**: Haven't modified any existing CSS class names
+15. ✅ **Structure Protection**: Haven't changed any layout structure or component design
+16. ✅ **Interaction Protection**: Haven't removed or modified any animations, transitions, or interaction behaviors
+17. ✅ **Function Protection**: Haven't simplified or removed any existing functionality
+18. ✅ **Internationalization Calls**: Use `useTranslations('namespace')` to specify namespace
+
+### Pre-Submission Verification
+- ✅ All modified files are listed
+- ✅ Dark mode functionality is normal
+- ✅ Responsive layout has no abnormalities
+- ✅ Chinese content displays correctly
+- ✅ No TypeScript errors
+- ✅ No console warnings
+- ✅ Commit messages conform to Conventional Commits specification
+- ✅ Commit messages are written in English
+
+---
+
+## 🎯 Core Requirements
+
+**Precise, Efficient, No Complexity Introduction, Absolute Protection of Styles and Structures** - This is our development guideline.
+
+Every code change should:
+- 🎯 **Precise**: Only modify code required by the task
+- ⚡ **Efficient**: Avoid unnecessary complexity
+- 🛡️ **Safe**: Ensure system stability and code quality
+- 🔒 **Cautious**: Only modify when clearly knowing what needs to be changed and having confidence
+- 🚨 **Style Protection**: Absolutely not allowed to modify any existing styles and structures
+- 🎨 **Design Protection**: Maintain all existing beautiful designs and complex functionality
+
+---

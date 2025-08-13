@@ -1,11 +1,7 @@
-import { I18nProvider } from "@/lib/i18n";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
-import AppFooter from "./components/app-footer";
-import AppHeader from "./components/app-header";
-import FixedContactButton from "./components/buttons/fixed-contact-button";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,18 +15,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RustFS - MinIO 国产化替代方案, 高性能分布式存储",
-  description: "RustFS 使用全球最热,性能最好的内存安全Rust语言开发的高性能对象存储是开源的、兼容 OSS 的 Kubernetes 原生云存储,专为 AI 等云原生工作负载而设计。适合企业构建私有云存储、混合云存储和分布式存储,也是 MinIO 的国产化替代方案。",
-  keywords: "RustFS, MinIO, 分布式存储, 高性能, 高安全, 高并发, S3, Rust, 云原生, Cloud Native, Docker,存储桶, Bucket, 存储, 对象存储, MinIO 国产化替代方案",
+  title: 'RustFS - High-Performance Distributed Storage System',
+  description: "High-performance distributed storage system built with Rust",
+  keywords: "RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative",
+  authors: [{ name: "RustFS Team" }],
+  metadataBase: new URL('https://rustfs.com'),
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale?: string }>;
 }>) {
+  const { locale } = await params;
+
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
+    <html lang={locale || 'zh'} suppressHydrationWarning>
       <head>
         <meta
           key="twitter:card"
@@ -68,12 +74,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex h-full flex-col`}
       >
         <ThemeProvider enableSystem attribute="class">
-          <I18nProvider>
-            <AppHeader />
-            {children}
-            <AppFooter />
-            <FixedContactButton />
-          </I18nProvider>
+          {children}
           <Script
             id="baidu-analytics"
             src="https://hm.baidu.com/hm.js?968e7103a8e28fb30f7d69e42b7c82bc"
