@@ -1,15 +1,15 @@
 'use client'
 
-import { cn } from "@/lib/utils";
-import { ChevronDownIcon, DownloadIcon } from "lucide-react";
-import { useTranslations } from "@/lib/i18n";
-import { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useTranslations } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+import { ChevronDownIcon, DownloadIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 
 type DownloadOptionKey = 'windows' | 'macos' | 'linux' | 'docker' | 'fallback';
 
@@ -19,27 +19,28 @@ interface DownloadOption {
   description: string;
 }
 
-const appConfig = {
-  downloads: {
-    windows: '/download/windows',
-    macos: '/download/macos',
-    linux: '/download/linux',
-    docker: '/download/docker',
-    fallback: '/download'
-  },
-  downloadOptions: [
-    { key: 'windows' as const, label: 'Windows', description: 'Windows 10/11' },
-    { key: 'macos' as const, label: 'macOS', description: 'macOS 10.15+' },
-    { key: 'linux' as const, label: 'Linux', description: 'Ubuntu 18.04+, CentOS 7+' },
-    { key: 'docker' as const, label: 'Docker', description: 'Docker 20.10+' },
-    { key: 'fallback' as const, label: 'Other Platforms', description: 'View all versions' }
-  ] as DownloadOption[]
-};
-
 export default function DownloadAuto({ className }: { className?: string }) {
-  const { t } = useTranslations('download');
+  const { t, locale } = useTranslations('download');
   const [selectedOption, setSelectedOption] = useState<DownloadOptionKey>('fallback');
   const [autoDetectedSystem, setAutoDetectedSystem] = useState<DownloadOptionKey>('fallback');
+
+  // 将 appConfig 移到组件内部，使用当前 locale
+  const appConfig = {
+    downloads: {
+      windows: `/${locale}/download/windows`,
+      macos: `/${locale}/download/macos`,
+      linux: `/${locale}/download/linux`,
+      docker: `/${locale}/download/docker`,
+      fallback: `/${locale}/download`
+    },
+    downloadOptions: [
+      { key: 'windows' as const, label: 'Windows', description: 'Windows 10/11' },
+      { key: 'macos' as const, label: 'macOS', description: 'macOS 10.15+' },
+      { key: 'linux' as const, label: 'Linux', description: 'Ubuntu 18.04+, CentOS 7+' },
+      { key: 'docker' as const, label: 'Docker', description: 'Docker 20.10+' },
+      { key: 'fallback' as const, label: 'Other Platforms', description: 'View all versions' }
+    ] as DownloadOption[]
+  };
 
   useEffect(() => {
     const detectSystem = () => {

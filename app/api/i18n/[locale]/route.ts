@@ -1,6 +1,14 @@
 import { locales, type Locale } from '@/lib/constants'
 import { NextRequest, NextResponse } from 'next/server'
 
+export const dynamic = 'force-static'
+
+export async function generateStaticParams() {
+  return locales.map((locale) => ({
+    locale,
+  }))
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ locale: string }> }
