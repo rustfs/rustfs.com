@@ -21,7 +21,7 @@ export default function PlatformHeader({ platform, className }: PlatformHeaderPr
       </div>
 
       <h2 className="text-2xl font-bold text-foreground">
-        {t('Download for')} {platform.name}
+        {platform.name}
       </h2>
 
       <p className="text-muted-foreground max-w-2xl mx-auto">
