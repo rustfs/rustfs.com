@@ -10,7 +10,7 @@ interface PlatformHeaderProps {
 }
 
 export default function PlatformHeader({ platform, className }: PlatformHeaderProps) {
-  const { t, locale } = useTranslations('download')
+  const { locale } = useTranslations('download')
 
   return (
     <div className={`text-center space-y-4 ${className || ''}`}>

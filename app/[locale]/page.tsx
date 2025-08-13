@@ -19,21 +19,21 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'site' });
 
   return {
-    title: t('titles.home'),
-    description: t('descriptions.home'),
+    title: t('title_home'),
+    description: t('description_home'),
     keywords: t('keywords'),
     authors: [{ name: t('author') }],
     openGraph: {
-      title: t('titles.home'),
-      description: t('descriptions.home'),
+      title: t('title_home'),
+      description: t('description_home'),
       type: "website",
       locale: locale,
       alternateLocale: locale === 'zh' ? 'en' : 'zh',
     },
     twitter: {
       card: "summary_large_image",
-      title: t('titles.home'),
-      description: t('descriptions.home'),
+      title: t('title_home'),
+      description: t('description_home'),
     },
   };
 }
