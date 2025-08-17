@@ -63,7 +63,7 @@ export default function LinuxDownloadSection({ platform, className }: LinuxDownl
           />
 
           <Note type="tip">
-            {t('Default credentials: admin / admin123')}
+            {t('Default credentials: rustfsadmin / rustfsadmin')}
           </Note>
         </div>
 
@@ -100,7 +100,7 @@ export default function LinuxDownloadSection({ platform, className }: LinuxDownl
               {t('ARM64 optimized for better performance')}
             </Note>
             <Note type="tip">
-              {t('Default credentials: admin / admin123')}
+              {t('Default credentials: rustfsadmin / rustfsadmin')}
             </Note>
           </div>
         </div>

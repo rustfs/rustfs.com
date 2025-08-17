@@ -77,7 +77,7 @@
     "Download": "Download",
     "Installation Commands": "Installation Commands",
     "Development version - not recommended for production use": "Development version - not recommended for production use",
-    "Default credentials: admin / admin123": "Default credentials: admin / admin123",
+    "Default credentials: rustfsadmin / rustfsadmin": "Default credentials: rustfsadmin / rustfsadmin",
     "View all available versions on Docker Hub": "View all available versions on Docker Hub",
     "View detailed Docker installation guide": "View detailed Docker installation guide",
     "Latest Alpha": "Latest Alpha",

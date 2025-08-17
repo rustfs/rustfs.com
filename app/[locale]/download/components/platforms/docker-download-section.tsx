@@ -176,7 +176,7 @@ export default function DockerDownloadSection({ platform, className }: DockerDow
       {/* Platform Notes */}
       <div className="space-y-2">
         <Note type="tip">
-          {t('Default credentials: admin / admin123')}
+          {t('Default credentials: rustfsadmin / rustfsadmin')}
         </Note>
         <Note type="info">
           <Link href="https://hub.docker.com/r/rustfs/rustfs/tags" target="_blank" className="hover:underline">

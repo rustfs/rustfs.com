@@ -71,7 +71,7 @@
     "Download": "下载",
     "Installation Commands": "安装命令",
     "Development version - not recommended for production use": "开发版本 - 不建议生产环境使用",
-    "Default credentials: admin / admin123": "默认凭据：admin / admin123",
+    "Default credentials: rustfsadmin / rustfsadmin": "默认凭据：rustfsadmin / rustfsadmin",
     "View all available versions on Docker Hub": "在 Docker Hub 上查看所有可用版本",
     "View detailed Docker installation guide": "查看详细的 Docker 安装指南",
     "Latest Alpha": "最新 Alpha 版",

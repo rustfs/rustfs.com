@@ -73,7 +73,7 @@ export default function MacOSDownloadSection({ platform, className }: MacOSDownl
 
           <div className="space-y-2">
             <Note type="tip">
-              {t('Default credentials: admin / admin123')}
+              {t('Default credentials: rustfsadmin / rustfsadmin')}
             </Note>
             <Note type="tip">
               {t('Apple Silicon optimized for better performance')}
@@ -111,7 +111,7 @@ export default function MacOSDownloadSection({ platform, className }: MacOSDownl
           />
 
           <Note type="tip">
-            {t('Default credentials: admin / admin123')}
+            {t('Default credentials: rustfsadmin / rustfsadmin')}
           </Note>
         </div>
       </div>
