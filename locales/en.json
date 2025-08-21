@@ -1,8 +1,8 @@
 {
   "site": {
     "name": "RustFS",
-    "tagline": "High-performance distributed storage system built with Rust",
-    "description": "RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.",
+    "tagline": "High-performance distributed object storage system built with Rust",
+    "description": "RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, MinIO alternative, supporting multi-cloud storage.",
     "keywords": "RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative",
     "author": "RustFS Team",
     "copyright": "© 2024 RustFS. All rights reserved.",
