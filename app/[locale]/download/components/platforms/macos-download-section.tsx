@@ -64,7 +64,7 @@ export default function MacOSDownloadSection({ platform, className }: MacOSDownl
           <CodeBlock
             code={[
               "curl --progress-bar -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-aarch64-latest.zip",
-              "unzip rustfs-darwin-aarch64-latest.zip",
+              "unzip rustfs-macos-aarch64-latest.zip",
               "chmod +x rustfs",
               "./rustfs --version",
             ]}
@@ -103,7 +103,7 @@ export default function MacOSDownloadSection({ platform, className }: MacOSDownl
           <CodeBlock
             code={[
               "curl --progress-bar -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-x86_64-latest.zip",
-              "unzip rustfs-darwin-x86_64-latest.zip",
+              "unzip rustfs-macos-x86_64-latest.zip",
               "chmod +x rustfs",
               "./rustfs --version",
             ]}
