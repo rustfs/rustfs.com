@@ -21,7 +21,7 @@ export default function AppHeader() {
     },
     {
       label: t('Architecture'),
-      url: docs_url('architecture.html', locale),
+      url: docs_url('/concepts/architecture.html', locale),
     },
     {
       label: t('Solutions'),
