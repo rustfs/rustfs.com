@@ -88,18 +88,36 @@ export default function AppFooter() {
             <div className="flex items-center gap-4">
               <Logo className="h-8 w-auto" />
               <div className="text-sm text-muted-foreground flex flex-col gap-0.5">
-                <p>{t('Customer Service: Weekdays 9:00-18:00')}</p>
                 <div className="flex items-center gap-2">
-                  <span>{t('Beijing Address: Chaoyang District, Beijing')}</span>
-                  <span className="hidden md:inline-block">|</span>
                   <a
-                    href="https://beian.miit.gov.cn/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="mailto:hello@rustfs.com"
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {t('Beijing ICP License: XXXXXXXXXXXX')}
+                    {t('Email: hello@rustfs.com')}
                   </a>
+                  <span className="hidden md:inline-block">|</span>
+                  <a
+                    href="tel:400-033-5363"
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {t('Phone: 400-033-5363')}
+                  </a>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span>{t('Beijing Address: Chaoyang District, Beijing')}</span>
+                  {locale === 'zh' && (
+                    <>
+                      <span className="hidden md:inline-block">|</span>
+                      <a
+                        href="https://beian.miit.gov.cn/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {t('Beijing ICP License: XXXXXXXXXXXX')}
+                      </a>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
