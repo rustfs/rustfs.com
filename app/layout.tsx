@@ -28,15 +28,11 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale?: string }>;
 }>) {
-  const { locale } = await params;
-
   return (
-    <html lang={locale || 'zh'} suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <head>
         <meta
           key="twitter:card"
@@ -70,6 +66,10 @@ export default async function RootLayout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        {/* hreflang links for international SEO */}
+        <link rel="alternate" hrefLang="zh" href="https://rustfs.com/zh" />
+        <link rel="alternate" hrefLang="en" href="https://rustfs.com/en" />
+        <link rel="alternate" hrefLang="x-default" href="https://rustfs.com/zh" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex h-full flex-col`}
