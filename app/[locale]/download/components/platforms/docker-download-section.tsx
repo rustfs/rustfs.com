@@ -61,6 +61,7 @@ export default function DockerDownloadSection({ platform, className }: DockerDow
               "docker run -d \\",
               "  --name rustfs \\",
               "  -p 9000:9000 \\",
+              "  -p 9001:9001 \\",
               "  -v /data:/data \\",
               "  rustfs/rustfs:latest",
             ]}
@@ -93,6 +94,7 @@ export default function DockerDownloadSection({ platform, className }: DockerDow
               "docker run -d \\",
               "  --name rustfs-alpha \\",
               "  -p 9000:9000 \\",
+              "  -p 9001:9001 \\",
               "  -v /data:/data \\",
               "  rustfs/rustfs:alpha",
             ]}
@@ -129,6 +131,7 @@ export default function DockerDownloadSection({ platform, className }: DockerDow
               "docker run -d \\",
               "  --name rustfs-v1-0-0-alpha-18 \\",
               "  -p 9000:9000 \\",
+              "  -p 9001:9001 \\",
               "  -v /data:/data \\",
               "  rustfs/rustfs:1.0.0-alpha.18",
             ]}
@@ -161,6 +164,7 @@ export default function DockerDownloadSection({ platform, className }: DockerDow
               "docker run -d \\",
               "  --name rustfs-nightly \\",
               "  -p 9000:9000 \\",
+              "  -p 9001:9001 \\",
               "  -v /data:/data \\",
               "  rustfs/rustfs:nightly",
             ]}
