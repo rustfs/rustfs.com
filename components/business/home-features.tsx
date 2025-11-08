@@ -2,13 +2,11 @@
 
 /* eslint-disable @next/next/no-img-element */
 import features from '@/data/features';
-import { useTranslations } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import { CheckCircleIcon, QuoteIcon } from "lucide-react";
 import { useState } from 'react';
 
 export default function HomeFeatures() {
-  const { t, locale } = useTranslations('features');
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -17,10 +15,10 @@ export default function HomeFeatures() {
         {/* Title */}
         <div className="mx-auto mb-10 text-center lg:mb-14">
           <h2 className="text-3xl font-bold md:text-4xl tracking-wide md:leading-tight dark:text-white">
-            {t('High-performance')} <span className="text-blue-500">{t('enterprise-grade distributed file system')}</span>
+            High-performance <span className="text-blue-500">enterprise-grade distributed file system</span>
           </h2>
           <p className="text-muted-foreground mt-4">
-            {t('Comprehensive features to meet enterprise-grade storage requirements')}
+            Comprehensive features to meet enterprise-grade storage requirements
           </p>
         </div>
         {/* End Title */}
@@ -29,7 +27,7 @@ export default function HomeFeatures() {
         <nav className="mx-auto grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
           {features.map((feature, index) => (
             <button
-              key={`${feature.title.zh}-${index}`}
+              key={`${feature.title}-${index}`}
               type="button"
               className={cn(
                 "w-full flex flex-col gap-2 text-start hover:bg-muted focus:outline-hidden focus:bg-muted p-2 sm:p-3 md:p-5 rounded-xl",
@@ -54,11 +52,11 @@ export default function HomeFeatures() {
                     'text-blue-600 dark:text-blue-500': activeTab === index,
                   }
                 )}>
-                  {feature.title[locale]}
+                  {feature.title}
                 </span>
               </div>
               <p className="hidden md:block mt-1 text-sm text-muted-foreground">
-                {feature.description[locale]}
+                {feature.description}
               </p>
             </button>
           ))}
@@ -69,7 +67,7 @@ export default function HomeFeatures() {
         <div className="mt-10 md:mt-16">
           {features.map((feature, index) => (
             <div
-              key={`${feature.title[locale]}-content-${index}`}
+              key={`${feature.title}-content-${index}`}
               className={cn(
                 {
                   'hidden': activeTab !== index,
@@ -84,10 +82,10 @@ export default function HomeFeatures() {
                     <feature.icon className="hidden md:block size-12 md:size-16 text-blue-500" />
                     <div>
                       <h4 className="text-2xl font-bold text-neutral-800 dark:text-white mb-2">
-                        {feature.title[locale]}
+                        {feature.title}
                       </h4>
                       <p className="text-muted-foreground">
-                        {feature.featureDescription[locale]}
+                        {feature.featureDescription}
                       </p>
                     </div>
                   </div>
@@ -96,7 +94,7 @@ export default function HomeFeatures() {
                     {feature.features.map((item, itemIndex) => (
                       <li className="flex gap-3 items-start" key={itemIndex}>
                         <CheckCircleIcon className="size-5 shrink-0 text-blue-500 mt-1" />
-                        <span>{item[locale]}</span>
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -105,15 +103,15 @@ export default function HomeFeatures() {
                     <div className="flex flex-col md:flex-row items-center gap-4">
                       <QuoteIcon className="size-8 rotate-180 text-blue-500 opacity-15" />
                       <p className="text-muted-foreground flex-1 text-lg italic">
-                        &ldquo;{feature.review.review[locale]}&rdquo;
+                        &ldquo;{feature.review.review}&rdquo;
                       </p>
                       <div className="flex items-center gap-4 self-end">
                         <div className="text-right">
                           <p className="font-semibold text-neutral-800 dark:text-white">
-                            {feature.review.name[locale]}
+                            {feature.review.name}
                           </p>
                           <p className="text-sm text-muted-foreground">
-                            {feature.review.position[locale]}
+                            {feature.review.position}
                           </p>
                         </div>
                         <img

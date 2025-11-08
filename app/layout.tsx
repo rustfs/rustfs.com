@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+
+import { SITE_CONFIG, SITE_METADATA } from '@/app.config';
+import AppFooter from '@/components/business/app-footer';
+import AppHeader from '@/components/business/app-header';
+import FixedContactButton from '@/components/business/buttons/fixed-contact-button';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,11 +20,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'RustFS - High-Performance Distributed Storage System',
-  description: "High-performance distributed storage system built with Rust",
-  keywords: "RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative",
+  title: SITE_METADATA.title,
+  description: SITE_METADATA.description,
+  keywords: SITE_METADATA.keywords,
   authors: [{ name: "RustFS Team" }],
-  metadataBase: new URL('https://rustfs.com'),
+  metadataBase: new URL(SITE_CONFIG.primaryDomain),
   robots: {
     index: true,
     follow: true,
@@ -66,16 +71,18 @@ export default async function RootLayout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
-        {/* hreflang links for international SEO */}
-        <link rel="alternate" hrefLang="zh" href="https://rustfs.com/zh" />
-        <link rel="alternate" hrefLang="en" href="https://rustfs.com/en" />
-        <link rel="alternate" hrefLang="x-default" href="https://rustfs.com/zh" />
+        {/* hreflang configuration */}
+        <link rel="alternate" hrefLang="en" href={SITE_CONFIG.primaryDomain} />
+        <link rel="alternate" hrefLang="x-default" href={SITE_CONFIG.primaryDomain} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex h-full flex-col`}
       >
         <ThemeProvider enableSystem attribute="class">
+          <AppHeader />
           {children}
+          <AppFooter />
+          <FixedContactButton />
           <Script
             id="baidu-analytics"
             src="https://hm.baidu.com/hm.js?968e7103a8e28fb30f7d69e42b7c82bc"

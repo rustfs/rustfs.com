@@ -1,7 +1,6 @@
 'use client'
 
 import LanguageToggle from "@/components/ui/language-selector";
-import { useTranslations } from '@/lib/i18n';
 import { docs_url } from "@/lib/utils";
 import { Popover, Transition } from '@headlessui/react';
 import Link from "next/link";
@@ -12,48 +11,46 @@ import { Logo } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
 
 export default function AppHeader() {
-  const { t, locale } = useTranslations('nav');
-
   const navs = [
     {
-      label: t('Features'),
-      url: docs_url('features/distributed/', locale),
+      label: 'Features',
+      url: docs_url('features/distributed/'),
     },
     {
-      label: t('Architecture'),
-      url: docs_url('/concepts/architecture.html', locale),
+      label: 'Architecture',
+      url: docs_url('/concepts/architecture.html'),
     },
     {
-      label: t('Solutions'),
-      url: docs_url('features/data-lake/', locale),
+      label: 'Solutions',
+      url: docs_url('features/data-lake/'),
     },
     // {
-    //   label: t('Integrations'),
-    //   url: `https://docs.rustfs.com/${locale}/intergrations`
+    //   label: 'Integrations',
+    //   url: `https://docs.rustfs.com/intergrations`
     // },
     {
-      label: t('AI'),
-      url: docs_url('features/ai', locale)
+      label: 'AI',
+      url: docs_url('features/ai')
     },
     {
-      label: t('Download'),
-      url: `/${locale}/download`
+      label: 'Download',
+      url: `/download`
     },
     {
-      label: t('Documentation'),
-      url: docs_url('', locale)
+      label: 'Documentation',
+      url: docs_url('')
     },
     // {
     //   label: 'Blog',
     //   url: '/blog'
     // },
     {
-      label: t('Community'),
+      label: 'Community',
       url: 'https://github.com/rustfs/rustfs/discussions'
     },
     {
-      label: t('About'),
-      url: docs_url('about', locale)
+      label: 'About',
+      url: docs_url('about')
     }
   ]
 
@@ -62,7 +59,7 @@ export default function AppHeader() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
-            <Link href={`/${locale}`}>
+            <Link href="/">
               <Logo className="h-5 w-auto" />
             </Link>
             <div className="hidden md:flex md:gap-x-6">

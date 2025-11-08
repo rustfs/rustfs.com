@@ -3,7 +3,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Marquee } from "@/components/magicui/marquee";
 import reviews from "@/data/reviews.json";
-import { useTranslations } from '@/lib/i18n';
 import clsx from "clsx";
 
 type SlideItem = { name: { zh: string; en: string; }; position: { zh: string; en: string; }; body: { zh: string; en: string; }; img: string; }
@@ -50,19 +49,17 @@ const ReviewCard = ({
   );
 };
 
-export default function HomeReviews() {
-  const { t, locale } = useTranslations('reviews');
-  const language = locale as 'zh' | 'en';
+export default function HomeReviews() {const language = locale as 'zh' | 'en';
 
   return (
     <section className="relative overflow-hidden py-32">
       <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl tracking-wide font-bold md:text-4xl md:leading-tight text-primary">
-            {t('What customers say about RustFS')}
+            {'What customers say about RustFS'}
           </h2>
           <p className="mt-4 text-neutral-600 dark:text-neutral-400">
-            {t('Exquisite service, professional team, providing you with the best service')}
+            {'Exquisite service, professional team, providing you with the best service'}
           </p>
         </div>
         <div className="relative flex h-[500px] w-full flex-row items-center justify-center overflow-hidden rounded-lg lg:hidden">

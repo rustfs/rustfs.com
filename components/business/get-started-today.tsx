@@ -1,7 +1,6 @@
 'use client'
 
 /* eslint-disable @next/next/no-img-element */
-import { useTranslations } from '@/lib/i18n';
 import FreeChatButton from "./buttons/free-chat";
 
 const AVATAR_URLS = [
@@ -11,18 +10,15 @@ const AVATAR_URLS = [
   "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
 ];
 
-export default function GetStartedToday() {
-  const { t } = useTranslations('getStarted');
-
-  return (
+export default function GetStartedToday() {return (
     <section
       className="relative overflow-hidden py-32 bg-accent text-accent-foreground"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
         <div className="mx-auto text-center flex flex-col gap-8">
           <h2 className="font-display text-2xl tracking-wide sm:text-4xl font-semibold leading-tight">
-            {t('Experience RustFS')} <br />
-            {t('High security, high concurrency and ultimate performance')}
+            {'Experience RustFS'} <br />
+            {'High security, high concurrency and ultimate performance'}
           </h2>
 
           {/* Avatar Group */}
@@ -48,7 +44,7 @@ export default function GetStartedToday() {
             </div>
             <div className="pt-5 sm:ps-5 sm:pt-0 lg:border-l">
               <div className="text-sm">
-                {t('Over 100+ enterprise users have started using RustFS')}
+                {'Over 100+ enterprise users have started using RustFS'}
               </div>
             </div>
           </div>

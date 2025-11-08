@@ -1,6 +1,5 @@
 'use client'
 
-import { useTranslations } from "@/lib/i18n";
 import DockerDownloadSection from "./docker-download-section";
 import LinuxDownloadSection from "./linux-download-section";
 import MacOSDownloadSection from "./macos-download-section";
@@ -12,10 +11,7 @@ interface PlatformFactoryProps {
   className?: string;
 }
 
-export default function PlatformFactory({ platform, className }: PlatformFactoryProps) {
-  const { t } = useTranslations('download');
-
-  switch (platform.id) {
+export default function PlatformFactory({ platform, className }: PlatformFactoryProps) {switch (platform.id) {
     case 'linux':
       return <LinuxDownloadSection platform={platform} className={className} />;
     case 'docker':
@@ -32,7 +28,7 @@ export default function PlatformFactory({ platform, className }: PlatformFactory
             <div className="opacity-50">{platform.icon}</div>
           </div>
           <h2 className="text-2xl font-bold text-muted-foreground mb-2">{platform.name}</h2>
-          <p className="text-muted-foreground">{t('not_supported')}</p>
+          <p className="text-muted-foreground">{'Platform not supported'}</p>
         </div>
       );
   }

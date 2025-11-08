@@ -1,48 +1,42 @@
-'use client'
+import GetStartedToday from "@/components/business/get-started-today";
+import HomeDifferents from "@/components/business/home-differents";
+import HomeFeatures from "@/components/business/home-features";
+import HomeHero from "@/components/business/home-hero";
+import HomeMultiClouds from "@/components/business/home-multi-clouds";
+import HomeStats from "@/components/business/home-stats";
+import HomeReviews from "@/components/business/reviews";
+import Subscribe from "@/components/business/subscribe";
+import type { Metadata } from "next";
 
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+export const metadata: Metadata = {
+  title: 'RustFS - High-Performance Distributed Storage System Built with Rust',
+  description: 'RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.',
+  keywords: 'RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative',
+  authors: [{ name: 'RustFS Team' }],
+  openGraph: {
+    title: 'RustFS - High-Performance Distributed Storage System Built with Rust',
+    description: 'RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.',
+    type: "website",
+    locale: 'en_US',
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: 'RustFS - High-Performance Distributed Storage System Built with Rust',
+    description: 'RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.',
+  },
+};
 
-export default function RootPage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    // 检测用户的语言偏好
-    const getPreferredLocale = () => {
-      // 首先检查 URL 参数
-      const urlParams = new URLSearchParams(window.location.search);
-      const localeParam = urlParams.get('locale');
-      if (localeParam && ['zh', 'en'].includes(localeParam)) {
-        return localeParam;
-      }
-
-      // 然后检查 localStorage
-      const storedLocale = localStorage.getItem('preferred-locale');
-      if (storedLocale && ['zh', 'en'].includes(storedLocale)) {
-        return storedLocale;
-      }
-
-      // 最后检查浏览器语言偏好
-      const browserLang = navigator.language || navigator.languages?.[0] || '';
-      if (browserLang.startsWith('en')) {
-        return 'en';
-      }
-
-      // 默认返回中文
-      return 'zh';
-    };
-
-    const locale = getPreferredLocale();
-    router.replace(`/${locale}`);
-  }, [router]);
-
-  // 显示加载状态
+export default async function HomePage() {
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-        <p className="text-muted-foreground">Loading...</p>
-      </div>
-    </div>
+    <main className="flex-1">
+      <HomeHero />
+      <HomeFeatures />
+      <HomeStats />
+      <HomeDifferents />
+      <HomeMultiClouds />
+      <HomeReviews />
+      <GetStartedToday />
+      <Subscribe />
+    </main>
   );
 }
