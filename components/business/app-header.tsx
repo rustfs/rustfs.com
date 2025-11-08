@@ -1,6 +1,5 @@
 'use client'
 
-import LanguageToggle from "@/components/ui/language-selector";
 import { docs_url } from "@/lib/utils";
 import { Popover, Transition } from '@headlessui/react';
 import Link from "next/link";
@@ -70,7 +69,6 @@ export default function AppHeader() {
           </div>
           <div className="flex items-center gap-x-2 md:gap-x-5">
             <div className="hidden md:flex items-center gap-x-2 md:gap-x-5">
-              <LanguageToggle />
               <ThemeToggle />
               <LinkGitHub size="size-5" className="group inline-flex" />
               <LinkTwitter size="size-5" className="group inline-flex" />
