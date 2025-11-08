@@ -5,7 +5,8 @@ import LinkGitHub from './buttons/link-github';
 import LinkTwitter from './buttons/link-twitter';
 import { Logo } from './logo';
 
-export default function AppFooter() {const footerLinks = [
+export default function AppFooter() {
+  const footerLinks = [
     {
       title: 'Architecture Support',
       links: [
