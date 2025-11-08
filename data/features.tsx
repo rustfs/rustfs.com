@@ -13,9 +13,9 @@ const features = [
       "FINRA Rule 4511 and CFTC regulations"
     ],
     "review": {
-      "name": "Wang Xiaoming",
+      "name": "Adrian Miller",
       "position": "CTO",
-      "img": "/images/faces/wangxiaoming.jpeg",
+      "img": "/images/faces/adrian-miller.jpeg",
       "review": "RustFS's cross-cloud support can effectively prevent single cloud failures and major losses"
     }
   },
@@ -31,9 +31,9 @@ const features = [
       "Easy integration - RustyVault provides simple APIs and command-line tools"
     ],
     "review": {
-      "name": "Sun Li",
+      "name": "Sophia Grant",
       "position": "CTO",
-      "img": "/images/faces/sunli.jpeg",
+      "img": "/images/faces/sophia-grant.jpeg",
       "review": "RustFS integrates very conveniently with Vault products, ensuring our data compliance and security encryption needs"
     }
   },
@@ -49,9 +49,9 @@ const features = [
       "Collaboration and concurrent editing - multiple users can work independently without affecting the main version"
     ],
     "review": {
-      "name": "Li Zaiheng",
+      "name": "Liam Harper",
       "position": "Senior Engineer",
-      "img": "/images/faces/lizaiheng.jpeg",
+      "img": "/images/faces/liam-harper.jpeg",
       "review": "Since each version is saved in object storage, the backup and recovery process becomes much simpler"
     }
   },
@@ -67,9 +67,9 @@ const features = [
       "No central metadata server - avoids centralized metadata server failures and service interruptions"
     ],
     "review": {
-      "name": "Wu Jingyu",
+      "name": "Noah Carter",
       "position": "Database Engineer",
-      "img": "/images/faces/wujingyu.jpeg",
+      "img": "/images/faces/noah-carter.jpeg",
       "review": "Any node interruption or damage will not affect data security"
     }
   },
@@ -85,9 +85,9 @@ const features = [
       "Audit and evidence retention - this is very important for legal proceedings and investigations"
     ],
     "review": {
-      "name": "Wei Yiming",
+      "name": "Isabella Rhodes",
       "position": "CEO",
-      "img": "/images/faces/weiyiming.jpeg",
+      "img": "/images/faces/isabella-rhodes.jpeg",
       "review": "Our data is not allowed to be deleted, which is more in line with legal requirements"
     }
   },
@@ -103,9 +103,9 @@ const features = [
       "Geographic redundancy - provides highly reliable services to customers globally"
     ],
     "review": {
-      "name": "Zhang Xiaolong",
+      "name": "James Porter",
       "position": "CEO",
-      "img": "/images/faces/sunli.jpeg",
+      "img": "/images/faces/james-porter.jpeg",
       "review": "For unstructured data, it saves more costs than traditional SAN storage"
     }
   }

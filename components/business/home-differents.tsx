@@ -86,7 +86,7 @@ export default function HomeDifferents() {return (
               </div>
               <div className="flex items-center gap-2 p-4 lg:px-8 ">
                 <CheckIcon className="text-green-500" />
-                <span>{'Full S3 support for Chinese clouds'}</span>
+                <span>{'Full S3 support for global clouds'}</span>
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
                 <CheckIcon className="text-green-500" />

@@ -1,122 +1,122 @@
 [
   {
-    "name": "Tom",
+    "name": "Ethan Brooks",
     "position": "Technical Director",
     "body": "RustFS file system is really amazing! It performs excellently, processes data super fast, and greatly improves my work efficiency. Its security also gives me peace of mind, no need to worry about data leaks. The features are comprehensive and can meet all my different needs, really great!",
-    "img": "/images/faces/liming.jpeg"
+    "img": "/images/faces/ethan-brooks.jpeg"
   },
   {
-    "name": "Wang Lihua",
+    "name": "Olivia Bennett",
     "position": "Product Manager",
     "body": "After using RustFS, it feels really different. Its performance is outstanding, running very stable and smooth. Security is also extremely high, protecting my important data. The comprehensive features make me feel comfortable during use, highly recommended!",
-    "img": "/images/faces/wangli.jpeg"
+    "img": "/images/faces/olivia-bennett.jpeg"
   },
   {
-    "name": "David",
+    "name": "Daniel Carter",
     "position": "Project Manager",
     "body": "I have to say, RustFS file system is one of the best I've ever used. Powerful performance, excellent handling of both large and small files. Security is guaranteed, giving me peace of mind. Comprehensive features covering all the functions I need daily, really great.",
-    "img": "/images/faces/zhangfeng.jpeg"
+    "img": "/images/faces/daniel-carter.jpeg"
   },
   {
-    "name": "Chen Yuxuan",
+    "name": "Sophia Hayes",
     "position": "Frontend Developer",
     "body": "RustFS has left a deep impression on me. Its performance is good, able to quickly respond to various operations. Security is also well done, data storage is very secure. And the features are comprehensive, meeting both work and entertainment needs, thumbs up!",
-    "img": "/images/faces/chenyan.jpeg"
+    "img": "/images/faces/sophia-hayes.jpeg"
   },
   {
-    "name": "Liu Wengang",
+    "name": "Michael Turner",
     "position": "Backend Developer",
     "body": "I am very satisfied with RustFS file system. Its excellent performance greatly reduces file read/write time. Reliable security, no need to worry about data safety. Features are also comprehensive, providing me with great convenience, easy to use!",
-    "img": "/images/faces/liugang.jpeg"
+    "img": "/images/faces/michael-turner.jpeg"
   },
   {
-    "name": "Zhao Xiaoxia",
+    "name": "Grace Collins",
     "position": "Test Engineer",
     "body": "RustFS is really good, great performance and smooth to use. High security, protecting my privacy and data. Features are particularly comprehensive, meeting my diverse needs, genuinely feel it's useful.",
-    "img": "/images/faces/zhaoxia.jpeg"
+    "img": "/images/faces/grace-collins.jpeg"
   },
   {
-    "name": "Sun Qiang",
+    "name": "Andrew Lawson",
     "position": "DevOps Engineer",
     "body": "After using RustFS for a while, I feel its performance is really strong, fast running speed, no lag. Security is also trustworthy, features are comprehensive and practical, it's a very good file system.",
-    "img": "/images/faces/sunqiang.jpeg"
+    "img": "/images/faces/andrew-lawson.jpeg"
   },
   {
-    "name": "Zhou Jianlin",
+    "name": "Benjamin Reed",
     "position": "Data Analyst",
     "body": "RustFS file system is better than imagined. Excellent performance, efficient and fast task processing. Security is guaranteed, giving me confidence to use. Comprehensive features bring great convenience to both my life and work, love it!",
-    "img": "/images/faces/zhoulin.jpeg"
+    "img": "/images/faces/benjamin-reed.jpeg"
   },
   {
-    "name": "Wu Min",
+    "name": "Natalie Parker",
     "position": "UI Designer",
     "body": "Have to praise RustFS, good performance, high security, and such comprehensive features. During use, I really felt its power and convenience, it's a rare good file system.",
-    "img": "/images/faces/wumin.jpeg"
+    "img": "/images/faces/natalie-parker.jpeg"
   },
   {
-    "name": "Zheng Yutao",
+    "name": "Lucas Mitchell",
     "position": "Architect",
     "body": "RustFS performance amazes me, fast speed and high efficiency. Security is also great, no need to worry about data loss or leakage. Comprehensive features meet my needs in different scenarios, really useful.",
-    "img": "/images/faces/zhengtao.jpeg"
+    "img": "/images/faces/lucas-mitchell.jpeg"
   },
   {
-    "name": "Wang Hua",
+    "name": "Abigail Foster",
     "position": "Database Administrator",
     "body": "I think RustFS file system is excellent, outstanding performance and smooth operation. Good security, protecting my important files. Comprehensive features covering various practical functions, very convenient to use, recommend to everyone.",
-    "img": "/images/faces/wanghua.jpeg"
+    "img": "/images/faces/abigail-foster.jpeg"
   },
   {
-    "name": "Li Xiaoxue",
+    "name": "Chloe Simmons",
     "position": "Algorithm Engineer",
     "body": "RustFS is really a very useful file system, good performance and can quickly complete various file operations. Security is also high, giving me peace of mind. Comprehensive features bring much convenience to my work and life, I like it very much.",
-    "img": "/images/faces/lixue.jpeg"
+    "img": "/images/faces/chloe-simmons.jpeg"
   },
   {
-    "name": "Zhang Yu",
+    "name": "Jonathan Pierce",
     "position": "Security Engineer",
     "body": "After using RustFS, I am very satisfied with its performance, security and comprehensive features. Its performance exceeded my expectations, it's a trustworthy file system that I will continue to use.",
-    "img": "/images/faces/zhangyu.jpeg"
+    "img": "/images/faces/jonathan-pierce.jpeg"
   },
   {
-    "name": "Liu Jinhan",
+    "name": "Ryan Gallagher",
     "position": "Network Engineer",
     "body": "RustFS file system has excellent performance, stable operation and fast speed. Security is also guaranteed, no need to worry about data security issues. And the features are comprehensive, meeting my daily needs, feels very good.",
-    "img": "/images/faces/liumei.jpeg"
+    "img": "/images/faces/ryan-gallagher.jpeg"
   },
   {
-    "name": "Chen Liang",
+    "name": "Matthew Harper",
     "position": "System Administrator",
     "body": "Have to say, RustFS is an excellent file system with good performance, high security and comprehensive features. During use, it brought me a great experience, I will recommend it to my friends.",
-    "img": "/images/faces/chenliang.jpeg"
+    "img": "/images/faces/matthew-harper.jpeg"
   },
   {
-    "name": "Zhao Xiaomin",
+    "name": "Emily Walters",
     "position": "Sales Manager",
     "body": "I really like RustFS file system, its performance is excellent and operation is simple and convenient. Security is also good, protecting my privacy. Comprehensive features can meet my various different needs, really great.",
-    "img": "/images/faces/zhaomin.jpeg"
+    "img": "/images/faces/emily-walters.jpeg"
   },
   {
-    "name": "Sun Limin",
+    "name": "Samuel Grant",
     "position": "Marketing Specialist",
     "body": "RustFS is really so useful! Good performance, high security, and particularly comprehensive features. During use, it feels very smooth without any problems, strongly recommend to everyone.",
-    "img": "/images/faces/sunli.jpeg"
+    "img": "/images/faces/samuel-grant.jpeg"
   },
   {
-    "name": "Zhou Wenjie",
+    "name": "Victoria Blake",
     "position": "Finance Manager",
     "body": "After using RustFS, I discovered its goodness. Powerful performance and super fast running speed. Reliable security with data guarantee. Comprehensive features meeting my diverse needs, really a good file system.",
-    "img": "/images/faces/zhoujie.jpeg"
+    "img": "/images/faces/victoria-blake.jpeg"
   },
   {
-    "name": "Wu Na",
+    "name": "Allison Wright",
     "position": "HR Specialist",
     "body": "RustFS file system brought me great surprises. Its performance is good with high file processing efficiency. Security is also great, giving me confidence to store data. Comprehensive features and convenient to use, genuinely feel it's good.",
-    "img": "/images/faces/wuna.jpeg"
+    "img": "/images/faces/allison-wright.jpeg"
   },
   {
-    "name": "Zheng Li",
+    "name": "Henry Dawson",
     "position": "Administrative Specialist",
     "body": "I am very satisfied with RustFS, its performance is excellent, security is high, and features are comprehensive. During use, it feels very smooth, bringing much convenience to my work and life, will always support it.",
-    "img": "/images/faces/zhengli.jpeg"
+    "img": "/images/faces/henry-dawson.jpeg"
   }
 ]

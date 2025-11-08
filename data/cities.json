@@ -5,15 +5,15 @@
       "lat": 39.89
     },
     "size": 0.02,
-    "_name": "深圳"
+    "_name": "Shenzhen"
   },
   {
     "location": {
-      "lon": 39.90,
-      "lat": 39.90
+      "lon": 39.9,
+      "lat": 39.9
     },
     "size": 0.02,
-    "_name": "北京"
+    "_name": "Beijing"
   },
   {
     "location": {
@@ -21,7 +21,7 @@
       "lat": 31.23
     },
     "size": 0.02,
-    "_name": "上海"
+    "_name": "Shanghai"
   },
   {
     "location": {
@@ -29,7 +29,7 @@
       "lat": 22.28
     },
     "size": 0.02,
-    "_name": "香港"
+    "_name": "Hong Kong"
   },
   {
     "location": {
@@ -37,7 +37,7 @@
       "lat": 26.64
     },
     "size": 0.02,
-    "_name": "贵阳"
+    "_name": "Guiyang"
   },
   {
     "location": {
@@ -45,7 +45,7 @@
       "lat": 29.56
     },
     "size": 0.02,
-    "_name": "重庆"
+    "_name": "Chongqing"
   },
   {
     "location": {
@@ -53,7 +53,7 @@
       "lat": 30.57
     },
     "size": 0.02,
-    "_name": "成都"
+    "_name": "Chengdu"
   },
   {
     "location": {
@@ -61,7 +61,7 @@
       "lat": 39.91
     },
     "size": 0.02,
-    "_name": "广州"
+    "_name": "Guangzhou"
   },
   {
     "location": {
@@ -69,7 +69,7 @@
       "lat": 18.32
     },
     "size": 0.02,
-    "_name": "海南"
+    "_name": "Hainan"
   },
   {
     "location": {
@@ -77,7 +77,7 @@
       "lat": 40.03
     },
     "size": 0.02,
-    "_name": "硅谷"
+    "_name": "Silicon Valley"
   },
   {
     "location": {
@@ -85,7 +85,7 @@
       "lat": 1.16
     },
     "size": 0.02,
-    "_name": "新加坡"
+    "_name": "Singapore"
   },
   {
     "location": {
@@ -93,7 +93,7 @@
       "lat": -11.202692
     },
     "size": 0.02,
-    "_name": "安哥拉"
+    "_name": "Angola"
   },
   {
     "location": {
@@ -101,7 +101,7 @@
       "lat": 41.153332
     },
     "size": 0.02,
-    "_name": "阿尔巴尼亚"
+    "_name": "Albania"
   },
   {
     "location": {
@@ -109,7 +109,7 @@
       "lat": 23.424076
     },
     "size": 0.02,
-    "_name": "阿联酋"
+    "_name": "United Arab Emirates"
   },
   {
     "location": {
@@ -117,7 +117,7 @@
       "lat": -38.416097
     },
     "size": 0.02,
-    "_name": "阿根廷"
+    "_name": "Argentina"
   },
   {
     "location": {
@@ -125,7 +125,7 @@
       "lat": 40.069099
     },
     "size": 0.02,
-    "_name": "亚美尼亚"
+    "_name": "Armenia"
   },
   {
     "location": {
@@ -133,7 +133,7 @@
       "lat": -49.280366
     },
     "size": 0.02,
-    "_name": "法属南半球和南极领地"
+    "_name": "French Southern and Antarctic Lands"
   },
   {
     "location": {
@@ -141,7 +141,7 @@
       "lat": -25.274398
     },
     "size": 0.02,
-    "_name": "澳大利亚"
+    "_name": "Australia"
   },
   {
     "location": {
@@ -149,7 +149,7 @@
       "lat": 47.516231
     },
     "size": 0.02,
-    "_name": "奥地利"
+    "_name": "Austria"
   },
   {
     "location": {
@@ -157,7 +157,7 @@
       "lat": 40.143105
     },
     "size": 0.02,
-    "_name": "阿塞拜疆"
+    "_name": "Azerbaijan"
   },
   {
     "location": {
@@ -165,7 +165,7 @@
       "lat": -3.373056
     },
     "size": 0.02,
-    "_name": "布隆迪"
+    "_name": "Burundi"
   },
   {
     "location": {
@@ -173,7 +173,7 @@
       "lat": 50.503887
     },
     "size": 0.02,
-    "_name": "比利时"
+    "_name": "Belgium"
   },
   {
     "location": {
@@ -181,7 +181,7 @@
       "lat": 9.30769
     },
     "size": 0.02,
-    "_name": "贝宁"
+    "_name": "Benin"
   },
   {
     "location": {
@@ -189,7 +189,7 @@
       "lat": 12.238333
     },
     "size": 0.02,
-    "_name": "布基纳法索"
+    "_name": "Burkina Faso"
   },
   {
     "location": {
@@ -197,7 +197,7 @@
       "lat": 23.684994
     },
     "size": 0.02,
-    "_name": "孟加拉国"
+    "_name": "Bangladesh"
   },
   {
     "location": {
@@ -205,7 +205,7 @@
       "lat": 42.733883
     },
     "size": 0.02,
-    "_name": "保加利亚"
+    "_name": "Bulgaria"
   },
   {
     "location": {
@@ -213,7 +213,7 @@
       "lat": 25.03428
     },
     "size": 0.02,
-    "_name": "巴哈马"
+    "_name": "Bahamas"
   },
   {
     "location": {
@@ -221,7 +221,7 @@
       "lat": 43.915886
     },
     "size": 0.02,
-    "_name": "波斯尼亚和黑塞哥维那"
+    "_name": "Bosnia and Herzegovina"
   },
   {
     "location": {
@@ -229,7 +229,7 @@
       "lat": 53.709807
     },
     "size": 0.02,
-    "_name": "白俄罗斯"
+    "_name": "Belarus"
   },
   {
     "location": {
@@ -237,7 +237,7 @@
       "lat": 17.189877
     },
     "size": 0.02,
-    "_name": "伯利兹"
+    "_name": "Belize"
   },
   {
     "location": {
@@ -245,7 +245,7 @@
       "lat": 32.3078
     },
     "size": 0.02,
-    "_name": "百慕大"
+    "_name": "Bermuda"
   },
   {
     "location": {
@@ -253,7 +253,7 @@
       "lat": -16.290154
     },
     "size": 0.02,
-    "_name": "玻利维亚"
+    "_name": "Bolivia"
   },
   {
     "location": {
@@ -261,7 +261,7 @@
       "lat": -14.235004
     },
     "size": 0.02,
-    "_name": "巴西"
+    "_name": "Brazil"
   },
   {
     "location": {
@@ -269,7 +269,7 @@
       "lat": 4.535277
     },
     "size": 0.02,
-    "_name": "文莱"
+    "_name": "Brunei"
   },
   {
     "location": {
@@ -277,7 +277,7 @@
       "lat": 27.514162
     },
     "size": 0.02,
-    "_name": "不丹"
+    "_name": "Bhutan"
   },
   {
     "location": {
@@ -285,7 +285,7 @@
       "lat": -22.328474
     },
     "size": 0.02,
-    "_name": "博茨瓦纳"
+    "_name": "Botswana"
   },
   {
     "location": {
@@ -293,7 +293,7 @@
       "lat": 6.611110999999999
     },
     "size": 0.02,
-    "_name": "中非共和国"
+    "_name": "Central African Republic"
   },
   {
     "location": {
@@ -301,7 +301,7 @@
       "lat": 56.130366
     },
     "size": 0.02,
-    "_name": "加拿大"
+    "_name": "Canada"
   },
   {
     "location": {
@@ -309,7 +309,7 @@
       "lat": 46.818188
     },
     "size": 0.02,
-    "_name": "瑞士"
+    "_name": "Switzerland"
   },
   {
     "location": {
@@ -317,7 +317,7 @@
       "lat": -35.675147
     },
     "size": 0.02,
-    "_name": "智利"
+    "_name": "Chile"
   },
   {
     "location": {
@@ -325,7 +325,7 @@
       "lat": 35.86166
     },
     "size": 0.02,
-    "_name": "中国"
+    "_name": "China"
   },
   {
     "location": {
@@ -333,7 +333,7 @@
       "lat": 7.539988999999999
     },
     "size": 0.02,
-    "_name": "象牙海岸"
+    "_name": "Ivory Coast"
   },
   {
     "location": {
@@ -341,7 +341,7 @@
       "lat": 7.369721999999999
     },
     "size": 0.02,
-    "_name": "喀麦隆"
+    "_name": "Cameroon"
   },
   {
     "location": {
@@ -349,7 +349,7 @@
       "lat": -4.038333
     },
     "size": 0.02,
-    "_name": "刚果民主共和国"
+    "_name": "Democratic Republic of the Congo"
   },
   {
     "location": {
@@ -357,7 +357,7 @@
       "lat": -0.228021
     },
     "size": 0.02,
-    "_name": "刚果共和国"
+    "_name": "Republic of the Congo"
   },
   {
     "location": {
@@ -365,7 +365,7 @@
       "lat": 4.570868
     },
     "size": 0.02,
-    "_name": "哥伦比亚"
+    "_name": "Colombia"
   },
   {
     "location": {
@@ -373,7 +373,7 @@
       "lat": 9.748916999999999
     },
     "size": 0.02,
-    "_name": "哥斯达黎加"
+    "_name": "Costa Rica"
   },
   {
     "location": {
@@ -381,7 +381,7 @@
       "lat": 21.521757
     },
     "size": 0.02,
-    "_name": "古巴"
+    "_name": "Cuba"
   },
   {
     "location": {
@@ -389,7 +389,7 @@
       "lat": 35.126413
     },
     "size": 0.02,
-    "_name": "北塞浦路斯"
+    "_name": "Northern Cyprus"
   },
   {
     "location": {
@@ -397,7 +397,7 @@
       "lat": 35.126413
     },
     "size": 0.02,
-    "_name": "塞浦路斯"
+    "_name": "Cyprus"
   },
   {
     "location": {
@@ -405,7 +405,7 @@
       "lat": 49.81749199999999
     },
     "size": 0.02,
-    "_name": "捷克共和国"
+    "_name": "Czech Republic"
   },
   {
     "location": {
@@ -413,7 +413,7 @@
       "lat": 51.165691
     },
     "size": 0.02,
-    "_name": "德国"
+    "_name": "Germany"
   },
   {
     "location": {
@@ -421,7 +421,7 @@
       "lat": 11.825138
     },
     "size": 0.02,
-    "_name": "吉布提"
+    "_name": "Djibouti"
   },
   {
     "location": {
@@ -429,7 +429,7 @@
       "lat": 56.26392
     },
     "size": 0.02,
-    "_name": "丹麦"
+    "_name": "Denmark"
   },
   {
     "location": {
@@ -437,7 +437,7 @@
       "lat": 18.735693
     },
     "size": 0.02,
-    "_name": "多明尼加共和国"
+    "_name": "Dominican Republic"
   },
   {
     "location": {
@@ -445,7 +445,7 @@
       "lat": 28.033886
     },
     "size": 0.02,
-    "_name": "阿尔及利亚"
+    "_name": "Algeria"
   },
   {
     "location": {
@@ -453,7 +453,7 @@
       "lat": -1.831239
     },
     "size": 0.02,
-    "_name": "厄瓜多尔"
+    "_name": "Ecuador"
   },
   {
     "location": {
@@ -461,7 +461,7 @@
       "lat": 26.820553
     },
     "size": 0.02,
-    "_name": "埃及"
+    "_name": "Egypt"
   },
   {
     "location": {
@@ -469,7 +469,7 @@
       "lat": 15.179384
     },
     "size": 0.02,
-    "_name": "厄立特里亚"
+    "_name": "Eritrea"
   },
   {
     "location": {
@@ -477,7 +477,7 @@
       "lat": 40.46366700000001
     },
     "size": 0.02,
-    "_name": "西班牙"
+    "_name": "Spain"
   },
   {
     "location": {
@@ -485,7 +485,7 @@
       "lat": 58.595272
     },
     "size": 0.02,
-    "_name": "爱沙尼亚"
+    "_name": "Estonia"
   },
   {
     "location": {
@@ -493,7 +493,7 @@
       "lat": 9.145000000000001
     },
     "size": 0.02,
-    "_name": "埃塞俄比亚"
+    "_name": "Ethiopia"
   },
   {
     "location": {
@@ -501,7 +501,7 @@
       "lat": 61.92410999999999
     },
     "size": 0.02,
-    "_name": "芬兰"
+    "_name": "Finland"
   },
   {
     "location": {
@@ -509,7 +509,7 @@
       "lat": -17.713371
     },
     "size": 0.02,
-    "_name": "斐"
+    "_name": "Fiji"
   },
   {
     "location": {
@@ -517,7 +517,7 @@
       "lat": -51.796253
     },
     "size": 0.02,
-    "_name": "福克兰群岛"
+    "_name": "Falkland Islands"
   },
   {
     "location": {
@@ -525,7 +525,7 @@
       "lat": 46.227638
     },
     "size": 0.02,
-    "_name": "法国"
+    "_name": "France"
   },
   {
     "location": {
@@ -533,7 +533,7 @@
       "lat": -0.803689
     },
     "size": 0.02,
-    "_name": "加蓬"
+    "_name": "Gabon"
   },
   {
     "location": {
@@ -541,7 +541,7 @@
       "lat": 55.378051
     },
     "size": 0.02,
-    "_name": "英国"
+    "_name": "United Kingdom"
   },
   {
     "location": {
@@ -549,7 +549,7 @@
       "lat": 32.1656221
     },
     "size": 0.02,
-    "_name": "格鲁吉亚"
+    "_name": "Georgia"
   },
   {
     "location": {
@@ -557,7 +557,7 @@
       "lat": 7.946527
     },
     "size": 0.02,
-    "_name": "加纳"
+    "_name": "Ghana"
   },
   {
     "location": {
@@ -565,7 +565,7 @@
       "lat": 9.945587
     },
     "size": 0.02,
-    "_name": "几内亚"
+    "_name": "Guinea"
   },
   {
     "location": {
@@ -573,7 +573,7 @@
       "lat": 13.443182
     },
     "size": 0.02,
-    "_name": "冈比亚"
+    "_name": "Gambia"
   },
   {
     "location": {
@@ -581,7 +581,7 @@
       "lat": 11.803749
     },
     "size": 0.02,
-    "_name": "几内亚比绍"
+    "_name": "Guinea-Bissau"
   },
   {
     "location": {
@@ -589,7 +589,7 @@
       "lat": 1.650801
     },
     "size": 0.02,
-    "_name": "赤道几内亚"
+    "_name": "Equatorial Guinea"
   },
   {
     "location": {
@@ -597,7 +597,7 @@
       "lat": 39.074208
     },
     "size": 0.02,
-    "_name": "希腊"
+    "_name": "Greece"
   },
   {
     "location": {
@@ -605,7 +605,7 @@
       "lat": 71.706936
     },
     "size": 0.02,
-    "_name": "格陵兰"
+    "_name": "Greenland"
   },
   {
     "location": {
@@ -613,7 +613,7 @@
       "lat": 15.783471
     },
     "size": 0.02,
-    "_name": "危地马拉"
+    "_name": "Guatemala"
   },
   {
     "location": {
@@ -621,7 +621,7 @@
       "lat": 3.933889
     },
     "size": 0.02,
-    "_name": "法属圭亚那"
+    "_name": "French Guiana"
   },
   {
     "location": {
@@ -629,7 +629,7 @@
       "lat": 4.860416
     },
     "size": 0.02,
-    "_name": "圭亚那"
+    "_name": "Guyana"
   },
   {
     "location": {
@@ -637,7 +637,7 @@
       "lat": 15.199999
     },
     "size": 0.02,
-    "_name": "洪都拉斯"
+    "_name": "Honduras"
   },
   {
     "location": {
@@ -645,7 +645,7 @@
       "lat": 45.1
     },
     "size": 0.02,
-    "_name": "克罗地亚"
+    "_name": "Croatia"
   },
   {
     "location": {
@@ -653,7 +653,7 @@
       "lat": 18.971187
     },
     "size": 0.02,
-    "_name": "海地"
+    "_name": "Haiti"
   },
   {
     "location": {
@@ -661,7 +661,7 @@
       "lat": 47.162494
     },
     "size": 0.02,
-    "_name": "匈牙利"
+    "_name": "Hungary"
   },
   {
     "location": {
@@ -669,7 +669,7 @@
       "lat": -0.789275
     },
     "size": 0.02,
-    "_name": "印尼"
+    "_name": "Indonesia"
   },
   {
     "location": {
@@ -677,7 +677,7 @@
       "lat": 53.41291
     },
     "size": 0.02,
-    "_name": "爱尔兰"
+    "_name": "Ireland"
   },
   {
     "location": {
@@ -685,7 +685,7 @@
       "lat": 32.427908
     },
     "size": 0.02,
-    "_name": "伊朗"
+    "_name": "Iran"
   },
   {
     "location": {
@@ -693,7 +693,7 @@
       "lat": 33.223191
     },
     "size": 0.02,
-    "_name": "伊拉克"
+    "_name": "Iraq"
   },
   {
     "location": {
@@ -701,7 +701,7 @@
       "lat": 64.963051
     },
     "size": 0.02,
-    "_name": "冰岛"
+    "_name": "Iceland"
   },
   {
     "location": {
@@ -709,7 +709,7 @@
       "lat": 31.046051
     },
     "size": 0.02,
-    "_name": "以色列"
+    "_name": "Israel"
   },
   {
     "location": {
@@ -717,7 +717,7 @@
       "lat": 41.87194
     },
     "size": 0.02,
-    "_name": "意大利"
+    "_name": "Italy"
   },
   {
     "location": {
@@ -725,7 +725,7 @@
       "lat": 18.109581
     },
     "size": 0.02,
-    "_name": "牙买加"
+    "_name": "Jamaica"
   },
   {
     "location": {
@@ -733,7 +733,7 @@
       "lat": 30.585164
     },
     "size": 0.02,
-    "_name": "约旦"
+    "_name": "Jordan"
   },
   {
     "location": {
@@ -741,7 +741,7 @@
       "lat": 36.204824
     },
     "size": 0.02,
-    "_name": "日本"
+    "_name": "Japan"
   },
   {
     "location": {
@@ -749,7 +749,7 @@
       "lat": 48.019573
     },
     "size": 0.02,
-    "_name": "哈萨克斯坦"
+    "_name": "Kazakhstan"
   },
   {
     "location": {
@@ -757,7 +757,7 @@
       "lat": -0.023559
     },
     "size": 0.02,
-    "_name": "肯尼亚"
+    "_name": "Kenya"
   },
   {
     "location": {
@@ -765,7 +765,7 @@
       "lat": 41.20438
     },
     "size": 0.02,
-    "_name": "吉尔吉斯斯坦"
+    "_name": "Kyrgyzstan"
   },
   {
     "location": {
@@ -773,7 +773,7 @@
       "lat": 12.565679
     },
     "size": 0.02,
-    "_name": "柬埔寨"
+    "_name": "Cambodia"
   },
   {
     "location": {
@@ -781,7 +781,7 @@
       "lat": 35.907757
     },
     "size": 0.02,
-    "_name": "韩国"
+    "_name": "South Korea"
   },
   {
     "location": {
@@ -789,7 +789,7 @@
       "lat": 42.6026359
     },
     "size": 0.02,
-    "_name": "科索沃"
+    "_name": "Kosovo"
   },
   {
     "location": {
@@ -797,7 +797,7 @@
       "lat": 29.31166
     },
     "size": 0.02,
-    "_name": "科威特"
+    "_name": "Kuwait"
   },
   {
     "location": {
@@ -805,7 +805,7 @@
       "lat": 19.85627
     },
     "size": 0.02,
-    "_name": "老挝"
+    "_name": "Laos"
   },
   {
     "location": {
@@ -813,7 +813,7 @@
       "lat": 33.854721
     },
     "size": 0.02,
-    "_name": "黎巴嫩"
+    "_name": "Lebanon"
   },
   {
     "location": {
@@ -821,7 +821,7 @@
       "lat": 6.428055
     },
     "size": 0.02,
-    "_name": "利比里亚"
+    "_name": "Liberia"
   },
   {
     "location": {
@@ -829,7 +829,7 @@
       "lat": 26.3351
     },
     "size": 0.02,
-    "_name": "利比亚"
+    "_name": "Libya"
   },
   {
     "location": {
@@ -837,7 +837,7 @@
       "lat": 7.873053999999999
     },
     "size": 0.02,
-    "_name": "斯里兰卡"
+    "_name": "Sri Lanka"
   },
   {
     "location": {
@@ -845,7 +845,7 @@
       "lat": -29.609988
     },
     "size": 0.02,
-    "_name": "莱索托"
+    "_name": "Lesotho"
   },
   {
     "location": {
@@ -853,7 +853,7 @@
       "lat": 55.169438
     },
     "size": 0.02,
-    "_name": "立陶宛"
+    "_name": "Lithuania"
   },
   {
     "location": {
@@ -861,7 +861,7 @@
       "lat": 49.815273
     },
     "size": 0.02,
-    "_name": "卢森堡"
+    "_name": "Luxembourg"
   },
   {
     "location": {
@@ -869,7 +869,7 @@
       "lat": 56.879635
     },
     "size": 0.02,
-    "_name": "拉脱维亚"
+    "_name": "Latvia"
   },
   {
     "location": {
@@ -877,7 +877,7 @@
       "lat": 31.791702
     },
     "size": 0.02,
-    "_name": "摩洛哥"
+    "_name": "Morocco"
   },
   {
     "location": {
@@ -885,7 +885,7 @@
       "lat": 47.411631
     },
     "size": 0.02,
-    "_name": "摩尔多瓦"
+    "_name": "Moldova"
   },
   {
     "location": {
@@ -893,7 +893,7 @@
       "lat": -18.766947
     },
     "size": 0.02,
-    "_name": "马达加斯加"
+    "_name": "Madagascar"
   },
   {
     "location": {
@@ -901,7 +901,7 @@
       "lat": 23.634501
     },
     "size": 0.02,
-    "_name": "墨西哥"
+    "_name": "Mexico"
   },
   {
     "location": {
@@ -909,7 +909,7 @@
       "lat": 41.608635
     },
     "size": 0.02,
-    "_name": "马其顿"
+    "_name": "North Macedonia"
   },
   {
     "location": {
@@ -917,7 +917,7 @@
       "lat": 17.570692
     },
     "size": 0.02,
-    "_name": "马里"
+    "_name": "Mali"
   },
   {
     "location": {
@@ -925,7 +925,7 @@
       "lat": 21.913965
     },
     "size": 0.02,
-    "_name": "缅甸"
+    "_name": "Myanmar"
   },
   {
     "location": {
@@ -933,7 +933,7 @@
       "lat": 42.708678
     },
     "size": 0.02,
-    "_name": "黑山"
+    "_name": "Montenegro"
   },
   {
     "location": {
@@ -941,7 +941,7 @@
       "lat": 46.862496
     },
     "size": 0.02,
-    "_name": "蒙古"
+    "_name": "Mongolia"
   },
   {
     "location": {
@@ -949,7 +949,7 @@
       "lat": -18.665695
     },
     "size": 0.02,
-    "_name": "莫桑比克"
+    "_name": "Mozambique"
   },
   {
     "location": {
@@ -957,7 +957,7 @@
       "lat": 21.00789
     },
     "size": 0.02,
-    "_name": "毛里塔尼亚"
+    "_name": "Mauritania"
   },
   {
     "location": {
@@ -965,7 +965,7 @@
       "lat": -13.254308
     },
     "size": 0.02,
-    "_name": "马拉维"
+    "_name": "Malawi"
   },
   {
     "location": {
@@ -973,7 +973,7 @@
       "lat": 4.210484
     },
     "size": 0.02,
-    "_name": "马来西亚"
+    "_name": "Malaysia"
   },
   {
     "location": {
@@ -981,7 +981,7 @@
       "lat": -22.95764
     },
     "size": 0.02,
-    "_name": "纳米比亚"
+    "_name": "Namibia"
   },
   {
     "location": {
@@ -989,7 +989,7 @@
       "lat": -20.904305
     },
     "size": 0.02,
-    "_name": "新喀里多尼亚"
+    "_name": "New Caledonia"
   },
   {
     "location": {
@@ -997,7 +997,7 @@
       "lat": 17.607789
     },
     "size": 0.02,
-    "_name": "尼日尔"
+    "_name": "Niger"
   },
   {
     "location": {
@@ -1005,7 +1005,7 @@
       "lat": 9.081999
     },
     "size": 0.02,
-    "_name": "尼日利亚"
+    "_name": "Nigeria"
   },
   {
     "location": {
@@ -1013,7 +1013,7 @@
       "lat": 12.865416
     },
     "size": 0.02,
-    "_name": "尼加拉瓜"
+    "_name": "Nicaragua"
   },
   {
     "location": {
@@ -1021,7 +1021,7 @@
       "lat": 52.132633
     },
     "size": 0.02,
-    "_name": "荷兰"
+    "_name": "Netherlands"
   },
   {
     "location": {
@@ -1029,7 +1029,7 @@
       "lat": 60.47202399999999
     },
     "size": 0.02,
-    "_name": "挪威"
+    "_name": "Norway"
   },
   {
     "location": {
@@ -1037,7 +1037,7 @@
       "lat": 28.394857
     },
     "size": 0.02,
-    "_name": "尼泊尔"
+    "_name": "Nepal"
   },
   {
     "location": {
@@ -1045,7 +1045,7 @@
       "lat": -40.900557
     },
     "size": 0.02,
-    "_name": "新西兰"
+    "_name": "New Zealand"
   },
   {
     "location": {
@@ -1053,7 +1053,7 @@
       "lat": 21.512583
     },
     "size": 0.02,
-    "_name": "阿曼"
+    "_name": "Oman"
   },
   {
     "location": {
@@ -1061,7 +1061,7 @@
       "lat": 30.375321
     },
     "size": 0.02,
-    "_name": "巴基斯坦"
+    "_name": "Pakistan"
   },
   {
     "location": {
@@ -1069,7 +1069,7 @@
       "lat": 8.537981
     },
     "size": 0.02,
-    "_name": "巴拿马"
+    "_name": "Panama"
   },
   {
     "location": {
@@ -1077,7 +1077,7 @@
       "lat": -9.189967
     },
     "size": 0.02,
-    "_name": "秘鲁"
+    "_name": "Peru"
   },
   {
     "location": {
@@ -1085,7 +1085,7 @@
       "lat": 12.879721
     },
     "size": 0.02,
-    "_name": "菲律宾"
+    "_name": "Philippines"
   },
   {
     "location": {
@@ -1093,7 +1093,7 @@
       "lat": -6.314992999999999
     },
     "size": 0.02,
-    "_name": "巴布亚新几内亚"
+    "_name": "Papua New Guinea"
   },
   {
     "location": {
@@ -1101,7 +1101,7 @@
       "lat": 51.919438
     },
     "size": 0.02,
-    "_name": "波兰"
+    "_name": "Poland"
   },
   {
     "location": {
@@ -1109,7 +1109,7 @@
       "lat": 18.220833
     },
     "size": 0.02,
-    "_name": "波多黎各"
+    "_name": "Puerto Rico"
   },
   {
     "location": {
@@ -1117,7 +1117,7 @@
       "lat": 40.339852
     },
     "size": 0.02,
-    "_name": "北朝鲜"
+    "_name": "North Korea"
   },
   {
     "location": {
@@ -1125,7 +1125,7 @@
       "lat": 39.39987199999999
     },
     "size": 0.02,
-    "_name": "葡萄牙"
+    "_name": "Portugal"
   },
   {
     "location": {
@@ -1133,7 +1133,7 @@
       "lat": -23.442503
     },
     "size": 0.02,
-    "_name": "巴拉圭"
+    "_name": "Paraguay"
   },
   {
     "location": {
@@ -1141,7 +1141,7 @@
       "lat": 25.354826
     },
     "size": 0.02,
-    "_name": "卡塔尔"
+    "_name": "Qatar"
   },
   {
     "location": {
@@ -1149,7 +1149,7 @@
       "lat": 45.943161
     },
     "size": 0.02,
-    "_name": "罗马尼亚"
+    "_name": "Romania"
   },
   {
     "location": {
@@ -1157,7 +1157,7 @@
       "lat": 61.52401
     },
     "size": 0.02,
-    "_name": "俄罗斯"
+    "_name": "Russia"
   },
   {
     "location": {
@@ -1165,7 +1165,7 @@
       "lat": -1.940278
     },
     "size": 0.02,
-    "_name": "卢旺达"
+    "_name": "Rwanda"
   },
   {
     "location": {
@@ -1173,7 +1173,7 @@
       "lat": 24.215527
     },
     "size": 0.02,
-    "_name": "西撒哈拉"
+    "_name": "Western Sahara"
   },
   {
     "location": {
@@ -1181,7 +1181,7 @@
       "lat": 23.885942
     },
     "size": 0.02,
-    "_name": "沙特阿拉伯"
+    "_name": "Saudi Arabia"
   },
   {
     "location": {
@@ -1189,7 +1189,7 @@
       "lat": 12.862807
     },
     "size": 0.02,
-    "_name": "苏丹"
+    "_name": "Sudan"
   },
   {
     "location": {
@@ -1197,7 +1197,7 @@
       "lat": 6.876991899999999
     },
     "size": 0.02,
-    "_name": "南苏丹"
+    "_name": "South Sudan"
   },
   {
     "location": {
@@ -1205,7 +1205,7 @@
       "lat": 14.497401
     },
     "size": 0.02,
-    "_name": "塞内加尔"
+    "_name": "Senegal"
   },
   {
     "location": {
@@ -1213,7 +1213,7 @@
       "lat": -9.64571
     },
     "size": 0.02,
-    "_name": "所罗门群岛"
+    "_name": "Solomon Islands"
   },
   {
     "location": {
@@ -1221,7 +1221,7 @@
       "lat": 8.460555
     },
     "size": 0.02,
-    "_name": "塞拉利昂"
+    "_name": "Sierra Leone"
   },
   {
     "location": {
@@ -1229,7 +1229,7 @@
       "lat": 13.794185
     },
     "size": 0.02,
-    "_name": "萨尔瓦多"
+    "_name": "El Salvador"
   },
   {
     "location": {
@@ -1237,7 +1237,7 @@
       "lat": 9.411743399999999
     },
     "size": 0.02,
-    "_name": "索马里兰"
+    "_name": "Somaliland"
   },
   {
     "location": {
@@ -1245,7 +1245,7 @@
       "lat": 5.152149
     },
     "size": 0.02,
-    "_name": "索马里"
+    "_name": "Somalia"
   },
   {
     "location": {
@@ -1253,7 +1253,7 @@
       "lat": 44.016521
     },
     "size": 0.02,
-    "_name": "塞尔维亚共和国"
+    "_name": "Serbia"
   },
   {
     "location": {
@@ -1261,7 +1261,7 @@
       "lat": 3.919305
     },
     "size": 0.02,
-    "_name": "苏里南"
+    "_name": "Suriname"
   },
   {
     "location": {
@@ -1269,7 +1269,7 @@
       "lat": 48.669026
     },
     "size": 0.02,
-    "_name": "斯洛伐克"
+    "_name": "Slovakia"
   },
   {
     "location": {
@@ -1277,7 +1277,7 @@
       "lat": 46.151241
     },
     "size": 0.02,
-    "_name": "斯洛文尼亚"
+    "_name": "Slovenia"
   },
   {
     "location": {
@@ -1285,7 +1285,7 @@
       "lat": 60.12816100000001
     },
     "size": 0.02,
-    "_name": "瑞典"
+    "_name": "Sweden"
   },
   {
     "location": {
@@ -1293,7 +1293,7 @@
       "lat": -26.522503
     },
     "size": 0.02,
-    "_name": "斯威士兰"
+    "_name": "Eswatini"
   },
   {
     "location": {
@@ -1301,7 +1301,7 @@
       "lat": 34.80207499999999
     },
     "size": 0.02,
-    "_name": "叙利亚"
+    "_name": "Syria"
   },
   {
     "location": {
@@ -1309,7 +1309,7 @@
       "lat": 15.454166
     },
     "size": 0.02,
-    "_name": "乍得"
+    "_name": "Chad"
   },
   {
     "location": {
@@ -1317,7 +1317,7 @@
       "lat": 8.619543
     },
     "size": 0.02,
-    "_name": "多哥"
+    "_name": "Togo"
   },
   {
     "location": {
@@ -1325,7 +1325,7 @@
       "lat": 15.870032
     },
     "size": 0.02,
-    "_name": "泰国"
+    "_name": "Thailand"
   },
   {
     "location": {
@@ -1333,7 +1333,7 @@
       "lat": 38.861034
     },
     "size": 0.02,
-    "_name": "塔吉克斯坦"
+    "_name": "Tajikistan"
   },
   {
     "location": {
@@ -1341,7 +1341,7 @@
       "lat": 38.969719
     },
     "size": 0.02,
-    "_name": "土库曼斯坦"
+    "_name": "Turkmenistan"
   },
   {
     "location": {
@@ -1349,7 +1349,7 @@
       "lat": -8.874217
     },
     "size": 0.02,
-    "_name": "东帝汶"
+    "_name": "Timor-Leste"
   },
   {
     "location": {
@@ -1357,7 +1357,7 @@
       "lat": 10.691803
     },
     "size": 0.02,
-    "_name": "特里尼达和多巴哥"
+    "_name": "Trinidad and Tobago"
   },
   {
     "location": {
@@ -1365,7 +1365,7 @@
       "lat": 33.886917
     },
     "size": 0.02,
-    "_name": "突尼斯"
+    "_name": "Tunisia"
   },
   {
     "location": {
@@ -1373,7 +1373,7 @@
       "lat": 38.963745
     },
     "size": 0.02,
-    "_name": "土耳其"
+    "_name": "Turkey"
   },
   {
     "location": {
@@ -1381,7 +1381,7 @@
       "lat": -6.369028
     },
     "size": 0.02,
-    "_name": "坦桑尼亚联合共和国"
+    "_name": "Tanzania"
   },
   {
     "location": {
@@ -1389,7 +1389,7 @@
       "lat": 1.373333
     },
     "size": 0.02,
-    "_name": "乌干达"
+    "_name": "Uganda"
   },
   {
     "location": {
@@ -1397,7 +1397,7 @@
       "lat": 48.379433
     },
     "size": 0.02,
-    "_name": "乌克兰"
+    "_name": "Ukraine"
   },
   {
     "location": {
@@ -1405,7 +1405,7 @@
       "lat": -32.522779
     },
     "size": 0.02,
-    "_name": "乌拉圭"
+    "_name": "Uruguay"
   },
   {
     "location": {
@@ -1413,7 +1413,7 @@
       "lat": 37.09024
     },
     "size": 0.02,
-    "_name": "美国"
+    "_name": "United States"
   },
   {
     "location": {
@@ -1421,7 +1421,7 @@
       "lat": 41.377491
     },
     "size": 0.02,
-    "_name": "乌兹别克斯坦"
+    "_name": "Uzbekistan"
   },
   {
     "location": {
@@ -1429,7 +1429,7 @@
       "lat": 6.42375
     },
     "size": 0.02,
-    "_name": "委内瑞拉"
+    "_name": "Venezuela"
   },
   {
     "location": {
@@ -1437,7 +1437,7 @@
       "lat": 14.058324
     },
     "size": 0.02,
-    "_name": "越南"
+    "_name": "Vietnam"
   },
   {
     "location": {
@@ -1445,7 +1445,7 @@
       "lat": -15.376706
     },
     "size": 0.02,
-    "_name": "瓦努阿图"
+    "_name": "Vanuatu"
   },
   {
     "location": {
@@ -1453,7 +1453,7 @@
       "lat": 31.9465703
     },
     "size": 0.02,
-    "_name": "西岸"
+    "_name": "West Bank"
   },
   {
     "location": {
@@ -1461,7 +1461,7 @@
       "lat": 15.552727
     },
     "size": 0.02,
-    "_name": "也门"
+    "_name": "Yemen"
   },
   {
     "location": {
@@ -1469,7 +1469,7 @@
       "lat": -30.559482
     },
     "size": 0.02,
-    "_name": "南非"
+    "_name": "South Africa"
   },
   {
     "location": {
@@ -1477,7 +1477,7 @@
       "lat": -13.133897
     },
     "size": 0.02,
-    "_name": "赞比亚"
+    "_name": "Zambia"
   },
   {
     "location": {
@@ -1485,7 +1485,7 @@
       "lat": -19.015438
     },
     "size": 0.02,
-    "_name": "津巴布韦"
+    "_name": "Zimbabwe"
   },
   {
     "location": {
@@ -1493,15 +1493,15 @@
       "lat": -11.875001
     },
     "size": 0.02,
-    "_name": "科摩罗"
+    "_name": "Comoros"
   },
   {
     "location": {
-      "lon": -6.103040,
-      "lat": -6.103040
+      "lon": -6.10304,
+      "lat": -6.10304
     },
     "size": 0.02,
-    "_name": "印度尼西亚"
+    "_name": "Indonesia"
   },
   {
     "location": {
@@ -1509,6 +1509,6 @@
       "lat": 20.593684
     },
     "size": 0.02,
-    "_name": "印度"
+    "_name": "India"
   }
 ]
