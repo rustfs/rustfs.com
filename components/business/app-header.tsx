@@ -1,7 +1,6 @@
 'use client'
 
 import LanguageToggle from "@/components/ui/language-selector";
-import { useTranslations } from '@/lib/i18n';
 import { docs_url } from "@/lib/utils";
 import { Popover, Transition } from '@headlessui/react';
 import Link from "next/link";
@@ -11,36 +10,33 @@ import LinkTwitter from "./buttons/link-twitter";
 import { Logo } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
 
-export default function AppHeader() {
-  const { t, locale } = useTranslations('nav');
-
-  const navs = [
+export default function AppHeader() {const navs = [
     {
-      label: t('Features'),
+      label: 'Features',
       url: docs_url('features/distributed/', locale),
     },
     {
-      label: t('Architecture'),
+      label: 'Architecture',
       url: docs_url('/concepts/architecture.html', locale),
     },
     {
-      label: t('Solutions'),
+      label: 'Solutions',
       url: docs_url('features/data-lake/', locale),
     },
     // {
-    //   label: t('Integrations'),
+    //   label: 'Integrations',
     //   url: `https://docs.rustfs.com/${locale}/intergrations`
     // },
     {
-      label: t('AI'),
+      label: 'AI',
       url: docs_url('features/ai', locale)
     },
     {
-      label: t('Download'),
+      label: 'Download',
       url: `/${locale}/download`
     },
     {
-      label: t('Documentation'),
+      label: 'Documentation',
       url: docs_url('', locale)
     },
     // {
@@ -48,11 +44,11 @@ export default function AppHeader() {
     //   url: '/blog'
     // },
     {
-      label: t('Community'),
+      label: 'Community',
       url: 'https://github.com/rustfs/rustfs/discussions'
     },
     {
-      label: t('About'),
+      label: 'About',
       url: docs_url('about', locale)
     }
   ]

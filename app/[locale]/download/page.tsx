@@ -1,5 +1,4 @@
 import { locales } from '@/lib/constants';
-import { getTranslations } from '@/lib/i18n-server';
 import DownloadPageClient from './components/download-page-client';
 
 export function generateStaticParams() {
@@ -7,15 +6,12 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'site' });
-
-  return {
-    title: t('title_download') + ' | ' + t('title_home'),
-    description: t('description_download'),
+  const { locale } = await params;return {
+    title: 'Download' + ' | ' + 'RustFS - High-Performance Distributed Storage System Built with Rust',
+    description: 'Download RustFS, supporting Docker, Linux, macOS, Windows and other platforms, quickly deploy your distributed storage system.',
     openGraph: {
-      title: t('title_download') + ' | ' + t('title_home'),
-      description: t('description_download'),
+      title: 'Download' + ' | ' + 'RustFS - High-Performance Distributed Storage System Built with Rust',
+      description: 'Download RustFS, supporting Docker, Linux, macOS, Windows and other platforms, quickly deploy your distributed storage system.',
       type: "website",
       locale: locale === 'zh' ? 'zh_CN' : 'en_US',
       alternateLocale: locale === 'zh' ? 'en_US' : 'zh_CN',

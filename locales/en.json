@@ -5,7 +5,7 @@
     "description": "RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, MinIO alternative, supporting multi-cloud storage.",
     "keywords": "RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative",
     "author": "RustFS Team",
-    "copyright": "© 2024 RustFS. All rights reserved.",
+    "copyright": "\u00a9 2024 RustFS. All rights reserved.",
     "license": "Apache 2.0 License",
     "powered_by": "Powered by Rust",
     "version": "1.0.0",
@@ -184,11 +184,13 @@
     "About Us": "About Us",
     "Contact Us": "Contact Us",
     "Privacy Policy": "Privacy Policy",
-    "© 2024 RustFS. All rights reserved.": "© 2024 RustFS. All rights reserved."
+    "\u00a9 2024 RustFS. All rights reserved.": "\u00a9 2024 RustFS. All rights reserved."
   },
   "reviews": {
     "title": "What Our Users Say",
-    "subtitle": "Join thousands of satisfied users who trust RustFS for their storage needs"
+    "subtitle": "Join thousands of satisfied users who trust RustFS for their storage needs",
+    "What customers say about RustFS": "What Our Users Say",
+    "Exquisite service, professional team, providing you with the best service": "Join thousands of satisfied users who trust RustFS for their storage needs"
   },
   "footer": {
     "Architecture Support": "Architecture Support",
@@ -224,5 +226,47 @@
     "Email: hello@rustfs.com": "Email: hello@rustfs.com",
     "Phone: 400-033-5363": "  ",
     "Beijing Address: Chaoyang District, Beijing": "3550 Lenox Road, NE Atlanta, Georgia 30326"
+  },
+  "differents": {
+    "Comparison with other storage products": "Comparison with other storage products",
+    "Choose RustFS for more advantages": "Choose RustFS for more advantages",
+    "Other object storage": "Other object storage",
+    "Memory management issues with Go/C": "Memory management issues with Go/C",
+    "Foreign logging violates security laws": "Foreign logging violates security laws",
+    "AGPL V3 licensing issues": "AGPL V3 licensing issues",
+    "Incomplete S3 support for Chinese clouds": "Incomplete S3 support for Chinese clouds",
+    "Limited domestic device support": "Limited domestic device support",
+    "Annual price hikes up to millions": "Annual price hikes up to millions",
+    "RustFS": "RustFS",
+    "Memory-safe Rust development": "Memory-safe Rust development",
+    "No foreign logging": "No foreign logging",
+    "Business-friendly Apache license": "Business-friendly Apache license",
+    "Full S3 support for Chinese clouds": "Full S3 support for Chinese clouds",
+    "Supports domestic secure systems": "Supports domestic secure systems",
+    "Stable pricing and support": "Stable pricing and support",
+    "Best choice": "Best choice",
+    "* Comparison for reference only": "* Comparison for reference only"
+  },
+  "getStarted": {
+    "Experience RustFS": "Experience RustFS",
+    "High security, high concurrency and ultimate performance": "High security, high concurrency and ultimate performance",
+    "Over 100+ enterprise users have started using RustFS": "Over 100+ enterprise users have started using RustFS"
+  },
+  "stats": {
+    "Powerful Performance, Outstanding Security": "Powerful Performance, Outstanding Security",
+    "RustFS provides high performance, high security, high concurrency, providing powerful support for your business": "RustFS provides high performance, high security, high concurrency, providing powerful support for your business",
+    "+7% Read/Write Speed": "+7% Read/Write Speed",
+    "High security and high concurrency performance improvements from Rust": "High security and high concurrency performance improvements from Rust",
+    "Data Read/Write Success Rate": "Data Read/Write Success Rate",
+    "Intellectual Property Risk": "Intellectual Property Risk",
+    "day": "day",
+    "GitHub Issues Average Resolution Time": "GitHub Issues Average Resolution Time"
+  },
+  "multiCloud": {
+    "True Multi-Cloud Storage": "True Multi-Cloud Storage",
+    "Multi-cloud object storage allows enterprises to build AWS S3-compatible data infrastructure on any cloud. The result is a consistent, portable interface for data and applications - meaning you can run anywhere, from edge to public cloud, without changing a line of code.": "Multi-cloud object storage allows enterprises to build AWS S3-compatible data infrastructure on any cloud. The result is a consistent, portable interface for data and applications - meaning you can run anywhere, from edge to public cloud, without changing a line of code.",
+    "RustFS is powered by Kubernetes and provides scalable, secure, S3-compatible object storage for every public cloud. Free yourself from vendor lock-in and treat clouds for what they are - commodity compute, network, and drives.": "RustFS is powered by Kubernetes and provides scalable, secure, S3-compatible object storage for every public cloud. Free yourself from vendor lock-in and treat clouds for what they are - commodity compute, network, and drives.",
+    "From OpenShift to Tanzu, RustFS is the only object storage that is part of the infrastructure foundation of leading Kubernetes distributions. With its massive portfolio of integrated applications, RustFS completes the software-defined picture.": "From OpenShift to Tanzu, RustFS is the only object storage that is part of the infrastructure foundation of leading Kubernetes distributions. With its massive portfolio of integrated applications, RustFS completes the software-defined picture.",
+    "The complete RustFS multi-cloud storage binary is less than 100MB, capable of powering object storage anywhere - from ARM SOCs, 5G POPs, and edge cache devices to mini data centers. This is why RustFS dominates the edge storage market.": "The complete RustFS multi-cloud storage binary is less than 100MB, capable of powering object storage anywhere - from ARM SOCs, 5G POPs, and edge cache devices to mini data centers. This is why RustFS dominates the edge storage market."
   }
 }

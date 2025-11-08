@@ -1,16 +1,12 @@
 'use client'
 
-import { useTranslations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 export interface PlatformInfoData {
   id: string;
   name: string;
   icon: React.ReactNode;
-  description: {
-    zh: string;
-    en: string;
-  };
+  description: string;
   available: boolean;
   comingSoon?: boolean;
 }
@@ -22,9 +18,7 @@ interface PlatformInfoProps {
   className?: string;
 }
 
-export default function PlatformInfo({ data, isSelected, onClick, className }: PlatformInfoProps) {
-  const { t, locale } = useTranslations('download');
-  const { name, icon, description, available, comingSoon } = data;
+export default function PlatformInfo({ data, isSelected, onClick, className }: PlatformInfoProps) {const { name, icon, description, available, comingSoon } = data;
 
   return (
     <button
@@ -57,8 +51,8 @@ export default function PlatformInfo({ data, isSelected, onClick, className }: P
       </span>
       <span className="text-sm text-muted-foreground mt-1 text-center">
         {available
-          ? description[locale as 'zh' | 'en']
-          : comingSoon ? t('coming_soon') : t('not_supported')
+          ? description
+          : comingSoon ? 'Coming Soon' : 'Platform not supported'
         }
       </span>
     </button>

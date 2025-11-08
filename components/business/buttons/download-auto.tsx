@@ -6,7 +6,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTranslations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon, DownloadIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -19,9 +18,7 @@ interface DownloadOption {
   description: string;
 }
 
-export default function DownloadAuto({ className }: { className?: string }) {
-  const { t, locale } = useTranslations('download');
-  const [selectedOption, setSelectedOption] = useState<DownloadOptionKey>('fallback');
+export default function DownloadAuto({ className }: { className?: string }) {const [selectedOption, setSelectedOption] = useState<DownloadOptionKey>('fallback');
   const [autoDetectedSystem, setAutoDetectedSystem] = useState<DownloadOptionKey>('fallback');
 
   // 将 appConfig 移到组件内部，使用当前 locale
@@ -79,27 +76,27 @@ export default function DownloadAuto({ className }: { className?: string }) {
       case 'macos': return 'macOS';
       case 'linux': return 'Linux';
       case 'docker': return 'Docker';
-      case 'fallback': return t('otherPlatforms');
+      case 'fallback': return 'otherPlatforms';
       default: return 'Unknown';
     }
   };
 
   const getDescription = (key: DownloadOptionKey) => {
     switch (key) {
-      case 'windows': return t('windowsDescription');
-      case 'macos': return t('macosDescription');
-      case 'linux': return t('linuxDescription');
-      case 'docker': return t('dockerDescription');
-      case 'fallback': return t('viewAllVersions');
+      case 'windows': return 'windowsDescription';
+      case 'macos': return 'macosDescription';
+      case 'linux': return 'linuxDescription';
+      case 'docker': return 'dockerDescription';
+      case 'fallback': return 'viewAllVersions';
       default: return '';
     }
   };
 
   const buttonText = selectedOption === autoDetectedSystem
-    ? t('downloadVersion')
+    ? 'downloadVersion'
     : selectedOption === 'fallback'
-      ? t("downloadNow")
-      : t('downloadVersion');
+      ? 'downloadNow'
+      : 'downloadVersion';
 
   return (
     <div className={cn("relative inline-flex", className)}>
@@ -117,7 +114,7 @@ export default function DownloadAuto({ className }: { className?: string }) {
         <DropdownMenuTrigger asChild>
           <button
             className="inline-flex items-center justify-center rounded-r-full h-12 w-12 text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 border-l border-primary-foreground/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors"
-            aria-label={t("selectVersion")}
+            aria-label={'selectVersion'}
           >
             <ChevronDownIcon className="h-3 w-3" />
           </button>
@@ -138,7 +135,7 @@ export default function DownloadAuto({ className }: { className?: string }) {
                 </div>
                 <div className="text-xs text-muted-foreground">
                   {getDescription(option.key)}
-                  {option.key === autoDetectedSystem && t("autoDetected")}
+                  {option.key === autoDetectedSystem && 'autoDetected'}
                 </div>
               </div>
             </DropdownMenuItem>

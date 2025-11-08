@@ -1,59 +1,55 @@
 'use client'
 
-import { useTranslations } from '@/lib/i18n';
 import { docs_url } from "@/lib/utils";
 import LinkGitHub from './buttons/link-github';
 import LinkTwitter from './buttons/link-twitter';
 import { Logo } from './logo';
 
-export default function AppFooter() {
-  const { t, locale } = useTranslations('footer');
-
-  const footerLinks = [
+export default function AppFooter() {const footerLinks = [
     {
-      title: t('Architecture Support'),
+      title: 'Architecture Support',
       links: [
-        { title: t('Bare Metal & Virtualization'), href: docs_url('features/baremetal', locale) },
-        { title: t('Alibaba Cloud'), href: docs_url('features/aliyun', locale) },
-        { title: t('Tencent Cloud'), href: docs_url('features/qcloud', locale) },
-        { title: t('Huawei Cloud'), href: docs_url('features/huaweicloud', locale) },
-        { title: t('International Cloud Providers'), href: docs_url('features/aws-elastic', locale) },
+        { title: 'Bare Metal & Virtualization', href: docs_url('features/baremetal', locale) },
+        { title: 'Alibaba Cloud', href: docs_url('features/aliyun', locale) },
+        { title: 'Tencent Cloud', href: docs_url('features/qcloud', locale) },
+        { title: 'Huawei Cloud', href: docs_url('features/huaweicloud', locale) },
+        { title: 'International Cloud Providers', href: docs_url('features/aws-elastic', locale) },
       ]
     },
     {
-      title: t('Product Features'),
+      title: 'Product Features',
       links: [
-        { title: t('Distributed Storage'), href: docs_url('features/distributed', locale) },
-        { title: t('Log Management'), href: docs_url('features/logging', locale) },
-        { title: t('Version Control'), href: docs_url('features/versioning', locale) },
-        { title: t('S3 Compatible'), href: docs_url('features/s3-compatibility', locale) },
-        { title: t('Object Level Read-Only'), href: docs_url('features/worm', locale) },
-        { title: t('Cross-Region Replication'), href: docs_url('features/replication', locale) },
-        { title: t('Encryption'), href: docs_url('features/encryption', locale) },
-        { title: t('Lifecycle Management'), href: docs_url('features/lifecycle', locale) },
+        { title: 'Distributed Storage', href: docs_url('features/distributed', locale) },
+        { title: 'Log Management', href: docs_url('features/logging', locale) },
+        { title: 'Version Control', href: docs_url('features/versioning', locale) },
+        { title: 'S3 Compatible', href: docs_url('features/s3-compatibility', locale) },
+        { title: 'Object Level Read-Only', href: docs_url('features/worm', locale) },
+        { title: 'Cross-Region Replication', href: docs_url('features/replication', locale) },
+        { title: 'Encryption', href: docs_url('features/encryption', locale) },
+        { title: 'Lifecycle Management', href: docs_url('features/lifecycle', locale) },
       ]
     },
     {
-      title: t('Solutions'),
+      title: 'Solutions',
       links: [
-        { title: t('Modern Data Lake'), href: docs_url('features/data-lake', locale) },
-        { title: t('AI & Machine Learning'), href: docs_url('features/ai', locale) },
-        { title: t('Cloud Native'), href: docs_url('features/cloud-native', locale) },
-        { title: t('Big Data Compute-Storage Separation'), href: docs_url('features/hdfs', locale) },
-        { title: t('SQL Support'), href: docs_url('features/sql-server', locale) },
-        { title: t('Quantitative Trading'), href: docs_url('features/quantitative-trading', locale) },
-        { title: t('Manufacturing Cost Reduction'), href: docs_url('features/industry', locale) },
-        { title: t('Cold Archive Storage'), href: docs_url('features/cold-archiving', locale) },
-        { title: t('Video Storage Solutions'), href: docs_url('features/video', locale) },
-        { title: t('Domestic Innovation & SM Solutions'), href: docs_url('features/domestic', locale) },
+        { title: 'Modern Data Lake', href: docs_url('features/data-lake', locale) },
+        { title: 'AI & Machine Learning', href: docs_url('features/ai', locale) },
+        { title: 'Cloud Native', href: docs_url('features/cloud-native', locale) },
+        { title: 'Big Data Compute-Storage Separation', href: docs_url('features/hdfs', locale) },
+        { title: 'SQL Support', href: docs_url('features/sql-server', locale) },
+        { title: 'Quantitative Trading', href: docs_url('features/quantitative-trading', locale) },
+        { title: 'Manufacturing Cost Reduction', href: docs_url('features/industry', locale) },
+        { title: 'Cold Archive Storage', href: docs_url('features/cold-archiving', locale) },
+        { title: 'Video Storage Solutions', href: docs_url('features/video', locale) },
+        { title: 'Domestic Innovation & SM Solutions', href: docs_url('features/domestic', locale) },
       ]
     },
     {
-      title: t('About Us'),
+      title: 'About Us',
       links: [
-        { title: t('About Us'), href: docs_url('about', locale) },
-        { title: t('Investment & Cooperation'), href: docs_url('about', locale) },
-        { title: t('Trademark Usage'), href: docs_url('about', locale) },
+        { title: 'About Us', href: docs_url('about', locale) },
+        { title: 'Investment & Cooperation', href: docs_url('about', locale) },
+        { title: 'Trademark Usage', href: docs_url('about', locale) },
       ]
     }
   ];
@@ -93,18 +89,18 @@ export default function AppFooter() {
                     href="mailto:hello@rustfs.com"
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {t('Email: hello@rustfs.com')}
+                    {'Email: hello@rustfs.com'}
                   </a>
                   <span className="hidden md:inline-block">|</span>
                   <a
                     href="tel:400-033-5363"
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {t('Phone: 400-033-5363')}
+                    {'  '}
                   </a>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span>{t('Beijing Address: Chaoyang District, Beijing')}</span>
+                  <span>{'3550 Lenox Road, NE Atlanta, Georgia 30326'}</span>
                   {locale === 'zh' && (
                     <>
                       <span className="hidden md:inline-block">|</span>
@@ -114,7 +110,7 @@ export default function AppFooter() {
                         rel="noopener noreferrer"
                         className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                       >
-                        {t('Beijing ICP License: XXXXXXXXXXXX')}
+                        {'Beijing ICP License: XXXXXXXXXXXX'}
                       </a>
                     </>
                   )}

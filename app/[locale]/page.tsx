@@ -7,7 +7,6 @@ import HomeStats from "@/components/business/home-stats";
 import HomeReviews from "@/components/business/reviews";
 import Subscribe from "@/components/business/subscribe";
 import { locales } from '@/lib/constants';
-import { getTranslations } from '@/lib/i18n-server';
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -15,25 +14,22 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'site' });
-
-  return {
-    title: t('title_home'),
-    description: t('description_home'),
-    keywords: t('keywords'),
-    authors: [{ name: t('author') }],
+  const { locale } = await params;return {
+    title: 'RustFS - High-Performance Distributed Storage System Built with Rust',
+    description: 'RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.',
+    keywords: 'RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative',
+    authors: [{ name: 'RustFS Team' }],
     openGraph: {
-      title: t('title_home'),
-      description: t('description_home'),
+      title: 'RustFS - High-Performance Distributed Storage System Built with Rust',
+      description: 'RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.',
       type: "website",
       locale: locale === 'zh' ? 'zh_CN' : 'en_US',
       alternateLocale: locale === 'zh' ? 'en_US' : 'zh_CN',
     },
     twitter: {
       card: "summary_large_image",
-      title: t('title_home'),
-      description: t('description_home'),
+      title: 'RustFS - High-Performance Distributed Storage System Built with Rust',
+      description: 'RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.',
     },
   };
 }
