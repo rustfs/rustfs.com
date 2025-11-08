@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { ChevronDownIcon, DownloadIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
-type DownloadOptionKey = 'windows' | 'macos' | 'linux' | 'docker' | 'fallback';
+type DownloadOptionKey = "windows" | "macos" | "linux" | "docker" | "fallback";
 
 interface DownloadOption {
   key: DownloadOptionKey;
@@ -18,26 +18,25 @@ interface DownloadOption {
   description: string;
 }
 
-export default function DownloadAuto({ className }: { className?: string }) {const [selectedOption, setSelectedOption] = useState<DownloadOptionKey>('fallback');
-  const [autoDetectedSystem, setAutoDetectedSystem] = useState<DownloadOptionKey>('fallback');
+const DOWNLOAD_URLS: Record<DownloadOptionKey, string> = {
+  windows: "/download/windows",
+  macos: "/download/macos",
+  linux: "/download/linux",
+  docker: "/download/docker",
+  fallback: "/download",
+};
 
-  // 将 appConfig 移到组件内部，使用当前 locale
-  const appConfig = {
-    downloads: {
-      windows: `/${locale}/download/windows`,
-      macos: `/${locale}/download/macos`,
-      linux: `/${locale}/download/linux`,
-      docker: `/${locale}/download/docker`,
-      fallback: `/${locale}/download`
-    },
-    downloadOptions: [
-      { key: 'windows' as const, label: 'Windows', description: 'Windows 10/11' },
-      { key: 'macos' as const, label: 'macOS', description: 'macOS 10.15+' },
-      { key: 'linux' as const, label: 'Linux', description: 'Ubuntu 18.04+, CentOS 7+' },
-      { key: 'docker' as const, label: 'Docker', description: 'Docker 20.10+' },
-      { key: 'fallback' as const, label: 'Other Platforms', description: 'View all versions' }
-    ] as DownloadOption[]
-  };
+const DOWNLOAD_OPTIONS: DownloadOption[] = [
+  { key: "windows", label: "Windows", description: "适用于 Windows 10/11" },
+  { key: "macos", label: "macOS", description: "适用于 macOS 10.15+" },
+  { key: "linux", label: "Linux", description: "适用于 Ubuntu 18.04+/CentOS 7+" },
+  { key: "docker", label: "Docker", description: "适用于 Docker 20.10+" },
+  { key: "fallback", label: "其他平台", description: "查看全部版本" },
+];
+
+export default function DownloadAuto({ className }: { className?: string }) {
+  const [selectedOption, setSelectedOption] = useState<DownloadOptionKey>("fallback");
+  const [autoDetectedSystem, setAutoDetectedSystem] = useState<DownloadOptionKey>("fallback");
 
   useEffect(() => {
     const detectSystem = () => {
@@ -60,7 +59,7 @@ export default function DownloadAuto({ className }: { className?: string }) {con
   }, []);
 
   const handleDownload = () => {
-    const downloadUrl = appConfig.downloads[selectedOption];
+    const downloadUrl = DOWNLOAD_URLS[selectedOption];
     if (downloadUrl) {
       window.open(downloadUrl, '_blank');
     }
@@ -70,33 +69,12 @@ export default function DownloadAuto({ className }: { className?: string }) {con
     setSelectedOption(optionKey);
   };
 
-  const getLabel = (key: DownloadOptionKey) => {
-    switch (key) {
-      case 'windows': return 'Windows';
-      case 'macos': return 'macOS';
-      case 'linux': return 'Linux';
-      case 'docker': return 'Docker';
-      case 'fallback': return 'otherPlatforms';
-      default: return 'Unknown';
-    }
-  };
-
-  const getDescription = (key: DownloadOptionKey) => {
-    switch (key) {
-      case 'windows': return 'windowsDescription';
-      case 'macos': return 'macosDescription';
-      case 'linux': return 'linuxDescription';
-      case 'docker': return 'dockerDescription';
-      case 'fallback': return 'viewAllVersions';
-      default: return '';
-    }
-  };
-
-  const buttonText = selectedOption === autoDetectedSystem
-    ? 'downloadVersion'
-    : selectedOption === 'fallback'
-      ? 'downloadNow'
-      : 'downloadVersion';
+  const buttonText =
+    selectedOption === autoDetectedSystem
+      ? "下载适配版本"
+      : selectedOption === "fallback"
+        ? "立即下载"
+        : "下载所选版本";
 
   return (
     <div className={cn("relative inline-flex", className)}>
@@ -114,13 +92,13 @@ export default function DownloadAuto({ className }: { className?: string }) {con
         <DropdownMenuTrigger asChild>
           <button
             className="inline-flex items-center justify-center rounded-r-full h-12 w-12 text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 border-l border-primary-foreground/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors"
-            aria-label={'selectVersion'}
+            aria-label={"选择版本"}
           >
             <ChevronDownIcon className="h-3 w-3" />
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56">
-          {appConfig.downloadOptions.map((option) => (
+          {DOWNLOAD_OPTIONS.map((option) => (
             <DropdownMenuItem
               key={option.key}
               onClick={() => handleOptionSelect(option.key)}
@@ -131,11 +109,11 @@ export default function DownloadAuto({ className }: { className?: string }) {con
             >
               <div className="flex-1">
                 <div className="font-medium">
-                  {getLabel(option.key)}
+                  {option.label}
                 </div>
                 <div className="text-xs text-muted-foreground">
-                  {getDescription(option.key)}
-                  {option.key === autoDetectedSystem && 'autoDetected'}
+                  {option.description}
+                  {option.key === autoDetectedSystem && " (已为你推荐)"}
                 </div>
               </div>
             </DropdownMenuItem>

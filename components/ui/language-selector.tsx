@@ -14,7 +14,7 @@ export default function LanguageToggle() {
       }}
     >
       <Globe className="h-4 w-4" />
-      <span className="hidden sm:inline">English</span>
+      <span className="hidden sm:inline">简体中文</span>
     </Button>
   );
 }

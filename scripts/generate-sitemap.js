@@ -8,27 +8,16 @@ const BASE_URL = 'https://rustfs.com'
 const OUT_DIR = 'out'
 const SITEMAP_OUTPUT = 'out/sitemap.xml'
 
-// Supported locales
-const LOCALES = ['en', 'zh']
-
 // Page priority configuration
 const PAGE_PRIORITIES = {
   '/': 1.0,
   '/download/': 0.9,
-  '/en/': 0.8,
-  '/zh/': 0.8,
-  '/en/download/': 0.7,
-  '/zh/download/': 0.7,
 }
 
 // Page change frequency configuration
 const PAGE_CHANGE_FREQ = {
   '/': 'weekly',
   '/download/': 'monthly',
-  '/en/': 'weekly',
-  '/zh/': 'weekly',
-  '/en/download/': 'monthly',
-  '/zh/download/': 'monthly',
 }
 
 // Scan directory and generate URL list
@@ -74,7 +63,7 @@ function generateSitemap(urls) {
   const now = new Date().toISOString()
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 
   for (const url of urls) {
     xml += '  <url>\n'
@@ -82,12 +71,6 @@ function generateSitemap(urls) {
     xml += `    <lastmod>${now}</lastmod>\n`
     xml += `    <changefreq>${getPageChangeFreq(url)}</changefreq>\n`
     xml += `    <priority>${getPagePriority(url)}</priority>\n`
-
-    // Add multi-language support
-    for (const locale of LOCALES) {
-      const localeUrl = locale === 'en' ? url : `/${locale}${url}`
-      xml += `    <xhtml:link rel="alternate" hreflang="${locale}" href="${BASE_URL}${localeUrl}"/>\n`
-    }
 
     xml += '  </url>\n'
   }
@@ -156,7 +139,6 @@ function main() {
     console.log(`✅ Sitemap generated successfully at ${SITEMAP_OUTPUT}`)
     console.log(`🌐 Sitemap URL: ${BASE_URL}/sitemap.xml`)
     console.log(`📊 Total URLs: ${urls.length}`)
-    console.log(`🌍 Supported locales: ${LOCALES.join(', ')}`)
   } catch (error) {
     console.error('❌ Error writing sitemap:', error)
     process.exit(1)
