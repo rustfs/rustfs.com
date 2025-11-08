@@ -1,3 +1,17 @@
+// Site configuration
+export const SITE_CONFIG = {
+  primaryDomain: 'https://rustfs.com',
+  secondaryDomain: 'https://rustfs.com.cn',
+  docsDomain: 'https://docs.rustfs.com',
+} as const
+
+// Site meta information
+export const SITE_METADATA = {
+  title: 'RustFS - High-Performance Distributed Storage System',
+  description: 'RustFS is a high-performance distributed storage system built with Rust, S3 protocol compatible',
+  keywords: 'RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative',
+} as const
+
 // Download link configuration
 export const DOWNLOAD_CONFIG = {
   GITHUB_REPO: 'rustfs/rustfs',
