@@ -90,22 +90,11 @@ export default function AppFooter() {
                     href="mailto:hello@rustfs.com"
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {'Email: hello@rustfs.com'}
-                  </a>
-                  <span className="hidden md:inline-block">|</span>
-                  <a
-                    href="tel:400-033-5363"
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {'  '}
+                    Email: hello@rustfs.com
                   </a>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span>{'3550 Lenox Road, NE Atlanta, Georgia 30326'}</span>
-                  {
-                      </a>
-                    </>
-                  )}
+                  <span>3550 Lenox Road, NE Atlanta, Georgia 30326</span>
                 </div>
               </div>
             </div>
