@@ -10,34 +10,35 @@ import LinkTwitter from "./buttons/link-twitter";
 import { Logo } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
 
-export default function AppHeader() {const navs = [
+export default function AppHeader() {
+  const navs = [
     {
       label: 'Features',
-      url: docs_url('features/distributed/', locale),
+      url: docs_url('features/distributed/'),
     },
     {
       label: 'Architecture',
-      url: docs_url('/concepts/architecture.html', locale),
+      url: docs_url('/concepts/architecture.html'),
     },
     {
       label: 'Solutions',
-      url: docs_url('features/data-lake/', locale),
+      url: docs_url('features/data-lake/'),
     },
     // {
     //   label: 'Integrations',
-    //   url: `https://docs.rustfs.com/${locale}/intergrations`
+    //   url: `https://docs.rustfs.com/intergrations`
     // },
     {
       label: 'AI',
-      url: docs_url('features/ai', locale)
+      url: docs_url('features/ai')
     },
     {
       label: 'Download',
-      url: `/${locale}/download`
+      url: `/download`
     },
     {
       label: 'Documentation',
-      url: docs_url('', locale)
+      url: docs_url('')
     },
     // {
     //   label: 'Blog',
@@ -49,7 +50,7 @@ export default function AppHeader() {const navs = [
     },
     {
       label: 'About',
-      url: docs_url('about', locale)
+      url: docs_url('about')
     }
   ]
 
@@ -58,7 +59,7 @@ export default function AppHeader() {const navs = [
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
-            <Link href={`/${locale}`}>
+            <Link href="/">
               <Logo className="h-5 w-auto" />
             </Link>
             <div className="hidden md:flex md:gap-x-6">

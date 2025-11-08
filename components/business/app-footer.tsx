@@ -9,47 +9,47 @@ export default function AppFooter() {const footerLinks = [
     {
       title: 'Architecture Support',
       links: [
-        { title: 'Bare Metal & Virtualization', href: docs_url('features/baremetal', locale) },
-        { title: 'Alibaba Cloud', href: docs_url('features/aliyun', locale) },
-        { title: 'Tencent Cloud', href: docs_url('features/qcloud', locale) },
-        { title: 'Huawei Cloud', href: docs_url('features/huaweicloud', locale) },
-        { title: 'International Cloud Providers', href: docs_url('features/aws-elastic', locale) },
+        { title: 'Bare Metal & Virtualization', href: docs_url('features/baremetal') },
+        { title: 'Alibaba Cloud', href: docs_url('features/aliyun') },
+        { title: 'Tencent Cloud', href: docs_url('features/qcloud') },
+        { title: 'Huawei Cloud', href: docs_url('features/huaweicloud') },
+        { title: 'International Cloud Providers', href: docs_url('features/aws-elastic') },
       ]
     },
     {
       title: 'Product Features',
       links: [
-        { title: 'Distributed Storage', href: docs_url('features/distributed', locale) },
-        { title: 'Log Management', href: docs_url('features/logging', locale) },
-        { title: 'Version Control', href: docs_url('features/versioning', locale) },
-        { title: 'S3 Compatible', href: docs_url('features/s3-compatibility', locale) },
-        { title: 'Object Level Read-Only', href: docs_url('features/worm', locale) },
-        { title: 'Cross-Region Replication', href: docs_url('features/replication', locale) },
-        { title: 'Encryption', href: docs_url('features/encryption', locale) },
-        { title: 'Lifecycle Management', href: docs_url('features/lifecycle', locale) },
+        { title: 'Distributed Storage', href: docs_url('features/distributed') },
+        { title: 'Log Management', href: docs_url('features/logging') },
+        { title: 'Version Control', href: docs_url('features/versioning') },
+        { title: 'S3 Compatible', href: docs_url('features/s3-compatibility') },
+        { title: 'Object Level Read-Only', href: docs_url('features/worm') },
+        { title: 'Cross-Region Replication', href: docs_url('features/replication') },
+        { title: 'Encryption', href: docs_url('features/encryption') },
+        { title: 'Lifecycle Management', href: docs_url('features/lifecycle') },
       ]
     },
     {
       title: 'Solutions',
       links: [
-        { title: 'Modern Data Lake', href: docs_url('features/data-lake', locale) },
-        { title: 'AI & Machine Learning', href: docs_url('features/ai', locale) },
-        { title: 'Cloud Native', href: docs_url('features/cloud-native', locale) },
-        { title: 'Big Data Compute-Storage Separation', href: docs_url('features/hdfs', locale) },
-        { title: 'SQL Support', href: docs_url('features/sql-server', locale) },
-        { title: 'Quantitative Trading', href: docs_url('features/quantitative-trading', locale) },
-        { title: 'Manufacturing Cost Reduction', href: docs_url('features/industry', locale) },
-        { title: 'Cold Archive Storage', href: docs_url('features/cold-archiving', locale) },
-        { title: 'Video Storage Solutions', href: docs_url('features/video', locale) },
-        { title: 'Domestic Innovation & SM Solutions', href: docs_url('features/domestic', locale) },
+        { title: 'Modern Data Lake', href: docs_url('features/data-lake') },
+        { title: 'AI & Machine Learning', href: docs_url('features/ai') },
+        { title: 'Cloud Native', href: docs_url('features/cloud-native') },
+        { title: 'Big Data Compute-Storage Separation', href: docs_url('features/hdfs') },
+        { title: 'SQL Support', href: docs_url('features/sql-server') },
+        { title: 'Quantitative Trading', href: docs_url('features/quantitative-trading') },
+        { title: 'Manufacturing Cost Reduction', href: docs_url('features/industry') },
+        { title: 'Cold Archive Storage', href: docs_url('features/cold-archiving') },
+        { title: 'Video Storage Solutions', href: docs_url('features/video') },
+        { title: 'Domestic Innovation & SM Solutions', href: docs_url('features/domestic') },
       ]
     },
     {
       title: 'About Us',
       links: [
-        { title: 'About Us', href: docs_url('about', locale) },
-        { title: 'Investment & Cooperation', href: docs_url('about', locale) },
-        { title: 'Trademark Usage', href: docs_url('about', locale) },
+        { title: 'About Us', href: docs_url('about') },
+        { title: 'Investment & Cooperation', href: docs_url('about') },
+        { title: 'Trademark Usage', href: docs_url('about') },
       ]
     }
   ];
@@ -101,16 +101,7 @@ export default function AppFooter() {const footerLinks = [
                 </div>
                 <div className="flex items-center gap-2">
                   <span>{'3550 Lenox Road, NE Atlanta, Georgia 30326'}</span>
-                  {locale === 'zh' && (
-                    <>
-                      <span className="hidden md:inline-block">|</span>
-                      <a
-                        href="https://beian.miit.gov.cn/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        {'Beijing ICP License: XXXXXXXXXXXX'}
+                  {
                       </a>
                     </>
                   )}
