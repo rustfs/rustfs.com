@@ -92,6 +92,8 @@ export default function AppFooter() {
                   >
                     Email: hello@rustfs.com
                   </a>
+
+                   | <a href="tel:+14707850446">Phone: +1(470)785-0446 </a>
                 </div>
                 <div className="flex items-center gap-2">
                   <span>3550 Lenox Road, NE Atlanta, Georgia 30326</span>
