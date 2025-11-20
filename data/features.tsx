@@ -6,7 +6,7 @@ const features = [
     "description": "RustFS leverages distributed architecture and object storage capabilities to provide excellent performance for AI and advanced analytics workloads, supporting data scaling from TB to EB levels.",
     "icon": EarthIcon,
     "url": "#",
-    "featureDescription": "Cross-cloud support can effectively prevent single cloud failures and major losses. You can use RustFS as a communication tool across clouds. We support bucket-level granular execution, which is used in the following scenarios:",
+    "featureDescription": "Cross-cloud redundancy mitigates single-provider failures and ensures business continuity.. You can use RustFS as a communication tool across clouds. We support bucket-level granular execution, which is used in the following scenarios:",
     "features": [
       "Active-active cross-region/availability zone replication",
       "Legal hold, governance and compliance",
@@ -16,7 +16,7 @@ const features = [
       "name": "Adrian Miller",
       "position": "CTO",
       "img": "/images/faces/adrian-miller.jpeg",
-      "review": "RustFS's cross-cloud support can effectively prevent single cloud failures and major losses"
+      "review": "RustFS's Cross-cloud redundancy mitigates single-provider failures and ensures business continuity."
     }
   },
   {
@@ -56,15 +56,15 @@ const features = [
     }
   },
   {
-    "title": "Unlimited Scaling",
-    "description": "RustFS system automatically balances node loads, ensures even data distribution, supports dynamic addition or removal of resources based on storage needs, achieving unlimited scaling.",
+    "title": "Limitless Scalability",
+    "description": "RustFS system automatically balances node loads, ensures even data distribution, supports dynamic addition or removal of resources based on storage needs, achieving Limitless Scalability.",
     "icon": ExpandIcon,
     "url": "#",
-    "featureDescription": "RustFS supports unlimited scaling and massive data storage, easily handling large-scale data storage requirements. RustFS storage capacity can expand infinitely as data volume grows, without being limited by storage capacity constraints.",
+    "featureDescription": "RustFS supports Limitless Scalability and massive data storage, easily handling large-scale data storage requirements. RustFS storage capacity can expand infinitely as data volume grows, without being limited by storage capacity constraints.",
     "features": [
       "Distributed architecture - data is distributed across multiple nodes",
-      "Data sharding - large objects may be split into multiple small chunks",
-      "No central metadata server - avoids centralized metadata server failures and service interruptions"
+      "Data Sharding - Large objects are distributed as granular fragments/shards.",
+      "Zero-Master Architecture - avoids centralized metadata server failures and service interruptions"
     ],
     "review": {
       "name": "Noah Carter",
@@ -74,13 +74,13 @@ const features = [
     }
   },
   {
-    "title": "Object Read-Only",
+    "title": "WORM Compliance",
     "description": "Supports object locking mode, implementing WORM (Write Once, Read Many) functionality, preventing data from being modified or deleted within specified time ranges, ensuring data integrity.",
     "icon": LockKeyholeIcon,
     "url": "#",
     "featureDescription": "WORM (Write Once, Read Many) in object storage is a data storage characteristic that ensures once data is written and solidified, it cannot be modified or deleted. The benefits of WORM include the following features:",
     "features": [
-      "Data protection - prevents data from being accidentally or intentionally modified",
+      "Data protection - Prevents accidental or malicious modification.",
       "Compliance - certain industries need to comply with specific regulations",
       "Audit and evidence retention - this is very important for legal proceedings and investigations"
     ],

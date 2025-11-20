@@ -42,7 +42,7 @@ export default function AppFooter() {
         { title: 'Manufacturing Cost Reduction', href: docs_url('features/industry') },
         { title: 'Cold Archive Storage', href: docs_url('features/cold-archiving') },
         { title: 'Video Storage Solutions', href: docs_url('features/video') },
-        { title: 'Domestic Innovation & SM Solutions', href: docs_url('features/domestic') },
+        { title: 'Compliance-focused Architecture', href: docs_url('features/domestic') },
       ]
     },
     {

@@ -10,19 +10,19 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: 'RustFS - High-Performance Distributed Storage System Built with Rust',
-  description: 'RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.',
+  description: 'RustFS is a high-performance, Limitless Scalability, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.',
   keywords: 'RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative',
   authors: [{ name: 'RustFS Team' }],
   openGraph: {
     title: 'RustFS - High-Performance Distributed Storage System Built with Rust',
-    description: 'RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.',
+    description: 'RustFS is a high-performance, Limitless Scalability, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.',
     type: "website",
     locale: 'en_US',
   },
   twitter: {
     card: "summary_large_image",
     title: 'RustFS - High-Performance Distributed Storage System Built with Rust',
-    description: 'RustFS is a high-performance, unlimited scaling, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.',
+    description: 'RustFS is a high-performance, Limitless Scalability, secure and reliable distributed storage system built with Rust, S3 protocol compatible, supporting multi-cloud storage.',
   },
 };
 

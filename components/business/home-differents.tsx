@@ -15,7 +15,7 @@ export default function HomeDifferents() {return (
       <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
           <h2 className="text-2xl font-bold md:text-4xl md:leading-tight">
-            {'Comparison with other storage products'}
+            {'RustFS vs. The Competition'}
           </h2>
           <p className="mt-4">
             {'Choose RustFS for more advantages'}
@@ -28,18 +28,18 @@ export default function HomeDifferents() {return (
             <div className="text-muted-foreground">
               <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
-                <span>{'Memory management issues with Go/C'}</span>
+                <span>{'Memory-safe Architecture (Built with Rust)'}</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
                 <XIcon className="text-neutral-500" />
-                <span>{'Foreign logging violates security laws'}</span>
+                <span>{'Ensures data sovereignty and compliance with local logging regulations'}</span>
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
                 <span>{'AGPL V3 licensing issues'}</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
-                <span>{'Incomplete S3 support for Chinese clouds'}</span>
+                <span>{'Inconsistent S3 compatibility across other providers'}</span>
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
