@@ -43,7 +43,7 @@ export default function HomeDifferents() {return (
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
                 <XIcon className="text-neutral-500" />
-                <span>{'Limited domestic device support'}</span>
+                <span>{'Limited Platform Compatibility'}</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
                 <span>{'Annual price hikes up to millions'}</span>
@@ -90,7 +90,7 @@ export default function HomeDifferents() {return (
               </div>
               <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
                 <CheckIcon className="text-green-500" />
-                <span>{'Supports domestic secure systems'}</span>
+                <span>{'Extensive Multi-Architecture Support'}</span>
               </div>
               <div className="flex items-center gap-2 p-4 lg:px-8 ">
                 <CheckIcon className="text-green-500" />

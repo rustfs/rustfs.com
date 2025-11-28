@@ -46,10 +46,6 @@ export default function AppHeader() {
     {
       label: 'Community',
       url: 'https://github.com/rustfs/rustfs/discussions'
-    },
-    {
-      label: 'About',
-      url: docs_url('about')
     }
   ]
 
