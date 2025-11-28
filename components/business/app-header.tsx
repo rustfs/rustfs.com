@@ -39,10 +39,10 @@ export default function AppHeader() {
       label: 'Documentation',
       url: docs_url('')
     },
-    // {
-    //   label: 'Blog',
-    //   url: '/blog'
-    // },
+    {
+       label: 'Blog',
+       url: 'https://rustfs.dev/'
+    },
     {
       label: 'Community',
       url: 'https://github.com/rustfs/rustfs/discussions'
