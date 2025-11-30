@@ -128,7 +128,7 @@ export default function StatsStrip({
       <div className="container px-5 py-12 lg:py-16 xl:py-20 mx-auto">
         <div className="flex flex-wrap -m-4 text-left">
           {items.map(({ label, value }) => (
-            <div key={label} className="px-4 sm:w-1/4 w-1/2 pl-6 border-l">
+            <div key={label} className="px-4 sm:w-1/4 w-1/2 pl-6 border-l mt-4 xl:mt-0">
               <h2 className="title-font font-extrabold sm:text-4xl text-3xl text-gray-900 dark:text-gray-50">
                 {loading ? (
                   '—'

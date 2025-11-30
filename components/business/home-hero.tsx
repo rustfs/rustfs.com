@@ -45,7 +45,7 @@ export default function HomeHero({ dockerPulls }: { dockerPulls: number }) {
   return (
     <section className="relative mx-auto max-w-7xl overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 pb-16 lg:pt-28">
       <div className="relative flex items-center gap-12">
-        <div className="space-y-6 text-center lg:text-left relative z-20 w-3/5">
+        <div className="space-y-6 text-center lg:text-left relative z-20 lg:w-3/5">
           <h1 className="font-display text-3xl font-extrabold tracking-tight text-primary sm:text-4xl md:text-5xl xl:text-6xl leading-tight">
             The World’s Fastest-Growing Open-Source Distributed Object Storage
           </h1>
@@ -65,13 +65,13 @@ export default function HomeHero({ dockerPulls }: { dockerPulls: number }) {
               className="inline-flex"
             />
           </div>
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-start lg:justify-start">
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
             <DownloadLink />
             <DemoLink className="hidden md:inline-flex" />
           </div>
         </div>
 
-        <div className="flex items-center justify-center w-2/5">
+        <div className="flex items-center justify-center lg:w-2/5 absolute bottom-[-50vh] left-0 right-0 md:static w-full md:w-auto opacity-40 lg:opacity-100">
           <div className="relative w-full max-w-[560px] md:max-w-[620px] lg:max-w-[680px] aspect-square">
             <Globe className="h-full w-full opacity-95 drop-shadow-2xl" config={globeConfig} />
           </div>
