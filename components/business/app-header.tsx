@@ -40,8 +40,8 @@ export default function AppHeader() {
       url: docs_url('')
     },
     {
-       label: 'Blog',
-       url: 'https://rustfs.dev/'
+      label: 'Blog',
+      url: 'https://rustfs.dev/'
     },
     {
       label: 'Community',
@@ -65,9 +65,9 @@ export default function AppHeader() {
           </div>
           <div className="flex items-center gap-x-2 md:gap-x-5">
             <div className="hidden md:flex items-center gap-x-2 md:gap-x-5">
+              <LinkGitHub className="group inline-flex" />
+              <LinkTwitter className="group inline-flex" />
               <ThemeToggle />
-              <LinkGitHub size="size-5" className="group inline-flex" />
-              <LinkTwitter size="size-5" className="group inline-flex" />
             </div>
             <div className="-mr-1 md:hidden">
               <Popover>

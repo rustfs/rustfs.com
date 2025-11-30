@@ -101,7 +101,7 @@ export default function AppFooter() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <LinkGitHub size="size-5" className="group inline-flex" />
+              <LinkGitHub className="group inline-flex" />
               <LinkTwitter size="size-5" className="group inline-flex" />
             </div>
           </div>

@@ -5,7 +5,9 @@ import HomeHero from "@/components/business/home-hero";
 import HomeMultiClouds from "@/components/business/home-multi-clouds";
 import HomeStats from "@/components/business/home-stats";
 import HomeReviews from "@/components/business/reviews";
+import SoftwareLogos from "@/components/business/software-logos";
 import Subscribe from "@/components/business/subscribe";
+import { getDockerPulls } from "@/lib/docker";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -27,16 +29,21 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
+  const dockerPulls = await getDockerPulls();
+
   return (
-    <main className="flex-1">
-      <HomeHero />
-      <HomeFeatures />
-      <HomeStats />
-      <HomeDifferents />
-      <HomeMultiClouds />
-      <HomeReviews />
-      <GetStartedToday />
-      <Subscribe />
+    <main className="flex-1 relative">
+      <div className="relative z-10">
+        <HomeHero dockerPulls={dockerPulls} />
+        <SoftwareLogos />
+        <HomeFeatures />
+        <HomeStats />
+        <HomeDifferents />
+        <HomeMultiClouds />
+        <HomeReviews />
+        <GetStartedToday />
+        <Subscribe />
+      </div>
     </main>
   );
 }
