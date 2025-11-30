@@ -7,7 +7,7 @@ import { SITE_CONFIG, SITE_METADATA } from '@/app.config';
 import AppFooter from '@/components/business/app-footer';
 import AppHeader from '@/components/business/app-header';
 import FixedContactButton from '@/components/business/buttons/fixed-contact-button';
-import { FlickeringGrid } from "@/components/ui/flickering-grid";
+import BackgroundGrid from '@/components/ui/background-grid';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -81,16 +81,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex h-full flex-col`}
       >
         <ThemeProvider enableSystem attribute="class">
-          <div className="absolute top-0 left-0 w-screen h-screen pointer-events-none z-0">
-            <FlickeringGrid className="absolute inset-0 z-0 size-full opacity-30"
-              squareSize={25}
-              gridGap={6}
-              color="#6B7280"
-              maxOpacity={0.3}
-              flickerChance={0.5}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
-          </div>
+          <BackgroundGrid />
           <AppHeader />
           {children}
           <AppFooter />
