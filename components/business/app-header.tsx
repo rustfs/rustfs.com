@@ -1,6 +1,6 @@
 'use client'
 
-import { docs_url } from "@/lib/utils";
+import { cn, docs_url } from "@/lib/utils";
 import { Popover, Transition } from '@headlessui/react';
 import Link from "next/link";
 import { Fragment } from 'react';
@@ -14,43 +14,52 @@ export default function AppHeader() {
     {
       label: 'Features',
       url: docs_url('features/distributed/'),
+      classes: '',
     },
     {
       label: 'Architecture',
       url: docs_url('/concepts/architecture.html'),
+      classes: 'hidden xl:inline-block',
     },
     {
       label: 'Solutions',
       url: docs_url('features/data-lake/'),
+      classes: 'hidden xl:inline-block',
     },
     // {
     //   label: 'Integrations',
-    //   url: `https://docs.rustfs.com/intergrations`
+    //   url: `https://docs.rustfs.com/intergrations`,
+    //   classes: '',
     // },
     {
       label: 'AI',
-      url: docs_url('features/ai')
+      url: docs_url('features/ai'),
+      classes: '',
     },
     {
       label: 'Download',
-      url: `/download`
+      url: `/download`,
+      classes: '',
     },
     {
-      label: 'Documentation',
-      url: docs_url('')
+      label: 'Docs',
+      url: docs_url(''),
+      classes: '',
     },
     {
       label: 'Blog',
-      url: 'https://rustfs.dev/'
+      url: 'https://rustfs.dev/',
+      classes: '',
     },
     {
       label: 'Community',
-      url: 'https://github.com/rustfs/rustfs/discussions'
+      url: 'https://github.com/rustfs/rustfs/discussions',
+      classes: '',
     }
   ]
 
   return (
-    <header className="py-10">
+    <header className="py-6 xl:py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
@@ -59,7 +68,15 @@ export default function AppHeader() {
             </Link>
             <div className="hidden md:flex md:gap-x-6">
               {navs.map((item, index) => {
-                return <a key={index} className="inline-block rounded-lg px-2 py-1 text-sm text-primary" href={item.url}>{item.label}</a>
+                return (
+                  <a
+                    key={index}
+                    className={cn(`inline-block rounded-lg px-2 py-1 text-sm text-primary`, item.classes)}
+                    href={item.url}
+                  >
+                    {item.label}
+                  </a>
+                )
               })}
             </div>
           </div>
