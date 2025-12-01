@@ -88,6 +88,14 @@ export async function getLatestBlogPosts(limit = 3): Promise<BlogPost[]> {
   try {
     const response = await fetch("https://rustfs.dev/feed", {
       next: { revalidate: 1800 },
+      // Some WordPress/security setups block default Node/undici user agents from CI/CD.
+      // Use a browser-like User-Agent and explicit Accept header to reduce false positives.
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (compatible; RustFSSiteBot/1.0; +https://rustfs.com)",
+        Accept:
+          "application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.7",
+      },
     });
 
     if (!response.ok) {
