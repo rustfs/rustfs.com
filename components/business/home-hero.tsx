@@ -60,13 +60,19 @@ export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
         { location: [40.7128, -74.006] as [number, number], size: 0.1 },
         { location: [34.6937, 135.5022] as [number, number], size: 0.05 },
         { location: [41.0082, 28.9784] as [number, number], size: 0.06 },
+        { location: [22.5431, 114.0579] as [number, number], size: 0.08 },
+        { location: [31.2304, 121.4737] as [number, number], size: 0.08 },
+        { location: [30.6624, 104.0633] as [number, number], size: 0.07 },
+        { location: [34.0522, -118.2437] as [number, number], size: 0.1 },
+        { location: [43.6532, -79.3832] as [number, number], size: 0.08 },
+        { location: [1.3521, 103.8198] as [number, number], size: 0.07 },
       ],
     }),
     [isDark]
   );
 
   return (
-    <section className="relative mx-auto max-w-7xl overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 pb-16 lg:pt-28">
+    <section className="relative mx-auto max-w-7xl overflow-hidden px-4 sm:px-6 lg:px-8 pt-12 pb-16 xl:pt-16">
       <div className="relative flex items-center gap-12">
         <div className="space-y-6 text-center lg:text-left relative z-20 lg:w-3/5">
           <h1 className="font-display text-3xl font-extrabold tracking-tight text-primary sm:text-4xl md:text-5xl xl:text-6xl leading-tight">
