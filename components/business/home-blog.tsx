@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import type { BlogPost } from "@/lib/blog";
 import { getLatestBlogPosts } from "@/lib/blog";
 import { cn } from "@/lib/utils";
@@ -40,7 +41,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
               className="flex flex-col justify-between rounded-xl border border-border bg-card/40 overflow-hidden text-left transition-colors hover:border-primary"
             >
               {post.imageUrl ? (
-                <div className="relative h-40 w-full">
+                <div className="relative h-64 w-full">
                   <img
                     src={post.imageUrl}
                     alt={post.title}
