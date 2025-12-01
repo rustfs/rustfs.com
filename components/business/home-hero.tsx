@@ -2,7 +2,7 @@
 import { WordRotate } from "@/components/magicui/word-rotate";
 import { Globe } from "@/components/ui/globe";
 import { useTheme } from "next-themes";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import DemoLink from "./buttons/demo-link";
 import DownloadLink from "./buttons/download-link";
 import StatsStrip from "./stats-strip";
@@ -11,36 +11,53 @@ import StatsStrip from "./stats-strip";
 // 导入所有软件SVG图标
 
 export default function HomeHero({ dockerPulls }: { dockerPulls: number }) {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  const { theme } = useTheme();
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  const globeConfig = useMemo(() => ({
-    width: 800,
-    height: 800,
-    phi: 0,
-    theta: 0.3,
-    dark: theme === "dark" ? 1 : 0,
-    diffuse: theme === "dark" ? 1.2 : 0.8,
-    mapBrightness: theme === "dark" ? 1.2 : 1.2,
-    baseColor: theme === "dark" ? [0.7, 0.85, 1] as [number, number, number] : [1, 1, 1] as [number, number, number],
-    markerColor: [251 / 255, 100 / 255, 21 / 255] as [number, number, number],
-    glowColor: theme === "dark" ? [0.6, 0.75, 1] as [number, number, number] : [1, 1, 1] as [number, number, number],
-    mapSamples: 16000,
-    devicePixelRatio: 2,
-    onRender: () => { },
-    markers: [
-      { location: [14.5995, 120.9842] as [number, number], size: 0.03 },
-      { location: [19.076, 72.8777] as [number, number], size: 0.1 },
-      { location: [23.8103, 90.4125] as [number, number], size: 0.05 },
-      { location: [30.0444, 31.2357] as [number, number], size: 0.07 },
-      { location: [39.9042, 116.4074] as [number, number], size: 0.08 },
-      { location: [-23.5505, -46.6333] as [number, number], size: 0.1 },
-      { location: [19.4326, -99.1332] as [number, number], size: 0.1 },
-      { location: [40.7128, -74.006] as [number, number], size: 0.1 },
-      { location: [34.6937, 135.5022] as [number, number], size: 0.05 },
-      { location: [41.0082, 28.9784] as [number, number], size: 0.06 },
-    ],
-  }), [theme]);
+  const isDark = mounted && resolvedTheme === "dark";
+
+  const globeConfig = useMemo(
+    () => ({
+      width: 800,
+      height: 800,
+      phi: 0,
+      theta: 0.3,
+      dark: isDark ? 1 : 0,
+      diffuse: isDark ? 1.2 : 0.8,
+      mapBrightness: isDark ? 1.2 : 1.2,
+      baseColor: isDark
+        ? ([0.7, 0.85, 1] as [number, number, number])
+        : ([1, 1, 1] as [number, number, number]),
+      markerColor: [251 / 255, 100 / 255, 21 / 255] as [
+        number,
+        number,
+        number
+      ],
+      glowColor: isDark
+        ? ([0.6, 0.75, 1] as [number, number, number])
+        : ([1, 1, 1] as [number, number, number]),
+      mapSamples: 16000,
+      devicePixelRatio: 2,
+      onRender: () => { },
+      markers: [
+        { location: [14.5995, 120.9842] as [number, number], size: 0.03 },
+        { location: [19.076, 72.8777] as [number, number], size: 0.1 },
+        { location: [23.8103, 90.4125] as [number, number], size: 0.05 },
+        { location: [30.0444, 31.2357] as [number, number], size: 0.07 },
+        { location: [39.9042, 116.4074] as [number, number], size: 0.08 },
+        { location: [-23.5505, -46.6333] as [number, number], size: 0.1 },
+        { location: [19.4326, -99.1332] as [number, number], size: 0.1 },
+        { location: [40.7128, -74.006] as [number, number], size: 0.1 },
+        { location: [34.6937, 135.5022] as [number, number], size: 0.05 },
+        { location: [41.0082, 28.9784] as [number, number], size: 0.06 },
+      ],
+    }),
+    [isDark]
+  );
 
   return (
     <section className="relative mx-auto max-w-7xl overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 pb-16 lg:pt-28">
