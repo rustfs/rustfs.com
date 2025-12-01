@@ -119,7 +119,7 @@ export default function DownloadPageClient() {// 使用 download 命名空间
 
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen z-10">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-b from-background to-muted">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
