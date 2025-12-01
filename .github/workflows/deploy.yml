@@ -6,6 +6,10 @@ on:
   push:
     branches: ["main"]
 
+  # Runs every day at 5:00 AM Beijing time (21:00 UTC of the previous day)
+  schedule:
+    - cron: "0 21 * * *"
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
