@@ -5,6 +5,7 @@ import HomeHero from "@/components/business/home-hero";
 import HomeMultiClouds from "@/components/business/home-multi-clouds";
 import HomeStats from "@/components/business/home-stats";
 import HomeReviews from "@/components/business/reviews";
+import HomeBlog from "@/components/business/home-blog";
 import SoftwareLogos from "@/components/business/software-logos";
 import Subscribe from "@/components/business/subscribe";
 import { getDockerPulls } from "@/lib/docker";
@@ -42,6 +43,7 @@ export default async function HomePage() {
         <HomeMultiClouds />
         <HomeReviews />
         <GetStartedToday />
+        <HomeBlog />
         <Subscribe />
       </div>
     </main>
