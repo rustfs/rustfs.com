@@ -91,12 +91,39 @@ export async function getLatestBlogPosts(limit = 3): Promise<BlogPost[]> {
     });
 
     if (!response.ok) {
-      return [];
+      console.error(
+        "[RustFS Blog] Failed to fetch feed",
+        JSON.stringify({
+          status: response.status,
+          statusText: response.statusText,
+          url: response.url,
+        })
+      );
+
+      throw new Error(
+        `[RustFS Blog] Failed to fetch feed: ${response.status} ${response.statusText}`
+      );
     }
 
     const xml = await response.text();
 
+    console.log(
+      "[RustFS Blog] Feed fetched successfully",
+      JSON.stringify({
+        status: response.status,
+        length: xml.length,
+      })
+    );
+
     const items = xml.match(/<item[\s\S]*?<\/item>/gi) ?? [];
+
+    console.log(
+      "[RustFS Blog] Parsed items from feed",
+      JSON.stringify({
+        totalItems: items.length,
+        limit,
+      })
+    );
 
     const posts: BlogPost[] = items.slice(0, limit).map((itemXml) => {
       const title = extractTagContent(itemXml, "title") ?? "Untitled";
@@ -117,8 +144,15 @@ export async function getLatestBlogPosts(limit = 3): Promise<BlogPost[]> {
     });
 
     return posts;
-  } catch {
-    return [];
+  } catch (error) {
+    console.error(
+      "[RustFS Blog] Error while fetching or parsing feed",
+      error instanceof Error
+        ? { name: error.name, message: error.message, stack: error.stack }
+        : { error }
+    );
+
+    throw error;
   }
 }
 
