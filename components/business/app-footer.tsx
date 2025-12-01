@@ -82,21 +82,21 @@ export default function AppFooter() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
+            <div className="flex flex-col md:flex-row items-center gap-4">
               <Logo className="h-8 w-auto" />
-              <div className="text-sm text-muted-foreground flex flex-col gap-0.5">
-                <div className="flex items-center gap-2">
+              <div className="text-sm text-muted-foreground flex flex-col gap-2">
+                <div className="flex flex-col md:flex-row items-center gap-2">
                   <a
                     href="mailto:hello@rustfs.com"
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     Email: hello@rustfs.com
                   </a>
-
-                  | <a href="tel:+14707850446">Phone: +1(470)785-0446 </a>
+                  <span className="hidden md:inline">|</span>
+                  <a href="tel:+14707850446">Phone: +1(470)785-0446 </a>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 text-center md:text-left">
                   <span>3550 Lenox Road, NE Atlanta, Georgia 30326</span>
                 </div>
               </div>
