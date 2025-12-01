@@ -7,6 +7,7 @@ import { SITE_CONFIG, SITE_METADATA } from '@/app.config';
 import AppFooter from '@/components/business/app-footer';
 import AppHeader from '@/components/business/app-header';
 import FixedContactButton from '@/components/business/buttons/fixed-contact-button';
+import FixedLanguageBanner from '@/components/business/fixed-language-banner';
 import BackgroundGrid from '@/components/ui/background-grid';
 import "./globals.css";
 
@@ -82,6 +83,7 @@ export default async function RootLayout({
       >
         <ThemeProvider enableSystem attribute="class">
           <BackgroundGrid />
+          <FixedLanguageBanner />
           <AppHeader />
           {children}
           <AppFooter />
