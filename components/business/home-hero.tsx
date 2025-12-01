@@ -1,6 +1,7 @@
 'use client'
 import { WordRotate } from "@/components/magicui/word-rotate";
 import { Globe } from "@/components/ui/globe";
+import type { GitHubMetrics } from "@/lib/github";
 import { useTheme } from "next-themes";
 import { useEffect, useMemo, useState } from "react";
 import DemoLink from "./buttons/demo-link";
@@ -10,7 +11,12 @@ import StatsStrip from "./stats-strip";
 
 // 导入所有软件SVG图标
 
-export default function HomeHero({ dockerPulls }: { dockerPulls: number }) {
+interface HomeHeroProps {
+  dockerPulls: number;
+  metrics: GitHubMetrics;
+}
+
+export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -95,7 +101,7 @@ export default function HomeHero({ dockerPulls }: { dockerPulls: number }) {
         </div>
       </div>
 
-      <StatsStrip className="mt-6 lg:mt-8" dockerPulls={dockerPulls} />
+      <StatsStrip className="mt-6 lg:mt-8" dockerPulls={dockerPulls} metrics={metrics} />
     </section >
   )
 }

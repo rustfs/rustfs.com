@@ -1,5 +1,6 @@
 'use client'
 
+import { SITE_CONFIG } from '@/app.config';
 import { docs_url } from "@/lib/utils";
 import LinkGitHub from './buttons/link-github';
 import LinkTwitter from './buttons/link-twitter';
@@ -93,7 +94,7 @@ export default function AppFooter() {
                     Email: hello@rustfs.com
                   </a>
 
-                   | <a href="tel:+14707850446">Phone: +1(470)785-0446 </a>
+                  | <a href="tel:+14707850446">Phone: +1(470)785-0446 </a>
                 </div>
                 <div className="flex items-center gap-2">
                   <span>3550 Lenox Road, NE Atlanta, Georgia 30326</span>
@@ -101,8 +102,14 @@ export default function AppFooter() {
               </div>
             </div>
             <div className="flex items-center gap-4">
+              <a
+                href={SITE_CONFIG.secondaryDomain}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                简体中文
+              </a>
+              <LinkTwitter size="size-4" className="group inline-flex" />
               <LinkGitHub className="group inline-flex" />
-              <LinkTwitter size="size-5" className="group inline-flex" />
             </div>
           </div>
         </div>

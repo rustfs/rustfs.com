@@ -12,6 +12,12 @@ export interface GitHubRelease {
   }[];
 }
 
+export interface GitHubMetrics {
+  stars: number;
+  forks: number;
+  commits: number;
+}
+
 /**
  * Get the latest release information (including pre-releases)
  * @returns Promise<GitHubRelease | null>
@@ -74,6 +80,62 @@ export async function getLatestRelease(): Promise<GitHubRelease | null> {
   }
 
   return null
+}
+
+/**
+ * Get GitHub repository metrics (stars, forks, commits) at build time
+ * @returns Promise<GitHubMetrics>
+ */
+export async function getGitHubMetrics(): Promise<GitHubMetrics> {
+  const fallback: GitHubMetrics = {
+    stars: 11000,
+    forks: 500,
+    commits: 2000,
+  };
+
+  try {
+    const [repoRes, commitsRes] = await Promise.all([
+      fetch('https://api.github.com/repos/rustfs/rustfs', {
+        headers: {
+          Accept: 'application/vnd.github+json',
+          'User-Agent': 'RustFS-Website',
+        },
+        next: { revalidate: 3600 },
+      }),
+      fetch('https://api.github.com/repos/rustfs/rustfs/commits?per_page=1', {
+        headers: {
+          Accept: 'application/vnd.github+json',
+          'User-Agent': 'RustFS-Website',
+        },
+        next: { revalidate: 3600 },
+      }),
+    ]);
+
+    if (!repoRes.ok || !commitsRes.ok) {
+      return fallback;
+    }
+
+    const repo = await repoRes.json() as { stargazers_count?: number; forks_count?: number };
+    const link = commitsRes.headers.get('link');
+    let commits = 0;
+
+    const match = link?.match(/page=(\d+)>; rel="last"/);
+    if (match?.[1]) {
+      commits = Number(match[1]);
+    } else {
+      const data = await commitsRes.json();
+      commits = Array.isArray(data) ? data.length : 0;
+    }
+
+    return {
+      stars: repo.stargazers_count ?? fallback.stars,
+      forks: repo.forks_count ?? fallback.forks,
+      commits: Number.isFinite(commits) && commits > 0 ? commits : fallback.commits,
+    };
+  } catch (error) {
+    console.warn('Failed to fetch GitHub metrics:', error);
+    return fallback;
+  }
 }
 
 /**

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const REPO = "rustfs/rustfs";
-const CACHE_MS = 60 * 60 * 1000; // 1 hour
+const CACHE_MS = 60 * 60 * 5000; // 5 hour
 
 let cachedStars: number | null = null;
 let cachedAt = 0;
