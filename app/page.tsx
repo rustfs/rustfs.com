@@ -5,7 +5,6 @@ import HomeFeatures from "@/components/business/home-features";
 import HomeHero from "@/components/business/home-hero";
 import HomeMultiClouds from "@/components/business/home-multi-clouds";
 import HomeStats from "@/components/business/home-stats";
-import HomeReviews from "@/components/business/reviews";
 import SoftwareLogos from "@/components/business/software-logos";
 import Subscribe from "@/components/business/subscribe";
 import { getDockerPulls } from "@/lib/docker";
@@ -45,7 +44,7 @@ export default async function HomePage() {
         <HomeStats />
         <HomeDifferents />
         <HomeMultiClouds />
-        <HomeReviews />
+        {/* <HomeReviews /> */}
         <GetStartedToday />
         <HomeBlog />
         <Subscribe />
