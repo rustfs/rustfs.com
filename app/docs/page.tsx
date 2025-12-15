@@ -4,11 +4,9 @@ import { useEffect } from 'react';
 
 export default function DocsPage() {
   useEffect(() => {
-    // 重定向到 docs.rustfs.com
-    window.location.href = 'https://docs.rustfs.com';
+     window.location.href = 'https://docs.rustfs.com';
   }, []);
 
-  // 显示加载状态
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="text-center">
