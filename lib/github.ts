@@ -200,6 +200,70 @@ export async function getLatestVersion(): Promise<string> {
 }
 
 /**
+ * Get the latest launcher release information
+ * @returns Promise<GitHubRelease | null>
+ */
+export async function getLatestLauncherRelease(): Promise<GitHubRelease | null> {
+  // Try to get the latest official release first
+  try {
+    const response = await fetch(
+      'https://api.github.com/repos/rustfs/launcher/releases/latest',
+      {
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'RustFS-Website'
+        },
+        // Cache for 1 hour
+        next: { revalidate: 3600 }
+      }
+    )
+
+    if (response.ok) {
+      const release = await response.json()
+      return release
+    }
+  } catch (error) {
+    console.warn('Failed to fetch latest launcher release:', error)
+  }
+
+  // If official release doesn't exist (404), get the latest version with assets
+  try {
+    const response = await fetch(
+      'https://api.github.com/repos/rustfs/launcher/releases?per_page=10',
+      {
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'RustFS-Website'
+        },
+        // Cache for 1 hour
+        next: { revalidate: 3600 }
+      }
+    )
+
+    if (response.ok) {
+      const releases = await response.json()
+
+      // Prioritize latest non-draft version with assets
+      const releaseWithAssets = releases.find((release: GitHubRelease) =>
+        !release.draft && release.assets && release.assets.length > 0
+      )
+
+      if (releaseWithAssets) {
+        return releaseWithAssets
+      }
+
+      // If no version with assets found, return latest non-draft version
+      const latestNonDraft = releases.find((release: GitHubRelease) => !release.draft)
+      return latestNonDraft || null
+    }
+  } catch (error) {
+    console.error('Failed to fetch launcher releases:', error)
+  }
+
+  return null
+}
+
+/**
  * Get download link for a version
  * @param release GitHub release information
  * @param platform Platform identifier

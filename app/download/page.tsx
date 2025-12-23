@@ -1,5 +1,5 @@
 import DownloadPageClient from './components/download-page-client';
-import { getLatestRelease } from '@/lib/github';
+import { getLatestRelease, getLatestLauncherRelease } from '@/lib/github';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -14,6 +14,9 @@ export const metadata: Metadata = {
 };
 
 export default async function DownloadPage() {
-  const release = await getLatestRelease();
-  return <DownloadPageClient release={release} />;
+  const [release, launcherRelease] = await Promise.all([
+    getLatestRelease(),
+    getLatestLauncherRelease()
+  ]);
+  return <DownloadPageClient release={release} launcherRelease={launcherRelease} />;
 }

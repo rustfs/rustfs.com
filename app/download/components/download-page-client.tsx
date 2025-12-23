@@ -13,9 +13,10 @@ import { type PlatformInfoData } from './platforms/platform-info';
 
 interface DownloadPageClientProps {
   release: GitHubRelease | null;
+  launcherRelease: GitHubRelease | null;
 }
 
-export default function DownloadPageClient({ release }: DownloadPageClientProps) {// 使用 download 命名空间
+export default function DownloadPageClient({ release, launcherRelease }: DownloadPageClientProps) {// 使用 download 命名空间
 
   // 平台配置 - 直接使用 useMemo，不依赖 t 函数
   const platforms = useMemo((): PlatformInfoData[] => [
@@ -169,7 +170,7 @@ export default function DownloadPageClient({ release }: DownloadPageClientProps)
       {selectedPlatform && (
         <section className="py-16 bg-muted/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <PlatformFactory platform={selectedPlatform} release={release} />
+            <PlatformFactory platform={selectedPlatform} release={release} launcherRelease={launcherRelease} />
           </div>
         </section>
       )}
