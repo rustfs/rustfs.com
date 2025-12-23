@@ -15,7 +15,10 @@ interface DockerDownloadSectionProps {
   className?: string;
 }
 
-export default function DockerDownloadSection({ platform, release, className }: DockerDownloadSectionProps) {return (
+export default function DockerDownloadSection({ platform, release, className }: DockerDownloadSectionProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _ = release; // Docker uses Docker Hub tags, not GitHub releases
+  return (
     <div className={cn("space-y-8", className)}>
       {/* Platform Header */}
       <PlatformHeader platform={platform} />
