@@ -6,13 +6,40 @@ import CodeBlock from "../code-block";
 import Note from "../common/note";
 import PlatformHeader from "../common/platform-header";
 import { type PlatformInfoData } from "./platform-info";
+import { getDownloadUrlForPlatform, type GitHubRelease } from '@/lib/github';
 
 interface LinuxDownloadSectionProps {
   platform: PlatformInfoData;
+  release: GitHubRelease | null;
   className?: string;
 }
 
-export default function LinuxDownloadSection({ platform, className }: LinuxDownloadSectionProps) {return (
+export default function LinuxDownloadSection({ platform, release, className }: LinuxDownloadSectionProps) {
+  // Get download URLs from release assets or use fallback
+  const x86_64Url = release
+    ? getDownloadUrlForPlatform(release, 'linux', 'x86_64')
+    : null;
+
+  const aarch64Url = release
+    ? getDownloadUrlForPlatform(release, 'linux', 'aarch64')
+    : null;
+
+  const fallbackX86_64Url = 'https://github.com/rustfs/rustfs/releases/latest';
+  const fallbackAarch64Url = 'https://github.com/rustfs/rustfs/releases/latest';
+
+  const finalX86_64Url = x86_64Url || fallbackX86_64Url;
+  const finalAarch64Url = aarch64Url || fallbackAarch64Url;
+
+  // Extract filename from URL for code block
+  const getFilenameFromUrl = (url: string, arch: string) => {
+    if (url.includes('github.com')) {
+      return `rustfs-linux-${arch}-musl.zip`;
+    }
+    const match = url.match(/([^\/]+\.zip)/);
+    return match ? match[1] : `rustfs-linux-${arch}-musl.zip`;
+  };
+
+  return (
     <div className={cn("space-y-8", className)}>
       {/* Platform Header */}
       <PlatformHeader platform={platform} />
@@ -40,7 +67,7 @@ export default function LinuxDownloadSection({ platform, className }: LinuxDownl
               </p>
             </div>
             <a
-              href="https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-x86_64-musl-latest.zip"
+              href={finalX86_64Url}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
@@ -51,8 +78,8 @@ export default function LinuxDownloadSection({ platform, className }: LinuxDownl
 
           <CodeBlock
             code={[
-              "curl -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-x86_64-musl-latest.zip",
-              "unzip rustfs-linux-x86_64-musl-latest.zip",
+              `curl -O ${finalX86_64Url}`,
+              `unzip ${getFilenameFromUrl(finalX86_64Url, 'x86_64')}`,
               "./rustfs --version",
             ]}
             title={'Installation Commands'}
@@ -73,7 +100,7 @@ export default function LinuxDownloadSection({ platform, className }: LinuxDownl
               </p>
             </div>
             <a
-              href="https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-aarch64-musl-latest.zip"
+              href={finalAarch64Url}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
@@ -84,8 +111,8 @@ export default function LinuxDownloadSection({ platform, className }: LinuxDownl
 
           <CodeBlock
             code={[
-              "curl -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-linux-aarch64-musl-latest.zip",
-              "unzip rustfs-linux-aarch64-musl-latest.zip",
+              `curl -O ${finalAarch64Url}`,
+              `unzip ${getFilenameFromUrl(finalAarch64Url, 'aarch64')}`,
               "./rustfs --version",
             ]}
             title={'Installation Commands'}

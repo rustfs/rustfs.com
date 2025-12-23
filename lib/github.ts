@@ -181,25 +181,72 @@ export function formatReleaseDate(dateString: string, locale: string = 'zh-CN'):
 }
 
 /**
+ * Get latest version string at build time
+ * @returns Promise<string> Version string (e.g., "v1.0.0") or fallback
+ */
+export async function getLatestVersion(): Promise<string> {
+  const fallback = 'v1.0.0';
+
+  try {
+    const release = await getLatestRelease();
+    if (release && release.tag_name) {
+      return release.tag_name.startsWith('v') ? release.tag_name : `v${release.tag_name}`;
+    }
+  } catch (error) {
+    console.warn('Failed to fetch latest version:', error);
+  }
+
+  return fallback;
+}
+
+/**
  * Get download link for a version
  * @param release GitHub release information
  * @param platform Platform identifier
+ * @param arch Optional architecture (e.g., 'x86_64', 'aarch64')
  * @returns Download link or null
  */
 export function getDownloadUrlForPlatform(
   release: GitHubRelease,
-  platform: string
+  platform: string,
+  arch?: string
 ): string | null {
   if (!release.assets || release.assets.length === 0) {
     return null;
   }
 
-  // Match filename pattern based on platform
-  const platformPatterns: Record<string, RegExp> = {
-    windows: /windows/i,
-    linux: /linux/i,
-    macos: /darwin/i,
-    docker: /docker/i
+  // Match filename pattern based on platform and architecture
+  const platformPatterns: Record<string, RegExp[]> = {
+    windows: [
+      /rustfs-windows-x86_64.*\.exe/i,
+      /windows.*x86_64.*\.exe/i,
+      /windows/i
+    ],
+    linux: arch === 'aarch64'
+      ? [
+        /rustfs-linux-aarch64.*\.zip/i,
+        /linux.*aarch64.*\.zip/i,
+        /linux.*arm64.*\.zip/i
+      ]
+      : [
+        /rustfs-linux-x86_64.*\.zip/i,
+        /linux.*x86_64.*\.zip/i,
+        /linux/i
+      ],
+    macos: arch === 'aarch64' || arch === 'arm64'
+      ? [
+        /rustfs-macos-aarch64.*\.zip/i,
+        /macos.*aarch64.*\.zip/i,
+        /macos.*arm64.*\.zip/i,
+        /darwin.*aarch64/i
+      ]
+      : [
+        /rustfs-macos-x86_64.*\.zip/i,
+        /macos.*x86_64.*\.zip/i,
+        /darwin.*x86_64/i,
+        /darwin/i
+      ],
+    docker: [/docker/i]
   };
 
   const patterns = platformPatterns[platform];
@@ -207,9 +254,12 @@ export function getDownloadUrlForPlatform(
     return null;
   }
 
-  for (const asset of release.assets) {
-    if (patterns.test(asset.name)) {
-      return asset.browser_download_url;
+  // Try patterns in order of specificity
+  for (const pattern of patterns) {
+    for (const asset of release.assets) {
+      if (pattern.test(asset.name)) {
+        return asset.browser_download_url;
+      }
     }
   }
 

@@ -7,13 +7,40 @@ import CodeBlock from "../code-block";
 import Note from "../common/note";
 import PlatformHeader from "../common/platform-header";
 import { type PlatformInfoData } from "./platform-info";
+import { getDownloadUrlForPlatform, type GitHubRelease } from '@/lib/github';
 
 interface MacOSDownloadSectionProps {
   platform: PlatformInfoData;
+  release: GitHubRelease | null;
   className?: string;
 }
 
-export default function MacOSDownloadSection({ platform, className }: MacOSDownloadSectionProps) {return (
+export default function MacOSDownloadSection({ platform, release, className }: MacOSDownloadSectionProps) {
+  // Get download URLs from release assets or use fallback
+  const aarch64Url = release
+    ? getDownloadUrlForPlatform(release, 'macos', 'aarch64')
+    : null;
+
+  const x86_64Url = release
+    ? getDownloadUrlForPlatform(release, 'macos', 'x86_64')
+    : null;
+
+  const fallbackAarch64Url = 'https://github.com/rustfs/rustfs/releases/latest';
+  const fallbackX86_64Url = 'https://github.com/rustfs/rustfs/releases/latest';
+
+  const finalAarch64Url = aarch64Url || fallbackAarch64Url;
+  const finalX86_64Url = x86_64Url || fallbackX86_64Url;
+
+  // Extract filename from URL for code block
+  const getFilenameFromUrl = (url: string, arch: string) => {
+    if (url.includes('github.com')) {
+      return `rustfs-macos-${arch}.zip`;
+    }
+    const match = url.match(/([^\/]+\.zip)/);
+    return match ? match[1] : `rustfs-macos-${arch}.zip`;
+  };
+
+  return (
     <div className={cn("space-y-8", className)}>
       {/* Platform Header */}
       <PlatformHeader platform={platform} />
@@ -48,7 +75,7 @@ export default function MacOSDownloadSection({ platform, className }: MacOSDownl
               </p>
             </div>
             <a
-              href="https://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-aarch64-latest.zip"
+              href={finalAarch64Url}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
@@ -59,8 +86,8 @@ export default function MacOSDownloadSection({ platform, className }: MacOSDownl
 
           <CodeBlock
             code={[
-              "curl --progress-bar -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-aarch64-latest.zip",
-              "unzip rustfs-macos-aarch64-latest.zip",
+              `curl --progress-bar -O ${finalAarch64Url}`,
+              `unzip ${getFilenameFromUrl(finalAarch64Url, 'aarch64')}`,
               "chmod +x rustfs",
               "./rustfs --version",
             ]}
@@ -87,7 +114,7 @@ export default function MacOSDownloadSection({ platform, className }: MacOSDownl
               </p>
             </div>
             <a
-              href="https://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-x86_64-latest.zip"
+              href={finalX86_64Url}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
@@ -98,8 +125,8 @@ export default function MacOSDownloadSection({ platform, className }: MacOSDownl
 
           <CodeBlock
             code={[
-              "curl --progress-bar -O https://dl.rustfs.com/artifacts/rustfs/release/rustfs-macos-x86_64-latest.zip",
-              "unzip rustfs-macos-x86_64-latest.zip",
+              `curl --progress-bar -O ${finalX86_64Url}`,
+              `unzip ${getFilenameFromUrl(finalX86_64Url, 'x86_64')}`,
               "chmod +x rustfs",
               "./rustfs --version",
             ]}

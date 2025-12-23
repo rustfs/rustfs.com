@@ -1,6 +1,6 @@
 'use client'
 
-import { formatReleaseDate, formatVersion, getLatestRelease, type GitHubRelease } from '@/lib/github';
+import { formatReleaseDate, formatVersion, type GitHubRelease } from '@/lib/github';
 import AppleIcon from "@/public/svgs/brands/apple.svg";
 import DockerIcon from "@/public/svgs/brands/docker.svg";
 import LinuxIcon from "@/public/svgs/brands/linux.svg";
@@ -11,7 +11,11 @@ import PlatformSelector from './platform-selector';
 import PlatformFactory from './platforms/platform-factory';
 import { type PlatformInfoData } from './platforms/platform-info';
 
-export default function DownloadPageClient() {// 使用 download 命名空间
+interface DownloadPageClientProps {
+  release: GitHubRelease | null;
+}
+
+export default function DownloadPageClient({ release }: DownloadPageClientProps) {// 使用 download 命名空间
 
   // 平台配置 - 直接使用 useMemo，不依赖 t 函数
   const platforms = useMemo((): PlatformInfoData[] => [
@@ -41,8 +45,7 @@ export default function DownloadPageClient() {// 使用 download 命名空间
       name: 'Windows',
       icon: <WindowsIcon className="w-full h-full aspect-square" />,
       description: 'Windows 10/11 with native binary support',
-      available: false,
-      comingSoon: true,
+      available: true,
     },
   ], []);
 
@@ -51,8 +54,6 @@ export default function DownloadPageClient() {// 使用 download 命名空间
   // State management
   const [selectedPlatform, setSelectedPlatform] = useState<PlatformInfoData | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
-  const [release, setRelease] = useState<GitHubRelease | null>(null);
-  const [isLoadingRelease, setIsLoadingRelease] = useState(true);
 
   // Initialize selected platform - 只在组件挂载时执行一次
   useEffect(() => {
@@ -87,22 +88,6 @@ export default function DownloadPageClient() {// 使用 download 命名空间
       setIsInitialized(true);
     }
   }, [platforms, availablePlatforms, isInitialized]);
-
-  // Get latest version information
-  useEffect(() => {
-    const fetchLatestRelease = async () => {
-      try {
-        const latestRelease = await getLatestRelease();
-        setRelease(latestRelease);
-      } catch (error) {
-        console.error('Failed to fetch latest release:', error);
-      } finally {
-        setIsLoadingRelease(false);
-      }
-    };
-
-    fetchLatestRelease();
-  }, []);
 
   // Handle platform selection change
   const handlePlatformChange = (platform: PlatformInfoData) => {
@@ -144,15 +129,9 @@ export default function DownloadPageClient() {// 使用 download 命名空间
               {/* 版本信息 */}
               <div className="flex items-center space-x-2">
                 <span className="text-sm font-medium text-foreground">
-                  {isLoadingRelease ? (
-                    'Loading latest version...'
-                  ) : release ? (
-                    formatVersion(release.tag_name)
-                  ) : (
-                    'v1.0.0'
-                  )}
+                  {release ? formatVersion(release.tag_name) : 'v1.0.0'}
                 </span>
-                {!isLoadingRelease && (
+                {release && (
                   <span className="inline-flex items-center space-x-1 px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded-full">
                     <div className="w-1 h-1 bg-green-500 rounded-full"></div>
                     <span>{'Latest'}</span>
@@ -190,7 +169,7 @@ export default function DownloadPageClient() {// 使用 download 命名空间
       {selectedPlatform && (
         <section className="py-16 bg-muted/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <PlatformFactory platform={selectedPlatform} />
+            <PlatformFactory platform={selectedPlatform} release={release} />
           </div>
         </section>
       )}

@@ -7,13 +7,15 @@ import CodeBlock from "../code-block";
 import Note from "../common/note";
 import PlatformHeader from "../common/platform-header";
 import { type PlatformInfoData } from "./platform-info";
+import { type GitHubRelease } from '@/lib/github';
 
 interface DockerDownloadSectionProps {
   platform: PlatformInfoData;
+  release: GitHubRelease | null;
   className?: string;
 }
 
-export default function DockerDownloadSection({ platform, className }: DockerDownloadSectionProps) {return (
+export default function DockerDownloadSection({ platform, release, className }: DockerDownloadSectionProps) {return (
     <div className={cn("space-y-8", className)}>
       {/* Platform Header */}
       <PlatformHeader platform={platform} />
