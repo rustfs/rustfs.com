@@ -140,41 +140,6 @@ export default function DockerDownloadSection({ platform, release, className }: 
           />
         </div>
 
-        {/* Nightly Version */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h4 className="font-medium text-foreground">{'Daily Build'}</h4>
-              <p className="text-sm text-muted-foreground">
-                {'Architecture'}: nightly
-              </p>
-            </div>
-            <a
-              href="https://hub.docker.com/r/rustfs/rustfs/tags"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-              <DownloadIcon className="w-4 h-4" />
-              <span>{'Download'}</span>
-            </a>
-          </div>
-
-          <CodeBlock
-            code={[
-              "docker pull rustfs/rustfs:nightly",
-              "docker run -d \\",
-              "  --name rustfs-nightly \\",
-              "  -p 9000:9000 \\",
-              "  -p 9001:9001 \\",
-              "  -v /data:/data \\",
-              "  rustfs/rustfs:nightly",
-            ]}
-            title={'Installation Commands'}
-          />
-
-          <Note type="warning">
-            {'Daily build - may contain experimental features'}
-          </Note>
         </div>
       </div>
 

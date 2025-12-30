@@ -32,7 +32,6 @@ export const VERSION_CONFIG = {
   LATEST: 'latest',
   STABLE: 'stable',
   ALPHA: 'alpha',
-  NIGHTLY: 'nightly'
 } as const
 
 // Download option key type
