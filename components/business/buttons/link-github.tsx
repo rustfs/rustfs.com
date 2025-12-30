@@ -10,7 +10,7 @@ const CACHE_MS = 60 * 60 * 5000; // 5 hour
 let cachedStars: number | null = null;
 let cachedAt = 0;
 
-export default function LinkGitHub({ className }: { className?: string }) {
+export default function LinkGitHub({ className, showText = false }: { className?: string; showText?: boolean }) {
   const [stars, setStars] = useState<number | null>(() => {
     if (cachedStars !== null && Date.now() - cachedAt < CACHE_MS) {
       return cachedStars;
@@ -72,16 +72,22 @@ export default function LinkGitHub({ className }: { className?: string }) {
       href={`https://github.com/${REPO}`}
       target="_blank"
       rel="noreferrer"
-      title="View on GitHub"
+      title="Stars on GitHub"
       className={cn(
         "inline-flex h-8 items-center gap-2 rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground shadow-none",
         className
       )}
     >
       <GitHubIcon className="h-4 w-4" />
-      <span className="text-xs text-muted-foreground tabular-nums min-w-[2.5rem]" aria-live="polite">
-        {renderStars()}
-      </span>
+      {showText ? (
+        <span className="text-xs text-muted-foreground" aria-live="polite">
+          Stars on GitHub
+        </span>
+      ) : (
+        <span className="text-xs text-muted-foreground tabular-nums min-w-[2.5rem]" aria-live="polite">
+          {renderStars()}
+        </span>
+      )}
     </Link>
   );
 }

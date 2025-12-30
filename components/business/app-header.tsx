@@ -77,7 +77,7 @@ export default function AppHeader() {
           </div>
           <div className="flex items-center gap-x-2 md:gap-x-5">
             <div className="hidden md:flex items-center gap-x-2 md:gap-x-5">
-              <LinkGitHub className="group inline-flex" />
+              <LinkGitHub showText={true} className="group inline-flex" />
               <LinkTwitter className="group inline-flex" />
               <ThemeToggle />
             </div>
