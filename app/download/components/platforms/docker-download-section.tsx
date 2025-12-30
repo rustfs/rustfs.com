@@ -141,7 +141,6 @@ export default function DockerDownloadSection({ platform, release, className }: 
         </div>
 
         </div>
-      </div>
 
       {/* Platform Notes */}
       <div className="space-y-2">
