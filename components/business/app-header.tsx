@@ -42,6 +42,11 @@ export default function AppHeader() {
       classes: '',
     },
     {
+      label: 'Demo',
+      url: 'https://play.rustfs.com',
+      classes: '',
+    },
+    {
       label: 'Docs',
       url: 'https://docs.rustfs.com/installation/',
       classes: '',

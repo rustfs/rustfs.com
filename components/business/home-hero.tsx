@@ -4,8 +4,8 @@ import { Globe } from "@/components/ui/globe";
 import type { GitHubMetrics } from "@/lib/github";
 import { useTheme } from "next-themes";
 import { useEffect, useMemo, useState } from "react";
-import DemoLink from "./buttons/demo-link";
 import DownloadLink from "./buttons/download-link";
+import ContactUsButton from "./buttons/contact-us";
 import StatsStrip from "./stats-strip";
 //import GetStartedButton from "./buttons/get-started";
 
@@ -96,7 +96,7 @@ export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
           </div>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
             <DownloadLink />
-            <DemoLink className="hidden md:inline-flex" />
+            <ContactUsButton className="hidden md:inline-flex bg-secondary text-secondary-foreground hover:bg-secondary/90 hover:text-secondary-foreground/90 active:bg-secondary/80 active:text-secondary-foreground/80 focus-visible:outline-secondary transition-colors" />
           </div>
         </div>
 

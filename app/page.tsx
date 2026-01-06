@@ -6,7 +6,7 @@ import HomeHero from "@/components/business/home-hero";
 import HomeMultiClouds from "@/components/business/home-multi-clouds";
 import HomeStats from "@/components/business/home-stats";
 import SoftwareLogos from "@/components/business/software-logos";
-import Subscribe from "@/components/business/subscribe";
+import ContactForm from "@/components/business/contact-form";
 import { getDockerPulls } from "@/lib/docker";
 import { getGitHubMetrics } from "@/lib/github";
 import type { Metadata } from "next";
@@ -47,7 +47,7 @@ export default async function HomePage() {
         {/* <HomeReviews /> */}
         <GetStartedToday />
         <HomeBlog />
-        <Subscribe />
+        <ContactForm />
       </div>
     </main>
   );

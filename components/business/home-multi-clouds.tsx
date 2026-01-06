@@ -1,6 +1,6 @@
 'use client'
 
-import FreeChat from "./buttons/free-chat";
+import ContactUsButton from "./buttons/contact-us";
 
 export default function HomeMultiClouds() {return (
     <section className="py-24 md:py-32">
@@ -13,7 +13,7 @@ export default function HomeMultiClouds() {return (
             {'Multi-cloud object storage allows enterprises to build AWS S3-compatible data infrastructure on any cloud. The result is a consistent, portable interface for data and applications - meaning you can run anywhere, from edge to public cloud, without changing a line of code.'}
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <FreeChat />
+            <ContactUsButton />
             {/* <a href="#" className="text-sm font-semibold leading-6 text-gray-900 dark:text-neutral-100">
               {'Contact Us'} <span aria-hidden="true">→</span>
             </a> */}

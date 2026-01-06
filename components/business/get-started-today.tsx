@@ -1,7 +1,7 @@
 'use client'
 
 /* eslint-disable @next/next/no-img-element */
-import FreeChatButton from "./buttons/free-chat";
+import ContactUsButton from "./buttons/contact-us";
 
 const AVATAR_URLS = [
   "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
@@ -50,7 +50,7 @@ export default function GetStartedToday() {return (
           </div>
           {/* End Avatar Group */}
           <div>
-            <FreeChatButton />
+            <ContactUsButton />
           </div>
         </div>
       </div>
