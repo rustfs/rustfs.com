@@ -10,7 +10,16 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  {
+    ignores: ["components/ui/**"],
+  },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    files: ["components/ui/**"],
+    rules: {
+      "@typescript-eslint/no-empty-object-type": "off",
+    },
+  },
 ];
 
 export default eslintConfig;
