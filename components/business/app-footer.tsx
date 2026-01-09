@@ -12,10 +12,8 @@ export default function AppFooter() {
       title: 'Architecture Support',
       links: [
         { title: 'Bare Metal & Virtualization', href: docs_url('features/baremetal') },
-        { title: 'Alibaba Cloud', href: docs_url('features/aliyun') },
-        { title: 'Tencent Cloud', href: docs_url('features/qcloud') },
-        { title: 'Huawei Cloud', href: docs_url('features/huaweicloud') },
-        { title: 'International Cloud Providers', href: docs_url('features/aws-elastic') },
+        { title: 'AWS', href: docs_url('features/aws-elastic') },
+        { title: 'Cloud Native', href: docs_url('features/cloud-native') },
       ]
     },
     {
