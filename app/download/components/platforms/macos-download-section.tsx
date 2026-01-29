@@ -34,10 +34,10 @@ export default function MacOSDownloadSection({ platform, release, className }: M
   // Extract filename from URL for code block
   const getFilenameFromUrl = (url: string, arch: string) => {
     if (url.includes('github.com')) {
-      return `rustfs-macos-${arch}.zip`;
+      return `rustfs-macos-${arch}-latest.zip`;
     }
     const match = url.match(/([^\/]+\.zip)/);
-    return match ? match[1] : `rustfs-macos-${arch}.zip`;
+    return match ? match[1] : `rustfs-macos-${arch}-latest.zip`;
   };
 
   return (
@@ -86,7 +86,7 @@ export default function MacOSDownloadSection({ platform, release, className }: M
 
           <CodeBlock
             code={[
-              `curl --progress-bar -O ${finalAarch64Url}`,
+              `curl --progress-bar -L -O ${finalAarch64Url}`,
               `unzip ${getFilenameFromUrl(finalAarch64Url, 'aarch64')}`,
               "chmod +x rustfs",
               "./rustfs --version",
@@ -125,7 +125,7 @@ export default function MacOSDownloadSection({ platform, release, className }: M
 
           <CodeBlock
             code={[
-              `curl --progress-bar -O ${finalX86_64Url}`,
+              `curl --progress-bar -L -O ${finalX86_64Url}`,
               `unzip ${getFilenameFromUrl(finalX86_64Url, 'x86_64')}`,
               "chmod +x rustfs",
               "./rustfs --version",
