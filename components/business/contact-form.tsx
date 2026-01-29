@@ -161,7 +161,7 @@ export default function ContactForm() {
                   placeholder="Enter your first name"
                   value={formData.firstName}
                   onChange={handleChange}
-                  className="w-full"
+                  className="w-full text-foreground"
                 />
               </div>
               <div>
@@ -176,7 +176,7 @@ export default function ContactForm() {
                   placeholder="Enter your last name"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className="w-full"
+                  className="w-full text-foreground"
                 />
               </div>
             </div>
@@ -193,7 +193,7 @@ export default function ContactForm() {
                 placeholder="your.email@company.com"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full"
+                className="w-full text-foreground"
               />
             </div>
 
@@ -208,7 +208,7 @@ export default function ContactForm() {
                 placeholder="e.g., +1 (555) 123-4567"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full"
+                className="w-full text-foreground"
               />
             </div>
 
@@ -223,7 +223,7 @@ export default function ContactForm() {
                   required
                   value={formData.country}
                   onChange={handleChange}
-                  className="w-full"
+                  className="w-full text-foreground"
                 >
                   <option value="">Select a country</option>
                   {COUNTRIES.map((country) => (
@@ -245,7 +245,7 @@ export default function ContactForm() {
                   placeholder="Enter your company name"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full"
+                  className="w-full text-foreground"
                 />
               </div>
             </div>
@@ -262,7 +262,7 @@ export default function ContactForm() {
                 placeholder="Please tell us about your inquiry, requirements, or how we can help you. Include any specific details about your use case, expected scale, or technical requirements."
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full"
+                className="w-full text-foreground"
               />
             </div>
 
