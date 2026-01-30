@@ -23,6 +23,7 @@ export default function AppFooter() {
         { title: 'Log Management', href: docs_url('features/logging') },
         { title: 'Version Control', href: docs_url('features/versioning') },
         { title: 'S3 Compatible', href: docs_url('features/s3-compatibility') },
+        { title: 'Erasure Code Calculator', href: '/erasure-code-calculator' },
         { title: 'Object Level Read-Only', href: docs_url('features/worm') },
         { title: 'Cross-Region Replication', href: docs_url('features/replication') },
         { title: 'Encryption', href: docs_url('features/encryption') },
