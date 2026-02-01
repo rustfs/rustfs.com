@@ -95,14 +95,25 @@ const calculateParityOptions = (stripeSize: number) => {
   return options;
 };
 
+const formatIntegerInput = (raw: string): string => {
+  if (raw === "") return "";
+  const n = Number(raw);
+  if (!Number.isFinite(n)) return "";
+  return String(Math.floor(n));
+};
+
 export default function ErasureCodeCalculator() {
   const [servers, setServers] = useState(8);
+  const [serversInput, setServersInput] = useState<string | null>(null);
   const [drivesPerServer, setDrivesPerServer] = useState(16);
+  const [drivesPerServerInput, setDrivesPerServerInput] = useState<string | null>(null);
   const [driveCapacity, setDriveCapacity] = useState(8);
+  const [driveCapacityInput, setDriveCapacityInput] = useState<string | null>(null);
   const [stripeSize, setStripeSize] = useState(0);
   const [parity, setParity] = useState(0);
   const [shareCopied, setShareCopied] = useState(false);
   const [exportBusy, setExportBusy] = useState(false);
+  const [appliedFeedback, setAppliedFeedback] = useState(false);
 
   const totalDrives = servers * drivesPerServer;
 
@@ -157,22 +168,39 @@ export default function ErasureCodeCalculator() {
   }, [stripeInfo.error, totalDrives, stripeSize, parityOptions.length]);
 
   const recommendedConfig = useMemo(() => {
-    if (stripeInfo.stripeSizes.length === 0) {
+    const stripeSizesSource =
+      stripeInfo.stripeSizes.length > 0
+        ? stripeInfo
+        : (() => {
+            const serversCorrected = Math.max(4, servers);
+            const drivesCorrected = Math.min(256, Math.max(1, drivesPerServer));
+            return calculateStripeSizes(serversCorrected, drivesCorrected);
+          })();
+
+    if (stripeSizesSource.stripeSizes.length === 0) {
       return null;
     }
 
-    const recommendedStripe = Math.max(...stripeInfo.stripeSizes);
+    const recommendedStripe = Math.max(...stripeSizesSource.stripeSizes);
     const recommendedParityOptions = calculateParityOptions(recommendedStripe);
     const recommendedParity =
       recommendedParityOptions.includes(4)
         ? 4
         : recommendedParityOptions[0] ?? 0;
 
+    if (stripeInfo.stripeSizes.length > 0) {
+      return { stripe: recommendedStripe, parity: recommendedParity };
+    }
+
+    const serversCorrected = Math.max(4, servers);
+    const drivesCorrected = Math.min(256, Math.max(1, drivesPerServer));
     return {
       stripe: recommendedStripe,
       parity: recommendedParity,
+      serversCorrected,
+      drivesCorrected,
     };
-  }, [stripeInfo.stripeSizes]);
+  }, [stripeInfo, servers, drivesPerServer]);
 
   useEffect(() => {
     if (stripeInfo.stripeSizes.length === 0) {
@@ -400,8 +428,17 @@ export default function ErasureCodeCalculator() {
               <Input
                 type="number"
                 min={1}
-                value={servers}
-                onChange={(event) => setServers(Math.abs(Number(event.target.value)))}
+                value={serversInput !== null ? serversInput : servers}
+                onFocus={() => setServersInput(String(servers))}
+                onChange={(event) => {
+                  const formatted = formatIntegerInput(event.target.value);
+                  setServersInput(formatted);
+                  if (formatted !== "") setServers(Number(formatted));
+                }}
+                onBlur={() => {
+                  if (serversInput === "" || Number(serversInput) < 1) setServers(1);
+                  setServersInput(null);
+                }}
                 className="mt-2"
               />
             </label>
@@ -412,8 +449,21 @@ export default function ErasureCodeCalculator() {
                 type="number"
                 min={1}
                 max={256}
-                value={drivesPerServer}
-                onChange={(event) => setDrivesPerServer(Math.abs(Number(event.target.value)))}
+                value={drivesPerServerInput !== null ? drivesPerServerInput : drivesPerServer}
+                onFocus={() => setDrivesPerServerInput(String(drivesPerServer))}
+                onChange={(event) => {
+                  const formatted = formatIntegerInput(event.target.value);
+                  setDrivesPerServerInput(formatted);
+                  if (formatted !== "") setDrivesPerServer(Number(formatted));
+                }}
+                onBlur={() => {
+                  if (drivesPerServerInput === "" || Number(drivesPerServerInput) < 1) {
+                    setDrivesPerServer(1);
+                  } else if (Number(drivesPerServerInput) > 256) {
+                    setDrivesPerServer(256);
+                  }
+                  setDrivesPerServerInput(null);
+                }}
                 className="mt-2"
               />
             </label>
@@ -423,8 +473,19 @@ export default function ErasureCodeCalculator() {
               <Input
                 type="number"
                 min={1}
-                value={driveCapacity}
-                onChange={(event) => setDriveCapacity(Math.abs(Number(event.target.value)))}
+                value={driveCapacityInput !== null ? driveCapacityInput : driveCapacity}
+                onFocus={() => setDriveCapacityInput(String(driveCapacity))}
+                onChange={(event) => {
+                  const formatted = formatIntegerInput(event.target.value);
+                  setDriveCapacityInput(formatted);
+                  if (formatted !== "") setDriveCapacity(Number(formatted));
+                }}
+                onBlur={() => {
+                  if (driveCapacityInput === "" || Number(driveCapacityInput) < 1) {
+                    setDriveCapacity(1);
+                  }
+                  setDriveCapacityInput(null);
+                }}
                 className="mt-2"
               />
             </label>
@@ -484,20 +545,46 @@ export default function ErasureCodeCalculator() {
                 <div>
                   <div className="font-medium text-foreground">Recommended configuration</div>
                   <div className="mt-1 text-muted-foreground">
-                    Stripe size {recommendedConfig.stripe}, parity {recommendedConfig.parity}.
-                    Balanced for efficiency and availability.
+                    {recommendedConfig.serversCorrected != null ? (
+                      <>
+                        At least 4 servers, {recommendedConfig.drivesCorrected} drives per server.
+                        Stripe size {recommendedConfig.stripe}, parity {recommendedConfig.parity}.
+                      </>
+                    ) : (
+                      <>
+                        Stripe size {recommendedConfig.stripe}, parity {recommendedConfig.parity}.
+                        Balanced for efficiency and availability.
+                      </>
+                    )}
                   </div>
                 </div>
                 <Button
                   variant="secondary"
                   size="sm"
                   type="button"
-                  onClick={() => {
-                    setStripeSize(recommendedConfig.stripe);
-                    setParity(recommendedConfig.parity);
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (
+                      recommendedConfig.serversCorrected != null &&
+                      recommendedConfig.drivesCorrected != null
+                    ) {
+                      setServers(recommendedConfig.serversCorrected);
+                      setDrivesPerServer(recommendedConfig.drivesCorrected);
+                      setServersInput(null);
+                      setDrivesPerServerInput(null);
+                      queueMicrotask(() => {
+                        setStripeSize(recommendedConfig.stripe);
+                        setParity(recommendedConfig.parity);
+                      });
+                    } else {
+                      setStripeSize(recommendedConfig.stripe);
+                      setParity(recommendedConfig.parity);
+                    }
+                    setAppliedFeedback(true);
+                    setTimeout(() => setAppliedFeedback(false), 1500);
                   }}
                 >
-                  Apply
+                  {appliedFeedback ? "Applied" : "Apply"}
                 </Button>
               </div>
             </div>
