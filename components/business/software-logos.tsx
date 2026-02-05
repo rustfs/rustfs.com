@@ -58,14 +58,14 @@ const iconMap: Record<SoftwareKey, React.ComponentType<{ className?: string; sty
 
 export default function SoftwareLogos() {
   return (
-    <section className="bg-muted relative overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 pb-16 lg:pt-32">
-      <div className="max-w-7xl mx-auto text-primary">
-        <p className="font-display text-base text-slate-500 font-bold text-center">
+    <section className="bg-muted/40 relative overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 pb-16 lg:pt-32">
+      <div className="max-w-7xl mx-auto">
+        <p className="font-display text-base text-foreground font-bold text-center">
           {
             "Trusted by the open-source community / Enterprise-grade open source solution"
           }
         </p>
-        <p className="font-display text-base text-slate-500 font-bold text-center">compatible with over Compatible with 1,500+ applications and integrations</p>
+        <p className="font-display text-base text-muted-foreground font-bold text-center">compatible with over Compatible with 1,500+ applications and integrations</p>
         <ul
           role="list"
           className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:flex-col sm:gap-x-0 sm:gap-y-10 md:flex-row xl:gap-x-16 xl:gap-y-6"
@@ -75,7 +75,7 @@ export default function SoftwareLogos() {
 
             return (
               <li key={software} className="flex">
-                <div className="w-40 h-20 text-gray-600 transition-colors duration-200 flex items-center justify-center">
+                <div className="w-40 h-20 text-foreground/70 transition-colors duration-200 flex items-center justify-center">
                   <IconComponent
                     className="w-full h-full"
                     style={{ color: "currentColor" }}

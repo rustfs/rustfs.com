@@ -46,7 +46,7 @@ export default function CodeBlock({ code, title, className }: CodeBlockProps) {c
           title={'Copy code'}
         >
           {copied ? (
-            <CheckIcon className="w-4 h-4 text-green-500" />
+            <CheckIcon className="w-4 h-4 text-success" />
           ) : (
             <CopyIcon className="w-4 h-4" />
           )}

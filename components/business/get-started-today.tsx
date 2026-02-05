@@ -12,7 +12,7 @@ const AVATAR_URLS = [
 
 export default function GetStartedToday() {return (
     <section
-      className="relative overflow-hidden py-32 bg-accent text-accent-foreground"
+      className="relative overflow-hidden py-32 bg-muted/40 text-foreground"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
         <div className="mx-auto text-center flex flex-col gap-8">
@@ -29,13 +29,13 @@ export default function GetStartedToday() {return (
                 {AVATAR_URLS.map((url, index) => (
                   <img
                     key={index}
-                    className="inline-block size-8 rounded-full ring-2 ring-white dark:ring-neutral-900"
+                    className="inline-block size-8 rounded-full ring-2 ring-background"
                     src={url}
                     alt={`Avatar ${index + 1}`}
                   />
                 ))}
-                <span className="inline-flex size-8 items-center justify-center rounded-full bg-gray-800 ring-2 ring-white dark:bg-neutral-900 dark:ring-neutral-900">
-                  <span className="text-xs font-medium uppercase leading-none text-white">
+                <span className="inline-flex size-8 items-center justify-center rounded-full bg-primary ring-2 ring-background">
+                  <span className="text-xs font-medium uppercase leading-none text-primary-foreground">
                     100+
                   </span>
                 </span>

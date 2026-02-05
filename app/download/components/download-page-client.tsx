@@ -133,8 +133,8 @@ export default function DownloadPageClient({ release, launcherRelease }: Downloa
                   {release ? formatVersion(release.tag_name) : 'v1.0.0'}
                 </span>
                 {release && (
-                  <span className="inline-flex items-center space-x-1 px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded-full">
-                    <div className="w-1 h-1 bg-green-500 rounded-full"></div>
+                  <span className="inline-flex items-center space-x-1 px-2 py-1 bg-success/10 text-success text-xs rounded-full">
+                    <div className="w-1 h-1 bg-success rounded-full"></div>
                     <span>{'Latest'}</span>
                   </span>
                 )}

@@ -21,7 +21,7 @@ export default function Subscribe() {
   return (
     <section
       id='contact'
-      className="relative overflow-hidden bg-background py-32 text-white"
+      className="relative overflow-hidden bg-background py-32"
     >
       {/* Subscribe */}
       <div className="mx-auto flex max-w-[85rem] flex-col justify-center px-4 sm:px-6 lg:px-8">

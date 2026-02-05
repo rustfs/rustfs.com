@@ -23,26 +23,26 @@ export default function HomeDifferents() {return (
         </div>
 
         <div className="relative flex w-full flex-col gap-6 lg:flex-row xl:mx-auto xl:w-10/12">
-          <div className="relative rounded-xl bg-white md:w-1/2 lg:text-right dark:bg-neutral-800">
+          <div className="relative rounded-xl bg-card md:w-1/2 lg:text-right">
             <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">{'Other object storage'}</h3>
             <div className="text-muted-foreground">
-              <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
-                <XIcon className="text-neutral-500" />
+              <div className="flex items-center gap-2 bg-muted p-4 md:flex-row-reverse lg:px-8">
+                <XIcon className="text-muted-foreground" />
                 <span>{'Memory-safe Architecture (Built with Rust)'}</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
-                <XIcon className="text-neutral-500" />
+                <XIcon className="text-muted-foreground" />
                 <span>{'Data Sovereignty & Local Compliance'}</span>
               </div>
-              <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
-                <XIcon className="text-neutral-500" />
+              <div className="flex items-center gap-2 bg-muted p-4 md:flex-row-reverse lg:px-8">
+                <XIcon className="text-muted-foreground" />
                 <span>{'AGPL V3 licensing issues'}</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
                 <span>{'Inconsistent S3 compatibility across other providers'}</span>
               </div>
-              <div className="flex items-center gap-2 bg-neutral-100 p-4 md:flex-row-reverse lg:px-8 dark:bg-neutral-900">
-                <XIcon className="text-neutral-500" />
+              <div className="flex items-center gap-2 bg-muted p-4 md:flex-row-reverse lg:px-8">
+                <XIcon className="text-muted-foreground" />
                 <span>{'Limited Platform Compatibility'}</span>
               </div>
               <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
@@ -52,7 +52,7 @@ export default function HomeDifferents() {return (
 
             <div className="absolute bottom-0 start-0 hidden -translate-x-16 translate-y-16 md:block">
               <svg
-                className="h-auto w-56 text-cyan-500"
+                className="h-auto w-56 text-info"
                 width={347}
                 height={188}
                 viewBox="0 0 347 188"
@@ -69,42 +69,42 @@ export default function HomeDifferents() {return (
             </div>
           </div>
 
-          <div className="relative rounded-xl bg-white text-left md:w-1/2 dark:bg-neutral-800">
+          <div className="relative rounded-xl bg-card text-left md:w-1/2">
             <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">{'RustFS'}</h3>
             <div className="text-muted-foreground">
-              <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
-                <CheckIcon className="text-green-500" />
+              <div className="flex items-center gap-2 bg-muted p-4 lg:px-8">
+                <CheckIcon className="text-success" />
                 <span>{'Memory-safe Rust development'}</span>
               </div>
               <div className="flex items-center gap-2 p-4 lg:px-8 ">
-                <CheckIcon className="text-green-500" />
+                <CheckIcon className="text-success" />
                 <span>{'No foreign logging'}</span>
               </div>
-              <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
-                <CheckIcon className="text-green-500" />
+              <div className="flex items-center gap-2 bg-muted p-4 lg:px-8">
+                <CheckIcon className="text-success" />
                 <span>{'Business-friendly Apache license'}</span>
               </div>
               <div className="flex items-center gap-2 p-4 lg:px-8 ">
-                <CheckIcon className="text-green-500" />
+                <CheckIcon className="text-success" />
                 <span>{'Full S3 support for global clouds'}</span>
               </div>
-              <div className="flex items-center gap-2 bg-neutral-100 p-4 lg:px-8 dark:bg-neutral-900">
-                <CheckIcon className="text-green-500" />
+              <div className="flex items-center gap-2 bg-muted p-4 lg:px-8">
+                <CheckIcon className="text-success" />
                 <span>{'Extensive Multi-Architecture Support'}</span>
               </div>
               <div className="flex items-center gap-2 p-4 lg:px-8 ">
-                <CheckIcon className="text-green-500" />
+                <CheckIcon className="text-success" />
                 <span>{'Stable pricing and support'}</span>
               </div>
             </div>
 
-            <span className="absolute end-0 top-0 rounded-es-xl rounded-se-xl bg-green-500 px-3 py-1.5 text-xs font-medium text-white">
+            <span className="absolute end-0 top-0 rounded-es-xl rounded-se-xl bg-success px-3 py-1.5 text-xs font-medium text-success-foreground">
               {'Best choice'}
             </span>
 
             <div className="absolute end-0 top-0 hidden translate-x-16 translate-y-16 md:block">
               <svg
-                className="h-auto w-16 text-orange-500"
+                className="h-auto w-16 text-warning"
                 width={121}
                 height={135}
                 viewBox="0 0 121 135"
@@ -134,7 +134,7 @@ export default function HomeDifferents() {return (
           </div>
         </div>
         <div className="mt-7 text-center">
-          <p className="text-xs text-neutral-400">{'* Comparison for reference only'}</p>
+          <p className="text-xs text-muted-foreground">{'* Comparison for reference only'}</p>
         </div>
         {/* End Features */}
       </div>

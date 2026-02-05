@@ -14,8 +14,8 @@ export default function HomeFeatures() {
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         {/* Title */}
         <div className="mx-auto mb-10 text-center lg:mb-14">
-          <h2 className="text-3xl font-bold md:text-4xl tracking-wide md:leading-tight dark:text-white">
-            High-performance <span className="text-blue-500">enterprise-grade distributed file system</span>
+          <h2 className="text-3xl font-bold md:text-4xl tracking-wide md:leading-tight text-foreground">
+            High-performance <span className="text-brand">enterprise-grade distributed file system</span>
           </h2>
           <p className="text-muted-foreground mt-4">
             Comprehensive features to meet enterprise-grade storage requirements
@@ -32,7 +32,7 @@ export default function HomeFeatures() {
               className={cn(
                 "w-full flex flex-col gap-2 text-start hover:bg-muted focus:outline-hidden focus:bg-muted p-2 sm:p-3 md:p-5 rounded-xl",
                 {
-                  'bg-muted text-blue-600': activeTab === index,
+                  'bg-muted text-brand': activeTab === index,
                 }
               )}
               onClick={() => setActiveTab(index)}
@@ -41,15 +41,15 @@ export default function HomeFeatures() {
             >
               <div className='flex gap-4 items-center'>
                 <feature.icon className={cn(
-                  "shrink-0 size-5 sm:size-6 md:size-7 text-gray-800 dark:text-white",
+                  "shrink-0 size-5 sm:size-6 md:size-7 text-foreground",
                   {
-                    'text-blue-600 dark:text-blue-500': activeTab === index,
+                    'text-brand': activeTab === index,
                   }
                 )} />
                 <span className={cn(
-                  "block font-semibold text-gray-800 dark:text-neutral-200 text-sm md:text-xl",
+                  "block font-semibold text-foreground text-sm md:text-xl",
                   {
-                    'text-blue-600 dark:text-blue-500': activeTab === index,
+                    'text-brand': activeTab === index,
                   }
                 )}>
                   {feature.title}
@@ -76,12 +76,12 @@ export default function HomeFeatures() {
               role="tabpanel"
             >
               {/* Feature Detail */}
-              <div className="relative mt-10 md:mt-20 overflow-hidden rounded-4xl md:bg-slate-200 md:dark:bg-slate-700 md:px-6 lg:px-14 md:py-8 lg:py-16 xl:px-16">
-                <div className="flex flex-col rounded-xl bg-background p-2 md:p-8 lg:p-12 shadow-xl ring-1 shadow-slate-900/5 ring-slate-500/10">
+              <div className="relative mt-10 md:mt-20 overflow-hidden rounded-4xl md:bg-muted md:px-6 lg:px-14 md:py-8 lg:py-16 xl:px-16">
+                <div className="flex flex-col rounded-xl bg-background p-2 md:p-8 lg:p-12 shadow-xl ring-1 shadow-foreground/5 ring-border/60">
                   <div className="flex items-center gap-6 mb-6">
-                    <feature.icon className="hidden md:block size-12 md:size-16 text-blue-500" />
+                    <feature.icon className="hidden md:block size-12 md:size-16 text-brand" />
                     <div>
-                      <h4 className="text-2xl font-bold text-neutral-800 dark:text-white mb-2">
+                      <h4 className="text-2xl font-bold text-foreground mb-2">
                         {feature.title}
                       </h4>
                       <p className="text-muted-foreground">
@@ -93,21 +93,21 @@ export default function HomeFeatures() {
                   <ul className="text-muted-foreground grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                     {feature.features.map((item, itemIndex) => (
                       <li className="flex gap-3 items-start" key={itemIndex}>
-                        <CheckCircleIcon className="size-5 shrink-0 text-blue-500 mt-1" />
+                        <CheckCircleIcon className="size-5 shrink-0 text-brand mt-1" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <div className="border-t dark:border-neutral-700 pt-6">
+                  <div className="border-t border-border pt-6">
                     <div className="flex flex-col md:flex-row items-center gap-4">
-                      <QuoteIcon className="size-8 rotate-180 text-blue-500 opacity-15" />
+                      <QuoteIcon className="size-8 rotate-180 text-brand opacity-15" />
                       <p className="text-muted-foreground flex-1 text-lg italic">
                         &ldquo;{feature.review.review}&rdquo;
                       </p>
                       <div className="flex items-center gap-4 self-end">
                         <div className="text-right">
-                          <p className="font-semibold text-neutral-800 dark:text-white">
+                          <p className="font-semibold text-foreground">
                             {feature.review.name}
                           </p>
                           <p className="text-sm text-muted-foreground">
@@ -125,7 +125,7 @@ export default function HomeFeatures() {
                     </div>
                   </div>
                 </div>
-                <div className="pointer-events-none absolute inset-0 rounded-4xl ring-1 ring-slate-900/10 ring-inset"></div>
+                <div className="pointer-events-none absolute inset-0 rounded-4xl ring-1 ring-border/60 ring-inset"></div>
               </div>
             </div>
           ))}

@@ -1,3 +1,4 @@
+import ContactForm from "@/components/business/contact-form";
 import GetStartedToday from "@/components/business/get-started-today";
 import HomeBlog from "@/components/business/home-blog";
 import HomeDifferents from "@/components/business/home-differents";
@@ -6,7 +7,6 @@ import HomeHero from "@/components/business/home-hero";
 import HomeMultiClouds from "@/components/business/home-multi-clouds";
 import HomeStats from "@/components/business/home-stats";
 import SoftwareLogos from "@/components/business/software-logos";
-import ContactForm from "@/components/business/contact-form";
 import { getDockerPulls } from "@/lib/docker";
 import { getGitHubMetrics } from "@/lib/github";
 import type { Metadata } from "next";

@@ -2,7 +2,14 @@
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Select } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { useRef, useState } from 'react'
@@ -61,7 +68,7 @@ export default function ContactForm() {
     message: ''
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
   }
@@ -134,7 +141,7 @@ export default function ContactForm() {
   return (
     <section
       id='contact'
-      className="relative overflow-hidden bg-background py-32 text-white"
+      className="relative overflow-hidden bg-background py-32"
     >
       <div className="mx-auto flex max-w-340 flex-col justify-center px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
@@ -181,35 +188,36 @@ export default function ContactForm() {
               </div>
             </div>
 
-            <div>
-              <label htmlFor="email" className="mb-2 block text-sm font-medium text-foreground">
-                Business Email <span className="text-destructive">*</span>
-              </label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                required
-                placeholder="your.email@company.com"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full text-foreground"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="phone" className="mb-2 block text-sm font-medium text-foreground">
-                Business Phone <span className="text-muted-foreground text-sm">(Optional)</span>
-              </label>
-              <Input
-                id="phone"
-                name="phone"
-                type="tel"
-                placeholder="e.g., +1 (555) 123-4567"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full text-foreground"
-              />
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <div>
+                <label htmlFor="email" className="mb-2 block text-sm font-medium text-foreground">
+                  Business Email <span className="text-destructive">*</span>
+                </label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="your.email@company.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full text-foreground"
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="mb-2 block text-sm font-medium text-foreground">
+                  Business Phone <span className="text-muted-foreground text-sm">(Optional)</span>
+                </label>
+                <Input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="e.g., +1 (555) 123-4567"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full text-foreground"
+                />
+              </div>
             </div>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -218,19 +226,23 @@ export default function ContactForm() {
                   Country <span className="text-destructive">*</span>
                 </label>
                 <Select
-                  id="country"
                   name="country"
                   required
                   value={formData.country}
-                  onChange={handleChange}
-                  className="w-full text-foreground"
+                  onValueChange={(value) => setFormData(prev => ({ ...prev, country: value }))}
                 >
-                  <option value="">Select a country</option>
-                  {COUNTRIES.map((country) => (
-                    <option key={country} value={country}>
-                      {country}
-                    </option>
-                  ))}
+                  <SelectTrigger id="country" className="w-full text-foreground">
+                    <SelectValue placeholder="Select a country" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {COUNTRIES.map((country) => (
+                        <SelectItem key={country} value={country}>
+                          {country}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
                 </Select>
               </div>
               <div>
@@ -277,16 +289,16 @@ export default function ContactForm() {
             </div>
 
             {submitStatus === 'success' && (
-              <div className="rounded-md bg-green-50 p-4 dark:bg-green-900/20">
-                <p className="text-sm font-medium text-green-800 dark:text-green-200">
+              <div className="rounded-md bg-success/10 p-4 dark:bg-success/20">
+                <p className="text-sm font-medium text-success">
                   Thank you for your message! We&apos;ll get back to you soon.
                 </p>
               </div>
             )}
 
             {submitStatus === 'error' && (
-              <div className="rounded-md bg-red-50 p-4 dark:bg-red-900/20">
-                <p className="text-sm font-medium text-red-800 dark:text-red-200">
+              <div className="rounded-md bg-destructive/10 p-4 dark:bg-destructive/20">
+                <p className="text-sm font-medium text-destructive">
                   Something went wrong. Please try again later.
                 </p>
               </div>
@@ -297,7 +309,7 @@ export default function ContactForm() {
                 type="submit"
                 disabled={isSubmitting}
                 size="lg"
-                className="min-w-[200px]"
+                className="min-w-[200px] rounded-full h-12 px-6 text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground/90 active:bg-primary/80 active:text-primary-foreground/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 {isSubmitting ? 'Submitting...' : 'Submit'}
               </Button>
