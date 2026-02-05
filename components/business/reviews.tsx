@@ -28,10 +28,7 @@ const ReviewCard = ({ img, name, position, body }: SlideItem) => {
     <figure
       className={clsx(
         "relative md:w-1/2 lg:w-full max-w-96 cursor-pointer overflow-hidden rounded-xl p-4 lg:p-6 shadow-xl",
-        // light styles
-        "border-neutral-950 bg-white hover:bg-neutral-50",
-        // dark styles
-        "dark:border-neutral-800 dark:bg-neutral-800/50 dark:hover:bg-neutral-700",
+        "border border-border bg-card hover:bg-muted/50",
         "flex flex-col gap-2"
       )}
     >
@@ -39,7 +36,7 @@ const ReviewCard = ({ img, name, position, body }: SlideItem) => {
       <div className="my-2 border-t"></div>
       <div className="flex flex-row items-center justify-between gap-2">
         <div className="flex flex-col">
-          <figcaption className="text-sm font-medium dark:text-white">
+          <figcaption className="text-sm font-medium text-foreground">
             {name}
           </figcaption>
           <p className="text-muted-foreground text-xs  font-medium">{position}</p>
@@ -58,7 +55,7 @@ export default function HomeReviews() {
           <h2 className="text-2xl tracking-wide font-bold md:text-4xl md:leading-tight text-primary">
             {'What customers say about RustFS'}
           </h2>
-          <p className="mt-4 text-neutral-600 dark:text-neutral-400">
+          <p className="mt-4 text-muted-foreground">
             {'Exquisite service, professional team, providing you with the best service'}
           </p>
         </div>
@@ -90,8 +87,8 @@ export default function HomeReviews() {
               <ReviewCard key={`${review.name}${review.position}`} {...review} />
             ))}
           </Marquee>
-          <div className="dark:from-background pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white"></div>
-          <div className="dark:from-background pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-white"></div>
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-background"></div>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background"></div>
         </div>
       </div>
     </section>

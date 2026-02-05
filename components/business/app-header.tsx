@@ -90,7 +90,7 @@ export default function AppHeader() {
               <Popover>
                 <Popover.Button className="relative z-10 flex h-8 w-8 items-center justify-center focus:not-data-focus:outline-hidden" aria-label="Toggle Navigation">
                   {({ open }) => (
-                    <svg aria-hidden="true" className="h-3.5 w-3.5 overflow-visible stroke-slate-700 dark:stroke-slate-300" fill="none" strokeWidth="2" strokeLinecap="round">
+                    <svg aria-hidden="true" className="h-3.5 w-3.5 overflow-visible stroke-foreground/70" fill="none" strokeWidth="2" strokeLinecap="round">
                       <path d="M0 1H14M0 7H14M0 13H14" className={`origin-center transition ${open ? 'scale-90 opacity-0' : ''}`} />
                       <path d="M2 2L12 12M12 2L2 12" className={`origin-center transition ${open ? '' : 'scale-90 opacity-0'}`} />
                     </svg>
@@ -107,10 +107,10 @@ export default function AppHeader() {
                 >
                   <Popover.Panel
                     focus
-                    className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5 dark:bg-slate-800 dark:text-slate-200 dark:ring-slate-700"
+                    className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-popover p-4 text-lg tracking-tight text-popover-foreground shadow-xl ring-1 ring-border/60"
                   >
                     {navs.map((item, index) => (
-                      <a key={index} className="block w-full p-2 rounded hover:bg-slate-100/50 dark:hover:bg-slate-700/50" href={item.url}>{item.label}</a>
+                      <a key={index} className="block w-full p-2 rounded hover:bg-muted/50" href={item.url}>{item.label}</a>
                     ))}
                   </Popover.Panel>
                 </Transition>
