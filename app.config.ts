@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
 
 // Site meta information
 export const SITE_METADATA = {
-  title: 'RustFS - High-Performance Distributed Storage System',
+  title: "RustFS | Escape MinIO's AGPL. The True Open-Source Object Storage.",
   description: 'RustFS is a high-performance distributed storage system built with Rust, S3 protocol compatible',
   keywords: 'RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative',
 } as const
