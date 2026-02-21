@@ -111,6 +111,15 @@ export default function AppFooter() {
               <LinkGitHub className="group inline-flex" />
             </div>
           </div>
+          
+          <div className="mt-8 pt-8 border-t border-border/50 flex flex-col gap-2 text-xs text-muted-foreground text-center md:text-left">
+            <p>
+              All product names, logos, and brands are property of their respective owners. All company, product and service names used in this website are for identification purposes only. Use of these names, logos, and brands does not imply endorsement.
+            </p>
+            <p>
+              &copy; {new Date().getFullYear()} RustFS. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
