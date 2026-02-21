@@ -3,7 +3,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const units = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"];
 
@@ -493,20 +500,22 @@ export default function ErasureCodeCalculator() {
             <label className="block">
               <span className="text-sm font-medium text-foreground">Stripe size (K + M)</span>
               <Select
-                value={stripeSize ? String(stripeSize) : ""}
-                onChange={(event) => setStripeSize(Number(event.target.value))}
-                className="mt-2"
+                value={stripeSize ? String(stripeSize) : undefined}
+                onValueChange={(value) => setStripeSize(Number(value))}
                 disabled={stripeInfo.stripeSizes.length === 0}
               >
-                {stripeInfo.stripeSizes.length === 0 ? (
-                  <option value="">Unavailable</option>
-                ) : (
-                  stripeInfo.stripeSizes.map((value) => (
-                    <option key={value} value={value}>
-                      {value}
-                    </option>
-                  ))
-                )}
+                <SelectTrigger className="mt-2">
+                  <SelectValue placeholder="Unavailable" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {stripeInfo.stripeSizes.map((value) => (
+                      <SelectItem key={value} value={String(value)}>
+                        {value}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
               </Select>
               <p className="mt-2 text-xs text-muted-foreground">
                 Stripe size is the number of drives in each erasure set (data + parity). Larger
@@ -517,20 +526,22 @@ export default function ErasureCodeCalculator() {
             <label className="block">
               <span className="text-sm font-medium text-foreground">Parity (M)</span>
               <Select
-                value={parity ? String(parity) : ""}
-                onChange={(event) => setParity(Number(event.target.value))}
-                className="mt-2"
+                value={parity ? String(parity) : undefined}
+                onValueChange={(value) => setParity(Number(value))}
                 disabled={parityOptions.length === 0}
               >
-                {parityOptions.length === 0 ? (
-                  <option value="">Unavailable</option>
-                ) : (
-                  parityOptions.map((value) => (
-                    <option key={value} value={value}>
-                      {value}
-                    </option>
-                  ))
-                )}
+                <SelectTrigger className="mt-2">
+                  <SelectValue placeholder="Unavailable" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {parityOptions.map((value) => (
+                      <SelectItem key={value} value={String(value)}>
+                        {value}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
               </Select>
               <p className="mt-2 text-xs text-muted-foreground">
                 Parity controls resiliency. Higher M increases fault tolerance but reduces usable
