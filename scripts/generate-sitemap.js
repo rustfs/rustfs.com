@@ -106,7 +106,7 @@ function main() {
 
   // Check if out directory exists
   if (!fs.existsSync(OUT_DIR)) {
-    console.error('❌ Out directory not found. Please run "npm run build" first.')
+    console.error('❌ Out directory not found. Please run "pnpm run build" first.')
     process.exit(1)
   }
 

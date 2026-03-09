@@ -47,16 +47,13 @@ rustfs.com/
 ### Requirements
 
 - Node.js 18+
-- pnpm (recommended) or npm
+- pnpm
 
 ### Install Dependencies
 
 ```bash
-# Using pnpm (recommended)
+# Using
 pnpm install
-
-# Or using npm
-npm install
 ```
 
 ### Development Server
@@ -64,9 +61,6 @@ npm install
 ```bash
 # Start development server
 pnpm dev
-
-# Or using npm
-npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the result.

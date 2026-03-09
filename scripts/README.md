@@ -16,10 +16,10 @@ Automated sitemap generation script for websites, supporting multi-language and 
 
 #### Automatic Generation (Recommended)
 
-The script is configured to run automatically after `npm run build`:
+The script is configured to run automatically after `pnpm run build`:
 
 ```bash
-npm run build
+pnpm run build
 # Sitemap will be automatically generated after build completion
 ```
 
@@ -29,8 +29,8 @@ npm run build
 # Run script directly
 node scripts/generate-sitemap.js
 
-# Or use npm script
-npm run postbuild
+# Or use pnpm script
+pnpm run postbuild
 ```
 
 ### Configuration
@@ -105,7 +105,7 @@ The generated sitemap complies with [Google Sitemap Protocol](https://developers
 
 ### Important Notes
 
-1. **Build Order**: Must run `npm run build` first to generate the `out` directory
+1. **Build Order**: Must run `pnpm run build` first to generate the `out` directory
 2. **File Permissions**: Ensure the script has write permissions to the `out` directory
 3. **Domain Configuration**: Modify `BASE_URL` configuration based on actual deployment
 4. **Page Configuration**: Adjust priorities and update frequencies based on actual page structure
@@ -114,7 +114,7 @@ The generated sitemap complies with [Google Sitemap Protocol](https://developers
 
 #### Common Errors
 
-- **Out directory not found**: Please run `npm run build` first
+- **Out directory not found**: Please run `pnpm run build` first
 - **Permission denied**: Check file write permissions
 - **No URLs found**: Check if the `out` directory contains `index.html` files
 
@@ -132,10 +132,10 @@ The script can be integrated into continuous integration workflows:
 ```yaml
 # GitHub Actions example
 - name: Build project
-  run: npm run build
+  run: pnpm run build
 
 - name: Generate sitemap
-  run: npm run postbuild
+  run: pnpm run postbuild
 
 - name: Deploy to server
   run: # Deployment commands
