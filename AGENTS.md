@@ -5,8 +5,8 @@ This document provides development guidelines and rules for AI Agents to ensure 
 ## 📋 Project Overview
 
 - **Project Name**: RustFS.com - Official Website
-- **Framework**: Next.js 15.3.4 (App Router, Static Export)
-- **Language**: TypeScript (ES2017+, Strict Mode)
+- **Framework**: Next.js 16.1.6 (App Router, Static Export)
+- **Language**: TypeScript (ES2022+, Strict Mode)
 - **Package Manager**: pnpm
 - **Styling**: Tailwind CSS 4 + shadcn/ui
 - **CI/CD**: GitHub Actions → Aliyun OSS
