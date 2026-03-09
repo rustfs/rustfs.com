@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const fs = require('fs')
-const path = require('path')
+import fs from 'node:fs';
+import path from 'node:path';
 
 // Configuration
 const BASE_URL = 'https://rustfs.com'
@@ -146,8 +146,8 @@ function main() {
 }
 
 // Run script
-if (require.main === module) {
+if (import.meta.main) {
   main()
 }
 
-module.exports = { generateSitemap, scanDirectory, validateSitemap }
+export { generateSitemap, scanDirectory, validateSitemap }
