@@ -1,9 +1,10 @@
 'use client'
+
 import { WordRotate } from "@/components/magicui/word-rotate";
 import { Globe } from "@/components/ui/globe";
 import type { GitHubMetrics } from "@/lib/github";
 import { useTheme } from "next-themes";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import ContactUsButton from "./buttons/contact-us";
 import DownloadLink from "./buttons/download-link";
 import StatsStrip from "./stats-strip";
@@ -17,14 +18,9 @@ interface HomeHeroProps {
 }
 
 export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const isDark = mounted && resolvedTheme === "dark";
+  const isDark = theme === "dark";
 
   const globeConfig = useMemo(
     () => ({
