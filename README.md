@@ -8,8 +8,8 @@ RustFS is a high-performance distributed object storage system developed in Rust
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 15.3.4 (App Router)
-- **Language**: TypeScript (ES2017+, Strict Mode)
+- **Framework**: Next.js 16.1.6 (App Router)
+- **Language**: TypeScript (ES2022+, Strict Mode)
 - **Styling**: Tailwind CSS 4 + shadcn/ui
 - **Icons**: Lucide React
 - **Theme**: next-themes (Dark Mode Support)
@@ -47,16 +47,13 @@ rustfs.com/
 ### Requirements
 
 - Node.js 18+
-- pnpm (recommended) or npm
+- pnpm
 
 ### Install Dependencies
 
 ```bash
-# Using pnpm (recommended)
+# Using
 pnpm install
-
-# Or using npm
-npm install
 ```
 
 ### Development Server
@@ -64,9 +61,6 @@ npm install
 ```bash
 # Start development server
 pnpm dev
-
-# Or using npm
-npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the result.

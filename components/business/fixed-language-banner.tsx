@@ -2,28 +2,18 @@
 
 import { SITE_CONFIG } from '@/app.config'
 import { X } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const STORAGE_KEY = 'rustfs-language-banner-dismissed'
 
 export default function FixedLanguageBanner() {
-  const [showBanner, setShowBanner] = useState(false)
-
-  useEffect(() => {
-    // Check if banner was dismissed
-    const dismissed = localStorage.getItem(STORAGE_KEY)
-    if (dismissed) {
-      return
-    }
-
-    // Detect browser language
-    const browserLang = navigator.language.toLowerCase()
-    const isChinese = browserLang.startsWith('zh')
-
-    if (isChinese) {
-      setShowBanner(true)
-    }
-  }, [])
+  const [showBanner, setShowBanner] = useState(() => {
+    if (typeof window === 'undefined') return false
+    
+    const isDismissed = localStorage.getItem(STORAGE_KEY) === 'true'
+    const isChinese = navigator.language.toLowerCase().startsWith('zh')
+    return isChinese && !isDismissed
+  })
 
   const handleDismiss = () => {
     setShowBanner(false)

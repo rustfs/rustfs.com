@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const fs = require('fs')
-const path = require('path')
+import fs from 'node:fs';
+import path from 'node:path';
 
 // Configuration
 const BASE_URL = 'https://rustfs.com'
@@ -106,7 +106,7 @@ function main() {
 
   // Check if out directory exists
   if (!fs.existsSync(OUT_DIR)) {
-    console.error('❌ Out directory not found. Please run "npm run build" first.')
+    console.error('❌ Out directory not found. Please run "pnpm run build" first.')
     process.exit(1)
   }
 
@@ -146,8 +146,8 @@ function main() {
 }
 
 // Run script
-if (require.main === module) {
+if (import.meta.main) {
   main()
 }
 
-module.exports = { generateSitemap, scanDirectory, validateSitemap }
+export { generateSitemap, scanDirectory, validateSitemap }

@@ -5,9 +5,9 @@ This document provides development guidelines and rules for AI Agents to ensure 
 ## 📋 Project Overview
 
 - **Project Name**: RustFS.com - Official Website
-- **Framework**: Next.js 15.3.4 (App Router, Static Export)
-- **Language**: TypeScript (ES2017+, Strict Mode)
-- **Package Manager**: pnpm (recommended) or npm
+- **Framework**: Next.js 16.1.6 (App Router, Static Export)
+- **Language**: TypeScript (ES2022+, Strict Mode)
+- **Package Manager**: pnpm
 - **Styling**: Tailwind CSS 4 + shadcn/ui
 - **CI/CD**: GitHub Actions → Aliyun OSS
 
@@ -28,8 +28,6 @@ This document provides development guidelines and rules for AI Agents to ensure 
 
    ```bash
    pnpm run lint
-   # or
-   npm run lint
    ```
 
 3. **✅ Local Build Test**
@@ -40,25 +38,14 @@ This document provides development guidelines and rules for AI Agents to ensure 
 
    # Execute build
    pnpm run build
-   # or
-   npm run build
 
    # Ensure build succeeds without errors
    ```
 
 4. **✅ Dependency Lock File Synchronization**
-
-   - If using `npm install` to update dependencies, must synchronize `pnpm-lock.yaml`:
-
-     ```bash
-     pnpm install
-     ```
-
    - If using `pnpm install` to update dependencies, ensure `pnpm-lock.yaml` is updated
-   - **Important**: CI uses pnpm. If dependencies are updated locally with npm but `pnpm-lock.yaml` is not updated, CI will fail
 
 5. **✅ Build Artifact Verification**
-
    - Ensure `out/` directory is generated
    - Ensure `out/sitemap.xml` is generated (automatically by postbuild script)
    - Check build artifacts are complete
@@ -71,20 +58,18 @@ According to `.github/workflows/deploy.yml`, the CI process includes:
 
 1. **Checkout**: Check out code
 
-2. **Install dependencies**:
+2. **Install pnpm**:
 
-   ```bash
-   npm install -g pnpm && pnpm install
-   ```
+3. **Use Node.js**:
 
-3. **Install dependencies and build**:
+4. **Install dependencies and build**:
 
    ```bash
    pnpm install --no-frozen-lockfile
    pnpm run build
    ```
 
-4. **Deploy**: Deploy to Aliyun OSS
+5. **Deploy**: Deploy to Aliyun OSS
 
 ### Local CI Simulation
 
@@ -95,7 +80,6 @@ Before committing, it's recommended to simulate the complete CI process locally:
 rm -rf node_modules .next out
 
 # 2. Install dependencies (using pnpm, consistent with CI)
-npm install -g pnpm
 pnpm install
 
 # 3. Build project
@@ -147,7 +131,7 @@ Examples:
 
 ```bash
 feat: add contact form with hCaptcha
-fix: update pnpm-lock.yaml after npm dependency changes
+fix: correct button alignment on mobile
 docs: update README with new features
 ```
 
@@ -159,7 +143,6 @@ docs: update README with new features
 
 **Causes**:
 
-- Dependencies updated locally with npm but `pnpm-lock.yaml` not updated
 - `pnpm-lock.yaml` out of sync with `package.json`
 
 **Solution**:

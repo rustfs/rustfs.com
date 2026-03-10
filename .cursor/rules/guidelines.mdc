@@ -6,7 +6,7 @@ alwaysApply: true
 
 ### TypeScript Standards
 - **Strict Mode**: Enable `"strict": true` configuration
-- **Syntax Version**: Prioritize ES2017+ syntax features
+- **Syntax Version**: Prioritize ES2022+ syntax features
 - **Component Definition**: Use arrow functions or `export default function`
 - **Type Import**: Use `import type { }` syntax
 
