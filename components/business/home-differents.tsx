@@ -50,7 +50,7 @@ export default function HomeDifferents() {return (
               </div>
             </div>
 
-            <div className="absolute bottom-0 start-0 hidden -translate-x-16 translate-y-16 md:block">
+            <div className="absolute bottom-0 inset-s-0 hidden -translate-x-16 translate-y-16 md:block">
               <svg
                 className="h-auto w-56 text-info"
                 width={347}
@@ -98,11 +98,11 @@ export default function HomeDifferents() {return (
               </div>
             </div>
 
-            <span className="absolute end-0 top-0 rounded-es-xl rounded-se-xl bg-success px-3 py-1.5 text-xs font-medium text-success-foreground">
+            <span className="absolute inset-e-0 top-0 rounded-es-xl rounded-se-xl bg-success px-3 py-1.5 text-xs font-medium text-success-foreground">
               {'Best choice'}
             </span>
 
-            <div className="absolute end-0 top-0 hidden translate-x-16 translate-y-16 md:block">
+            <div className="absolute inset-e-0 top-0 hidden translate-x-16 translate-y-16 md:block">
               <svg
                 className="h-auto w-16 text-warning"
                 width={121}

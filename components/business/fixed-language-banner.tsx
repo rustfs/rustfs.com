@@ -9,7 +9,7 @@ const STORAGE_KEY = 'rustfs-language-banner-dismissed'
 export default function FixedLanguageBanner() {
   const [showBanner, setShowBanner] = useState(() => {
     if (typeof window === 'undefined') return false
-    
+
     const isDismissed = localStorage.getItem(STORAGE_KEY) === 'true'
     const isChinese = navigator.language.toLowerCase().startsWith('zh')
     return isChinese && !isDismissed
@@ -43,7 +43,7 @@ export default function FixedLanguageBanner() {
           </div>
           <button
             onClick={handleDismiss}
-            className="flex-shrink-0 rounded-md p-1 transition-colors hover:bg-primary-foreground/10 focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary active:bg-primary-foreground/20"
+            className="shrink-0 rounded-md p-1 transition-colors hover:bg-primary-foreground/10 focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary active:bg-primary-foreground/20"
             aria-label="关闭提示"
           >
             <X className="h-4 w-4" />

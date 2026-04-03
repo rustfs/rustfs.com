@@ -1,6 +1,5 @@
 'use client'
 
-/* eslint-disable @next/next/no-img-element */
 import ContactUsButton from "./buttons/contact-us";
 
 const AVATAR_URLS = [

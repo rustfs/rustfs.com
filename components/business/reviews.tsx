@@ -1,6 +1,5 @@
 'use client'
 
-/* eslint-disable @next/next/no-img-element */
 import { Marquee } from "@/components/magicui/marquee";
 import reviews from "@/data/reviews.json";
 import clsx from "clsx";
@@ -87,8 +86,8 @@ export default function HomeReviews() {
               <ReviewCard key={`${review.name}${review.position}`} {...review} />
             ))}
           </Marquee>
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-background"></div>
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background"></div>
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-linear-to-b from-background"></div>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-background"></div>
         </div>
       </div>
     </section>
