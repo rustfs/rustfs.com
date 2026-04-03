@@ -41,7 +41,7 @@ const ReviewCard = ({ img, name, position, body }: SlideItem) => {
           </figcaption>
           <p className="text-muted-foreground text-xs  font-medium">{position}</p>
         </div>
-        <img className="rounded-full" width="36" height="36" alt="" src={img} />
+        <img className="rounded-full" width="36" height="36" alt="" src={img} loading="lazy"/>
       </div>
     </figure>
   );

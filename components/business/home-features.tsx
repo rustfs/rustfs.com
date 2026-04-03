@@ -119,6 +119,7 @@ export default function HomeFeatures() {
                           width="48"
                           height="48"
                           alt=""
+                          loading="lazy"
                           src={feature.review.img}
                         />
                       </div>
