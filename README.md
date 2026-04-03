@@ -8,7 +8,7 @@ RustFS is a high-performance distributed object storage system developed in Rust
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 16.1.6 (App Router)
+- **Framework**: Next.js 16.2.2 (App Router)
 - **Language**: TypeScript (ES2022+, Strict Mode)
 - **Styling**: Tailwind CSS 4 + shadcn/ui
 - **Icons**: Lucide React
