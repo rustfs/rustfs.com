@@ -32,7 +32,7 @@ export default function GetStartedToday() {return (
                     className="inline-block size-8 rounded-full ring-2 ring-background"
                     src={url}
                     alt={`Avatar ${index + 1}`}
-                    loading=""
+                    loading="lazy"
                   />
                 ))}
                 <span className="inline-flex size-8 items-center justify-center rounded-full bg-primary ring-2 ring-background">

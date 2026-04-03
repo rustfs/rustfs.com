@@ -158,7 +158,7 @@ export default function ContactForm() {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label htmlFor="firstName" className="mb-2 block text-sm font-medium text-foreground">
-                  First Name <span className="text-destructive">*</span>
+                  First Name <span className="text-destructive" aria-hidden="true">*</span>
                 </label>
                 <Input
                   id="firstName"
@@ -173,7 +173,7 @@ export default function ContactForm() {
               </div>
               <div>
                 <label htmlFor="lastName" className="mb-2 block text-sm font-medium text-foreground">
-                  Last Name <span className="text-destructive">*</span>
+                  Last Name <span className="text-destructive" aria-hidden="true">*</span>
                 </label>
                 <Input
                   id="lastName"
@@ -191,7 +191,7 @@ export default function ContactForm() {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label htmlFor="email" className="mb-2 block text-sm font-medium text-foreground">
-                  Business Email <span className="text-destructive">*</span>
+                  Business Email <span className="text-destructive" aria-hidden="true">*</span>
                 </label>
                 <Input
                   id="email"
@@ -223,7 +223,7 @@ export default function ContactForm() {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label htmlFor="country" className="mb-2 block text-sm font-medium text-foreground">
-                  Country <span className="text-destructive">*</span>
+                  Country <span className="text-destructive" aria-hidden="true">*</span>
                 </label>
                 <Select
                   name="country"
@@ -247,7 +247,7 @@ export default function ContactForm() {
               </div>
               <div>
                 <label htmlFor="company" className="mb-2 block text-sm font-medium text-foreground">
-                  Company <span className="text-destructive">*</span>
+                  Company <span className="text-destructive" aria-hidden="true">*</span>
                 </label>
                 <Input
                   id="company"
@@ -264,7 +264,7 @@ export default function ContactForm() {
 
             <div>
               <label htmlFor="message" className="mb-2 block text-sm font-medium text-foreground">
-                Message <span className="text-destructive">*</span>
+                Message <span className="text-destructive" aria-hidden="true">*</span>
               </label>
               <Textarea
                 id="message"

@@ -81,9 +81,9 @@ export default function HomeFeatures() {
                   <div className="flex items-center gap-6 mb-6">
                     <feature.icon className="hidden md:block size-12 md:size-16 text-brand" />
                     <div>
-                      <h4 className="text-2xl font-bold text-foreground mb-2">
+                      <h3 className="text-2xl font-bold text-foreground mb-2">
                         {feature.title}
-                      </h4>
+                      </h3>
                       <p className="text-muted-foreground">
                         {feature.featureDescription}
                       </p>
