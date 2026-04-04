@@ -49,7 +49,7 @@ export default function HomeStats() {return (
           </div>
           {/* End Col */}
 
-          <div className="relative lg:col-span-8 lg:before:absolute lg:before:-start-12 lg:before:top-0 lg:before:h-full lg:before:w-px lg:before:bg-foreground/10 dark:lg:before:bg-foreground/20">
+          <div className="relative lg:col-span-8 lg:before:absolute lg:before:-inset-s-12 lg:before:top-0 lg:before:h-full lg:before:w-px lg:before:bg-foreground/10 dark:lg:before:bg-foreground/20">
             <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4 lg:grid-cols-3">
               {/* Stats */}
               <div>

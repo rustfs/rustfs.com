@@ -55,7 +55,7 @@ export default function MacOSDownloadSection({ platform, release, className }: M
         />
 
         <Note type="info">
-          <Link href="https://brew.sh/" target="_blank" className="hover:underline">
+          <Link href="https://brew.sh/" target="_blank" className="hover:underline" rel="noopener noreferrer">
             {'Homebrew is required for installation'}
           </Link>
         </Note>

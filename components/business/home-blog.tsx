@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import type { BlogPost } from "@/lib/blog";
 import { getLatestBlogPosts } from "@/lib/blog";
 import { cn } from "@/lib/utils";

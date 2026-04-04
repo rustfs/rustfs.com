@@ -148,12 +148,12 @@ export default function DockerDownloadSection({ platform, release, className }: 
           {'Default credentials: rustfsadmin / rustfsadmin'}
         </Note>
         <Note type="info">
-          <Link href="https://hub.docker.com/r/rustfs/rustfs/tags" target="_blank" className="hover:underline">
+          <Link href="https://hub.docker.com/r/rustfs/rustfs/tags" target="_blank" className="hover:underline" rel="noopener noreferrer">
             {'View all available versions on Docker Hub'}
           </Link>
         </Note>
         <Note type="success">
-          <Link href="https://docs.rustfs.com/installation/docker" target="_blank" className="hover:underline">
+          <Link href="https://docs.rustfs.com/installation/docker" target="_blank" className="hover:underline" rel="noopener noreferrer">
             {'View detailed Docker installation guide'}
           </Link>
         </Note>

@@ -71,8 +71,8 @@ export default function LinkGitHub({ className, showText = false }: { className?
     <Link
       href={`https://github.com/${REPO}`}
       target="_blank"
-      rel="noreferrer"
-      title="Stars on GitHub"
+      rel="noopener noreferrer"
+      aria-label={!showText ? "Stars on GitHub" : undefined}
       className={cn(
         "inline-flex h-8 items-center gap-2 rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground shadow-none",
         className

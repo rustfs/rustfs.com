@@ -17,6 +17,12 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     "components/ui/**", // shadcn/ui components
   ]),
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    rules: {
+      "@next/next/no-img-element": "off",
+    }
+  }
 ]);
 
 export default eslintConfig;

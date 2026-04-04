@@ -1,6 +1,5 @@
 'use client'
 
-/* eslint-disable @next/next/no-img-element */
 import features from '@/data/features';
 import { cn } from '@/lib/utils';
 import { CheckCircleIcon, QuoteIcon } from "lucide-react";
@@ -81,9 +80,9 @@ export default function HomeFeatures() {
                   <div className="flex items-center gap-6 mb-6">
                     <feature.icon className="hidden md:block size-12 md:size-16 text-brand" />
                     <div>
-                      <h4 className="text-2xl font-bold text-foreground mb-2">
+                      <h3 className="text-2xl font-bold text-foreground mb-2">
                         {feature.title}
-                      </h4>
+                      </h3>
                       <p className="text-muted-foreground">
                         {feature.featureDescription}
                       </p>
@@ -119,6 +118,7 @@ export default function HomeFeatures() {
                           width="48"
                           height="48"
                           alt=""
+                          loading="lazy"
                           src={feature.review.img}
                         />
                       </div>
