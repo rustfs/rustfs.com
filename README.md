@@ -167,6 +167,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [RustFS Official Website](https://rustfs.com)
 - [RustFS Documentation](https://docs.rustfs.com)
 - [Community Discussions](https://github.com/rustfs/rustfs/discussions)
+- [Discord Community](https://discord.gg/NcKBCEJp6P)
 
 ---
 

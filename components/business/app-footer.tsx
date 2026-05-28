@@ -2,6 +2,7 @@
 
 import { SITE_CONFIG } from '@/app.config';
 import { docs_url } from "@/lib/utils";
+import LinkDiscord from './buttons/link-discord';
 import LinkGitHub from './buttons/link-github';
 import LinkTwitter from './buttons/link-twitter';
 import { Logo } from './logo';
@@ -92,8 +93,11 @@ export default function AppFooter() {
                   >
                     Email: hello@rustfs.com
                   </a>
-                  <span className="hidden md:inline">|</span>
-                  <a href="tel:+14707850446">Phone: +1(470)785-0446 </a>
+                  {/*
+                    US phone number removed until a new number is registered.
+                    <span className="hidden md:inline">|</span>
+                    <a href="tel:+14707850446">Phone: +1(470)785-0446 </a>
+                  */}
                 </div>
                 <div className="flex items-center gap-2 text-center md:text-left">
                   <span>3550 Lenox Road, NE Atlanta, Georgia 30326</span>
@@ -108,6 +112,7 @@ export default function AppFooter() {
                 简体中文
               </a>
               <LinkTwitter size="size-4" className="group inline-flex" />
+              <LinkDiscord size="size-4" className="group inline-flex" />
               <LinkGitHub className="group inline-flex" />
             </div>
           </div>

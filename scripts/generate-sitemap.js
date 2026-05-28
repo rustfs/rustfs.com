@@ -2,6 +2,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 // Configuration
 const BASE_URL = 'https://rustfs.com'
@@ -146,7 +147,9 @@ function main() {
 }
 
 // Run script
-if (import.meta.main) {
+const isMainModule = process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href
+
+if (isMainModule) {
   main()
 }
 
