@@ -1,7 +1,9 @@
 'use client'
 
-import { cn, docs_url } from "@/lib/utils";
+import { cn } from "@/lib/utils";
+import { productNavigation, resourceNavigation, type NavigationItem } from "@/data/navigation";
 import { Popover, Transition } from '@headlessui/react';
+import { ChevronDownIcon } from "lucide-react";
 import Link from "next/link";
 import { Fragment } from 'react';
 import LinkGitHub from "./buttons/link-github";
@@ -9,53 +11,60 @@ import LinkTwitter from "./buttons/link-twitter";
 import { Logo } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
 
+function NavigationMenu({ label, items }: { label: string; items: NavigationItem[] }) {
+  return (
+    <Popover className="relative">
+      <Popover.Button className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-sm text-primary hover:bg-muted/60">
+        <span>{label}</span>
+        <ChevronDownIcon className="size-3" />
+      </Popover.Button>
+      <Transition
+        as={Fragment}
+        enter="duration-150 ease-out"
+        enterFrom="opacity-0 translate-y-1"
+        enterTo="opacity-100 translate-y-0"
+        leave="duration-100 ease-in"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 translate-y-1"
+      >
+        <Popover.Panel className="absolute left-0 top-full z-50 mt-3 w-80 rounded-lg border border-border bg-popover p-3 text-popover-foreground shadow-xl">
+          <div className="space-y-1">
+            {items.map((item) => (
+              <a key={item.title} href={item.href} className="block rounded-lg p-3 hover:bg-muted/60">
+                <span className="text-sm font-semibold text-foreground">{item.title}</span>
+                {item.description && (
+                  <span className="mt-1 block text-xs leading-5 text-muted-foreground">{item.description}</span>
+                )}
+                {item.items && (
+                  <span className="mt-2 flex flex-wrap gap-1.5">
+                    {item.items.map((tag) => (
+                      <span key={tag} className="rounded-md bg-muted px-1.5 py-0.5 text-[11px] text-muted-foreground">
+                        {tag}
+                      </span>
+                    ))}
+                  </span>
+                )}
+              </a>
+            ))}
+          </div>
+        </Popover.Panel>
+      </Transition>
+    </Popover>
+  );
+}
+
 export default function AppHeader() {
   const navs = [
-    {
-      label: 'Features',
-      url: docs_url('features/distributed/'),
-      classes: '',
-    },
-    {
-      label: 'Architecture',
-      url: docs_url('/concepts/architecture.html'),
-      classes: 'hidden xl:inline-block',
-    },
-    {
-      label: 'Solutions',
-      url: docs_url('features/data-lake/'),
-      classes: 'hidden xl:inline-block',
-    },
-    // {
-    //   label: 'Integrations',
-    //   url: `https://docs.rustfs.com/intergrations`,
-    //   classes: '',
-    // },
-    {
-      label: 'AI',
-      url: docs_url('features/ai'),
-      classes: '',
-    },
     {
       label: 'Download',
       url: `/download`,
       classes: '',
     },
     {
-      label: 'Demo',
-      url: 'https://play.rustfs.com',
+      label: 'Pricing',
+      url: '/pricing',
       classes: '',
     },
-    {
-      label: 'Docs',
-      url: 'https://docs.rustfs.com/installation/',
-      classes: '',
-    },
-    {
-      label: 'Blog',
-      url: 'https://rustfs.dev/',
-      classes: '',
-    }
   ]
 
   return (
@@ -66,7 +75,9 @@ export default function AppHeader() {
             <Link href="/" aria-label="Go to homepage">
               <Logo className="h-5 w-auto" />
             </Link>
-            <div className="hidden md:flex md:gap-x-6">
+            <div className="hidden md:flex md:items-center md:gap-x-4">
+              <NavigationMenu label="Product" items={productNavigation} />
+              <NavigationMenu label="Resources" items={resourceNavigation} />
               {navs.map((item, index) => {
                 return (
                   <a
@@ -107,10 +118,19 @@ export default function AppHeader() {
                 >
                   <Popover.Panel
                     focus
-                    className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-popover p-4 text-lg tracking-tight text-popover-foreground shadow-xl ring-1 ring-border/60"
+                    className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-lg bg-popover p-4 text-lg tracking-tight text-popover-foreground shadow-xl ring-1 ring-border/60"
                   >
+                    <div className="px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Product</div>
+                    {productNavigation.map((item) => (
+                      <a key={item.title} className="block w-full rounded p-2 text-sm hover:bg-muted/50" href={item.href}>{item.title}</a>
+                    ))}
+                    <div className="mt-3 px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Resources</div>
+                    {resourceNavigation.map((item) => (
+                      <a key={item.title} className="block w-full rounded p-2 text-sm hover:bg-muted/50" href={item.href}>{item.title}</a>
+                    ))}
+                    <div className="mt-3 px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Links</div>
                     {navs.map((item, index) => (
-                      <a key={index} className="block w-full p-2 rounded hover:bg-muted/50" href={item.url}>{item.label}</a>
+                      <a key={index} className="block w-full rounded p-2 text-sm hover:bg-muted/50" href={item.url}>{item.label}</a>
                     ))}
                   </Popover.Panel>
                 </Transition>

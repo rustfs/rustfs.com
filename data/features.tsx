@@ -1,115 +1,119 @@
-import { BookCopyIcon, EarthIcon, ExpandIcon, Layers3Icon, LockKeyholeIcon, ShieldIcon } from "lucide-react";
+import {
+  BinaryIcon,
+  CloudCogIcon,
+  Code2Icon,
+  DatabaseZapIcon,
+  GitBranchIcon,
+  NetworkIcon,
+  ShieldCheckIcon,
+  WorkflowIcon,
+} from "lucide-react";
 
 const features = [
   {
-    "title": "Cross-Cloud",
-    "description": "RustFS leverages distributed architecture and object storage capabilities to provide excellent performance for AI and advanced analytics workloads, supporting data scaling from TB to EB levels.",
-    "icon": EarthIcon,
-    "url": "#",
-    "featureDescription": "Cross-cloud redundancy mitigates single-provider failures and ensures business continuity.. You can use RustFS as a communication tool across clouds. We support bucket-level granular execution, which is used in the following scenarios:",
+    "title": "Advanced Erasure Coding",
+    "plane": "Data plane",
+    "token": "RS(EC)",
+    "description": "Flexible Reed-Solomon EC profiles balance durability and storage efficiency.",
+    "icon": DatabaseZapIcon,
+    "featureDescription": "Leverage cutting-edge Reed-Solomon algorithms to maximize storage efficiency while tuning hardware overhead and data durability for each workload.",
     "features": [
-      "Active-active cross-region/availability zone replication",
-      "Legal hold, governance and compliance",
-      "FINRA Rule 4511 and CFTC regulations"
+      "Flexible data and parity layouts",
+      "High durability without wasteful replicas",
+      "Workload-specific efficiency tuning"
     ],
-    "review": {
-      "name": "Adrian Miller",
-      "position": "CTO",
-      "img": "/images/faces/adrian-miller.jpeg",
-      "review": "RustFS's Cross-cloud redundancy mitigates single-provider failures and ensures business continuity."
-    }
   },
   {
-    "title": "Secure & Reliable",
-    "description": "RustFS integrates with RustyVault to provide high-performance object storage security encryption, supporting multiple encryption modes to ensure data security and transparency.",
-    "icon": ShieldIcon,
-    "url": "#",
-    "featureDescription": "RustyVault is an open-source object storage encryption tool that provides high performance, cross-platform compatibility, easy integration, and multiple encryption modes. RustyVault ensures data security and transparency through data encryption.",
+    "title": "Distributed Deployment",
+    "plane": "Cluster plane",
+    "token": "MNMD",
+    "description": "Run across nodes and drives with high availability and predictable scale.",
+    "icon": NetworkIcon,
+    "featureDescription": "Deploy across multiple nodes and drives. RustFS distributes data and traffic across the cluster to remove single points of failure and keep performance predictable.",
     "features": [
-      "High performance - better encryption/decryption performance than other products",
-      "Security - better security through rotation methods",
-      "Easy integration - RustyVault provides simple APIs and command-line tools"
+      "Multi-node, multi-drive topology",
+      "Automatic failover behavior",
+      "Horizontal performance scaling"
     ],
-    "review": {
-      "name": "Sophia Grant",
-      "position": "CTO",
-      "img": "/images/faces/sophia-grant.jpeg",
-      "review": "RustFS integrates very conveniently with Vault products, ensuring our data compliance and security encryption needs"
-    }
   },
   {
-    "title": "Version Control",
-    "description": "Object storage version control feature assigns unique identifiers to each object version, allowing users to access and manage historical versions through APIs or management interfaces.",
-    "icon": Layers3Icon,
-    "url": "#",
-    "featureDescription": "Object storage is a data storage architecture used to store and manage large amounts of unstructured data, such as images, videos, documents, and backups. Version control is a feature of object storage that allows users to save and access multiple versions of an object:",
+    "title": "Dynamic Pool Orchestration",
+    "plane": "Pool plane",
+    "token": "rebalance()",
+    "description": "Expand, rebalance, and retire pools without planned downtime.",
+    "icon": GitBranchIcon,
+    "featureDescription": "Take control of the full cluster lifecycle with pool expansion, data rebalancing, and safe decommissioning for aging hardware.",
     "features": [
-      "Data protection and recovery - version control allows users to restore to previous versions",
-      "Historical tracking - version control records the historical changes of each object",
-      "Collaboration and concurrent editing - multiple users can work independently without affecting the main version"
+      "Pool-level expansion",
+      "Automatic data rebalancing",
+      "Zero-downtime decommissioning"
     ],
-    "review": {
-      "name": "Liam Harper",
-      "position": "Senior Engineer",
-      "img": "/images/faces/liam-harper.jpeg",
-      "review": "Since each version is saved in object storage, the backup and recovery process becomes much simpler"
-    }
   },
   {
-    "title": "Limitless Scalability",
-    "description": "RustFS system automatically balances node loads, ensures even data distribution, supports dynamic addition or removal of resources based on storage needs, achieving Limitless Scalability.",
-    "icon": ExpandIcon,
-    "url": "#",
-    "featureDescription": "RustFS supports Limitless Scalability and massive data storage, easily handling large-scale data storage requirements. RustFS storage capacity can expand infinitely as data volume grows, without being limited by storage capacity constraints.",
+    "title": "Multi-Protocol Access",
+    "plane": "Access plane",
+    "token": "S3 + MCP",
+    "description": "Expose the same storage through S3, Swift, FTP(s), WebDAV, and MCP.",
+    "icon": WorkflowIcon,
+    "featureDescription": "Break down data silos by letting diverse applications read, write, and manage the same storage without protocol translation bottlenecks.",
     "features": [
-      "Distributed architecture - data is distributed across multiple nodes",
-      "Data Sharding - Large objects are distributed as granular fragments/shards.",
-      "Zero-Master Architecture - avoids centralized metadata server failures and service interruptions"
+      "Native S3 compatibility",
+      "WebDAV, Swift, and FTP(s) access",
+      "MCP-ready automation paths"
     ],
-    "review": {
-      "name": "Noah Carter",
-      "position": "Database Engineer",
-      "img": "/images/faces/noah-carter.jpeg",
-      "review": "Any node interruption or damage will not affect data security"
-    }
   },
   {
-    "title": "WORM Compliance",
-    "description": "Supports object locking mode, implementing WORM (Write Once, Read Many) functionality, preventing data from being modified or deleted within specified time ranges, ensuring data integrity.",
-    "icon": LockKeyholeIcon,
-    "url": "#",
-    "featureDescription": "WORM (Write Once, Read Many) in object storage is a data storage characteristic that ensures once data is written and solidified, it cannot be modified or deleted. The benefits of WORM include the following features:",
+    "title": "Defense-in-Depth Security",
+    "plane": "Trust plane",
+    "token": "IAM/KMS",
+    "description": "Layer IAM, OIDC, STS, mTLS, KMS encryption, and audit controls.",
+    "icon": ShieldCheckIcon,
+    "featureDescription": "Secure data infrastructure at every layer with identity, transport security, encryption, and audit controls designed for strict compliance environments.",
     "features": [
-      "Data protection - Prevents accidental or malicious modification.",
-      "Compliance - certain industries need to comply with specific regulations",
-      "Audit and evidence retention - this is very important for legal proceedings and investigations"
+      "IAM, OIDC, and STS integration",
+      "mTLS and KMS-driven encryption",
+      "Security audit coverage"
     ],
-    "review": {
-      "name": "Isabella Rhodes",
-      "position": "CEO",
-      "img": "/images/faces/isabella-rhodes.jpeg",
-      "review": "Our data is not allowed to be deleted, which is more in line with legal requirements"
-    }
   },
   {
-    "title": "Active Replication",
-    "description": "Automatically creates multiple copies when objects are written and distributes them to different nodes, supports synchronous and asynchronous replication modes, providing high availability and disaster recovery capabilities.",
-    "icon": BookCopyIcon,
-    "url": "#",
-    "featureDescription": "Active Replication in object storage is a data redundancy strategy that involves replicating data between multiple geographic locations or data centers. These replicas can be synchronously or asynchronously replicated:",
+    "title": "Operational Control & Telemetry",
+    "plane": "Ops plane",
+    "token": "otel.trace",
+    "description": "Track capacity, health, events, and OTEL signals from one control plane.",
+    "icon": CloudCogIcon,
+    "featureDescription": "Streamline operations with native OpenTelemetry integration, instant event notifications, capacity metrics, and node health monitoring.",
     "features": [
-      "High availability - better balance and scalability ensure services are provided at locations closest to users",
-      "Disaster recovery - other regions take over when regional failures or disasters occur",
-      "Geographic redundancy - provides highly reliable services to customers globally"
+      "OpenTelemetry support",
+      "Event notifications",
+      "Node and capacity visibility"
     ],
-    "review": {
-      "name": "James Porter",
-      "position": "CEO",
-      "img": "/images/faces/james-porter.jpeg",
-      "review": "For unstructured data, it saves more costs than traditional SAN storage"
-    }
+  },
+  {
+    "title": "Cloud Native Deployment",
+    "plane": "Runtime plane",
+    "token": "helm install",
+    "description": "Use Helm Charts and a Kubernetes Operator for automated lifecycle control.",
+    "icon": BinaryIcon,
+    "featureDescription": "Provision, scale, and heal RustFS clusters through cloud-native orchestration primitives.",
+    "features": [
+      "Official Helm Charts",
+      "Kubernetes Operator support",
+      "Automated provisioning and scaling"
+    ],
+  },
+  {
+    "title": "AI & Agent-Native Infrastructure",
+    "plane": "Agent plane",
+    "token": "rc + MCP",
+    "description": "Let agents and CI/CD pipelines query and orchestrate storage resources.",
+    "icon": Code2Icon,
+    "featureDescription": "RustFS is built for agentic workflows with MCP support and the rc CLI for automated storage management.",
+    "features": [
+      "Model Context Protocol support",
+      "Powerful rc CLI automation",
+      "Agent-friendly operational workflows"
+    ],
   }
 ];
 
 export default features;
-

@@ -1,143 +1,82 @@
 'use client'
 
 import { CheckIcon, XIcon } from "lucide-react";
+import HomeSectionHeader from "./home-section-header";
 
-export default function HomeDifferents() {return (
-    <section className="relative pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32 bg-muted"
-    // style={{
-    //   backgroundImage: "url('/svgs/backgrounds/gradient-transparent.svg')",
-    //   backgroundSize: "cover",
-    //   backgroundPosition: "center",
-    //   backgroundRepeat: "no-repeat"
-    // }}
-    >
-      {/* Features */}
-      <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-          <h2 className="text-2xl font-bold md:text-4xl md:leading-tight">
-            {'RustFS vs. The Competition'}
-          </h2>
-          <p className="mt-4">
-            {'Choose RustFS for more advantages'}
-          </p>
-        </div>
+const comparisonRows = [
+  {
+    other: "Memory safety depends on runtime and implementation discipline",
+    rustfs: "Memory-safe Rust development",
+  },
+  {
+    other: "Telemetry and logging may leave local control boundaries",
+    rustfs: "Self-hosted control with no foreign logging",
+  },
+  {
+    other: "License terms can restrict commercial redistribution",
+    rustfs: "Business-friendly Apache 2.0 license",
+  },
+  {
+    other: "S3 behavior can differ across products and gateways",
+    rustfs: "Full S3 support for existing cloud ecosystems",
+  },
+  {
+    other: "Platform coverage often depends on separate editions",
+    rustfs: "Broad multi-architecture support",
+  },
+  {
+    other: "Pricing and support can drift as storage grows",
+    rustfs: "Predictable open-source foundation and support path",
+  },
+];
 
-        <div className="relative flex w-full flex-col gap-6 lg:flex-row xl:mx-auto xl:w-10/12">
-          <div className="relative rounded-xl bg-card md:w-1/2 lg:text-right">
-            <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">{'Other object storage'}</h3>
-            <div className="text-muted-foreground">
-              <div className="flex items-center gap-2 bg-muted p-4 md:flex-row-reverse lg:px-8">
-                <XIcon className="text-muted-foreground" />
-                <span>{'Memory-safe Architecture (Built with Rust)'}</span>
-              </div>
-              <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
-                <XIcon className="text-muted-foreground" />
-                <span>{'Data Sovereignty & Local Compliance'}</span>
-              </div>
-              <div className="flex items-center gap-2 bg-muted p-4 md:flex-row-reverse lg:px-8">
-                <XIcon className="text-muted-foreground" />
-                <span>{'AGPL V3 licensing issues'}</span>
-              </div>
-              <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
-                <span>{'Inconsistent S3 compatibility across other providers'}</span>
-              </div>
-              <div className="flex items-center gap-2 bg-muted p-4 md:flex-row-reverse lg:px-8">
-                <XIcon className="text-muted-foreground" />
-                <span>{'Limited Platform Compatibility'}</span>
-              </div>
-              <div className="flex items-center gap-2 p-4 md:flex-row-reverse lg:px-8 ">
-                <span>{'Annual price hikes up to millions'}</span>
-              </div>
+export default function HomeDifferents() {
+  return (
+    <section className="relative border-y border-border bg-muted/30 py-20 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <HomeSectionHeader
+          sectionNumber="04"
+          eyebrow="Competitive profile"
+          title="RustFS vs. legacy object storage"
+          description="Choose RustFS when memory safety, S3 compatibility, open licensing, and predictable operations matter more than vendor lock-in."
+        />
+
+        <div className="border border-border bg-card">
+          <div className="grid border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground lg:grid-cols-2">
+            <div className="border-b border-border px-5 py-3 lg:border-b-0 lg:border-r">
+              Other object storage
             </div>
-
-            <div className="absolute bottom-0 inset-s-0 hidden -translate-x-16 translate-y-16 md:block">
-              <svg
-                className="h-auto w-56 text-info"
-                width={347}
-                height={188}
-                viewBox="0 0 347 188"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4 82.4591C54.7956 92.8751 30.9771 162.782 68.2065 181.385C112.642 203.59 127.943 78.57 122.161 25.5053C120.504 2.2376 93.4028 -8.11128 89.7468 25.5053C85.8633 61.2125 130.186 199.678 180.982 146.248L214.898 107.02C224.322 95.4118 242.9 79.2851 258.6 107.02C274.299 134.754 299.315 125.589 309.861 117.539L343 93.4426"
-                  stroke="currentColor"
-                  strokeWidth={7}
-                  strokeLinecap="round"
-                />
-              </svg>
+            <div className="px-5 py-3 text-brand">
+              RustFS
             </div>
           </div>
 
-          <div className="relative rounded-xl bg-card text-left md:w-1/2">
-            <h3 className="p-4 text-xl font-semibold lg:p-8 lg:text-3xl">{'RustFS'}</h3>
-            <div className="text-muted-foreground">
-              <div className="flex items-center gap-2 bg-muted p-4 lg:px-8">
-                <CheckIcon className="text-success" />
-                <span>{'Memory-safe Rust development'}</span>
+          <div className="divide-y divide-border">
+            {comparisonRows.map((row, index) => (
+              <div key={row.rustfs} className="grid lg:grid-cols-2">
+                <div className="grid grid-cols-[3.5rem_1fr] border-b border-border text-muted-foreground lg:border-b-0 lg:border-r">
+                  <span className="flex items-center justify-center border-r border-border">
+                    <XIcon className="size-4" aria-hidden="true" />
+                  </span>
+                  <span className="px-5 py-5 text-sm leading-6">{row.other}</span>
+                </div>
+                <div className="grid grid-cols-[3.5rem_1fr] text-foreground">
+                  <span className="flex items-center justify-center border-r border-border text-brand">
+                    <CheckIcon className="size-4" aria-hidden="true" />
+                  </span>
+                  <span className="px-5 py-5 text-sm font-medium leading-6">
+                    <span className="mr-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                      WIN.{String(index + 1).padStart(2, "0")}
+                    </span>
+                    {row.rustfs}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 p-4 lg:px-8 ">
-                <CheckIcon className="text-success" />
-                <span>{'No foreign logging'}</span>
-              </div>
-              <div className="flex items-center gap-2 bg-muted p-4 lg:px-8">
-                <CheckIcon className="text-success" />
-                <span>{'Business-friendly Apache license'}</span>
-              </div>
-              <div className="flex items-center gap-2 p-4 lg:px-8 ">
-                <CheckIcon className="text-success" />
-                <span>{'Full S3 support for global clouds'}</span>
-              </div>
-              <div className="flex items-center gap-2 bg-muted p-4 lg:px-8">
-                <CheckIcon className="text-success" />
-                <span>{'Extensive Multi-Architecture Support'}</span>
-              </div>
-              <div className="flex items-center gap-2 p-4 lg:px-8 ">
-                <CheckIcon className="text-success" />
-                <span>{'Stable pricing and support'}</span>
-              </div>
-            </div>
-
-            <span className="absolute inset-e-0 top-0 rounded-es-xl rounded-se-xl bg-success px-3 py-1.5 text-xs font-medium text-success-foreground">
-              {'Best choice'}
-            </span>
-
-            <div className="absolute inset-e-0 top-0 hidden translate-x-16 translate-y-16 md:block">
-              <svg
-                className="h-auto w-16 text-warning"
-                width={121}
-                height={135}
-                viewBox="0 0 121 135"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5 16.4754C11.7688 27.4499 21.2452 57.3224 5 89.0164"
-                  stroke="currentColor"
-                  strokeWidth={10}
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M33.6761 112.104C44.6984 98.1239 74.2618 57.6776 83.4821 5"
-                  stroke="currentColor"
-                  strokeWidth={10}
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M50.5525 130C68.2064 127.495 110.731 117.541 116 78.0874"
-                  stroke="currentColor"
-                  strokeWidth={10}
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
+            ))}
           </div>
+
         </div>
-        <div className="mt-7 text-center">
-          <p className="text-xs text-muted-foreground">{'* Comparison for reference only'}</p>
-        </div>
-        {/* End Features */}
       </div>
-    </section >
+    </section>
   )
 }

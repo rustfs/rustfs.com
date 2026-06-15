@@ -18,32 +18,45 @@ export default function StatsStrip({
 }: StatsStripProps) {
   const items = useMemo(
     () => [
-      { label: "GitHub Stars", value: metrics.stars },
-      { label: "GitHub Forks", value: metrics.forks },
-      { label: "Repo Commits", value: metrics.commits },
-      { label: "Docker Pulls", value: dockerPulls },
+      { label: "GitHub Stars", token: "stars", value: metrics.stars },
+      { label: "Global Instances", token: "nodes", text: "1M+" },
+      { label: "Repo Commits", token: "commits", value: metrics.commits },
+      { label: "Docker Pulls", token: "pulls", value: dockerPulls },
     ],
     [metrics, dockerPulls],
   );
 
   return (
-    <section className={cn("text-muted-foreground body-font", className)}>
-      <div className="container px-5 py-12 lg:py-16 xl:py-20 mx-auto">
-        <div className="flex flex-wrap -m-4 text-left">
-          {items.map(({ label, value }) => (
-            <div key={label} className="px-4 sm:w-1/4 w-1/2 pl-6 border-l mt-4 xl:mt-0">
-              <h2 className="title-font font-extrabold sm:text-4xl text-2xl text-foreground">
+    <section className={cn("text-muted-foreground", className)}>
+      <div className="grid gap-y-6 border-t border-border pt-6 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map(({ label, token, value, text }, index) => (
+          <div
+            key={label}
+            className="lg:border-r lg:border-border lg:px-6 lg:first:pl-0 lg:last:border-r-0"
+          >
+            <div className="mb-4 flex items-center gap-3">
+              <code className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                {token}
+              </code>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                / {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <h2 className="font-extrabold text-3xl text-foreground sm:text-4xl">
+              {typeof value === "number" ? (
                 <NumberTicker
                   value={value}
                   className="text-foreground"
                 />
-              </h2>
-              <p className="mt-4 text-base text-muted-foreground font-bold text-left uppercase">
-                {label}
-              </p>
-            </div>
-          ))}
-        </div>
+              ) : (
+                <span>{text}</span>
+              )}
+            </h2>
+            <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+              {label}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );

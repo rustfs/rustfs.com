@@ -210,26 +210,43 @@ export default function ErasureCodeCalculator() {
   }, [stripeInfo, servers, drivesPerServer]);
 
   useEffect(() => {
+    let nextStripeSize: number | null = null;
+
     if (stripeInfo.stripeSizes.length === 0) {
-      setStripeSize(0);
+      nextStripeSize = 0;
+    } else if (!stripeInfo.stripeSizes.includes(stripeSize)) {
+      nextStripeSize = stripeInfo.stripeSizes[0];
+    }
+
+    if (nextStripeSize === null) {
       return;
     }
 
-    if (!stripeInfo.stripeSizes.includes(stripeSize)) {
-      setStripeSize(stripeInfo.stripeSizes[0]);
-    }
+    const frame = window.requestAnimationFrame(() => {
+      setStripeSize(nextStripeSize);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [stripeInfo.stripeSizes, stripeSize]);
 
   useEffect(() => {
+    let nextParity: number | null = null;
+
     if (parityOptions.length === 0) {
-      setParity(0);
+      nextParity = 0;
+    } else if (!parityOptions.includes(parity)) {
+      nextParity = totalDrives >= 16 && parityOptions.includes(4) ? 4 : parityOptions[0];
+    }
+
+    if (nextParity === null) {
       return;
     }
 
-    if (!parityOptions.includes(parity)) {
-      const preferred = totalDrives >= 16 && parityOptions.includes(4) ? 4 : parityOptions[0];
-      setParity(preferred);
-    }
+    const frame = window.requestAnimationFrame(() => {
+      setParity(nextParity);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [parityOptions, parity, totalDrives]);
 
   useEffect(() => {
@@ -254,11 +271,15 @@ export default function ErasureCodeCalculator() {
         Number.isFinite(nextStripe) &&
         Number.isFinite(nextParity)
       ) {
-        setServers(nextServers);
-        setDrivesPerServer(nextDrives);
-        setDriveCapacity(nextCapacity);
-        setStripeSize(nextStripe);
-        setParity(nextParity);
+        const frame = window.requestAnimationFrame(() => {
+          setServers(nextServers);
+          setDrivesPerServer(nextDrives);
+          setDriveCapacity(nextCapacity);
+          setStripeSize(nextStripe);
+          setParity(nextParity);
+        });
+
+        return () => window.cancelAnimationFrame(frame);
       }
     }
   }, []);

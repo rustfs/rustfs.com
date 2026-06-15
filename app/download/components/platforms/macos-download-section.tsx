@@ -89,7 +89,8 @@ export default function MacOSDownloadSection({ platform, release, className }: M
               `curl --progress-bar -L -O ${finalAarch64Url}`,
               `unzip ${getFilenameFromUrl(finalAarch64Url, 'aarch64')}`,
               "chmod +x rustfs",
-              "./rustfs --version",
+              "cp rustfs /usr/local/bin/",
+              "rustfs --version",
             ]}
             title={'Installation Commands'}
           />
@@ -128,7 +129,8 @@ export default function MacOSDownloadSection({ platform, release, className }: M
               `curl --progress-bar -L -O ${finalX86_64Url}`,
               `unzip ${getFilenameFromUrl(finalX86_64Url, 'x86_64')}`,
               "chmod +x rustfs",
-              "./rustfs --version",
+              "cp rustfs /usr/local/bin/",
+              "rustfs --version",
             ]}
             title={'Installation Commands'}
           />

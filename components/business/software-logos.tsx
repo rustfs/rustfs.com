@@ -11,6 +11,7 @@ import PrometheusIcon from "../../public/svgs/softwares/prometheus.svg";
 import SparkIcon from "../../public/svgs/softwares/spark.svg";
 import TensorflowIcon from "../../public/svgs/softwares/tensorflow.svg";
 import WebhooksIcon from "../../public/svgs/softwares/webhooks.svg";
+import HomeSectionHeader from "./home-section-header";
 
 type SoftwareKey =
   | "docker"
@@ -41,6 +42,21 @@ const softwares: SoftwareKey[] = [
   "webhooks",
 ];
 
+const softwareLabels: Record<SoftwareKey, string> = {
+  docker: "Docker",
+  elastic: "Elastic",
+  grafana: "Grafana",
+  kafka: "Kafka",
+  mysql: "MySQL",
+  nginx: "Nginx",
+  postgresql: "PostgreSQL",
+  clickhouse: "ClickHouse",
+  prometheus: "Prometheus",
+  spark: "Spark",
+  tensorflow: "TensorFlow",
+  webhooks: "Webhooks",
+};
+
 const iconMap: Record<SoftwareKey, React.ComponentType<{ className?: string; style?: React.CSSProperties; fill?: string }>> = {
   docker: DockerIcon,
   elastic: ElasticIcon,
@@ -58,34 +74,36 @@ const iconMap: Record<SoftwareKey, React.ComponentType<{ className?: string; sty
 
 export default function SoftwareLogos() {
   return (
-    <section className="bg-muted/40 relative overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 pb-16 lg:pt-32">
-      <div className="max-w-7xl mx-auto">
-        <p className="font-display text-base text-foreground font-bold text-center">
-          {
-            "Trusted by the open-source community / Enterprise-grade open source solution"
-          }
-        </p>
-        <p className="font-display text-base text-muted-foreground font-bold text-center">compatible with over Compatible with 1,500+ applications and integrations</p>
-        <ul
-          role="list"
-          className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:flex-col sm:gap-x-0 sm:gap-y-10 md:flex-row xl:gap-x-16 xl:gap-y-6"
-        >
-          {softwares.map((software) => {
-            const IconComponent = iconMap[software];
+    <section className="relative overflow-hidden border-y border-border bg-muted/30 py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <HomeSectionHeader
+          sectionNumber="01"
+          eyebrow="Integration surface"
+          title="Works with the storage ecosystem"
+          description="RustFS keeps S3 compatibility at the center, so existing analytics, observability, AI, and delivery tools can keep using the object storage interfaces they already know."
+        />
+        <div className="border border-border bg-card">
+          <ul role="list" className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
+            {softwares.map((software) => {
+              const IconComponent = iconMap[software];
 
-            return (
-              <li key={software} className="flex">
-                <div className="w-40 h-20 text-foreground/70 transition-colors duration-200 flex items-center justify-center">
-                  <IconComponent
-                    className="w-full h-full"
-                    style={{ color: "currentColor" }}
-                    fill="currentColor"
-                  />
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+              return (
+                <li key={software} className="flex min-h-36 flex-col items-center justify-center bg-card p-5 text-center sm:min-h-40">
+                  <span className="flex h-16 w-full max-w-36 items-center justify-center text-foreground/75 sm:h-20 sm:max-w-44">
+                    <IconComponent
+                      className="h-full w-full"
+                      style={{ color: "currentColor" }}
+                      fill="currentColor"
+                    />
+                  </span>
+                  <span className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    {softwareLabels[software]}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </section>
   );

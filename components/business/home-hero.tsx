@@ -1,109 +1,62 @@
 'use client'
 
-import { WordRotate } from "@/components/magicui/word-rotate";
-import { Globe } from "@/components/ui/globe";
-import type { GitHubMetrics } from "@/lib/github";
-import { useTheme } from "next-themes";
-import { useMemo } from "react";
-import ContactUsButton from "./buttons/contact-us";
-import DownloadLink from "./buttons/download-link";
-import StatsStrip from "./stats-strip";
-//import GetStartedButton from "./buttons/get-started";
-
-// 导入所有软件SVG图标
+import type { GitHubMetrics } from "@/lib/github"
+import ContactUsButton from "./buttons/contact-us"
+import DownloadLink from "./buttons/download-link"
+import GlobePanel from "./globe-panel"
+import StatsStrip from "./stats-strip"
 
 interface HomeHeroProps {
   dockerPulls: number;
   metrics: GitHubMetrics;
 }
 
+const stackItems = [
+  { label: "Apache 2.0", value: "open source" },
+  { label: "S3 API", value: "drop-in" },
+  { label: "Rust core", value: "memory-safe" },
+  { label: "AI data", value: "petabyte-scale" },
+];
+
+const heroButtonClassName = "!h-14 !min-h-14 w-full !px-0 !py-0 leading-none sm:!w-48";
+
 export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
-  const { theme } = useTheme();
-
-  const isDark = theme === "dark";
-
-  const globeConfig = useMemo(
-    () => ({
-      width: 800,
-      height: 800,
-      phi: 0,
-      theta: 0.3,
-      dark: isDark ? 1 : 0,
-      diffuse: isDark ? 1.2 : 0.8,
-      mapBrightness: isDark ? 1.2 : 1.2,
-      baseColor: isDark
-        ? ([0.7, 0.85, 1] as [number, number, number])
-        : ([1, 1, 1] as [number, number, number]),
-      markerColor: [251 / 255, 100 / 255, 21 / 255] as [
-        number,
-        number,
-        number
-      ],
-      glowColor: isDark
-        ? ([0.6, 0.75, 1] as [number, number, number])
-        : ([1, 1, 1] as [number, number, number]),
-      mapSamples: 16000,
-      devicePixelRatio: 2,
-      onRender: () => { },
-      markers: [
-        { location: [14.5995, 120.9842] as [number, number], size: 0.03 },
-        { location: [19.076, 72.8777] as [number, number], size: 0.1 },
-        { location: [23.8103, 90.4125] as [number, number], size: 0.05 },
-        { location: [30.0444, 31.2357] as [number, number], size: 0.07 },
-        { location: [39.9042, 116.4074] as [number, number], size: 0.08 },
-        { location: [-23.5505, -46.6333] as [number, number], size: 0.1 },
-        { location: [19.4326, -99.1332] as [number, number], size: 0.1 },
-        { location: [40.7128, -74.006] as [number, number], size: 0.1 },
-        { location: [34.6937, 135.5022] as [number, number], size: 0.05 },
-        { location: [41.0082, 28.9784] as [number, number], size: 0.06 },
-        { location: [22.5431, 114.0579] as [number, number], size: 0.08 },
-        { location: [31.2304, 121.4737] as [number, number], size: 0.08 },
-        { location: [30.6624, 104.0633] as [number, number], size: 0.07 },
-        { location: [34.0522, -118.2437] as [number, number], size: 0.1 },
-        { location: [43.6532, -79.3832] as [number, number], size: 0.08 },
-        { location: [1.3521, 103.8198] as [number, number], size: 0.07 },
-      ],
-    }),
-    [isDark]
-  );
-
   return (
-    <section className="relative mx-auto max-w-7xl overflow-hidden px-4 sm:px-6 lg:px-8 pt-12 pb-16 xl:pt-16">
-      <div className="relative flex items-center gap-12">
-        <div className="space-y-6 text-center lg:text-left relative z-20 lg:w-3/5">
-          <h1 className="font-display text-3xl font-extrabold tracking-tight text-primary sm:text-4xl md:text-5xl xl:text-6xl leading-tight">
-            The fast data foundation for the AI era.
-          </h1>
-          {/* <p className="mx-auto lg:mx-0 max-w-2xl text-lg tracking-tight text-secondary-foreground">
-            RustFS is developed with the popular and secure Rust language, compatible with S3 protocol. Suitable for AI/ML and massive data storage, big data, internet, industrial and confidential storage scenarios. Significantly reduces TCO. Follows Apache 2 license, Compatible with diverse hardware ecosystems.
-          </p> */}
-          <div className="text-lg font-semibold text-primary/90 flex items-center justify-center lg:justify-start gap-2">
-            <span>Built for</span>
-            <WordRotate
-              words={[
-                'AI/ML Pipelines',
-                'Hyper-Scale Data Lakes',
-                'Multi-Cloud Storage',
-                'S3-Compatible Ecosystems',
-                'Enterprise Reliability'
-              ]}
-              className="inline-flex"
-            />
+    <section className="relative overflow-hidden pt-14 pb-16 sm:pt-20 lg:pb-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-8">
+          <div className="relative z-10">
+            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
+              Rust-native object storage
+            </p>
+            <h1 className="max-w-3xl font-display text-4xl font-extrabold leading-tight text-primary sm:text-5xl xl:text-6xl">
+              S3-compatible object storage, built in Rust.
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg md:leading-8">
+              RustFS is an Apache 2.0 distributed object store for AI data centers, cloud-native platforms, and MinIO migrations.
+            </p>
+
+            <dl className="mt-8 grid gap-x-6 gap-y-4 text-sm sm:grid-cols-2 xl:grid-cols-4">
+              {stackItems.map((item) => (
+                <div key={item.label} className="relative pl-4">
+                  <span className="absolute left-0 top-1 h-8 w-px bg-border" />
+                  <dt className="font-semibold text-foreground">{item.label}</dt>
+                  <dd className="mt-1 text-xs text-muted-foreground">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+              <DownloadLink className={`${heroButtonClassName} shadow-[inset_0_0_0_1px_var(--primary)]`} />
+              <ContactUsButton className={`${heroButtonClassName} bg-background text-foreground shadow-[inset_0_0_0_1px_var(--border)] hover:bg-muted hover:text-foreground active:bg-muted focus-visible:outline-border`} />
+            </div>
           </div>
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
-            <DownloadLink />
-            <ContactUsButton className="md:inline-flex bg-secondary text-secondary-foreground hover:bg-secondary/90 hover:text-secondary-foreground/90 active:bg-secondary/80 active:text-secondary-foreground/80 focus-visible:outline-secondary transition-colors" />
-          </div>
+
+          <GlobePanel className="lg:min-h-[36rem]" />
         </div>
 
-        <div className="flex items-center justify-center lg:w-2/5 absolute bottom-[-50vh] left-0 right-0 md:static w-full md:w-auto opacity-40 lg:opacity-100">
-          <div className="relative w-full max-w-[560px] md:max-w-[620px] lg:max-w-[680px] aspect-square">
-            <Globe className="h-full w-full opacity-95 drop-shadow-2xl" config={globeConfig} />
-          </div>
-        </div>
+        <StatsStrip className="mt-10" dockerPulls={dockerPulls} metrics={metrics} />
       </div>
-
-      <StatsStrip className="mt-6 lg:mt-8" dockerPulls={dockerPulls} metrics={metrics} />
-    </section >
+    </section>
   )
 }

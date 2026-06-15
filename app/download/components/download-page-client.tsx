@@ -7,16 +7,18 @@ import LinuxIcon from "@/public/svgs/brands/linux.svg";
 import WindowsIcon from "@/public/svgs/brands/windows.svg";
 import { BookOpenIcon, MessageCircleIcon } from "lucide-react";
 import { useEffect, useMemo, useState } from 'react';
+import InstallationTopology from './installation-topology';
 import PlatformSelector from './platform-selector';
 import PlatformFactory from './platforms/platform-factory';
 import { type PlatformInfoData } from './platforms/platform-info';
+import RcDownloadSection from './rc-download-section';
 
 interface DownloadPageClientProps {
   release: GitHubRelease | null;
-  launcherRelease: GitHubRelease | null;
+  cliRelease: GitHubRelease | null;
 }
 
-export default function DownloadPageClient({ release, launcherRelease }: DownloadPageClientProps) {// 使用 download 命名空间
+export default function DownloadPageClient({ release, cliRelease }: DownloadPageClientProps) {// 使用 download 命名空间
 
   // 平台配置 - 直接使用 useMemo，不依赖 t 函数
   const platforms = useMemo((): PlatformInfoData[] => [
@@ -53,42 +55,31 @@ export default function DownloadPageClient({ release, launcherRelease }: Downloa
   const availablePlatforms = useMemo(() => platforms.filter((p: PlatformInfoData) => p.available), [platforms]);
 
   // State management
-  const [selectedPlatform, setSelectedPlatform] = useState<PlatformInfoData | null>(null);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState<PlatformInfoData | null>(
+    availablePlatforms[0] ?? null
+  );
 
-  // Initialize selected platform - 只在组件挂载时执行一次
+  // Initialize from URL after hydration so server and client markup stay stable.
   useEffect(() => {
-    // 确保只初始化一次
-    if (isInitialized) {
+    if (typeof window === 'undefined') {
       return;
     }
 
-    // 确保 platforms 和 availablePlatforms 已经准备好
-    if (!platforms.length || !availablePlatforms.length) {
+    const platformParam = new URLSearchParams(window.location.search).get('platform');
+    const platform = platformParam
+      ? platforms.find((item: PlatformInfoData) => item.id === platformParam && item.available)
+      : null;
+
+    if (!platform || platform.id === selectedPlatform?.id) {
       return;
     }
 
-    // Get platform parameter from URL (client-side only)
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const platformParam = urlParams.get('platform');
+    const frame = window.requestAnimationFrame(() => {
+      setSelectedPlatform(platform);
+    });
 
-      if (platformParam) {
-        const platform = platforms.find((p: PlatformInfoData) => p.id === platformParam);
-        if (platform && platform.available) {
-          setSelectedPlatform(platform);
-          setIsInitialized(true);
-          return;
-        }
-      }
-    }
-
-    // If no valid platform parameter, use first available platform
-    if (availablePlatforms.length > 0) {
-      setSelectedPlatform(availablePlatforms[0]);
-      setIsInitialized(true);
-    }
-  }, [platforms, availablePlatforms, isInitialized]);
+    return () => window.cancelAnimationFrame(frame);
+  }, [platforms, selectedPlatform?.id]);
 
   // Handle platform selection change
   const handlePlatformChange = (platform: PlatformInfoData) => {
@@ -116,7 +107,7 @@ export default function DownloadPageClient({ release, launcherRelease }: Downloa
           </div>
 
           <p className="mx-auto max-w-3xl text-lg text-muted-foreground">
-            {'Choose the RustFS version that suits your system, supporting Windows, Linux, macOS and Docker deployment. Start experiencing high-performance distributed storage systems.'}
+            {'Find the best installation method for RustFS Server and the native rc CLI across Linux, macOS, Windows, Docker, and Kubernetes.'}
           </p>
 
           <div className="mt-8 flex justify-center">
@@ -170,10 +161,13 @@ export default function DownloadPageClient({ release, launcherRelease }: Downloa
       {selectedPlatform && (
         <section className="py-16 bg-muted/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <PlatformFactory platform={selectedPlatform} release={release} launcherRelease={launcherRelease} />
+            <PlatformFactory platform={selectedPlatform} release={release} />
           </div>
         </section>
       )}
+
+      <RcDownloadSection release={cliRelease} />
+      <InstallationTopology />
 
       {/* Help Section */}
       <section className="py-16 bg-background">
@@ -182,7 +176,7 @@ export default function DownloadPageClient({ release, launcherRelease }: Downloa
             {'Need Help?'}
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <a
               href="https://docs.rustfs.com"
               className="p-6 bg-card rounded-lg border border-border hover:border-primary/50 transition-colors group"
@@ -199,17 +193,32 @@ export default function DownloadPageClient({ release, launcherRelease }: Downloa
             </a>
 
             <a
-              href="https://github.com/rustfs/rustfs/discussions"
+              href="https://github.com/rustfs/rustfs/issues"
               className="p-6 bg-card rounded-lg border border-border hover:border-primary/50 transition-colors group"
             >
               <div className="w-12 h-12 mx-auto mb-4 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                 <MessageCircleIcon className="w-6 h-6 text-primary" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-2">
-                {'Community Support'}
+                {'GitHub Issue'}
               </h3>
               <p className="text-sm text-muted-foreground">
-                {'Join community discussions and get technical support'}
+                {'Report bugs, request help, and track technical issues'}
+              </p>
+            </a>
+
+            <a
+              href="https://discord.gg/NcKBCEJp6P"
+              className="p-6 bg-card rounded-lg border border-border hover:border-primary/50 transition-colors group"
+            >
+              <div className="w-12 h-12 mx-auto mb-4 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                <MessageCircleIcon className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">
+                {'Discord'}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {'Join the RustFS community for discussion and support'}
               </p>
             </a>
           </div>

@@ -1,115 +1,107 @@
 'use client'
 
+import HomeSectionHeader from "./home-section-header";
+
+const reasons = [
+  {
+    title: "High-Performance",
+    token: "perf",
+    description: "Built with Rust. Zero-overhead. Hardware-saturated.",
+  },
+  {
+    title: "Security & Compliance",
+    token: "trust",
+    description: "Self-hosted control, built-in security, and enterprise compliance.",
+  },
+  {
+    title: "Availability & Scale",
+    token: "scale",
+    description: "Distributed architecture with horizontal and vertical scaling.",
+  },
+  {
+    title: "Developer-First Experience",
+    token: "dx",
+    description: "Cross-platform support, versatile installations, and one-click deployment.",
+  },
+  {
+    title: "Open Source",
+    token: "oss",
+    description: "Apache-2.0 licensed, business-friendly, and vendor-independent.",
+  },
+  {
+    title: "S3-Compatible",
+    token: "s3",
+    description: "Fully S3-compatible for seamless integration and migration.",
+  },
+];
+
 export default function HomeStats() {return (
     <section
-      className="relative overflow-hidden bg-muted/40 text-foreground dark:bg-background dark:text-foreground py-32"
-    // style={{
-    //   backgroundImage: "url('/svgs/backgrounds/gradient-1.svg')",
-    //   backgroundSize: "cover",
-    //   backgroundPosition: "center",
-    //   backgroundRepeat: "no-repeat"
-    // }}
+      className="relative overflow-hidden border-y border-border bg-background py-24 text-foreground sm:py-32"
     >
-      {/* Features */}
-      <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-20">
-          <h2 className="text-3xl font-bold tracking-wide md:text-4xl md:leading-tight ">
-            {'Powerful Performance, Outstanding Security'}
-          </h2>
-          <p className="mt-4 text-muted">
-            {'RustFS provides high performance, high security, high concurrency, providing powerful support for your business'}
-          </p>
-        </div>
-        {/* Grid */}
-        <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-20">
-          <div className="lg:col-span-4">
-            {/* Stats */}
-            <div className="lg:pe-6 xl:pe-12">
-              <p className="text-8xl font-bold leading-10">
-                92%
-                <span className="ms-1 inline-flex items-center gap-x-1 rounded-full bg-background px-4 py-2 text-xs font-medium leading-4 text-foreground">
-                  <svg
-                    className="size-4 shrink-0"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={16}
-                    height={16}
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
-                  </svg>
-                  {'+7% Read/Write Speed'}
-                </span>
-              </p>
-              <p className="mt-6">
-                {'High security and high concurrency performance improvements from Rust'}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <HomeSectionHeader
+          sectionNumber="03"
+          eyebrow="Why RustFS"
+          title="A storage core built for production pressure"
+          description="A focused object storage foundation for modern AI, cloud-native, and enterprise workloads."
+        />
+        <div className="grid gap-4 lg:grid-cols-12">
+          <article className="border border-border bg-card p-6 sm:p-8 lg:col-span-5">
+            <code className="border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+              {reasons[0].token}
+            </code>
+            <h3 className="mt-8 text-2xl font-semibold text-foreground">
+              {reasons[0].title}
+            </h3>
+            <p className="mt-4 text-sm leading-7 text-muted-foreground">
+              {reasons[0].description}
+            </p>
+            <div className="mt-8 border border-border bg-background p-4">
+              <pre className="overflow-x-auto text-xs leading-6 text-muted-foreground">
+                <code>{`[rustfs]
+runtime = "memory-safe"
+io = "hardware-saturated"
+mode = "distributed"`}</code>
+              </pre>
+            </div>
+          </article>
+
+          <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:col-span-7">
+            {reasons.slice(1, 5).map((item) => (
+              <article key={item.title} className="bg-card p-6">
+                <div className="mb-8 flex items-center justify-between gap-4">
+                  <code className="border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                    {item.token}
+                  </code>
+                  <span className="h-px flex-1 bg-border" />
+                </div>
+                <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{item.description}</p>
+              </article>
+            ))}
+          </div>
+
+          <article className="grid border border-border bg-card lg:col-span-12 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
+              <code className="border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                {reasons[5].token}
+              </code>
+              <h3 className="mt-8 text-2xl font-semibold text-foreground">
+                {reasons[5].title}
+              </h3>
+              <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                {reasons[5].description}
               </p>
             </div>
-            {/* End Stats */}
-          </div>
-          {/* End Col */}
-
-          <div className="relative lg:col-span-8 lg:before:absolute lg:before:-inset-s-12 lg:before:top-0 lg:before:h-full lg:before:w-px lg:before:bg-foreground/10 dark:lg:before:bg-foreground/20">
-            <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4 lg:grid-cols-3">
-              {/* Stats */}
-              <div>
-                <p className="text-5xl font-semibold">99.99%</p>
-                <p className="mt-1">
-                  {'Data Read/Write Success Rate'}
-                </p>
-              </div>
-              {/* End Stats */}
-              {/* Stats */}
-              <div>
-                <p className="text-5xl font-semibold">100%</p>
-                <p className="mt-1">
-                  {'S3 Compatibility'}
-                </p>
-              </div>
-              {/* End Stats */}
-
-              {/* Stats */}
-              <div>
-                <p className="text-5xl font-semibold">95%</p>
-                <p className="mt-1">
-                  {'User Satisfaction'}
-                </p>
-              </div>
-              {/* End Stats */}
-
-              {/* Stats */}
-              <div>
-                <p className="text-5xl font-semibold">0</p>
-                <p className="mt-1">
-                  {'Intellectual Property Risk'}
-                </p>
-              </div>
-              {/* End Stats */}
-
-              {/* Stats */}
-              <div>
-                <p className="text-5xl font-semibold">～1 {'day'}</p>
-                <p className="mt-1">
-                  {'GitHub Issues Average Resolution Time'}
-                </p>
-              </div>
-              {/* End Stats */}
-
-              {/* Stats */}
-              <div>
-                <p className="text-5xl font-semibold">1000+</p>
-                <p className="mt-1">
-                  {'GitHub Commits'}
-                </p>
-              </div>
-              {/* End Stats */}
+            <div className="grid grid-cols-3 text-center text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <span className="border-r border-border px-3 py-10">AWS SDKs</span>
+              <span className="border-r border-border px-3 py-10">MinIO tools</span>
+              <span className="px-3 py-10">Cloud apps</span>
             </div>
-          </div>
-          {/* End Col */}
+          </article>
         </div>
-        {/* End Grid */}
       </div>
-      {/* End Features */}
     </section>
   )
 }

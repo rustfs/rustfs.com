@@ -2,136 +2,117 @@
 
 import features from '@/data/features';
 import { cn } from '@/lib/utils';
-import { CheckCircleIcon, QuoteIcon } from "lucide-react";
+import { CheckIcon } from "lucide-react";
 import { useState } from 'react';
+import HomeSectionHeader from './home-section-header';
 
 export default function HomeFeatures() {
   const [activeTab, setActiveTab] = useState(0);
+  const activeFeature = features[activeTab];
 
   return (
     <section className="relative pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32">
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-        {/* Title */}
-        <div className="mx-auto mb-10 text-center lg:mb-14">
-          <h2 className="text-3xl font-bold md:text-4xl tracking-wide md:leading-tight text-foreground">
-            High-performance <span className="text-brand">enterprise-grade distributed file system</span>
-          </h2>
-          <p className="text-muted-foreground mt-4">
-            Comprehensive features to meet enterprise-grade storage requirements
-          </p>
-        </div>
-        {/* End Title */}
+        <HomeSectionHeader
+          sectionNumber="02"
+          eyebrow="Capability matrix"
+          title="Core features"
+          description="Production-ready capabilities for distributed, S3-compatible object storage."
+        />
 
-        {/* Tab Nav */}
-        <nav className="mx-auto grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
+        <nav className="grid gap-px border border-border bg-border md:grid-cols-2 xl:grid-cols-4" aria-label="Core feature tabs" role="tablist" aria-orientation="horizontal">
           {features.map((feature, index) => (
             <button
               key={`${feature.title}-${index}`}
+              id={`core-feature-tab-${index}`}
               type="button"
               className={cn(
-                "w-full flex flex-col gap-2 text-start hover:bg-muted focus:outline-hidden focus:bg-muted p-2 sm:p-3 md:p-5 rounded-xl",
-                {
-                  'bg-muted text-brand': activeTab === index,
-                }
+                "group relative min-h-40 bg-card text-left transition-colors hover:bg-muted/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-brand/40",
+                activeTab === index && "bg-muted/35"
               )}
               onClick={() => setActiveTab(index)}
               aria-selected={activeTab === index}
+              aria-controls="core-feature-panel"
               role="tab"
             >
-              <div className='flex gap-4 items-center'>
-                <feature.icon className={cn(
-                  "shrink-0 size-5 sm:size-6 md:size-7 text-foreground",
-                  {
-                    'text-brand': activeTab === index,
-                  }
-                )} />
-                <span className={cn(
-                  "block font-semibold text-foreground text-sm md:text-xl",
-                  {
-                    'text-brand': activeTab === index,
-                  }
-                )}>
-                  {feature.title}
-                </span>
+              <span
+                className={cn(
+                  "absolute inset-y-0 left-0 w-0.5 bg-transparent transition-colors",
+                  activeTab === index && "bg-brand"
+                )}
+              />
+              <div className="flex h-full flex-col p-5">
+                <div className="flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  <span>{feature.plane}</span>
+                  <code className="uppercase tracking-[0.12em]">{feature.token}</code>
+                </div>
+
+                <div className="mt-7 flex items-start gap-4">
+                  <span className={cn(
+                    "flex size-11 shrink-0 items-center justify-center border border-border bg-background text-foreground transition-colors",
+                    activeTab === index && "border-brand bg-brand text-brand-foreground"
+                  )}>
+                    <feature.icon className="size-5" />
+                  </span>
+                  <span className={cn(
+                    "block text-base font-semibold leading-6 text-foreground",
+                    activeTab === index && "text-brand"
+                  )}>
+                    {feature.title}
+                  </span>
+                </div>
               </div>
-              <p className="hidden md:block mt-1 text-sm text-muted-foreground">
-                {feature.description}
-              </p>
             </button>
           ))}
         </nav>
-        {/* End Tab Nav */}
 
-        {/* Tab Content */}
-        <div className="mt-10 md:mt-16">
-          {features.map((feature, index) => (
-            <div
-              key={`${feature.title}-content-${index}`}
-              className={cn(
-                {
-                  'hidden': activeTab !== index,
-                }
-              )}
-              role="tabpanel"
-            >
-              {/* Feature Detail */}
-              <div className="relative mt-10 md:mt-20 overflow-hidden rounded-4xl md:bg-muted md:px-6 lg:px-14 md:py-8 lg:py-16 xl:px-16">
-                <div className="flex flex-col rounded-xl bg-background p-2 md:p-8 lg:p-12 shadow-xl ring-1 shadow-foreground/5 ring-border/60">
-                  <div className="flex items-center gap-6 mb-6">
-                    <feature.icon className="hidden md:block size-12 md:size-16 text-brand" />
-                    <div>
-                      <h3 className="text-2xl font-bold text-foreground mb-2">
-                        {feature.title}
-                      </h3>
-                      <p className="text-muted-foreground">
-                        {feature.featureDescription}
-                      </p>
-                    </div>
-                  </div>
+        <div
+          id="core-feature-panel"
+          className="mt-8 border border-border bg-card"
+          role="tabpanel"
+          aria-labelledby={`core-feature-tab-${activeTab}`}
+        >
+          <div className="grid border-b border-border text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground sm:grid-cols-[1fr_auto] sm:tracking-[0.2em]">
+            <span className="px-5 py-3 sm:px-8">
+              Selected surface / {activeFeature.plane}
+            </span>
+            <code className="border-t border-border px-5 py-3 text-[11px] uppercase tracking-[0.12em] text-foreground sm:border-l sm:border-t-0 sm:px-4">
+              {activeFeature.token}
+            </code>
+          </div>
 
-                  <ul className="text-muted-foreground grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                    {feature.features.map((item, itemIndex) => (
-                      <li className="flex gap-3 items-start" key={itemIndex}>
-                        <CheckCircleIcon className="size-5 shrink-0 text-brand mt-1" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="border-t border-border pt-6">
-                    <div className="flex flex-col md:flex-row items-center gap-4">
-                      <QuoteIcon className="size-8 rotate-180 text-brand opacity-15" />
-                      <p className="text-muted-foreground flex-1 text-lg italic">
-                        &ldquo;{feature.review.review}&rdquo;
-                      </p>
-                      <div className="flex items-center gap-4 self-end">
-                        <div className="text-right">
-                          <p className="font-semibold text-foreground">
-                            {feature.review.name}
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            {feature.review.position}
-                          </p>
-                        </div>
-                        <img
-                          className="rounded-full"
-                          width="48"
-                          height="48"
-                          alt=""
-                          loading="lazy"
-                          src={feature.review.img}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="pointer-events-none absolute inset-0 rounded-4xl ring-1 ring-border/60 ring-inset"></div>
+          <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
+            <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r lg:p-10">
+              <div className="flex items-center gap-4">
+                <span className="flex size-12 items-center justify-center border border-brand bg-brand text-brand-foreground">
+                  <activeFeature.icon className="size-6" />
+                </span>
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+                  Active capability
+                </span>
               </div>
+              <h3 className="mt-8 text-2xl font-bold text-foreground md:text-3xl">
+                {activeFeature.title}
+              </h3>
+              <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
+                {activeFeature.description}
+              </p>
             </div>
-          ))}
+            <div>
+              <ul className="grid h-full divide-y divide-border">
+                {activeFeature.features.map((item) => (
+                  <li className="flex min-h-20 items-center gap-4 px-5 py-4 sm:px-8" key={item}>
+                    <span className="flex size-8 shrink-0 items-center justify-center border border-border bg-background text-brand">
+                      <CheckIcon className="size-4" aria-hidden="true" />
+                    </span>
+                    <span className="text-sm font-medium leading-6 text-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      {/* End Tab Content */}
     </section>
   );
 }

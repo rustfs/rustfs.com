@@ -1,66 +1,18 @@
 'use client'
 
 import { SITE_CONFIG } from '@/app.config';
-import { docs_url } from "@/lib/utils";
+import { footerNavigation } from '@/data/navigation';
 import LinkDiscord from './buttons/link-discord';
 import LinkGitHub from './buttons/link-github';
 import LinkTwitter from './buttons/link-twitter';
 import { Logo } from './logo';
 
 export default function AppFooter() {
-  const footerLinks = [
-    {
-      title: 'Architecture Support',
-      links: [
-        { title: 'Bare Metal & Virtualization', href: docs_url('features/baremetal') },
-        { title: 'AWS', href: docs_url('features/aws-elastic') },
-        { title: 'Cloud Native', href: docs_url('features/cloud-native') },
-      ]
-    },
-    {
-      title: 'Product Features',
-      links: [
-        { title: 'Distributed Storage', href: docs_url('features/distributed') },
-        { title: 'Log Management', href: docs_url('features/logging') },
-        { title: 'Version Control', href: docs_url('features/versioning') },
-        { title: 'S3 Compatible', href: docs_url('features/s3-compatibility') },
-        { title: 'Erasure Code Calculator', href: '/erasure-code-calculator' },
-        { title: 'Object Level Read-Only', href: docs_url('features/worm') },
-        { title: 'Cross-Region Replication', href: docs_url('features/replication') },
-        { title: 'Encryption', href: docs_url('features/encryption') },
-        { title: 'Lifecycle Management', href: docs_url('features/lifecycle') },
-      ]
-    },
-    {
-      title: 'Solutions',
-      links: [
-        { title: 'Modern Data Lake', href: docs_url('features/data-lake') },
-        { title: 'AI & Machine Learning', href: docs_url('features/ai') },
-        { title: 'Cloud Native', href: docs_url('features/cloud-native') },
-        { title: 'Big Data Compute-Storage Separation', href: docs_url('features/hdfs') },
-        { title: 'SQL Support', href: docs_url('features/sql-server') },
-        { title: 'Quantitative Trading', href: docs_url('features/quantitative-trading') },
-        { title: 'Manufacturing Cost Reduction', href: docs_url('features/industry') },
-        { title: 'Cold Archive Storage', href: docs_url('features/cold-archiving') },
-        { title: 'Video Storage Solutions', href: docs_url('features/video') },
-        { title: 'Compliance-focused Architecture', href: docs_url('features/domestic') },
-      ]
-    },
-    {
-      title: 'About Us',
-      links: [
-        { title: 'About Us', href: docs_url('about') },
-        { title: 'Investment & Cooperation', href: docs_url('about') },
-        { title: 'Trademark Usage', href: docs_url('about') },
-      ]
-    }
-  ];
-
   return (
     <footer className="bg-background border-t">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {footerLinks.map((section, sectionIndex) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {footerNavigation.map((section, sectionIndex) => (
             <div key={sectionIndex}>
               <h3 className="text-sm font-semibold text-foreground mb-4">
                 {section.title}

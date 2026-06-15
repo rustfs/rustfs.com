@@ -18,13 +18,12 @@ export async function getDockerPulls(): Promise<number> {
 
     if (response.ok) {
       const json = await response.json()
-      return json.pull_count ?? 157000 // Fallback: 157k+
+      return json.pull_count ?? 3000000 // Fallback: 3M+
     }
   } catch (error) {
     console.warn('Failed to fetch Docker pulls:', error)
   }
 
-  // Fallback value: 157k+
-  return 157000
+  // Fallback value: 3M+
+  return 3000000
 }
-

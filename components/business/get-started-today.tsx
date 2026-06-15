@@ -1,56 +1,45 @@
 'use client'
 
-import ContactUsButton from "./buttons/contact-us";
+import ContactUsButton from './buttons/contact-us'
+import DownloadLink from './buttons/download-link'
+import HomeSectionHeader from './home-section-header'
+import BackgroundGrid from '@/components/ui/background-grid'
 
-const AVATAR_URLS = [
-  "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=112&h=112&q=80",
-  "https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=112&h=112&q=80",
-  "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=112&h=112&q=80",
-  "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=112&h=112&q=80"
-];
+const ctaButtonClassName = "!h-16 !min-h-16 w-full shrink-0 !px-0 !py-0 leading-none sm:!w-60";
 
-export default function GetStartedToday() {return (
+export default function GetStartedToday() {
+  return (
     <section
-      className="relative overflow-hidden py-32 bg-muted/40 text-foreground"
+      className="relative overflow-hidden border-y border-border bg-muted/30 py-24 text-foreground sm:py-32"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
-        <div className="mx-auto text-center flex flex-col gap-8">
-          <h2 className="font-display text-2xl tracking-wide sm:text-4xl font-semibold leading-tight">
-            {'Experience RustFS'} <br />
-            {'High security, high concurrency and ultimate performance'}
-          </h2>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <HomeSectionHeader
+          sectionNumber="06"
+          eyebrow="Deploy surface"
+          title="Start building with RustFS"
+          description="Download RustFS for local testing, or contact us to plan production deployment, migration, and enterprise support."
+        />
 
-          {/* Avatar Group */}
-          <div className="text-center sm:flex sm:items-center sm:justify-center sm:text-start">
-            <div className="shrink-0 pb-5 sm:flex sm:pb-0 sm:pe-5">
-              {/* Avatar Group */}
-              <div className="flex justify-center -space-x-3">
-                {AVATAR_URLS.map((url, index) => (
-                  <img
-                    key={index}
-                    className="inline-block size-8 rounded-full ring-2 ring-background"
-                    src={url}
-                    alt={`Avatar ${index + 1}`}
-                    loading="lazy"
-                  />
-                ))}
-                <span className="inline-flex size-8 items-center justify-center rounded-full bg-primary ring-2 ring-background">
-                  <span className="text-xs font-medium uppercase leading-none text-primary-foreground">
-                    100+
-                  </span>
-                </span>
-              </div>
-              {/* End Avatar Group */}
-            </div>
-            <div className="pt-5 sm:ps-5 sm:pt-0 lg:border-l">
-              <div className="text-sm">
-                {'Over 100+ enterprise users have started using RustFS'}
-              </div>
+        <div className="grid border border-border bg-card lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
+            <code className="border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+              production-ready
+            </code>
+            <h2 className="mt-8 font-display text-2xl font-semibold leading-tight text-foreground sm:text-4xl">
+              Open-source object storage for AI and cloud-native workloads.
+            </h2>
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-muted-foreground">
+              Use the same storage foundation from laptop validation to multi-node deployment.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <DownloadLink className={`${ctaButtonClassName} border border-primary`} />
+              <ContactUsButton className={`${ctaButtonClassName} border border-border bg-background text-foreground hover:bg-muted`} />
             </div>
           </div>
-          {/* End Avatar Group */}
-          <div>
-            <ContactUsButton />
+
+          <div className="relative min-h-80 overflow-hidden bg-background lg:min-h-full">
+            <BackgroundGrid />
           </div>
         </div>
       </div>

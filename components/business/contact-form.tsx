@@ -13,6 +13,7 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { useRef, useState } from 'react'
+import HomeSectionHeader from './home-section-header'
 
 const COUNTRIES = [
   'United States',
@@ -53,7 +54,11 @@ const COUNTRIES = [
   'Other'
 ]
 
-export default function ContactForm() {
+interface ContactFormProps {
+  sectionNumber?: string;
+}
+
+export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [hCaptchaToken, setHCaptchaToken] = useState<string | null>(null)
@@ -141,20 +146,24 @@ export default function ContactForm() {
   return (
     <section
       id='contact'
-      className="relative overflow-hidden bg-background py-32"
+      className="relative overflow-hidden border-y border-border bg-muted/30 py-24 sm:py-32"
     >
-      <div className="mx-auto flex max-w-340 flex-col justify-center px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-          <h2 className="text-2xl font-bold md:text-4xl md:leading-tight text-primary">
-            Contact Us
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Get in touch with our team. We&apos;d love to hear from you.
-          </p>
-        </div>
+      <div className="mx-auto flex max-w-7xl flex-col justify-center px-4 sm:px-6 lg:px-8">
+        <HomeSectionHeader
+          sectionNumber={sectionNumber}
+          eyebrow="Contact channel"
+          title="Contact Us"
+          description="Get in touch with the RustFS team for deployment planning, migration support, and enterprise requirements."
+        />
 
-        <div className="mx-auto w-full max-w-2xl">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="mx-auto w-full max-w-3xl border border-border bg-card">
+          <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="px-5 py-3">Enterprise inquiry</span>
+            <code className="border-l border-border px-4 py-3 text-[11px] uppercase tracking-[0.12em] text-foreground">
+              form.submit
+            </code>
+          </div>
+          <form onSubmit={handleSubmit} className="space-y-6 p-6 sm:p-8">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label htmlFor="firstName" className="mb-2 block text-sm font-medium text-foreground">
@@ -289,7 +298,7 @@ export default function ContactForm() {
             </div>
 
             {submitStatus === 'success' && (
-              <div className="rounded-md bg-success/10 p-4 dark:bg-success/20">
+              <div className="border border-success/30 bg-success/10 p-4 dark:bg-success/20">
                 <p className="text-sm font-medium text-success">
                   Thank you for your message! We&apos;ll get back to you soon.
                 </p>
@@ -297,7 +306,7 @@ export default function ContactForm() {
             )}
 
             {submitStatus === 'error' && (
-              <div className="rounded-md bg-destructive/10 p-4 dark:bg-destructive/20">
+              <div className="border border-destructive/30 bg-destructive/10 p-4 dark:bg-destructive/20">
                 <p className="text-sm font-medium text-destructive">
                   Something went wrong. Please try again later.
                 </p>
@@ -309,7 +318,7 @@ export default function ContactForm() {
                 type="submit"
                 disabled={isSubmitting}
                 size="lg"
-                className="min-w-[200px] rounded-full h-12 px-6 text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground/90 active:bg-primary/80 active:text-primary-foreground/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="min-w-[200px] border border-primary h-12 px-6 text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground/90 active:bg-primary/80 active:text-primary-foreground/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 {isSubmitting ? 'Submitting...' : 'Submit'}
               </Button>

@@ -7,9 +7,9 @@ export const SITE_CONFIG = {
 
 // Site meta information
 export const SITE_METADATA = {
-  title: "RustFS | The High-Performance, Apache 2.0 Alternative to MinIO",
-  description: 'RustFS is a high-performance distributed storage system built with Rust, S3 protocol compatible',
-  keywords: 'RustFS, distributed storage, cloud storage, S3 compatible, high performance, open source, MinIO alternative',
+  title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
+  description: 'RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust.',
+  keywords: 'RustFS, object storage, distributed storage, open source, Rust, Amazon S3, MinIO alternative, Apache 2.0, cloud native storage, AI infrastructure',
 } as const
 
 // Download link configuration
