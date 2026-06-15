@@ -30,7 +30,7 @@ export default function CodeBlock({ code, title, className }: CodeBlockProps) {
           <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">{title}</h4>
           <button
             onClick={copyToClipboard}
-            className="inline-flex size-8 items-center justify-center border border-border bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="motion-button inline-flex size-8 items-center justify-center border border-border bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             title="Copy code"
           >
             {copied ? (
@@ -55,7 +55,7 @@ export default function CodeBlock({ code, title, className }: CodeBlockProps) {
         {!title && (
           <button
             onClick={copyToClipboard}
-            className="absolute right-2 top-2 inline-flex size-8 items-center justify-center border border-border bg-background/90 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="motion-button absolute right-2 top-2 inline-flex size-8 items-center justify-center border border-border bg-background/90 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             title="Copy code"
           >
             {copied ? (

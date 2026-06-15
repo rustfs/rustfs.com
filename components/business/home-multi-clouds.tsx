@@ -37,7 +37,7 @@ export default function HomeMultiClouds() {
           description="RustFS combines Rust-native engineering, Apache 2.0 licensing, and S3 compatibility for AI infrastructure and direct MinIO migrations."
         />
         <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
-          <article className="flex flex-col border border-border bg-card">
+          <article className="motion-card flex flex-col border border-border bg-card">
             <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               <span className="px-5 py-3">{stories[0].label}</span>
               <span className="border-l border-border px-4 py-3">Spotlight</span>
@@ -68,16 +68,16 @@ export default function HomeMultiClouds() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={stories[0].linkText}
-                  className="flex size-10 items-center justify-center border border-border bg-background text-brand transition-colors hover:bg-muted/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                  className="motion-button flex size-10 items-center justify-center border border-border bg-background text-brand transition-colors hover:bg-muted/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                 >
-                  <ExternalLinkIcon className="size-4" />
+                  <ExternalLinkIcon className="motion-arrow size-4" />
                 </a>
               </div>
             </div>
           </article>
 
           <div className="grid gap-4">
-            <article className="border border-border bg-muted/40 p-6 sm:p-8">
+            <article className="motion-card border border-border bg-muted/40 p-6 sm:p-8">
               <div className="flex items-center justify-between gap-4">
                 <span className="flex h-12 w-40 items-center border border-border bg-card px-3">
                   <MinioIcon className="h-6 w-full" aria-label="MinIO" />
@@ -92,14 +92,14 @@ export default function HomeMultiClouds() {
                 href={stories[1].href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand"
+                className="group mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand"
               >
                 <span>{stories[1].linkText}</span>
-                <ExternalLinkIcon className="size-4" />
+                <ExternalLinkIcon className="motion-arrow size-4" />
               </a>
             </article>
 
-            <div className="border border-border bg-card p-6">
+            <div className="motion-card border border-border bg-card p-6">
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                 Migration shape
               </p>

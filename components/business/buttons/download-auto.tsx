@@ -80,21 +80,21 @@ export default function DownloadAuto({ className }: { className?: string }) {
     <div className={cn("relative inline-flex", className)}>
       {/* 主下载按钮 */}
       <button
-        className="group inline-flex items-center justify-center rounded-l-full h-12 pl-6 pr-4 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground/90 active:bg-primary/80 active:text-primary-foreground/80 focus-visible:outline-primary transition-colors"
+        className="motion-button group inline-flex h-12 items-center justify-center bg-primary pl-6 pr-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 hover:text-primary-foreground/90 active:bg-primary/80 active:text-primary-foreground/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         onClick={handleDownload}
       >
         <span className="mr-2">{buttonText}</span>
-        <DownloadIcon className="h-3 w-3 flex-none" />
+        <DownloadIcon className="motion-arrow size-4 flex-none" />
       </button>
 
       {/* 版本切换下拉菜单 */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button
-            className="inline-flex items-center justify-center rounded-r-full h-12 w-12 text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 border-l border-primary-foreground/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors"
+            className="motion-button inline-flex size-12 items-center justify-center border-l border-primary-foreground/20 bg-primary text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             aria-label={"选择版本"}
           >
-            <ChevronDownIcon className="h-3 w-3" />
+            <ChevronDownIcon className="size-4" />
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56">

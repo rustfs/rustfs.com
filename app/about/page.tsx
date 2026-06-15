@@ -54,8 +54,8 @@ function ValueCard({
   description: string;
 }) {
   return (
-    <article className="border border-border bg-card p-5">
-      <Icon className="size-5 text-brand" />
+    <article className="motion-card border border-border bg-card p-5">
+      <Icon className="motion-icon-tile size-5 text-brand" />
       <h3 className="mt-6 text-lg font-semibold text-foreground">{title}</h3>
       <p className="mt-3 text-sm leading-7 text-muted-foreground">{description}</p>
     </article>
@@ -129,7 +129,7 @@ export default function AboutPage() {
 
           <ol className="border border-border bg-card">
             {milestones.map((item) => (
-              <li key={`${item.date}-${item.title}`} className="grid border-b border-border last:border-b-0 sm:grid-cols-[10rem_1fr]">
+              <li key={`${item.date}-${item.title}`} className="motion-card grid border-b border-border last:border-b-0 sm:grid-cols-[10rem_1fr]">
                 <div className="border-b border-border px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand sm:border-b-0 sm:border-r">
                   {item.date}
                 </div>

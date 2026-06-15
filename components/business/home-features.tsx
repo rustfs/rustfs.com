@@ -27,7 +27,7 @@ export default function HomeFeatures() {
               id={`core-feature-tab-${index}`}
               type="button"
               className={cn(
-                "group relative min-h-40 bg-card text-left transition-colors hover:bg-muted/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-brand/40",
+                "motion-card group relative min-h-40 bg-card text-left transition-colors hover:bg-muted/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-brand/40",
                 activeTab === index && "bg-muted/35"
               )}
               onClick={() => setActiveTab(index)}
@@ -49,7 +49,7 @@ export default function HomeFeatures() {
 
                 <div className="mt-7 flex items-start gap-4">
                   <span className={cn(
-                    "flex size-11 shrink-0 items-center justify-center border border-border bg-background text-foreground transition-colors",
+                    "motion-icon-tile flex size-11 shrink-0 items-center justify-center border border-border bg-background text-foreground transition-colors",
                     activeTab === index && "border-brand bg-brand text-brand-foreground"
                   )}>
                     <feature.icon className="size-5" />
@@ -81,10 +81,10 @@ export default function HomeFeatures() {
             </code>
           </div>
 
-          <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
+          <div key={activeTab} className="motion-reveal grid lg:grid-cols-[0.82fr_1.18fr]">
             <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r lg:p-10">
               <div className="flex items-center gap-4">
-                <span className="flex size-12 items-center justify-center border border-brand bg-brand text-brand-foreground">
+                <span className="motion-icon-tile flex size-12 items-center justify-center border border-brand bg-brand text-brand-foreground">
                   <activeFeature.icon className="size-6" />
                 </span>
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
@@ -102,7 +102,7 @@ export default function HomeFeatures() {
               <ul className="grid h-full divide-y divide-border">
                 {activeFeature.features.map((item) => (
                   <li className="flex min-h-20 items-center gap-4 px-5 py-4 sm:px-8" key={item}>
-                    <span className="flex size-8 shrink-0 items-center justify-center border border-border bg-background text-brand">
+                    <span className="motion-icon-tile flex size-8 shrink-0 items-center justify-center border border-border bg-background text-brand">
                       <CheckIcon className="size-4" aria-hidden="true" />
                     </span>
                     <span className="text-sm font-medium leading-6 text-foreground">{item}</span>

@@ -36,7 +36,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
             href={featuredPost.link}
             target="_blank"
             rel="noreferrer"
-            className="group overflow-hidden border border-border bg-card text-left transition-colors hover:bg-muted/50"
+            className="motion-card group overflow-hidden border border-border bg-card text-left transition-colors hover:bg-muted/50"
           >
             {featuredPost.imageUrl ? (
               <div className="relative h-72 w-full border-b border-border sm:h-96">
@@ -71,7 +71,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
             <div className="border-t border-border px-6 py-4 sm:px-8">
               <span className="inline-flex items-center text-sm font-medium text-brand">
                 Read more
-                <span className="ml-1" aria-hidden="true">
+                <span className="motion-arrow ml-1 inline-block" aria-hidden="true">
                   ↗
                 </span>
               </span>
@@ -85,7 +85,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
                 href={post.link}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex flex-col justify-between bg-card text-left transition-colors hover:bg-muted/50"
+                className="motion-card group flex flex-col justify-between bg-card text-left transition-colors hover:bg-muted/50"
               >
                 <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                   <span className="px-5 py-3">Blog</span>
@@ -112,7 +112,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
                 <div className="border-t border-border px-6 py-4">
                   <span className="inline-flex items-center text-sm font-medium text-brand">
                     Read more
-                    <span className="ml-1" aria-hidden="true">
+                    <span className="motion-arrow ml-1 inline-block" aria-hidden="true">
                       ↗
                     </span>
                   </span>
@@ -127,10 +127,10 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
             href="https://rustfs.dev/"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+            className="motion-button group inline-flex border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
           >
             View more on RustFS Blog
-            <span className="ml-1" aria-hidden="true">
+            <span className="motion-arrow ml-1 inline-block" aria-hidden="true">
               ↗
             </span>
           </a>

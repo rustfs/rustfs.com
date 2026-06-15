@@ -27,7 +27,7 @@ const ReviewCard = ({ img, name, position, body }: SlideItem) => {
     <figure
       className={clsx(
         "relative md:w-1/2 lg:w-full max-w-96 cursor-pointer overflow-hidden rounded-xl p-4 lg:p-6 shadow-xl",
-        "border border-border bg-card hover:bg-muted/50",
+        "motion-card border border-border bg-card hover:bg-muted/50",
         "flex flex-col gap-2"
       )}
     >

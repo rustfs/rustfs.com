@@ -16,7 +16,7 @@ export default function HomeSectionHeader({
   className,
 }: HomeSectionHeaderProps) {
   return (
-    <div className={cn("mb-10 lg:mb-14", className)}>
+    <div className={cn("motion-reveal mb-10 lg:mb-14", className)}>
       <div className="relative h-px bg-border">
         <span className="absolute left-0 top-0 h-0.5 w-28 -translate-y-px bg-brand" />
       </div>

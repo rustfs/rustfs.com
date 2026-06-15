@@ -85,8 +85,8 @@ export default function FeaturePage({ title, description, sections, links }: Fea
             </div>
             <div className="grid sm:grid-cols-2">
               {firstSection.items?.map((item) => (
-                <article key={item.title} className="border-b border-border p-5 even:sm:border-l last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0">
-                  <CheckIcon className="size-5 text-brand" />
+                <article key={item.title} className="motion-card border-b border-border p-5 even:sm:border-l last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0">
+                  <CheckIcon className="motion-icon-tile size-5 text-brand" />
                   <h3 className="mt-5 text-base font-semibold text-foreground">{item.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
                 </article>
@@ -117,7 +117,7 @@ export default function FeaturePage({ title, description, sections, links }: Fea
                 {section.items && (
                   <div className="grid border border-border bg-card md:grid-cols-2">
                     {section.items.map((item) => (
-                      <article key={item.title} className="border-b border-border p-5 even:md:border-l md:[&:nth-last-child(-n+2)]:border-b-0">
+                      <article key={item.title} className="motion-card border-b border-border p-5 even:md:border-l md:[&:nth-last-child(-n+2)]:border-b-0">
                         <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
                         <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
                       </article>

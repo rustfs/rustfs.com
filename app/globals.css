@@ -80,6 +80,11 @@
 
 :root {
   --radius: 0rem;
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --motion-duration-fast: 140ms;
+  --motion-duration-standard: 260ms;
+  --motion-duration-slow: 420ms;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -176,4 +181,98 @@
 /* Enforce the site-wide square-corner visual system, including legacy rounded-* utilities. */
 :where([class*="rounded-"]) {
   border-radius: 0 !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-button {
+    transition-duration: var(--motion-duration-fast);
+    transition-property: transform, color, background-color, border-color, box-shadow;
+    transition-timing-function: var(--motion-ease-standard);
+  }
+
+  .motion-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .motion-button:active {
+    transform: translateY(0) scale(0.985);
+  }
+
+  .motion-card {
+    transform: translateZ(0);
+    transition-duration: var(--motion-duration-standard);
+    transition-property: transform, background-color, border-color, box-shadow, filter;
+    transition-timing-function: var(--motion-ease-standard);
+  }
+
+  .motion-card:hover {
+    border-color: color-mix(in oklch, var(--brand) 34%, var(--border));
+    box-shadow: 0 18px 46px color-mix(in oklch, var(--foreground) 10%, transparent);
+    transform: translateY(-2px);
+  }
+
+  .motion-card:active {
+    transform: translateY(0) scale(0.998);
+  }
+
+  .motion-icon-tile {
+    transition-duration: var(--motion-duration-standard);
+    transition-property: transform, color, background-color, border-color;
+    transition-timing-function: var(--motion-ease-standard);
+  }
+
+  .motion-card:hover .motion-icon-tile,
+  .group:hover .motion-icon-tile {
+    transform: translateY(-2px);
+  }
+
+  .motion-arrow {
+    transition-duration: var(--motion-duration-fast);
+    transition-property: transform, color;
+    transition-timing-function: var(--motion-ease-standard);
+  }
+
+  .group:hover .motion-arrow {
+    transform: translate(3px, -3px);
+  }
+
+  .motion-reveal {
+    animation: motion-reveal var(--motion-duration-slow) var(--motion-ease-emphasized) both;
+  }
+
+  .motion-reveal[data-motion-delay="1"] {
+    animation-delay: 70ms;
+  }
+
+  .motion-reveal[data-motion-delay="2"] {
+    animation-delay: 140ms;
+  }
+
+  .motion-reveal[data-motion-delay="3"] {
+    animation-delay: 210ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-button,
+  .motion-card,
+  .motion-icon-tile,
+  .motion-arrow,
+  .motion-reveal {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@keyframes motion-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -116,9 +116,9 @@ function InstallCard({
   children: ReactNode;
 }) {
   return (
-    <article className="flex min-w-0 flex-col border border-border bg-card">
+    <article className="motion-card flex min-w-0 flex-col border border-border bg-card">
       <div className="flex items-start gap-4 border-b border-border p-5">
-        <span className="flex size-12 shrink-0 items-center justify-center bg-brand text-brand-foreground">
+        <span className="motion-icon-tile flex size-12 shrink-0 items-center justify-center bg-brand text-brand-foreground">
           <Icon className="size-5" />
         </span>
         <div>
@@ -372,32 +372,32 @@ function HelpPanel() {
             href="https://docs.rustfs.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group border-b border-border p-6 transition-colors hover:bg-muted/40 md:border-b-0 md:border-r"
+            className="motion-card group border-b border-border p-6 transition-colors hover:bg-muted/40 md:border-b-0 md:border-r"
           >
-            <BookOpenIcon className="size-5 text-brand" />
+            <BookOpenIcon className="motion-icon-tile size-5 text-brand" />
             <h3 className="mt-6 text-xl font-semibold text-foreground">Read the docs</h3>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">Configuration, deployment, S3 clients, and operations guidance.</p>
-            <ArrowUpRightIcon className="mt-8 size-5 text-brand transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            <ArrowUpRightIcon className="motion-arrow mt-8 size-5 text-brand" />
           </a>
           <Link
             href="/contact-us"
-            className="group border-b border-border p-6 transition-colors hover:bg-muted/40 md:border-b-0 md:border-r"
+            className="motion-card group border-b border-border p-6 transition-colors hover:bg-muted/40 md:border-b-0 md:border-r"
           >
-            <ServerIcon className="size-5 text-brand" />
+            <ServerIcon className="motion-icon-tile size-5 text-brand" />
             <h3 className="mt-6 text-xl font-semibold text-foreground">Plan deployment</h3>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">Migration, capacity planning, production topology, and support scope.</p>
-            <ArrowUpRightIcon className="mt-8 size-5 text-brand transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            <ArrowUpRightIcon className="motion-arrow mt-8 size-5 text-brand" />
           </Link>
           <a
             href="https://github.com/rustfs/rustfs/issues"
             target="_blank"
             rel="noopener noreferrer"
-            className="group p-6 transition-colors hover:bg-muted/40"
+            className="motion-card group p-6 transition-colors hover:bg-muted/40"
           >
-            <MessageCircleIcon className="size-5 text-brand" />
+            <MessageCircleIcon className="motion-icon-tile size-5 text-brand" />
             <h3 className="mt-6 text-xl font-semibold text-foreground">Report an issue</h3>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">Share compatibility feedback, installation friction, or operational questions.</p>
-            <ArrowUpRightIcon className="mt-8 size-5 text-brand transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            <ArrowUpRightIcon className="motion-arrow mt-8 size-5 text-brand" />
           </a>
         </div>
       </div>

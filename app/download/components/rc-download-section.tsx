@@ -57,7 +57,7 @@ function CliPackageCard({
   commands: string[];
 }) {
   return (
-    <article className="min-w-0 border border-border bg-card">
+    <article className="motion-card min-w-0 border border-border bg-card">
       <div className="flex items-start justify-between gap-4 border-b border-border p-5">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{arch}</p>
@@ -86,10 +86,10 @@ function CliPackageCard({
 
 function PackageManagerCard() {
   return (
-    <article className="grid min-w-0 border border-border bg-card lg:grid-cols-2 [&>*]:min-w-0">
+    <article className="motion-card grid min-w-0 border border-border bg-card lg:grid-cols-2 [&>*]:min-w-0">
       <div className="border-b border-border p-5 lg:border-b-0 lg:border-r">
         <div className="flex items-center gap-3">
-          <TerminalIcon className="size-5 text-brand" />
+          <TerminalIcon className="motion-icon-tile size-5 text-brand" />
           <h3 className="text-xl font-semibold text-foreground">Homebrew</h3>
         </div>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
@@ -99,7 +99,7 @@ function PackageManagerCard() {
       </div>
       <div className="p-5">
         <div className="flex items-center gap-3">
-          <LaptopIcon className="size-5 text-brand" />
+          <LaptopIcon className="motion-icon-tile size-5 text-brand" />
           <h3 className="text-xl font-semibold text-foreground">Scoop</h3>
         </div>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
@@ -121,10 +121,10 @@ function PackageManagerCard() {
 
 function DockerAndSourceCard() {
   return (
-    <article className="grid min-w-0 border border-border bg-card lg:grid-cols-2 [&>*]:min-w-0">
+    <article className="motion-card grid min-w-0 border border-border bg-card lg:grid-cols-2 [&>*]:min-w-0">
       <div className="border-b border-border p-5 lg:border-b-0 lg:border-r">
         <div className="flex items-center gap-3">
-          <BoxesIcon className="size-5 text-brand" />
+          <BoxesIcon className="motion-icon-tile size-5 text-brand" />
           <h3 className="text-xl font-semibold text-foreground">Run rc in Docker</h3>
         </div>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
@@ -141,7 +141,7 @@ function DockerAndSourceCard() {
       </div>
       <div className="p-5">
         <div className="flex items-center gap-3">
-          <BracesIcon className="size-5 text-brand" />
+          <BracesIcon className="motion-icon-tile size-5 text-brand" />
           <h3 className="text-xl font-semibold text-foreground">Build from source</h3>
         </div>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">

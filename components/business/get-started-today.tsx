@@ -20,7 +20,7 @@ export default function GetStartedToday() {
           description="Download RustFS for local testing, or contact us to plan production deployment, migration, and enterprise support."
         />
 
-        <div className="grid border border-border bg-card lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="motion-card grid border border-border bg-card lg:grid-cols-[0.95fr_1.05fr]">
           <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
             <code className="border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
               production-ready

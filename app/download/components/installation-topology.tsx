@@ -17,9 +17,9 @@ function TopologyRow({
   command: string;
 }) {
   return (
-    <article className="grid border-b border-border last:border-b-0 lg:grid-cols-[13rem_1fr_1fr_15rem]">
+    <article className="motion-card grid border-b border-border last:border-b-0 lg:grid-cols-[13rem_1fr_1fr_15rem]">
       <div className="flex items-center gap-4 border-b border-border p-5 lg:border-b-0 lg:border-r">
-        <span className="flex size-11 items-center justify-center bg-brand text-brand-foreground">
+        <span className="motion-icon-tile flex size-11 items-center justify-center bg-brand text-brand-foreground">
           <Icon className="size-5" />
         </span>
         <div>

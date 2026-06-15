@@ -47,7 +47,7 @@ export default function HomeStats() {return (
           description="A focused object storage foundation for modern AI, cloud-native, and enterprise workloads."
         />
         <div className="grid gap-4 lg:grid-cols-12">
-          <article className="border border-border bg-card p-6 sm:p-8 lg:col-span-5">
+          <article className="motion-card border border-border bg-card p-6 sm:p-8 lg:col-span-5">
             <code className="border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
               {reasons[0].token}
             </code>
@@ -69,7 +69,7 @@ mode = "distributed"`}</code>
 
           <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:col-span-7">
             {reasons.slice(1, 5).map((item) => (
-              <article key={item.title} className="bg-card p-6">
+              <article key={item.title} className="motion-card bg-card p-6">
                 <div className="mb-8 flex items-center justify-between gap-4">
                   <code className="border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                     {item.token}
@@ -82,7 +82,7 @@ mode = "distributed"`}</code>
             ))}
           </div>
 
-          <article className="grid border border-border bg-card lg:col-span-12 lg:grid-cols-[0.9fr_1.1fr]">
+          <article className="motion-card grid border border-border bg-card lg:col-span-12 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
               <code className="border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                 {reasons[5].token}

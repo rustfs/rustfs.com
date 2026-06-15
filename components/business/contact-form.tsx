@@ -22,10 +22,10 @@ function ContactRoute({
       href={href}
       target={href.startsWith('http') ? '_blank' : undefined}
       rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-      className="group grid border border-border bg-card p-5 transition-colors hover:bg-muted/35 sm:grid-cols-[1fr_auto] sm:items-center"
+      className="motion-card group grid border border-border bg-card p-5 transition-colors hover:bg-muted/35 sm:grid-cols-[1fr_auto] sm:items-center"
     >
       <div className="flex gap-4">
-        <span className="flex size-11 shrink-0 items-center justify-center bg-brand text-brand-foreground">
+        <span className="motion-icon-tile flex size-11 shrink-0 items-center justify-center bg-brand text-brand-foreground">
           <Icon className="size-5" />
         </span>
         <div>
@@ -33,7 +33,7 @@ function ContactRoute({
           <p className="mt-2 text-sm leading-6 text-muted-foreground">{description}</p>
         </div>
       </div>
-      <span className="mt-6 flex size-11 items-center justify-center text-brand transition-transform group-hover:translate-x-1 sm:mt-0">
+      <span className="motion-arrow mt-6 flex size-11 items-center justify-center text-brand sm:mt-0">
         <ArrowRightIcon className="size-5" />
       </span>
     </a>
@@ -58,7 +58,7 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
         <div className="grid gap-6 lg:grid-cols-[1fr_0.86fr] lg:items-start">
           <a
             href="mailto:hello@rustfs.com"
-            className="group block border border-border bg-card transition-colors hover:bg-muted/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            className="motion-card group block border border-border bg-card transition-colors hover:bg-muted/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
           >
             <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
               <div className="max-w-3xl">
@@ -73,7 +73,7 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
                 </p>
               </div>
 
-              <span className="flex size-12 items-center justify-center text-brand transition-transform group-hover:translate-x-1">
+              <span className="motion-arrow flex size-12 items-center justify-center text-brand">
                 <ArrowRightIcon className="size-5" aria-hidden="true" />
               </span>
             </div>

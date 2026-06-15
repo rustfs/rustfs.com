@@ -24,7 +24,7 @@ function PricingCard({
   emphasized?: boolean;
 }) {
   return (
-    <article className={`flex flex-col border border-border bg-card ${emphasized ? "border-brand" : ""}`}>
+    <article className={`motion-card flex flex-col border border-border bg-card ${emphasized ? "border-brand" : ""}`}>
       <div className="border-b border-border p-6">
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">{label}</p>
         <h2 className="mt-4 text-2xl font-semibold text-foreground">{title}</h2>
@@ -34,7 +34,7 @@ function PricingCard({
       <ul className="flex flex-1 flex-col">
         {points.map((point) => (
           <li key={point} className="flex gap-3 border-b border-border px-6 py-4 last:border-b-0">
-            <BadgeCheckIcon className="mt-0.5 size-4 shrink-0 text-brand" />
+            <BadgeCheckIcon className="motion-icon-tile mt-0.5 size-4 shrink-0 text-brand" />
             <span className="text-sm leading-6 text-foreground">{point}</span>
           </li>
         ))}
@@ -108,18 +108,18 @@ export default function PricingPage() {
 
       <section className="border-y border-border bg-muted/20">
         <div className="mx-auto grid max-w-7xl gap-0 px-4 py-16 sm:px-6 lg:grid-cols-3 lg:px-8">
-          <div className="border border-border bg-card p-6">
-            <Code2Icon className="size-5 text-brand" />
+          <div className="motion-card border border-border bg-card p-6">
+            <Code2Icon className="motion-icon-tile size-5 text-brand" />
             <h2 className="mt-6 text-lg font-semibold text-foreground">Evaluate without sales friction</h2>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">Download the server, run Docker, or install through Kubernetes before starting a commercial conversation.</p>
           </div>
-          <div className="border border-border bg-card p-6 lg:border-l-0">
-            <Building2Icon className="size-5 text-brand" />
+          <div className="motion-card border border-border bg-card p-6 lg:border-l-0">
+            <Building2Icon className="motion-icon-tile size-5 text-brand" />
             <h2 className="mt-6 text-lg font-semibold text-foreground">Plan around your environment</h2>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">Storage topology, compliance, network, and observability needs vary by organization and workload.</p>
           </div>
-          <div className="border border-border bg-card p-6 lg:border-l-0">
-            <LifeBuoyIcon className="size-5 text-brand" />
+          <div className="motion-card border border-border bg-card p-6 lg:border-l-0">
+            <LifeBuoyIcon className="motion-icon-tile size-5 text-brand" />
             <h2 className="mt-6 text-lg font-semibold text-foreground">Add support when it matters</h2>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">Use enterprise support for production migration, operations, and long-term deployment confidence.</p>
           </div>

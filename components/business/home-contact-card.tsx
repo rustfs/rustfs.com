@@ -18,7 +18,7 @@ export default function HomeContactCard() {
 
         <Link
           href="/contact-us"
-          className="group block border border-border bg-card transition-colors hover:bg-muted/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          className="motion-card group block border border-border bg-card transition-colors hover:bg-muted/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
         >
           <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
             <div className="max-w-3xl">
@@ -30,7 +30,7 @@ export default function HomeContactCard() {
               </p>
             </div>
 
-            <span className="flex size-12 items-center justify-center text-brand transition-transform group-hover:translate-x-1">
+            <span className="motion-arrow flex size-12 items-center justify-center text-brand">
               <ArrowRightIcon className="size-5" aria-hidden="true" />
             </span>
           </div>

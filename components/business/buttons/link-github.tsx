@@ -74,7 +74,7 @@ export default function LinkGitHub({ className, showText = false }: { className?
       rel="noopener noreferrer"
       aria-label={!showText ? "Stars on GitHub" : undefined}
       className={cn(
-        "inline-flex h-8 items-center gap-2 rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground shadow-none",
+        "motion-button inline-flex h-8 items-center gap-2 rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground shadow-none",
         className
       )}
     >
