@@ -10,7 +10,8 @@ interface CodeBlockProps {
   className?: string;
 }
 
-export default function CodeBlock({ code, title, className }: CodeBlockProps) {const [copied, setCopied] = useState(false);
+export default function CodeBlock({ code, title, className }: CodeBlockProps) {
+  const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async () => {
     try {
@@ -23,34 +24,47 @@ export default function CodeBlock({ code, title, className }: CodeBlockProps) {c
   };
 
   return (
-    <div className={cn("rounded-lg border border-border bg-card overflow-hidden", className)}>
+    <div className={cn("min-w-0 overflow-hidden border border-border bg-background", className)}>
       {title && (
-        <div className="px-4 py-2 bg-muted/50 border-b border-border">
-          <h4 className="text-sm font-medium text-foreground">{title}</h4>
+        <div className="flex items-center justify-between border-b border-border bg-muted/35 px-4 py-3">
+          <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">{title}</h4>
+          <button
+            onClick={copyToClipboard}
+            className="inline-flex size-8 items-center justify-center border border-border bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            title="Copy code"
+          >
+            {copied ? (
+              <CheckIcon className="size-4 text-success" />
+            ) : (
+              <CopyIcon className="size-4" />
+            )}
+          </button>
         </div>
       )}
 
       <div className="relative">
-        <pre className="p-4 overflow-x-auto text-sm font-mono text-foreground bg-card">
+        <pre className="max-w-full overflow-x-auto bg-card p-4 font-mono text-[13px] leading-7 text-foreground">
           {code.map((line, index) => (
-            <div key={index} className="mb-1 last:mb-0">
-              <span className="text-muted-foreground select-none">$ </span>
+            <div key={index} className="grid grid-cols-[1.4rem_1fr] gap-2">
+              <span className="select-none text-muted-foreground">$</span>
               <span>{line}</span>
             </div>
           ))}
         </pre>
 
-        <button
-          onClick={copyToClipboard}
-          className="absolute top-2 right-2 p-2 rounded-md bg-muted/80 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-          title={'Copy code'}
-        >
-          {copied ? (
-            <CheckIcon className="w-4 h-4 text-success" />
-          ) : (
-            <CopyIcon className="w-4 h-4" />
-          )}
-        </button>
+        {!title && (
+          <button
+            onClick={copyToClipboard}
+            className="absolute right-2 top-2 inline-flex size-8 items-center justify-center border border-border bg-background/90 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            title="Copy code"
+          >
+            {copied ? (
+              <CheckIcon className="size-4 text-success" />
+            ) : (
+              <CopyIcon className="size-4" />
+            )}
+          </button>
+        )}
       </div>
     </div>
   );
