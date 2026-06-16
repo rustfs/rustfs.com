@@ -24,16 +24,16 @@ function PricingCard({
   emphasized?: boolean;
 }) {
   return (
-    <article className={`motion-card flex flex-col border border-border bg-card ${emphasized ? "border-brand" : ""}`}>
-      <div className="border-b border-border p-6">
+    <article className={`motion-card flex h-full flex-col border border-border bg-card ${emphasized ? "border-brand" : ""}`}>
+      <div className="flex flex-1 flex-col border-b border-border p-6">
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">{label}</p>
         <h2 className="mt-4 text-2xl font-semibold text-foreground">{title}</h2>
         <p className="mt-5 font-display text-4xl font-semibold text-foreground">{price}</p>
         <p className="mt-4 text-sm leading-7 text-muted-foreground">{description}</p>
       </div>
-      <ul className="flex flex-1 flex-col">
+      <ul className="grid grid-rows-4">
         {points.map((point) => (
-          <li key={point} className="flex gap-3 border-b border-border px-6 py-4 last:border-b-0">
+          <li key={point} className="flex min-h-20 gap-3 border-b border-border px-6 py-4 last:border-b-0 lg:h-20">
             <BadgeCheckIcon className="motion-icon-tile mt-0.5 size-4 shrink-0 text-brand" />
             <span className="text-sm leading-6 text-foreground">{point}</span>
           </li>
@@ -45,7 +45,7 @@ function PricingCard({
 
 export default function PricingPage() {
   return (
-    <main className="relative z-10 flex-1 bg-background text-foreground">
+    <main className="relative z-10 flex-1 text-foreground">
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="grid gap-10 lg:grid-cols-[0.98fr_1.02fr] lg:items-end">
           <div>
@@ -65,7 +65,7 @@ export default function PricingPage() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-3">
           <PricingCard
             label="Open source"
             title="Self-hosted RustFS"

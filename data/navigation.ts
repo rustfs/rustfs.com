@@ -16,9 +16,9 @@ export const productNavigation: NavigationItem[] = [
   },
   {
     title: "Security & Compliance",
-    href: docs_url("features/security"),
+    href: "/product/security-compliance",
     description: "Identity, transport security, encryption, and audit controls.",
-    items: ["IAM management", "mTLS", "Event audit"],
+    items: ["IAM", "STS", "SSE/KMS", "Audit"],
   },
   {
     title: "Availability & Scale",
@@ -58,7 +58,7 @@ export const footerNavigation = [
       { title: "S3 Compatible", href: docs_url("features/s3-compatibility") },
       { title: "Multiple Protocol Access", href: "/product/multiple-protocol-access" },
       { title: "Operational & Observability", href: "/product/operational-observability" },
-      { title: "Security & Compliance", href: docs_url("features/security") },
+      { title: "Security & Compliance", href: "/product/security-compliance" },
       { title: "Availability & Scale", href: docs_url("features/distributed") },
     ],
   },

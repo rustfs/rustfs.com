@@ -2,11 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
+  ArrowUpRightIcon,
   CheckIcon,
   DatabaseIcon,
   DownloadIcon,
   HardDriveIcon,
   LinkIcon,
+  LifeBuoyIcon,
   ServerIcon,
   ShieldCheckIcon,
 } from "lucide-react";
@@ -440,7 +442,7 @@ export default function ErasureCodeCalculator() {
   };
 
   return (
-    <div className="relative z-10 border-y border-border bg-background py-16 text-foreground sm:py-24">
+    <div className="relative z-10 border-y border-border py-16 text-foreground sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 border-t border-border pt-8 lg:grid-cols-[minmax(0,0.7fr)_0.3fr] lg:items-end">
           <div>
@@ -484,25 +486,13 @@ export default function ErasureCodeCalculator() {
           </div>
         </div>
 
-        <div className="mt-6 grid items-start gap-6 lg:grid-cols-[minmax(0,0.58fr)_0.42fr]">
-          <section className="border border-border bg-card">
-            <div className="grid border-b border-border sm:grid-cols-[1fr_auto]">
-              <div className="px-5 py-4">
-                <h2 className="text-lg font-semibold text-foreground">Cluster input</h2>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Hardware first, then choose the erasure layout.
-                </p>
-              </div>
-              <div className="border-t border-border p-4 sm:border-l sm:border-t-0">
-                <Button variant="outline" size="sm" type="button" onClick={handleCopyShareLink}>
-                  {shareCopied ? (
-                    <CheckIcon className="size-4" />
-                  ) : (
-                    <LinkIcon className="size-4" />
-                  )}
-                  {shareCopied ? "Copied" : "Copy link"}
-                </Button>
-              </div>
+        <div className="mt-6 grid items-stretch gap-6 lg:grid-cols-[minmax(0,0.58fr)_0.42fr]">
+          <section className="flex flex-col border border-border bg-card">
+            <div className="border-b border-border px-5 py-4">
+              <h2 className="text-lg font-semibold text-foreground">Cluster input</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Hardware first, then choose the erasure layout.
+              </p>
             </div>
 
             {validationError ? (
@@ -643,9 +633,36 @@ export default function ErasureCodeCalculator() {
               </label>
             </div>
 
+            <div className="grid gap-px border-t border-border bg-border sm:grid-cols-3">
+              <div className="bg-card p-4">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  Data shards
+                </div>
+                <div className="mt-2 font-mono text-xl font-semibold text-foreground">
+                  {validationError ? "--" : stripeSize - parity}
+                </div>
+              </div>
+              <div className="bg-card p-4">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  Parity shards
+                </div>
+                <div className="mt-2 font-mono text-xl font-semibold text-foreground">
+                  {validationError ? "--" : parity}
+                </div>
+              </div>
+              <div className="bg-card p-4">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  Erasure set
+                </div>
+                <div className="mt-2 font-mono text-xl font-semibold text-foreground">
+                  {validationError ? "--" : `${stripeSize} drives`}
+                </div>
+              </div>
+            </div>
+
             {recommendedConfig ? (
-              <div className="border-t border-border bg-muted/25 p-5 text-sm">
-                <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
+              <div className="flex flex-1 border-t border-border bg-muted/25 p-5 text-sm">
+                <div className="grid w-full gap-4 sm:grid-cols-[1fr_auto] sm:items-start">
                   <div>
                     <div className="font-medium text-foreground">Recommended layout</div>
                     <div className="mt-1 leading-6 text-muted-foreground">
@@ -695,6 +712,44 @@ export default function ErasureCodeCalculator() {
                 </div>
               </div>
             ) : null}
+
+            <div className="mt-auto grid gap-px border-t border-border bg-border md:grid-cols-[1fr_0.92fr]">
+              <div className="bg-card p-5">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  Production check
+                </div>
+                <div className="mt-4 grid gap-3 text-sm">
+                  <div className="grid grid-cols-[1fr_auto] gap-4 border-b border-border pb-3">
+                    <span className="text-muted-foreground">Failure domain</span>
+                    <span className="font-medium text-foreground">rack / node</span>
+                  </div>
+                  <div className="grid grid-cols-[1fr_auto] gap-4 border-b border-border pb-3">
+                    <span className="text-muted-foreground">Rebuild headroom</span>
+                    <span className="font-medium text-foreground">capacity + I/O</span>
+                  </div>
+                  <div className="grid grid-cols-[1fr_auto] gap-4">
+                    <span className="text-muted-foreground">Ops baseline</span>
+                    <span className="font-medium text-foreground">alerts + spares</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col bg-muted/25 p-5">
+                <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <LifeBuoyIcon className="size-4 text-brand" />
+                  Need a sizing review?
+                </div>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                  Share your node count, drive model, expected growth, and failure-domain target
+                  with the RustFS team before ordering hardware.
+                </p>
+                <Button asChild variant="outline" size="sm" className="mt-auto w-fit">
+                  <a href="/contact">
+                    Contact us
+                    <ArrowUpRightIcon className="size-4" />
+                  </a>
+                </Button>
+              </div>
+            </div>
           </section>
 
           <section className="border border-border bg-card">
@@ -794,7 +849,7 @@ export default function ErasureCodeCalculator() {
                 estimates before production sizing.
               </p>
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <div className="mt-6 grid gap-3 sm:grid-cols-3">
                 <Button
                   type="button"
                   variant="outline"
@@ -814,6 +869,19 @@ export default function ErasureCodeCalculator() {
                 >
                   <DownloadIcon className="size-4" />
                   {exportBusy ? "Exporting" : "SVG"}
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleCopyShareLink}
+                  className="w-full"
+                >
+                  {shareCopied ? (
+                    <CheckIcon className="size-4" />
+                  ) : (
+                    <LinkIcon className="size-4" />
+                  )}
+                  {shareCopied ? "Copied" : "Copy link"}
                 </Button>
               </div>
             </div>

@@ -16,7 +16,7 @@ const reasons = [
   {
     title: "Availability & Scale",
     token: "scale",
-    description: "Distributed architecture with horizontal and vertical scaling.",
+    description: "Distributed architecture with horizontal and vertical scaling, built to avoid single points of failure.",
   },
   {
     title: "Developer-First Experience",
@@ -31,7 +31,7 @@ const reasons = [
   {
     title: "S3-Compatible",
     token: "s3",
-    description: "Fully S3-compatible for seamless integration and migration.",
+    description: "Fully S3-compatible for seamless integration and effortless migration.",
   },
 ];
 
@@ -56,7 +56,7 @@ const compatibilityRows = [
 export default function HomeStats() {
   return (
     <section
-      className="relative overflow-hidden border-y border-border bg-background py-24 text-foreground sm:py-32"
+      className="relative overflow-hidden border-t border-border py-24 text-foreground sm:py-32"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader

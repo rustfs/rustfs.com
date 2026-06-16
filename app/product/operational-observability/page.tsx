@@ -96,6 +96,10 @@ export default function OperationalObservabilityPage() {
       title="Operational & Observability"
       description="RustFS gives operators practical control over storage operations with console workflows, OpenTelemetry support, cluster insights, and rc CLI automation."
       sections={sections}
+      links={[
+        { label: "Review operations", href: "/contact-us" },
+        { label: "Read docs", href: "/docs", variant: "outline" },
+      ]}
     />
   );
 }

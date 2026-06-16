@@ -74,7 +74,7 @@ export default function AboutPage() {
             </h1>
           </div>
           <p className="max-w-2xl text-base leading-8 text-muted-foreground lg:ml-auto">
-            RustFS is an Apache 2.0 distributed object storage system focused on S3 compatibility, operational control, and AI data center workloads.
+            RustFS is a next-generation Apache 2.0 distributed object storage system built in Rust. It has surpassed 28,000 GitHub stars, 3 million Docker Hub pulls, and 1 million global instances across S3-compatible and AI data center workloads.
           </p>
         </div>
 
@@ -87,7 +87,7 @@ export default function AboutPage() {
               A storage foundation that stays open, self-hosted, and programmable.
             </h2>
             <p className="mt-5 text-sm leading-7 text-muted-foreground">
-              RustFS manages object, bucket, IAM, lifecycle, and cluster workflows while keeping the S3 interface stable for existing tools and applications.
+              RustFS manages object, bucket, IAM, lifecycle, and cluster workflows while keeping 100% native S3 compatibility stable for existing tools and applications.
             </p>
           </div>
           <div className="grid sm:grid-cols-2">

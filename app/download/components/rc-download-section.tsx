@@ -6,7 +6,6 @@ import {
   ArrowUpRightIcon,
   BracesIcon,
   BoxesIcon,
-  DownloadIcon,
   LaptopIcon,
   TerminalIcon,
 } from 'lucide-react';
@@ -48,39 +47,33 @@ function CliPackageCard({
   description,
   arch,
   asset,
-  commands,
 }: {
   title: string;
   description: string;
   arch: string;
   asset: ReturnType<typeof findAsset>;
-  commands: string[];
 }) {
   return (
-    <article className="motion-card min-w-0 border border-border bg-card">
-      <div className="flex items-start justify-between gap-4 border-b border-border p-5">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{arch}</p>
-          <h3 className="mt-3 text-xl font-semibold text-foreground">{title}</h3>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">{description}</p>
-        </div>
-        <Button asChild size="lg" className="h-11 shrink-0 px-4 text-sm font-semibold">
-          <a href={asset.url} target="_blank" rel="noopener noreferrer">
-            Download
-            <DownloadIcon data-icon="inline-end" className="size-4" />
-          </a>
-        </Button>
+    <a
+      href={asset.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${title} package: ${asset.filename}`}
+      title={asset.filename}
+      className="motion-card group flex min-h-52 min-w-0 flex-col bg-card p-5 transition-colors hover:bg-muted/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{arch}</p>
+        <ArrowUpRightIcon className="motion-arrow size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
       </div>
-      <div className="p-5">
-        {asset.isDirect ? (
-          <CodeBlock code={commands} title="Install package" />
-        ) : (
-          <Note type="warning">
-            Open the GitHub Release page and download <code>{asset.filename}</code> or the closest matching package.
-          </Note>
-        )}
+      <h3 className="mt-5 text-xl font-semibold text-foreground">{title}</h3>
+      <p className="mt-3 text-sm leading-6 text-muted-foreground">{description}</p>
+      <div className="mt-auto border-t border-border pt-5">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
+          {asset.isDirect ? 'Download package' : 'GitHub releases'}
+        </span>
       </div>
-    </article>
+    </a>
   );
 }
 
@@ -217,68 +210,38 @@ export default function RcDownloadSection({ cliRelease }: RcDownloadSectionProps
         <div className="mt-10 flex flex-col gap-6">
           <PackageManagerCard />
 
-          <div className="grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
+          <div className="grid border border-border bg-border sm:grid-cols-2 xl:grid-cols-5 [&>*]:min-w-0">
             <CliPackageCard
               title="Linux x86_64"
               description="Use this on common AMD64 Linux servers, CI runners, and admin hosts."
               arch="amd64"
               asset={linuxX86}
-              commands={[
-                `wget ${linuxX86.url}`,
-                `tar -zxvf ${linuxX86.filename}`,
-                'chmod +x rc',
-                'sudo install -m 755 rc /usr/local/bin/rc',
-              ]}
             />
             <CliPackageCard
               title="Linux ARM64"
               description="Use this for ARM servers, edge nodes, and Apple Silicon Linux environments."
               arch="arm64"
               asset={linuxArm}
-              commands={[
-                `wget ${linuxArm.url}`,
-                `tar -zxvf ${linuxArm.filename}`,
-                'chmod +x rc',
-                'sudo install -m 755 rc /usr/local/bin/rc',
-              ]}
             />
             <CliPackageCard
               title="macOS Intel"
               description="A direct package for Intel-based macOS workstations and jump hosts."
               arch="amd64"
               asset={macIntel}
-              commands={[
-                `curl -L -O ${macIntel.url}`,
-                `tar -zxvf ${macIntel.filename}`,
-                'chmod +x rc',
-                'sudo install -m 755 rc /usr/local/bin/rc',
-              ]}
             />
             <CliPackageCard
               title="macOS Apple Silicon"
               description="A native package for M-series Macs used as operator workstations."
               arch="arm64"
               asset={macArm}
-              commands={[
-                `curl -L -O ${macArm.url}`,
-                `tar -zxvf ${macArm.filename}`,
-                'chmod +x rc',
-                'sudo install -m 755 rc /usr/local/bin/rc',
-              ]}
+            />
+            <CliPackageCard
+              title="Windows x86_64"
+              description="Use this for Windows-based admin machines, lab environments, and compatibility checks."
+              arch="amd64"
+              asset={windows}
             />
           </div>
-
-          <CliPackageCard
-            title="Windows x86_64"
-            description="Use this for Windows-based admin machines, lab environments, and compatibility checks."
-            arch="amd64"
-            asset={windows}
-            commands={[
-              `curl -L -O ${windows.url}`,
-              `Expand-Archive ${windows.filename}`,
-              'rc.exe --help',
-            ]}
-          />
 
           <DockerAndSourceCard />
 

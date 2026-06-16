@@ -5,16 +5,16 @@ import { SITE_CONFIG } from "@/app.config";
 import { getBlogPosts, type BlogPostMeta } from "@/lib/mdx-blog";
 
 export const metadata: Metadata = {
-  title: "RustFS Blog | Engineering notes for object storage",
+  title: "RustFS Blog | Engineering posts for object storage",
   description:
-    "RustFS engineering notes, product updates, and practical guides for S3-compatible object storage, AI infrastructure, and cloud-native deployments.",
+    "RustFS engineering posts, product updates, and practical guides for S3-compatible object storage, AI infrastructure, and cloud-native deployments.",
   alternates: {
     canonical: `${SITE_CONFIG.primaryDomain}/blog/`,
   },
   openGraph: {
     title: "RustFS Blog",
     description:
-      "Engineering notes, product updates, and practical guides for RustFS object storage.",
+      "Engineering posts, product updates, and practical guides for RustFS object storage.",
     type: "website",
     url: `${SITE_CONFIG.primaryDomain}/blog/`,
   },
@@ -28,33 +28,25 @@ export default async function BlogPage() {
 
   return (
     <main className="relative flex-1">
-      <section className="border-y border-border bg-background py-16 text-foreground sm:py-24">
+      <section className="border-y border-border py-16 text-foreground sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-10 border-t border-border pt-8 lg:grid-cols-[minmax(0,0.72fr)_0.28fr] lg:items-end">
+          <div className="border-t border-border pt-8">
             <div>
               <div className="mb-8 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                 <span className="h-1 w-24 bg-brand" />
                 <span>RustFS journal</span>
               </div>
               <h1 className="max-w-4xl font-display text-5xl font-semibold tracking-tight text-foreground sm:text-7xl">
-                Engineering notes from the storage layer.
+                Engineering posts from the storage layer.
               </h1>
-            </div>
-
-            <div className="border border-border bg-card">
-              <div className="grid grid-cols-2 border-b border-border text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                <span className="border-r border-border px-4 py-3">Local MDX</span>
-                <span className="px-4 py-3">WordPress sync</span>
-              </div>
-              <p className="p-4 text-sm leading-7 text-muted-foreground">
-                Product releases, field notes, migration guides, and security updates mirrored from
-                rustfs.dev for fast static publishing.
+              <p className="mt-6 max-w-2xl text-sm leading-7 text-muted-foreground">
+                Product updates, migration guides, security work, and field lessons from the RustFS team.
               </p>
             </div>
           </div>
 
           {featuredPost ? (
-            <div className="mt-12 grid gap-4 lg:grid-cols-[minmax(0,0.72fr)_0.28fr]">
+            <div className="mt-12 grid items-start gap-4 lg:grid-cols-[minmax(0,0.72fr)_0.28fr]">
               <FeaturedPost post={featuredPost} />
               <RecentIndex posts={recentPosts} />
             </div>
@@ -70,9 +62,9 @@ export default async function BlogPage() {
         <section className="border-b border-border bg-muted/20 py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-6 flex items-center justify-between gap-4">
-              <h2 className="text-2xl font-semibold text-foreground">Older notes</h2>
+              <h2 className="text-2xl font-semibold text-foreground">Older posts</h2>
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                {olderPosts.length} notes
+                {olderPosts.length} posts
               </span>
             </div>
             <div className="border border-border bg-card">
@@ -91,31 +83,22 @@ function FeaturedPost({ post }: { post: BlogPostMeta }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="motion-card group grid min-h-[30rem] border border-border bg-card lg:grid-cols-[17rem_1fr]"
+      className="motion-card group flex flex-col border border-border bg-card transition-colors hover:bg-muted/35"
     >
-      <div className="flex flex-col justify-between border-b border-border bg-muted/25 p-6 lg:border-b-0 lg:border-r">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
-          Latest dispatch
-        </div>
-        <div>
-          <div className="font-mono text-7xl font-semibold leading-none text-foreground">
-            {formatDay(post.date)}
-          </div>
-          <div className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            {formatMonthYear(post.date)}
-          </div>
-        </div>
+      <div className="grid grid-cols-[1fr_auto] border-b border-border text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <span className="px-5 py-4 text-brand">Latest post</span>
+        <span className="border-l border-border px-5 py-4">{formatShortDate(post.date)}</span>
       </div>
 
-      <div className="flex flex-col p-6 sm:p-8 lg:p-10">
+      <div className="flex flex-1 flex-col p-6 sm:p-8">
         <PostMeta post={post} />
-        <h2 className="mt-10 max-w-3xl text-4xl font-semibold leading-tight text-foreground sm:text-5xl">
+        <h2 className="mt-6 max-w-3xl text-3xl font-semibold leading-tight text-foreground sm:text-4xl">
           {post.title}
         </h2>
-        <p className="mt-6 max-w-2xl text-sm leading-7 text-muted-foreground">{post.description}</p>
-        <PostTags tags={post.tags} className="mt-8" />
-        <span className="mt-auto inline-flex items-center pt-12 text-sm font-semibold text-brand">
-          Read the note
+        <p className="mt-5 line-clamp-3 max-w-2xl text-sm leading-7 text-muted-foreground">{post.description}</p>
+        <PostTags tags={post.tags} className="mt-6" />
+        <span className="mt-auto inline-flex items-center pt-8 text-sm font-semibold text-brand">
+          Read the post
           <span className="motion-arrow ml-2 inline-block" aria-hidden="true">
             ↗
           </span>
@@ -139,7 +122,7 @@ function RecentIndex({ posts }: { posts: BlogPostMeta[] }) {
             className="group block border-b border-border px-5 py-5 last:border-b-0 hover:bg-muted/35"
           >
             <div className="flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              <span>Note.{String(index + 2).padStart(2, "0")}</span>
+              <span>Post.{String(index + 2).padStart(2, "0")}</span>
               <span>{formatShortDate(post.date)}</span>
             </div>
             <h3 className="mt-4 line-clamp-3 text-base font-semibold leading-tight text-foreground">
@@ -211,17 +194,6 @@ function PostTags({ tags, className }: { tags: string[]; className?: string }) {
       ))}
     </div>
   );
-}
-
-function formatDay(date: string) {
-  return new Intl.DateTimeFormat("en-US", { day: "2-digit" }).format(new Date(date));
-}
-
-function formatMonthYear(date: string) {
-  return new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    year: "numeric",
-  }).format(new Date(date));
 }
 
 function formatShortDate(date: string) {

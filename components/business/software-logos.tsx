@@ -74,7 +74,7 @@ const iconMap: Record<SoftwareKey, React.ComponentType<{ className?: string; sty
 
 export default function SoftwareLogos() {
   return (
-    <section className="relative overflow-hidden border-y border-border bg-muted/30 py-20 lg:py-28">
+    <section className="relative overflow-hidden border-t border-border bg-muted/30 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           sectionNumber="01"
@@ -88,15 +88,18 @@ export default function SoftwareLogos() {
               const IconComponent = iconMap[software];
 
               return (
-                <li key={software} className="flex min-h-36 flex-col items-center justify-center bg-card p-5 text-center sm:min-h-40">
-                  <span className="flex h-16 w-full max-w-36 items-center justify-center text-foreground/75 sm:h-20 sm:max-w-44">
+                <li
+                  key={software}
+                  className="grid min-h-28 place-items-center bg-card px-6 py-4 sm:min-h-32"
+                >
+                  <span className="grid h-14 w-full max-w-40 place-items-center text-foreground/75 sm:h-16 sm:max-w-44">
                     <IconComponent
-                      className="h-full w-full"
+                      className="block h-full w-full"
                       style={{ color: "currentColor" }}
                       fill="currentColor"
                     />
                   </span>
-                  <span className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  <span className="sr-only">
                     {softwareLabels[software]}
                   </span>
                 </li>

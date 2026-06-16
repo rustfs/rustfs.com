@@ -6,10 +6,14 @@ import matter from "gray-matter";
 import TurndownService from "turndown";
 
 const BLOG_DIR = path.join(process.cwd(), "content/blog");
-const WORDPRESS_ENDPOINT =
-  process.env.WORDPRESS_BLOG_ENDPOINT ?? "https://rustfs.dev/wp-json/wp/v2/posts";
+const PUBLIC_BLOG_IMAGE_DIR = path.join(process.cwd(), "public/images/blog");
+const WORDPRESS_ENDPOINT = process.env.WORDPRESS_BLOG_ENDPOINT;
 const POST_LIMIT = Number.parseInt(process.env.WORDPRESS_BLOG_LIMIT ?? "12", 10);
 const PER_PAGE = Math.min(Math.max(POST_LIMIT, 1), 100);
+const IMAGE_URL_PATTERN =
+  /https?:\/\/[^\s)'"]+\.(?:png|jpe?g|webp|gif|svg)(?:\?[^\s)'"]*)?/gi;
+const REMOTE_IMAGE_URL_PATTERN =
+  /^https?:\/\/[^\s)'"]+\.(?:png|jpe?g|webp|gif|svg)(?:\?[^\s)'"]*)?$/i;
 const FALLBACK_COVERS = [
   "/images/covers/1.jpg",
   "/images/covers/2.jpg",
@@ -39,7 +43,7 @@ async function main() {
   for (const [index, post] of posts.entries()) {
     const slug = normalizeSlug(post.slug || post.id);
     const filename = path.join(BLOG_DIR, `${slug}.mdx`);
-    const markdown = convertPostToMarkdown(post);
+    const localized = await localizePostAssets(slug, convertPostToMarkdown(post), getImage(post, index));
     const data = {
       title: decodeHtml(post.title?.rendered) || "Untitled",
       slug,
@@ -47,11 +51,10 @@ async function main() {
       date: getIsoDate(post.date_gmt || post.date),
       author: getAuthor(post),
       tags: getTags(post),
-      image: getImage(post, index),
-      sourceUrl: post.link,
+      image: localized.image,
     };
 
-    await fs.writeFile(filename, matter.stringify(markdown, data), "utf8");
+    await fs.writeFile(filename, matter.stringify(localized.markdown, data), "utf8");
     console.log(`Synced ${slug}`);
   }
 
@@ -59,6 +62,10 @@ async function main() {
 }
 
 async function fetchWordPressPosts(limit) {
+  if (!WORDPRESS_ENDPOINT) {
+    throw new Error("Set WORDPRESS_BLOG_ENDPOINT before syncing WordPress posts.");
+  }
+
   const posts = [];
   let page = 1;
 
@@ -141,6 +148,98 @@ function getImage(post, index) {
   }
 
   return FALLBACK_COVERS[index % FALLBACK_COVERS.length];
+}
+
+async function localizePostAssets(slug, markdown, image) {
+  const urls = new Set(markdown.match(IMAGE_URL_PATTERN) ?? []);
+  const imageUrl = typeof image === "string" ? image.trim() : image;
+
+  if (isRemoteImageUrl(imageUrl)) {
+    urls.add(imageUrl);
+  }
+
+  const replacements = new Map();
+  let index = 1;
+
+  for (const url of urls) {
+    replacements.set(url, await saveRemoteImage(slug, url, index));
+    index += 1;
+  }
+
+  for (const [url, localPath] of replacements) {
+    markdown = markdown.split(url).join(localPath);
+  }
+
+  return {
+    markdown: rewriteSourcePostLinks(markdown),
+    image: replacements.get(imageUrl) ?? image,
+  };
+}
+
+function rewriteSourcePostLinks(markdown) {
+  if (!WORDPRESS_ENDPOINT) {
+    return markdown;
+  }
+
+  const host = new URL(WORDPRESS_ENDPOINT).origin;
+  const sourcePostLinkPattern = new RegExp(`${escapeRegExp(host)}\\/([a-z0-9-]+)\\/?`, "g");
+
+  return markdown.replace(sourcePostLinkPattern, "/blog/$1/");
+}
+
+async function saveRemoteImage(slug, url, index) {
+  const filename = sanitizeImageFilename(url, index);
+  const targetDir = path.join(PUBLIC_BLOG_IMAGE_DIR, slug);
+  const targetPath = path.join(targetDir, filename);
+  const publicPath = `/images/blog/${slug}/${filename}`;
+
+  await fs.mkdir(targetDir, { recursive: true });
+
+  const response = await fetch(url, {
+    headers: {
+      "User-Agent": "RustFSSiteBot/1.0 (+https://rustfs.com)",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Image download failed for ${url}: ${response.status} ${response.statusText}`);
+  }
+
+  const buffer = Buffer.from(await response.arrayBuffer());
+  await fs.writeFile(targetPath, buffer);
+
+  return publicPath;
+}
+
+function sanitizeImageFilename(url, index) {
+  const parsed = new URL(url);
+  const extension = path.extname(parsed.pathname).toLowerCase() || ".png";
+  const basename = path.basename(safeDecodeURIComponent(parsed.pathname), extension);
+  const safeName = basename
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9._-]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+    .toLowerCase();
+
+  return `${safeName || `image-${index}`}${extension}`;
+}
+
+function safeDecodeURIComponent(value) {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+function isRemoteImageUrl(value) {
+  return typeof value === "string" && REMOTE_IMAGE_URL_PATTERN.test(value);
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function getIsoDate(value) {

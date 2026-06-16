@@ -8,11 +8,10 @@ export default function EnRedirectPage() {
   }, []);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background">
+    <main className="flex min-h-screen items-center justify-center">
       <div className="text-center">
         <p className="text-sm text-muted-foreground">Redirecting to RustFS...</p>
       </div>
     </main>
   );
 }
-

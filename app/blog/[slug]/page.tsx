@@ -66,41 +66,35 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <main className="relative flex-1">
-      <article className="border-y border-border bg-background text-foreground">
-        <header className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+      <article className="border-y border-border text-foreground">
+        <header className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
           <div className="border-t border-border pt-8">
             <Link
               href="/blog"
-              className="motion-button inline-flex border border-border bg-card px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground"
+              className="inline-flex text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground"
             >
-              ← All notes
+              ← All posts
             </Link>
 
-            <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_0.28fr] lg:items-end">
-              <div>
-                <div className="mb-8 flex flex-wrap gap-2">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="border border-border bg-card px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <h1 className="max-w-5xl font-display text-4xl font-semibold tracking-tight text-foreground sm:text-6xl">
-                  {post.title}
-                </h1>
-                <p className="mt-6 max-w-3xl text-base leading-8 text-muted-foreground">
-                  {post.description}
-                </p>
+            <div className="mt-8 max-w-5xl">
+              <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-6xl">
+                {post.title}
+              </h1>
+              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <span>{formatLongDate(post.date)}</span>
+                <span>{post.author}</span>
+                <span>{post.readingMinutes} min read</span>
               </div>
-
-              <dl className="border border-border bg-card text-sm">
-                <MetaItem label="Published" value={formatLongDate(post.date)} />
-                <MetaItem label="Author" value={post.author} />
-                <MetaItem label="Read" value={`${post.readingMinutes} min`} />
-              </dl>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="border border-border bg-card px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
 
             {shouldShowImage(post.image) ? (
@@ -117,62 +111,45 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </header>
 
         <div className="border-t border-border bg-muted/15">
-          <div className="mx-auto grid max-w-7xl gap-12 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,48rem)_1fr] lg:px-8">
-            <div className="min-w-0 bg-background px-0 py-2 sm:px-2 lg:px-0">
-              <div className="blog-prose mx-auto max-w-3xl">{post.content}</div>
+          <div
+            className={[
+              "mx-auto grid max-w-7xl gap-12 px-4 py-12 sm:px-6 lg:px-8",
+              relatedPosts.length ? "lg:grid-cols-[minmax(0,48rem)_1fr]" : "",
+            ].join(" ")}
+          >
+            <div className="min-w-0 px-0 py-2 sm:px-2 lg:px-0">
+              <div
+                className={[
+                  "prose prose-neutral dark:prose-invert mx-auto max-w-3xl",
+                  "prose-headings:scroll-mt-24 prose-headings:font-semibold prose-headings:tracking-tight",
+                  "prose-h2:border-t prose-h2:border-border prose-h2:pt-8",
+                  "prose-a:text-brand prose-a:no-underline prose-a:hover:underline",
+                  "prose-strong:text-foreground",
+                  "prose-code:break-words prose-code:text-foreground",
+                  "prose-pre:border prose-pre:border-border prose-pre:bg-muted/30",
+                  "[&_pre_code]:border-0 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:shadow-none",
+                  "[&_pre_code]:before:content-none [&_pre_code]:after:content-none",
+                  "prose-blockquote:border-l-2 prose-blockquote:border-brand prose-blockquote:bg-transparent prose-blockquote:not-italic",
+                  "prose-img:border prose-img:border-border prose-img:bg-transparent",
+                  "prose-hr:border-border",
+                ].join(" ")}
+              >
+                {post.content}
+              </div>
             </div>
 
-            <aside className="lg:sticky lg:top-8 lg:self-start">
-              <div className="border border-border bg-card">
-                <div className="border-b border-border px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                  Publication
-                </div>
-                <div className="grid text-sm">
-                  <div className="grid grid-cols-[7rem_1fr] border-b border-border">
-                    <span className="border-r border-border px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                      Format
-                    </span>
-                    <span className="px-4 py-3 text-foreground">MDX mirror</span>
-                  </div>
-                  <div className="grid grid-cols-[7rem_1fr] border-b border-border">
-                    <span className="border-r border-border px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                      Updated
-                    </span>
-                    <span className="px-4 py-3 text-foreground">{formatShortDate(post.date)}</span>
-                  </div>
-                </div>
-                <div className="p-5">
-                  <p className="text-sm leading-6 text-muted-foreground">
-                    Stored locally for static delivery, with the canonical source preserved for
-                    reference.
-                  </p>
-                  {post.sourceUrl ? (
-                    <a
-                      href={post.sourceUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group mt-5 inline-flex items-center text-sm font-semibold text-brand"
-                    >
-                      Original WordPress post
-                      <span className="motion-arrow ml-2 inline-block" aria-hidden="true">
-                        ↗
-                      </span>
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-
-              {relatedPosts.length ? (
-                <div className="mt-4 border border-border bg-card">
+            {relatedPosts.length ? (
+              <aside className="lg:sticky lg:top-8 lg:self-start">
+                <div className="border border-border bg-card">
                   <div className="border-b border-border px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                    Related notes
+                    Related posts
                   </div>
                   {relatedPosts.map((item) => (
                     <RelatedPost key={item.slug} post={item} />
                   ))}
                 </div>
-              ) : null}
-            </aside>
+              </aside>
+            ) : null}
           </div>
         </div>
       </article>
@@ -199,17 +176,6 @@ function RelatedPost({ post }: { post: BlogPostMeta }) {
         </span>
       </span>
     </Link>
-  );
-}
-
-function MetaItem({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="grid grid-cols-[8rem_1fr] border-b border-border last:border-b-0">
-      <dt className="border-r border-border px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-        {label}
-      </dt>
-      <dd className="px-4 py-3 text-foreground">{value}</dd>
-    </div>
   );
 }
 

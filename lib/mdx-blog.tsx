@@ -20,7 +20,6 @@ export interface BlogPostMeta {
   author: string;
   tags: string[];
   image?: string;
-  sourceUrl?: string;
   readingMinutes: number;
 }
 
@@ -106,7 +105,6 @@ function getPostMetaFromSource(source: string, fallbackSlug: string): BlogPostMe
     author,
     tags: toStringArray(data.tags),
     image: toOptionalString(data.image),
-    sourceUrl: toOptionalString(data.sourceUrl),
     readingMinutes: getReadingMinutes(parsed.content),
   };
 }
@@ -149,7 +147,7 @@ function createHeading(level: 2 | 3 | 4) {
     className,
     ...props
   }: ComponentPropsWithoutRef<typeof Tag>) {
-    return <Tag className={cn("scroll-mt-24 text-foreground", className)} {...props} />;
+    return <Tag className={cn("scroll-mt-24", className)} {...props} />;
   };
 }
 
@@ -183,7 +181,7 @@ const mdxComponents = {
   img({ className, alt = "", ...props }: ComponentPropsWithoutRef<"img">) {
     return (
       <img
-        className={cn("my-8 w-full border border-border bg-card object-cover", className)}
+        className={cn("my-8 w-full border border-border object-cover", className)}
         alt={alt}
         loading="lazy"
         {...props}
@@ -194,7 +192,7 @@ const mdxComponents = {
     return (
       <pre
         className={cn(
-          "my-8 max-w-full overflow-hidden whitespace-pre-wrap break-words border border-border bg-card p-4 text-sm leading-7 text-foreground sm:overflow-x-auto",
+          "my-8 max-w-full overflow-hidden whitespace-pre-wrap break-words border border-border bg-muted/30 p-4 text-sm leading-7 sm:overflow-x-auto",
           className
         )}
         {...props}
@@ -208,8 +206,8 @@ const mdxComponents = {
       <code
         className={cn(
           isCodeBlock
-            ? "border-0 bg-transparent p-0 font-mono text-sm text-foreground"
-            : "border border-border bg-card px-1.5 py-0.5 font-mono text-[0.9em] text-foreground break-words",
+            ? "border-0 bg-transparent p-0 font-mono text-sm"
+            : "border border-border bg-muted/30 px-1.5 py-0.5 font-mono text-[0.9em] break-words",
           className
         )}
         {...props}
@@ -219,7 +217,7 @@ const mdxComponents = {
   blockquote({ className, ...props }: ComponentPropsWithoutRef<"blockquote">) {
     return (
       <blockquote
-        className={cn("my-8 border-l-2 border-brand bg-card px-5 py-4 text-foreground", className)}
+        className={cn("border-l-2 border-brand bg-transparent pl-5 not-italic", className)}
         {...props}
       />
     );
@@ -232,7 +230,7 @@ const mdxComponents = {
     );
   },
   th({ className, ...props }: ComponentPropsWithoutRef<"th">) {
-    return <th className={cn("border-b border-border bg-card px-4 py-3", className)} {...props} />;
+    return <th className={cn("border-b border-border bg-muted/30 px-4 py-3", className)} {...props} />;
   },
   td({ className, ...props }: ComponentPropsWithoutRef<"td">) {
     return <td className={cn("border-b border-border px-4 py-3", className)} {...props} />;

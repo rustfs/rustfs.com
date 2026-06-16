@@ -17,7 +17,6 @@ import {
     MessageCircleIcon,
     ServerIcon,
 } from 'lucide-react'
-import Link from 'next/link'
 import type { ComponentType, ReactNode } from 'react'
 import CodeBlock from './code-block'
 import InstallationTopology from './installation-topology'
@@ -35,6 +34,22 @@ function getAssetName(url: string | null, fallback: string) {
 
   const match = decodeURIComponent(url).match(/([^/]+\.(zip|tar\.gz|tgz|exe|deb|rpm))($|\?)/i);
   return match?.[1] ?? fallback;
+}
+
+function findReleaseAsset(
+  release: GitHubRelease | null,
+  patterns: RegExp[],
+  fallbackName: string,
+) {
+  const asset = release?.assets.find((candidate) =>
+    patterns.some((pattern) => pattern.test(candidate.name))
+  );
+
+  return {
+    url: asset?.browser_download_url ?? release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest',
+    filename: asset?.name ?? fallbackName,
+    isDirect: Boolean(asset),
+  };
 }
 
 function SectionHeader({
@@ -68,17 +83,19 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
   const publishedAt = release?.published_at ? formatReleaseDate(release.published_at, 'en-US') : 'GitHub latest';
 
   return (
-    <div className="border border-border bg-card">
+    <a
+      href={releaseUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block border border-border bg-card transition-colors hover:border-foreground/40"
+      aria-label="Open current RustFS server release on GitHub"
+    >
       <div className="grid border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:grid-cols-[1fr_auto]">
         <span className="px-4 py-3">Current server release</span>
-        <a
-          href={releaseUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="border-t border-border px-4 py-3 text-foreground hover:text-brand sm:border-l sm:border-t-0"
-        >
+        <span className="inline-flex items-center gap-2 border-t border-border px-4 py-3 text-foreground transition-colors group-hover:text-brand sm:border-l sm:border-t-0">
           GitHub
-        </a>
+          <ArrowUpRightIcon className="size-3.5" />
+        </span>
       </div>
       <div className="grid gap-0 sm:grid-cols-3">
         <div className="border-b border-border p-5 sm:border-b-0 sm:border-r">
@@ -98,7 +115,7 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
           </p>
         </div>
       </div>
-    </div>
+    </a>
   );
 }
 
@@ -170,17 +187,10 @@ function PlatformBadge({
 }
 
 function LinuxBinaryInstall({ release }: { release: GitHubRelease | null }) {
-  const x86Url = release
-    ? getDownloadUrlForPlatform(release, 'linux', 'x86_64')
-    : null;
-  const armUrl = release
-    ? getDownloadUrlForPlatform(release, 'linux', 'aarch64')
-    : null;
-  const fallbackUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
-  const x86FinalUrl = x86Url ?? fallbackUrl;
-  const armFinalUrl = armUrl ?? fallbackUrl;
-  const x86Name = getAssetName(x86Url, 'rustfs-linux-x86_64-musl.zip');
-  const armName = getAssetName(armUrl, 'rustfs-linux-aarch64-musl.zip');
+  const x86Musl = findReleaseAsset(release, [/rustfs-linux-x86_64-musl.*\.zip/i], 'rustfs-linux-x86_64-musl-latest.zip');
+  const x86Gnu = findReleaseAsset(release, [/rustfs-linux-x86_64-gnu.*\.zip/i], 'rustfs-linux-x86_64-gnu-latest.zip');
+  const armMusl = findReleaseAsset(release, [/rustfs-linux-aarch64-musl.*\.zip/i], 'rustfs-linux-aarch64-musl-latest.zip');
+  const armGnu = findReleaseAsset(release, [/rustfs-linux-aarch64-gnu.*\.zip/i], 'rustfs-linux-aarch64-gnu-latest.zip');
 
   return (
     <InstallCard
@@ -200,13 +210,23 @@ function LinuxBinaryInstall({ release }: { release: GitHubRelease | null }) {
 
       <div className="grid gap-3 sm:grid-cols-2">
         <ArtifactButton
-          href={x86FinalUrl}
-          label="Linux x86_64"
+          href={x86Musl.url}
+          label="x86_64 MUSL"
           icon={<LinuxIcon className="size-4" />}
         />
         <ArtifactButton
-          href={armFinalUrl}
-          label="Linux ARM64"
+          href={x86Gnu.url}
+          label="x86_64 GNU"
+          icon={<LinuxIcon className="size-4" />}
+        />
+        <ArtifactButton
+          href={armMusl.url}
+          label="ARM64 MUSL"
+          icon={<LinuxIcon className="size-4" />}
+        />
+        <ArtifactButton
+          href={armGnu.url}
+          label="ARM64 GNU"
           icon={<LinuxIcon className="size-4" />}
         />
       </div>
@@ -214,8 +234,8 @@ function LinuxBinaryInstall({ release }: { release: GitHubRelease | null }) {
       <CodeBlock
         title="Manual install"
         code={[
-          `curl -L -O ${x86FinalUrl}`,
-          `unzip ${x86Name}`,
+          `curl -L -O ${x86Musl.url}`,
+          `unzip ${x86Musl.filename}`,
           'chmod +x rustfs',
           'sudo install -m 755 rustfs /usr/local/bin/rustfs',
           'rustfs --version',
@@ -223,7 +243,7 @@ function LinuxBinaryInstall({ release }: { release: GitHubRelease | null }) {
       />
 
       <p className="text-xs leading-6 text-muted-foreground">
-        ARM64 follows the same flow with <code className="text-foreground">{armName}</code>.
+        Pick GNU for glibc-based systems and MUSL for a more portable static binary. ARM64 follows the same flow with <code className="text-foreground">{armMusl.filename}</code>.
       </p>
     </InstallCard>
   );
@@ -326,6 +346,15 @@ function WorkstationInstall({ release }: { release: GitHubRelease | null }) {
         <PlatformBadge icon={<WindowsIcon className="size-4" />} label="Windows" />
       </div>
 
+      <CodeBlock
+        title="macOS Homebrew"
+        code={[
+          'brew tap rustfs/homebrew-tap',
+          'brew install rustfs',
+          'rustfs --version',
+        ]}
+      />
+
       <div className="grid gap-3 md:grid-cols-3">
         <ArtifactButton
           href={macArmUrl ?? fallbackUrl}
@@ -379,24 +408,26 @@ function HelpPanel() {
             <p className="mt-3 text-sm leading-7 text-muted-foreground">Configuration, deployment, S3 clients, and operations guidance.</p>
             <ArrowUpRightIcon className="motion-arrow mt-8 size-5 text-brand" />
           </a>
-          <Link
-            href="/contact-us"
-            className="motion-card group border-b border-border p-6 transition-colors hover:bg-muted/40 md:border-b-0 md:border-r"
-          >
-            <ServerIcon className="motion-icon-tile size-5 text-brand" />
-            <h3 className="mt-6 text-xl font-semibold text-foreground">Plan deployment</h3>
-            <p className="mt-3 text-sm leading-7 text-muted-foreground">Migration, capacity planning, production topology, and support scope.</p>
-            <ArrowUpRightIcon className="motion-arrow mt-8 size-5 text-brand" />
-          </Link>
           <a
             href="https://github.com/rustfs/rustfs/issues"
             target="_blank"
             rel="noopener noreferrer"
-            className="motion-card group p-6 transition-colors hover:bg-muted/40"
+            className="motion-card group border-b border-border p-6 transition-colors hover:bg-muted/40 md:border-b-0 md:border-r"
           >
             <MessageCircleIcon className="motion-icon-tile size-5 text-brand" />
             <h3 className="mt-6 text-xl font-semibold text-foreground">Report an issue</h3>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">Share compatibility feedback, installation friction, or operational questions.</p>
+            <ArrowUpRightIcon className="motion-arrow mt-8 size-5 text-brand" />
+          </a>
+          <a
+            href="https://discord.gg/NcKBCEJp6P"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="motion-card group p-6 transition-colors hover:bg-muted/40"
+          >
+            <ServerIcon className="motion-icon-tile size-5 text-brand" />
+            <h3 className="mt-6 text-xl font-semibold text-foreground">Join Discord</h3>
+            <p className="mt-3 text-sm leading-7 text-muted-foreground">Discuss installation, operations, and migration questions with the RustFS community.</p>
             <ArrowUpRightIcon className="motion-arrow mt-8 size-5 text-brand" />
           </a>
         </div>

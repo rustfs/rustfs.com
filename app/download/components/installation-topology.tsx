@@ -20,8 +20,8 @@ const topologies: Topology[] = [
     code: 'SNSD',
     name: 'Single-node single-disk',
     icon: ServerIcon,
-    useCase: 'Developer laptops, demos, and disposable validation environments.',
-    tradeoff: 'No redundancy. Treat the data path as replaceable.',
+    useCase: 'Personal labs, local development, and non-production testing with minimal resource use.',
+    tradeoff: 'No data redundancy. Keep this path for disposable validation, not durable production data.',
     command: ['rustfs /data'],
     notes: ['1 node', '1 disk path', 'No redundancy'],
   },
@@ -30,8 +30,8 @@ const topologies: Topology[] = [
     code: 'SNMD',
     name: 'Single-node multiple-disk',
     icon: SquareStackIcon,
-    useCase: 'Small deployments that need local erasure coding across drives.',
-    tradeoff: 'Disk failure tolerance improves, but the node remains a single availability boundary.',
+    useCase: 'Small organizations managing tens of terabytes that need local erasure coding across drives.',
+    tradeoff: 'Disk failure tolerance improves, but service availability still depends on one node.',
     command: ['rustfs /disk{1...4}'],
     notes: ['1 node', 'Multiple disks', 'Local EC'],
   },
@@ -40,12 +40,65 @@ const topologies: Topology[] = [
     code: 'MNMD',
     name: 'Multi-node multiple-disk',
     icon: NetworkIcon,
-    useCase: 'Production clusters, high durability, and petabyte-scale object storage.',
-    tradeoff: 'Requires network, identity, observability, capacity, and upgrade planning.',
+    useCase: 'Medium and large enterprises scaling from hundreds of terabytes to petabyte-scale object storage.',
+    tradeoff: 'Requires network, identity, observability, capacity, upgrade planning, and full production operations.',
     command: ['rustfs http://node{1...4}/disk{1...4}'],
     notes: ['Multiple nodes', 'Multiple disks', 'Production'],
   },
 ];
+
+function TopologyDiagram({ id }: { id: string }) {
+  if (id === 'single-disk') {
+    return (
+      <div className="flex min-h-44 items-center justify-center p-6" aria-hidden="true">
+        <div className="grid w-full max-w-72 gap-5">
+          <div className="mx-auto flex h-16 w-28 items-center justify-center border border-border bg-card">
+            <ServerIcon className="size-6 text-brand" />
+          </div>
+          <div className="mx-auto h-8 w-px bg-foreground/25" />
+          <div className="mx-auto h-12 w-32 border border-border bg-muted/50" />
+        </div>
+      </div>
+    );
+  }
+
+  if (id === 'single-node-multi-disk') {
+    return (
+      <div className="flex min-h-44 items-center justify-center p-6" aria-hidden="true">
+        <div className="grid w-full max-w-80 gap-5">
+          <div className="mx-auto flex h-16 w-32 items-center justify-center border border-border bg-card">
+            <ServerIcon className="size-6 text-brand" />
+          </div>
+          <div className="mx-auto h-8 w-px bg-foreground/25" />
+          <div className="grid grid-cols-4 gap-2">
+            {[1, 2, 3, 4].map((disk) => (
+              <div key={disk} className="h-12 border border-border bg-muted/50" />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex min-h-44 items-center justify-center p-5" aria-hidden="true">
+      <div className="grid w-full max-w-96 grid-cols-4 gap-3">
+        {[1, 2, 3, 4].map((node) => (
+          <div key={node} className="border border-border bg-card p-2">
+            <div className="mb-2 flex h-10 items-center justify-center border border-border bg-muted/35">
+              <ServerIcon className="size-4 text-brand" />
+            </div>
+            <div className="grid grid-cols-2 gap-1">
+              {[1, 2, 3, 4].map((disk) => (
+                <div key={disk} className="h-6 border border-border bg-background" />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function InstallationTopology() {
   const [activeId, setActiveId] = useState(topologies[0].id);
@@ -127,12 +180,19 @@ export default function InstallationTopology() {
                 </div>
               </div>
 
-              <div className="mt-8 grid border border-border bg-background text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:grid-cols-3">
-                {activeTopology.notes.map((note) => (
-                  <span key={note} className="border-b border-border px-3 py-3 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
-                    {note}
-                  </span>
-                ))}
+              <div className="mt-8 border border-border bg-background">
+                <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  <span className="px-3 py-3">Topology shape</span>
+                  <span className="border-l border-border px-3 py-3 text-brand">{activeTopology.code}</span>
+                </div>
+                <TopologyDiagram id={activeTopology.id} />
+                <div className="grid border-t border-border text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:grid-cols-3">
+                  {activeTopology.notes.map((note) => (
+                    <span key={note} className="border-b border-border px-3 py-3 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
+                      {note}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 

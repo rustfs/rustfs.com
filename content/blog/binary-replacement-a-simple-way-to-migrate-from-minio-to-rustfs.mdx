@@ -10,9 +10,7 @@ tags:
   - Announcements
   - Best Practices
   - General Usage
-image: 'https://rustfs.dev/wp-content/uploads/2026/03/minio-blog.png'
-sourceUrl: >-
-  https://rustfs.dev/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs/
+image: '/images/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs/minio-blog.png'
 ---
 Today we are excited to announce that RustFS has introduced a key feature in the latest release (`1.0.0-alpha.8`9): users can now migrate from MinIO to RustFS through direct binary replacement.
 
@@ -38,7 +36,7 @@ For example, if your MinIO instance was started with the following command:
 minio server /data/minio --console-address ":9001"
 ```
 
-![Your MinIO Instance](https://hackmd.io/_uploads/rkzulxu5be.png)
+![Your MinIO Instance](/images/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs/rkzulxu5be.png)
 
 Then you can follow the steps below to complete the migration.
 
@@ -67,7 +65,7 @@ Starting the RustFS instance with MinIO data,
 
 After the conversion, you can verify the migration by accessing `http://ip:9001`.
 
-![Your RustFS Instance](https://hackmd.io/_uploads/BJLrWg_cWx.png)
+![Your RustFS Instance](/images/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs/bjlrwg_cwx.png)
 
 ### For Docker Installation
 

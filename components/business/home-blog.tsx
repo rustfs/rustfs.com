@@ -19,16 +19,16 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
   return (
     <section
       className={cn(
-        "relative border-y border-border bg-background py-20 sm:py-28",
+        "relative border-t border-border py-20 sm:py-28",
         className
       )}
     >
       <div className="mx-auto flex max-w-7xl flex-col justify-center px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           sectionNumber="07"
-          eyebrow="Technical notes"
+          eyebrow="Technical posts"
           title="Latest from RustFS Blog"
-          description="Read the latest updates, release notes, and technical deep dives from the RustFS team."
+          description="Read product updates, release posts, and technical deep dives from the RustFS team."
         />
 
         <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">

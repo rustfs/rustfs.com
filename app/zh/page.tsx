@@ -9,11 +9,10 @@ export default function ZhRedirectPage() {
   }, []);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background">
+    <main className="flex min-h-screen items-center justify-center">
       <div className="text-center">
         <p className="text-sm text-muted-foreground">正在跳转到 RustFS 中文站...</p>
       </div>
     </main>
   );
 }
-

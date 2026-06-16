@@ -32,7 +32,7 @@ const comparisonRows = [
 
 export default function HomeDifferents() {
   return (
-    <section className="relative border-y border-border bg-muted/30 py-20 sm:py-32">
+    <section className="relative border-t border-border bg-muted/30 py-20 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           sectionNumber="04"

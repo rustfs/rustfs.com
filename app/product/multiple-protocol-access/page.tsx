@@ -46,6 +46,40 @@ const sections: FeaturePageSection[] = [
     ],
   },
   {
+    title: "OpenStack Swift",
+    items: [
+      {
+        title: "Existing Swift workflows",
+        description: "Connect Swift-compatible applications and operational tooling to the same RustFS object storage layer.",
+      },
+      {
+        title: "No translation gateway",
+        description: "Avoid extra proxy layers while keeping one high-performance source of truth for object data.",
+      },
+      {
+        title: "Enterprise ecosystem fit",
+        description: "Support legacy enterprise and private-cloud workloads without forcing immediate application rewrites.",
+      },
+    ],
+  },
+  {
+    title: "FTP(s)",
+    items: [
+      {
+        title: "Legacy workload access",
+        description: "Let existing FTP-aware systems exchange files with RustFS while storage remains object-native.",
+      },
+      {
+        title: "Secure transfer path",
+        description: "Use FTP(s) for encrypted transfer flows where teams still depend on file-oriented integration.",
+      },
+      {
+        title: "Unified storage backend",
+        description: "Keep S3, WebDAV, Swift, FTP(s), and MCP clients pointed at one consistent storage foundation.",
+      },
+    ],
+  },
+  {
     title: "MCP",
     description: "RustFS is designed for agent-native infrastructure. MCP support lets LLM agents and automated workflows query, manage, and orchestrate storage resources through a controlled interface.",
   },
@@ -57,6 +91,10 @@ export default function MultipleProtocolAccessPage() {
       title="Multiple Protocol Access"
       description="Native multi-protocol accessibility delivery. By speaking S3, Swift, FTP(s), WebDAV, and MCP out of the box, RustFS integrates naturally into existing environments with no gateways, no legacy proxies, and no code modifications."
       sections={sections}
+      links={[
+        { label: "Plan protocol access", href: "/contact-us" },
+        { label: "Read docs", href: "/docs", variant: "outline" },
+      ]}
     />
   );
 }

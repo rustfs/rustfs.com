@@ -11,9 +11,8 @@ tags:
   - security
   - Security
 image: /images/covers/2.jpg
-sourceUrl: 'https://rustfs.dev/how-to-harden-your-rustfs-security-with-cloudflare-tunnel/'
 ---
-![](https://rustfs.dev/wp-content/uploads/2026/01/rustfs-with-cloudflare-2-1024x519.png)
+![](/images/blog/how-to-harden-your-rustfs-security-with-cloudflare-tunnel/rustfs-with-cloudflare-2-1024x519.png)
 
 By default, [RustFS](https://github.com/rustfs/rustfs) uses a port `9001` for the Web Console and a port `9000` for API access. To ensure security and compliance, users always deploy RustFS with HTTPS enabled, even with a **reverse proxy (such as Nginx, Traefik, or Caddy)**. The blog will share an even more secure way, which uses **Cloudflare tunnel** to access your RustFS instance without exposing ports directly to the public internet, and make RustFS more secure eventually.
 
@@ -89,7 +88,7 @@ Proper domain configuration ensures seamless access to RustFS later. So you shou
 *   If onboarding, enter your domain name and follow the guides until you select **Continue to activation**.
 *   Finally, the domain **Status** will appear as **Active** on your dashboard.
 
-![](https://rustfs.dev/wp-content/uploads/2026/01/image-1024x205.png)
+![](/images/blog/how-to-harden-your-rustfs-security-with-cloudflare-tunnel/image-1024x205.png)
 
 ### 2\. Tunnel Configuration
 
@@ -103,7 +102,7 @@ Proper domain configuration ensures seamless access to RustFS later. So you shou
     *   **Service**: Select the type and URL. For this setup, choose HTTP (or HTTPS if enabled internally) and set the URL to localhost:9001.
 *   Click **Complete setup**.
 
-![](https://rustfs.dev/wp-content/uploads/2026/01/image-1-1024x411.png)
+![](/images/blog/how-to-harden-your-rustfs-security-with-cloudflare-tunnel/image-1-1024x411.png)
 
 The tunnel **Status** should now show as a green **HEALTHY** badge.
 
@@ -113,7 +112,7 @@ The tunnel **Status** should now show as a green **HEALTHY** badge.
 
 Congratulations! You can now access your RustFS instance via your configured domain. In the above configuration, RustFS instance URL will be https://rustfs.xiaomage.vip.
 
-![](https://rustfs.dev/wp-content/uploads/2026/01/image-2-1024x550.png)
+![](/images/blog/how-to-harden-your-rustfs-security-with-cloudflare-tunnel/image-2-1024x550.png)
 
 Log in the RustFS instance with default credentials `rustfsadmin / rustfsadmin`.
 

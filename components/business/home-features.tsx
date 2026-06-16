@@ -11,7 +11,7 @@ export default function HomeFeatures() {
   const activeFeature = features[activeTab];
 
   return (
-    <section className="relative pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32">
+    <section className="relative border-t border-border pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32">
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <HomeSectionHeader
           sectionNumber="02"
@@ -95,7 +95,7 @@ export default function HomeFeatures() {
                 {activeFeature.title}
               </h3>
               <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
-                {activeFeature.description}
+                {activeFeature.featureDescription}
               </p>
             </div>
             <div>
