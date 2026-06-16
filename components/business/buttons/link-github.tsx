@@ -53,7 +53,7 @@ export default function LinkGitHub({ className, showText = false }: { className?
     if (stars === null) {
       return (
         <span
-          className="inline-block h-2.5 w-10 rounded bg-muted/60 animate-pulse"
+          className="inline-block h-2.5 w-10 bg-muted/60 animate-pulse"
           aria-hidden
         />
       );
@@ -74,7 +74,7 @@ export default function LinkGitHub({ className, showText = false }: { className?
       rel="noopener noreferrer"
       aria-label={!showText ? "Stars on GitHub" : undefined}
       className={cn(
-        "motion-button inline-flex h-8 items-center gap-2 rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground shadow-none",
+        "motion-button inline-flex h-8 items-center gap-2 px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground shadow-none",
         className
       )}
     >
