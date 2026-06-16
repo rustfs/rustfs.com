@@ -126,7 +126,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   "prose-a:text-brand prose-a:no-underline prose-a:hover:underline",
                   "prose-strong:text-foreground",
                   "prose-code:break-words prose-code:text-foreground",
-                  "prose-pre:border prose-pre:border-border prose-pre:bg-muted/30",
+                  "prose-pre:rounded-none prose-pre:border prose-pre:border-border prose-pre:bg-muted/30",
                   "[&_pre_code]:border-0 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:shadow-none",
                   "[&_pre_code]:before:content-none [&_pre_code]:after:content-none",
                   "prose-blockquote:border-l-2 prose-blockquote:border-brand prose-blockquote:bg-transparent prose-blockquote:not-italic",
