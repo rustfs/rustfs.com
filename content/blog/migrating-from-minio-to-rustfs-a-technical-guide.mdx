@@ -1,0 +1,123 @@
+---
+title: 'Migrating from MinIO to RustFS: A Technical Guide'
+slug: migrating-from-minio-to-rustfs-a-technical-guide
+description: >-
+  Original author: https://github.com/soakes. Many thanks for his submission and
+  contribution. In the evolving landscape of object storage, RustFS...
+date: '2025-12-07T06:42:15.000Z'
+author: Rustfs
+tags:
+  - How to migrate from MinIO to RustFS?
+  - mc
+  - mc cp
+  - mc mirror
+  - minio
+  - RustFS
+image: 'https://rustfs.dev/wp-content/uploads/2025/12/minio-to-rustfs.png'
+sourceUrl: 'https://rustfs.dev/migrating-from-minio-to-rustfs-a-technical-guide/'
+---
+> Original author: [https://github.com/soakes](https://github.com/soakes). Many thanks for his submission and contribution.
+
+In the evolving landscape of object storage, **RustFS** has emerged as a compelling alternative to MinIO. While MinIO set the standard for self-hosted S3-compatible storage, its shift to the AGPLv3 license has created compliance challenges for many organizations. RustFS addresses this by offering a high-performance, memory-safe architecture built in Rust, released under the permissive **Apache 2.0** license.
+
+This guide outlines the technical process for migrating data from an existing MinIO cluster to a new RustFS deployment with minimal downtime.
+
+## Why Migrate?
+
+Before executing the migration, it is important to understand the technical drivers:
+
+1.  **Licensing Compliance:** RustFS uses the Apache 2.0 license, allowing for broader integration in commercial and proprietary environments without the copyleft implications of MinIO’s AGPLv3.
+2.  **Performance Stability:** Written in Rust, RustFS eliminates the Garbage Collection (GC) pauses inherent in Go-based systems like MinIO. This results in lower tail latency and more consistent throughput, particularly under high load.
+3.  **S3 Compatibility:** RustFS maintains strict API compatibility with Amazon S3, allowing existing tooling (Terraform, SDKs, backup scripts) to function without modification.
+
+## Migration Tooling: The MinIO Client (`mc`)
+
+The most robust tool for this migration is, ironically, the **MinIO Client (`mc`)**. It provides distinct advantages over generic S3 CLI tools:
+
+*   **Resumability:** Automatically handles network interruptions.
+*   **Data Integrity:** Includes checksum verification for transferred objects.
+*   **Metadata Preservation:** Retains original object tags, content-types, and custom metadata.
+
+## Prerequisites
+
+*   **Source:** A running MinIO instance.
+*   **Destination:** A running RustFS instance.
+*   **Tooling:** `mc` installed on a host with network access to both clusters.
+*   **Credentials:** **Root/Admin Access Keys** for both the source and destination.
+
+### A Note on Access Credentials
+
+For this migration, we strongly recommend using the **Root User (Admin) Access Keys** for both the MinIO source and the RustFS destination.
+
+While least-privilege principles usually apply, the migration process involves `mc mirror`, which attempts to replicate the entire bucket structure. If a bucket exists on the source but not the destination, `mc` needs the `s3:CreateBucket` permission to create it automatically. Using root credentials ensures the client has full authority to replicate the namespace structure without permission errors interrupting the transfer.
+
+## Step-by-Step Migration
+
+### 1\. Configure Remote Aliases
+
+Define aliases for both storage clusters in the `mc` configuration.
+
+```
+# Configure the Source (MinIO)
+mc alias set minio-old https://minio.example.com ADMIN_ACCESS_KEY ADMIN_SECRET_KEY
+
+# Configure the Destination (RustFS)
+mc alias set rustfs-new https://rustfs.example.com ADMIN_ACCESS_KEY ADMIN_SECRET_KEY
+```
+
+*Verification:* Run `mc ls rustfs-new` to confirm connectivity and permissions.
+
+### 2\. Perform a Dry Run
+
+Before initiating the transfer, simulate the operation to verify path resolution and permissions. The `--dry-run` flag lists the operations that would be performed without moving data.
+
+```
+mc mirror --dry-run minio-old/production-data rustfs-new/production-data
+```
+
+### 3\. Execute the Mirror
+
+There are two primary strategies for the data transfer:
+
+#### Option A: Static Transfer (Cold Storage)
+
+For backup or archive data that is not actively being written to.
+
+```
+mc mirror minio-old/production-data rustfs-new/production-data
+```
+
+#### Option B: Active Synchronization (Zero Downtime)
+
+For production workloads, use the `--watch` flag. `mc` will perform an initial sync of existing data and then continuously monitor the source for new objects, replicating them to the destination in near real-time.
+
+```
+mc mirror --watch --overwrite minio-old/production-data rustfs-new/production-data
+```
+
+*   `--watch`: Continuously replicates new objects.
+*   `--overwrite`: Updates objects on the destination if they have changed on the source.
+*   `--remove`: (Optional) Deletes objects on the destination if they are deleted from the source. Use with caution.
+
+### 4\. Final Cutover
+
+Once the data is synchronized:
+
+1.  **Quiesce the Application:** Pause write operations to the application to ensure a consistent state.
+2.  **Wait for Sync:** Allow `mc mirror` to process the final queue of pending objects.
+3.  **Update Configuration:** Change the S3 Endpoint URL in your application settings to point to the RustFS instance (`https://rustfs.example.com`).
+4.  **Restart & Verify:** Restart the application and verify data accessibility.
+
+### 5\. Verification
+
+After the cutover, verify data integrity using the `diff` command. This compares the source and destination metadata to identify any discrepancies.
+
+```
+mc diff minio-old/production-data rustfs-new/production-data
+```
+
+If the command returns no output, the datasets are identical.
+
+## Conclusion
+
+Migrating to RustFS offers a path to a more performant and permissively licensed object storage infrastructure. By leveraging standard tools like `mc` and ensuring proper administrative privileges during the migration, organizations can execute this transition with confidence and minimal operational impact.

@@ -47,12 +47,12 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
       className="relative overflow-hidden border-y border-border bg-muted/30 py-24 sm:py-32"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h1 className="sr-only">Contact Us</h1>
         <HomeSectionHeader
           sectionNumber={sectionNumber}
           eyebrow="Contact channel"
           title="Contact Us"
           description="Get in touch with the RustFS team for deployment planning, migration support, and enterprise requirements."
+          headingLevel={1}
         />
 
         <div className="grid gap-6 lg:grid-cols-[1fr_0.86fr] lg:items-start">

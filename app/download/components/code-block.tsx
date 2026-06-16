@@ -43,11 +43,13 @@ export default function CodeBlock({ code, title, className }: CodeBlockProps) {
       )}
 
       <div className="relative">
-        <pre className="max-w-full overflow-x-auto bg-card p-4 font-mono text-[13px] leading-7 text-foreground">
+        <pre className="max-w-full overflow-hidden bg-card p-4 font-mono text-[13px] leading-7 text-foreground sm:overflow-x-auto">
           {code.map((line, index) => (
-            <div key={index} className="grid grid-cols-[1.4rem_1fr] gap-2">
+            <div key={index} className="grid grid-cols-[1.4rem_minmax(0,1fr)] gap-2">
               <span className="select-none text-muted-foreground">$</span>
-              <span>{line}</span>
+              <span className="min-w-0 whitespace-pre-wrap break-words sm:whitespace-pre">
+                {line}
+              </span>
             </div>
           ))}
         </pre>

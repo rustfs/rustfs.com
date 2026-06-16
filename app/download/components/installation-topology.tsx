@@ -1,49 +1,57 @@
-import { NetworkIcon, ServerIcon, SquareStackIcon } from 'lucide-react';
-import type { ComponentType } from 'react';
+'use client'
 
-function TopologyRow({
-  code,
-  name,
-  icon: Icon,
-  useCase,
-  tradeoff,
-  command,
-}: {
+import { NetworkIcon, ServerIcon, SquareStackIcon } from 'lucide-react';
+import { useState, type ComponentType } from 'react';
+
+type Topology = {
+  id: string;
   code: string;
   name: string;
   icon: ComponentType<{ className?: string }>;
   useCase: string;
   tradeoff: string;
-  command: string;
-}) {
-  return (
-    <article className="motion-card grid border-b border-border last:border-b-0 lg:grid-cols-[13rem_1fr_1fr_15rem]">
-      <div className="flex items-center gap-4 border-b border-border p-5 lg:border-b-0 lg:border-r">
-        <span className="motion-icon-tile flex size-11 items-center justify-center bg-brand text-brand-foreground">
-          <Icon className="size-5" />
-        </span>
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">{code}</p>
-          <h3 className="mt-1 text-base font-semibold text-foreground">{name}</h3>
-        </div>
-      </div>
-      <div className="border-b border-border p-5 lg:border-b-0 lg:border-r">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Best for</p>
-        <p className="mt-3 text-sm leading-7 text-foreground">{useCase}</p>
-      </div>
-      <div className="border-b border-border p-5 lg:border-b-0 lg:border-r">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Watch</p>
-        <p className="mt-3 text-sm leading-7 text-muted-foreground">{tradeoff}</p>
-      </div>
-      <div className="p-5">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Shape</p>
-        <code className="mt-3 block border border-border bg-background px-3 py-2 text-xs text-foreground">{command}</code>
-      </div>
-    </article>
-  );
-}
+  command: string[];
+  notes: string[];
+};
+
+const topologies: Topology[] = [
+  {
+    id: 'single-disk',
+    code: 'SNSD',
+    name: 'Single-node single-disk',
+    icon: ServerIcon,
+    useCase: 'Developer laptops, demos, and disposable validation environments.',
+    tradeoff: 'No redundancy. Treat the data path as replaceable.',
+    command: ['rustfs /data'],
+    notes: ['1 node', '1 disk path', 'No redundancy'],
+  },
+  {
+    id: 'single-node-multi-disk',
+    code: 'SNMD',
+    name: 'Single-node multiple-disk',
+    icon: SquareStackIcon,
+    useCase: 'Small deployments that need local erasure coding across drives.',
+    tradeoff: 'Disk failure tolerance improves, but the node remains a single availability boundary.',
+    command: ['rustfs /disk{1...4}'],
+    notes: ['1 node', 'Multiple disks', 'Local EC'],
+  },
+  {
+    id: 'multi-node-multi-disk',
+    code: 'MNMD',
+    name: 'Multi-node multiple-disk',
+    icon: NetworkIcon,
+    useCase: 'Production clusters, high durability, and petabyte-scale object storage.',
+    tradeoff: 'Requires network, identity, observability, capacity, and upgrade planning.',
+    command: ['rustfs http://node{1...4}/disk{1...4}'],
+    notes: ['Multiple nodes', 'Multiple disks', 'Production'],
+  },
+];
 
 export default function InstallationTopology() {
+  const [activeId, setActiveId] = useState(topologies[0].id);
+  const activeTopology = topologies.find((item) => item.id === activeId) ?? topologies[0];
+  const ActiveIcon = activeTopology.icon;
+
   return (
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -62,30 +70,92 @@ export default function InstallationTopology() {
         </div>
 
         <div className="border border-border bg-card">
-          <TopologyRow
-            code="SNSD"
-            name="Single-node single-disk"
-            icon={ServerIcon}
-            useCase="Developer laptops, demos, and disposable validation environments."
-            tradeoff="No redundancy. Treat the data path as replaceable."
-            command="rustfs /data"
-          />
-          <TopologyRow
-            code="SNMD"
-            name="Single-node multiple-disk"
-            icon={SquareStackIcon}
-            useCase="Small deployments that need local erasure coding across drives."
-            tradeoff="Disk failure tolerance improves, but the node remains a single availability boundary."
-            command="rustfs /disk{1...4}"
-          />
-          <TopologyRow
-            code="MNMD"
-            name="Multi-node multiple-disk"
-            icon={NetworkIcon}
-            useCase="Production clusters, high durability, and petabyte-scale object storage."
-            tradeoff="Requires network, identity, observability, capacity, and upgrade planning."
-            command="rustfs http://node{1...4}/disk{1...4}"
-          />
+          <div
+            role="tablist"
+            aria-label="Deployment topology"
+            className="grid divide-y divide-border md:grid-cols-3 md:divide-x md:divide-y-0"
+          >
+            {topologies.map((item) => {
+              const Icon = item.icon;
+              const isActive = item.id === activeTopology.id;
+
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`topology-panel-${item.id}`}
+                  id={`topology-tab-${item.id}`}
+                  onClick={() => setActiveId(item.id)}
+                  className={[
+                    'motion-button flex min-h-24 items-center gap-4 p-5 text-left transition-colors',
+                    isActive ? 'bg-muted/40 text-foreground' : 'text-muted-foreground hover:bg-muted/20 hover:text-foreground',
+                  ].join(' ')}
+                >
+                  <span
+                    className={[
+                      'flex size-11 shrink-0 items-center justify-center',
+                      isActive ? 'bg-brand text-brand-foreground' : 'bg-background text-foreground',
+                    ].join(' ')}
+                  >
+                    <Icon className="size-5" />
+                  </span>
+                  <span>
+                    <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">{item.code}</span>
+                    <span className="mt-1 block text-base font-semibold leading-snug">{item.name}</span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div
+            id={`topology-panel-${activeTopology.id}`}
+            role="tabpanel"
+            aria-labelledby={`topology-tab-${activeTopology.id}`}
+            className="grid border-t border-border lg:grid-cols-[0.86fr_1.14fr]"
+          >
+            <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
+              <div className="flex items-center gap-4">
+                <span className="flex size-12 shrink-0 items-center justify-center bg-brand text-brand-foreground">
+                  <ActiveIcon className="size-5" />
+                </span>
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">{activeTopology.code}</p>
+                  <h3 className="mt-2 text-2xl font-semibold leading-tight text-foreground">{activeTopology.name}</h3>
+                </div>
+              </div>
+
+              <div className="mt-8 grid border border-border bg-background text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:grid-cols-3">
+                {activeTopology.notes.map((note) => (
+                  <span key={note} className="border-b border-border px-3 py-3 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
+                    {note}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid">
+              <div className="grid border-b border-border md:grid-cols-2">
+                <div className="border-b border-border p-6 md:border-b-0 md:border-r">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Best for</p>
+                  <p className="mt-3 text-sm leading-7 text-foreground">{activeTopology.useCase}</p>
+                </div>
+                <div className="p-6">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Watch</p>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{activeTopology.tradeoff}</p>
+                </div>
+              </div>
+
+              <div className="p-6 sm:p-8">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Shape</p>
+                <code className="mt-4 block min-w-0 whitespace-pre-wrap break-words border border-border bg-background p-4 font-mono text-sm leading-6 text-foreground">
+                  {activeTopology.command.join('\n')}
+                </code>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

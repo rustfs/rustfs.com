@@ -18,6 +18,29 @@ export interface GitHubMetrics {
   commits: number;
 }
 
+const GITHUB_FETCH_TIMEOUT_MS = 3500;
+
+async function fetchGitHub(
+  url: string,
+  init: RequestInit & { next?: { revalidate?: number } } = {}
+) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), GITHUB_FETCH_TIMEOUT_MS);
+
+  try {
+    return await fetch(url, {
+      ...init,
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+function isAbortError(error: unknown) {
+  return error instanceof Error && error.name === "AbortError";
+}
+
 /**
  * Get the latest release information for a GitHub repository.
  * @param repo Repository path, e.g. "rustfs/rustfs"
@@ -26,7 +49,7 @@ export interface GitHubMetrics {
 async function getLatestReleaseForRepo(repo: string): Promise<GitHubRelease | null> {
   // Try to get the latest official release first
   try {
-    const response = await fetch(
+    const response = await fetchGitHub(
       `https://api.github.com/repos/${repo}/releases/latest`,
       {
         headers: {
@@ -43,12 +66,17 @@ async function getLatestReleaseForRepo(repo: string): Promise<GitHubRelease | nu
       return release
     }
   } catch (error) {
+    if (isAbortError(error)) {
+      console.warn(`Timed out fetching latest release for ${repo}`);
+      return null;
+    }
+
     console.warn(`Failed to fetch latest release for ${repo}:`, error)
   }
 
   // If official release doesn't exist (404), get the latest version with assets
   try {
-    const response = await fetch(
+    const response = await fetchGitHub(
       `https://api.github.com/repos/${repo}/releases?per_page=10`,
       {
         headers: {
@@ -77,6 +105,11 @@ async function getLatestReleaseForRepo(repo: string): Promise<GitHubRelease | nu
       return latestNonDraft || null
     }
   } catch (error) {
+    if (isAbortError(error)) {
+      console.warn(`Timed out fetching releases for ${repo}`);
+      return null;
+    }
+
     console.error(`Failed to fetch releases for ${repo}:`, error)
   }
 
@@ -112,14 +145,14 @@ export async function getGitHubMetrics(): Promise<GitHubMetrics> {
 
   try {
     const [repoRes, commitsRes] = await Promise.all([
-      fetch('https://api.github.com/repos/rustfs/rustfs', {
+      fetchGitHub('https://api.github.com/repos/rustfs/rustfs', {
         headers: {
           Accept: 'application/vnd.github+json',
           'User-Agent': 'RustFS-Website',
         },
         next: { revalidate: 3600 },
       }),
-      fetch('https://api.github.com/repos/rustfs/rustfs/commits?per_page=1', {
+      fetchGitHub('https://api.github.com/repos/rustfs/rustfs/commits?per_page=1', {
         headers: {
           Accept: 'application/vnd.github+json',
           'User-Agent': 'RustFS-Website',
@@ -150,7 +183,12 @@ export async function getGitHubMetrics(): Promise<GitHubMetrics> {
       commits: Number.isFinite(commits) && commits > 0 ? commits : fallback.commits,
     };
   } catch (error) {
-    console.warn('Failed to fetch GitHub metrics:', error);
+    if (isAbortError(error)) {
+      console.warn('Timed out fetching GitHub metrics');
+    } else {
+      console.warn('Failed to fetch GitHub metrics:', error);
+    }
+
     return fallback;
   }
 }

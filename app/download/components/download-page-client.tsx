@@ -1,27 +1,27 @@
 'use client'
 
-import { Button } from '@/components/ui/button';
-import { formatReleaseDate, formatVersion, getDownloadUrlForPlatform, type GitHubRelease } from '@/lib/github';
-import AppleIcon from '@/public/svgs/brands/apple.svg';
-import DockerIcon from '@/public/svgs/brands/docker.svg';
-import LinuxIcon from '@/public/svgs/brands/linux.svg';
-import WindowsIcon from '@/public/svgs/brands/windows.svg';
+import { Button } from '@/components/ui/button'
+import { formatReleaseDate, formatVersion, getDownloadUrlForPlatform, type GitHubRelease } from '@/lib/github'
+import AppleIcon from '@/public/svgs/brands/apple.svg'
+import DockerIcon from '@/public/svgs/brands/docker.svg'
+import LinuxIcon from '@/public/svgs/brands/linux.svg'
+import WindowsIcon from '@/public/svgs/brands/windows.svg'
 import {
-  ArrowUpRightIcon,
-  BinaryIcon,
-  BookOpenIcon,
-  CloudIcon,
-  DownloadIcon,
-  HardDriveIcon,
-  LayersIcon,
-  MessageCircleIcon,
-  ServerIcon,
-} from 'lucide-react';
-import Link from 'next/link';
-import type { ComponentType, ReactNode } from 'react';
-import CodeBlock from './code-block';
-import InstallationTopology from './installation-topology';
-import RcDownloadSection from './rc-download-section';
+    ArrowUpRightIcon,
+    BinaryIcon,
+    BookOpenIcon,
+    CloudIcon,
+    DownloadIcon,
+    HardDriveIcon,
+    LayersIcon,
+    MessageCircleIcon,
+    ServerIcon,
+} from 'lucide-react'
+import Link from 'next/link'
+import type { ComponentType, ReactNode } from 'react'
+import CodeBlock from './code-block'
+import InstallationTopology from './installation-topology'
+import RcDownloadSection from './rc-download-section'
 
 interface DownloadPageClientProps {
   release: GitHubRelease | null;
@@ -409,7 +409,7 @@ export default function DownloadPageClient({ release, cliRelease }: DownloadPage
   const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
 
   return (
-    <main className="relative z-10 min-h-screen bg-background text-foreground">
+    <main className="relative z-10 min-h-screen text-foreground">
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.96fr_1.04fr] lg:items-end">

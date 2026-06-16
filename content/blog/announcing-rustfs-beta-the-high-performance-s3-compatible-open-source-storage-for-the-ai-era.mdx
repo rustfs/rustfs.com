@@ -1,0 +1,169 @@
+---
+title: >-
+  Announcing RustFS Beta: The High-Performance, S3-Compatible Open Source
+  Storage for the AI Era
+slug: >-
+  announcing-rustfs-beta-the-high-performance-s3-compatible-open-source-storage-for-the-ai-era
+description: >-
+  Today, we are excited to announce the release of RustFS Beta. Built as a
+  distributed object storage system...
+date: '2026-04-28T17:52:35.000Z'
+author: Jinghe Ma
+tags:
+  - Announcements
+  - Release
+image: >-
+  https://rustfs.dev/wp-content/uploads/2026/04/Gemini_Generated_Image_opotwvopotwvopot.png
+sourceUrl: >-
+  https://rustfs.dev/announcing-rustfs-beta-the-high-performance-s3-compatible-open-source-storage-for-the-ai-era/
+---
+Today, we are excited to announce the release of **RustFS Beta**.
+
+Built as a **distributed object storage system for the AI era**, RustFS has seen remarkable growth since being open sourced in July 2025. In less than a year, RustFS has reached **26.5K GitHub stars**, **1.1K forks**, and attracted **130+ contributors worldwide**. Our DockerHub images have surpassed **2.2 million pulls**, while RustFS has ranked **#1 on GitHub Trending eight times** and topped **GitHub Rust Trending more than 40 times**.
+
+These milestones have made RustFS one of the **fastest-growing open-source object storage projects**.
+
+After **2,800+ Git commits** and **100 Alpha releases**, the project has matured significantly in architecture, stability, and ecosystem readiness. Based on this progress, we believe the project is ready to move from **Alpha to Beta** .
+
+![](https://rustfs.dev/wp-content/uploads/2026/04/image-1-1024x662.png)
+
+The RustFS Beta release marks an important milestone in our journey to build a high-performance, cloud-native, distributed object storage platform designed for modern AI and data-intensive workloads.
+
+### Why Beta Matters
+
+**[RustFS](https://rustfs.com)** is a distributed object storage system written entirely in **Rust** and released under the business-friendly **Apache 2.0 license**. As the landscape of open-source storage shifts—most notably with MinIO’s move toward more restrictive licensing—the global community is searching for a truly open, S3-compatible platform.
+
+> Learn how to migrate from MinIO to RustFS with [Drop-in Binary Replacement feature](https://rustfs.dev/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs/).
+
+RustFS fills this gap by delivering **high performance, distributed erasure coding, and advanced security**, ensuring developers and enterprises can build without the fear of vendor or license lock-in. This Beta release marks a new stage of maturity, signifying that RustFS is now ready for **broader real-world adoption and production validation**.
+
+## RustFS Core Features
+
+RustFS Beta delivers a robust set of enterprise-grade features, including:
+
+*   **Fully S3 Compatibility:** Comprehensive object lifecycle management with seamless integration for a S3-compatible ecosystem.
+*   **Security First:** Built-in support for mTLS, KMS, and OIDC identity management.
+*   **High Availability:** Distributed clustering with multi-node and multi-disk support.
+
+Capability Grouping
+
+Core Capabilities
+
+S3 storage
+
+Bucket/Object lifecycle management
+
+Object Versioning and Object Lock
+
+Distributed Erasure Coding
+
+Multipart upload
+
+Checksums and integrity verification
+
+Compliance & Security
+
+IAM users, groups, policies, and service accounts
+
+OIDC login and web identity
+
+KMS service
+
+SSE-S3、SSE-KMS 以及 SSE-C
+
+STS
+
+mTLS
+
+Security audit
+
+Operation & Observibility
+
+Event notification
+
+OTEL
+
+Storage Capacity Monitoring
+
+Cluster node health check
+
+rc（rustfs client command line）
+
+MinIO migration
+
+Protocol
+
+S3
+
+WebDAV
+
+Swift API
+
+FTP(s)
+
+High Availability
+
+Distributed Clustering (Multi Node Multi Disks)
+
+Node Healing, Scaling, and Rebalancing
+
+Cloud Native
+
+Helm Chart
+
+Operator
+
+AI
+
+MCP Server
+
+## Getting Started with RustFS
+
+RustFS supports multiple operating systems, including **Linux**, **macOS**, and **Windows**, as well as multiple deployment methods such as **binary installation**, **Docker**, **Helm Charts**, and the **RustFS Operator**.
+
+Using Linux as an example, getting started with RustFS is straightforward:
+
+*   Binary installation
+
+Run the following command to install RustFS:
+
+```
+$ curl -O https://rustfs.com/install_rustfs.sh && bash install_rustfs.sh
+```
+
+*   Docker installation
+
+```
+$ docker pull rustfs/rustfs:latest
+$ docker run -d \
+  --name rustfs \
+  -p 9000:9000 \
+  -p 9001:9001 \
+  -v /data:/data \
+  rustfs/rustfs:latest
+```
+
+*   Helm installation
+
+```
+# add Helm repo
+helm repo add rustfs https://charts.rustfs.com
+
+# Install RustFS
+helm install my-rustfs rustfs/rustfs --version 0.0.99
+```
+
+For detailed installation instructions and deployment guides, please refer to [our documentation](https://docs.rustfs.com/installation/).
+
+## What’s next
+
+The Beta release marks an important milestone for RustFS, but it is only the beginning.
+
+Looking ahead, we will continue investing in **performance optimization**, **security hardening**, and **enterprise-grade high availability**, making RustFS even more stable and production-ready as we work toward our **planned General Availability (GA) release in July** .
+
+Our goal remains clear: **to build a modern, high-performance distributed object storage system designed for AI and data-intensive workloads**.
+
+We welcome you to try RustFS in your own environments, share feedback through GitHub Issues, and contribute through star, issue, as well as pull requests.
+
+*   RustFS GitHub Repo：[https://github.com/rustfs/rustfs](https://github.com/rustfs/rustfs)
+*   RustFS client GitHub Repo：[https://github.com/rustfs/cli](https://github.com/rustfs/cli)

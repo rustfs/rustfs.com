@@ -46,7 +46,7 @@ export const resourceNavigation: NavigationItem[] = [
   },
   {
     title: "Blog",
-    href: "https://rustfs.dev/",
+    href: "/blog",
     description: "Production best practices, technical deep dives, and expert insights.",
   },
 ];
@@ -67,7 +67,7 @@ export const footerNavigation = [
     links: [
       { title: "RustFS Download", href: "/download" },
       { title: "rc Download", href: "/download#rc" },
-      { title: "Blog", href: "https://rustfs.dev/" },
+      { title: "Blog", href: "/blog" },
       { title: "EC Calculator", href: "/erasure-code-calculator" },
       { title: "Documentation", href: "/docs" },
     ],

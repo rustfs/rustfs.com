@@ -1,6 +1,6 @@
-import type { BlogPost } from "@/lib/blog";
-import { getLatestBlogPosts } from "@/lib/blog";
 import { cn } from "@/lib/utils";
+import { getBlogPosts, type BlogPostMeta } from "@/lib/mdx-blog";
+import Link from "next/link";
 import HomeSectionHeader from "./home-section-header";
 
 interface HomeBlogProps {
@@ -8,7 +8,7 @@ interface HomeBlogProps {
 }
 
 export default async function HomeBlog({ className }: HomeBlogProps) {
-  const posts: BlogPost[] = await getLatestBlogPosts(3);
+  const posts: BlogPostMeta[] = (await getBlogPosts()).slice(0, 3);
 
   if (!posts.length) {
     return null;
@@ -32,16 +32,14 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
         />
 
         <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
-          <a
-            href={featuredPost.link}
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            href={`/blog/${featuredPost.slug}`}
             className="motion-card group overflow-hidden border border-border bg-card text-left transition-colors hover:bg-muted/50"
           >
-            {featuredPost.imageUrl ? (
+            {featuredPost.image ? (
               <div className="relative h-72 w-full border-b border-border sm:h-96">
                 <img
-                  src={featuredPost.imageUrl}
+                  src={featuredPost.image}
                   alt={featuredPost.title}
                   className="h-full w-full object-cover grayscale transition duration-300 group-hover:grayscale-0"
                   loading="lazy"
@@ -55,15 +53,9 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
                 </span>
                 <span className="h-px flex-1 bg-border" />
               </div>
-              {featuredPost.pubDate ? (
-                <p className="mb-4 w-fit border border-border bg-background px-2 py-1 text-[11px] text-muted-foreground">
-                  {new Date(featuredPost.pubDate).toLocaleDateString(undefined, {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </p>
-              ) : null}
+              <p className="mb-4 w-fit border border-border bg-background px-2 py-1 text-[11px] text-muted-foreground">
+                {formatDate(featuredPost.date)}
+              </p>
               <h3 className="text-2xl font-semibold text-foreground sm:text-3xl">
                 {featuredPost.title}
               </h3>
@@ -76,15 +68,13 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
                 </span>
               </span>
             </div>
-          </a>
+          </Link>
 
           <div className="grid gap-px border border-border bg-border">
             {otherPosts.map((post, index) => (
-              <a
-                key={post.link}
-                href={post.link}
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
                 className="motion-card group flex flex-col justify-between bg-card text-left transition-colors hover:bg-muted/50"
               >
                 <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
@@ -95,15 +85,9 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
                 </div>
 
                 <div className="flex-1 p-6">
-                  {post.pubDate ? (
-                    <p className="mb-4 w-fit border border-border bg-background px-2 py-1 text-[11px] text-muted-foreground">
-                      {new Date(post.pubDate).toLocaleDateString(undefined, {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </p>
-                  ) : null}
+                  <p className="mb-4 w-fit border border-border bg-background px-2 py-1 text-[11px] text-muted-foreground">
+                    {formatDate(post.date)}
+                  </p>
                   <h3 className="text-lg font-semibold text-foreground line-clamp-2">
                     {post.title}
                   </h3>
@@ -117,25 +101,31 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
                     </span>
                   </span>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
 
         <div className="mt-8">
-          <a
-            href="https://rustfs.dev/"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            href="/blog"
             className="motion-button group inline-flex border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
           >
             View more on RustFS Blog
             <span className="motion-arrow ml-1 inline-block" aria-hidden="true">
               ↗
             </span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
   );
+}
+
+function formatDate(date: string) {
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  }).format(new Date(date));
 }

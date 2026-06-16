@@ -47,8 +47,8 @@ export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
             </dl>
 
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <DownloadLink className={`${heroButtonClassName} shadow-[inset_0_0_0_1px_var(--primary)]`} />
-              <ContactUsButton className={`${heroButtonClassName} bg-background text-foreground shadow-[inset_0_0_0_1px_var(--border)] hover:bg-muted hover:text-foreground active:bg-muted focus-visible:outline-border`} />
+              <DownloadLink className={`${heroButtonClassName} bg-foreground text-background shadow-none hover:bg-foreground/90 hover:text-background active:bg-foreground/80 active:text-background focus-visible:outline-border`} />
+              <ContactUsButton className={`${heroButtonClassName} bg-muted text-foreground shadow-none hover:bg-foreground hover:text-background active:bg-foreground active:text-background focus-visible:outline-border`} />
             </div>
           </div>
 

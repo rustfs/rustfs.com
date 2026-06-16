@@ -35,7 +35,26 @@ const reasons = [
   },
 ];
 
-export default function HomeStats() {return (
+const compatibilityRows = [
+  {
+    title: "AWS SDKs",
+    detail: "Keep application storage code unchanged.",
+    meta: "S3 API",
+  },
+  {
+    title: "MinIO tools",
+    detail: "Reuse familiar migration and admin workflows.",
+    meta: "MC / CLI",
+  },
+  {
+    title: "Cloud apps",
+    detail: "Connect S3-aware analytics, backup, and AI pipelines.",
+    meta: "DROP-IN",
+  },
+];
+
+export default function HomeStats() {
+  return (
     <section
       className="relative overflow-hidden border-y border-border bg-background py-24 text-foreground sm:py-32"
     >
@@ -94,10 +113,21 @@ mode = "distributed"`}</code>
                 {reasons[5].description}
               </p>
             </div>
-            <div className="grid grid-cols-3 text-center text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              <span className="border-r border-border px-3 py-10">AWS SDKs</span>
-              <span className="border-r border-border px-3 py-10">MinIO tools</span>
-              <span className="px-3 py-10">Cloud apps</span>
+            <div className="grid divide-y divide-border">
+              {compatibilityRows.map((item) => (
+                <div
+                  key={item.title}
+                  className="grid gap-4 p-6 sm:grid-cols-[1fr_auto] sm:items-center sm:p-8"
+                >
+                  <div>
+                    <h4 className="text-base font-semibold text-foreground">{item.title}</h4>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.detail}</p>
+                  </div>
+                  <code className="w-fit border border-border bg-background px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    {item.meta}
+                  </code>
+                </div>
+              ))}
             </div>
           </article>
         </div>

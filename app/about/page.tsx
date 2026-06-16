@@ -1,9 +1,9 @@
-import ContactUsButton from "@/components/business/buttons/contact-us";
-import NvidiaLogo from "@/public/svgs/softwares/nvidia.svg";
-import RustFSLogo from "@/public/rustfs.logo.svg";
-import { CpuIcon, DatabaseIcon, GitBranchIcon, ShieldCheckIcon } from "lucide-react";
-import type { Metadata } from "next";
-import type { ComponentType } from "react";
+import ContactUsButton from "@/components/business/buttons/contact-us"
+import RustFSLogo from "@/public/rustfs.logo.svg"
+import NvidiaLogo from "@/public/svgs/softwares/nvidia.svg"
+import { CpuIcon, DatabaseIcon, GitBranchIcon, ShieldCheckIcon } from "lucide-react"
+import type { Metadata } from "next"
+import type { ComponentType } from "react"
 
 export const metadata: Metadata = {
   title: "About RustFS | Next-Generation Distributed Object Storage for AI",
@@ -64,7 +64,7 @@ function ValueCard({
 
 export default function AboutPage() {
   return (
-    <main className="relative z-10 flex-1 bg-background text-foreground">
+    <main className="relative z-10 flex-1 text-foreground">
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="grid gap-10 lg:grid-cols-[0.98fr_1.02fr] lg:items-end">
           <div>

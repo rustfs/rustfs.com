@@ -6,6 +6,7 @@ interface HomeSectionHeaderProps {
   description: string;
   sectionNumber?: string;
   className?: string;
+  headingLevel?: 1 | 2;
 }
 
 export default function HomeSectionHeader({
@@ -14,7 +15,10 @@ export default function HomeSectionHeader({
   description,
   sectionNumber,
   className,
+  headingLevel = 2,
 }: HomeSectionHeaderProps) {
+  const Heading = headingLevel === 1 ? "h1" : "h2";
+
   return (
     <div className={cn("motion-reveal mb-10 lg:mb-14", className)}>
       <div className="relative h-px bg-border">
@@ -32,9 +36,9 @@ export default function HomeSectionHeader({
             <span className="font-mono text-brand">&gt;</span>
             <span>{eyebrow}</span>
           </div>
-          <h2 className="text-4xl font-bold leading-none text-foreground md:text-5xl lg:text-6xl">
+          <Heading className="text-4xl font-bold leading-none text-foreground md:text-5xl lg:text-6xl">
             {title}
-          </h2>
+          </Heading>
         </div>
         <p className="max-w-2xl text-base leading-8 text-muted-foreground lg:justify-self-end lg:text-right">
           {description}

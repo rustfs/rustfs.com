@@ -1,0 +1,77 @@
+---
+title: 'Patch Release: RustFS 1.0.0-alpha.79 Released'
+slug: patch-release-rustfs-1-0-0-alpha-79-released
+description: >-
+  Today, we are releasing RustFS 1.0.0-alpha.79. This release contains important
+  security fixes, stability improvements, and new features for...
+date: '2026-01-07T07:41:00.000Z'
+author: Rustfs
+tags:
+  - Released
+  - Rust
+  - RustFS
+  - S3
+  - security
+  - Announcements
+image: 'https://rustfs.dev/wp-content/uploads/2026/01/alpha.79.png'
+sourceUrl: 'https://rustfs.dev/patch-release-rustfs-1-0-0-alpha-79-released/'
+---
+Today, we are releasing **RustFS 1.0.0-alpha.79**. This release contains important security fixes, stability improvements, and new features for the RustFS community.
+
+We strongly recommend that all installations running a version prior to `1.0.0-alpha.79` be upgraded immediately.
+
+## 🛡️ A More Secure RustFS Through Global Collaboration
+
+Security is a journey, not a destination. We want to extend a sincere thank you to the global security research community and the security teams who have audited the RustFS codebase.
+
+The transparency of open source allows us to collaborate with experts worldwide. Because of your scrutiny, audits, and responsible disclosure, RustFS is becoming more secure with every release. We define success not by the absence of vulnerabilities, but by our speed and transparency in addressing them.
+
+## Security Fixes
+
+This release addresses specific security vulnerabilities reported by the community. These issues have been mitigated in version `1.0.0-alpha.79`.
+
+We have published the following Security Advisories:
+
+*   **[GHSA-h956-rh7x-ppgj](https://github.com/rustfs/rustfs/security/advisories/GHSA-h956-rh7x-ppgj)**: Fixes a critical path traversal vulnerability.
+*   **[GHSA-pq29-69jg-9mxc](https://github.com/rustfs/rustfs/security/advisories/GHSA-pq29-69jg-9mxc)**: Addresses security risks in RPC authentication.
+*   **[GHSA-gw2x-q739-qhcr](https://github.com/rustfs/rustfs/security/advisories/GHSA-gw2x-q739-qhcr)**: Enhances validation for object management and replication.
+
+## Key Changes in 1.0.0-alpha.79
+
+In addition to security patches, this release includes significant updates to protocol support, policy management, and system stability.
+
+### 🚀 Features & Enhancements
+
+*   **Protocol Support:** Added support for FTPS and SFTP (@yxrxy).
+*   **Deployment:** Added node selector support for standalone deployments (@majinghe, @31ch).
+*   **Policies:** Policy resources now support string and array modes (@GatewayJ).
+*   **Configuration:** Enabled the possibility to freely configure requests and limits (@mkrueger92).
+*   **IAM:** Added permission verification for account creation and version deletion (@GatewayJ).
+*   **Testing:** Enhanced S3 test classification and readiness detection (@overtrue).
+
+### 🐛 Bug Fixes & Improvements
+
+*   **Security:** Fixed path traversal and enhanced object validation (@weisd).
+*   **Security:** Refactored RPC Authentication System for improved maintainability (@weisd).
+*   **Security:** Corrected `RemoteAddr` extension type to enable accurate IP-based policy evaluation (@LeonWang0735).
+*   **S3 Compatibility:** Fixed bucket policy principal parsing to support specific AWS wildcards (@yxrxy).
+*   **S3 Compatibility:** Fixed `list object versions` next marker behavior (@overtrue).
+*   **Networking:** Removed NGINX Ingress default body size limit (@usernameisnull).
+*   **Platform:** Fixed issues with casting available blocks on FreeBSD/OpenBSD and removed hardcoded bash paths (@jan-schreib).
+*   **Performance:** Improved memory ordering for the disk health tracker (@weisd).
+*   **Fix:** Resolved URL output format issues in IPv6 environments and UI timing errors (@houseme).
+*   **Fix:** Addressed FTPS/SFTP download issues and optimized S3Client caching (@yxrxy).
+
+### ⚙️ Maintenance & Dependencies
+
+*   Upgraded `tokio` to 1.49.0 (@houseme).
+*   Migrated to `aws-lc-rs` and upgraded GitHub Actions artifacts (@houseme).
+*   Replaced `native-tls` with pure `rustls` for FTPS/SFTP E2E tests (@yxrxy).
+*   Removed `sysctl` crate in favor of libc’s call interface (@jan-schreib).
+*   General dependency upgrades and cleanup of unused crates.
+
+## Upgrade Information
+
+To upgrade to the latest version, please visit our release page:
+
+**[Download RustFS 1.0.0-alpha.79](https://github.com/rustfs/rustfs/releases/tag/1.0.0-alpha.79)**
