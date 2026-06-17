@@ -18,8 +18,8 @@ export function RedirectPanel({
   title,
 }: RedirectPanelProps) {
   return (
-    <main className="relative min-h-screen text-foreground">
-      <div className="mx-auto flex min-h-screen max-w-7xl items-center px-4 py-24 sm:px-6 lg:px-8">
+    <main className="relative min-h-[100dvh] text-foreground">
+      <div className="mx-auto flex min-h-[100dvh] max-w-7xl items-center px-4 py-24 sm:px-6 lg:px-8">
         <section className="w-full border border-border bg-card/80 backdrop-blur-sm">
           <header className="grid grid-cols-[1fr_auto] border-b border-border text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <span className="px-5 py-4">{eyebrow}</span>

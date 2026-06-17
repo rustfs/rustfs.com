@@ -14,7 +14,7 @@ import { ThemeToggle } from "./theme-toggle";
 function NavigationMenu({ label, items }: { label: string; items: NavigationItem[] }) {
   return (
     <Popover className="relative">
-      <Popover.Button className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-sm text-primary hover:bg-muted/60">
+      <Popover.Button className="inline-flex items-center gap-1 px-2 py-1 text-sm text-primary hover:bg-muted/60">
         <span>{label}</span>
         <ChevronDownIcon className="size-3" />
       </Popover.Button>
@@ -27,10 +27,10 @@ function NavigationMenu({ label, items }: { label: string; items: NavigationItem
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 translate-y-1"
       >
-        <Popover.Panel className="absolute left-0 top-full z-50 mt-3 w-80 rounded-lg border border-border bg-popover p-3 text-popover-foreground shadow-xl">
+        <Popover.Panel className="absolute left-0 top-full z-50 mt-3 w-80 border border-border bg-popover p-3 text-popover-foreground shadow-xl">
           <div className="space-y-1">
             {items.map((item) => (
-              <a key={item.title} href={item.href} className="block rounded-lg p-3 hover:bg-muted/60">
+              <a key={item.title} href={item.href} className="block p-3 hover:bg-muted/60">
                 <span className="text-sm font-semibold text-foreground">{item.title}</span>
                 {item.description && (
                   <span className="mt-1 block text-xs leading-5 text-muted-foreground">{item.description}</span>
@@ -38,7 +38,7 @@ function NavigationMenu({ label, items }: { label: string; items: NavigationItem
                 {item.items && (
                   <span className="mt-2 flex flex-wrap gap-1.5">
                     {item.items.map((tag) => (
-                      <span key={tag} className="rounded-md bg-muted px-1.5 py-0.5 text-[11px] text-muted-foreground">
+                      <span key={tag} className="bg-muted px-1.5 py-0.5 text-[11px] text-muted-foreground">
                         {tag}
                       </span>
                     ))}
@@ -68,7 +68,7 @@ export default function AppHeader() {
   ]
 
   return (
-    <header className="py-6 xl:py-8">
+    <header className="py-4 xl:py-5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
@@ -82,7 +82,7 @@ export default function AppHeader() {
                 return (
                   <a
                     key={index}
-                    className={cn(`inline-block rounded-lg px-2 py-1 text-sm text-primary`, item.classes)}
+                    className={cn(`inline-block px-2 py-1 text-sm text-primary`, item.classes)}
                     href={item.url}
                   >
                     {item.label}
@@ -118,19 +118,19 @@ export default function AppHeader() {
                 >
                   <Popover.Panel
                     focus
-                    className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-lg bg-popover p-4 text-lg tracking-tight text-popover-foreground shadow-xl ring-1 ring-border/60"
+                    className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col bg-popover p-4 text-lg tracking-tight text-popover-foreground shadow-xl ring-1 ring-border/60"
                   >
                     <div className="px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Product</div>
                     {productNavigation.map((item) => (
-                      <a key={item.title} className="block w-full rounded p-2 text-sm hover:bg-muted/50" href={item.href}>{item.title}</a>
+                      <a key={item.title} className="block w-full p-2 text-sm hover:bg-muted/50" href={item.href}>{item.title}</a>
                     ))}
                     <div className="mt-3 px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Resources</div>
                     {resourceNavigation.map((item) => (
-                      <a key={item.title} className="block w-full rounded p-2 text-sm hover:bg-muted/50" href={item.href}>{item.title}</a>
+                      <a key={item.title} className="block w-full p-2 text-sm hover:bg-muted/50" href={item.href}>{item.title}</a>
                     ))}
                     <div className="mt-3 px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Links</div>
                     {navs.map((item, index) => (
-                      <a key={index} className="block w-full rounded p-2 text-sm hover:bg-muted/50" href={item.url}>{item.label}</a>
+                      <a key={index} className="block w-full p-2 text-sm hover:bg-muted/50" href={item.url}>{item.label}</a>
                     ))}
                   </Popover.Panel>
                 </Transition>

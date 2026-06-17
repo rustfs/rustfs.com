@@ -440,19 +440,19 @@ export default function DownloadPageClient({ release, cliRelease }: DownloadPage
   const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
 
   return (
-    <main className="relative z-10 min-h-screen text-foreground">
+    <main className="relative z-10 min-h-[100dvh] text-foreground">
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.96fr_1.04fr] lg:items-end">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Download surface</p>
               <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-                Install RustFS by how you actually deploy storage.
+                Install RustFS for real deployments.
               </h1>
             </div>
             <div className="flex flex-col gap-6">
               <p className="max-w-2xl text-base leading-8 text-muted-foreground lg:ml-auto">
-                Pick the shortest route for validation, containers, Kubernetes, or the native rc admin CLI. Each path keeps the commands close to the decision you are making.
+                Choose binary, container, Kubernetes, or rc CLI paths with commands kept close to each deployment decision.
               </p>
               <div className="flex flex-wrap gap-2 lg:justify-end">
                 <PlatformBadge icon={<LinuxIcon className="size-4" />} label="Linux" />

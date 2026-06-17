@@ -51,12 +51,12 @@ export default function PricingPage() {
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Pricing</p>
             <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-              Open-source storage with a clear enterprise path.
+              Open-source storage, clear support path.
             </h1>
           </div>
           <div className="flex flex-col gap-6">
             <p className="max-w-2xl text-base leading-8 text-muted-foreground lg:ml-auto">
-              RustFS is Apache 2.0 software. You can run it yourself, evaluate it freely, and contact the RustFS team when you need deployment planning, migration, or production support.
+              Run RustFS freely, then involve the team for deployment planning, migration, and production support.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
               <DownloadLink className="!h-12 !px-5 !py-0 leading-none" />

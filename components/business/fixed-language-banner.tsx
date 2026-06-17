@@ -2,21 +2,45 @@
 
 import { SITE_CONFIG } from '@/app.config'
 import { X } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useSyncExternalStore } from 'react'
 
 const STORAGE_KEY = 'rustfs-language-banner-dismissed'
 
-export default function FixedLanguageBanner() {
-  const [showBanner, setShowBanner] = useState(() => {
-    if (typeof window === 'undefined') return false
+function subscribeLanguagePreference(onStoreChange: () => void) {
+  if (typeof window === 'undefined') return () => {}
 
-    const isDismissed = localStorage.getItem(STORAGE_KEY) === 'true'
-    const isChinese = navigator.language.toLowerCase().startsWith('zh')
-    return isChinese && !isDismissed
-  })
+  const timer = window.setTimeout(onStoreChange, 0)
+  const handleStorage = (event: StorageEvent) => {
+    if (event.key === STORAGE_KEY) onStoreChange()
+  }
+
+  window.addEventListener('storage', handleStorage)
+
+  return () => {
+    window.clearTimeout(timer)
+    window.removeEventListener('storage', handleStorage)
+  }
+}
+
+function getLanguagePreferenceSnapshot() {
+  if (typeof window === 'undefined') return false
+
+  const isDismissed = localStorage.getItem(STORAGE_KEY) === 'true'
+  const isChinese = navigator.language.toLowerCase().startsWith('zh')
+
+  return isChinese && !isDismissed
+}
+
+export default function FixedLanguageBanner() {
+  const shouldShowBanner = useSyncExternalStore(
+    subscribeLanguagePreference,
+    getLanguagePreferenceSnapshot,
+    () => false,
+  )
+  const [isDismissed, setIsDismissed] = useState(false)
 
   const handleDismiss = () => {
-    setShowBanner(false)
+    setIsDismissed(true)
     localStorage.setItem(STORAGE_KEY, 'true')
   }
 
@@ -24,7 +48,7 @@ export default function FixedLanguageBanner() {
     window.location.href = SITE_CONFIG.secondaryDomain
   }
 
-  if (!showBanner) {
+  if (!shouldShowBanner || isDismissed) {
     return null
   }
 

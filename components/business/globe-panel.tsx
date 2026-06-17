@@ -30,8 +30,8 @@ interface GlobePanelProps {
 }
 
 export default function GlobePanel({ className, globeClassName }: GlobePanelProps) {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
+  const { resolvedTheme, theme } = useTheme();
+  const isDark = (resolvedTheme ?? theme ?? "dark") !== "light";
 
   const globeConfig = useMemo(
     () => ({
