@@ -151,17 +151,96 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
   );
 }
 
+type InstallCardVariant = 'binary' | 'container' | 'compose' | 'cluster' | 'workstation';
+
+function InstallCardVisual({ variant }: { variant: InstallCardVariant }) {
+  if (variant === 'binary') {
+    return (
+      <div className="border-b border-border bg-background/50 p-4">
+        <div className="grid gap-px bg-border sm:grid-cols-4">
+          {['MUSL', 'GNU', 'ARM64', 'x86_64'].map((item) => (
+            <span key={item} className="bg-card px-3 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (variant === 'container') {
+    return (
+      <div className="grid border-b border-border bg-background/50 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:grid-cols-3">
+        <span className="border-b border-border px-4 py-4 sm:border-b-0 sm:border-r">9000 S3</span>
+        <span className="border-b border-border px-4 py-4 sm:border-b-0 sm:border-r">9001 UI</span>
+        <span className="px-4 py-4">Volume /data</span>
+      </div>
+    );
+  }
+
+  if (variant === 'compose') {
+    return (
+      <div className="relative h-28 overflow-hidden border-b border-border bg-background/50 p-4">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-40 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:28px_28px]"
+        />
+        <div className="relative flex h-full items-center gap-3">
+          {['compose.yml', 'volume', 'ports'].map((item, index) => (
+            <span
+              key={item}
+              className="grid h-14 flex-1 place-items-center border border-border bg-card font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+              style={{ transform: `translateY(${index === 1 ? -8 : index === 2 ? 8 : 0}px)` }}
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (variant === 'cluster') {
+    return (
+      <div className="relative h-28 overflow-hidden border-b border-border bg-background/50 p-4">
+        <span className="absolute left-10 right-10 top-1/2 h-px bg-border" />
+        <div className="relative flex h-full items-center justify-between">
+          {[1, 2, 3].map((node) => (
+            <span key={node} className="grid size-14 place-items-center border border-border bg-card font-mono text-[10px] font-semibold text-muted-foreground">
+              pod.{node}
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="border-b border-border bg-background/50 p-4">
+      <div className="flex flex-wrap gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+        {['macOS', 'Windows', 'Apple Silicon', 'Intel'].map((item) => (
+          <span key={item} className="border border-border bg-card px-3 py-2">
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function InstallCard({
   icon: Icon,
   label,
   title,
   description,
+  variant,
   children,
 }: {
   icon: ComponentType<{ className?: string }>;
   label: string;
   title: string;
   description: string;
+  variant: InstallCardVariant;
   children: ReactNode;
 }) {
   return (
@@ -180,6 +259,7 @@ function InstallCard({
           <p className="mt-3 text-sm leading-7 text-muted-foreground">{description}</p>
         </div>
       </div>
+      <InstallCardVisual variant={variant} />
       <div className="flex min-w-0 flex-1 flex-col gap-5 p-5">{children}</div>
     </article>
   );
@@ -234,6 +314,7 @@ function LinuxBinaryInstall({ release }: { release: GitHubRelease | null }) {
       label="Recommended for servers"
       title="Linux binary"
       description="Use this path when you want a small, direct RustFS server binary and a system service under your control."
+      variant="binary"
     >
       <CodeBlock
         title="Quick local validation"
@@ -292,6 +373,7 @@ function DockerInstall() {
       label="Container path"
       title="Docker single node"
       description="Best for quick evaluation, local development, and smoke testing S3-compatible clients."
+      variant="container"
     >
       <CodeBlock
         title="Run a persistent container"
@@ -317,6 +399,7 @@ function ComposeInstall() {
       label="Repeatable lab"
       title="Docker Compose"
       description="Keep a repeatable local stack in source control before moving the same storage layout to production nodes."
+      variant="compose"
     >
       <CodeBlock
         title="Create compose stack"
@@ -340,6 +423,7 @@ function KubernetesInstall() {
       label="Cluster path"
       title="Kubernetes and Helm"
       description="Use Helm for cloud-native deployment, GitOps review, and repeatable configuration across environments."
+      variant="cluster"
     >
       <CodeBlock
         title="Install with Helm"
@@ -376,6 +460,7 @@ function WorkstationInstall({ release }: { release: GitHubRelease | null }) {
       label="Workstation binaries"
       title="macOS and Windows"
       description="Use workstation binaries for client validation, demos, and isolated compatibility testing outside Linux servers."
+      variant="workstation"
     >
       <div className="flex flex-wrap gap-2">
         <PlatformBadge icon={<AppleIcon className="size-4" />} label="macOS" />
