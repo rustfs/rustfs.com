@@ -6,6 +6,129 @@ import { CheckIcon } from "lucide-react";
 import { useState } from 'react';
 import HomeSectionHeader from './home-section-header';
 
+function FeaturePreview({ index, token }: { index: number; token: string }) {
+  const variant = index % 8;
+
+  return (
+    <div className="mt-8 overflow-hidden border border-border bg-background/70">
+      <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+        <span className="px-3 py-2">Surface preview</span>
+        <code className="border-l border-border px-3 py-2 text-foreground">{token}</code>
+      </div>
+      <div className="relative h-28 overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-45 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:28px_28px]"
+        />
+
+        {variant === 0 && (
+          <div className="relative flex h-full items-end gap-2 p-5">
+            {["h-10", "h-14", "h-8", "h-16"].map((height, barIndex) => (
+              <span
+                key={`${height}-${barIndex}`}
+                className={cn("w-10 border border-brand/60 bg-brand/15", height)}
+              />
+            ))}
+            <span className="ml-auto grid size-14 place-items-center border border-border bg-card font-mono text-xs font-semibold text-brand">
+              EC
+            </span>
+          </div>
+        )}
+
+        {variant === 1 && (
+          <div className="relative flex h-full items-center justify-between px-8">
+            <span className="absolute left-10 right-10 top-1/2 h-px bg-border" />
+            {[1, 2, 3, 4].map((node) => (
+              <span key={node} className="relative grid size-12 place-items-center border border-border bg-card font-mono text-[10px] text-muted-foreground">
+                N{node}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {variant === 2 && (
+          <div className="relative flex h-full flex-col justify-center gap-3 p-5">
+            {[68, 44, 82].map((width, row) => (
+              <span key={width} className="h-3 border border-border bg-card">
+                <span className="block h-full bg-brand/45" style={{ width: `${width}%` }} />
+                <span className="sr-only">Pool rail {row + 1}</span>
+              </span>
+            ))}
+          </div>
+        )}
+
+        {variant === 3 && (
+          <div className="relative grid h-full grid-cols-2 gap-px bg-border p-5 sm:grid-cols-4">
+            {["S3", "IAM", "MCP", "OTEL"].map((item) => (
+              <span key={item} className="grid place-items-center bg-card font-mono text-xs font-semibold text-muted-foreground">
+                {item}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {variant === 4 && (
+          <div className="relative grid h-full grid-cols-[3rem_1fr] gap-4 p-5">
+            <span className="grid size-12 place-items-center border border-brand bg-brand/15 font-mono text-xs font-semibold text-brand">
+              KMS
+            </span>
+            <div className="space-y-2">
+              {["IAM policy", "mTLS path", "Audit log"].map((item) => (
+                <span key={item} className="flex items-center justify-between border border-border bg-card px-3 py-1.5 text-[11px] text-muted-foreground">
+                  {item}
+                  <CheckIcon className="size-3 text-brand" />
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {variant === 5 && (
+          <div className="relative flex h-full items-end gap-2 p-5">
+            {[28, 48, 38, 72, 52, 86, 44, 62].map((height, barIndex) => (
+              <span
+                key={`${height}-${barIndex}`}
+                className="w-full border border-border bg-card"
+                style={{ height: `${height}%` }}
+              >
+                <span className="block h-1/2 bg-brand/35" />
+              </span>
+            ))}
+          </div>
+        )}
+
+        {variant === 6 && (
+          <div className="relative flex h-full flex-col justify-center gap-3 p-5">
+            <code className="border border-border bg-card px-3 py-2 text-xs text-foreground">
+              helm install rustfs
+            </code>
+            <div className="grid grid-cols-3 gap-px bg-border">
+              {["pod", "pvc", "svc"].map((item) => (
+                <span key={item} className="bg-card px-3 py-2 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {variant === 7 && (
+          <div className="relative flex h-full items-center gap-4 p-5">
+            <span className="grid size-14 place-items-center border border-border bg-card font-mono text-xs font-semibold text-brand">
+              rc
+            </span>
+            <div className="flex-1 space-y-2">
+              <span className="block h-2 w-10/12 bg-foreground/20" />
+              <span className="block h-2 w-7/12 bg-brand/50" />
+              <span className="block h-2 w-9/12 bg-foreground/20" />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function HomeFeatures() {
   const [activeTab, setActiveTab] = useState(0);
   const activeFeature = features[activeTab];
@@ -97,6 +220,7 @@ export default function HomeFeatures() {
               <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
                 {activeFeature.featureDescription}
               </p>
+              <FeaturePreview index={activeTab} token={activeFeature.token} />
             </div>
             <div>
               <ul className="grid h-full divide-y divide-border">

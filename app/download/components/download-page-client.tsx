@@ -81,38 +81,70 @@ function SectionHeader({
 function ReleasePanel({ release }: { release: GitHubRelease | null }) {
   const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
   const publishedAt = release?.published_at ? formatReleaseDate(release.published_at, 'en-US') : 'GitHub latest';
+  const version = release?.tag_name ? formatVersion(release.tag_name) : 'Latest';
 
   return (
     <a
       href={releaseUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block border border-border bg-card transition-colors hover:border-foreground/40"
+      className="motion-card group relative block overflow-hidden border border-border bg-card/90 transition-colors hover:border-foreground/40"
       aria-label="Open current RustFS server release on GitHub"
     >
-      <div className="grid border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:grid-cols-[1fr_auto]">
+      <div
+        aria-hidden="true"
+        className="absolute inset-y-0 right-0 hidden w-72 opacity-45 [background-image:repeating-linear-gradient(135deg,transparent_0_18px,var(--border)_18px_19px,transparent_19px_36px)] lg:block"
+      />
+      <div className="relative grid border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:grid-cols-[1fr_auto]">
         <span className="px-4 py-3">Current server release</span>
         <span className="inline-flex items-center gap-2 border-t border-border px-4 py-3 text-foreground transition-colors group-hover:text-brand sm:border-l sm:border-t-0">
           GitHub
           <ArrowUpRightIcon className="size-3.5" />
         </span>
       </div>
-      <div className="grid gap-0 sm:grid-cols-3">
-        <div className="border-b border-border p-5 sm:border-b-0 sm:border-r">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Version</p>
-          <p className="mt-3 font-display text-3xl font-semibold text-foreground">
-            {release?.tag_name ? formatVersion(release.tag_name) : 'Latest'}
-          </p>
+
+      <div className="relative grid lg:grid-cols-[minmax(0,1fr)_24rem]">
+        <div className="p-5 sm:p-6">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">Release channel</p>
+          <div className="mt-5 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Version</p>
+              <p className="mt-2 font-display text-4xl font-semibold leading-none text-foreground sm:text-5xl">
+                {version}
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-brand">
+              Open release
+              <ArrowUpRightIcon className="motion-arrow size-4" />
+            </span>
+          </div>
+          <div className="mt-6 grid gap-px bg-border sm:grid-cols-3">
+            {['Server binary', 'Docker image', 'Source archive'].map((item) => (
+              <span
+                key={item}
+                className="bg-background/65 px-3 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="border-b border-border p-5 sm:border-b-0 sm:border-r">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Published</p>
-          <p className="mt-3 text-base font-semibold text-foreground">{publishedAt}</p>
-        </div>
-        <div className="p-5">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Artifacts</p>
-          <p className="mt-3 text-base font-semibold text-foreground">
-            {release?.assets?.length ? `${release.assets.length} files` : 'Release page'}
-          </p>
+
+        <div className="grid border-t border-border bg-background/35 lg:border-l lg:border-t-0">
+          {[
+            ['Published', publishedAt],
+            ['Artifacts', release?.assets?.length ? `${release.assets.length} files` : 'Release page'],
+            ['Destination', 'GitHub releases'],
+          ].map(([label, value]) => (
+            <div key={label} className="grid grid-cols-[8.5rem_1fr] border-b border-border last:border-b-0">
+              <span className="border-r border-border px-4 py-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                {label}
+              </span>
+              <span className="px-4 py-4 text-sm font-semibold text-foreground">
+                {value}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </a>
@@ -133,12 +165,16 @@ function InstallCard({
   children: ReactNode;
 }) {
   return (
-    <article className="motion-card flex min-w-0 flex-col border border-border bg-card">
-      <div className="flex items-start gap-4 border-b border-border p-5">
-        <span className="motion-icon-tile flex size-12 shrink-0 items-center justify-center bg-brand text-brand-foreground">
+    <article className="motion-card relative flex min-w-0 flex-col overflow-hidden border border-border bg-card">
+      <div className="relative flex items-start gap-4 overflow-hidden border-b border-border p-5">
+        <span
+          aria-hidden="true"
+          className="absolute inset-y-0 right-0 hidden w-40 opacity-45 [background-image:repeating-linear-gradient(135deg,transparent_0_14px,var(--border)_14px_15px,transparent_15px_28px)] sm:block"
+        />
+        <span className="motion-icon-tile relative flex size-12 shrink-0 items-center justify-center bg-brand text-brand-foreground">
           <Icon className="size-5" />
         </span>
-        <div>
+        <div className="relative">
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">{label}</p>
           <h3 className="mt-3 text-2xl font-semibold leading-tight text-foreground">{title}</h3>
           <p className="mt-3 text-sm leading-7 text-muted-foreground">{description}</p>

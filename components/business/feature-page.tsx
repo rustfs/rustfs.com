@@ -96,20 +96,27 @@ export default function FeaturePage({ title, description, sections, links }: Fea
                 RustFS
               </code>
             </div>
-            <div className="p-5 sm:p-6">
-              <div className="grid gap-px border border-border bg-border sm:grid-cols-2">
-                {sections.slice(0, 4).map((section) => (
-                  <div key={section.title} className="min-h-28 bg-card p-4">
-                    <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
-                      {slugCode(section.title)}
-                    </p>
-                    <h2 className="mt-5 text-base font-semibold leading-6 text-foreground">
-                      {section.title}
-                    </h2>
-                  </div>
-                ))}
+            <div>
+              <div className="relative min-h-64 overflow-hidden border-b border-border p-5 sm:p-6">
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 opacity-45 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:32px_32px]"
+                />
+                <div className="relative grid h-full gap-3 sm:grid-cols-2">
+                  {sections.slice(0, 4).map((section) => (
+                    <div key={section.title} className="border border-border bg-card/90 p-4">
+                      <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
+                        {slugCode(section.title)}
+                      </p>
+                      <h2 className="mt-5 text-base font-semibold leading-6 text-foreground">
+                        {section.title}
+                      </h2>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="mt-6 grid gap-px border border-border bg-border sm:grid-cols-3">
+
+              <div className="grid gap-px bg-border sm:grid-cols-3">
                 {primaryItems.map((item) => (
                   <div key={item.title} className="bg-background/70 px-4 py-3">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
@@ -118,7 +125,7 @@ export default function FeaturePage({ title, description, sections, links }: Fea
                   </div>
                 ))}
               </div>
-              <div className="mt-6 flex items-center justify-between gap-4 border border-border px-4 py-4">
+              <div className="flex items-center justify-between gap-4 px-4 py-4">
                 <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                   Client
                 </span>

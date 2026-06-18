@@ -19,35 +19,59 @@ export default function HomeContactCard() {
         <Link
           href="/contact-us"
           aria-label="Open the RustFS contact page"
-          className="motion-card group grid overflow-hidden border border-border bg-card transition-colors hover:bg-muted/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand lg:grid-cols-[minmax(0,1fr)_22rem_auto]"
+          className="motion-card group grid overflow-hidden border border-border bg-card/90 text-left transition-colors hover:bg-muted/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand lg:grid-cols-[minmax(0,1fr)_24rem]"
         >
-          <div className="p-6 sm:p-8 lg:p-10">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand">
-              Production handoff
-            </p>
+          <div className="relative p-6 sm:p-8 lg:p-10">
+            <span
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-brand via-brand/30 to-transparent"
+            />
+            <div className="inline-flex items-center gap-3 border border-border bg-background/70 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <span className="text-brand">handoff</span>
+              <span className="h-px w-8 bg-border" />
+              <span>production</span>
+            </div>
             <h3 className="mt-4 max-w-2xl text-2xl font-semibold leading-tight text-foreground sm:text-4xl">
-              Plan the next storage move.
+              Talk through topology, migration, and production support.
             </h3>
             <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
-              Share topology, migration context, or enterprise requirements with the RustFS team.
+              Bring the deployment context. We will help map the next storage decision to RustFS.
             </p>
+
+            <div className="mt-8 grid gap-px bg-border sm:grid-cols-3">
+              {["Deployment planning", "Migration path", "Enterprise review"].map((item) => (
+                <span
+                  key={item}
+                  className="bg-background/60 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
 
-          <div className="grid grid-cols-3 border-t border-border bg-background/30 lg:grid-cols-1 lg:border-l lg:border-t-0">
-            {["Deployment", "Migration", "Enterprise"].map((item) => (
+          <div className="flex flex-col border-t border-border bg-background/35 lg:border-l lg:border-t-0">
+            {[
+              ["01", "Size the failure domain"],
+              ["02", "Review migration pressure"],
+              ["03", "Plan operations ownership"],
+            ].map(([step, label]) => (
               <span
-                key={item}
-                className="flex items-center border-r border-border px-4 py-5 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground last:border-r-0 lg:border-b lg:border-r-0 lg:last:border-b-0"
+                key={step}
+                className="grid grid-cols-[3.5rem_1fr] border-b border-border last:border-b-0"
               >
-                {item}
+                <span className="border-r border-border px-4 py-4 font-mono text-[10px] font-semibold text-brand">
+                  {step}
+                </span>
+                <span className="px-4 py-4 text-sm font-medium text-foreground">
+                  {label}
+                </span>
               </span>
             ))}
-          </div>
 
-          <div className="flex items-stretch border-t border-border lg:border-l lg:border-t-0">
-            <span className="flex min-w-full items-center justify-between gap-5 px-6 py-5 text-sm font-semibold text-foreground lg:min-w-52">
-              Contact team
-              <span className="motion-arrow grid size-10 place-items-center border border-border text-brand transition-colors group-hover:border-brand group-hover:bg-brand group-hover:text-brand-foreground">
+            <span className="mt-auto flex items-center justify-between gap-5 border-t border-border px-5 py-5 text-sm font-semibold text-foreground">
+              Open contact page
+              <span className="motion-arrow grid size-10 place-items-center text-brand transition-colors group-hover:text-foreground">
                 <ArrowRightIcon className="size-4" aria-hidden="true" />
               </span>
             </span>
