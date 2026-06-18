@@ -39,7 +39,7 @@ export default function GetStartedToday() {
           </div>
 
           <div className="relative min-h-80 overflow-hidden bg-background lg:min-h-full">
-            <BackgroundGrid />
+            <BackgroundGrid className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
           </div>
         </div>
       </div>

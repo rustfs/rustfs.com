@@ -28,13 +28,13 @@ export default function StatsStrip({
 
   return (
     <section className={cn("text-muted-foreground", className)}>
-      <div className="grid gap-y-6 border-t border-border pt-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid overflow-hidden border-y border-border bg-card/55 sm:grid-cols-2 lg:grid-cols-4">
         {items.map(({ label, token, value, text }, index) => (
           <div
             key={label}
-            className="lg:border-r lg:border-border lg:px-6 lg:first:pl-0 lg:last:border-r-0"
+            className="grid min-h-36 content-between border-b border-border p-5 last:border-b-0 sm:[&:nth-child(n+3)]:border-b-0 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0"
           >
-            <div className="mb-4 flex items-center gap-3">
+            <div className="flex items-center justify-between gap-3">
               <code className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                 {token}
               </code>
@@ -42,7 +42,7 @@ export default function StatsStrip({
                 / {String(index + 1).padStart(2, "0")}
               </span>
             </div>
-            <h2 className="font-extrabold text-3xl text-foreground sm:text-4xl">
+            <h2 className="mt-8 font-extrabold text-3xl text-foreground sm:text-4xl">
               {typeof value === "number" ? (
                 <NumberTicker
                   value={value}

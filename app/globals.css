@@ -186,13 +186,35 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .motion-button {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     transition-duration: var(--motion-duration-fast);
     transition-property: transform, color, background-color, border-color, box-shadow;
     transition-timing-function: var(--motion-ease-standard);
   }
 
+  .motion-button::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    background: linear-gradient(
+      120deg,
+      transparent 0 42%,
+      color-mix(in oklch, var(--foreground) 10%, transparent) 48%,
+      transparent 54% 100%
+    );
+    transform: translateX(-130%);
+    transition: transform var(--motion-duration-slow) var(--motion-ease-emphasized);
+  }
+
   .motion-button:hover {
     transform: translateY(-1px);
+  }
+
+  .motion-button:hover::after {
+    transform: translateX(130%);
   }
 
   .motion-button:active {

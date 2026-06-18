@@ -1,5 +1,6 @@
 import ContactUsButton from "@/components/business/buttons/contact-us";
 import DownloadLink from "@/components/business/buttons/download-link";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { BadgeCheckIcon, Building2Icon, Code2Icon, LifeBuoyIcon } from "lucide-react";
 import type { Metadata } from "next";
@@ -15,6 +16,7 @@ function PricingCard({
   price,
   description,
   points,
+  chips,
   emphasized,
 }: {
   label: string;
@@ -22,6 +24,7 @@ function PricingCard({
   price: string;
   description: string;
   points: string[];
+  chips: string[];
   emphasized?: boolean;
 }) {
   const isEmphasized = Boolean(emphasized);
@@ -43,6 +46,20 @@ function PricingCard({
         <p className={cn("relative text-[11px] font-semibold uppercase tracking-[0.22em] text-brand", isEmphasized && "text-brand-foreground/75")}>{label}</p>
         <h2 className={cn("relative mt-4 text-2xl font-semibold text-foreground", isEmphasized && "text-brand-foreground")}>{title}</h2>
         <p className={cn("relative mt-5 font-display text-4xl font-semibold text-foreground", isEmphasized && "text-brand-foreground")}>{price}</p>
+        <div className="relative mt-5 flex flex-wrap gap-2">
+          {chips.map((chip) => (
+            <Badge
+              key={chip}
+              variant="outline"
+              className={cn(
+                "h-7 bg-background/45 px-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground",
+                isEmphasized && "border-brand-foreground/25 bg-brand-foreground/10 text-brand-foreground/75"
+              )}
+            >
+              {chip}
+            </Badge>
+          ))}
+        </div>
         <p className={cn("relative mt-4 text-sm leading-7 text-muted-foreground", isEmphasized && "text-brand-foreground/75")}>{description}</p>
         <div className={cn("relative mt-6 grid grid-cols-[auto_1fr_auto] border border-border text-[10px] font-semibold uppercase tracking-[0.12em]", isEmphasized && "border-brand-foreground/25")}>
           <span className={cn("border-r border-border px-3 py-2 text-muted-foreground", isEmphasized && "border-brand-foreground/25 text-brand-foreground/70")}>Path</span>
@@ -98,6 +115,7 @@ export default function PricingPage() {
             title="Self-hosted RustFS"
             price="$0"
             description="Use RustFS under Apache 2.0 for development, testing, and production deployments you operate yourself."
+            chips={["Apache 2.0", "Self-hosted"]}
             points={[
               "Apache 2.0 license",
               "S3-compatible object storage",
@@ -111,6 +129,7 @@ export default function PricingPage() {
             price="Talk to us"
             description="For teams moving from evaluation to production and needing topology, migration, and operations planning."
             emphasized
+            chips={["Planning", "Migration"]}
             points={[
               "Migration planning from existing object storage",
               "Capacity and topology review",
@@ -123,6 +142,7 @@ export default function PricingPage() {
             title="Ongoing assistance"
             price="Custom"
             description="For organizations that need a long-running support relationship around RustFS operations."
+            chips={["SLA path", "Enterprise"]}
             points={[
               "Production troubleshooting path",
               "Upgrade and observability review",

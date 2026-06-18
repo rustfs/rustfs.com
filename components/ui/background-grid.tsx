@@ -1,8 +1,12 @@
 import { FlickeringGrid } from "@/components/ui/flickering-grid"
 
-export default function BackgroundGrid() {
+export default function BackgroundGrid({
+  className,
+}: {
+  className?: string;
+}) {
   return (
-    <div className="absolute left-0 top-0 z-0 h-[100dvh] w-screen pointer-events-none">
+    <div className={className ?? "fixed inset-0 z-0 h-[100dvh] w-screen pointer-events-none"}>
       <FlickeringGrid
         className="absolute inset-0 z-0 size-full opacity-30"
         squareSize={25}
@@ -15,6 +19,4 @@ export default function BackgroundGrid() {
     </div>
   )
 }
-
-
 

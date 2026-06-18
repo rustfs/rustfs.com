@@ -19,30 +19,30 @@ export default function HomeContactCard() {
         <Link
           href="/contact-us"
           aria-label="Open the RustFS contact page"
-          className="motion-card group grid overflow-hidden border border-border bg-card/90 text-left transition-colors hover:bg-muted/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand lg:grid-cols-[minmax(0,1fr)_24rem]"
+          className="motion-card group grid overflow-hidden border border-brand bg-brand text-left text-brand-foreground transition-colors hover:bg-brand/95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand lg:grid-cols-[minmax(0,1fr)_24rem]"
         >
-          <div className="relative p-6 sm:p-8 lg:p-10">
+          <div className="relative overflow-hidden p-6 sm:p-8 lg:p-10">
             <span
               aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-brand via-brand/30 to-transparent"
+              className="absolute inset-0 opacity-25 [background-image:repeating-linear-gradient(135deg,transparent_0_16px,var(--brand-foreground)_16px_17px,transparent_17px_34px)]"
             />
-            <div className="inline-flex items-center gap-3 border border-border bg-background/70 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              <span className="text-brand">handoff</span>
-              <span className="h-px w-8 bg-border" />
+            <div className="relative inline-flex items-center gap-3 border border-brand-foreground/25 bg-brand-foreground/10 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-foreground/75">
+              <span className="text-brand-foreground">handoff</span>
+              <span className="h-px w-8 bg-brand-foreground/25" />
               <span>production</span>
             </div>
-            <h3 className="mt-4 max-w-2xl text-2xl font-semibold leading-tight text-foreground sm:text-4xl">
+            <h3 className="relative mt-4 max-w-2xl text-2xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
               Talk through topology, migration, and production support.
             </h3>
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
+            <p className="relative mt-4 max-w-3xl text-sm leading-7 text-brand-foreground/75">
               Bring the deployment context. We will help map the next storage decision to RustFS.
             </p>
 
-            <div className="mt-8 grid gap-px bg-border sm:grid-cols-3">
+            <div className="relative mt-8 grid gap-px bg-brand-foreground/25 sm:grid-cols-3">
               {["Deployment planning", "Migration path", "Enterprise review"].map((item) => (
                 <span
                   key={item}
-                  className="bg-background/60 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
+                  className="bg-brand px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-foreground/80"
                 >
                   {item}
                 </span>
@@ -50,7 +50,7 @@ export default function HomeContactCard() {
             </div>
           </div>
 
-          <div className="flex flex-col border-t border-border bg-background/35 lg:border-l lg:border-t-0">
+          <div className="flex flex-col border-t border-brand-foreground/25 bg-black/15 lg:border-l lg:border-t-0">
             {[
               ["01", "Size the failure domain"],
               ["02", "Review migration pressure"],
@@ -58,20 +58,20 @@ export default function HomeContactCard() {
             ].map(([step, label]) => (
               <span
                 key={step}
-                className="grid grid-cols-[3.5rem_1fr] border-b border-border last:border-b-0"
+                className="grid grid-cols-[3.5rem_1fr] border-b border-brand-foreground/20 last:border-b-0"
               >
-                <span className="border-r border-border px-4 py-4 font-mono text-[10px] font-semibold text-brand">
+                <span className="border-r border-brand-foreground/20 px-4 py-4 font-mono text-[10px] font-semibold text-brand-foreground/75">
                   {step}
                 </span>
-                <span className="px-4 py-4 text-sm font-medium text-foreground">
+                <span className="px-4 py-4 text-sm font-medium text-brand-foreground">
                   {label}
                 </span>
               </span>
             ))}
 
-            <span className="mt-auto flex items-center justify-between gap-5 border-t border-border px-5 py-5 text-sm font-semibold text-foreground">
+            <span className="mt-auto flex items-center justify-between gap-5 border-t border-brand-foreground/25 px-5 py-5 text-sm font-semibold text-brand-foreground">
               Open contact page
-              <span className="motion-arrow grid size-10 place-items-center text-brand transition-colors group-hover:text-foreground">
+              <span className="motion-arrow grid size-10 place-items-center border border-brand-foreground/25 text-brand-foreground transition-colors group-hover:bg-brand-foreground group-hover:text-brand">
                 <ArrowRightIcon className="size-4" aria-hidden="true" />
               </span>
             </span>

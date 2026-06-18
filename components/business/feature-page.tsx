@@ -87,8 +87,12 @@ export default function FeaturePage({ title, description, sections, links }: Fea
             </div>
           </div>
 
-          <div className="motion-reveal border border-border bg-card/80" data-motion-delay="1">
-            <div className="grid grid-cols-[1fr_auto] border-b border-border">
+          <div className="motion-reveal relative overflow-hidden border border-border bg-card/80" data-motion-delay="1">
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 opacity-35 [background-image:repeating-linear-gradient(135deg,transparent_0_18px,var(--border)_18px_19px,transparent_19px_36px)]"
+            />
+            <div className="relative grid grid-cols-[1fr_auto] border-b border-border">
               <span className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                 Capability map
               </span>
@@ -96,7 +100,7 @@ export default function FeaturePage({ title, description, sections, links }: Fea
                 RustFS
               </code>
             </div>
-            <div>
+            <div className="relative">
               <div className="relative min-h-64 overflow-hidden border-b border-border p-5 sm:p-6">
                 <div
                   aria-hidden="true"
@@ -160,14 +164,17 @@ export default function FeaturePage({ title, description, sections, links }: Fea
                 </p>
               )}
             </div>
-            <div className="grid gap-px bg-border sm:grid-cols-2">
+            <div className="divide-y divide-border">
               {firstSection.items?.map((item) => (
-                <article key={item.title} className="motion-card bg-card p-5">
+                <article key={item.title} className="motion-card group grid gap-4 bg-card px-5 py-5 transition-colors hover:bg-muted/30 sm:grid-cols-[2.5rem_1fr_auto] sm:items-start">
                   <span className="motion-icon-tile flex size-8 items-center justify-center border border-border bg-background/70 text-brand">
                     <CheckIcon className="size-4" />
                   </span>
-                  <h3 className="mt-5 text-base font-semibold leading-6 text-foreground">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                  <div>
+                    <h3 className="text-base font-semibold leading-6 text-foreground">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                  </div>
+                  <ArrowRightIcon className="motion-arrow hidden size-4 text-brand sm:block" aria-hidden="true" />
                 </article>
               ))}
             </div>
@@ -194,11 +201,14 @@ export default function FeaturePage({ title, description, sections, links }: Fea
                   )}
                 </div>
                 {section.items && (
-                  <div className="grid gap-px border border-border bg-border md:grid-cols-2">
+                  <div className="divide-y divide-border border border-border bg-card">
                     {section.items.map((item) => (
-                      <article key={item.title} className="motion-card bg-card p-5">
-                        <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
-                        <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                      <article key={item.title} className="motion-card group grid gap-4 px-5 py-5 transition-colors hover:bg-muted/30 sm:grid-cols-[1fr_auto] sm:items-center">
+                        <div>
+                          <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
+                          <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                        </div>
+                        <ArrowRightIcon className="motion-arrow hidden size-4 text-brand sm:block" aria-hidden="true" />
                       </article>
                     ))}
                   </div>
