@@ -36,11 +36,12 @@ export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
               High-performance Rust core, native S3 compatibility, and self-hosted control for AI data centers, cloud-native platforms, and MinIO migrations.
             </p>
 
-            <dl className="mt-8 grid overflow-hidden border border-brand/60 bg-brand text-brand-foreground shadow-[0_16px_48px_color-mix(in_oklch,var(--brand)_18%,transparent)] sm:grid-cols-2 xl:grid-cols-4">
+            <dl className="mt-8 grid gap-x-6 gap-y-4 text-sm sm:grid-cols-2 xl:grid-cols-4">
               {stackItems.map((item) => (
-                <div key={item.label} className="min-h-28 border-b border-brand-foreground/20 p-4 last:border-b-0 sm:[&:nth-child(odd)]:border-r xl:border-b-0 xl:border-r xl:last:border-r-0">
-                  <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-foreground/75">{item.label}</dt>
-                  <dd className="mt-4 font-mono text-xs leading-6 text-brand-foreground/90">{item.value}</dd>
+                <div key={item.label} className="relative pl-4">
+                  <span className="absolute left-0 top-1 h-8 w-px bg-border" />
+                  <dt className="font-semibold text-foreground">{item.label}</dt>
+                  <dd className="mt-1 text-xs text-muted-foreground">{item.value}</dd>
                 </div>
               ))}
             </dl>

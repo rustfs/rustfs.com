@@ -42,18 +42,21 @@ async function main() {
 
   for (const [index, post] of posts.entries()) {
     const slug = normalizeSlug(post.slug || post.id);
-    const filename = path.join(BLOG_DIR, `${slug}.mdx`);
+    const postDate = getIsoDate(post.date_gmt || post.date);
+    const postDir = path.join(BLOG_DIR, `${getDatePrefix(postDate)}-${slug}`);
+    const filename = path.join(postDir, "index.mdx");
     const localized = await localizePostAssets(slug, convertPostToMarkdown(post), getImage(post, index));
     const data = {
       title: decodeHtml(post.title?.rendered) || "Untitled",
       slug,
       description: getDescription(post),
-      date: getIsoDate(post.date_gmt || post.date),
+      date: postDate,
       author: getAuthor(post),
       tags: getTags(post),
       image: localized.image,
     };
 
+    await fs.mkdir(postDir, { recursive: true });
     await fs.writeFile(filename, matter.stringify(localized.markdown, data), "utf8");
     console.log(`Synced ${slug}`);
   }
@@ -245,6 +248,10 @@ function escapeRegExp(value) {
 function getIsoDate(value) {
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? new Date().toISOString() : date.toISOString();
+}
+
+function getDatePrefix(value) {
+  return value.slice(0, 10);
 }
 
 function cleanHtml(html) {

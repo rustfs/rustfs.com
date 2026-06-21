@@ -209,8 +209,33 @@
     transition: transform var(--motion-duration-slow) var(--motion-ease-emphasized);
   }
 
+  .motion-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent 0,
+      transparent 12px,
+      color-mix(in oklch, currentColor 12%, transparent) 12px,
+      color-mix(in oklch, currentColor 12%, transparent) 24px
+    );
+    background-position: 0 0;
+    background-size: 34px 34px;
+    opacity: 0;
+    transition:
+      opacity var(--motion-duration-standard) var(--motion-ease-standard),
+      background-position var(--motion-duration-slow) var(--motion-ease-emphasized);
+  }
+
   .motion-button:hover {
     transform: translateY(-1px);
+  }
+
+  .motion-button:hover::before {
+    opacity: 0.45;
+    background-position: 34px 0;
   }
 
   .motion-button:hover::after {

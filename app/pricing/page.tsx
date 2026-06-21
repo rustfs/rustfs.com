@@ -131,7 +131,7 @@ export default function PricingPage() {
             emphasized
             chips={["Planning", "Migration"]}
             points={[
-              "Migration planning from existing object storage",
+              "Migration planning",
               "Capacity and topology review",
               "Operational readiness guidance",
               "Enterprise requirements discovery",
@@ -155,23 +155,38 @@ export default function PricingPage() {
 
       <section className="border-y border-border bg-muted/20">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 py-16 sm:px-6 lg:grid-cols-[0.88fr_1.12fr] lg:px-8">
-          <div className="motion-card overflow-hidden border border-border bg-card">
-            <div className="relative min-h-56 border-b border-border bg-background p-6">
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 opacity-45 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:32px_32px]"
-              />
-              <div className="relative grid h-full content-end gap-4">
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Support path</p>
-                <h2 className="max-w-md text-2xl font-semibold text-foreground">
-                  Start open source, add planning when production risk appears.
-                </h2>
+          <div className="motion-card flex overflow-hidden border border-border bg-card">
+            <div className="flex w-full flex-col">
+              <div className="relative border-b border-border bg-background p-6 sm:p-8">
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 opacity-[0.35] [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:32px_32px]"
+                />
+                <div className="relative">
+                  <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Support path</p>
+                  <h2 className="mt-4 max-w-md text-2xl font-semibold leading-tight text-foreground">
+                    Open source first. Add support when the risk is real.
+                  </h2>
+                  <p className="mt-4 max-w-md text-sm leading-7 text-muted-foreground">
+                    Validate freely, then bring us in when topology, migration, or operations need review.
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="grid grid-cols-3 gap-px bg-border text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-              {["Evaluate", "Plan", "Operate"].map((item) => (
-                <span key={item} className="bg-card px-4 py-4">{item}</span>
-              ))}
+              <div className="grid flex-1 divide-y divide-border">
+                {[
+                  ["01", "Evaluate", "Run RustFS without a sales gate."],
+                  ["02", "Plan", "Review topology and migration pressure."],
+                  ["03", "Operate", "Add support for production ownership."],
+                ].map(([step, title, detail]) => (
+                  <div key={step} className="grid gap-4 px-5 py-5 sm:grid-cols-[3rem_1fr]">
+                    <span className="font-mono text-[10px] font-semibold text-brand">{step}</span>
+                    <span>
+                      <span className="block text-sm font-semibold text-foreground">{title}</span>
+                      <span className="mt-1 block text-sm leading-6 text-muted-foreground">{detail}</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 

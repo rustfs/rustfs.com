@@ -1,4 +1,5 @@
 import ContactUsButton from "@/components/business/buttons/contact-us"
+import { cn } from "@/lib/utils"
 import RustFSLogo from "@/public/rustfs.logo.svg"
 import NvidiaLogo from "@/public/svgs/softwares/nvidia.svg"
 import { CpuIcon, DatabaseIcon, GitBranchIcon, ShieldCheckIcon } from "lucide-react"
@@ -127,15 +128,28 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <ol className="border border-border bg-card">
-            {milestones.map((item) => (
-              <li key={`${item.date}-${item.title}`} className="motion-card grid border-b border-border last:border-b-0 sm:grid-cols-[10rem_1fr]">
-                <div className="border-b border-border px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand sm:border-b-0 sm:border-r">
-                  {item.date}
+          <ol className="overflow-hidden border border-border bg-card">
+            {[...milestones].reverse().map((item, index) => (
+              <li
+                key={`${item.date}-${item.title}`}
+                className={cn(
+                  "motion-card group grid border-b border-border transition-colors last:border-b-0 hover:bg-muted/25 sm:grid-cols-[12.5rem_1fr]",
+                  index === 0 && "bg-muted/20"
+                )}
+              >
+                <div className="flex items-center gap-3 border-b border-border px-5 py-4 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] sm:border-b-0 sm:border-r">
+                  <span className="text-brand">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="h-px flex-1 bg-border transition-colors group-hover:bg-brand/50" />
+                  <time className="text-muted-foreground">{item.date}</time>
                 </div>
-                <div className="px-5 py-4">
-                  <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                <div className="grid gap-4 px-5 py-4 sm:grid-cols-[1fr_auto] sm:items-start">
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                  </div>
+                  <span className="w-fit border border-border bg-background px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    {index === 0 ? "Latest" : "Event"}
+                  </span>
                 </div>
               </li>
             ))}

@@ -10,7 +10,7 @@ const ctaButtonClassName = "!h-16 !min-h-16 w-full shrink-0 !px-0 !py-0 leading-
 export default function GetStartedToday() {
   return (
     <section
-      className="relative overflow-hidden border-t border-border bg-muted/30 py-24 text-foreground sm:py-32"
+      className="relative overflow-hidden border-t border-border bg-background py-24 text-foreground sm:py-32"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader

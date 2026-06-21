@@ -59,7 +59,7 @@ const reasonIcons = [ShieldCheckIcon, NetworkIcon, Code2Icon, GaugeIcon];
 export default function HomeStats() {
   return (
     <section
-      className="relative overflow-hidden border-t border-border py-24 text-foreground sm:py-32"
+      className="relative overflow-hidden border-t border-border bg-background py-24 text-foreground sm:py-32"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
@@ -112,33 +112,35 @@ mode = "distributed"`}</code>
             </div>
           </article>
 
-          <div className="overflow-hidden border border-border bg-card lg:col-span-7">
-            <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              <span className="px-5 py-3">Operating advantages</span>
-              <span className="border-l border-border px-4 py-3 text-brand">04 paths</span>
-            </div>
-            <div className="divide-y divide-border">
-              {reasons.slice(1, 5).map((item, index) => {
-                const Icon = reasonIcons[index];
+          <div className="flex overflow-hidden border border-border bg-card lg:col-span-7">
+            <div className="flex min-h-full w-full flex-col">
+              <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <span className="px-5 py-3">Operating advantages</span>
+                <span className="border-l border-border px-4 py-3 text-brand">04 paths</span>
+              </div>
+              <div className="grid flex-1 grid-rows-4 divide-y divide-border">
+                {reasons.slice(1, 5).map((item, index) => {
+                  const Icon = reasonIcons[index];
 
-                return (
-                  <article
-                    key={item.title}
-                    className="motion-card group grid gap-4 px-5 py-5 transition-colors hover:bg-muted/30 sm:grid-cols-[3rem_1fr_auto] sm:items-center"
-                  >
-                    <span className="motion-icon-tile flex size-11 items-center justify-center border border-border bg-background text-brand">
-                      <Icon className="size-4" />
-                    </span>
-                    <div>
-                      <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
-                    </div>
-                    <code className="w-fit border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-                      {item.token}
-                    </code>
-                  </article>
-                );
-              })}
+                  return (
+                    <article
+                      key={item.title}
+                      className="motion-card group grid min-h-0 gap-4 px-5 py-5 transition-colors hover:bg-muted/30 sm:grid-cols-[3rem_1fr_auto] sm:items-center"
+                    >
+                      <span className="motion-icon-tile flex size-11 items-center justify-center border border-border bg-background text-brand">
+                        <Icon className="size-4" />
+                      </span>
+                      <div>
+                        <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
+                        <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                      </div>
+                      <code className="w-fit border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                        {item.token}
+                      </code>
+                    </article>
+                  );
+                })}
+              </div>
             </div>
           </div>
 

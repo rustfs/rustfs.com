@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { getBlogPosts, type BlogPostMeta } from "@/lib/mdx-blog";
+import { ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
 import HomeSectionHeader from "./home-section-header";
 
@@ -19,7 +20,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
   return (
     <section
       className={cn(
-        "relative border-t border-border py-20 sm:py-28",
+        "relative border-t border-border bg-background py-20 sm:py-28",
         className
       )}
     >
@@ -31,76 +32,69 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
           description="Read product updates, release posts, and technical deep dives from the RustFS team."
         />
 
-        <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
           <Link
             href={`/blog/${featuredPost.slug}`}
-            className="motion-card group overflow-hidden border border-border bg-card text-left transition-colors hover:bg-muted/50"
+            className="motion-card group relative overflow-hidden border border-border bg-card p-5 text-left transition-colors hover:bg-muted/30 sm:p-6"
           >
-            {featuredPost.image ? (
-              <div className="relative h-72 w-full border-b border-border sm:h-96">
-                <img
-                  src={featuredPost.image}
-                  alt={featuredPost.title}
-                  className="h-full w-full object-cover grayscale transition duration-300 group-hover:grayscale-0"
-                  loading="lazy"
-                />
+            <div className="flex items-start justify-between gap-6">
+              <div className="grid grid-cols-[auto_1fr] items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <span className="text-brand">Featured post</span>
+                <span className="h-px w-24 bg-border" />
               </div>
-            ) : null}
-            <div className="p-6 sm:p-8">
-              <div className="mb-8 flex items-center justify-between gap-4">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  Featured post
-                </span>
-                <span className="h-px flex-1 bg-border" />
-              </div>
-              <p className="mb-4 w-fit border border-border bg-background px-2 py-1 text-[11px] text-muted-foreground">
-                {formatDate(featuredPost.date)}
-              </p>
-              <h3 className="text-2xl font-semibold text-foreground sm:text-3xl">
-                {featuredPost.title}
-              </h3>
-            </div>
-            <div className="border-t border-border px-6 py-4 sm:px-8">
-              <span className="inline-flex items-center text-sm font-medium text-brand">
-                Read more
-                <span className="motion-arrow ml-1 inline-block" aria-hidden="true">
-                  ↗
-                </span>
+              <span className="motion-arrow grid size-10 shrink-0 place-items-center border border-border text-brand transition-colors group-hover:bg-brand group-hover:text-brand-foreground">
+                <ArrowUpRightIcon className="size-4" aria-hidden="true" />
               </span>
+            </div>
+
+            <div className="mt-8 grid gap-7 md:grid-cols-[minmax(0,1fr)_15rem] md:items-end">
+              <div>
+                <PostDate date={featuredPost.date} />
+                <h3 className="mt-5 max-w-2xl text-2xl font-semibold leading-tight text-foreground sm:text-3xl">
+                  {featuredPost.title}
+                </h3>
+                <PostTags tags={featuredPost.tags.slice(0, 3)} className="mt-6" />
+              </div>
+
+              {featuredPost.image ? (
+                <div className="relative aspect-[4/3] overflow-hidden border border-border bg-background">
+                  <img
+                    src={featuredPost.image}
+                    alt=""
+                    className="h-full w-full object-cover grayscale transition duration-300 group-hover:grayscale-0"
+                    loading="lazy"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 opacity-25 [background-image:repeating-linear-gradient(135deg,transparent_0_16px,var(--background)_16px_17px,transparent_17px_32px)]"
+                  />
+                </div>
+              ) : null}
             </div>
           </Link>
 
-          <div className="grid gap-px border border-border bg-border">
+          <div className="grid gap-4">
             {otherPosts.map((post, index) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="motion-card group flex flex-col justify-between bg-card text-left transition-colors hover:bg-muted/50"
+                className="motion-card group grid min-h-40 gap-5 border border-border bg-card p-5 text-left transition-colors hover:bg-muted/30 sm:grid-cols-[3.5rem_1fr_auto] sm:items-start sm:p-6"
               >
-                <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  <span className="px-5 py-3">Blog</span>
-                  <span className="border-l border-border px-4 py-3">
-                    POST.{String(index + 2).padStart(2, "0")}
-                  </span>
+                <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">
+                  {String(index + 2).padStart(2, "0")}
                 </div>
 
-                <div className="flex-1 p-6">
-                  <p className="mb-4 w-fit border border-border bg-background px-2 py-1 text-[11px] text-muted-foreground">
-                    {formatDate(post.date)}
-                  </p>
-                  <h3 className="text-lg font-semibold text-foreground line-clamp-2">
+                <div className="min-w-0">
+                  <PostDate date={post.date} />
+                  <h3 className="mt-4 line-clamp-2 text-xl font-semibold leading-tight text-foreground">
                     {post.title}
                   </h3>
+                  <PostTags tags={post.tags.slice(0, 2)} className="mt-5" />
                 </div>
 
-                <div className="border-t border-border px-6 py-4">
-                  <span className="inline-flex items-center text-sm font-medium text-brand">
-                    Read more
-                    <span className="motion-arrow ml-1 inline-block" aria-hidden="true">
-                      ↗
-                    </span>
-                  </span>
-                </div>
+                <span className="motion-arrow grid size-10 place-items-center border border-border text-brand transition-colors group-hover:bg-brand group-hover:text-brand-foreground">
+                  <ArrowUpRightIcon className="size-4" aria-hidden="true" />
+                </span>
               </Link>
             ))}
           </div>
@@ -119,6 +113,33 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
         </div>
       </div>
     </section>
+  );
+}
+
+function PostDate({ date }: { date: string }) {
+  return (
+    <p className="w-fit border border-border bg-background px-2 py-1 font-mono text-[11px] text-muted-foreground">
+      {formatDate(date)}
+    </p>
+  );
+}
+
+function PostTags({ tags, className }: { tags: string[]; className?: string }) {
+  if (!tags.length) {
+    return null;
+  }
+
+  return (
+    <div className={cn("flex flex-wrap gap-2", className)}>
+      {tags.map((tag) => (
+        <span
+          key={tag}
+          className="border border-border bg-background px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
   );
 }
 

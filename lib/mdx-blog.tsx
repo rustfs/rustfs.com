@@ -1,3 +1,4 @@
+import type { Dirent } from "node:fs";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { cache, type ComponentPropsWithoutRef, type ReactElement } from "react";
@@ -11,6 +12,7 @@ import { cn } from "@/lib/utils";
 
 const BLOG_DIR = path.join(process.cwd(), "content/blog");
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const DATE_PREFIX_PATTERN = /^\d{4}-\d{2}-\d{2}-/;
 
 export interface BlogPostMeta {
   slug: string;
@@ -28,10 +30,10 @@ export interface BlogPost extends BlogPostMeta {
 }
 
 export const getBlogPosts = cache(async (): Promise<BlogPostMeta[]> => {
-  let filenames: string[];
+  let entries: Dirent[];
 
   try {
-    filenames = await fs.readdir(BLOG_DIR);
+    entries = await fs.readdir(BLOG_DIR, { withFileTypes: true });
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") {
       return [];
@@ -40,14 +42,31 @@ export const getBlogPosts = cache(async (): Promise<BlogPostMeta[]> => {
     throw error;
   }
 
+  const postFiles = new Map<string, string>();
+
+  for (const entry of entries) {
+    if (entry.isDirectory() && SLUG_PATTERN.test(entry.name)) {
+      const slug = stripDatePrefix(entry.name);
+
+      if (DATE_PREFIX_PATTERN.test(entry.name) || !postFiles.has(slug)) {
+        postFiles.set(slug, path.join(BLOG_DIR, entry.name, "index.mdx"));
+      }
+    }
+
+    if (entry.isFile() && entry.name.endsWith(".mdx")) {
+      const slug = entry.name.replace(/\.mdx$/, "");
+
+      if (!postFiles.has(slug)) {
+        postFiles.set(slug, path.join(BLOG_DIR, entry.name));
+      }
+    }
+  }
+
   const posts = await Promise.all(
-    filenames
-      .filter((filename) => filename.endsWith(".mdx"))
-      .map(async (filename) => {
-        const slug = filename.replace(/\.mdx$/, "");
-        const source = await fs.readFile(path.join(BLOG_DIR, filename), "utf8");
-        return getPostMetaFromSource(source, slug);
-      })
+    Array.from(postFiles.entries()).map(async ([slug, filepath]) => {
+      const source = await fs.readFile(filepath, "utf8");
+      return getPostMetaFromSource(source, slug);
+    })
   );
 
   return posts.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
@@ -61,7 +80,7 @@ export const getBlogPost = cache(async (slug: string): Promise<BlogPost | null> 
   let source: string;
 
   try {
-    source = await fs.readFile(path.join(BLOG_DIR, `${slug}.mdx`), "utf8");
+    source = await fs.readFile(await getPostSourcePath(slug), "utf8");
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") {
       return null;
@@ -87,6 +106,40 @@ export const getBlogPost = cache(async (slug: string): Promise<BlogPost | null> 
     content,
   };
 });
+
+async function getPostSourcePath(slug: string): Promise<string> {
+  const folderPath = path.join(BLOG_DIR, slug, "index.mdx");
+
+  try {
+    await fs.access(folderPath);
+    return folderPath;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+      throw error;
+    }
+  }
+
+  const datedFolderPath = await getDatedPostSourcePath(slug);
+
+  if (datedFolderPath) {
+    return datedFolderPath;
+  }
+
+  return path.join(BLOG_DIR, `${slug}.mdx`);
+}
+
+async function getDatedPostSourcePath(slug: string): Promise<string | null> {
+  const entries = await fs.readdir(BLOG_DIR, { withFileTypes: true });
+  const directory = entries.find(
+    (entry) => entry.isDirectory() && stripDatePrefix(entry.name) === slug
+  );
+
+  return directory ? path.join(BLOG_DIR, directory.name, "index.mdx") : null;
+}
+
+function stripDatePrefix(slug: string): string {
+  return slug.replace(DATE_PREFIX_PATTERN, "");
+}
 
 function getPostMetaFromSource(source: string, fallbackSlug: string): BlogPostMeta {
   const parsed = matter(source);

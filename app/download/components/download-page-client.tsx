@@ -82,76 +82,56 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
   const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
   const publishedAt = release?.published_at ? formatReleaseDate(release.published_at, 'en-US') : 'GitHub latest';
   const version = release?.tag_name ? formatVersion(release.tag_name) : 'Latest';
-  const releaseFacts = [
-    ['Published', publishedAt],
-    ['Artifacts', release?.assets?.length ? `${release.assets.length} files` : 'Release page'],
-    ['Destination', 'GitHub releases'],
-  ];
 
   return (
     <a
       href={releaseUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="motion-card group relative block overflow-hidden border border-border bg-card/90 transition-colors hover:border-foreground/40"
+      className="motion-card group relative grid overflow-hidden border border-border bg-card/90 transition-colors hover:border-foreground/40 lg:grid-cols-[1fr_auto]"
       aria-label="Open current RustFS server release on GitHub"
     >
-      <div className="relative grid border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:grid-cols-[1fr_auto]">
-        <span className="px-4 py-3">Current server release</span>
-        <span className="inline-flex items-center gap-2 border-t border-border px-4 py-3 text-foreground transition-colors group-hover:text-brand sm:border-l sm:border-t-0">
-          GitHub
-          <ArrowUpRightIcon className="size-3.5" />
-        </span>
+      <div className="relative p-5 sm:p-6">
+        <div className="mb-5 grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          <span className="text-brand">Current server release</span>
+          <span>{'//'}</span>
+          <span className="h-px bg-border" />
+          <span>{publishedAt}</span>
+        </div>
+
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="font-display text-4xl font-semibold leading-none text-foreground sm:text-5xl">
+              {version}
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Server binary, Docker image, and source archive.
+            </p>
+          </div>
+          <span className="inline-flex items-center gap-2 text-sm font-semibold text-brand">
+            Open release
+            <ArrowUpRightIcon className="motion-arrow size-4" />
+          </span>
+        </div>
       </div>
 
-      <div className="relative grid gap-px bg-border lg:grid-cols-[minmax(0,1fr)_20rem]">
-        <div className="bg-card p-5 sm:p-6">
-          <div className="grid min-h-20 grid-cols-[auto_auto_1fr_auto] items-center gap-4 bg-brand px-4 py-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-foreground sm:px-5">
-            <span>release</span>
-            <span className="text-brand-foreground/60">{'//'}</span>
-            <span className="h-px bg-brand-foreground/45" />
-            <span className="font-display text-2xl normal-case tracking-normal sm:text-4xl">
-              {version}
-            </span>
-          </div>
-
-          <div className="mt-5 flex items-center justify-between gap-4">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">Release channel</p>
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-brand">
-              Open release
-              <ArrowUpRightIcon className="motion-arrow size-4" />
-            </span>
-          </div>
-
-          <div className="mt-5 grid gap-px bg-border sm:grid-cols-3">
-            {['Server binary', 'Docker image', 'Source archive'].map((item) => (
-              <span
-                key={item}
-                className="bg-card px-3 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid bg-background/35">
-          {releaseFacts.map(([label, value], index) => (
-            <div key={label} className="grid grid-cols-[3.5rem_1fr] border-b border-border last:border-b-0">
-              <span className="border-r border-border px-4 py-4 font-mono text-[10px] font-semibold text-brand">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <span className="grid gap-1 px-4 py-4">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                {label}
-                </span>
-                <span className="text-sm font-semibold text-foreground">
-                  {value}
-                </span>
-              </span>
-            </div>
-          ))}
-        </div>
+      <div className="grid border-t border-border bg-background/35 lg:w-52 lg:border-l lg:border-t-0">
+        <span className="grid gap-1 border-b border-border px-4 py-4">
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Artifacts
+          </span>
+          <span className="text-sm font-semibold text-foreground">
+            {release?.assets?.length ? `${release.assets.length} files` : 'Release page'}
+          </span>
+        </span>
+        <span className="grid gap-1 px-4 py-4">
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Destination
+          </span>
+          <span className="text-sm font-semibold text-foreground">
+            GitHub
+          </span>
+        </span>
       </div>
     </a>
   );
@@ -163,21 +143,16 @@ function HeroStripeCard({ releaseUrl }: { releaseUrl: string }) {
       href={releaseUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="motion-card group relative block overflow-hidden border border-border bg-card p-5 transition-colors hover:bg-muted/25 sm:p-6"
+      className="motion-card group relative block overflow-hidden border border-border bg-card p-4 transition-colors hover:bg-muted/25 sm:p-5"
     >
       <div
         aria-hidden="true"
         className="absolute inset-0 opacity-50 [background-image:repeating-linear-gradient(135deg,transparent_0_18px,var(--border)_18px_19px,transparent_19px_36px)]"
       />
-      <div className="relative grid min-h-64 content-between gap-8">
-        <div>
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-            Fast route
-          </p>
-          <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground">
-            Pick the shortest path for validation, containers, Kubernetes, or the native rc admin CLI.
-          </p>
-        </div>
+      <div className="relative grid min-h-32 content-between gap-5">
+        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+          Fast route
+        </p>
 
         <div className="grid gap-3">
           <div className="flex flex-wrap gap-2">

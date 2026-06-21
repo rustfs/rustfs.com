@@ -74,7 +74,7 @@ const iconMap: Record<SoftwareKey, React.ComponentType<{ className?: string; sty
 
 export default function SoftwareLogos() {
   return (
-    <section className="relative overflow-hidden border-t border-border bg-muted/30 py-20 lg:py-28">
+    <section className="relative overflow-hidden border-t border-border bg-background py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           sectionNumber="01"
@@ -90,9 +90,9 @@ export default function SoftwareLogos() {
               return (
                 <li
                   key={software}
-                  className="grid min-h-28 place-items-center bg-card px-6 py-4 sm:min-h-32"
+                  className="group relative grid min-h-28 place-items-center overflow-hidden bg-card px-6 py-4 transition-colors duration-300 before:absolute before:inset-0 before:opacity-0 before:transition-[opacity,background-position] before:duration-500 before:[background-image:repeating-linear-gradient(135deg,transparent_0,transparent_12px,var(--muted)_12px,var(--muted)_24px)] before:[background-position:0_0] before:[background-size:34px_34px] hover:bg-muted/30 hover:before:opacity-45 hover:before:[background-position:34px_0] sm:min-h-32"
                 >
-                  <span className="grid h-14 w-full max-w-40 place-items-center text-foreground/75 sm:h-16 sm:max-w-44">
+                  <span className="relative z-10 grid h-14 w-full max-w-40 place-items-center text-foreground/75 transition duration-300 group-hover:-translate-y-0.5 group-hover:text-foreground sm:h-16 sm:max-w-44">
                     <IconComponent
                       className="block h-full w-full"
                       style={{ color: "currentColor" }}
