@@ -72,6 +72,7 @@ export function Globe({
   }
 
   useEffect(() => {
+    const canvas = canvasRef.current
     const onResize = () => {
       if (canvasRef.current) {
         widthRef.current = canvasRef.current.offsetWidth
@@ -81,20 +82,36 @@ export function Globe({
     window.addEventListener("resize", onResize)
     onResize()
 
-    const globe = createGlobe(canvasRef.current!, {
+    if (!canvas) {
+      return () => window.removeEventListener("resize", onResize)
+    }
+
+    const gl =
+      canvas.getContext("webgl") ?? canvas.getContext("experimental-webgl")
+
+    if (!gl) {
+      return () => window.removeEventListener("resize", onResize)
+    }
+
+    const globe = createGlobe(canvas, {
       ...config,
       width: widthRef.current * 2,
       height: widthRef.current * 2,
       onRender: (state) => {
-        if (!pointerInteracting.current) phiRef.current += 0.005
+        if (pointerInteracting.current === null) phiRef.current += 0.005
         state.phi = phiRef.current + rs.get()
         state.width = widthRef.current * 2
         state.height = widthRef.current * 2
       },
     })
 
-    setTimeout(() => (canvasRef.current!.style.opacity = "1"), 0)
+    const opacityTimer = window.setTimeout(() => {
+      if (canvasRef.current) {
+        canvasRef.current.style.opacity = "1"
+      }
+    }, 0)
     return () => {
+      window.clearTimeout(opacityTimer)
       globe.destroy()
       window.removeEventListener("resize", onResize)
     }
