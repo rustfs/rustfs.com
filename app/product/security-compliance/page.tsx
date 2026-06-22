@@ -2,8 +2,21 @@ import FeaturePage, { type FeaturePageSection } from "@/components/business/feat
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Security & Compliance | RustFS",
-  description: "RustFS security controls for IAM, STS temporary credentials, server-side encryption, KMS integration, authentication, and audit workflows.",
+  title: "Enterprise Security & Compliance | RustFS",
+  description: "RustFS provides enterprise-grade authentication, authorization, log auditing, event handling, SSE/KMS encryption, OIDC SSO, and mTLS security controls.",
+  keywords: [
+    "RustFS",
+    "security compliance",
+    "IAM",
+    "STS",
+    "SSE",
+    "KMS",
+    "OIDC",
+    "mTLS",
+    "audit logging",
+    "Kafka",
+    "Pulsar",
+  ],
 };
 
 const sections: FeaturePageSection[] = [
@@ -24,8 +37,8 @@ const sections: FeaturePageSection[] = [
         description: "Separate storage operations, security administration, and application access into explicit permission surfaces.",
       },
       {
-        title: "Agent-ready access patterns",
-        description: "Keep automation and MCP-driven workflows scoped to the minimum permissions needed for each task.",
+        title: "Zero-trust by default",
+        description: "Enforce the principle of least privilege across the entire storage environment.",
       },
     ],
   },
@@ -52,16 +65,16 @@ const sections: FeaturePageSection[] = [
     ],
   },
   {
-    title: "Authentication and transport security",
-    description: "Harden every access path from application clients to administrative operations.",
+    title: "Authentication",
+    description: "Integrate RustFS into enterprise identity systems without turning login and operator access into custom glue code.",
     items: [
       {
-        title: "Enterprise authentication flows",
-        description: "Integrate identity-driven authentication patterns for operators, applications, and temporary access sessions.",
+        title: "Unified OIDC-driven SSO",
+        description: "Integrate seamlessly with enterprise identity providers to enable frictionless single sign-on.",
       },
       {
-        title: "Secure client connections",
-        description: "Use encrypted transport paths for S3-compatible clients, administrative tooling, and service-to-service traffic.",
+        title: "Visual console integration",
+        description: "Simplify OIDC infrastructure setup and reduce operational complexity.",
       },
       {
         title: "Credential exposure reduction",
@@ -74,16 +87,30 @@ const sections: FeaturePageSection[] = [
     ],
   },
   {
+    title: "mTLS",
+    description: "Protect service-to-service traffic with mutual identity verification and certificate automation.",
+    items: [
+      {
+        title: "Zero-trust mTLS",
+        description: "Enforce mutual TLS verification to achieve bi-directional identity authentication across communications.",
+      },
+      {
+        title: "Automated certificate management",
+        description: "Support cert-manager natively to automate certificate issuance and rotation.",
+      },
+    ],
+  },
+  {
     title: "Security audit",
     description: "Turn storage activity into reviewable operational evidence for incident response and compliance processes.",
     items: [
       {
         title: "Administrative action visibility",
-        description: "Track security-sensitive control-plane activity such as access changes, key usage paths, and configuration updates.",
+        description: "Spot destructive actions and security-sensitive control-plane changes quickly.",
       },
       {
-        title: "Object access traceability",
-        description: "Preserve useful context around data access so teams can investigate unusual behavior without losing storage-level detail.",
+        title: "Log streaming destination",
+        description: "Forward audit trails to Kafka and Pulsar for deeper security analytics.",
       },
       {
         title: "Compliance evidence workflows",
@@ -101,8 +128,9 @@ export default function SecurityCompliancePage() {
   return (
     <FeaturePage
       title="Security & Compliance"
-      description="RustFS provides a defense-in-depth security foundation for enterprise object storage: policy-based access control, temporary credentials, server-side encryption, KMS integration, authentication, transport security, and auditable operations."
+      description="RustFS provides a defense-in-depth security foundation for enterprise object storage: policy-based access control, temporary credentials, server-side encryption, KMS integration, OIDC authentication, mTLS, and auditable operations."
       sections={sections}
+      variant="security"
       links={[
         { label: "Review security model", href: "/contact-us" },
         { label: "Read docs", href: "/docs", variant: "outline" },

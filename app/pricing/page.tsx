@@ -69,12 +69,12 @@ function PricingCard({
           </span>
         </div>
       </div>
-      <ul className="grid grid-rows-4">
+      <ul>
         {points.map((point) => (
           <li
             key={point}
             className={cn(
-              "flex min-h-20 gap-3 border-b border-border px-6 py-4 last:border-b-0 lg:h-20",
+              "flex gap-3 border-b border-border px-6 py-4 last:border-b-0",
               isEmphasized && "border-brand-foreground/20"
             )}
           >

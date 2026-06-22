@@ -15,15 +15,22 @@ export const productNavigation: NavigationItem[] = [
     items: ["S3", "WebDAV", "Swift", "FTP(s)", "MCP"],
   },
   {
-    title: "Security & Compliance",
-    href: "/product/security-compliance",
-    description: "Identity, transport security, encryption, and audit controls.",
-    items: ["IAM", "STS", "SSE/KMS", "Audit"],
+    title: "Data Management",
+    href: "/product/data-management",
+    description: "Buckets, lifecycle, Object Lock, versioning, multipart upload, and S3 Tables.",
+    items: ["Lifecycle", "Versioning", "S3 Tables"],
   },
   {
-    title: "Availability & Scale",
-    href: docs_url("features/distributed"),
-    description: "Distributed topology, Erasure Coding, and pool orchestration.",
+    title: "High Availability & Scale",
+    href: "/product/high-availability-scale",
+    description: "Distributed topology, Erasure Coding, pool orchestration, and self-healing.",
+    items: ["EC", "Rebalance", "Healing"],
+  },
+  {
+    title: "Security & Compliance",
+    href: "/product/security-compliance",
+    description: "Identity, OIDC, mTLS, encryption, KMS, audit, and event handling.",
+    items: ["IAM", "OIDC", "mTLS", "SSE/KMS"],
   },
   {
     title: "Operational & Observability",
@@ -57,9 +64,10 @@ export const footerNavigation = [
     links: [
       { title: "S3 Compatible", href: docs_url("features/s3-compatibility") },
       { title: "Multiple Protocol Access", href: "/product/multiple-protocol-access" },
+      { title: "Data Management", href: "/product/data-management" },
+      { title: "High Availability & Scale", href: "/product/high-availability-scale" },
       { title: "Operational & Observability", href: "/product/operational-observability" },
       { title: "Security & Compliance", href: "/product/security-compliance" },
-      { title: "Availability & Scale", href: docs_url("features/distributed") },
     ],
   },
   {

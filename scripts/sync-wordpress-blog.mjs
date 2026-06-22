@@ -161,6 +161,7 @@ async function localizePostAssets(slug, markdown, image) {
     urls.add(imageUrl);
   }
 
+  const localizedImage = isSharedCoverPath(imageUrl) ? await saveSharedCover(slug, imageUrl) : image;
   const replacements = new Map();
   let index = 1;
 
@@ -175,7 +176,7 @@ async function localizePostAssets(slug, markdown, image) {
 
   return {
     markdown: rewriteSourcePostLinks(markdown),
-    image: replacements.get(imageUrl) ?? image,
+    image: replacements.get(imageUrl) ?? localizedImage,
   };
 }
 
@@ -214,6 +215,19 @@ async function saveRemoteImage(slug, url, index) {
   return publicPath;
 }
 
+async function saveSharedCover(slug, imagePath) {
+  const extension = path.extname(imagePath) || ".jpg";
+  const targetDir = path.join(PUBLIC_BLOG_IMAGE_DIR, slug);
+  const targetFilename = `cover${extension}`;
+  const sourcePath = path.join(process.cwd(), "public", imagePath.replace(/^\//, ""));
+  const targetPath = path.join(targetDir, targetFilename);
+
+  await fs.mkdir(targetDir, { recursive: true });
+  await fs.copyFile(sourcePath, targetPath);
+
+  return `/images/blog/${slug}/${targetFilename}`;
+}
+
 function sanitizeImageFilename(url, index) {
   const parsed = new URL(url);
   const extension = path.extname(parsed.pathname).toLowerCase() || ".png";
@@ -239,6 +253,10 @@ function safeDecodeURIComponent(value) {
 
 function isRemoteImageUrl(value) {
   return typeof value === "string" && REMOTE_IMAGE_URL_PATTERN.test(value);
+}
+
+function isSharedCoverPath(value) {
+  return typeof value === "string" && value.startsWith("/images/covers/");
 }
 
 function escapeRegExp(value) {

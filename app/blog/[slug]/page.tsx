@@ -180,7 +180,7 @@ function RelatedPost({ post }: { post: BlogPostMeta }) {
 }
 
 function shouldShowImage(image?: string) {
-  return Boolean(image && !image.startsWith("/images/covers/"));
+  return Boolean(image);
 }
 
 function formatLongDate(date: string) {

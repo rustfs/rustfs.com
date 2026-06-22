@@ -375,16 +375,18 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
                   className="group relative flex min-h-48 flex-col justify-between border-b border-border p-6 transition-colors hover:bg-muted/50 sm:border-b-0 sm:border-r sm:last:border-r-0 lg:border-b lg:border-r-0 lg:last:border-b-0"
                 >
                   <div className="flex items-center justify-between gap-4">
-                    <div className="inline-flex size-10 items-center justify-center bg-muted text-foreground transition-colors group-hover:bg-brand group-hover:text-brand-foreground">
-                      <Icon className="size-4" aria-hidden="true" />
+                    <div className="flex min-w-0 items-center gap-3">
+                      <div className="inline-flex size-10 shrink-0 items-center justify-center bg-muted text-foreground transition-colors group-hover:bg-brand group-hover:text-brand-foreground">
+                        <Icon className="size-4" aria-hidden="true" />
+                      </div>
+                      <p className="truncate font-mono text-xs font-semibold uppercase tracking-[0.22em] text-brand">
+                        {channel.title}
+                      </p>
                     </div>
                     <ArrowUpRightIcon className="size-4 text-muted-foreground transition-colors group-hover:text-brand" aria-hidden="true" />
                   </div>
                   <div>
-                    <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-brand">
-                      {channel.title}
-                    </p>
-                    <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                    <p className="text-sm leading-6 text-muted-foreground">
                       {channel.description}
                     </p>
                     <p className="mt-5 text-sm font-semibold text-foreground">

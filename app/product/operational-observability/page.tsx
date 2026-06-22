@@ -2,13 +2,26 @@ import FeaturePage, { type FeaturePageSection } from "@/components/business/feat
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Operational & Observability | RustFS",
-  description: "RustFS operational control with cluster management, OpenTelemetry support, real-time insights, and the rc CLI.",
+  title: "RustFS Cluster Operations & OTEL Observability | Enterprise Management",
+  description: "Simplify RustFS management with an intuitive console, rich rc CLI, and full-stack OTEL observability. Deploy Prometheus, Grafana, and Loki for real-time cluster insights.",
+  keywords: [
+    "RustFS",
+    "cluster observability",
+    "OpenTelemetry",
+    "Prometheus",
+    "Grafana",
+    "Loki",
+    "rc CLI",
+    "storage console",
+    "IAM security",
+    "real-time cluster monitoring",
+  ],
 };
 
 const sections: FeaturePageSection[] = [
   {
     title: "Enterprise insights",
+    description: "Operate RustFS with real-time signals and a unified administration surface.",
     items: [
       {
         title: "Real-time insights",
@@ -17,6 +30,10 @@ const sections: FeaturePageSection[] = [
       {
         title: "Operational flexibility",
         description: "Effortless deployment across operating systems and installation methods including source, binary, Docker, and Kubernetes.",
+      },
+      {
+        title: "Simplified administration",
+        description: "Comprehensive console and CLI controls for full-lifecycle bucket management and granular IAM security.",
       },
     ],
   },
@@ -39,14 +56,15 @@ const sections: FeaturePageSection[] = [
   },
   {
     title: "OTEL support",
+    description: "Route logs, metrics, and monitoring signals through OpenTelemetry-compatible operations workflows.",
     items: [
       {
         title: "Full-stack observability",
-        description: "Support logging, monitoring, and metrics across RustFS deployments.",
+        description: "Integrate unified logs, monitoring, and metrics under OpenTelemetry.",
       },
       {
-        title: "One-command stack",
-        description: "Containerized deployment for Prometheus, Grafana, and Loki instances.",
+        title: "One-click containerized deployment",
+        description: "Spin up Prometheus, Grafana, and Loki instances quickly for operational review.",
       },
       {
         title: "Flexible configuration",
@@ -56,6 +74,7 @@ const sections: FeaturePageSection[] = [
   },
   {
     title: "Cluster insights",
+    description: "Keep node health, disk state, capacity, buckets, and object counts visible to operators.",
     items: [
       {
         title: "Cluster status monitoring",
@@ -66,17 +85,18 @@ const sections: FeaturePageSection[] = [
         description: "Track total capacity and current usage in real time.",
       },
       {
-        title: "Object counts",
+        title: "Live object count display",
         description: "See bucket and object counts directly in the operational view.",
       },
     ],
   },
   {
-    title: "rc CLI support",
+    title: "RustFS client CLI",
+    description: "Use rc for repeatable storage administration from local terminals, automation, and operational runbooks.",
     items: [
       {
-        title: "Broad command coverage",
-        description: "Operate objects, buckets, clusters, and security workflows from the command line.",
+        title: "Rich command ecosystem",
+        description: "Cover object, bucket, cluster, and security operations from the command line.",
       },
       {
         title: "Secure and convenient",
@@ -96,6 +116,7 @@ export default function OperationalObservabilityPage() {
       title="Operational & Observability"
       description="RustFS gives operators practical control over storage operations with console workflows, OpenTelemetry support, cluster insights, and rc CLI automation."
       sections={sections}
+      variant="ops"
       links={[
         { label: "Review operations", href: "/contact-us" },
         { label: "Read docs", href: "/docs", variant: "outline" },
