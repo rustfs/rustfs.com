@@ -59,7 +59,7 @@ const reasonIcons = [ShieldCheckIcon, NetworkIcon, Code2Icon, GaugeIcon];
 export default function HomeStats() {
   return (
     <section
-      className="relative overflow-hidden border-t border-border bg-background py-24 text-foreground sm:py-32"
+      className="relative overflow-hidden border-t border-border bg-background py-20 text-foreground sm:py-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader

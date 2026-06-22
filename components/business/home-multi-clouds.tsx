@@ -29,7 +29,7 @@ const stories = [
 
 export default function HomeMultiClouds() {
   return (
-    <section className="border-t border-border bg-background py-24 md:py-32">
+    <section className="border-t border-border bg-background py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           sectionNumber="05"

@@ -185,7 +185,7 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden border-y border-border bg-muted/30 py-24 sm:py-32"
+      className="relative overflow-hidden border-y border-border bg-muted/30 py-20 sm:py-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader

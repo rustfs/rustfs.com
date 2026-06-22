@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 
 import { SITE_CONFIG, SITE_METADATA } from '@/app.config';
@@ -10,8 +10,6 @@ import FixedContactButton from '@/components/business/buttons/fixed-contact-butt
 import FixedLanguageBanner from '@/components/business/fixed-language-banner';
 import BackgroundGrid from '@/components/ui/background-grid';
 import "./globals.css";
-
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,7 +39,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning lang="en" className={inter.variable}>
+    <html suppressHydrationWarning lang="en">
       <head>
         <meta
           key="twitter:card"
