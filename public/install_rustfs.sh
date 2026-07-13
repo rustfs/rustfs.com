@@ -147,6 +147,7 @@ install_rustfs_binary() {
     info "RustFS binary installed at $RUSTFS_BIN_PATH."
 }
 
+
 # --- Installation Logic ---
 install_rustfs() {
     info "Starting RustFS installation..."
@@ -206,7 +207,7 @@ User=root
 Group=root
 WorkingDirectory=/usr/local
 EnvironmentFile=-$RUSTFS_CONFIG_FILE
-ExecStart=$RUSTFS_BIN_PATH \$RUSTFS_VOLUMES
+ExecStart=$RUSTFS_BIN_PATH
 LimitNOFILE=1048576
 LimitNPROC=32768
 TasksMax=infinity
@@ -226,8 +227,6 @@ ProtectKernelModules=true
 ProtectControlGroups=true
 RestrictSUIDSGID=true
 RestrictRealtime=true
-StandardOutput=append:$LOG_DIR/rustfs.log
-StandardError=append:$LOG_DIR/rustfs-err.log
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -235,8 +234,8 @@ EOF
 
     # --- RustFS Config File ---
     cat <<EOF > "$RUSTFS_CONFIG_FILE" || err "Failed to write config file."
-RUSTFS_ACCESS_KEY=rustfsadmin
-RUSTFS_SECRET_KEY=rustfstips-change-your-pwd
+RUSTFS_ACCESS_KEY=<your access key>
+RUSTFS_SECRET_KEY=<your secret key>
 RUSTFS_VOLUMES="$RUSTFS_VOLUME"
 RUSTFS_ADDRESS=":$RUSTFS_PORT"
 RUSTFS_CONSOLE_ADDRESS=":$CONSOLE_PORT"
@@ -253,14 +252,17 @@ EOF
     systemctl start rustfs || err "systemctl start rustfs failed."
     info "RustFS service enabled and started."
 
+    echo ""
     echo "RustFS has been installed and started successfully!"
     echo "Service port: $RUSTFS_PORT,  Console port: $CONSOLE_PORT,  Data directory: $RUSTFS_VOLUME"
     echo ""
-    echo -e "\033[1;33m[SECURITY WARNING]\033[0m RustFS is using the default credentials:"
-    echo "  Access Key: rustfsadmin"
-    echo "  Secret Key: rustfstips-change-your-pwd"
-    echo "Please change them IMMEDIATELY by editing $RUSTFS_CONFIG_FILE,"
-    echo "then run: systemctl restart rustfs"
+    echo -e "\033[1;33m[SECURITY WARNING]\033[0m Please change the default value for RUSTFS_ACCESS_KEY/RUSTFS_SECRET_KEY immediately and the value can't be rustfsadmin!"
+    echo ""
+    echo "  Config file: $RUSTFS_CONFIG_FILE"
+    echo ""
+    echo "To change them, run:"
+    echo "  1. Edit $RUSTFS_CONFIG_FILE and update RUSTFS_ACCESS_KEY/RUSTFS_SECRET_KEY"
+    echo "  2. systemctl restart rustfs"
 }
 
 # --- Upgrade Logic ---
