@@ -91,9 +91,21 @@ export default async function RootLayout({
           <AppFooter />
           <FixedContactButton />
           <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-TWW7WMTWL9"
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-TWW7WMTWL9');
+            `}
+          </Script>
+          <Script
             id="baidu-analytics"
             src="https://hm.baidu.com/hm.js?968e7103a8e28fb30f7d69e42b7c82bc"
-            strategy="afterInteractive" // Ensure script loads after page interaction
+            strategy="afterInteractive"
           />
         </ThemeProvider>
       </body>
