@@ -49,6 +49,9 @@ jobs:
           pnpm install --no-frozen-lockfile
           pnpm run build
 
+      - name: Generate sitemap
+        run: node scripts/generate-sitemap.js
+
       - name: Install Aliyun OSS CLI
         if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
         shell: bash
@@ -75,6 +78,24 @@ jobs:
           # ossutil rm -r oss://rustfs/ --force
           ossutil cp -r ./out/ oss://rustfs/ --force
           echo "Successfully uploaded to OSS"
+
+      - name: Push to IndexNow
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          HOST: rustfs.com
+        run: |
+          URLS=$(grep -oP '(?<=<loc>)[^<]+' out/sitemap.xml)
+          JSON=$(jq -n \
+            --arg host "$HOST" \
+            --arg key "$INDEXNOW_KEY" \
+            --arg keyLoc "https://$HOST/$INDEXNOW_KEY.txt" \
+            --argjson urls "$(echo "$URLS" | jq -R . | jq -s .)" \
+            '{host:$host, key:$key, keyLocation:$keyLoc, urlList:$urls}')
+          curl -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json" \
+            -d "$JSON" \
+            -w "\nIndexNow HTTP %{http_code}\n"
+
       - name: Show OSS error log if exists
         if: failure()
         run: |
