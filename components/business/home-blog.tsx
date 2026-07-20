@@ -61,7 +61,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
                   <img
                     src={featuredPost.image}
                     alt=""
-                    className="h-full w-full object-cover grayscale transition duration-300 group-hover:grayscale-0"
+                    className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
                     loading="lazy"
                   />
                   <span

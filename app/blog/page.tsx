@@ -23,8 +23,8 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   const posts = await getBlogPosts();
   const [featuredPost, ...archivePosts] = posts;
-  const recentPosts = archivePosts.slice(0, 4);
-  const olderPosts = archivePosts.slice(4);
+  const recentPosts = archivePosts.slice(0, 3);
+  const olderPosts = archivePosts.slice(3);
 
   return (
     <main className="relative flex-1">
@@ -46,9 +46,9 @@ export default async function BlogPage() {
           </div>
 
           {featuredPost ? (
-            <div className="mt-12 grid items-start gap-4 lg:grid-cols-[minmax(0,0.72fr)_0.28fr]">
+            <div className="mt-12 space-y-4">
               <FeaturedPost post={featuredPost} />
-              <RecentIndex posts={recentPosts} />
+              <RecentPostGrid posts={recentPosts} />
             </div>
           ) : (
             <div className="mt-12 border border-border bg-card p-8">
@@ -80,76 +80,120 @@ export default async function BlogPage() {
 }
 
 function FeaturedPost({ post }: { post: BlogPostMeta }) {
+  const hasImage = shouldShowImage(post.image);
+
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="motion-card group flex flex-col border border-border bg-card transition-colors hover:bg-muted/35"
+      className="motion-card group block overflow-hidden border border-border bg-card transition-colors hover:bg-muted/30"
     >
-      <div className="grid grid-cols-[1fr_auto] border-b border-border text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-        <span className="px-5 py-4 text-brand">Latest post</span>
-        <span className="border-l border-border px-5 py-4">{formatShortDate(post.date)}</span>
-      </div>
+      <div
+        className={`grid ${
+          hasImage ? "md:grid-cols-[15rem_minmax(0,1fr)] xl:grid-cols-[18rem_minmax(0,1fr)]" : ""
+        }`}
+      >
+        {hasImage ? (
+          <div className="relative min-h-56 overflow-hidden border-b border-border bg-background md:border-r md:border-b-0">
+            <img
+              src={post.image}
+              alt=""
+              className="absolute inset-0 size-full object-cover transition duration-300 group-hover:scale-[1.02]"
+              loading="eager"
+            />
+            <span className="absolute left-4 top-4 border border-border bg-background/85 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
+              Featured
+            </span>
+          </div>
+        ) : null}
 
-      <div className="flex flex-1 flex-col p-6 sm:p-8">
-        <PostMeta post={post} />
-        <h2 className="mt-6 max-w-3xl text-3xl font-semibold leading-tight text-foreground sm:text-4xl">
-          {post.title}
-        </h2>
-        <p className="mt-5 line-clamp-3 max-w-2xl text-sm leading-7 text-muted-foreground">{post.description}</p>
-        <PostTags tags={post.tags} className="mt-6" />
-        <span className="mt-auto inline-flex items-center pt-8 text-sm font-semibold text-brand">
-          Read the post
-          <span className="motion-arrow ml-2 inline-block" aria-hidden="true">
-            ↗
-          </span>
-        </span>
+        <div className="flex flex-col p-6 sm:p-7">
+          <div className="mb-6 flex items-center gap-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <span className="text-brand">Featured post</span>
+            <span className="h-px flex-1 bg-border" aria-hidden="true" />
+            <span>{formatShortDate(post.date)}</span>
+          </div>
+          <PostMeta post={post} />
+          <h2 className="mt-5 max-w-4xl text-2xl font-semibold leading-tight text-foreground sm:text-3xl">
+            {post.title}
+          </h2>
+          <p className="mt-5 line-clamp-2 max-w-2xl text-sm leading-7 text-muted-foreground">
+            {post.description}
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+            <PostTags tags={post.tags.slice(0, 4)} />
+            <span className="inline-flex items-center text-sm font-semibold text-brand">
+              Read the post
+              <span className="motion-arrow ml-2 inline-block" aria-hidden="true">
+                ↗
+              </span>
+            </span>
+          </div>
+        </div>
       </div>
     </Link>
   );
 }
 
-function RecentIndex({ posts }: { posts: BlogPostMeta[] }) {
+function RecentPostGrid({ posts }: { posts: BlogPostMeta[] }) {
+  if (!posts.length) {
+    return null;
+  }
+
   return (
-    <aside className="border border-border bg-card">
-      <div className="border-b border-border px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-        Recent index
-      </div>
-      <div>
-        {posts.map((post, index) => (
-          <Link
-            key={post.slug}
-            href={`/blog/${post.slug}`}
-            className="group block border-b border-border px-5 py-5 last:border-b-0 hover:bg-muted/35"
-          >
-            <div className="flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              <span>Post.{String(index + 2).padStart(2, "0")}</span>
+    <div className="grid gap-4 md:grid-cols-3">
+      {posts.map((post, index) => (
+        <Link
+          key={post.slug}
+          href={`/blog/${post.slug}`}
+          className="motion-card group flex min-h-72 flex-col overflow-hidden border border-border bg-card transition-colors hover:bg-muted/30"
+        >
+          {shouldShowImage(post.image) ? (
+            <div className="relative aspect-[16/9] overflow-hidden border-b border-border bg-background">
+              <img
+                src={post.image}
+                alt=""
+                className="absolute inset-0 size-full object-cover transition duration-300 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+            </div>
+          ) : null}
+          <div className="flex flex-1 flex-col p-5">
+            <div className="flex items-center justify-between gap-4 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <span className="text-brand">Post.{String(index + 2).padStart(2, "0")}</span>
               <span>{formatShortDate(post.date)}</span>
             </div>
-            <h3 className="mt-4 line-clamp-3 text-base font-semibold leading-tight text-foreground">
+            <h3 className="mt-4 line-clamp-3 text-lg font-semibold leading-tight text-foreground">
               {post.title}
             </h3>
-            <span className="mt-5 inline-flex items-center text-sm font-semibold text-brand">
-              Open
-              <span className="motion-arrow ml-2 inline-block" aria-hidden="true">
+            <div className="mt-auto flex items-center justify-between pt-6 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <span>{post.readingMinutes} min</span>
+              <span className="motion-arrow text-brand" aria-hidden="true">
                 ↗
               </span>
-            </span>
-          </Link>
-        ))}
-      </div>
-    </aside>
+            </div>
+          </div>
+        </Link>
+      ))}
+    </div>
   );
 }
 
 function ArchiveRow({ post }: { post: BlogPostMeta }) {
+  const hasImage = shouldShowImage(post.image);
+
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group grid gap-5 border-b border-border px-5 py-6 last:border-b-0 hover:bg-muted/35 md:grid-cols-[9rem_minmax(0,1fr)_11rem]"
+      className={`group grid gap-5 border-b border-border px-5 py-6 last:border-b-0 hover:bg-muted/35 ${
+        hasImage
+          ? "md:grid-cols-[8rem_8.5rem_minmax(0,1fr)_7rem]"
+          : "md:grid-cols-[8rem_minmax(0,1fr)_7rem]"
+      }`}
     >
       <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
         {formatShortDate(post.date)}
       </div>
+      {hasImage ? <PostThumbnail image={post.image} className="hidden md:block" /> : null}
       <div>
         <h3 className="text-xl font-semibold leading-tight text-foreground">{post.title}</h3>
         <p className="mt-3 line-clamp-2 max-w-3xl text-sm leading-7 text-muted-foreground">
@@ -164,6 +208,23 @@ function ArchiveRow({ post }: { post: BlogPostMeta }) {
         </span>
       </div>
     </Link>
+  );
+}
+
+function PostThumbnail({ image, className }: { image?: string; className?: string }) {
+  if (!shouldShowImage(image)) {
+    return null;
+  }
+
+  return (
+    <div className={`relative aspect-[4/3] overflow-hidden border border-border bg-background ${className ?? ""}`}>
+      <img
+        src={image}
+        alt=""
+        className="absolute inset-0 size-full object-cover transition duration-300 group-hover:scale-[1.03]"
+        loading="lazy"
+      />
+    </div>
   );
 }
 
@@ -202,4 +263,8 @@ function formatShortDate(date: string) {
     day: "numeric",
     year: "numeric",
   }).format(new Date(date));
+}
+
+function shouldShowImage(image?: string) {
+  return Boolean(image);
 }

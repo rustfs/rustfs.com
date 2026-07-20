@@ -100,17 +100,22 @@ function flattenItems(sections: FeaturePageSection[]) {
 function SectionKicker({
   index,
   label,
+  code,
 }: {
   index: number;
   label: string;
+  code?: string;
 }) {
   return (
-    <div className="flex items-center gap-4 font-mono text-[11px] font-semibold uppercase tracking-[0.22em]">
+    <div className="flex flex-wrap items-center gap-4 font-mono text-[11px] font-semibold uppercase tracking-[0.22em]">
       <span className="bg-brand px-4 py-3 text-sm tracking-[0.14em] text-brand-foreground">
         {String(index).padStart(2, "0")}
       </span>
       <span className="text-brand">&gt;</span>
       <span className="text-muted-foreground">{label}</span>
+      {code ? (
+        <span className="text-muted-foreground/45">/ {code}</span>
+      ) : null}
     </div>
   );
 }
@@ -800,7 +805,6 @@ export default function FeaturePage({
   variant = "protocol",
 }: FeaturePageProps) {
   const meta = variantMeta[variant];
-  const Icon = meta.Icon;
 
   return (
     <main className="relative z-10 flex-1 text-foreground">
@@ -811,14 +815,8 @@ export default function FeaturePage({
 
         <div className="mt-8 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <SectionKicker index={1} label={meta.label} />
-            <div className="mt-8 inline-flex items-center gap-3 border border-border bg-card/80 px-4 py-3">
-              <Icon className="size-4 text-brand" />
-              <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                {meta.code}
-              </span>
-            </div>
-            <h1 className="mt-8 max-w-4xl font-display text-4xl font-extrabold leading-none text-foreground sm:text-6xl lg:text-7xl">
+            <SectionKicker index={1} label={meta.label} code={meta.code} />
+            <h1 className="mt-10 max-w-4xl font-display text-4xl font-extrabold leading-none text-foreground sm:text-6xl lg:text-7xl">
               {title}
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground">

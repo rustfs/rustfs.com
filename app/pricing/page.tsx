@@ -61,12 +61,14 @@ function PricingCard({
           ))}
         </div>
         <p className={cn("relative mt-4 text-sm leading-7 text-muted-foreground", isEmphasized && "text-brand-foreground/75")}>{description}</p>
-        <div className={cn("relative mt-6 grid grid-cols-[auto_1fr_auto] border border-border text-[10px] font-semibold uppercase tracking-[0.12em]", isEmphasized && "border-brand-foreground/25")}>
-          <span className={cn("border-r border-border px-3 py-2 text-muted-foreground", isEmphasized && "border-brand-foreground/25 text-brand-foreground/70")}>Path</span>
-          <span className={cn("px-3 py-2 text-foreground", isEmphasized && "text-brand-foreground")}>{label}</span>
-          <span className={cn("border-l border-border px-3 py-2 text-muted-foreground", isEmphasized && "border-brand-foreground/25 text-brand-foreground/70")}>
-            {price === "$0" ? "OSS" : price === "Custom" ? "SLA" : "Plan"}
-          </span>
+        <div className="relative mt-auto pt-6">
+          <div className={cn("grid grid-cols-[auto_1fr_auto] border border-border text-[10px] font-semibold uppercase tracking-[0.12em]", isEmphasized && "border-brand-foreground/25")}>
+            <span className={cn("border-r border-border px-3 py-2 text-muted-foreground", isEmphasized && "border-brand-foreground/25 text-brand-foreground/70")}>Path</span>
+            <span className={cn("px-3 py-2 text-foreground", isEmphasized && "text-brand-foreground")}>{label}</span>
+            <span className={cn("border-l border-border px-3 py-2 text-muted-foreground", isEmphasized && "border-brand-foreground/25 text-brand-foreground/70")}>
+              {price === "$0" ? "OSS" : price === "Custom" ? "SLA" : "Plan"}
+            </span>
+          </div>
         </div>
       </div>
       <ul>

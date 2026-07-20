@@ -102,7 +102,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <img
                   src={post.image}
                   alt=""
-                  className="aspect-[16/7] w-full object-cover grayscale"
+                  className="aspect-[16/7] w-full object-cover"
                   loading="lazy"
                 />
               </div>

@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import { formatReleaseDate, formatVersion, getDownloadUrlForPlatform, type GitHubRelease } from '@/lib/github'
 import AppleIcon from '@/public/svgs/brands/apple.svg'
 import DockerIcon from '@/public/svgs/brands/docker.svg'
@@ -17,7 +18,7 @@ import {
     MessageCircleIcon,
     ServerIcon,
 } from 'lucide-react'
-import type { ComponentType, ReactNode } from 'react'
+import { useState, type ComponentType, type ReactNode } from 'react'
 import CodeBlock from './code-block'
 import InstallationTopology from './installation-topology'
 import RcDownloadSection from './rc-download-section'
@@ -25,15 +26,6 @@ import RcDownloadSection from './rc-download-section'
 interface DownloadPageClientProps {
   release: GitHubRelease | null;
   cliRelease: GitHubRelease | null;
-}
-
-function getAssetName(url: string | null, fallback: string) {
-  if (!url) {
-    return fallback;
-  }
-
-  const match = decodeURIComponent(url).match(/([^/]+\.(zip|tar\.gz|tgz|exe|deb|rpm))($|\?)/i);
-  return match?.[1] ?? fallback;
 }
 
 function findReleaseAsset(
@@ -171,120 +163,6 @@ function HeroStripeCard({ releaseUrl }: { releaseUrl: string }) {
   );
 }
 
-type InstallCardVariant = 'binary' | 'container' | 'compose' | 'cluster' | 'workstation';
-
-function InstallCardVisual({ variant }: { variant: InstallCardVariant }) {
-  if (variant === 'binary') {
-    return (
-      <div className="border-b border-border bg-background/50 p-4">
-        <div className="grid gap-px bg-border sm:grid-cols-4">
-          {['MUSL', 'GNU', 'ARM64', 'x86_64'].map((item) => (
-            <span key={item} className="bg-card px-3 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (variant === 'container') {
-    return (
-      <div className="grid border-b border-border bg-background/50 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:grid-cols-3">
-        <span className="border-b border-border px-4 py-4 sm:border-b-0 sm:border-r">9000 S3</span>
-        <span className="border-b border-border px-4 py-4 sm:border-b-0 sm:border-r">9001 UI</span>
-        <span className="px-4 py-4">Volume /data</span>
-      </div>
-    );
-  }
-
-  if (variant === 'compose') {
-    return (
-      <div className="relative h-28 overflow-hidden border-b border-border bg-background/50 p-4">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-40 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:28px_28px]"
-        />
-        <div className="relative flex h-full items-center gap-3">
-          {['compose.yml', 'volume', 'ports'].map((item, index) => (
-            <span
-              key={item}
-              className="grid h-14 flex-1 place-items-center border border-border bg-card font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
-              style={{ transform: `translateY(${index === 1 ? -8 : index === 2 ? 8 : 0}px)` }}
-            >
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (variant === 'cluster') {
-    return (
-      <div className="relative h-28 overflow-hidden border-b border-border bg-background/50 p-4">
-        <span className="absolute left-10 right-10 top-1/2 h-px bg-border" />
-        <div className="relative flex h-full items-center justify-between">
-          {[1, 2, 3].map((node) => (
-            <span key={node} className="grid size-14 place-items-center border border-border bg-card font-mono text-[10px] font-semibold text-muted-foreground">
-              pod.{node}
-            </span>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="border-b border-border bg-background/50 p-4">
-      <div className="flex flex-wrap gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-        {['macOS', 'Windows', 'Apple Silicon', 'Intel'].map((item) => (
-          <span key={item} className="border border-border bg-card px-3 py-2">
-            {item}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function InstallCard({
-  icon: Icon,
-  label,
-  title,
-  description,
-  variant,
-  children,
-}: {
-  icon: ComponentType<{ className?: string }>;
-  label: string;
-  title: string;
-  description: string;
-  variant: InstallCardVariant;
-  children: ReactNode;
-}) {
-  return (
-    <article className="motion-card relative flex min-w-0 flex-col overflow-hidden border border-border bg-card">
-      <div className="relative flex items-start gap-4 overflow-hidden border-b border-border p-5">
-        <span
-          aria-hidden="true"
-          className="absolute inset-y-0 right-0 hidden w-40 opacity-45 [background-image:repeating-linear-gradient(135deg,transparent_0_14px,var(--border)_14px_15px,transparent_15px_28px)] sm:block"
-        />
-        <span className="motion-icon-tile relative flex size-12 shrink-0 items-center justify-center bg-brand text-brand-foreground">
-          <Icon className="size-5" />
-        </span>
-        <div className="relative">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">{label}</p>
-          <h3 className="mt-3 text-2xl font-semibold leading-tight text-foreground">{title}</h3>
-          <p className="mt-3 text-sm leading-7 text-muted-foreground">{description}</p>
-        </div>
-      </div>
-      <InstallCardVisual variant={variant} />
-      <div className="flex min-w-0 flex-1 flex-col gap-5 p-5">{children}</div>
-    </article>
-  );
-}
-
 function ArtifactButton({
   href,
   label,
@@ -322,147 +200,28 @@ function PlatformBadge({
   );
 }
 
-function LinuxBinaryInstall({ release }: { release: GitHubRelease | null }) {
+type ServerInstallPath = {
+  id: string;
+  label: string;
+  title: string;
+  summary: string;
+  bestFor: string;
+  Icon: ComponentType<{ className?: string }>;
+  commandTitle: string;
+  command: string[];
+  chips: string[];
+  actions?: {
+    href: string;
+    label: string;
+    icon: ReactNode;
+  }[];
+};
+
+function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
   const x86Musl = findReleaseAsset(release, [/rustfs-linux-x86_64-musl.*\.zip/i], 'rustfs-linux-x86_64-musl-latest.zip');
   const x86Gnu = findReleaseAsset(release, [/rustfs-linux-x86_64-gnu.*\.zip/i], 'rustfs-linux-x86_64-gnu-latest.zip');
   const armMusl = findReleaseAsset(release, [/rustfs-linux-aarch64-musl.*\.zip/i], 'rustfs-linux-aarch64-musl-latest.zip');
   const armGnu = findReleaseAsset(release, [/rustfs-linux-aarch64-gnu.*\.zip/i], 'rustfs-linux-aarch64-gnu-latest.zip');
-
-  return (
-    <InstallCard
-      icon={BinaryIcon}
-      label="Recommended for servers"
-      title="Linux binary"
-      description="Use this path when you want a small, direct RustFS server binary and a system service under your control."
-      variant="binary"
-    >
-      <CodeBlock
-        title="Quick local validation"
-        code={[
-          'curl -O https://rustfs.com/install_rustfs.sh && bash install_rustfs.sh',
-          'mkdir -p ~/rustfs-data',
-          'rustfs ~/rustfs-data',
-        ]}
-      />
-
-      <div className="grid gap-3 sm:grid-cols-2">
-        <ArtifactButton
-          href={x86Musl.url}
-          label="x86_64 MUSL"
-          icon={<LinuxIcon className="size-4" />}
-        />
-        <ArtifactButton
-          href={x86Gnu.url}
-          label="x86_64 GNU"
-          icon={<LinuxIcon className="size-4" />}
-        />
-        <ArtifactButton
-          href={armMusl.url}
-          label="ARM64 MUSL"
-          icon={<LinuxIcon className="size-4" />}
-        />
-        <ArtifactButton
-          href={armGnu.url}
-          label="ARM64 GNU"
-          icon={<LinuxIcon className="size-4" />}
-        />
-      </div>
-
-      <CodeBlock
-        title="Manual install"
-        code={[
-          `curl -L -O ${x86Musl.url}`,
-          `unzip ${x86Musl.filename}`,
-          'chmod +x rustfs',
-          'sudo install -m 755 rustfs /usr/local/bin/rustfs',
-          'rustfs --version',
-        ]}
-      />
-
-      <p className="text-xs leading-6 text-muted-foreground">
-        Pick GNU for glibc-based systems and MUSL for a more portable static binary. ARM64 follows the same flow with <code className="text-foreground">{armMusl.filename}</code>.
-      </p>
-    </InstallCard>
-  );
-}
-
-function DockerInstall() {
-  return (
-    <InstallCard
-      icon={DockerIcon}
-      label="Container path"
-      title="Docker single node"
-      description="Best for quick evaluation, local development, and smoke testing S3-compatible clients."
-      variant="container"
-    >
-      <CodeBlock
-        title="Run a persistent container"
-        code={[
-          'docker volume create rustfs-data',
-          'docker run -d --name rustfs -p 9000:9000 -p 9001:9001 -v rustfs-data:/data rustfs/rustfs:latest /data',
-          'docker logs -f rustfs',
-        ]}
-      />
-      <div className="grid border border-border bg-background text-xs sm:grid-cols-3">
-        <span className="border-b border-border px-3 py-3 font-semibold sm:border-b-0 sm:border-r">9000 S3 API</span>
-        <span className="border-b border-border px-3 py-3 font-semibold sm:border-b-0 sm:border-r">9001 Console</span>
-        <span className="px-3 py-3 font-semibold">/data Volume</span>
-      </div>
-    </InstallCard>
-  );
-}
-
-function ComposeInstall() {
-  return (
-    <InstallCard
-      icon={LayersIcon}
-      label="Repeatable lab"
-      title="Docker Compose"
-      description="Keep a repeatable local stack in source control before moving the same storage layout to production nodes."
-      variant="compose"
-    >
-      <CodeBlock
-        title="Create compose stack"
-        code={[
-          'mkdir rustfs-compose && cd rustfs-compose',
-          'curl -O https://rustfs.com/docker-compose.yml',
-          'docker compose up -d',
-        ]}
-      />
-      <p className="text-xs leading-6 text-muted-foreground">
-        Use Compose when you need stable ports, named volumes, and a setup teammates can reproduce without reading long docs.
-      </p>
-    </InstallCard>
-  );
-}
-
-function KubernetesInstall() {
-  return (
-    <InstallCard
-      icon={CloudIcon}
-      label="Cluster path"
-      title="Kubernetes and Helm"
-      description="Use Helm for cloud-native deployment, GitOps review, and repeatable configuration across environments."
-      variant="cluster"
-    >
-      <CodeBlock
-        title="Install with Helm"
-        code={[
-          'helm repo add rustfs https://charts.rustfs.com',
-          'helm repo update',
-          'helm install rustfs rustfs/rustfs --namespace rustfs --create-namespace',
-        ]}
-      />
-      <div className="grid border border-border bg-background text-xs sm:grid-cols-3">
-        <span className="border-b border-border px-3 py-3 font-semibold sm:border-b-0 sm:border-r">StatefulSet</span>
-        <span className="border-b border-border px-3 py-3 font-semibold sm:border-b-0 sm:border-r">PVC backed</span>
-        <span className="px-3 py-3 font-semibold">Ingress ready</span>
-      </div>
-    </InstallCard>
-  );
-}
-
-function WorkstationInstall({ release }: { release: GitHubRelease | null }) {
   const macArmUrl = release
     ? getDownloadUrlForPlatform(release, 'macos', 'aarch64')
     : null;
@@ -473,57 +232,181 @@ function WorkstationInstall({ release }: { release: GitHubRelease | null }) {
     ? getDownloadUrlForPlatform(release, 'windows', 'x86_64')
     : null;
   const fallbackUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
+  const paths: ServerInstallPath[] = [
+    {
+      id: 'linux',
+      label: 'Linux binary',
+      title: 'Install directly on a server',
+      summary: 'Best when RustFS should run as a small native service with explicit control over disks and systemd.',
+      bestFor: 'Production hosts, bare metal, VMs',
+      Icon: BinaryIcon,
+      commandTitle: 'Fast validation',
+      command: [
+        'curl -O https://rustfs.com/install_rustfs.sh && bash install_rustfs.sh',
+        'mkdir -p ~/rustfs-data',
+        'rustfs ~/rustfs-data',
+      ],
+      chips: ['MUSL / GNU', 'x86_64 / ARM64', 'system service'],
+      actions: [
+        { href: x86Musl.url, label: 'x86_64 MUSL', icon: <LinuxIcon className="size-4" /> },
+        { href: x86Gnu.url, label: 'x86_64 GNU', icon: <LinuxIcon className="size-4" /> },
+        { href: armMusl.url, label: 'ARM64 MUSL', icon: <LinuxIcon className="size-4" /> },
+        { href: armGnu.url, label: 'ARM64 GNU', icon: <LinuxIcon className="size-4" /> },
+      ],
+    },
+    {
+      id: 'docker',
+      label: 'Docker',
+      title: 'Run a persistent container',
+      summary: 'Use Docker for local validation, S3 client testing, and a clean disposable runtime.',
+      bestFor: 'Local dev, demos, smoke tests',
+      Icon: DockerIcon,
+      commandTitle: 'Single-node container',
+      command: [
+        'docker volume create rustfs-data',
+        'docker run -d --name rustfs -p 9000:9000 -p 9001:9001 -v rustfs-data:/data rustfs/rustfs:latest /data',
+        'docker logs -f rustfs',
+      ],
+      chips: ['9000 S3 API', '9001 Console', '/data volume'],
+    },
+    {
+      id: 'compose',
+      label: 'Compose',
+      title: 'Keep a repeatable lab stack',
+      summary: 'Use Compose when the setup should live in source control and be reproduced by teammates.',
+      bestFor: 'Team labs, reproducible local stacks',
+      Icon: LayersIcon,
+      commandTitle: 'Compose stack',
+      command: [
+        'mkdir rustfs-compose && cd rustfs-compose',
+        'curl -O https://rustfs.com/docker-compose.yml',
+        'docker compose up -d',
+      ],
+      chips: ['compose.yml', 'named volume', 'fixed ports'],
+    },
+    {
+      id: 'kubernetes',
+      label: 'Kubernetes',
+      title: 'Install with Helm',
+      summary: 'Use Helm for cloud-native deployment, GitOps review, and repeatable cluster configuration.',
+      bestFor: 'Kubernetes, GitOps, cluster rollout',
+      Icon: CloudIcon,
+      commandTitle: 'Helm install',
+      command: [
+        'helm repo add rustfs https://charts.rustfs.com',
+        'helm repo update',
+        'helm install rustfs rustfs/rustfs --namespace rustfs --create-namespace',
+      ],
+      chips: ['StatefulSet', 'PVC backed', 'Ingress ready'],
+    },
+    {
+      id: 'workstation',
+      label: 'macOS / Windows',
+      title: 'Validate from a workstation',
+      summary: 'Use workstation binaries for client testing, demos, and compatibility checks outside Linux servers.',
+      bestFor: 'Client validation, isolated testing',
+      Icon: HardDriveIcon,
+      commandTitle: 'macOS Homebrew',
+      command: [
+        'brew tap rustfs/homebrew-tap',
+        'brew install rustfs',
+        'rustfs --version',
+      ],
+      chips: ['macOS', 'Windows', 'Apple Silicon'],
+      actions: [
+        { href: macArmUrl ?? fallbackUrl, label: 'Apple Silicon', icon: <AppleIcon className="size-4" /> },
+        { href: macX86Url ?? fallbackUrl, label: 'macOS Intel', icon: <AppleIcon className="size-4" /> },
+        { href: windowsUrl ?? fallbackUrl, label: 'Windows x86_64', icon: <WindowsIcon className="size-4" /> },
+      ],
+    },
+  ];
+  const [activePathId, setActivePathId] = useState(paths[0].id);
+  const activePath = paths.find((path) => path.id === activePathId) ?? paths[0];
+  const ActiveIcon = activePath.Icon;
 
   return (
-    <InstallCard
-      icon={HardDriveIcon}
-      label="Workstation binaries"
-      title="macOS and Windows"
-      description="Use workstation binaries for client validation, demos, and isolated compatibility testing outside Linux servers."
-      variant="workstation"
-    >
-      <div className="flex flex-wrap gap-2">
-        <PlatformBadge icon={<AppleIcon className="size-4" />} label="macOS" />
-        <PlatformBadge icon={<WindowsIcon className="size-4" />} label="Windows" />
+    <div className="motion-card overflow-hidden border border-border bg-card">
+      <div className="grid lg:grid-cols-[20rem_1fr]">
+        <div className="border-b border-border bg-background/40 lg:border-b-0 lg:border-r">
+          <div className="border-b border-border p-5">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-brand">Choose one path</p>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">Pick the environment first. Only the matching command stays visible.</p>
+          </div>
+          <div className="grid" role="tablist" aria-label="Server install paths">
+            {paths.map((path) => {
+              const Icon = path.Icon;
+              const isActive = path.id === activePath.id;
+
+              return (
+                <button
+                  key={path.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`install-path-${path.id}`}
+                  onClick={() => setActivePathId(path.id)}
+                  className={cn(
+                    "group grid grid-cols-[2.5rem_1fr] gap-3 border-b border-border px-5 py-4 text-left transition-colors last:border-b-0 hover:bg-muted/35",
+                    isActive && "bg-brand text-brand-foreground hover:bg-brand"
+                  )}
+                >
+                  <span className={cn("motion-icon-tile flex size-10 items-center justify-center bg-background text-brand", isActive && "bg-brand-foreground/15 text-brand-foreground")}>
+                    <Icon className="size-5" />
+                  </span>
+                  <span>
+                    <span className={cn("block text-sm font-semibold text-foreground", isActive && "text-brand-foreground")}>{path.label}</span>
+                    <span className={cn("mt-1 block text-xs leading-5 text-muted-foreground", isActive && "text-brand-foreground/75")}>{path.bestFor}</span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div id={`install-path-${activePath.id}`} role="tabpanel" className="min-w-0">
+          <div className="grid gap-6 border-b border-border p-5 sm:p-6 lg:grid-cols-[1fr_auto] lg:items-start">
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="motion-icon-tile flex size-11 items-center justify-center bg-brand text-brand-foreground">
+                  <ActiveIcon className="size-5" />
+                </span>
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">{activePath.label}</p>
+              </div>
+              <h3 className="mt-5 text-3xl font-semibold leading-tight text-foreground">{activePath.title}</h3>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">{activePath.summary}</p>
+            </div>
+            <div className="flex flex-wrap gap-2 lg:max-w-72 lg:justify-end">
+              {activePath.chips.map((chip) => (
+                <span key={chip} className="border border-border bg-background px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  {chip}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-5 p-5 sm:p-6">
+            <CodeBlock
+              title={activePath.commandTitle}
+              code={activePath.command}
+              className="border-brand/60 shadow-[0_0_0_1px_rgba(39,112,246,0.18),0_18px_60px_rgba(39,112,246,0.12)]"
+            />
+
+            {activePath.actions ? (
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                {activePath.actions.map((action) => (
+                  <ArtifactButton
+                    key={action.label}
+                    href={action.href}
+                    label={action.label}
+                    icon={action.icon}
+                  />
+                ))}
+              </div>
+            ) : null}
+          </div>
+        </div>
       </div>
-
-      <CodeBlock
-        title="macOS Homebrew"
-        code={[
-          'brew tap rustfs/homebrew-tap',
-          'brew install rustfs',
-          'rustfs --version',
-        ]}
-      />
-
-      <div className="grid gap-3 md:grid-cols-3">
-        <ArtifactButton
-          href={macArmUrl ?? fallbackUrl}
-          label="Apple Silicon"
-          icon={<AppleIcon className="size-4" />}
-        />
-        <ArtifactButton
-          href={macX86Url ?? fallbackUrl}
-          label="macOS Intel"
-          icon={<AppleIcon className="size-4" />}
-        />
-        <ArtifactButton
-          href={windowsUrl ?? fallbackUrl}
-          label="Windows x86_64"
-          icon={<WindowsIcon className="size-4" />}
-        />
-      </div>
-
-      <CodeBlock
-        title="macOS manual install"
-        code={[
-          `curl -L -O ${macArmUrl ?? fallbackUrl}`,
-          `unzip ${getAssetName(macArmUrl, 'rustfs-macos-aarch64.zip')}`,
-          'chmod +x rustfs',
-          'sudo install -m 755 rustfs /usr/local/bin/rustfs',
-        ]}
-      />
-    </InstallCard>
+    </div>
   );
 }
 
@@ -605,19 +488,10 @@ export default function DownloadPageClient({ release, cliRelease }: DownloadPage
           <SectionHeader
             eyebrow="Server install paths"
             title="Start small, then keep the same operating model."
-            description="Local binary validation, Docker, Compose, and Helm are separate decisions. The page keeps them separate so users can copy the right command without reading around it."
+            description="Choose the environment first, then copy the exact command for that path."
           />
 
-          <div className="grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
-            <LinuxBinaryInstall release={release} />
-            <DockerInstall />
-            <ComposeInstall />
-            <KubernetesInstall />
-          </div>
-
-          <div className="mt-6">
-            <WorkstationInstall release={release} />
-          </div>
+          <ServerInstallTabs release={release} />
 
           <div className="mt-8 flex flex-col gap-3 border border-border bg-muted/25 p-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
