@@ -448,34 +448,34 @@ export default function ErasureCodeCalculator() {
           <div>
             <div className="mb-8 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
               <span className="h-1 w-24 bg-brand" />
-              <span>Erasure coding planner</span>
+              <span>Planning estimate / public beta</span>
             </div>
             <h1 className="max-w-4xl font-display text-5xl font-semibold tracking-tight text-foreground sm:text-7xl">
-              Size a RustFS erasure set before you deploy.
+              Explore a starting point for an erasure set.
             </h1>
           </div>
           <p className="max-w-xl text-sm leading-7 text-muted-foreground">
-            Model raw capacity, usable capacity, stripe layout, and failure tolerance from the
-            hardware shape you plan to run.
+            Model raw capacity, usable capacity, stripe layout, and theoretical failure tolerance.
+            The estimate does not cover network behavior, rebuild time, mixed drives, upgrades, or rack-level failure.
           </p>
         </div>
 
-        <div className="mt-10 grid border border-border bg-card sm:grid-cols-3">
-          <div className="border-b border-border p-5 sm:border-b-0 sm:border-r">
+        <div className="mt-12 grid border-y border-border sm:grid-cols-3">
+          <div className="border-b border-border py-6 sm:border-b-0 sm:border-r sm:px-5 sm:first:pl-0">
             <ServerIcon className="size-5 text-brand" />
             <div className="mt-5 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
               Servers
             </div>
             <div className="mt-2 font-mono text-3xl font-semibold text-foreground">{servers}</div>
           </div>
-          <div className="border-b border-border p-5 sm:border-b-0 sm:border-r">
+          <div className="border-b border-border py-6 sm:border-b-0 sm:border-r sm:px-5">
             <HardDriveIcon className="size-5 text-brand" />
             <div className="mt-5 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
               Total drives
             </div>
             <div className="mt-2 font-mono text-3xl font-semibold text-foreground">{totalDrives}</div>
           </div>
-          <div className="p-5">
+          <div className="py-6 sm:pl-5">
             <DatabaseIcon className="size-5 text-brand" />
             <div className="mt-5 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
               Raw capacity
@@ -486,9 +486,9 @@ export default function ErasureCodeCalculator() {
           </div>
         </div>
 
-        <div className="mt-6 grid items-stretch gap-6 lg:grid-cols-[minmax(0,0.58fr)_0.42fr]">
-          <section className="flex flex-col border border-border bg-card">
-            <div className="border-b border-border px-5 py-4">
+        <div className="mt-10 grid items-start gap-12 lg:grid-cols-[minmax(0,0.6fr)_0.4fr]">
+          <section className="flex flex-col border-t border-border">
+            <div className="border-b border-border py-6">
               <h2 className="text-lg font-semibold text-foreground">Cluster input</h2>
               <p className="mt-1 text-sm text-muted-foreground">
                 Hardware first, then choose the erasure layout.
@@ -501,8 +501,8 @@ export default function ErasureCodeCalculator() {
               </div>
             ) : null}
 
-            <div className="grid gap-px bg-border md:grid-cols-3">
-              <label className="block bg-card p-5">
+            <div className="grid gap-5 border-b border-border py-6 md:grid-cols-3">
+              <label className="block">
                 <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                   Servers
                 </span>
@@ -524,7 +524,7 @@ export default function ErasureCodeCalculator() {
                 />
               </label>
 
-              <label className="block bg-card p-5">
+              <label className="block">
                 <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                   Drives / server
                 </span>
@@ -551,7 +551,7 @@ export default function ErasureCodeCalculator() {
                 />
               </label>
 
-              <label className="block bg-card p-5">
+              <label className="block">
                 <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                   Drive TiB
                 </span>
@@ -576,8 +576,8 @@ export default function ErasureCodeCalculator() {
               </label>
             </div>
 
-            <div className="grid gap-px border-t border-border bg-border md:grid-cols-2">
-              <label className="block bg-card p-5">
+            <div className="grid gap-5 border-b border-border py-6 md:grid-cols-2">
+              <label className="block">
                 <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                   Stripe size (K + M)
                 </span>
@@ -605,7 +605,7 @@ export default function ErasureCodeCalculator() {
                 </p>
               </label>
 
-              <label className="block bg-card p-5">
+              <label className="block">
                 <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                   Parity (M)
                 </span>
@@ -633,8 +633,8 @@ export default function ErasureCodeCalculator() {
               </label>
             </div>
 
-            <div className="grid gap-px border-t border-border bg-border sm:grid-cols-3">
-              <div className="bg-card p-4">
+            <div className="grid gap-5 border-b border-border py-5 sm:grid-cols-3">
+              <div>
                 <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                   Data shards
                 </div>
@@ -642,7 +642,7 @@ export default function ErasureCodeCalculator() {
                   {validationError ? "--" : stripeSize - parity}
                 </div>
               </div>
-              <div className="bg-card p-4">
+              <div>
                 <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                   Parity shards
                 </div>
@@ -650,7 +650,7 @@ export default function ErasureCodeCalculator() {
                   {validationError ? "--" : parity}
                 </div>
               </div>
-              <div className="bg-card p-4">
+              <div>
                 <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                   Erasure set
                 </div>
@@ -661,10 +661,10 @@ export default function ErasureCodeCalculator() {
             </div>
 
             {recommendedConfig ? (
-              <div className="flex flex-1 border-t border-border bg-muted/25 p-5 text-sm">
+              <div className="flex flex-1 border-b border-border py-6 text-sm">
                 <div className="grid w-full gap-4 sm:grid-cols-[1fr_auto] sm:items-start">
                   <div>
-                    <div className="font-medium text-foreground">Recommended layout</div>
+                    <div className="font-medium text-foreground">Suggested starting point</div>
                     <div className="mt-1 leading-6 text-muted-foreground">
                       {recommendedConfig.serversCorrected != null ? (
                         <>
@@ -675,7 +675,7 @@ export default function ErasureCodeCalculator() {
                       ) : (
                         <>
                           Stripe {recommendedConfig.stripe}, parity {recommendedConfig.parity}.
-                          Balanced for availability and efficiency.
+                          Use this as an input to workload and failure testing.
                         </>
                       )}
                     </div>
@@ -713,10 +713,10 @@ export default function ErasureCodeCalculator() {
               </div>
             ) : null}
 
-            <div className="mt-auto grid gap-px border-t border-border bg-border md:grid-cols-[1fr_0.92fr]">
-              <div className="bg-card p-5">
+            <div className="mt-auto grid gap-8 border-b border-border py-6 md:grid-cols-[1fr_0.92fr]">
+              <div>
                 <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                  Production check
+                  Validation checklist
                 </div>
                 <div className="mt-4 grid gap-3 text-sm">
                   <div className="grid grid-cols-[1fr_auto] gap-4 border-b border-border pb-3">
@@ -733,7 +733,7 @@ export default function ErasureCodeCalculator() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col bg-muted/25 p-5">
+              <div className="flex flex-col border-l border-border pl-6">
                 <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
                   <LifeBuoyIcon className="size-4 text-brand" />
                   Need a sizing review?
@@ -743,7 +743,7 @@ export default function ErasureCodeCalculator() {
                   with the RustFS team before ordering hardware.
                 </p>
                 <Button asChild variant="outline" size="sm" className="mt-auto w-fit">
-                  <a href="/contact">
+                  <a href="/contact-us">
                     Contact us
                     <ArrowUpRightIcon className="size-4" />
                   </a>
@@ -752,15 +752,15 @@ export default function ErasureCodeCalculator() {
             </div>
           </section>
 
-          <section className="border border-border bg-card">
-            <div className="border-b border-border px-5 py-4">
+          <section className="border-t border-border">
+            <div className="border-b border-border py-6">
               <h2 className="text-lg font-semibold text-foreground">Capacity output</h2>
               <p className="mt-1 text-sm text-muted-foreground">
                 Usable data after parity reservation.
               </p>
             </div>
 
-            <div className="p-5">
+            <div className="py-6">
               <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Usable capacity
               </div>
@@ -789,8 +789,8 @@ export default function ErasureCodeCalculator() {
                 </div>
               </div>
 
-              <div className="mt-5 grid gap-px border border-border bg-border sm:grid-cols-2">
-                <div className="bg-card p-4">
+              <div className="mt-6 grid gap-6 border-y border-border py-5 sm:grid-cols-2">
+                <div>
                   <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                     Raw
                   </div>
@@ -798,7 +798,7 @@ export default function ErasureCodeCalculator() {
                     {validationError ? "--" : niceBytes(results.rawBytes)}
                   </div>
                 </div>
-                <div className="bg-card p-4">
+                <div>
                   <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                     Efficiency
                   </div>
@@ -808,8 +808,8 @@ export default function ErasureCodeCalculator() {
                 </div>
               </div>
 
-              <div className="mt-5 grid gap-px border border-border bg-border">
-                <div className="bg-card p-4">
+              <div className="mt-6 divide-y divide-border border-y border-border">
+                <div className="py-5">
                   <div className="flex items-center gap-2 font-medium text-foreground">
                     <HardDriveIcon className="size-4 text-brand" />
                     Drive failure tolerance
@@ -826,7 +826,7 @@ export default function ErasureCodeCalculator() {
                   </div>
                 </div>
 
-                <div className="bg-card p-4">
+                <div className="py-5">
                   <div className="flex items-center gap-2 font-medium text-foreground">
                     <ServerIcon className="size-4 text-brand" />
                     Server failure tolerance
@@ -845,17 +845,17 @@ export default function ErasureCodeCalculator() {
               </div>
 
               <p className="mt-5 text-xs leading-6 text-muted-foreground">
-                Results are rounded down to quorum-safe limits and should be treated as planning
-                estimates before production sizing.
+                Results are planning estimates for the current public beta. They do not model network partitions,
+                rebuild duration, mixed-drive behavior, upgrade paths, or rack-level failure. Validate with representative hardware before procurement or production sizing.
               </p>
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+              <div className="mt-6 flex flex-wrap gap-3">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={handleExportCsv}
                   disabled={!!validationError}
-                  className="w-full"
+                  className="min-w-28"
                 >
                   <DownloadIcon className="size-4" />
                   CSV
@@ -865,7 +865,7 @@ export default function ErasureCodeCalculator() {
                   variant="outline"
                   onClick={handleExportSvg}
                   disabled={!!validationError || exportBusy}
-                  className="w-full"
+                  className="min-w-28"
                 >
                   <DownloadIcon className="size-4" />
                   {exportBusy ? "Exporting" : "SVG"}
@@ -874,7 +874,7 @@ export default function ErasureCodeCalculator() {
                   type="button"
                   variant="outline"
                   onClick={handleCopyShareLink}
-                  className="w-full"
+                  className="min-w-32"
                 >
                   {shareCopied ? (
                     <CheckIcon className="size-4" />

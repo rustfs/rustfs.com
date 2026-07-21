@@ -8,39 +8,39 @@ import HomeSectionHeader from "./home-section-header";
 
 const stories = [
   {
-    title: "NVIDIA Inception Program",
-    token: "rdma+dpu",
-    label: "AI infrastructure",
-    description:
-      "RustFS has joined the NVIDIA Inception Program. We are accelerating AI data center storage with native RDMA support and future DPU offload for Erasure Coding and encryption.",
-    href: "/blog/big-news-rustfs-joins-the-nvidia-inception-program",
-    linkText: "Read the story",
-  },
-  {
-    title: "Drop-in Replacement for MinIO",
-    token: "minio swap",
+    title: "A practical MinIO evaluation path",
+    token: "minio eval",
     label: "Migration path",
     description:
-      "Migrate instantly without data moving headaches. RustFS supports seamless, in-place migration from MinIO by swapping the binary or container image.",
+      "Reuse familiar S3 clients and validate migration on a backup or copy before planning a controlled production cutover with a rollback path.",
     href: "/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs",
     linkText: "Read the migration guide",
+  },
+  {
+    title: "NVIDIA Inception Program",
+    token: "rdma+dpu",
+    label: "AI roadmap",
+    description:
+      "RustFS has joined the NVIDIA Inception Program. RDMA and DPU offload remain roadmap directions, not current production guarantees.",
+    href: "/blog/big-news-rustfs-joins-the-nvidia-inception-program",
+    linkText: "Read the roadmap story",
   },
 ];
 
 export default function HomeMultiClouds() {
   return (
-    <section className="border-t border-border bg-background py-20 md:py-24">
+    <section className="border-t border-border bg-background py-20 md:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           sectionNumber="05"
           eyebrow="Field posts"
-          title="Built for the next generation of object storage"
-          description="RustFS combines Rust-native engineering, Apache 2.0 licensing, and S3 compatibility for AI infrastructure and direct MinIO migrations."
+          title="Two paths into the product"
+          description="Start with the immediate task many teams have: evaluating an actively maintained Apache 2.0 path from an existing S3 or MinIO estate. Keep AI acceleration work in view as roadmap, not baseline."
         />
-        <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-[1.15fr_0.85fr]">
           <Link
             href={stories[0].href}
-            className="motion-card group block overflow-hidden border border-border bg-card transition-colors hover:bg-muted/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            className="motion-card group block overflow-hidden bg-card/45 transition-colors hover:bg-muted/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
             aria-label={stories[0].linkText}
           >
             <div className="relative min-h-64 overflow-hidden border-b border-border bg-background">
@@ -51,19 +51,19 @@ export default function HomeMultiClouds() {
               <div className="relative flex min-h-64 flex-col p-5 sm:p-6">
                 <div className="flex items-center justify-between gap-4">
                   <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                    FIG.NVDA
+                    FIG.MIGRATION
                   </span>
-                  <code className="border border-border bg-card/80 px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                  <code className="text-[10px] font-semibold uppercase tracking-[0.16em] text-brand">
                     {stories[0].token}
                   </code>
                 </div>
-                <span className="mx-auto my-8 flex h-20 w-full max-w-96 items-center border border-border bg-card/90 px-6 text-foreground sm:h-24 sm:px-8">
-                  <NvidiaLogo className="h-10 w-full sm:h-12" aria-label="NVIDIA" />
+                <span className="mx-auto my-8 flex h-20 w-full max-w-96 items-center px-6 text-foreground sm:h-24 sm:px-8">
+                  <MinioIcon className="h-10 w-full sm:h-12" aria-label="MinIO" />
                 </span>
-                <div className="mx-auto grid w-full max-w-sm grid-cols-3 gap-px border border-border bg-border text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                  <span className="bg-card/90 px-3 py-2.5">RDMA</span>
-                  <span className="bg-card/90 px-3 py-2.5">DPU</span>
-                  <span className="bg-card/90 px-3 py-2.5">AI data</span>
+                <div className="mx-auto grid w-full max-w-sm grid-cols-3 gap-px border-y border-border bg-border/70 text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  <span className="bg-background/70 px-3 py-2.5">Backup</span>
+                  <span className="bg-background/70 px-3 py-2.5">Validate</span>
+                  <span className="bg-background/70 px-3 py-2.5">Rollback</span>
                 </div>
               </div>
             </div>
@@ -91,10 +91,10 @@ export default function HomeMultiClouds() {
             </div>
           </Link>
 
-          <div className="grid gap-4">
+          <div className="grid gap-px bg-border">
             <Link
               href={stories[1].href}
-              className="motion-card group relative block overflow-hidden border border-border bg-card transition-colors hover:bg-muted/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              className="motion-card group relative block overflow-hidden bg-card/45 transition-colors hover:bg-muted/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               aria-label={stories[1].linkText}
             >
               <span
@@ -103,15 +103,15 @@ export default function HomeMultiClouds() {
               />
               <div className="relative p-5 sm:p-6">
                 <div className="flex items-start justify-between gap-5">
-                  <span className="flex h-14 w-44 items-center border border-border bg-background px-4">
-                    <MinioIcon className="h-7 w-full" aria-label="MinIO" />
+                  <span className="flex h-14 w-44 items-center px-1">
+                    <NvidiaLogo className="h-7 w-full" aria-label="NVIDIA" />
                   </span>
                   <span className="motion-arrow grid size-10 shrink-0 place-items-center border border-border bg-background text-brand transition-colors group-hover:bg-brand group-hover:text-brand-foreground">
                     <ArrowUpRightIcon className="size-4" />
                   </span>
                 </div>
 
-                <code className="mt-8 inline-flex border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                <code className="mt-8 inline-flex text-[10px] font-semibold uppercase tracking-[0.16em] text-brand">
                   {stories[1].token}
                 </code>
                 <h3 className="mt-4 max-w-md text-2xl font-semibold leading-tight text-foreground">
@@ -122,7 +122,7 @@ export default function HomeMultiClouds() {
                 </p>
               </div>
               <div className="relative grid gap-px bg-border text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:grid-cols-3">
-                {["Binary swap", "Container", "S3 clients"].map((item) => (
+                {["Roadmap", "RDMA", "DPU"].map((item) => (
                   <span key={item} className="bg-background/65 px-4 py-3">
                     {item}
                   </span>
@@ -130,22 +130,22 @@ export default function HomeMultiClouds() {
               </div>
             </Link>
 
-            <div className="border border-border bg-card">
+            <div className="bg-card/35">
               <p className="border-b border-border px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                Migration shape
+                Roadmap status
               </p>
               <div className="divide-y divide-border text-sm text-foreground">
                 <div className="flex justify-between gap-4 px-5 py-4">
-                  <span>Binary replacement</span>
-                  <code className="text-muted-foreground">swap</code>
+                  <span>AI data path</span>
+                  <code className="text-muted-foreground">explore</code>
                 </div>
                 <div className="flex justify-between gap-4 px-5 py-4">
-                  <span>Container image</span>
-                  <code className="text-muted-foreground">drop-in</code>
+                  <span>RDMA</span>
+                  <code className="text-muted-foreground">roadmap</code>
                 </div>
                 <div className="flex justify-between gap-4 px-5 py-4">
-                  <span>Existing clients</span>
-                  <code className="text-muted-foreground">S3</code>
+                  <span>DPU offload</span>
+                  <code className="text-muted-foreground">roadmap</code>
                 </div>
               </div>
             </div>

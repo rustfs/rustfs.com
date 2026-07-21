@@ -24,27 +24,27 @@ const deployPaths = [
 export default function GetStartedToday() {
   return (
     <section
-      className="relative overflow-hidden border-t border-border bg-background py-20 text-foreground sm:py-24"
+      className="relative overflow-hidden border-t border-border bg-background py-20 text-foreground sm:py-24 lg:py-28"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           sectionNumber="06"
           eyebrow="Deploy surface"
-          title="Start building with RustFS"
-          description="Download RustFS for local testing, or contact us to plan production deployment, migration, and enterprise support."
+          title="Start with an evaluation you can explain"
+          description="Download RustFS for a local or lab environment, then bring measured compatibility and topology findings into a production review."
         />
 
         <div className="motion-card group relative overflow-hidden border border-brand bg-brand text-brand-foreground">
           <span
             aria-hidden="true"
-            className="absolute inset-0 opacity-[0.16] [background-image:repeating-linear-gradient(135deg,transparent_0_18px,var(--brand-foreground)_18px_19px,transparent_19px_36px)]"
+            className="absolute inset-0 opacity-[0.1] [background-image:repeating-linear-gradient(135deg,transparent_0_18px,var(--brand-foreground)_18px_19px,transparent_19px_36px)]"
           />
 
           <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-center">
             <div className="p-6 sm:p-8 lg:p-10">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="border border-brand-foreground/25 bg-brand-foreground/10 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-foreground/80">
-                  Production ready
+                  Public beta
                 </span>
                 <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-foreground/55">
                   open source / s3 api
@@ -52,10 +52,10 @@ export default function GetStartedToday() {
               </div>
 
               <h2 className="mt-5 max-w-3xl text-3xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
-                Deploy RustFS locally. Keep the same path to production.
+                Evaluate locally. Plan production from evidence.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-brand-foreground/75">
-                Start with one machine, then carry the same S3-compatible storage layer into migration and multi-node operations.
+                Start with one machine, validate the API surface your workload uses, and expand only after reviewing the current distributed-mode status.
               </p>
             </div>
 

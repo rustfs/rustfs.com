@@ -2,8 +2,8 @@ import FeaturePage, { type FeaturePageSection } from "@/components/business/feat
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "RustFS Cluster Operations & OTEL Observability | Enterprise Management",
-  description: "Simplify RustFS management with an intuitive console, rich rc CLI, and full-stack OTEL observability. Deploy Prometheus, Grafana, and Loki for real-time cluster insights.",
+  title: "RustFS Operations, rc CLI & OpenTelemetry",
+  description: "Evaluate RustFS console, rc CLI, OpenTelemetry, and cluster insight surfaces for repeatable operator workflows.",
   keywords: [
     "RustFS",
     "cluster observability",
@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 const sections: FeaturePageSection[] = [
   {
     title: "Enterprise insights",
+    status: "Verify signals",
     description: "Operate RustFS with real-time signals and a unified administration surface.",
     items: [
       {
@@ -29,42 +30,44 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "Operational flexibility",
-        description: "Effortless deployment across operating systems and installation methods including source, binary, Docker, and Kubernetes.",
+        description: "Choose source, binary, Docker, or Kubernetes installation paths based on the environment being evaluated.",
       },
       {
         title: "Simplified administration",
-        description: "Comprehensive console and CLI controls for full-lifecycle bucket management and granular IAM security.",
+        description: "Review the console and CLI operations needed for bucket, cluster, and IAM runbooks.",
       },
     ],
   },
   {
     title: "Console operations",
+    status: "Mixed coverage",
     items: [
       {
         title: "Data management",
-        description: "Manage the full lifecycle of objects and buckets from the console.",
+        description: "Evaluate the available object and bucket operations from the console.",
       },
       {
         title: "Security management",
-        description: "Operate IAM, security audit, authentication, authorization, and data encryption from one place.",
+        description: "Review the IAM, audit, authentication, authorization, and encryption controls exposed in the current console.",
       },
       {
         title: "Cluster management",
-        description: "Expand, rebalance, and retire pools directly from the console.",
+        description: "Validate available pool expansion, rebalancing, and retirement workflows before relying on them operationally.",
       },
     ],
   },
   {
     title: "OTEL support",
+    status: "Available in beta",
     description: "Route logs, metrics, and monitoring signals through OpenTelemetry-compatible operations workflows.",
     items: [
       {
-        title: "Full-stack observability",
+        title: "OpenTelemetry signal routing",
         description: "Integrate unified logs, monitoring, and metrics under OpenTelemetry.",
       },
       {
-        title: "One-click containerized deployment",
-        description: "Spin up Prometheus, Grafana, and Loki instances quickly for operational review.",
+        title: "Containerized observability stack",
+        description: "Use Prometheus, Grafana, and Loki containers for an initial operational review.",
       },
       {
         title: "Flexible configuration",
@@ -74,6 +77,7 @@ const sections: FeaturePageSection[] = [
   },
   {
     title: "Cluster insights",
+    status: "Available in beta",
     description: "Keep node health, disk state, capacity, buckets, and object counts visible to operators.",
     items: [
       {
@@ -92,6 +96,7 @@ const sections: FeaturePageSection[] = [
   },
   {
     title: "RustFS client CLI",
+    status: "Available in beta",
     description: "Use rc for repeatable storage administration from local terminals, automation, and operational runbooks.",
     items: [
       {
@@ -114,12 +119,12 @@ export default function OperationalObservabilityPage() {
   return (
     <FeaturePage
       title="Operational & Observability"
-      description="RustFS gives operators practical control over storage operations with console workflows, OpenTelemetry support, cluster insights, and rc CLI automation."
+      description="Evaluate the console, OpenTelemetry signals, cluster insights, and rc CLI as one operator journey: observe, diagnose, act, and record a repeatable runbook."
       sections={sections}
       variant="ops"
       links={[
-        { label: "Review operations", href: "/contact-us" },
-        { label: "Read docs", href: "/docs", variant: "outline" },
+        { label: "Read operations docs", href: "/docs" },
+        { label: "Review operations", href: "/contact-us", variant: "outline" },
       ]}
     />
   );

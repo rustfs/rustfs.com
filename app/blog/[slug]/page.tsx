@@ -95,6 +95,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </span>
                 ))}
               </div>
+              <div className="mt-8 grid gap-2 border-y border-border py-4 text-xs leading-6 sm:grid-cols-[9rem_1fr]">
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
+                  Publication context
+                </p>
+                <p className="text-muted-foreground">
+                  This article reflects its publication date. RustFS is currently in public beta; verify current release notes, feature status, and compatibility before acting on historical product claims.
+                </p>
+              </div>
             </div>
 
             {shouldShowImage(post.image) ? (
@@ -110,7 +118,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </header>
 
-        <div className="border-t border-border bg-muted/15">
+        <div className="border-t border-border">
           <div
             className={[
               "mx-auto grid max-w-7xl gap-12 px-4 py-12 sm:px-6 lg:px-8",
@@ -140,7 +148,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {relatedPosts.length ? (
               <aside className="lg:sticky lg:top-8 lg:self-start">
-                <div className="border border-border bg-card">
+                <div className="border-y border-border">
                   <div className="border-b border-border px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                     Related posts
                   </div>

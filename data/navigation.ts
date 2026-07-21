@@ -11,7 +11,7 @@ export const productNavigation: NavigationItem[] = [
   {
     title: "Multiple Protocol Access",
     href: "/product/multiple-protocol-access",
-    description: "Native S3, WebDAV, Swift, FTP(s), and MCP access.",
+    description: "Primary S3 access with WebDAV, Swift, FTP(s), and MCP evaluation paths.",
     items: ["S3", "WebDAV", "Swift", "FTP(s)", "MCP"],
   },
   {
@@ -27,7 +27,7 @@ export const productNavigation: NavigationItem[] = [
     items: ["EC", "Rebalance", "Healing"],
   },
   {
-    title: "Security & Compliance",
+    title: "Security Controls",
     href: "/product/security-compliance",
     description: "Identity, OIDC, mTLS, encryption, KMS, audit, and event handling.",
     items: ["IAM", "OIDC", "mTLS", "SSE/KMS"],
@@ -42,6 +42,16 @@ export const productNavigation: NavigationItem[] = [
 
 export const resourceNavigation: NavigationItem[] = [
   {
+    title: "S3 Compatibility Overview",
+    href: "https://docs.rustfs.com/features/s3-compatibility/",
+    description: "Published S3 coverage notes and the current verification scope.",
+  },
+  {
+    title: "Release Status",
+    href: "https://github.com/rustfs/rustfs#feature--status",
+    description: "Current beta maturity and feature availability from the source repository.",
+  },
+  {
     title: "EC Calculator",
     href: "/erasure-code-calculator",
     description: "Optimal EC configurations for durability and storage efficiency.",
@@ -54,7 +64,7 @@ export const resourceNavigation: NavigationItem[] = [
   {
     title: "Blog",
     href: "/blog",
-    description: "Production best practices, technical deep dives, and expert insights.",
+    description: "Engineering updates, operator guidance, and project perspectives.",
   },
 ];
 
@@ -67,7 +77,7 @@ export const footerNavigation = [
       { title: "Data Management", href: "/product/data-management" },
       { title: "High Availability & Scale", href: "/product/high-availability-scale" },
       { title: "Operational & Observability", href: "/product/operational-observability" },
-      { title: "Security & Compliance", href: "/product/security-compliance" },
+      { title: "Security Controls", href: "/product/security-compliance" },
     ],
   },
   {
@@ -78,6 +88,8 @@ export const footerNavigation = [
       { title: "Blog", href: "/blog" },
       { title: "EC Calculator", href: "/erasure-code-calculator" },
       { title: "Documentation", href: "/docs" },
+      { title: "S3 Compatibility Overview", href: "https://docs.rustfs.com/features/s3-compatibility/" },
+      { title: "Release Status", href: "https://github.com/rustfs/rustfs#feature--status" },
     ],
   },
   {

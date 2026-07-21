@@ -15,7 +15,7 @@ interface WindowsDownloadSectionProps {
 }
 
 export default function WindowsDownloadSection({ platform, release, className }: WindowsDownloadSectionProps) {
-  const releaseUrl = release?.html_url || 'https://github.com/rustfs/rustfs/releases/latest';
+  const releaseUrl = release?.html_url || 'https://github.com/rustfs/rustfs/releases';
   const downloadUrl = release ? getDownloadUrlForPlatform(release, 'windows', 'x86_64') : null;
   const finalDownloadUrl = downloadUrl || releaseUrl;
   const filename = downloadUrl?.match(/([^/]+\.zip)$/)?.[1] || 'rustfs-windows-x86_64-latest.zip';

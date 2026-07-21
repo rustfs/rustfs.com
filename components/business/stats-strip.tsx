@@ -19,22 +19,22 @@ export default function StatsStrip({
   const items = useMemo(
     () => [
       { label: "GitHub Stars", token: "stars", value: metrics.stars },
-      { label: "Global Instances", token: "nodes", text: "1,000,000+" },
-      { label: "Repo Commits", token: "commits", value: metrics.commits },
       { label: "Docker Pulls", token: "pulls", value: dockerPulls },
+      { label: "S3 Coverage", token: "overview", text: "Published" },
+      { label: "Release Channel", token: "maturity", text: "Beta" },
     ],
     [metrics, dockerPulls],
   );
 
   return (
     <section className={cn("text-muted-foreground", className)}>
-      <div className="grid overflow-hidden border-y border-border bg-card/55 sm:grid-cols-2 lg:grid-cols-4">
+      <dl className="grid overflow-hidden border-y border-border bg-card/20 sm:grid-cols-2 lg:grid-cols-4">
         {items.map(({ label, token, value, text }, index) => (
           <div
             key={label}
-            className="grid min-h-36 content-between border-b border-border p-5 last:border-b-0 sm:[&:nth-child(n+3)]:border-b-0 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0"
+            className="grid min-h-28 content-between border-b border-border/80 p-4 last:border-b-0 sm:[&:nth-child(n+3)]:border-b-0 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0 sm:p-5"
           >
-            <div className="flex items-center justify-between gap-3">
+            <div className="order-1 flex items-center justify-between gap-3">
               <code className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                 {token}
               </code>
@@ -42,7 +42,10 @@ export default function StatsStrip({
                 / {String(index + 1).padStart(2, "0")}
               </span>
             </div>
-            <h2 className="mt-8 font-extrabold text-3xl text-foreground sm:text-4xl">
+            <dt className="order-3 mt-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              {label}
+            </dt>
+            <dd className="order-2 mt-6 text-3xl font-semibold tracking-[-0.035em] text-foreground sm:text-4xl">
               {typeof value === "number" ? (
                 <NumberTicker
                   value={value}
@@ -51,13 +54,10 @@ export default function StatsStrip({
               ) : (
                 <span>{text}</span>
               )}
-            </h2>
-            <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
-              {label}
-            </p>
+            </dd>
           </div>
         ))}
-      </div>
+      </dl>
     </section>
   );
 }

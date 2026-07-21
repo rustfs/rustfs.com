@@ -5,24 +5,24 @@ import HomeSectionHeader from "./home-section-header";
 
 const reasons = [
   {
-    title: "High-Performance",
-    token: "perf",
-    description: "Built with Rust. Zero-overhead. Hardware-saturated.",
+    title: "Rust-native core",
+    token: "runtime",
+    description: "A memory-safe storage core designed for teams that want direct control over infrastructure and code.",
   },
   {
-    title: "Security & Compliance",
+    title: "Security reviewability",
     token: "trust",
-    description: "Self-hosted control, built-in security, and enterprise compliance.",
+    description: "Self-hosted control with documented identity, encryption, and audit surfaces to evaluate.",
   },
   {
-    title: "Availability & Scale",
+    title: "Architecture without a metadata tier",
     token: "scale",
-    description: "Distributed architecture with horizontal and vertical scaling, built to avoid single points of failure.",
+    description: "A decentralized peer-to-peer design with strong read-after-write consistency.",
   },
   {
-    title: "Developer-First Experience",
+    title: "Familiar evaluation path",
     token: "dx",
-    description: "Cross-platform support, versatile installations, and one-click deployment.",
+    description: "Start on one node, exercise existing S3 clients, then validate the topology you intend to operate.",
   },
   {
     title: "Open Source",
@@ -30,27 +30,27 @@ const reasons = [
     description: "Apache-2.0 licensed, business-friendly, and vendor-independent.",
   },
   {
-    title: "S3-Compatible",
+    title: "Published S3 coverage",
     token: "s3",
-    description: "Fully S3-compatible for seamless integration and effortless migration.",
+    description: "Broad S3 API coverage with a published overview to use alongside workload-specific testing.",
   },
 ];
 
 const compatibilityRows = [
   {
     title: "AWS SDKs",
-    detail: "Keep application storage code unchanged.",
-    meta: "S3 API",
+    detail: "Run the operations your application depends on and compare results with the published coverage overview.",
+    meta: "VERIFY",
   },
   {
     title: "MinIO tools",
-    detail: "Reuse familiar migration and admin workflows.",
-    meta: "MC / CLI",
+    detail: "Evaluate familiar clients and migration steps before changing a production endpoint.",
+    meta: "MIGRATE",
   },
   {
     title: "Cloud apps",
-    detail: "Connect S3-aware analytics, backup, and AI pipelines.",
-    meta: "DROP-IN",
+    detail: "Confirm multipart, lifecycle, policy, and event behavior for each workload.",
+    meta: "TEST",
   },
 ];
 
@@ -59,17 +59,17 @@ const reasonIcons = [ShieldCheckIcon, NetworkIcon, Code2Icon, GaugeIcon];
 export default function HomeStats() {
   return (
     <section
-      className="relative overflow-hidden border-t border-border bg-background py-20 text-foreground sm:py-24"
+      className="relative overflow-hidden border-t border-border bg-background py-20 text-foreground sm:py-24 lg:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           sectionNumber="03"
           eyebrow="Why RustFS"
-          title="A storage core built for production pressure"
-          description="A focused object storage foundation for modern AI, cloud-native, and enterprise workloads."
+          title="Why teams evaluate RustFS"
+          description="A focused open-source alternative for teams comparing S3 behavior, infrastructure control, and long-term operating freedom."
         />
-        <div className="grid gap-4 lg:grid-cols-12">
-          <article className="motion-card overflow-hidden border border-border bg-card lg:col-span-5">
+        <div className="grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-12">
+          <article className="overflow-hidden bg-card/45 lg:col-span-5">
             <div className="relative h-48 overflow-hidden border-b border-border bg-background">
               <div
                 aria-hidden="true"
@@ -87,12 +87,12 @@ export default function HomeStats() {
                 ))}
               </div>
               <div className="absolute right-4 top-4 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                FIG.PERF
+                ARCH.CORE
               </div>
             </div>
 
             <div className="p-6 sm:p-8">
-              <code className="border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+              <code className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
                 {reasons[0].token}
               </code>
               <h3 className="mt-8 text-2xl font-semibold text-foreground">
@@ -101,18 +101,18 @@ export default function HomeStats() {
               <p className="mt-4 text-sm leading-7 text-muted-foreground">
                 {reasons[0].description}
               </p>
-              <div className="mt-8 border border-border bg-background p-4">
+              <div className="mt-8 border-l border-brand/35 pl-4">
                 <pre className="overflow-x-auto text-xs leading-6 text-muted-foreground">
                   <code>{`[rustfs]
 runtime = "memory-safe"
-io = "hardware-saturated"
-mode = "distributed"`}</code>
+license = "apache-2.0"
+mode = "public-beta"`}</code>
                 </pre>
               </div>
             </div>
           </article>
 
-          <div className="flex overflow-hidden border border-border bg-card lg:col-span-7">
+          <div className="flex overflow-hidden bg-card/40 lg:col-span-7">
             <div className="flex min-h-full w-full flex-col">
               <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 <span className="px-5 py-3">Operating advantages</span>
@@ -125,16 +125,16 @@ mode = "distributed"`}</code>
                   return (
                     <article
                       key={item.title}
-                      className="motion-card group grid min-h-0 gap-4 px-5 py-5 transition-colors hover:bg-muted/30 sm:grid-cols-[3rem_1fr_auto] sm:items-center"
+                      className="grid min-h-0 gap-4 px-5 py-5 sm:grid-cols-[3rem_1fr_auto] sm:items-center"
                     >
-                      <span className="motion-icon-tile flex size-11 items-center justify-center border border-border bg-background text-brand">
-                        <Icon className="size-4" />
+                      <span className="motion-icon-tile flex size-11 items-center justify-center text-brand">
+                        <Icon className="size-5" />
                       </span>
                       <div>
                         <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
                         <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
                       </div>
-                      <code className="w-fit border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                      <code className="w-fit text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                         {item.token}
                       </code>
                     </article>
@@ -144,7 +144,7 @@ mode = "distributed"`}</code>
             </div>
           </div>
 
-          <article className="motion-card grid overflow-hidden border border-border bg-card lg:col-span-12 lg:grid-cols-[0.86fr_1.14fr]">
+          <article className="grid overflow-hidden bg-card/40 lg:col-span-12 lg:grid-cols-[0.86fr_1.14fr]">
             <div className="relative min-h-72 overflow-hidden border-b border-border bg-background lg:border-b-0 lg:border-r">
               <div
                 aria-hidden="true"
@@ -152,7 +152,7 @@ mode = "distributed"`}</code>
               />
               <div className="relative flex h-full flex-col justify-between p-6 sm:p-8">
                 <div>
-                  <code className="border border-border bg-card/80 px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                  <code className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
                     {reasons[5].token}
                   </code>
                   <h3 className="mt-8 max-w-md text-2xl font-semibold text-foreground">
@@ -173,17 +173,17 @@ mode = "distributed"`}</code>
               {compatibilityRows.map((item) => (
                 <div
                   key={item.title}
-                  className="motion-card group grid min-h-28 gap-4 px-6 py-5 transition-colors hover:bg-muted/30 sm:grid-cols-[1fr_auto] sm:items-center sm:px-8"
+                  className="grid min-h-28 gap-4 px-6 py-5 sm:grid-cols-[1fr_auto] sm:items-center sm:px-8"
                 >
                   <div>
                     <h4 className="text-base font-semibold text-foreground">{item.title}</h4>
                     <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.detail}</p>
                   </div>
                   <span className="inline-flex items-center gap-3">
-                    <code className="w-fit border border-border bg-background px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    <code className="w-fit text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                       {item.meta}
                     </code>
-                    <ArrowRightIcon className="motion-arrow size-4 text-brand" aria-hidden="true" />
+                    <ArrowRightIcon className="size-4 text-brand" aria-hidden="true" />
                   </span>
                 </div>
               ))}

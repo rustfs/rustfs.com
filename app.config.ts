@@ -7,8 +7,8 @@ export const SITE_CONFIG = {
 
 // Site meta information
 export const SITE_METADATA = {
-  title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
-  description: 'RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust.',
+  title: "RustFS | Open S3-Compatible Object Storage in Rust",
+  description: 'RustFS is an Apache 2.0 S3-compatible object storage project built in Rust and currently available as a public beta.',
   keywords: 'RustFS, object storage, distributed storage, open source, Rust, Amazon S3, MinIO alternative, Apache 2.0, cloud native storage, AI infrastructure',
 } as const
 

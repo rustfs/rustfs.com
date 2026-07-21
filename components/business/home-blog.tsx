@@ -20,7 +20,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
   return (
     <section
       className={cn(
-        "relative border-t border-border bg-background py-20 sm:py-28",
+        "relative border-t border-border bg-background py-20 sm:py-24 lg:py-28",
         className
       )}
     >
@@ -32,10 +32,10 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
           description="Read product updates, release posts, and technical deep dives from the RustFS team."
         />
 
-        <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-[1.05fr_0.95fr]">
           <Link
             href={`/blog/${featuredPost.slug}`}
-            className="motion-card group relative overflow-hidden border border-border bg-card p-5 text-left transition-colors hover:bg-muted/30 sm:p-6"
+            className="motion-card group relative overflow-hidden bg-card/45 p-5 text-left transition-colors hover:bg-muted/30 sm:p-6"
           >
             <div className="flex items-start justify-between gap-6">
               <div className="grid grid-cols-[auto_1fr] items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
@@ -73,12 +73,12 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
             </div>
           </Link>
 
-          <div className="grid gap-4">
+          <div className="grid gap-px bg-border">
             {otherPosts.map((post, index) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="motion-card group grid min-h-40 gap-5 border border-border bg-card p-5 text-left transition-colors hover:bg-muted/30 sm:grid-cols-[3.5rem_1fr_auto] sm:items-start sm:p-6"
+                className="motion-card group grid min-h-40 gap-5 bg-card/45 p-5 text-left transition-colors hover:bg-muted/30 sm:grid-cols-[3.5rem_1fr_auto] sm:items-start sm:p-6"
               >
                 <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">
                   {String(index + 2).padStart(2, "0")}
@@ -118,7 +118,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
 
 function PostDate({ date }: { date: string }) {
   return (
-    <p className="w-fit border border-border bg-background px-2 py-1 font-mono text-[11px] text-muted-foreground">
+    <p className="w-fit font-mono text-[11px] text-muted-foreground">
       {formatDate(date)}
     </p>
   );
@@ -130,11 +130,11 @@ function PostTags({ tags, className }: { tags: string[]; className?: string }) {
   }
 
   return (
-    <div className={cn("flex flex-wrap gap-2", className)}>
+    <div className={cn("flex flex-wrap gap-x-4 gap-y-2", className)}>
       {tags.map((tag) => (
         <span
           key={tag}
-          className="border border-border bg-background px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"
+          className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
         >
           {tag}
         </span>

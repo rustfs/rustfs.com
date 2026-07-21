@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import {
   ActivityIcon,
   ArrowRightIcon,
@@ -16,6 +15,7 @@ import type { ReactNode } from "react";
 
 export interface FeaturePageSection {
   title: string;
+  status?: string;
   description?: string;
   items?: {
     title: string;
@@ -45,32 +45,44 @@ const variantMeta: Record<
     label: string;
     code: string;
     Icon: LucideIcon;
+    status: string;
+    statusDetail: string;
   }
 > = {
   protocol: {
     label: "Integration surface",
     code: "S3.MCP",
     Icon: NetworkIcon,
+    status: "Mixed coverage",
+    statusDetail: "S3 has broad test-backed coverage; verify Swift, WebDAV, FTP(s), and MCP operations for your workflow.",
   },
   data: {
     label: "Data surface",
     code: "S3.TABLE",
     Icon: DatabaseIcon,
+    status: "Beta + preview",
+    statusDetail: "Core object APIs are available in beta; lifecycle remains under validation and S3 Tables is a preview direction.",
   },
   scale: {
     label: "Scale surface",
     code: "EC.POOL",
     Icon: ServerIcon,
+    status: "Active validation",
+    statusDetail: "Erasure coding is available; distributed mode and topology lifecycle workflows remain under active beta validation.",
   },
   ops: {
     label: "Ops surface",
     code: "OTEL.RC",
     Icon: ActivityIcon,
+    status: "Available in beta",
+    statusDetail: "Console, rc, and telemetry surfaces are evolving; validate the runbooks and signals required by your team.",
   },
   security: {
     label: "Trust surface",
     code: "IAM.KMS",
     Icon: ShieldCheckIcon,
+    status: "Mixed coverage",
+    statusDetail: "Review identity, encryption, transport, and audit controls individually; KMS remains under validation.",
   },
 };
 
@@ -93,6 +105,7 @@ function flattenItems(sections: FeaturePageSection[]) {
     (section.items ?? []).map((item) => ({
       ...item,
       group: section.title,
+      groupStatus: section.status,
     }))
   );
 }
@@ -123,27 +136,23 @@ function SectionKicker({
 function FeatureLine({
   item,
   index,
-  compact = false,
 }: {
-  item: { title: string; description: string; group?: string };
+  item: { title: string; description: string; group?: string; groupStatus?: string };
   index: number;
-  compact?: boolean;
 }) {
   return (
-    <article className="grid gap-4 border-t border-border/60 px-1 py-5 first:border-t-0 sm:grid-cols-[2.5rem_1fr] sm:items-start">
+    <article className="grid gap-3 border-t border-border/60 py-6 first:border-t-0 sm:grid-cols-[3rem_1fr] sm:items-start">
       <span className="mt-1 font-mono text-xs font-semibold text-brand">
         {String(index + 1).padStart(2, "0")}
       </span>
       <div>
         {item.group && (
           <p className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            {slugCode(item.group)}
+            {slugCode(item.group)}{item.groupStatus ? ` / ${item.groupStatus}` : ''}
           </p>
         )}
-        <h3 className="text-base font-semibold leading-6 text-foreground">{item.title}</h3>
-        {!compact && (
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
-        )}
+        <h3 className="text-lg font-semibold leading-6 tracking-tight text-foreground">{item.title}</h3>
+        <p className="mt-3 max-w-xl text-sm leading-7 text-muted-foreground">{item.description}</p>
       </div>
     </article>
   );
@@ -151,7 +160,7 @@ function FeatureLine({
 
 function MiniChip({ children }: { children: ReactNode }) {
   return (
-    <span className="border border-border bg-background/70 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+    <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
       {children}
     </span>
   );
@@ -184,7 +193,7 @@ function ProductLinks({ links }: { links?: FeaturePageLink[] }) {
 }
 
 function ProtocolVisual({ sections }: { sections: FeaturePageSection[] }) {
-  const labels = ["S3", "Swift", "WebDAV", "FTP(s)", "MCP"];
+  const labels = ["S3", "WebDAV", "Swift", "FTP(s)", "MCP"];
 
   return (
     <div className="motion-reveal relative overflow-hidden border border-border bg-card/55" data-motion-delay="1">
@@ -193,7 +202,7 @@ function ProtocolVisual({ sections }: { sections: FeaturePageSection[] }) {
           Native access plane
         </span>
         <code className="border-l border-border px-5 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
-          Gateway free
+          Verify coverage
         </code>
       </div>
       <div className="grid gap-px bg-border sm:grid-cols-5">
@@ -212,7 +221,7 @@ function ProtocolVisual({ sections }: { sections: FeaturePageSection[] }) {
         ))}
       </div>
       <div className="grid gap-px bg-border sm:grid-cols-3">
-        {["No proxy", "No rewrite", "One source"].map((item) => (
+        {["Primary: S3", "Client tests", "One data plane"].map((item) => (
           <div key={item} className="bg-background/80 px-5 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
             {item}
           </div>
@@ -235,10 +244,10 @@ function DataVisual() {
       </div>
       <div className="grid gap-px bg-border lg:grid-cols-[1fr_1.1fr]">
         <div className="bg-card/95 p-6">
-          <div className="space-y-4">
+          <div className="grid gap-px bg-border">
             {["Bucket and object", "Lifecycle rules", "Multipart upload"].map((item, index) => (
-              <div key={item} className="grid grid-cols-[3rem_1fr] items-center border border-border bg-background/60">
-                <span className="border-r border-border px-4 py-5 font-mono text-xs text-brand">
+              <div key={item} className="grid grid-cols-[3rem_1fr] items-center bg-background/60">
+                <span className="px-4 py-5 font-mono text-xs text-brand">
                   0{index + 1}
                 </span>
                 <span className="px-4 py-5 text-sm font-semibold text-foreground">{item}</span>
@@ -246,7 +255,7 @@ function DataVisual() {
             ))}
           </div>
         </div>
-        <div className="relative overflow-hidden bg-brand p-6 text-brand-foreground">
+        <div className="relative overflow-hidden bg-muted/25 p-6 text-foreground">
           <div
             aria-hidden="true"
             className="absolute inset-0 opacity-25 [background-image:repeating-linear-gradient(135deg,transparent_0_20px,rgba(255,255,255,0.35)_20px_21px,transparent_21px_40px)]"
@@ -254,15 +263,15 @@ function DataVisual() {
           <div className="relative flex flex-col justify-between gap-12">
             <div>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] opacity-80">
-                Coming soon
+                Preview direction
               </p>
-              <h2 className="mt-5 max-w-sm text-4xl font-semibold leading-tight">
-                S3 Tables for unified lakehouse data.
+              <h2 className="mt-5 max-w-sm text-3xl font-semibold leading-tight">
+                S3 Tables for emerging lakehouse workflows.
               </h2>
             </div>
-            <div className="grid gap-px bg-white/25 sm:grid-cols-3">
+            <div className="grid gap-px bg-border sm:grid-cols-3">
               {["Snapshots", "Metadata", "Iceberg"].map((item) => (
-                <span key={item} className="bg-brand/70 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em]">
+                <span key={item} className="bg-background/80 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                   {item}
                 </span>
               ))}
@@ -291,9 +300,9 @@ function ScaleVisual() {
           className="absolute inset-0 opacity-55 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:36px_36px]"
         />
         <div className="relative grid h-full gap-5">
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-px bg-border sm:grid-cols-3">
             {["Node", "Pool", "Region"].map((item, index) => (
-              <div key={item} className="border border-border bg-card/95 p-4">
+              <div key={item} className="bg-card/95 p-4">
                 <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
                   0{index + 1}
                 </p>
@@ -415,32 +424,34 @@ function ProtocolBody({ sections }: { sections: FeaturePageSection[] }) {
   return (
     <div className="grid gap-8">
       {primarySection && (
-        <section className="grid overflow-hidden border border-border bg-border lg:grid-cols-[0.92fr_1.08fr]">
-          <div className="bg-card/55 p-6 sm:p-8">
-            <MiniChip>Gateway-free access</MiniChip>
-            <h2 className="mt-7 max-w-xl text-3xl font-semibold tracking-tight text-foreground">
-              One storage foundation, many native clients.
+        <section className="grid gap-10 border-y border-border py-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
+          <div className="py-2">
+            <MiniChip>Protocol evaluation</MiniChip>
+            <h2 className="mt-5 max-w-xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              One storage foundation, verified client by client.
             </h2>
             {primarySection.description && (
               <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
                 {primarySection.description}
               </p>
             )}
-            <div className="mt-8 flex flex-wrap gap-2">
+            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
               {sections.map((section) => (
-                <MiniChip key={section.title}>{section.title}</MiniChip>
+                <MiniChip key={section.title}>{section.title}{section.status ? ` / ${section.status}` : ''}</MiniChip>
               ))}
             </div>
           </div>
-          <div className="bg-background p-4 sm:p-5">
-            <div className="grid gap-3 sm:grid-cols-2">
+          <div className="border-y border-border/70">
+            <div className="divide-y divide-border/70">
               {primarySection.items?.map((item, index) => (
-                <article key={item.title} className={cn("border border-border bg-card/55 p-5", index === 0 && "sm:col-span-2")}>
-                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
+                <article key={item.title} className="grid gap-3 py-5 sm:grid-cols-[3rem_1fr]">
+                  <p className="pt-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
                     0{index + 1}
                   </p>
-                  <h3 className="mt-5 text-lg font-semibold text-foreground">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                  <div>
+                    <h3 className="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
+                    <p className="mt-2 max-w-xl text-sm leading-7 text-muted-foreground">{item.description}</p>
+                  </div>
                 </article>
               ))}
             </div>
@@ -448,7 +459,7 @@ function ProtocolBody({ sections }: { sections: FeaturePageSection[] }) {
         </section>
       )}
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-x-12 gap-y-10 lg:grid-cols-2">
         {restSections.map((section, index) => (
           <section key={section.title} className="border-t border-border pt-6">
             <div className="flex items-start justify-between gap-4">
@@ -456,6 +467,11 @@ function ProtocolBody({ sections }: { sections: FeaturePageSection[] }) {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
                   {slugCode(section.title)}
                 </p>
+                {section.status ? (
+                  <p className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                    {section.status}
+                  </p>
+                ) : null}
                 <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
                   {section.title}
                 </h2>
@@ -471,7 +487,7 @@ function ProtocolBody({ sections }: { sections: FeaturePageSection[] }) {
             )}
             <div className="mt-5 divide-y divide-border/70 border-y border-border/70">
               {section.items?.map((item, itemIndex) => (
-                <FeatureLine key={item.title} item={item} index={itemIndex} compact={itemIndex > 0} />
+                <FeatureLine key={item.title} item={item} index={itemIndex} />
               ))}
             </div>
           </section>
@@ -482,14 +498,14 @@ function ProtocolBody({ sections }: { sections: FeaturePageSection[] }) {
 }
 
 function DataBody({ sections }: { sections: FeaturePageSection[] }) {
-  const items = flattenItems(sections);
   const tableSection = sections.find((section) => section.title.toLowerCase().includes("tables"));
   const routineSections = sections.filter((section) => section !== tableSection);
+  const routineItems = flattenItems(routineSections);
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-      <section className="border border-border bg-card/50">
-        <div className="px-6 py-6 sm:px-8">
+    <div className="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
+      <section className="border-t border-border pt-6">
+        <div>
           <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
             Object lifecycle
           </p>
@@ -497,42 +513,32 @@ function DataBody({ sections }: { sections: FeaturePageSection[] }) {
             Manage buckets, objects, lifecycle, and uploads from one S3 surface.
           </h2>
         </div>
-        <div className="grid border-t border-border md:grid-cols-2">
-          {items.slice(0, 6).map((item, index) => (
+        <div className="mt-8 grid gap-x-8 md:grid-cols-2">
+          {routineItems.map((item, index) => (
             <article
               key={item.title}
-              className={cn(
-                "border-b border-border px-6 py-5 md:px-8",
-                index % 2 === 0 && "md:border-r"
-              )}
+              className="border-t border-border/70 py-5"
             >
               <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
                 {String(index + 1).padStart(2, "0")}
               </p>
               <h3 className="mt-4 text-base font-semibold leading-6 text-foreground">{item.title}</h3>
-              {index < 4 && (
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
-              )}
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
             </article>
           ))}
         </div>
       </section>
-      <section className="grid content-start gap-5">
+      <section className="grid content-start gap-8">
         {tableSection && (
-          <article className="relative overflow-hidden border border-brand/50 bg-card/55 p-6">
-            <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 bg-brand" />
-            <span
-              aria-hidden="true"
-              className="absolute inset-0 opacity-10 [background-image:repeating-linear-gradient(135deg,transparent_0_20px,var(--brand)_20px_21px,transparent_21px_40px)]"
-            />
-            <div className="relative">
-              <MiniChip>Coming soon</MiniChip>
+          <article className="border-t-2 border-brand py-6">
+            <div>
+              <MiniChip>{tableSection.status ?? 'Preview'}</MiniChip>
               <h3 className="mt-6 text-3xl font-semibold tracking-tight text-foreground">{tableSection.title}</h3>
               {tableSection.description && (
                 <p className="mt-4 text-sm leading-7 text-muted-foreground">{tableSection.description}</p>
               )}
-              <div className="mt-7 flex flex-wrap gap-2">
-                {tableSection.items?.slice(0, 3).map((item) => (
+              <div className="mt-7 flex flex-wrap gap-x-5 gap-y-3">
+                {tableSection.items?.map((item) => (
                   <MiniChip key={item.title}>{item.title}</MiniChip>
                 ))}
               </div>
@@ -541,18 +547,23 @@ function DataBody({ sections }: { sections: FeaturePageSection[] }) {
         )}
 
         {routineSections.map((section) => (
-          <article key={section.title} className="border-l border-border pl-6">
+          <article key={section.title} className="border-t border-border pt-6">
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
               {slugCode(section.title)}
             </p>
+            {section.status ? (
+              <p className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                {section.status}
+              </p>
+            ) : null}
             <h3 className="mt-3 text-xl font-semibold tracking-tight text-foreground">{section.title}</h3>
             {section.description && (
               <p className="mt-2 text-sm leading-7 text-muted-foreground">
                 {section.description}
               </p>
             )}
-            <div className="mt-4 flex flex-wrap gap-2">
-              {section.items?.slice(0, 3).map((item) => (
+            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3">
+              {section.items?.map((item) => (
                 <MiniChip key={item.title}>
                   {item.title}
                 </MiniChip>
@@ -570,8 +581,8 @@ function ScaleBody({ sections }: { sections: FeaturePageSection[] }) {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-      <aside className="overflow-hidden border border-border bg-card/50">
-        <div className="relative border-b border-border p-6">
+      <aside className="border-t border-border pt-6">
+        <div className="relative border-b border-border pb-6">
           <div
             aria-hidden="true"
             className="absolute inset-0 opacity-40 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:32px_32px]"
@@ -589,7 +600,7 @@ function ScaleBody({ sections }: { sections: FeaturePageSection[] }) {
             ))}
           </div>
         </div>
-        <div className="p-6 sm:p-8">
+        <div className="py-7">
           <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
             EC calculator
           </p>
@@ -602,7 +613,7 @@ function ScaleBody({ sections }: { sections: FeaturePageSection[] }) {
         </div>
         <Link
           href="/erasure-code-calculator"
-          className="group flex items-center justify-between border-t border-border px-6 py-5 text-sm font-semibold text-brand sm:px-8"
+          className="group flex items-center justify-between border-y border-border py-5 text-sm font-semibold text-brand"
         >
           Open calculator
           <ArrowRightIcon className="motion-arrow size-4" />
@@ -615,6 +626,11 @@ function ScaleBody({ sections }: { sections: FeaturePageSection[] }) {
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
                 0{index + 1} / {slugCode(section.title)}
               </p>
+              {section.status ? (
+                <p className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  {section.status}
+                </p>
+              ) : null}
               <h3 className="mt-4 text-2xl font-semibold tracking-tight text-foreground">{section.title}</h3>
               {section.description && (
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">{section.description}</p>
@@ -623,8 +639,8 @@ function ScaleBody({ sections }: { sections: FeaturePageSection[] }) {
           ))}
         </div>
         <div className="border-y border-border px-1">
-          {items.slice(0, 6).map((item, index) => (
-            <FeatureLine key={item.title} item={item} index={index} compact />
+          {items.map((item, index) => (
+            <FeatureLine key={item.title} item={item} index={index} />
           ))}
         </div>
       </section>
@@ -638,8 +654,8 @@ function OpsBody({ sections }: { sections: FeaturePageSection[] }) {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-      <section className="border border-border bg-card/50">
-        <div className="px-6 py-6 sm:px-8">
+      <section className="border-t border-border pt-6">
+        <div>
           <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
             Console operations
           </p>
@@ -647,9 +663,9 @@ function OpsBody({ sections }: { sections: FeaturePageSection[] }) {
             One control plane for data, security, and pool operations.
           </h2>
         </div>
-        <div className="grid border-t border-border sm:grid-cols-3">
+        <div className="mt-8 grid gap-6 sm:grid-cols-3">
           {consoleSection.items?.map((item) => (
-            <article key={item.title} className="border-b border-border p-5 sm:border-r sm:last:border-r-0">
+            <article key={item.title} className="border-t border-border pt-5">
               <CheckIcon className="size-4 text-brand" />
               <h3 className="mt-8 text-base font-semibold text-foreground">{item.title}</h3>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">{item.description}</p>
@@ -665,12 +681,12 @@ function OpsBody({ sections }: { sections: FeaturePageSection[] }) {
                 0{index + 1}
               </p>
               <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                {slugCode(section.title)}
+                {slugCode(section.title)}{section.status ? ` / ${section.status}` : ''}
               </p>
             </div>
             <h3 className="mt-5 text-2xl font-semibold tracking-tight text-foreground">{section.title}</h3>
             <div className="mt-5 grid gap-3">
-              {section.items?.slice(0, 3).map((item) => (
+              {section.items?.map((item) => (
                 <div key={item.title} className="grid grid-cols-[1rem_1fr] gap-3 text-sm leading-6 text-muted-foreground">
                   <span className="mt-2 size-1.5 bg-brand" />
                   <p>
@@ -693,23 +709,28 @@ function SecurityBody({ sections }: { sections: FeaturePageSection[] }) {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-      <section className="relative overflow-hidden border border-border bg-card/50 p-6 sm:p-8">
+      <section className="relative border-t border-border pt-6">
         <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 bg-brand" />
         <div className="flex items-center justify-between gap-4">
-          <MiniChip>Secure by default</MiniChip>
+          <MiniChip>Layered security review</MiniChip>
           <LockKeyholeIcon className="size-5 text-brand" />
         </div>
         <h2 className="mt-7 max-w-2xl text-3xl font-semibold tracking-tight text-foreground">
             Layered controls from identity to evidence.
         </h2>
-        <div className="mt-8 grid gap-px bg-border sm:grid-cols-3">
+        <div className="mt-8 grid gap-6 sm:grid-cols-3">
           {primarySections.map((section) => (
-            <article key={section.title} className="bg-background/80 p-5">
+            <article key={section.title} className="border-t border-border pt-5">
               <div className="flex items-center gap-3">
                 <CheckIcon className="size-4 shrink-0 text-brand" />
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
                   {slugCode(section.title)}
                 </p>
+                {section.status ? (
+                  <p className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                    {section.status}
+                  </p>
+                ) : null}
               </div>
               <h3 className="mt-4 text-xl font-semibold tracking-tight text-foreground">{section.title}</h3>
               {section.description && (
@@ -718,7 +739,7 @@ function SecurityBody({ sections }: { sections: FeaturePageSection[] }) {
             </article>
           ))}
         </div>
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3">
           {restSections.map((section) => (
             <MiniChip key={section.title}>{section.title}</MiniChip>
           ))}
@@ -731,8 +752,8 @@ function SecurityBody({ sections }: { sections: FeaturePageSection[] }) {
           </p>
         </div>
         <div>
-          {items.slice(0, 7).map((item, index) => (
-            <FeatureLine key={`${item.group}-${item.title}`} item={item} index={index} compact />
+          {items.map((item, index) => (
+            <FeatureLine key={`${item.group}-${item.title}`} item={item} index={index} />
           ))}
         </div>
       </section>
@@ -770,25 +791,22 @@ function ProductionReview({ variant }: { variant: FeaturePageVariant }) {
   const Icon = variantMeta[variant].Icon;
 
   return (
-    <div className="mt-16 border border-border bg-card/55">
-      <Link href="/contact-us" className="group relative grid gap-6 overflow-hidden p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
-        <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 bg-brand" />
-        <span
-          aria-hidden="true"
-          className="absolute inset-0 opacity-15 [background-image:repeating-linear-gradient(135deg,transparent_0_20px,var(--brand)_20px_21px,transparent_21px_40px)]"
-        />
+    <div className="mt-20 border-y border-border">
+      <Link href="/contact-us" className="group grid gap-6 py-8 md:grid-cols-[8rem_1fr_auto] md:items-center lg:grid-cols-[10rem_1fr_auto]">
         <div>
-          <p className="inline-flex border border-border bg-background/70 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
             Production review
           </p>
-          <h2 className="mt-5 max-w-2xl text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+        </div>
+        <div>
+          <h2 className="max-w-2xl text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
             Need help mapping this surface?
           </h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
             Share your topology, identity model, and operations constraints before production rollout.
           </p>
         </div>
-        <span className="motion-icon-tile relative flex size-12 items-center justify-center border border-border bg-background/70 text-brand">
+        <span className="motion-icon-tile relative flex size-12 items-center justify-center text-brand">
           <Icon className="size-5" />
           <span className="sr-only">Contact RustFS</span>
         </span>
@@ -813,8 +831,8 @@ export default function FeaturePage({
           <span className="absolute left-0 top-0 h-0.5 w-28 -translate-y-px bg-brand" />
         </div>
 
-        <div className="mt-8 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
+        <div className="mt-8 grid min-w-0 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="min-w-0">
             <SectionKicker index={1} label={meta.label} code={meta.code} />
             <h1 className="mt-10 max-w-4xl font-display text-4xl font-extrabold leading-none text-foreground sm:text-6xl lg:text-7xl">
               {title}
@@ -823,9 +841,27 @@ export default function FeaturePage({
               {description}
             </p>
             <ProductLinks links={links} />
+            <div className="mt-8 grid gap-2 border-y border-border py-4 sm:grid-cols-[8rem_1fr]">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
+                {meta.status}
+              </p>
+              <div>
+                <p className="text-xs leading-6 text-muted-foreground">{meta.statusDetail}</p>
+                <a
+                  className="mt-2 inline-flex text-xs font-semibold text-foreground hover:text-brand"
+                  href="https://github.com/rustfs/rustfs#feature--status"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Review current feature status ↗
+                </a>
+              </div>
+            </div>
           </div>
 
-          <HeroVisual variant={variant} sections={sections} />
+          <div className="min-w-0">
+            <HeroVisual variant={variant} sections={sections} />
+          </div>
         </div>
       </section>
 

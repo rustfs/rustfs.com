@@ -8,6 +8,7 @@ import AppFooter from '@/components/business/app-footer';
 import AppHeader from '@/components/business/app-header';
 import FixedContactButton from '@/components/business/buttons/fixed-contact-button';
 import FixedLanguageBanner from '@/components/business/fixed-language-banner';
+import SkipLink from '@/components/business/skip-link';
 import BackgroundGrid from '@/components/ui/background-grid';
 import "./globals.css";
 
@@ -79,13 +80,20 @@ export default async function RootLayout({
         <link rel="alternate" hrefLang="x-default" href={SITE_CONFIG.primaryDomain} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex h-full flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} flex h-full flex-col overflow-x-clip antialiased`}
       >
         <ThemeProvider enableSystem attribute="class">
+          <SkipLink />
           <BackgroundGrid />
           <FixedLanguageBanner />
           <AppHeader />
-          {children}
+          <div
+            id="main-content"
+            tabIndex={-1}
+            className="flex min-h-0 flex-1 flex-col outline-none"
+          >
+            {children}
+          </div>
           <AppFooter />
           <FixedContactButton />
           <Script

@@ -1,7 +1,7 @@
 'use client'
 
 import { NetworkIcon, ServerIcon, SquareStackIcon } from 'lucide-react';
-import { useState, type ComponentType } from 'react';
+import { useState, type ComponentType, type KeyboardEvent } from 'react';
 
 type Topology = {
   id: string;
@@ -40,10 +40,10 @@ const topologies: Topology[] = [
     code: 'MNMD',
     name: 'Multi-node multiple-disk',
     icon: NetworkIcon,
-    useCase: 'Medium and large enterprises scaling from hundreds of terabytes to petabyte-scale object storage.',
-    tradeoff: 'Requires network, identity, observability, capacity, upgrade planning, and full production operations.',
+    useCase: 'Teams evaluating distributed object storage across representative nodes and drives.',
+    tradeoff: 'Distributed mode is under active beta validation and requires network, identity, observability, capacity, recovery, and upgrade planning.',
     command: ['rustfs http://node{1...4}/disk{1...4}'],
-    notes: ['Multiple nodes', 'Multiple disks', 'Production'],
+    notes: ['Multiple nodes', 'Multiple disks', 'Validate first'],
   },
 ];
 
@@ -105,30 +105,52 @@ export default function InstallationTopology() {
   const activeTopology = topologies.find((item) => item.id === activeId) ?? topologies[0];
   const ActiveIcon = activeTopology.icon;
 
+  const handleTopologyKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    let nextIndex = index;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      nextIndex = (index + 1) % topologies.length;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      nextIndex = (index - 1 + topologies.length) % topologies.length;
+    } else if (event.key === 'Home') {
+      nextIndex = 0;
+    } else if (event.key === 'End') {
+      nextIndex = topologies.length - 1;
+    } else {
+      return;
+    }
+
+    event.preventDefault();
+    setActiveId(topologies[nextIndex].id);
+    event.currentTarget.parentElement
+      ?.querySelectorAll<HTMLButtonElement>('[role="tab"]')
+      [nextIndex]?.focus();
+  };
+
   return (
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="border-t border-border pt-8">
-          <div className="mb-8 grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
+        <div className="border-t border-border pt-10">
+          <div className="mb-10 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Deployment topology</p>
-              <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight text-foreground sm:text-5xl">
+              <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
                 Pick topology after you know the failure domain.
               </h2>
             </div>
             <p className="max-w-2xl text-sm leading-7 text-muted-foreground lg:justify-self-end">
-              RustFS can start on one machine, but production planning should be explicit about disks, nodes, and recovery expectations.
+              RustFS can start on one machine, but production planning should be explicit about disks, nodes, recovery, upgrades, and the current distributed-mode status.
             </p>
           </div>
         </div>
 
-        <div className="border border-border bg-card">
+        <div className="border-y border-border">
           <div
             role="tablist"
             aria-label="Deployment topology"
-            className="grid divide-y divide-border md:grid-cols-3 md:divide-x md:divide-y-0"
+            className="grid divide-y divide-border border-b border-border md:grid-cols-3 md:divide-x md:divide-y-0"
           >
-            {topologies.map((item) => {
+            {topologies.map((item, index) => {
               const Icon = item.icon;
               const isActive = item.id === activeTopology.id;
 
@@ -141,15 +163,17 @@ export default function InstallationTopology() {
                   aria-controls={`topology-panel-${item.id}`}
                   id={`topology-tab-${item.id}`}
                   onClick={() => setActiveId(item.id)}
+                  onKeyDown={(event) => handleTopologyKeyDown(event, index)}
+                  tabIndex={isActive ? 0 : -1}
                   className={[
-                    'motion-button flex min-h-24 items-center gap-4 p-5 text-left transition-colors',
-                    isActive ? 'bg-muted/40 text-foreground' : 'text-muted-foreground hover:bg-muted/20 hover:text-foreground',
+                    'motion-button flex min-h-24 items-center gap-4 border-l-2 border-l-transparent p-5 text-left transition-colors',
+                    isActive ? 'border-l-brand bg-brand/10 text-foreground' : 'text-muted-foreground hover:bg-muted/20 hover:text-foreground',
                   ].join(' ')}
                 >
                   <span
                     className={[
-                      'flex size-11 shrink-0 items-center justify-center',
-                      isActive ? 'bg-brand text-brand-foreground' : 'bg-background text-foreground',
+                      'flex size-8 shrink-0 items-center justify-center',
+                      isActive ? 'text-brand' : 'text-foreground',
                     ].join(' ')}
                   >
                     <Icon className="size-5" />
@@ -167,11 +191,11 @@ export default function InstallationTopology() {
             id={`topology-panel-${activeTopology.id}`}
             role="tabpanel"
             aria-labelledby={`topology-tab-${activeTopology.id}`}
-            className="grid border-t border-border lg:grid-cols-[0.86fr_1.14fr]"
+            className="grid lg:grid-cols-[0.86fr_1.14fr]"
           >
             <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
               <div className="flex items-center gap-4">
-                <span className="flex size-12 shrink-0 items-center justify-center bg-brand text-brand-foreground">
+                <span className="flex size-8 shrink-0 items-center justify-center text-brand">
                   <ActiveIcon className="size-5" />
                 </span>
                 <div>
@@ -180,7 +204,7 @@ export default function InstallationTopology() {
                 </div>
               </div>
 
-              <div className="mt-8 border border-border bg-background">
+              <div className="mt-8 border-y border-border">
                 <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                   <span className="px-3 py-3">Topology shape</span>
                   <span className="border-l border-border px-3 py-3 text-brand">{activeTopology.code}</span>
@@ -197,12 +221,12 @@ export default function InstallationTopology() {
             </div>
 
             <div className="grid">
-              <div className="grid border-b border-border md:grid-cols-2">
-                <div className="border-b border-border p-6 md:border-b-0 md:border-r">
+              <div className="grid gap-8 border-b border-border px-6 py-7 sm:px-8 md:grid-cols-2">
+                <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Best for</p>
                   <p className="mt-3 text-sm leading-7 text-foreground">{activeTopology.useCase}</p>
                 </div>
-                <div className="p-6">
+                <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Watch</p>
                   <p className="mt-3 text-sm leading-7 text-muted-foreground">{activeTopology.tradeoff}</p>
                 </div>

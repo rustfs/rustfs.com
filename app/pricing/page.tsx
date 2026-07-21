@@ -32,20 +32,14 @@ function PricingCard({
   return (
     <article
       className={cn(
-        "motion-card flex h-full flex-col overflow-hidden border border-border bg-card",
-        isEmphasized && "border-brand bg-brand text-brand-foreground"
+        "flex h-full flex-col border-t-2 border-border bg-transparent",
+        isEmphasized && "border-brand"
       )}
     >
-      <div className={cn("relative flex flex-1 flex-col border-b border-border p-6", isEmphasized && "border-brand-foreground/20")}>
-        {isEmphasized ? (
-          <span
-            aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-14 opacity-35 [background-image:repeating-linear-gradient(135deg,transparent_0_12px,var(--brand-foreground)_12px_13px,transparent_13px_26px)]"
-          />
-        ) : null}
-        <p className={cn("relative text-[11px] font-semibold uppercase tracking-[0.22em] text-brand", isEmphasized && "text-brand-foreground/75")}>{label}</p>
-        <h2 className={cn("relative mt-4 text-2xl font-semibold text-foreground", isEmphasized && "text-brand-foreground")}>{title}</h2>
-        <p className={cn("relative mt-5 font-display text-4xl font-semibold text-foreground", isEmphasized && "text-brand-foreground")}>{price}</p>
+      <div className="relative flex flex-1 flex-col border-b border-border px-1 py-6 lg:px-6">
+        <p className="relative text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">{label}</p>
+        <h2 className="relative mt-4 text-2xl font-semibold text-foreground">{title}</h2>
+        <p className="relative mt-5 font-display text-3xl font-semibold text-foreground">{price}</p>
         <div className="relative mt-5 flex flex-wrap gap-2">
           {chips.map((chip) => (
             <Badge
@@ -53,20 +47,20 @@ function PricingCard({
               variant="outline"
               className={cn(
                 "h-7 bg-background/45 px-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground",
-                isEmphasized && "border-brand-foreground/25 bg-brand-foreground/10 text-brand-foreground/75"
+                isEmphasized && "border-brand/40 bg-brand/5 text-brand"
               )}
             >
               {chip}
             </Badge>
           ))}
         </div>
-        <p className={cn("relative mt-4 text-sm leading-7 text-muted-foreground", isEmphasized && "text-brand-foreground/75")}>{description}</p>
+        <p className="relative mt-4 text-sm leading-7 text-muted-foreground">{description}</p>
         <div className="relative mt-auto pt-6">
-          <div className={cn("grid grid-cols-[auto_1fr_auto] border border-border text-[10px] font-semibold uppercase tracking-[0.12em]", isEmphasized && "border-brand-foreground/25")}>
-            <span className={cn("border-r border-border px-3 py-2 text-muted-foreground", isEmphasized && "border-brand-foreground/25 text-brand-foreground/70")}>Path</span>
-            <span className={cn("px-3 py-2 text-foreground", isEmphasized && "text-brand-foreground")}>{label}</span>
-            <span className={cn("border-l border-border px-3 py-2 text-muted-foreground", isEmphasized && "border-brand-foreground/25 text-brand-foreground/70")}>
-              {price === "$0" ? "OSS" : price === "Custom" ? "SLA" : "Plan"}
+          <div className="grid grid-cols-[auto_1fr_auto] border-y border-border text-[10px] font-semibold uppercase tracking-[0.12em]">
+            <span className="border-r border-border px-3 py-2 text-muted-foreground">Path</span>
+            <span className="px-3 py-2 text-foreground">{label}</span>
+            <span className="border-l border-border px-3 py-2 text-muted-foreground">
+              {price.includes("$0") ? "OSS" : "Scope"}
             </span>
           </div>
         </div>
@@ -76,12 +70,11 @@ function PricingCard({
           <li
             key={point}
             className={cn(
-              "flex gap-3 border-b border-border px-6 py-4 last:border-b-0",
-              isEmphasized && "border-brand-foreground/20"
+              "flex gap-3 border-b border-border px-1 py-4 last:border-b-0 lg:px-6"
             )}
           >
-            <BadgeCheckIcon className={cn("motion-icon-tile mt-0.5 size-4 shrink-0 text-brand", isEmphasized && "text-brand-foreground")} />
-            <span className={cn("text-sm leading-6 text-foreground", isEmphasized && "text-brand-foreground")}>{point}</span>
+            <BadgeCheckIcon className="motion-icon-tile mt-0.5 size-4 shrink-0 text-brand" />
+            <span className="text-sm leading-6 text-foreground">{point}</span>
           </li>
         ))}
       </ul>
@@ -97,12 +90,12 @@ export default function PricingPage() {
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Pricing</p>
             <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-              Open-source storage, clear support path.
+              Open-source software, support by scope.
             </h1>
           </div>
           <div className="flex flex-col gap-6">
             <p className="max-w-2xl text-base leading-8 text-muted-foreground lg:ml-auto">
-              Run RustFS freely, then involve the team for deployment planning, migration, and production support.
+              RustFS software is Apache 2.0. Commercial assistance is scoped around the deployment, migration, and operating responsibility you bring.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
               <DownloadLink className="!h-12 !px-5 !py-0 leading-none" />
@@ -111,12 +104,12 @@ export default function PricingPage() {
           </div>
         </div>
 
-        <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid items-stretch gap-8 border-y border-border lg:grid-cols-3 lg:gap-0 lg:divide-x lg:divide-border">
           <PricingCard
             label="Open source"
             title="Self-hosted RustFS"
-            price="$0"
-            description="Use RustFS under Apache 2.0 for development, testing, and production deployments you operate yourself."
+            price="Software $0"
+            description="Use RustFS under Apache 2.0 for development, evaluation, and deployments you operate yourself."
             chips={["Apache 2.0", "Self-hosted"]}
             points={[
               "Apache 2.0 license",
@@ -126,10 +119,10 @@ export default function PricingPage() {
             ]}
           />
           <PricingCard
-            label="Production"
-            title="Deployment support"
-            price="Talk to us"
-            description="For teams moving from evaluation to production and needing topology, migration, and operations planning."
+            label="Readiness"
+            title="Deployment review"
+            price="Scoped with you"
+            description="For teams moving beyond evaluation and needing topology, migration, compatibility, or operations review."
             emphasized
             chips={["Planning", "Migration"]}
             points={[
@@ -140,13 +133,13 @@ export default function PricingPage() {
             ]}
           />
           <PricingCard
-            label="Enterprise"
+            label="Ongoing"
             title="Ongoing assistance"
-            price="Custom"
+            price="Custom scope"
             description="For organizations that need a long-running support relationship around RustFS operations."
-            chips={["SLA path", "Enterprise"]}
+            chips={["Operations", "Enterprise"]}
             points={[
-              "Production troubleshooting path",
+              "Production troubleshooting planning",
               "Upgrade and observability review",
               "Security and IAM workflow consultation",
               "Roadmap and deployment alignment",
@@ -157,7 +150,7 @@ export default function PricingPage() {
 
       <section className="border-y border-border bg-muted/20">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 py-16 sm:px-6 lg:grid-cols-[0.88fr_1.12fr] lg:px-8">
-          <div className="motion-card flex overflow-hidden border border-border bg-card">
+          <div className="flex overflow-hidden border-y border-border">
             <div className="flex w-full flex-col">
               <div className="relative border-b border-border bg-background p-6 sm:p-8">
                 <div
@@ -192,7 +185,7 @@ export default function PricingPage() {
             </div>
           </div>
 
-          <div className="border border-border bg-card">
+          <div className="border-y border-border">
             {[
               [Code2Icon, "Evaluate without sales friction", "Download the server, run Docker, or install through Kubernetes before starting a commercial conversation."],
               [Building2Icon, "Plan around your environment", "Storage topology, compliance, network, and observability needs vary by organization and workload."],
@@ -200,9 +193,9 @@ export default function PricingPage() {
             ].map(([Icon, title, description]) => (
               <div
                 key={title as string}
-                className="motion-card group grid gap-4 border-b border-border px-5 py-5 last:border-b-0 sm:grid-cols-[3rem_1fr_auto] sm:items-center"
+                className="grid gap-4 border-b border-border px-5 py-5 last:border-b-0 sm:grid-cols-[3rem_1fr_auto] sm:items-center"
               >
-                <span className="motion-icon-tile flex size-11 items-center justify-center border border-border bg-background text-brand">
+                <span className="flex size-11 items-center justify-center border border-border bg-background text-brand">
                   <Icon className="size-5" />
                 </span>
                 <div>

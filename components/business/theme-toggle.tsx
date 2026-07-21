@@ -26,7 +26,7 @@ export function ThemeToggle() {
     return (
       <button
         type="button"
-        className="relative p-0 text-muted-foreground hover:text-primary transition-colors"
+        className="relative inline-flex size-10 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
         aria-label="Toggle theme"
         disabled
       >
@@ -44,7 +44,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="relative p-0 text-muted-foreground hover:text-primary transition-colors"
+      className="relative inline-flex size-10 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
       aria-label="Toggle theme"
     >
       <div className="relative size-5">

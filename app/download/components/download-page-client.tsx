@@ -18,7 +18,7 @@ import {
     MessageCircleIcon,
     ServerIcon,
 } from 'lucide-react'
-import { useState, type ComponentType, type ReactNode } from 'react'
+import { useState, type ComponentType, type KeyboardEvent, type ReactNode } from 'react'
 import CodeBlock from './code-block'
 import InstallationTopology from './installation-topology'
 import RcDownloadSection from './rc-download-section'
@@ -38,7 +38,7 @@ function findReleaseAsset(
   );
 
   return {
-    url: asset?.browser_download_url ?? release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest',
+    url: asset?.browser_download_url ?? release?.html_url ?? 'https://github.com/rustfs/rustfs/releases',
     filename: asset?.name ?? fallbackName,
     isDirect: Boolean(asset),
   };
@@ -54,11 +54,11 @@ function SectionHeader({
   description: string;
 }) {
   return (
-    <div className="border-t border-border pt-8">
-      <div className="mb-8 grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
+    <div className="border-t border-border pt-10">
+      <div className="mb-10 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">{eyebrow}</p>
-          <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight text-foreground sm:text-5xl">
+          <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
             {title}
           </h2>
         </div>
@@ -71,9 +71,16 @@ function SectionHeader({
 }
 
 function ReleasePanel({ release }: { release: GitHubRelease | null }) {
-  const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
-  const publishedAt = release?.published_at ? formatReleaseDate(release.published_at, 'en-US') : 'GitHub latest';
-  const version = release?.tag_name ? formatVersion(release.tag_name) : 'Latest';
+  const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases';
+  const publishedAt = release?.published_at ? formatReleaseDate(release.published_at, 'en-US') : 'Select on GitHub';
+  const version = release?.tag_name ? formatVersion(release.tag_name) : 'Choose a beta';
+  const channel = !release
+    ? 'Release list'
+    : /preview/i.test(release.tag_name)
+    ? 'Preview build'
+    : release?.prerelease
+      ? 'Recommended beta'
+      : 'Stable release';
 
   return (
     <a
@@ -85,7 +92,7 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
     >
       <div className="relative p-5 sm:p-6">
         <div className="mb-5 grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-          <span className="text-brand">Current server release</span>
+          <span className="text-brand">{channel}</span>
           <span>{'//'}</span>
           <span className="h-px bg-border" />
           <span>{publishedAt}</span>
@@ -97,7 +104,7 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
               {version}
             </p>
             <p className="mt-3 text-sm text-muted-foreground">
-              Server binary, Docker image, and source archive.
+              Server binary, Docker image, and source archive. Review release notes before upgrading.
             </p>
           </div>
           <span className="inline-flex items-center gap-2 text-sm font-semibold text-brand">
@@ -135,19 +142,19 @@ function HeroStripeCard({ releaseUrl }: { releaseUrl: string }) {
       href={releaseUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="motion-card group relative block overflow-hidden border border-border bg-card p-4 transition-colors hover:bg-muted/25 sm:p-5"
+      className="group relative block border-y border-border py-4 transition-colors hover:border-foreground/35"
     >
       <div
         aria-hidden="true"
         className="absolute inset-0 opacity-50 [background-image:repeating-linear-gradient(135deg,transparent_0_18px,var(--border)_18px_19px,transparent_19px_36px)]"
       />
-      <div className="relative grid min-h-32 content-between gap-5">
+      <div className="relative flex flex-col justify-between gap-5 sm:flex-row sm:items-center">
         <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-          Fast route
+          Platform packages
         </p>
 
         <div className="grid gap-3">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-x-5 gap-y-3">
             <PlatformBadge icon={<LinuxIcon className="size-4" />} label="Linux" />
             <PlatformBadge icon={<DockerIcon className="size-4" />} label="Docker" />
             <PlatformBadge icon={<AppleIcon className="size-4" />} label="macOS" />
@@ -193,7 +200,7 @@ function PlatformBadge({
   label: string;
 }) {
   return (
-    <span className="inline-flex h-9 items-center gap-2 border border-border bg-background px-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+    <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
       <span className="size-4 text-foreground">{icon}</span>
       {label}
     </span>
@@ -231,14 +238,15 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
   const windowsUrl = release
     ? getDownloadUrlForPlatform(release, 'windows', 'x86_64')
     : null;
-  const fallbackUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
+  const fallbackUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases';
+  const serverTag = release?.tag_name.replace(/^v/, '') ?? '<beta-version>';
   const paths: ServerInstallPath[] = [
     {
       id: 'linux',
       label: 'Linux binary',
       title: 'Install directly on a server',
       summary: 'Best when RustFS should run as a small native service with explicit control over disks and systemd.',
-      bestFor: 'Production hosts, bare metal, VMs',
+      bestFor: 'Bare metal and VM evaluation',
       Icon: BinaryIcon,
       commandTitle: 'Fast validation',
       command: [
@@ -264,7 +272,7 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
       commandTitle: 'Single-node container',
       command: [
         'docker volume create rustfs-data',
-        'docker run -d --name rustfs -p 9000:9000 -p 9001:9001 -v rustfs-data:/data rustfs/rustfs:latest /data',
+        `docker run -d --name rustfs -p 9000:9000 -p 9001:9001 -v rustfs-data:/data rustfs/rustfs:${serverTag} /data`,
         'docker logs -f rustfs',
       ],
       chips: ['9000 S3 API', '9001 Console', '/data volume'],
@@ -324,16 +332,38 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
   const activePath = paths.find((path) => path.id === activePathId) ?? paths[0];
   const ActiveIcon = activePath.Icon;
 
+  const handlePathKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    let nextIndex = index;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      nextIndex = (index + 1) % paths.length;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      nextIndex = (index - 1 + paths.length) % paths.length;
+    } else if (event.key === 'Home') {
+      nextIndex = 0;
+    } else if (event.key === 'End') {
+      nextIndex = paths.length - 1;
+    } else {
+      return;
+    }
+
+    event.preventDefault();
+    setActivePathId(paths[nextIndex].id);
+    event.currentTarget.parentElement
+      ?.querySelectorAll<HTMLButtonElement>('[role="tab"]')
+      [nextIndex]?.focus();
+  };
+
   return (
-    <div className="motion-card overflow-hidden border border-border bg-card">
-      <div className="grid lg:grid-cols-[20rem_1fr]">
+    <div className="overflow-hidden border-y border-border">
+      <div className="grid lg:grid-cols-[18rem_1fr]">
         <div className="border-b border-border bg-background/40 lg:border-b-0 lg:border-r">
           <div className="border-b border-border p-5">
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-brand">Choose one path</p>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">Pick the environment first. Only the matching command stays visible.</p>
           </div>
           <div className="grid" role="tablist" aria-label="Server install paths">
-            {paths.map((path) => {
+            {paths.map((path, index) => {
               const Icon = path.Icon;
               const isActive = path.id === activePath.id;
 
@@ -342,20 +372,23 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
                   key={path.id}
                   type="button"
                   role="tab"
+                  id={`install-path-tab-${path.id}`}
                   aria-selected={isActive}
                   aria-controls={`install-path-${path.id}`}
                   onClick={() => setActivePathId(path.id)}
+                  onKeyDown={(event) => handlePathKeyDown(event, index)}
+                  tabIndex={isActive ? 0 : -1}
                   className={cn(
-                    "group grid grid-cols-[2.5rem_1fr] gap-3 border-b border-border px-5 py-4 text-left transition-colors last:border-b-0 hover:bg-muted/35",
-                    isActive && "bg-brand text-brand-foreground hover:bg-brand"
+                    "group grid grid-cols-[2.5rem_1fr] gap-3 border-b border-border border-l-2 border-l-transparent px-5 py-4 text-left transition-colors last:border-b-0 hover:bg-muted/35",
+                    isActive && "border-l-brand bg-brand/10"
                   )}
                 >
-                  <span className={cn("motion-icon-tile flex size-10 items-center justify-center bg-background text-brand", isActive && "bg-brand-foreground/15 text-brand-foreground")}>
+                  <span className="motion-icon-tile flex size-10 items-center justify-center text-brand">
                     <Icon className="size-5" />
                   </span>
                   <span>
-                    <span className={cn("block text-sm font-semibold text-foreground", isActive && "text-brand-foreground")}>{path.label}</span>
-                    <span className={cn("mt-1 block text-xs leading-5 text-muted-foreground", isActive && "text-brand-foreground/75")}>{path.bestFor}</span>
+                    <span className={cn("block text-sm font-semibold text-foreground", isActive && "text-brand")}>{path.label}</span>
+                    <span className="mt-1 block text-xs leading-5 text-muted-foreground">{path.bestFor}</span>
                   </span>
                 </button>
               );
@@ -363,21 +396,26 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
           </div>
         </div>
 
-        <div id={`install-path-${activePath.id}`} role="tabpanel" className="min-w-0">
+        <div
+          id={`install-path-${activePath.id}`}
+          role="tabpanel"
+          aria-labelledby={`install-path-tab-${activePath.id}`}
+          className="min-w-0"
+        >
           <div className="grid gap-6 border-b border-border p-5 sm:p-6 lg:grid-cols-[1fr_auto] lg:items-start">
             <div>
               <div className="flex items-center gap-3">
-                <span className="motion-icon-tile flex size-11 items-center justify-center bg-brand text-brand-foreground">
-                  <ActiveIcon className="size-5" />
+                <span className="motion-icon-tile flex size-5 items-center justify-center text-brand">
+                  <ActiveIcon className="size-4" />
                 </span>
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">{activePath.label}</p>
               </div>
-              <h3 className="mt-5 text-3xl font-semibold leading-tight text-foreground">{activePath.title}</h3>
+              <h3 className="mt-6 text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">{activePath.title}</h3>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">{activePath.summary}</p>
             </div>
-            <div className="flex flex-wrap gap-2 lg:max-w-72 lg:justify-end">
+            <div className="flex flex-wrap gap-x-5 gap-y-3 lg:max-w-72 lg:justify-end">
               {activePath.chips.map((chip) => (
-                <span key={chip} className="border border-border bg-background px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                <span key={chip} className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                   {chip}
                 </span>
               ))}
@@ -416,16 +454,16 @@ function HelpPanel() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Support surface"
-          title="Need a production deployment path?"
-          description="Move from local validation to production with documentation, community help, or direct planning support."
+          title="Need a production readiness review?"
+          description="Move from local validation toward production only after reviewing compatibility, topology, operations, and the current beta status."
         />
 
-        <div className="grid border border-border bg-card md:grid-cols-3">
+        <div className="grid gap-8 border-y border-border py-8 md:grid-cols-3">
           <a
             href="https://docs.rustfs.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="motion-card group border-b border-border p-6 transition-colors hover:bg-muted/40 md:border-b-0 md:border-r"
+            className="motion-card group border-t border-border pt-5 transition-colors hover:border-foreground/35"
           >
             <BookOpenIcon className="motion-icon-tile size-5 text-brand" />
             <h3 className="mt-6 text-xl font-semibold text-foreground">Read the docs</h3>
@@ -436,7 +474,7 @@ function HelpPanel() {
             href="https://github.com/rustfs/rustfs/issues"
             target="_blank"
             rel="noopener noreferrer"
-            className="motion-card group border-b border-border p-6 transition-colors hover:bg-muted/40 md:border-b-0 md:border-r"
+            className="motion-card group border-t border-border pt-5 transition-colors hover:border-foreground/35"
           >
             <MessageCircleIcon className="motion-icon-tile size-5 text-brand" />
             <h3 className="mt-6 text-xl font-semibold text-foreground">Report an issue</h3>
@@ -447,7 +485,7 @@ function HelpPanel() {
             href="https://discord.gg/NcKBCEJp6P"
             target="_blank"
             rel="noopener noreferrer"
-            className="motion-card group p-6 transition-colors hover:bg-muted/40"
+            className="motion-card group border-t border-border pt-5 transition-colors hover:border-foreground/35"
           >
             <ServerIcon className="motion-icon-tile size-5 text-brand" />
             <h3 className="mt-6 text-xl font-semibold text-foreground">Join Discord</h3>
@@ -461,7 +499,7 @@ function HelpPanel() {
 }
 
 export default function DownloadPageClient({ release, cliRelease }: DownloadPageClientProps) {
-  const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
+  const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases';
 
   return (
     <main className="relative z-10 min-h-[100dvh] text-foreground">
@@ -469,9 +507,9 @@ export default function DownloadPageClient({ release, cliRelease }: DownloadPage
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.96fr_1.04fr] lg:items-end">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Download surface</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Public beta / download</p>
               <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-                Install RustFS for real deployments.
+                Evaluate RustFS, then plan the deployment.
               </h1>
             </div>
             <HeroStripeCard releaseUrl={releaseUrl} />
@@ -479,6 +517,19 @@ export default function DownloadPageClient({ release, cliRelease }: DownloadPage
 
           <div className="mt-12">
             <ReleasePanel release={release} />
+            <div className="grid gap-3 border-b border-border py-5 text-xs leading-6 sm:grid-cols-[1fr_auto] sm:items-center">
+              <p className="text-muted-foreground">
+                RustFS is in public beta. Validate required S3 operations, recovery behavior, and upgrade procedures before storing durable production data.
+              </p>
+              <a
+                className="font-semibold text-foreground hover:text-brand"
+                href="https://github.com/rustfs/rustfs#feature--status"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Review feature status ↗
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -487,13 +538,13 @@ export default function DownloadPageClient({ release, cliRelease }: DownloadPage
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Server install paths"
-            title="Start small, then keep the same operating model."
-            description="Choose the environment first, then copy the exact command for that path."
+            title="Start small, then validate the operating model."
+            description="Choose the environment first, copy the exact command, and record what the path does and does not prove."
           />
 
           <ServerInstallTabs release={release} />
 
-          <div className="mt-8 flex flex-col gap-3 border border-border bg-muted/25 p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-10 flex flex-col gap-4 border-y border-border py-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm font-semibold text-foreground">Prefer browsing every release artifact?</p>
               <p className="mt-1 text-xs leading-6 text-muted-foreground">Use GitHub when you need older versions, checksums, or non-default packages.</p>

@@ -17,17 +17,19 @@ image: '/images/blog/migrating-from-minio-to-rustfs-a-technical-guide/minio-to-r
 ---
 > Original author: [https://github.com/soakes](https://github.com/soakes). Many thanks for his submission and contribution.
 
-In the evolving landscape of object storage, **RustFS** has emerged as a compelling alternative to MinIO. While MinIO set the standard for self-hosted S3-compatible storage, its shift to the AGPLv3 license has created compliance challenges for many organizations. RustFS addresses this by offering a high-performance, memory-safe architecture built in Rust, released under the permissive **Apache 2.0** license.
+> **Current status:** RustFS is in public beta. Use this as a data-copy evaluation guide, not a zero-downtime migration guarantee. Pin exact versions, back up both configuration and data, validate required S3 operations, and rehearse rollback before a production cutover.
 
-This guide outlines the technical process for migrating data from an existing MinIO cluster to a new RustFS deployment with minimal downtime.
+In the evolving landscape of object storage, **RustFS** is an Apache 2.0 alternative that teams can evaluate alongside MinIO. RustFS is built in Rust and exposes an evolving S3-compatible surface.
+
+This guide outlines a technical process for copying data from an existing MinIO cluster to an isolated RustFS deployment before a controlled cutover.
 
 ## Why Migrate?
 
 Before executing the migration, it is important to understand the technical drivers:
 
 1.  **Licensing Compliance:** RustFS uses the Apache 2.0 license, allowing for broader integration in commercial and proprietary environments without the copyleft implications of MinIO’s AGPLv3.
-2.  **Performance Stability:** Written in Rust, RustFS eliminates the Garbage Collection (GC) pauses inherent in Go-based systems like MinIO. This results in lower tail latency and more consistent throughput, particularly under high load.
-3.  **S3 Compatibility:** RustFS maintains strict API compatibility with Amazon S3, allowing existing tooling (Terraform, SDKs, backup scripts) to function without modification.
+2.  **Memory-Safe Implementation:** RustFS is written in Rust and gives operators a different implementation to benchmark against their own latency and throughput requirements.
+3.  **S3 Evaluation Path:** Existing tooling such as SDKs, backup scripts, and `mc` can be tested against the operations each workload requires.
 
 ## Migration Tooling: The MinIO Client (`mc`)
 
@@ -42,13 +44,13 @@ The most robust tool for this migration is, ironically, the **MinIO Client (`mc`
 *   **Source:** A running MinIO instance.
 *   **Destination:** A running RustFS instance.
 *   **Tooling:** `mc` installed on a host with network access to both clusters.
-*   **Credentials:** **Root/Admin Access Keys** for both the source and destination.
+*   **Credentials:** Dedicated, time-limited migration credentials with only the permissions the copy and verification steps require.
 
 ### A Note on Access Credentials
 
-For this migration, we strongly recommend using the **Root User (Admin) Access Keys** for both the MinIO source and the RustFS destination.
+Prefer dedicated migration credentials over normal root or admin credentials. Grant bucket listing, object read/write, metadata, and bucket creation only where the selected `mc` command requires them, then revoke the credentials after validation.
 
-While least-privilege principles usually apply, the migration process involves `mc mirror`, which attempts to replicate the entire bucket structure. If a bucket exists on the source but not the destination, `mc` needs the `s3:CreateBucket` permission to create it automatically. Using root credentials ensures the client has full authority to replicate the namespace structure without permission errors interrupting the transfer.
+If a bucket exists on the source but not the destination, `mc` may require `s3:CreateBucket`. Add that permission to the temporary destination policy instead of broadening everyday operator credentials.
 
 ## Step-by-Step Migration
 
@@ -86,9 +88,9 @@ For backup or archive data that is not actively being written to.
 mc mirror minio-old/production-data rustfs-new/production-data
 ```
 
-#### Option B: Active Synchronization (Zero Downtime)
+#### Option B: Active Synchronization Before a Write Freeze
 
-For production workloads, use the `--watch` flag. `mc` will perform an initial sync of existing data and then continuously monitor the source for new objects, replicating them to the destination in near real-time.
+For a rehearsal, the `--watch` flag can continue copying new objects after the initial sync. This does not make the cutover zero downtime: concurrent overwrites, deletes, versions, events, and configuration require separate verification, and a final write freeze is still needed for a controlled handoff.
 
 ```
 mc mirror --watch --overwrite minio-old/production-data rustfs-new/production-data
@@ -115,8 +117,8 @@ After the cutover, verify data integrity using the `diff` command. This compares
 mc diff minio-old/production-data rustfs-new/production-data
 ```
 
-If the command returns no output, the datasets are identical.
+If the command returns no output, it found no differences in the fields it checks. Record separate object-count, version, metadata, retention, identity, event, and application-level validation results.
 
 ## Conclusion
 
-Migrating to RustFS offers a path to a more performant and permissively licensed object storage infrastructure. By leveraging standard tools like `mc` and ensuring proper administrative privileges during the migration, organizations can execute this transition with confidence and minimal operational impact.
+RustFS offers a permissively licensed object storage option to evaluate. Use standard tools such as `mc` with scoped credentials, evidence-based acceptance checks, a write-freeze plan, and a tested rollback path.

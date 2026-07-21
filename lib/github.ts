@@ -91,18 +91,14 @@ async function getLatestReleaseForRepo(repo: string): Promise<GitHubRelease | nu
     if (response.ok) {
       const releases = await response.json()
 
-      // Prioritize latest non-draft version with assets
-      const releaseWithAssets = releases.find((release: GitHubRelease) =>
-        !release.draft && release.assets && release.assets.length > 0
-      )
+      const publishedReleases = (releases as GitHubRelease[])
+        .filter((release) => !release.draft)
+        .sort((left, right) => Date.parse(right.published_at) - Date.parse(left.published_at))
 
-      if (releaseWithAssets) {
-        return releaseWithAssets
-      }
+      const withAssets = publishedReleases.filter((release) => release.assets.length > 0)
+      const recommended = withAssets.find((release) => !/preview/i.test(release.tag_name))
 
-      // If no version with assets found, return latest non-draft version
-      const latestNonDraft = releases.find((release: GitHubRelease) => !release.draft)
-      return latestNonDraft || null
+      return recommended ?? withAssets[0] ?? publishedReleases[0] ?? null
     }
   } catch (error) {
     if (isAbortError(error)) {

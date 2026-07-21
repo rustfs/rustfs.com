@@ -13,7 +13,7 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { ArrowUpRightIcon, MailIcon, MessageCircleIcon } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import HomeSectionHeader from './home-section-header'
 
 interface ContactFormProps {
@@ -100,8 +100,11 @@ function GitHubIcon({ className }: { className?: string }) {
 export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [submitError, setSubmitError] = useState('')
   const [hCaptchaToken, setHCaptchaToken] = useState<string | null>(null)
+  const [shouldLoadCaptcha, setShouldLoadCaptcha] = useState(false)
   const captchaRef = useRef<HCaptcha>(null)
+  const captchaMountRef = useRef<HTMLDivElement>(null)
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -125,17 +128,40 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
     setHCaptchaToken(null)
   }
 
+  useEffect(() => {
+    const mount = captchaMountRef.current
+
+    if (!mount || shouldLoadCaptcha) {
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadCaptcha(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '0px' },
+    )
+
+    observer.observe(mount)
+
+    return () => observer.disconnect()
+  }, [shouldLoadCaptcha])
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (!hCaptchaToken) {
       setSubmitStatus('error')
-      alert('Please complete the captcha verification')
+      setSubmitError('Complete the verification step before sending your deployment details.')
       return
     }
 
     setIsSubmitting(true)
     setSubmitStatus('idle')
+    setSubmitError('')
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -174,9 +200,11 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
         captchaRef.current?.resetCaptcha()
       } else {
         setSubmitStatus('error')
+        setSubmitError('We could not send your message. Please try again or email hello@rustfs.com.')
       }
     } catch {
       setSubmitStatus('error')
+      setSubmitError('We could not send your message. Please try again or email hello@rustfs.com.')
     } finally {
       setIsSubmitting(false)
     }
@@ -191,16 +219,20 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
         <HomeSectionHeader
           sectionNumber={sectionNumber}
           eyebrow="Contact channel"
-          title="Contact Us"
-          description="Get in touch with the RustFS team for deployment planning, migration support, and enterprise requirements."
+          title="Bring the deployment context"
+          description="Tell us what you are evaluating: workload, capacity, topology, required S3 operations, migration window, and support expectations."
           headingLevel={1}
         />
 
         <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] xl:grid-cols-[minmax(0,1fr)_24rem]">
           <form
             onSubmit={handleSubmit}
-            className="motion-card min-w-0 border border-border bg-card p-6 sm:p-8"
+            className="min-w-0 border border-border bg-card p-6 sm:p-8"
           >
+          <div className="mb-8 grid gap-2 border-b border-border pb-5 sm:grid-cols-[1fr_auto] sm:items-end">
+            <p className="text-sm font-semibold text-foreground">Deployment details</p>
+            <p className="text-xs leading-6 text-muted-foreground">We will use these details only to respond to this request.</p>
+          </div>
           <div className="grid gap-6 sm:grid-cols-2">
             <div>
               <label htmlFor="firstName" className="mb-2 block text-sm font-medium text-foreground">
@@ -269,11 +301,10 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
           <div className="mt-6 grid gap-6 sm:grid-cols-2">
             <div>
               <label htmlFor="country" className="mb-2 block text-sm font-medium text-foreground">
-                Country <span className="text-destructive" aria-hidden="true">*</span>
+                Country <span className="text-sm text-muted-foreground">(Optional)</span>
               </label>
               <Select
                 name="country"
-                required
                 value={formData.country}
                 onValueChange={(value) => setFormData((previous) => ({ ...previous, country: value }))}
               >
@@ -293,13 +324,12 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
             </div>
             <div>
               <label htmlFor="company" className="mb-2 block text-sm font-medium text-foreground">
-                Company <span className="text-destructive" aria-hidden="true">*</span>
+                Company <span className="text-sm text-muted-foreground">(Optional)</span>
               </label>
               <Input
                 id="company"
                 name="company"
                 type="text"
-                required
                 placeholder="Enter your company name"
                 value={formData.company}
                 onChange={handleChange}
@@ -317,25 +347,30 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
               name="message"
               required
               rows={6}
-              placeholder="Please tell us about your inquiry, requirements, or how we can help you. Include any specific details about your use case, expected scale, or technical requirements."
+              placeholder="Include workload, expected capacity, topology, required S3 operations, current platform, migration window, and support expectations."
               value={formData.message}
               onChange={handleChange}
               className="w-full text-foreground"
             />
           </div>
 
-          <div className="mt-8 flex justify-center">
-            <HCaptcha
-              sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
-              onVerify={handleHCaptchaVerify}
-              onExpire={handleHCaptchaExpire}
-              ref={captchaRef}
-              reCaptchaCompat={false}
-            />
+          <div ref={captchaMountRef} className="mt-8 flex min-h-20 items-center justify-center">
+            {shouldLoadCaptcha ? (
+              <HCaptcha
+                sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+                onVerify={handleHCaptchaVerify}
+                onExpire={handleHCaptchaExpire}
+                ref={captchaRef}
+                reCaptchaCompat={false}
+                tabIndex={-1}
+              />
+            ) : (
+              <p className="text-xs text-muted-foreground">Verification loads when this step is visible.</p>
+            )}
           </div>
 
           {submitStatus === 'success' && (
-            <div className="mt-6 bg-success/10 p-4 dark:bg-success/20">
+            <div role="status" aria-live="polite" className="mt-6 bg-success/10 p-4 dark:bg-success/20">
               <p className="text-sm font-medium text-success">
                 Thank you for your message! We&apos;ll get back to you soon.
               </p>
@@ -343,9 +378,9 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
           )}
 
           {submitStatus === 'error' && (
-            <div className="mt-6 bg-destructive/10 p-4 dark:bg-destructive/20">
+            <div role="alert" className="mt-6 bg-destructive/10 p-4 dark:bg-destructive/20">
               <p className="text-sm font-medium text-destructive">
-                Something went wrong. Please try again later.
+                {submitError}
               </p>
             </div>
           )}
@@ -357,12 +392,12 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
               size="lg"
               className="h-12 min-w-56 px-6 text-sm font-semibold"
             >
-              {isSubmitting ? 'Submitting...' : 'Submit'}
+              {isSubmitting ? 'Sending...' : 'Send deployment details'}
             </Button>
           </div>
           </form>
 
-          <div className="grid border border-border bg-card/70 sm:grid-cols-3 lg:grid-cols-1">
+          <div className="grid border-y border-border sm:grid-cols-3 lg:grid-cols-1">
             {CONTACT_CHANNELS.map((channel) => {
               const Icon = channel.icon
 

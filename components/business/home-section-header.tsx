@@ -20,27 +20,27 @@ export default function HomeSectionHeader({
   const Heading = headingLevel === 1 ? "h1" : "h2";
 
   return (
-    <div className={cn("motion-reveal mb-10 lg:mb-14", className)}>
-      <div className="relative h-px bg-border">
-        <span className="absolute left-0 top-0 h-0.5 w-28 -translate-y-px bg-brand" />
+    <div className={cn("motion-reveal mb-9 lg:mb-12", className)}>
+      <div className="relative h-px bg-border/70">
+        <span className="absolute left-0 top-0 h-px w-16 bg-brand" />
       </div>
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+      <div className="mt-7 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
         <div className="min-w-0">
-          <div className="mb-7 flex items-center gap-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          <div className="mb-5 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             {sectionNumber ? (
-              <span className="bg-brand px-4 py-3 font-mono text-sm tracking-[0.14em] text-brand-foreground">
+              <span className="font-mono text-xs tracking-[0.16em] text-brand">
                 {sectionNumber}
               </span>
             ) : null}
-            <span className="font-mono text-brand">&gt;</span>
+            <span className="font-mono text-border">/</span>
             <span>{eyebrow}</span>
           </div>
-          <Heading className="text-4xl font-bold leading-none text-foreground md:text-5xl lg:text-6xl">
+          <Heading className="text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-foreground md:text-5xl">
             {title}
           </Heading>
         </div>
-        <p className="max-w-2xl text-base leading-8 text-muted-foreground lg:justify-self-end lg:text-right">
+        <p className="max-w-2xl text-[15px] leading-7 text-muted-foreground lg:justify-self-end lg:text-right">
           {description}
         </p>
       </div>

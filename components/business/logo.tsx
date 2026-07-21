@@ -1,12 +1,15 @@
+import { cn } from '@/lib/utils';
+
 export function Logo({
   className,
   ...props
 }: { className?: string } & React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      {...props}
       viewBox="0 0 360 61"
       fill="none"
-      className="h-full w-auto min-h-5"
+      className={cn("block h-5 w-auto max-w-full", className)}
       xmlns="http://www.w3.org/2000/svg"
     >
         <path

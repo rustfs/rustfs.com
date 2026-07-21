@@ -25,8 +25,8 @@ export default function MacOSDownloadSection({ platform, release, className }: M
     ? getDownloadUrlForPlatform(release, 'macos', 'x86_64')
     : null;
 
-  const fallbackAarch64Url = 'https://github.com/rustfs/rustfs/releases/latest';
-  const fallbackX86_64Url = 'https://github.com/rustfs/rustfs/releases/latest';
+  const fallbackAarch64Url = 'https://github.com/rustfs/rustfs/releases';
+  const fallbackX86_64Url = 'https://github.com/rustfs/rustfs/releases';
 
   const finalAarch64Url = aarch64Url || fallbackAarch64Url;
   const finalX86_64Url = x86_64Url || fallbackX86_64Url;

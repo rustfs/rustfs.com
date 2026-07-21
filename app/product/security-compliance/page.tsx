@@ -2,8 +2,8 @@ import FeaturePage, { type FeaturePageSection } from "@/components/business/feat
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Enterprise Security & Compliance | RustFS",
-  description: "RustFS provides enterprise-grade authentication, authorization, log auditing, event handling, SSE/KMS encryption, OIDC SSO, and mTLS security controls.",
+  title: "Security Controls & Review Surface | RustFS",
+  description: "Review RustFS identity, temporary credentials, encryption, OIDC, mTLS, and audit controls by current feature status. KMS remains under validation.",
   keywords: [
     "RustFS",
     "security compliance",
@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 const sections: FeaturePageSection[] = [
   {
     title: "Identity and access management",
+    status: "Available in beta",
     description: "Define clear access boundaries for users, services, applications, and automated agents without relying on long-lived shared credentials.",
     items: [
       {
@@ -37,40 +38,42 @@ const sections: FeaturePageSection[] = [
         description: "Separate storage operations, security administration, and application access into explicit permission surfaces.",
       },
       {
-        title: "Zero-trust by default",
-        description: "Enforce the principle of least privilege across the entire storage environment.",
+        title: "Least-privilege review",
+        description: "Map policy and credential boundaries to the principle of least privilege for the intended environment.",
       },
     ],
   },
   {
     title: "Data encryption",
+    status: "Mixed coverage",
     description: "Protect object data at rest and keep key ownership aligned with enterprise security requirements.",
     items: [
       {
-        title: "Comprehensive SSE support",
-        description: "Use server-side encryption modes including SSE-S3, SSE-KMS, and SSE-C for workload-specific protection.",
+        title: "Server-side encryption modes",
+        description: "Verify SSE-S3, SSE-KMS, and SSE-C behavior individually for workload-specific protection; KMS remains under validation.",
       },
       {
-        title: "Seamless KMS integration",
-        description: "Centralize key lifecycle, access control, and auditability through enterprise-grade key management systems.",
+        title: "KMS integration under validation",
+        description: "Evaluate key lifecycle, access control, and auditability requirements while KMS support remains under active validation.",
       },
       {
         title: "Encryption-by-design operations",
         description: "Keep encryption decisions close to storage policy so secure defaults can be applied consistently.",
       },
       {
-        title: "Compliance-ready key boundaries",
-        description: "Support deployments that need explicit separation between storage operators, application teams, and key owners.",
+        title: "Reviewable key boundaries",
+        description: "Model separation between storage operators, application teams, and key owners during the security review.",
       },
     ],
   },
   {
     title: "Authentication",
+    status: "Verify integration",
     description: "Integrate RustFS into enterprise identity systems without turning login and operator access into custom glue code.",
     items: [
       {
         title: "Unified OIDC-driven SSO",
-        description: "Integrate seamlessly with enterprise identity providers to enable frictionless single sign-on.",
+        description: "Evaluate OIDC integration with the identity provider and session policies used by your organization.",
       },
       {
         title: "Visual console integration",
@@ -88,20 +91,22 @@ const sections: FeaturePageSection[] = [
   },
   {
     title: "mTLS",
+    status: "Verify integration",
     description: "Protect service-to-service traffic with mutual identity verification and certificate automation.",
     items: [
       {
-        title: "Zero-trust mTLS",
-        description: "Enforce mutual TLS verification to achieve bi-directional identity authentication across communications.",
+        title: "Mutual TLS review",
+        description: "Validate mutual TLS verification and service identity across the communications paths you plan to operate.",
       },
       {
-        title: "Automated certificate management",
-        description: "Support cert-manager natively to automate certificate issuance and rotation.",
+        title: "Certificate lifecycle",
+        description: "Verify certificate issuance and rotation with the tooling used in your deployment, including cert-manager where applicable.",
       },
     ],
   },
   {
     title: "Security audit",
+    status: "Available in beta",
     description: "Turn storage activity into reviewable operational evidence for incident response and compliance processes.",
     items: [
       {
@@ -113,7 +118,7 @@ const sections: FeaturePageSection[] = [
         description: "Forward audit trails to Kafka and Pulsar for deeper security analytics.",
       },
       {
-        title: "Compliance evidence workflows",
+        title: "Security evidence workflows",
         description: "Help operators answer who accessed what, when, and through which controlled interface.",
       },
       {
@@ -127,13 +132,13 @@ const sections: FeaturePageSection[] = [
 export default function SecurityCompliancePage() {
   return (
     <FeaturePage
-      title="Security & Compliance"
-      description="RustFS provides a defense-in-depth security foundation for enterprise object storage: policy-based access control, temporary credentials, server-side encryption, KMS integration, OIDC authentication, mTLS, and auditable operations."
+      title="Security Controls"
+      description="Review policy-based access, temporary credentials, server-side encryption, OIDC, mTLS, and audit workflows as separate controls. RustFS product features support a security program; they do not constitute a compliance certification."
       sections={sections}
       variant="security"
       links={[
-        { label: "Review security model", href: "/contact-us" },
-        { label: "Read docs", href: "/docs", variant: "outline" },
+        { label: "Read security docs", href: "/docs" },
+        { label: "Review security model", href: "/contact-us", variant: "outline" },
       ]}
     />
   );

@@ -17,7 +17,9 @@ image: >-
 
 We are thrilled to announce that **RustFS** has officially joined the [**NVIDIA Inception program**](https://www.nvidia.com/en-us/startups). This marks a pivotal milestone for us, serving as powerful validation of the progress we’ve made over the past nine months and the growing market recognition of our vision.
 
-RustFS is a high-performance, distributed object storage system built from the ground up in **Rust**. Released under the **Apache 2.0 license**, it offers full S3 compatibility and serves as a seamless, high-efficiency alternative to MinIO. Since going open-source last July, our momentum has been incredible:
+> **Current status:** Program membership is not a technical certification or product endorsement. RustFS remains in public beta, while RDMA and DPU work described below remains roadmap direction.
+
+RustFS is an S3-compatible object storage system built in **Rust** and released under the **Apache 2.0 license**. Teams considering it as an alternative to MinIO should verify the exact S3 operations, migration steps, and operational behavior their workloads require.
 
 ![](/images/blog/big-news-rustfs-joins-the-nvidia-inception-program/rustfs-key-data-summary-1-1024x572.png)
 
@@ -27,11 +29,11 @@ Object storage is rapidly becoming the backbone of the AI era. From large-scale 
 
 Our vision for AI-native storage involves offloading the network stack (**RDMA**) and compute-intensive tasks (such as **erasure coding, compression, and encryption**) directly to the **DPU**. By doing so, we ensure that data storage is no longer a bottleneck for AI workloads, significantly driving up overall computational efficiency.
 
-Through the NVIDIA Inception program, we will leverage NVIDIA’s cutting-edge platforms and technical resources to accelerate the development and deployment of our AI-centric features.
+Through the NVIDIA Inception program, the project can explore NVIDIA platforms and technical resources while keeping any resulting AI-oriented features subject to normal open development, testing, and release status.
 
 ### What’s Next?
 
-Currently, our team is laser-focused on hardening the core functionality and security of RustFS. We are on track to transition RustFS from **Alpha to Beta** later this month. Looking further ahead, we are planning the official **General Availability (GA) release for July**.
+The project has since entered **public beta**. Current maturity and feature availability should be read from the [repository status](https://github.com/rustfs/rustfs#feature--status), not the older schedule published with this announcement.
 
 We currently use GitHub as our primary feedback channel. If you encounter any issues while using RustFS, please let us know by opening an **[issue](https://github.com/rustfs/rustfs/issues)** on our [rustfs/rustfs](https://github.com/rustfs/rustfs). We also warmly welcome contributions via [pull requests](https://github.com/rustfs/rustfs/pulls).
 

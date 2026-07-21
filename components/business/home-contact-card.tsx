@@ -6,14 +6,14 @@ export default function HomeContactCard() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden border-t border-border bg-background py-20 sm:py-24"
+      className="relative overflow-hidden border-t border-border bg-background py-20 sm:py-24 lg:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           sectionNumber="08"
           eyebrow="Contact channel"
           title="Contact Us"
-          description="Get in touch with the RustFS team for deployment planning, migration support, and enterprise requirements."
+          description="Bring the workload, capacity, topology, migration window, and support expectations that shape your decision."
         />
 
         <Link
@@ -23,13 +23,13 @@ export default function HomeContactCard() {
         >
           <span
             aria-hidden="true"
-            className="absolute inset-0 opacity-[0.18] [background-image:repeating-linear-gradient(135deg,transparent_0_16px,var(--brand-foreground)_16px_17px,transparent_17px_34px)]"
+            className="absolute inset-0 opacity-[0.1] [background-image:repeating-linear-gradient(135deg,transparent_0_16px,var(--brand-foreground)_16px_17px,transparent_17px_34px)]"
           />
           <div className="relative p-6 pr-24 sm:p-8 sm:pr-28 lg:p-10 lg:pr-32">
             <span
               className="relative inline-flex border border-brand-foreground/25 bg-brand-foreground/10 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-foreground/75"
             >
-              Production handoff
+              Deployment review
             </span>
             <h3 className="relative mt-4 max-w-2xl text-2xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
               Talk to the RustFS team.

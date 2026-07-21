@@ -82,24 +82,24 @@
 :root {
   --radius: 0rem;
   --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
-  --motion-ease-emphasized: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  --motion-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
   --motion-duration-fast: 150ms;
-  --motion-duration-standard: 200ms;
-  --motion-duration-slow: 300ms;
-  --card: #ffffff;
+  --motion-duration-standard: 240ms;
+  --motion-duration-slow: 420ms;
+  --card: #fbfbfc;
   --card-foreground: #171717;
   --popover: #ffffff;
   --popover-foreground: #171717;
   --primary: #171717;
   --primary-foreground: #ffffff;
-  --secondary: #f2f2f2;
+  --secondary: #f5f5f6;
   --secondary-foreground: #171717;
-  --muted: #f2f2f2;
-  --muted-foreground: #4d4d4d;
-  --accent: #ebebeb;
+  --muted: #f5f5f6;
+  --muted-foreground: #5f6067;
+  --accent: #ededf0;
   --accent-foreground: #171717;
   --destructive: oklch(0.58 0.22 27);
-  --brand: #006bff;
+  --brand: #2568f5;
   --brand-foreground: #ffffff;
   --success: #16a34a;
   --success-foreground: #ffffff;
@@ -107,7 +107,7 @@
   --warning-foreground: #ffffff;
   --info: #06b6d4;
   --info-foreground: #ffffff;
-  --border: #0000001a;
+  --border: #11182717;
   --input: #00000024;
   --ring: #006bff;
   --chart-1: oklch(0.809 0.105 251.813);
@@ -128,22 +128,22 @@
 }
 
 .dark {
-  --background: #000000;
-  --foreground: #ededed;
-  --card: #1a1a1a;
-  --card-foreground: #ededed;
-  --popover: #1a1a1a;
-  --popover-foreground: #ededed;
-  --primary: #ededed;
-  --primary-foreground: #000000;
-  --secondary: #1f1f1f;
-  --secondary-foreground: #ededed;
-  --muted: #1a1a1a;
-  --muted-foreground: #a0a0a0;
-  --accent: #292929;
-  --accent-foreground: #ededed;
+  --background: #050506;
+  --foreground: #f2f2f3;
+  --card: #0c0d10;
+  --card-foreground: #f2f2f3;
+  --popover: #101115;
+  --popover-foreground: #f2f2f3;
+  --primary: #f2f2f3;
+  --primary-foreground: #050506;
+  --secondary: #15161a;
+  --secondary-foreground: #f2f2f3;
+  --muted: #15161a;
+  --muted-foreground: #a3a3aa;
+  --accent: #1a1c21;
+  --accent-foreground: #f2f2f3;
   --destructive: oklch(0.704 0.191 22.216);
-  --brand: #006efe;
+  --brand: #3474ff;
   --brand-foreground: #ffffff;
   --success: #16a34a;
   --success-foreground: #ffffff;
@@ -151,7 +151,7 @@
   --warning-foreground: #ffffff;
   --info: #06b6d4;
   --info-foreground: #ffffff;
-  --border: #ffffff21;
+  --border: #ffffff17;
   --input: #ffffff24;
   --ring: #47a8ff;
   --chart-1: oklch(0.809 0.105 251.813);
@@ -176,6 +176,7 @@
 
   body {
     @apply bg-background font-sans text-foreground;
+    text-rendering: optimizeLegibility;
   }
 
   :where(a, button, input, textarea, select, [tabindex]):focus-visible {
@@ -239,7 +240,7 @@
   }
 
   .motion-button:hover::before {
-    opacity: 0.45;
+    opacity: 0.18;
     background-position: 34px 0;
   }
 
@@ -254,18 +255,16 @@
   .motion-card {
     transform: translateZ(0);
     transition-duration: var(--motion-duration-standard);
-    transition-property: transform, background-color, border-color, box-shadow, filter;
+    transition-property: background-color, border-color, color;
     transition-timing-function: var(--motion-ease-standard);
   }
 
   .motion-card:hover {
-    border-color: color-mix(in oklch, var(--brand) 22%, var(--border));
-    box-shadow: 0 1px 2px color-mix(in oklch, var(--background) 76%, transparent);
-    transform: translateY(-1px);
+    border-color: color-mix(in oklch, var(--brand) 10%, var(--border));
   }
 
   .motion-card:active {
-    transform: translateY(0) scale(0.998);
+    border-color: color-mix(in oklch, var(--brand) 18%, var(--border));
   }
 
   .motion-icon-tile {
