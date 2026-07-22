@@ -60,7 +60,7 @@ function PricingCard({
             <span className="border-r border-border px-3 py-2 text-muted-foreground">Path</span>
             <span className="px-3 py-2 text-foreground">{label}</span>
             <span className="border-l border-border px-3 py-2 text-muted-foreground">
-              {price === "$0" ? "OSS" : price === "Custom" ? "SLA" : "Plan"}
+              {price === "$0" ? "OSS" : "Plan"}
             </span>
           </div>
         </div>
@@ -104,9 +104,9 @@ export default function PricingPage() {
           </div>
         </div>
 
-        <div className="mt-12 grid items-stretch gap-8 border-y border-border lg:grid-cols-3 lg:gap-0 lg:divide-x lg:divide-border">
+        <div className="mt-12 grid items-stretch gap-8 border-y border-border lg:grid-cols-2 lg:gap-0 lg:divide-x lg:divide-border">
           <PricingCard
-            label="Open source"
+            label="Free"
             title="Self-hosted RustFS"
             price="$0"
             description="Use RustFS under Apache 2.0 for development, testing, and production deployments you operate yourself."
@@ -130,19 +130,6 @@ export default function PricingPage() {
               "Capacity and topology review",
               "Operational readiness guidance",
               "Enterprise requirements discovery",
-            ]}
-          />
-          <PricingCard
-            label="Enterprise"
-            title="Ongoing assistance"
-            price="Custom"
-            description="For organizations that need a long-running support relationship around RustFS operations."
-            chips={["SLA path", "Enterprise"]}
-            points={[
-              "Production troubleshooting path",
-              "Upgrade and observability review",
-              "Security and IAM workflow consultation",
-              "Roadmap and deployment alignment",
             ]}
           />
         </div>
