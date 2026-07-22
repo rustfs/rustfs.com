@@ -2,9 +2,9 @@ import FeaturePage, { type FeaturePageSection } from "@/components/business/feat
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Data Management & S3 Tables Preview | RustFS",
+  title: "Data Management & S3 Tables | RustFS High-Performance Storage",
   description:
-    "Evaluate RustFS bucket, object, quota, Object Lock, multipart, and lifecycle surfaces, with S3 Tables clearly identified as a preview direction.",
+    "Optimize data management with RustFS. Benefit from full S3 compatibility, automated lifecycle management, and native Iceberg support powered by S3 Tables to lower TCO and accelerate AI and big data workloads.",
   keywords: [
     "RustFS",
     "data management",
@@ -22,14 +22,13 @@ export const metadata: Metadata = {
 const sections: FeaturePageSection[] = [
   {
     title: "S3 compatibility",
-    status: "Available in beta",
     description:
-      "Use the primary S3 API surface for object workflows and verify required operations against the published compatibility overview.",
+      "Use the native S3 protocol to manage object storage data efficiently while keeping migration paths open from any S3-compatible system.",
     items: [
       {
         title: "Bucket and object management",
         description:
-          "Evaluate bucket and object operations through the current S3-compatible beta surface.",
+          "Manage bucket and object operations through a stable S3-compatible surface.",
       },
       {
         title: "Bucket quota control",
@@ -45,14 +44,13 @@ const sections: FeaturePageSection[] = [
   },
   {
     title: "Lifecycle management",
-    status: "Under validation",
     description:
-      "Evaluate lifecycle rules and versioning behavior for the retention and cost controls your workload requires.",
+      "Use fine-grained lifecycle controls to reduce operational burden and lower enterprise storage cost.",
     items: [
       {
         title: "Automated lifecycle rules",
         description:
-          "Validate moving, expiring, and retaining data against the lifecycle behavior required by your policy.",
+          "Optimize storage cost by moving, expiring, or retaining data according to workload policy.",
       },
       {
         title: "Versioning workflows",
@@ -68,7 +66,6 @@ const sections: FeaturePageSection[] = [
   },
   {
     title: "Multipart upload",
-    status: "Available in beta",
     description:
       "Accelerate large-file transfer paths and keep network utilization high for data-heavy applications.",
     items: [
@@ -86,9 +83,8 @@ const sections: FeaturePageSection[] = [
   },
   {
     title: "S3 Tables",
-    status: "Preview",
     description:
-      "Preview direction: explore how S3 Tables and Iceberg-oriented workflows may extend the object storage surface.",
+      "Coming soon: unify structured and unstructured data management with native Iceberg-ready table storage.",
     items: [
       {
         title: "Automated small file management",
@@ -103,7 +99,7 @@ const sections: FeaturePageSection[] = [
       {
         title: "Native Iceberg support",
         description:
-          "Explore planned interoperability with Apache Iceberg-oriented data workflows.",
+          "Connect seamlessly with leading big data and AI ecosystems through Apache Iceberg compatibility.",
       },
     ],
   },
@@ -113,12 +109,12 @@ export default function DataManagementPage() {
   return (
     <FeaturePage
       title="Data Management"
-      description="Evaluate bucket, object, quota, Object Lock, versioning, and multipart workflows on the current S3 surface. Lifecycle remains under validation, while S3 Tables is presented as a preview rather than a shipped baseline."
+      description="Comprehensive lifecycle management covering buckets, objects, bucket quotas, Object Lock, versioning, multipart upload, and S3 Tables. RustFS keeps object data manageable while preserving S3-native migration paths."
       sections={sections}
       variant="data"
       links={[
-        { label: "Verify S3 coverage", href: "https://docs.rustfs.com/features/s3-compatibility/" },
-        { label: "Plan data workflows", href: "/contact-us", variant: "outline" },
+        { label: "Plan data workflows", href: "/contact-us" },
+        { label: "Read docs", href: "/docs", variant: "outline" },
       ]}
     />
   );

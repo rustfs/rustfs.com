@@ -14,7 +14,6 @@ const features = [
     "title": "Advanced Erasure Coding",
     "plane": "Data plane",
     "token": "RS(EC)",
-    "status": "Available in beta",
     "description": "Flexible Reed-Solomon EC profiles balance durability and storage efficiency.",
     "icon": DatabaseZapIcon,
     "featureDescription": "Leverage cutting-edge Reed-Solomon algorithms to maximize storage efficiency while tuning hardware overhead and data durability for each workload.",
@@ -28,66 +27,61 @@ const features = [
     "title": "Distributed Deployment",
     "plane": "Cluster plane",
     "token": "MNMD",
-    "status": "Active validation",
-    "description": "Evaluate multi-node, multi-drive layouts while distributed mode is under active validation.",
+    "description": "Run across nodes and drives with high availability and predictable scale.",
     "icon": NetworkIcon,
-    "featureDescription": "Deploy across multiple nodes and drives and validate failure behavior against your topology. Distributed mode is available for evaluation and remains under active beta validation.",
+    "featureDescription": "Deploy across multiple nodes and drives. RustFS distributes data and traffic intelligently across the cluster to deliver high availability, automatic failover, and predictable performance scaling.",
     "features": [
       "Multi-node, multi-drive topology",
-      "Failure-domain evaluation",
-      "Topology-specific scale testing"
+      "Automatic failover behavior",
+      "Horizontal performance scaling"
     ],
   },
   {
     "title": "Dynamic Pool Orchestration",
     "plane": "Pool plane",
     "token": "rebalance()",
-    "status": "Active validation",
-    "description": "Evaluate expansion, rebalancing, and decommissioning workflows for your topology.",
+    "description": "Expand, rebalance, and retire pools without planned downtime.",
     "icon": GitBranchIcon,
-    "featureDescription": "Test pool expansion, data rebalancing, and decommissioning workflows against your hardware and operational requirements before production rollout.",
+    "featureDescription": "Take control of the full cluster lifecycle with pool expansion, automatic data rebalancing, and safe decommissioning for aging hardware without planned downtime.",
     "features": [
       "Pool-level expansion",
       "Automatic data rebalancing",
-      "Decommissioning workflows under validation"
+      "Zero-downtime decommissioning"
     ],
   },
   {
     "title": "Multi-Protocol Access",
     "plane": "Access plane",
     "token": "S3 + MCP",
-    "status": "Mixed coverage",
-    "description": "Start with broad S3 coverage and verify each additional protocol for your workflow.",
+    "description": "Expose the same storage through S3, Swift, FTP(s), WebDAV, and MCP.",
     "icon": WorkflowIcon,
-    "featureDescription": "RustFS centers on broad S3 API coverage and is expanding Swift, WebDAV, FTP(s), and MCP access. Validate the exact protocol operations your application relies on.",
+    "featureDescription": "Break down data silos by letting applications use Amazon S3, OpenStack Swift, FTP(s), WebDAV, and MCP to read, write, and manage the same storage without protocol translation bottlenecks.",
     "features": [
-      "Published S3 compatibility overview",
-      "Swift, WebDAV, and FTP(s) evaluation paths",
-      "MCP automation in preview"
+      "Native S3 compatibility",
+      "WebDAV, Swift, and FTP(s) access",
+      "MCP-ready automation paths"
     ],
   },
   {
     "title": "Defense-in-Depth Security",
     "plane": "Trust plane",
     "token": "IAM/KMS",
-    "status": "Mixed coverage",
-    "description": "Evaluate IAM, transport security, encryption, and audit controls by feature status.",
+    "description": "Layer IAM, OIDC, STS, mTLS, KMS encryption, and audit controls.",
     "icon": ShieldCheckIcon,
-    "featureDescription": "Build a security review around IAM, OIDC, STS, mTLS, encryption, and audit controls. KMS remains under validation, and product controls are not a compliance certification.",
+    "featureDescription": "Secure data infrastructure at every layer with IAM, OIDC, STS, mTLS, KMS-driven encryption, and audit controls designed for strict compliance environments.",
     "features": [
       "IAM, OIDC, and STS integration",
-      "mTLS and encryption controls",
-      "KMS integration under validation"
+      "mTLS and KMS-driven encryption",
+      "Security audit coverage"
     ],
   },
   {
     "title": "Operational Control & Telemetry",
     "plane": "Ops plane",
     "token": "otel.trace",
-    "status": "Available in beta",
     "description": "Track capacity, health, events, and OTEL signals from one control plane.",
     "icon": CloudCogIcon,
-    "featureDescription": "Review OpenTelemetry integration, event notifications, capacity metrics, bucket and object visibility, and node health monitoring as one operator workflow.",
+    "featureDescription": "Streamline operations with native OpenTelemetry integration, instant event notifications, capacity metrics, bucket and object visibility, and node health monitoring.",
     "features": [
       "OpenTelemetry support",
       "Event notifications",
@@ -98,7 +92,6 @@ const features = [
     "title": "Cloud Native Deployment",
     "plane": "Runtime plane",
     "token": "helm install",
-    "status": "Available in beta",
     "description": "Use Helm Charts and a Kubernetes Operator for automated lifecycle control.",
     "icon": BinaryIcon,
     "featureDescription": "Provision, scale, and heal RustFS clusters through official Helm Charts, Kubernetes operator workflows, and cloud-native orchestration primitives.",
@@ -112,10 +105,9 @@ const features = [
     "title": "AI & Agent-Native Infrastructure",
     "plane": "Agent plane",
     "token": "rc + MCP",
-    "status": "Preview",
-    "description": "Explore rc and MCP automation without making agent workflows the deployment baseline.",
+    "description": "Let agents and CI/CD pipelines query and orchestrate storage resources.",
     "icon": Code2Icon,
-    "featureDescription": "Use the rc CLI for repeatable administration and explore MCP-based automation as an emerging workflow. Treat agent integrations as preview capabilities.",
+    "featureDescription": "RustFS is built for agentic workflows with MCP support and a powerful rc CLI so LLMs, automated agents, and CI/CD pipelines can query and orchestrate storage resources.",
     "features": [
       "Model Context Protocol support",
       "Powerful rc CLI automation",

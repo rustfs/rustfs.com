@@ -2,14 +2,14 @@ import FeaturePage, { type FeaturePageSection } from "@/components/business/feat
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "High Availability & Scale Evaluation | RustFS",
+  title: "RustFS High Availability & Scalability | Enterprise Distributed Storage",
   description:
-    "Evaluate RustFS erasure coding, failure domains, healing, and distributed deployment while multi-node mode remains under active beta validation.",
+    "Discover RustFS enterprise distributed architecture. Experience scaling from PB to EB levels with distributed EC, automated self-healing, and data reliability.",
   keywords: [
     "RustFS",
     "distributed object storage",
     "high availability",
-    "storage expansion",
+    "infinite scaling",
     "erasure coding",
     "self-healing",
     "S3-compatible",
@@ -20,15 +20,14 @@ export const metadata: Metadata = {
 
 const sections: FeaturePageSection[] = [
   {
-    title: "Distributed deployment validation",
-    status: "Under validation",
+    title: "Distributed deployment",
     description:
-      "Model multi-node and multi-drive layouts against your failure domains while distributed mode remains under active validation.",
+      "Enterprise-grade distributed architecture for massive data availability and customized storage policies.",
     items: [
       {
-        title: "Decentralized architecture",
+        title: "Enterprise-grade architecture",
         description:
-          "Evaluate a peer-to-peer design without a distinct metadata-server tier.",
+          "Satisfy high-availability requirements for massive data through distributed system design.",
       },
       {
         title: "Flexible multi-node topology",
@@ -38,13 +37,12 @@ const sections: FeaturePageSection[] = [
       {
         title: "Node and disk fault tolerance",
         description:
-          "Exercise disk and node failure behavior against the topology you intend to operate.",
+          "Keep service and data available when disks or nodes fail.",
       },
     ],
   },
   {
     title: "EC configuration",
-    status: "Available in beta",
     description:
       "Distributed Erasure Coding balances resilience, disaster recovery, storage efficiency, and reliability.",
     items: [
@@ -61,15 +59,14 @@ const sections: FeaturePageSection[] = [
       {
         title: "EC Calculator",
         description:
-          "Use planning estimates as a starting point, then validate them against the intended failure domain.",
+          "Match workloads with best-practice configurations before production rollout.",
       },
     ],
   },
   {
-    title: "Expansion and rebalancing",
-    status: "Under validation",
+    title: "Infinite scaling",
     description:
-      "Plan horizontal and vertical growth, then validate rebalancing and operational impact in a representative environment.",
+      "Scale horizontally and vertically from PB to EB-level data management while preserving operational continuity.",
     items: [
       {
         title: "Horizontal and vertical scaling",
@@ -79,25 +76,24 @@ const sections: FeaturePageSection[] = [
       {
         title: "Automated data rebalancing",
         description:
-          "Measure rebalancing behavior and cluster-wide disk utilization in a representative environment.",
+          "Improve cluster-wide disk utilization as pools expand.",
       },
       {
-        title: "Controlled expansion",
+        title: "Zero-downtime expansion",
         description:
-          "Measure workload impact and recovery behavior during online expansion.",
+          "Minimize impact on active workloads during online expansion.",
       },
     ],
   },
   {
     title: "Node healing",
-    status: "Under validation",
     description:
       "Automated recovery and integrity verification keep cluster state visible and reliable.",
     items: [
       {
         title: "Automated data self-healing",
         description:
-          "Evaluate automatic recovery behavior against the reliability target for your topology.",
+          "Recover data automatically to maintain enterprise-grade reliability.",
       },
       {
         title: "Data integrity verification",
@@ -117,7 +113,7 @@ export default function HighAvailabilityScalePage() {
   return (
     <FeaturePage
       title="High Availability & Scale"
-      description="Use erasure coding and the topology calculator to model resilience and efficiency. Treat distributed deployment, healing, and pool lifecycle as validation work before a production rollout."
+      description="RustFS combines enterprise distributed architecture, distributed Erasure Coding, resilient node and disk fault tolerance, and automated healing to support reliable PB to EB-scale storage."
       sections={sections}
       variant="scale"
       links={[

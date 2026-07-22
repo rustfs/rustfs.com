@@ -448,15 +448,15 @@ export default function ErasureCodeCalculator() {
           <div>
             <div className="mb-8 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
               <span className="h-1 w-24 bg-brand" />
-              <span>Planning estimate / public beta</span>
+              <span>Erasure coding planner</span>
             </div>
             <h1 className="max-w-4xl font-display text-5xl font-semibold tracking-tight text-foreground sm:text-7xl">
-              Explore a starting point for an erasure set.
+              Size a RustFS erasure set before you deploy.
             </h1>
           </div>
           <p className="max-w-xl text-sm leading-7 text-muted-foreground">
-            Model raw capacity, usable capacity, stripe layout, and theoretical failure tolerance.
-            The estimate does not cover network behavior, rebuild time, mixed drives, upgrades, or rack-level failure.
+            Model raw capacity, usable capacity, stripe layout, and failure tolerance from the
+            hardware shape you plan to run.
           </p>
         </div>
 
@@ -664,7 +664,7 @@ export default function ErasureCodeCalculator() {
               <div className="flex flex-1 border-b border-border py-6 text-sm">
                 <div className="grid w-full gap-4 sm:grid-cols-[1fr_auto] sm:items-start">
                   <div>
-                    <div className="font-medium text-foreground">Suggested starting point</div>
+                    <div className="font-medium text-foreground">Recommended layout</div>
                     <div className="mt-1 leading-6 text-muted-foreground">
                       {recommendedConfig.serversCorrected != null ? (
                         <>
@@ -675,7 +675,7 @@ export default function ErasureCodeCalculator() {
                       ) : (
                         <>
                           Stripe {recommendedConfig.stripe}, parity {recommendedConfig.parity}.
-                          Use this as an input to workload and failure testing.
+                          Balanced for availability and efficiency.
                         </>
                       )}
                     </div>
@@ -716,7 +716,7 @@ export default function ErasureCodeCalculator() {
             <div className="mt-auto grid gap-8 border-b border-border py-6 md:grid-cols-[1fr_0.92fr]">
               <div>
                 <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                  Validation checklist
+                  Production check
                 </div>
                 <div className="mt-4 grid gap-3 text-sm">
                   <div className="grid grid-cols-[1fr_auto] gap-4 border-b border-border pb-3">
@@ -845,8 +845,8 @@ export default function ErasureCodeCalculator() {
               </div>
 
               <p className="mt-5 text-xs leading-6 text-muted-foreground">
-                Results are planning estimates for the current public beta. They do not model network partitions,
-                rebuild duration, mixed-drive behavior, upgrade paths, or rack-level failure. Validate with representative hardware before procurement or production sizing.
+                Results are rounded down to quorum-safe limits and should be treated as planning
+                estimates before production sizing.
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">

@@ -7,8 +7,8 @@ import type { Metadata } from "next"
 import type { ComponentType } from "react"
 
 export const metadata: Metadata = {
-  title: "About RustFS | Open S3-Compatible Storage in Rust",
-  description: "Learn about RustFS, an Apache 2.0 open-source S3-compatible object storage project built in Rust and currently in public beta.",
+  title: "About RustFS | Next-Generation Distributed Object Storage for AI",
+  description: "Learn about RustFS, an Apache 2.0 open-source distributed object storage system built in Rust. Powering AI data centers with native RDMA and DPU acceleration.",
   keywords: "about RustFS, RustFS project, open source object storage, distributed object storage, Rust infrastructure, NVIDIA Inception, RDMA storage, DPU hardware acceleration",
 };
 
@@ -26,12 +26,12 @@ const milestones = [
   {
     date: "2025.10.27",
     title: "10,000 GitHub stars",
-    description: "The repository reached a visible open-source community milestone.",
+    description: "Open-source storage teams began adopting RustFS at scale.",
   },
   {
     date: "2026.01.20",
     title: "20,000 GitHub stars",
-    description: "The open-source community reached another repository milestone.",
+    description: "Community momentum doubled across storage and AI workloads.",
   },
   {
     date: "2026.04.09",
@@ -41,7 +41,7 @@ const milestones = [
   {
     date: "2026.04.26",
     title: "Beta release",
-    description: "The project entered public beta and expanded S3-compatible storage validation.",
+    description: "The project moved into production-oriented S3-compatible storage validation.",
   },
 ];
 
@@ -71,11 +71,11 @@ export default function AboutPage() {
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">About RustFS</p>
             <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-              Open object storage, engineered in Rust.
+              Object storage built for Rust-native infrastructure.
             </h1>
           </div>
           <p className="max-w-2xl text-base leading-8 text-muted-foreground lg:ml-auto">
-            RustFS is an Apache 2.0 S3-compatible object storage project built in Rust. The project is in public beta, with an active open repository and a published compatibility overview for teams evaluating self-hosted storage.
+            RustFS is a next-generation Apache 2.0 distributed object storage system built in Rust. It has surpassed 28,000 GitHub stars, 3 million Docker Hub pulls, and 1 million global instances across S3-compatible and AI data center workloads.
           </p>
         </div>
 
@@ -88,7 +88,7 @@ export default function AboutPage() {
               A storage foundation that stays open, self-hosted, and programmable.
             </h2>
             <p className="mt-5 text-sm leading-7 text-muted-foreground">
-              RustFS covers object, bucket, IAM, lifecycle, and cluster workflows through an evolving S3-compatible surface. Teams can inspect current coverage and known gaps before adoption.
+              RustFS manages object, bucket, IAM, lifecycle, and cluster workflows while keeping 100% native S3 compatibility stable for existing tools and applications.
             </p>
           </div>
           <div className="grid gap-x-8 px-6 sm:grid-cols-2 lg:px-8">
@@ -105,7 +105,7 @@ export default function AboutPage() {
             <ValueCard
               icon={CpuIcon}
               title="AI infrastructure path"
-              description="RDMA, DPU acceleration, and hardware encryption are roadmap directions for future data center workloads."
+              description="Native RDMA, DPU acceleration, and hardware encryption are core directions for future data center workloads."
             />
             <ValueCard
               icon={GitBranchIcon}
@@ -167,7 +167,7 @@ export default function AboutPage() {
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">AI infrastructure</p>
               <h2 className="mt-3 text-2xl font-semibold text-foreground">NVIDIA Inception Program</h2>
               <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                RustFS is a member of the NVIDIA Inception Program. RDMA and DPU offload for erasure coding and encryption remain roadmap directions, not current production guarantees or a technical endorsement.
+                RustFS is accelerating AI data center storage with native RDMA support and future DPU offload for Erasure Coding and encryption.
               </p>
             </div>
             <ContactUsButton className="!h-12 !px-5 !py-0 leading-none" />

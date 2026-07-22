@@ -40,10 +40,10 @@ const topologies: Topology[] = [
     code: 'MNMD',
     name: 'Multi-node multiple-disk',
     icon: NetworkIcon,
-    useCase: 'Teams evaluating distributed object storage across representative nodes and drives.',
-    tradeoff: 'Distributed mode is under active beta validation and requires network, identity, observability, capacity, recovery, and upgrade planning.',
+    useCase: 'Medium and large enterprises scaling from hundreds of terabytes to petabyte-scale object storage.',
+    tradeoff: 'Requires network, identity, observability, capacity, upgrade planning, and full production operations.',
     command: ['rustfs http://node{1...4}/disk{1...4}'],
-    notes: ['Multiple nodes', 'Multiple disks', 'Validate first'],
+    notes: ['Multiple nodes', 'Multiple disks', 'Production'],
   },
 ];
 
@@ -139,7 +139,7 @@ export default function InstallationTopology() {
               </h2>
             </div>
             <p className="max-w-2xl text-sm leading-7 text-muted-foreground lg:justify-self-end">
-              RustFS can start on one machine, but production planning should be explicit about disks, nodes, recovery, upgrades, and the current distributed-mode status.
+              RustFS can start on one machine, but production planning should be explicit about disks, nodes, and recovery expectations.
             </p>
           </div>
         </div>

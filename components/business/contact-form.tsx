@@ -155,7 +155,7 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
 
     if (!hCaptchaToken) {
       setSubmitStatus('error')
-      setSubmitError('Complete the verification step before sending your deployment details.')
+      setSubmitError('Please complete the captcha verification')
       return
     }
 
@@ -200,11 +200,11 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
         captchaRef.current?.resetCaptcha()
       } else {
         setSubmitStatus('error')
-        setSubmitError('We could not send your message. Please try again or email hello@rustfs.com.')
+        setSubmitError('Something went wrong. Please try again later.')
       }
     } catch {
       setSubmitStatus('error')
-      setSubmitError('We could not send your message. Please try again or email hello@rustfs.com.')
+      setSubmitError('Something went wrong. Please try again later.')
     } finally {
       setIsSubmitting(false)
     }
@@ -219,8 +219,8 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
         <HomeSectionHeader
           sectionNumber={sectionNumber}
           eyebrow="Contact channel"
-          title="Bring the deployment context"
-          description="Tell us what you are evaluating: workload, capacity, topology, required S3 operations, migration window, and support expectations."
+          title="Contact Us"
+          description="Get in touch with the RustFS team for deployment planning, migration support, and enterprise requirements."
           headingLevel={1}
         />
 
@@ -229,10 +229,6 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
             onSubmit={handleSubmit}
             className="min-w-0 border border-border bg-card p-6 sm:p-8"
           >
-          <div className="mb-8 grid gap-2 border-b border-border pb-5 sm:grid-cols-[1fr_auto] sm:items-end">
-            <p className="text-sm font-semibold text-foreground">Deployment details</p>
-            <p className="text-xs leading-6 text-muted-foreground">We will use these details only to respond to this request.</p>
-          </div>
           <div className="grid gap-6 sm:grid-cols-2">
             <div>
               <label htmlFor="firstName" className="mb-2 block text-sm font-medium text-foreground">
@@ -301,10 +297,11 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
           <div className="mt-6 grid gap-6 sm:grid-cols-2">
             <div>
               <label htmlFor="country" className="mb-2 block text-sm font-medium text-foreground">
-                Country <span className="text-sm text-muted-foreground">(Optional)</span>
+                Country <span className="text-destructive" aria-hidden="true">*</span>
               </label>
               <Select
                 name="country"
+                required
                 value={formData.country}
                 onValueChange={(value) => setFormData((previous) => ({ ...previous, country: value }))}
               >
@@ -324,12 +321,13 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
             </div>
             <div>
               <label htmlFor="company" className="mb-2 block text-sm font-medium text-foreground">
-                Company <span className="text-sm text-muted-foreground">(Optional)</span>
+                Company <span className="text-destructive" aria-hidden="true">*</span>
               </label>
               <Input
                 id="company"
                 name="company"
                 type="text"
+                required
                 placeholder="Enter your company name"
                 value={formData.company}
                 onChange={handleChange}
@@ -347,7 +345,7 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
               name="message"
               required
               rows={6}
-              placeholder="Include workload, expected capacity, topology, required S3 operations, current platform, migration window, and support expectations."
+              placeholder="Please tell us about your inquiry, requirements, or how we can help you. Include any specific details about your use case, expected scale, or technical requirements."
               value={formData.message}
               onChange={handleChange}
               className="w-full text-foreground"
@@ -364,9 +362,7 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
                 reCaptchaCompat={false}
                 tabIndex={-1}
               />
-            ) : (
-              <p className="text-xs text-muted-foreground">Verification loads when this step is visible.</p>
-            )}
+            ) : null}
           </div>
 
           {submitStatus === 'success' && (
@@ -392,7 +388,7 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
               size="lg"
               className="h-12 min-w-56 px-6 text-sm font-semibold"
             >
-              {isSubmitting ? 'Sending...' : 'Send deployment details'}
+              {isSubmitting ? 'Submitting...' : 'Submit'}
             </Button>
           </div>
           </form>

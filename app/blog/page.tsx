@@ -62,10 +62,7 @@ export default async function BlogPage() {
         <section className="border-b border-border py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-8 flex items-end justify-between gap-4 border-t border-border pt-8">
-              <div>
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-brand">Archive</p>
-                <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground">Older posts</h2>
-              </div>
+              <h2 className="text-3xl font-semibold tracking-tight text-foreground">Older posts</h2>
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 {olderPosts.length} posts
               </span>

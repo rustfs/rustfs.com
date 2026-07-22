@@ -38,7 +38,7 @@ function findReleaseAsset(
   );
 
   return {
-    url: asset?.browser_download_url ?? release?.html_url ?? 'https://github.com/rustfs/rustfs/releases',
+    url: asset?.browser_download_url ?? release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest',
     filename: asset?.name ?? fallbackName,
     isDirect: Boolean(asset),
   };
@@ -71,16 +71,9 @@ function SectionHeader({
 }
 
 function ReleasePanel({ release }: { release: GitHubRelease | null }) {
-  const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases';
-  const publishedAt = release?.published_at ? formatReleaseDate(release.published_at, 'en-US') : 'Select on GitHub';
-  const version = release?.tag_name ? formatVersion(release.tag_name) : 'Choose a beta';
-  const channel = !release
-    ? 'Release list'
-    : /preview/i.test(release.tag_name)
-    ? 'Preview build'
-    : release?.prerelease
-      ? 'Recommended beta'
-      : 'Stable release';
+  const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
+  const publishedAt = release?.published_at ? formatReleaseDate(release.published_at, 'en-US') : 'GitHub latest';
+  const version = release?.tag_name ? formatVersion(release.tag_name) : 'Latest';
 
   return (
     <a
@@ -92,7 +85,7 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
     >
       <div className="relative p-5 sm:p-6">
         <div className="mb-5 grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-          <span className="text-brand">{channel}</span>
+          <span className="text-brand">Current server release</span>
           <span>{'//'}</span>
           <span className="h-px bg-border" />
           <span>{publishedAt}</span>
@@ -104,7 +97,7 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
               {version}
             </p>
             <p className="mt-3 text-sm text-muted-foreground">
-              Server binary, Docker image, and source archive. Review release notes before upgrading.
+              Server binary, Docker image, and source archive.
             </p>
           </div>
           <span className="inline-flex items-center gap-2 text-sm font-semibold text-brand">
@@ -150,7 +143,7 @@ function HeroStripeCard({ releaseUrl }: { releaseUrl: string }) {
       />
       <div className="relative flex flex-col justify-between gap-5 sm:flex-row sm:items-center">
         <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-          Platform packages
+          Fast route
         </p>
 
         <div className="grid gap-3">
@@ -238,15 +231,14 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
   const windowsUrl = release
     ? getDownloadUrlForPlatform(release, 'windows', 'x86_64')
     : null;
-  const fallbackUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases';
-  const serverTag = release?.tag_name.replace(/^v/, '') ?? '<beta-version>';
+  const fallbackUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
   const paths: ServerInstallPath[] = [
     {
       id: 'linux',
       label: 'Linux binary',
       title: 'Install directly on a server',
       summary: 'Best when RustFS should run as a small native service with explicit control over disks and systemd.',
-      bestFor: 'Bare metal and VM evaluation',
+      bestFor: 'Production hosts, bare metal, VMs',
       Icon: BinaryIcon,
       commandTitle: 'Fast validation',
       command: [
@@ -272,7 +264,7 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
       commandTitle: 'Single-node container',
       command: [
         'docker volume create rustfs-data',
-        `docker run -d --name rustfs -p 9000:9000 -p 9001:9001 -v rustfs-data:/data rustfs/rustfs:${serverTag} /data`,
+        'docker run -d --name rustfs -p 9000:9000 -p 9001:9001 -v rustfs-data:/data rustfs/rustfs:latest /data',
         'docker logs -f rustfs',
       ],
       chips: ['9000 S3 API', '9001 Console', '/data volume'],
@@ -454,8 +446,8 @@ function HelpPanel() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Support surface"
-          title="Need a production readiness review?"
-          description="Move from local validation toward production only after reviewing compatibility, topology, operations, and the current beta status."
+          title="Need a production deployment path?"
+          description="Move from local validation to production with documentation, community help, or direct planning support."
         />
 
         <div className="grid gap-8 border-y border-border py-8 md:grid-cols-3">
@@ -499,7 +491,7 @@ function HelpPanel() {
 }
 
 export default function DownloadPageClient({ release, cliRelease }: DownloadPageClientProps) {
-  const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases';
+  const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
 
   return (
     <main className="relative z-10 min-h-[100dvh] text-foreground">
@@ -507,9 +499,9 @@ export default function DownloadPageClient({ release, cliRelease }: DownloadPage
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.96fr_1.04fr] lg:items-end">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Public beta / download</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Download surface</p>
               <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-                Evaluate RustFS, then plan the deployment.
+                Install RustFS for real deployments.
               </h1>
             </div>
             <HeroStripeCard releaseUrl={releaseUrl} />
@@ -517,19 +509,6 @@ export default function DownloadPageClient({ release, cliRelease }: DownloadPage
 
           <div className="mt-12">
             <ReleasePanel release={release} />
-            <div className="grid gap-3 border-b border-border py-5 text-xs leading-6 sm:grid-cols-[1fr_auto] sm:items-center">
-              <p className="text-muted-foreground">
-                RustFS is in public beta. Validate required S3 operations, recovery behavior, and upgrade procedures before storing durable production data.
-              </p>
-              <a
-                className="font-semibold text-foreground hover:text-brand"
-                href="https://github.com/rustfs/rustfs#feature--status"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Review feature status ↗
-              </a>
-            </div>
           </div>
         </div>
       </section>
@@ -538,8 +517,8 @@ export default function DownloadPageClient({ release, cliRelease }: DownloadPage
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Server install paths"
-            title="Start small, then validate the operating model."
-            description="Choose the environment first, copy the exact command, and record what the path does and does not prove."
+            title="Start small, then keep the same operating model."
+            description="Choose the environment first, then copy the exact command for that path."
           />
 
           <ServerInstallTabs release={release} />

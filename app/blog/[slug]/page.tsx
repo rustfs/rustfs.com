@@ -95,14 +95,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </span>
                 ))}
               </div>
-              <div className="mt-8 grid gap-2 border-y border-border py-4 text-xs leading-6 sm:grid-cols-[9rem_1fr]">
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
-                  Publication context
-                </p>
-                <p className="text-muted-foreground">
-                  This article reflects its publication date. RustFS is currently in public beta; verify current release notes, feature status, and compatibility before acting on historical product claims.
-                </p>
-              </div>
             </div>
 
             {shouldShowImage(post.image) ? (

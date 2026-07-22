@@ -2,11 +2,11 @@ import ContactForm from '@/components/business/contact-form'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Contact RustFS | Deployment & Migration Review",
-  description: 'Share your workload, topology, migration, and support context with the RustFS team.',
+  title: "Contact Us | RustFS | The High-Performance, Apache 2.0 Alternative to MinIO",
+  description: 'Get in touch with the RustFS team. Contact us for questions, support, or partnership opportunities.',
   openGraph: {
-    title: "Contact RustFS | Deployment & Migration Review",
-    description: 'Share your workload, topology, migration, and support context with the RustFS team.',
+    title: "Contact Us | RustFS | The High-Performance, Apache 2.0 Alternative to MinIO",
+    description: 'Get in touch with the RustFS team. Contact us for questions, support, or partnership opportunities.',
     type: "website",
     locale: 'en_US',
   },

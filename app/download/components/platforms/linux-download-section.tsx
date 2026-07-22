@@ -24,8 +24,8 @@ export default function LinuxDownloadSection({ platform, release, className }: L
     ? getDownloadUrlForPlatform(release, 'linux', 'aarch64')
     : null;
 
-  const fallbackX86_64Url = 'https://github.com/rustfs/rustfs/releases';
-  const fallbackAarch64Url = 'https://github.com/rustfs/rustfs/releases';
+  const fallbackX86_64Url = 'https://github.com/rustfs/rustfs/releases/latest';
+  const fallbackAarch64Url = 'https://github.com/rustfs/rustfs/releases/latest';
 
   const finalX86_64Url = x86_64Url || fallbackX86_64Url;
   const finalAarch64Url = aarch64Url || fallbackAarch64Url;

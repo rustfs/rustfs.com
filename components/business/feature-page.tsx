@@ -15,7 +15,6 @@ import type { ReactNode } from "react";
 
 export interface FeaturePageSection {
   title: string;
-  status?: string;
   description?: string;
   items?: {
     title: string;
@@ -45,44 +44,32 @@ const variantMeta: Record<
     label: string;
     code: string;
     Icon: LucideIcon;
-    status: string;
-    statusDetail: string;
   }
 > = {
   protocol: {
     label: "Integration surface",
     code: "S3.MCP",
     Icon: NetworkIcon,
-    status: "Mixed coverage",
-    statusDetail: "S3 has broad test-backed coverage; verify Swift, WebDAV, FTP(s), and MCP operations for your workflow.",
   },
   data: {
     label: "Data surface",
     code: "S3.TABLE",
     Icon: DatabaseIcon,
-    status: "Beta + preview",
-    statusDetail: "Core object APIs are available in beta; lifecycle remains under validation and S3 Tables is a preview direction.",
   },
   scale: {
     label: "Scale surface",
     code: "EC.POOL",
     Icon: ServerIcon,
-    status: "Active validation",
-    statusDetail: "Erasure coding is available; distributed mode and topology lifecycle workflows remain under active beta validation.",
   },
   ops: {
     label: "Ops surface",
     code: "OTEL.RC",
     Icon: ActivityIcon,
-    status: "Available in beta",
-    statusDetail: "Console, rc, and telemetry surfaces are evolving; validate the runbooks and signals required by your team.",
   },
   security: {
     label: "Trust surface",
     code: "IAM.KMS",
     Icon: ShieldCheckIcon,
-    status: "Mixed coverage",
-    statusDetail: "Review identity, encryption, transport, and audit controls individually; KMS remains under validation.",
   },
 };
 
@@ -105,7 +92,6 @@ function flattenItems(sections: FeaturePageSection[]) {
     (section.items ?? []).map((item) => ({
       ...item,
       group: section.title,
-      groupStatus: section.status,
     }))
   );
 }
@@ -137,7 +123,7 @@ function FeatureLine({
   item,
   index,
 }: {
-  item: { title: string; description: string; group?: string; groupStatus?: string };
+  item: { title: string; description: string; group?: string };
   index: number;
 }) {
   return (
@@ -148,7 +134,7 @@ function FeatureLine({
       <div>
         {item.group && (
           <p className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            {slugCode(item.group)}{item.groupStatus ? ` / ${item.groupStatus}` : ''}
+            {slugCode(item.group)}
           </p>
         )}
         <h3 className="text-lg font-semibold leading-6 tracking-tight text-foreground">{item.title}</h3>
@@ -193,7 +179,7 @@ function ProductLinks({ links }: { links?: FeaturePageLink[] }) {
 }
 
 function ProtocolVisual({ sections }: { sections: FeaturePageSection[] }) {
-  const labels = ["S3", "WebDAV", "Swift", "FTP(s)", "MCP"];
+  const labels = ["S3", "Swift", "WebDAV", "FTP(s)", "MCP"];
 
   return (
     <div className="motion-reveal relative overflow-hidden border border-border bg-card/55" data-motion-delay="1">
@@ -202,7 +188,7 @@ function ProtocolVisual({ sections }: { sections: FeaturePageSection[] }) {
           Native access plane
         </span>
         <code className="border-l border-border px-5 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
-          Verify coverage
+          Gateway free
         </code>
       </div>
       <div className="grid gap-px bg-border sm:grid-cols-5">
@@ -221,7 +207,7 @@ function ProtocolVisual({ sections }: { sections: FeaturePageSection[] }) {
         ))}
       </div>
       <div className="grid gap-px bg-border sm:grid-cols-3">
-        {["Primary: S3", "Client tests", "One data plane"].map((item) => (
+        {["No proxy", "No rewrite", "One source"].map((item) => (
           <div key={item} className="bg-background/80 px-5 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
             {item}
           </div>
@@ -263,10 +249,10 @@ function DataVisual() {
           <div className="relative flex flex-col justify-between gap-12">
             <div>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] opacity-80">
-                Preview direction
+                Coming soon
               </p>
               <h2 className="mt-5 max-w-sm text-3xl font-semibold leading-tight">
-                S3 Tables for emerging lakehouse workflows.
+                S3 Tables for unified lakehouse data.
               </h2>
             </div>
             <div className="grid gap-px bg-border sm:grid-cols-3">
@@ -426,9 +412,9 @@ function ProtocolBody({ sections }: { sections: FeaturePageSection[] }) {
       {primarySection && (
         <section className="grid gap-10 border-y border-border py-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
           <div className="py-2">
-            <MiniChip>Protocol evaluation</MiniChip>
+            <MiniChip>Gateway-free access</MiniChip>
             <h2 className="mt-5 max-w-xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              One storage foundation, verified client by client.
+              One storage foundation, many native clients.
             </h2>
             {primarySection.description && (
               <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
@@ -437,7 +423,7 @@ function ProtocolBody({ sections }: { sections: FeaturePageSection[] }) {
             )}
             <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
               {sections.map((section) => (
-                <MiniChip key={section.title}>{section.title}{section.status ? ` / ${section.status}` : ''}</MiniChip>
+                <MiniChip key={section.title}>{section.title}</MiniChip>
               ))}
             </div>
           </div>
@@ -467,11 +453,6 @@ function ProtocolBody({ sections }: { sections: FeaturePageSection[] }) {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
                   {slugCode(section.title)}
                 </p>
-                {section.status ? (
-                  <p className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                    {section.status}
-                  </p>
-                ) : null}
                 <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
                   {section.title}
                 </h2>
@@ -532,7 +513,7 @@ function DataBody({ sections }: { sections: FeaturePageSection[] }) {
         {tableSection && (
           <article className="border-t-2 border-brand py-6">
             <div>
-              <MiniChip>{tableSection.status ?? 'Preview'}</MiniChip>
+              <MiniChip>Coming soon</MiniChip>
               <h3 className="mt-6 text-3xl font-semibold tracking-tight text-foreground">{tableSection.title}</h3>
               {tableSection.description && (
                 <p className="mt-4 text-sm leading-7 text-muted-foreground">{tableSection.description}</p>
@@ -551,11 +532,6 @@ function DataBody({ sections }: { sections: FeaturePageSection[] }) {
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
               {slugCode(section.title)}
             </p>
-            {section.status ? (
-              <p className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                {section.status}
-              </p>
-            ) : null}
             <h3 className="mt-3 text-xl font-semibold tracking-tight text-foreground">{section.title}</h3>
             {section.description && (
               <p className="mt-2 text-sm leading-7 text-muted-foreground">
@@ -626,11 +602,6 @@ function ScaleBody({ sections }: { sections: FeaturePageSection[] }) {
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
                 0{index + 1} / {slugCode(section.title)}
               </p>
-              {section.status ? (
-                <p className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                  {section.status}
-                </p>
-              ) : null}
               <h3 className="mt-4 text-2xl font-semibold tracking-tight text-foreground">{section.title}</h3>
               {section.description && (
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">{section.description}</p>
@@ -681,7 +652,7 @@ function OpsBody({ sections }: { sections: FeaturePageSection[] }) {
                 0{index + 1}
               </p>
               <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                {slugCode(section.title)}{section.status ? ` / ${section.status}` : ''}
+                {slugCode(section.title)}
               </p>
             </div>
             <h3 className="mt-5 text-2xl font-semibold tracking-tight text-foreground">{section.title}</h3>
@@ -712,7 +683,7 @@ function SecurityBody({ sections }: { sections: FeaturePageSection[] }) {
       <section className="relative border-t border-border pt-6">
         <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 bg-brand" />
         <div className="flex items-center justify-between gap-4">
-          <MiniChip>Layered security review</MiniChip>
+          <MiniChip>Secure by default</MiniChip>
           <LockKeyholeIcon className="size-5 text-brand" />
         </div>
         <h2 className="mt-7 max-w-2xl text-3xl font-semibold tracking-tight text-foreground">
@@ -726,11 +697,6 @@ function SecurityBody({ sections }: { sections: FeaturePageSection[] }) {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
                   {slugCode(section.title)}
                 </p>
-                {section.status ? (
-                  <p className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                    {section.status}
-                  </p>
-                ) : null}
               </div>
               <h3 className="mt-4 text-xl font-semibold tracking-tight text-foreground">{section.title}</h3>
               {section.description && (
@@ -841,22 +807,6 @@ export default function FeaturePage({
               {description}
             </p>
             <ProductLinks links={links} />
-            <div className="mt-8 grid gap-2 border-y border-border py-4 sm:grid-cols-[8rem_1fr]">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
-                {meta.status}
-              </p>
-              <div>
-                <p className="text-xs leading-6 text-muted-foreground">{meta.statusDetail}</p>
-                <a
-                  className="mt-2 inline-flex text-xs font-semibold text-foreground hover:text-brand"
-                  href="https://github.com/rustfs/rustfs#feature--status"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Review current feature status ↗
-                </a>
-              </div>
-            </div>
           </div>
 
           <div className="min-w-0">

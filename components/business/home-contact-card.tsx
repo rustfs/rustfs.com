@@ -13,7 +13,7 @@ export default function HomeContactCard() {
           sectionNumber="08"
           eyebrow="Contact channel"
           title="Contact Us"
-          description="Bring the workload, capacity, topology, migration window, and support expectations that shape your decision."
+          description="Get in touch with the RustFS team for deployment planning, migration support, and enterprise requirements."
         />
 
         <Link
@@ -29,7 +29,7 @@ export default function HomeContactCard() {
             <span
               className="relative inline-flex border border-brand-foreground/25 bg-brand-foreground/10 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-foreground/75"
             >
-              Deployment review
+              Production handoff
             </span>
             <h3 className="relative mt-4 max-w-2xl text-2xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
               Talk to the RustFS team.

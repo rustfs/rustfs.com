@@ -33,7 +33,7 @@ export default function HomeSectionHeader({
                 {sectionNumber}
               </span>
             ) : null}
-            <span className="font-mono text-border">/</span>
+            <span className="font-mono text-border">&gt;</span>
             <span>{eyebrow}</span>
           </div>
           <Heading className="text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-foreground md:text-5xl">

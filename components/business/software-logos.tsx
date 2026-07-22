@@ -78,9 +78,9 @@ export default function SoftwareLogos() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           sectionNumber="01"
-          eyebrow="Evaluation surface"
-          title="Start with the tools your teams already know"
-          description="RustFS exposes familiar S3 and infrastructure interfaces. Validate the exact API and workflow coverage your application needs before production rollout."
+          eyebrow="Integration surface"
+          title="Works with the storage ecosystem"
+          description="RustFS keeps S3 compatibility at the center, so existing analytics, observability, AI, and delivery tools can keep using the object storage interfaces they already know."
         />
         <div className="border-y border-border bg-card/20">
           <ul role="list" className="grid gap-px bg-border/70 sm:grid-cols-2 lg:grid-cols-4">
@@ -107,13 +107,6 @@ export default function SoftwareLogos() {
             })}
           </ul>
         </div>
-        <p className="mt-4 text-xs leading-6 text-muted-foreground">
-          Logos indicate common evaluation paths, not certification. See the{' '}
-          <a className="font-semibold text-foreground hover:text-brand" href="https://docs.rustfs.com/features/s3-compatibility/" target="_blank" rel="noopener noreferrer">
-            published S3 compatibility overview ↗
-          </a>
-          .
-        </p>
       </div>
     </section>
   );

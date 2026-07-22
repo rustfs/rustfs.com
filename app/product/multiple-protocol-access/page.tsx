@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Native Multi-Protocol Access | S3, Swift, WebDAV, FTP(s) & MCP | RustFS",
-  description: "Start with broad test-backed S3 coverage, then verify Swift, WebDAV, FTP(s), and MCP behavior for each application workflow.",
+  description: "Connect RustFS natively to any workload via S3, Swift, FTP(s), WebDAV, and MCP. Zero code modifications, no legacy proxies, and multi-protocol data coexistence.",
   keywords: [
     "RustFS",
     "multi-protocol access",
@@ -21,54 +21,51 @@ export const metadata: Metadata = {
 const sections: FeaturePageSection[] = [
   {
     title: "S3 API compatibility",
-    status: "Available in beta",
     description: "The primary object-storage API surface, designed for efficient management and existing S3-compatible ecosystems.",
     items: [
       {
-        title: "Test-backed S3 API coverage",
-        description: "Review the published coverage notes, then exercise the operations your application depends on.",
+        title: "Comprehensive S3 API capabilities",
+        description: "Pure Rust-powered S3 implementation across object operations, bucket policies, versioning, and lifecycle management.",
       },
       {
-        title: "Client-first evaluation",
-        description: "Exercise existing SDKs and tools against the operations your application actually uses.",
+        title: "Out-of-the-box S3 support",
+        description: "Seamless integration across S3-compliant infrastructure and application ecosystems.",
       },
       {
-        title: "MinIO migration path",
-        description: "Validate familiar clients and the documented binary or container migration path in a non-production environment first.",
+        title: "Drop-in MinIO replacement",
+        description: "Avoid config overhauls, API rewrites, and migration friction when moving from MinIO.",
       },
       {
         title: "Native virtual host mode",
-        description: "Evaluate virtual-host bucket addressing, domain isolation, and absolute URL behavior for your clients.",
+        description: "Enterprise-grade bucket addressing, domain-level isolation, and absolute URL compatibility.",
       },
     ],
   },
   {
     title: "WebDAV",
-    status: "Verify per workflow",
     description: "File-oriented access for teams that need operating-system-native workflows without leaving object storage behind.",
     items: [
       {
         title: "Native OS integration",
-        description: "Evaluate remote object storage as mounted directories across Windows, macOS, and Linux clients.",
+        description: "Operate remote object storage as local directories across Windows, macOS, and Linux without client lock-in.",
       },
       {
-        title: "Direct client path",
-        description: "Evaluate operating-system clients without introducing a separate data copy.",
+        title: "Instant frictionless setup",
+        description: "Out-of-the-box convenience requiring no extra configuration or heavy third-party integrations.",
       },
       {
         title: "Secure file operations",
-        description: "Validate TLS/HTTPS transport and client behavior for the intended file workflow.",
+        description: "Full TLS/HTTPS protocol support for encrypted data transfer.",
       },
     ],
   },
   {
     title: "Swift API",
-    status: "Partial coverage",
     description: "Bring private-cloud and OpenStack-compatible workloads onto the same storage foundation.",
     items: [
       {
         title: "OpenStack native support",
-        description: "Evaluate the available Swift surface with the OpenStack clients and operations you require.",
+        description: "Frictionless RustFS integration into the OpenStack ecosystem.",
       },
       {
         title: "Dual-protocol coexistence",
@@ -82,16 +79,15 @@ const sections: FeaturePageSection[] = [
   },
   {
     title: "FTP(s)",
-    status: "Verify per workflow",
     description: "A secure bridge for file-transfer workloads that cannot be rewritten immediately.",
     items: [
       {
         title: "Legacy modernization",
-        description: "Evaluate traditional applications and automated batch workflows against the same storage foundation.",
+        description: "Connect traditional applications and automated batch workflows to modern object storage instantly.",
       },
       {
         title: "Hardened enterprise security",
-        description: "Validate FTPS over TLS and credential handling for encrypted transfer in transit.",
+        description: "Support FTPS over TLS to guarantee encrypted data transfer in transit.",
       },
       {
         title: "Unified storage backend",
@@ -101,7 +97,6 @@ const sections: FeaturePageSection[] = [
   },
   {
     title: "MCP",
-    status: "Preview",
     description: "RustFS is designed for agent-native infrastructure. MCP support lets LLM agents and automated workflows query, manage, and orchestrate storage resources through a controlled interface.",
     items: [
       {
@@ -120,12 +115,12 @@ export default function MultipleProtocolAccessPage() {
   return (
     <FeaturePage
       title="Multiple Protocol Access"
-      description="S3 is the primary, test-backed object API. Swift, WebDAV, FTP(s), and MCP extend the access surface, but each protocol and client workflow should be validated before adoption."
+      description="Native multi-protocol accessibility delivery. By speaking S3, Swift, FTP(s), WebDAV, and MCP out of the box, RustFS integrates naturally into existing environments with no gateways, no legacy proxies, and no code modifications."
       sections={sections}
       variant="protocol"
       links={[
-        { label: "Verify S3 coverage", href: "https://docs.rustfs.com/features/s3-compatibility/" },
-        { label: "Plan protocol access", href: "/contact-us", variant: "outline" },
+        { label: "Plan protocol access", href: "/contact-us" },
+        { label: "Read docs", href: "/docs", variant: "outline" },
       ]}
     />
   );

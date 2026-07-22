@@ -16,7 +16,7 @@ interface RcDownloadSectionProps {
   cliRelease: GitHubRelease | null;
 }
 
-const releaseFallbackUrl = 'https://github.com/rustfs/cli/releases';
+const releaseFallbackUrl = 'https://github.com/rustfs/cli/releases/latest';
 
 function findAsset(
   release: GitHubRelease | null,
@@ -112,7 +112,7 @@ function PackageManagerCard() {
   );
 }
 
-function DockerAndSourceCard({ tag }: { tag: string }) {
+function DockerAndSourceCard() {
   return (
     <article className="grid min-w-0 gap-8 border-y border-border py-8 lg:grid-cols-2 lg:gap-12 [&>*]:min-w-0">
       <div className="border-b border-border pb-8 lg:border-b-0 lg:pb-0">
@@ -125,8 +125,8 @@ function DockerAndSourceCard({ tag }: { tag: string }) {
         </p>
         <CodeBlock
           code={[
-            `docker pull rustfs/cli:${tag}`,
-            `docker run --rm rustfs/cli:${tag} rc --help`,
+            'docker pull rustfs/cli:latest',
+            'docker run --rm rustfs/cli:latest rc --help',
           ]}
           title="Container CLI"
           className="mt-5"
@@ -156,8 +156,7 @@ function DockerAndSourceCard({ tag }: { tag: string }) {
 }
 
 export default function RcDownloadSection({ cliRelease }: RcDownloadSectionProps) {
-  const version = cliRelease ? formatVersion(cliRelease.tag_name) : 'choose a version';
-  const dockerTag = cliRelease?.tag_name.replace(/^v/, '') ?? '<version>';
+  const version = cliRelease ? formatVersion(cliRelease.tag_name) : 'latest';
   const releaseUrl = cliRelease?.html_url ?? releaseFallbackUrl;
   const linuxX86 = findAsset(
     cliRelease,
@@ -209,21 +208,9 @@ export default function RcDownloadSection({ cliRelease }: RcDownloadSectionProps
         </div>
 
         <div className="mt-12 flex flex-col gap-10">
-          <div>
-            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              Package managers
-            </p>
-            <PackageManagerCard />
-          </div>
+          <PackageManagerCard />
 
-          <div>
-            <div className="flex items-center justify-between gap-4">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                Direct packages
-              </p>
-              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">5 builds</span>
-            </div>
-            <div className="mt-4 grid gap-x-8 sm:grid-cols-2 xl:grid-cols-3 [&>*]:min-w-0">
+          <div className="grid gap-x-8 sm:grid-cols-2 xl:grid-cols-3 [&>*]:min-w-0">
               <CliPackageCard
                 title="Linux x86_64"
                 description="Use this on common AMD64 Linux servers, CI runners, and admin hosts."
@@ -254,18 +241,12 @@ export default function RcDownloadSection({ cliRelease }: RcDownloadSectionProps
                 arch="amd64"
                 asset={windows}
               />
-            </div>
           </div>
 
-          <div>
-            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              Other installation paths
-            </p>
-            <DockerAndSourceCard tag={dockerTag} />
-          </div>
+          <DockerAndSourceCard />
 
           <Note type="info">
-            Pin an explicit rc version for repeatable installation. If release metadata is unavailable here, use the GitHub Releases list and choose the matching package for your operating system.
+            For older or pinned rc versions, use the GitHub Release page and choose the matching package for your operating system.
           </Note>
         </div>
       </div>

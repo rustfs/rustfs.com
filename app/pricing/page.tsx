@@ -60,7 +60,7 @@ function PricingCard({
             <span className="border-r border-border px-3 py-2 text-muted-foreground">Path</span>
             <span className="px-3 py-2 text-foreground">{label}</span>
             <span className="border-l border-border px-3 py-2 text-muted-foreground">
-              {price.includes("$0") ? "OSS" : "Scope"}
+              {price === "$0" ? "OSS" : price === "Custom" ? "SLA" : "Plan"}
             </span>
           </div>
         </div>
@@ -90,12 +90,12 @@ export default function PricingPage() {
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Pricing</p>
             <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-              Open-source software, support by scope.
+              Open-source storage, clear support path.
             </h1>
           </div>
           <div className="flex flex-col gap-6">
             <p className="max-w-2xl text-base leading-8 text-muted-foreground lg:ml-auto">
-              RustFS software is Apache 2.0. Commercial assistance is scoped around the deployment, migration, and operating responsibility you bring.
+              Run RustFS freely, then involve the team for deployment planning, migration, and production support.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
               <DownloadLink className="!h-12 !px-5 !py-0 leading-none" />
@@ -108,8 +108,8 @@ export default function PricingPage() {
           <PricingCard
             label="Open source"
             title="Self-hosted RustFS"
-            price="Software $0"
-            description="Use RustFS under Apache 2.0 for development, evaluation, and deployments you operate yourself."
+            price="$0"
+            description="Use RustFS under Apache 2.0 for development, testing, and production deployments you operate yourself."
             chips={["Apache 2.0", "Self-hosted"]}
             points={[
               "Apache 2.0 license",
@@ -119,10 +119,10 @@ export default function PricingPage() {
             ]}
           />
           <PricingCard
-            label="Readiness"
-            title="Deployment review"
-            price="Scoped with you"
-            description="For teams moving beyond evaluation and needing topology, migration, compatibility, or operations review."
+            label="Production"
+            title="Deployment support"
+            price="Talk to us"
+            description="For teams moving from evaluation to production and needing topology, migration, and operations planning."
             emphasized
             chips={["Planning", "Migration"]}
             points={[
@@ -133,13 +133,13 @@ export default function PricingPage() {
             ]}
           />
           <PricingCard
-            label="Ongoing"
+            label="Enterprise"
             title="Ongoing assistance"
-            price="Custom scope"
+            price="Custom"
             description="For organizations that need a long-running support relationship around RustFS operations."
-            chips={["Operations", "Enterprise"]}
+            chips={["SLA path", "Enterprise"]}
             points={[
-              "Production troubleshooting planning",
+              "Production troubleshooting path",
               "Upgrade and observability review",
               "Security and IAM workflow consultation",
               "Roadmap and deployment alignment",

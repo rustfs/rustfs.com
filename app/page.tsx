@@ -12,20 +12,20 @@ import { getGitHubMetrics } from "@/lib/github";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "RustFS | Open S3-Compatible Object Storage in Rust",
-  description: 'RustFS is an Apache 2.0-licensed, S3-compatible object storage system built in Rust for self-hosted data infrastructure, MinIO migration evaluation, and modern data workloads.',
+  title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
+  description: 'RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, drop-in replacement for MinIO and Amazon S3 engineered for AI workloads.',
   keywords: 'RustFS, object storage, distributed storage, open source, Rust, Amazon S3, MinIO alternative, MinIO migration, Apache 2.0, cloud native storage, AI infrastructure',
   authors: [{ name: 'RustFS Team' }],
   openGraph: {
-    title: "RustFS | Open S3-Compatible Object Storage in Rust",
-    description: 'RustFS is an Apache 2.0-licensed, S3-compatible object storage system built in Rust for self-hosted data infrastructure and modern data workloads.',
+    title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
+    description: 'RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, drop-in replacement for MinIO and Amazon S3 engineered for AI workloads.',
     type: "website",
     locale: 'en_US',
   },
   twitter: {
     card: "summary_large_image",
-    title: "RustFS | Open S3-Compatible Object Storage in Rust",
-    description: 'RustFS is an Apache 2.0-licensed, S3-compatible object storage system built in Rust for self-hosted data infrastructure and modern data workloads.',
+    title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
+    description: 'RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, drop-in replacement for MinIO and Amazon S3 engineered for AI workloads.',
   },
 };
 

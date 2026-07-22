@@ -30,8 +30,8 @@ export default function GetStartedToday() {
         <HomeSectionHeader
           sectionNumber="06"
           eyebrow="Deploy surface"
-          title="Start with an evaluation you can explain"
-          description="Download RustFS for a local or lab environment, then bring measured compatibility and topology findings into a production review."
+          title="Start building with RustFS"
+          description="Download RustFS for local testing, or contact us to plan production deployment, migration, and enterprise support."
         />
 
         <div className="motion-card group relative overflow-hidden border border-brand bg-brand text-brand-foreground">
@@ -44,7 +44,7 @@ export default function GetStartedToday() {
             <div className="p-6 sm:p-8 lg:p-10">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="border border-brand-foreground/25 bg-brand-foreground/10 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-foreground/80">
-                  Public beta
+                  Production ready
                 </span>
                 <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-foreground/55">
                   open source / s3 api
@@ -52,10 +52,10 @@ export default function GetStartedToday() {
               </div>
 
               <h2 className="mt-5 max-w-3xl text-3xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
-                Evaluate locally. Plan production from evidence.
+                Deploy RustFS locally. Keep the same path to production.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-brand-foreground/75">
-                Start with one machine, validate the API surface your workload uses, and expand only after reviewing the current distributed-mode status.
+                Start with one machine, then carry the same S3-compatible storage layer into migration and multi-node operations.
               </p>
             </div>
 

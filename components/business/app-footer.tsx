@@ -14,13 +14,6 @@ export default function AppFooter() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-[1.25fr_repeat(3,1fr)]">
           <div className="max-w-sm border-t border-border pt-5">
             <Logo className="h-8 w-auto" />
-            <p className="mt-5 text-sm leading-7 text-muted-foreground">
-              Apache 2.0 S3-compatible object storage built in Rust. Public beta, with compatibility and feature status published for evaluation.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-foreground">
-              <a className="hover:text-brand" href="https://docs.rustfs.com/features/s3-compatibility/" target="_blank" rel="noopener noreferrer">S3 overview ↗</a>
-              <a className="hover:text-brand" href="https://github.com/rustfs/rustfs#feature--status" target="_blank" rel="noopener noreferrer">Feature status ↗</a>
-            </div>
           </div>
           {footerNavigation.map((section, sectionIndex) => (
             <div key={sectionIndex} className="border-t border-border pt-5">

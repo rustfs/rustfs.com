@@ -5,24 +5,24 @@ import HomeSectionHeader from "./home-section-header";
 
 const reasons = [
   {
-    title: "Rust-native core",
-    token: "runtime",
-    description: "A memory-safe storage core designed for teams that want direct control over infrastructure and code.",
+    title: "High-Performance",
+    token: "perf",
+    description: "Built with Rust. Zero-overhead. Hardware-saturated.",
   },
   {
-    title: "Security reviewability",
+    title: "Security & Compliance",
     token: "trust",
-    description: "Self-hosted control with documented identity, encryption, and audit surfaces to evaluate.",
+    description: "Self-hosted control, built-in security, and enterprise compliance.",
   },
   {
-    title: "Architecture without a metadata tier",
+    title: "Availability & Scale",
     token: "scale",
-    description: "A decentralized peer-to-peer design with strong read-after-write consistency.",
+    description: "Distributed architecture with horizontal and vertical scaling, built to avoid single points of failure.",
   },
   {
-    title: "Familiar evaluation path",
+    title: "Developer-First Experience",
     token: "dx",
-    description: "Start on one node, exercise existing S3 clients, then validate the topology you intend to operate.",
+    description: "Cross-platform support, versatile installations, and one-click deployment.",
   },
   {
     title: "Open Source",
@@ -30,27 +30,27 @@ const reasons = [
     description: "Apache-2.0 licensed, business-friendly, and vendor-independent.",
   },
   {
-    title: "Published S3 coverage",
+    title: "S3-Compatible",
     token: "s3",
-    description: "Broad S3 API coverage with a published overview to use alongside workload-specific testing.",
+    description: "Fully S3-compatible for seamless integration and effortless migration.",
   },
 ];
 
 const compatibilityRows = [
   {
     title: "AWS SDKs",
-    detail: "Run the operations your application depends on and compare results with the published coverage overview.",
-    meta: "VERIFY",
+    detail: "Keep application storage code unchanged.",
+    meta: "S3 API",
   },
   {
     title: "MinIO tools",
-    detail: "Evaluate familiar clients and migration steps before changing a production endpoint.",
-    meta: "MIGRATE",
+    detail: "Reuse familiar migration and admin workflows.",
+    meta: "MC / CLI",
   },
   {
     title: "Cloud apps",
-    detail: "Confirm multipart, lifecycle, policy, and event behavior for each workload.",
-    meta: "TEST",
+    detail: "Connect S3-aware analytics, backup, and AI pipelines.",
+    meta: "DROP-IN",
   },
 ];
 
@@ -65,8 +65,8 @@ export default function HomeStats() {
         <HomeSectionHeader
           sectionNumber="03"
           eyebrow="Why RustFS"
-          title="Why teams evaluate RustFS"
-          description="A focused open-source alternative for teams comparing S3 behavior, infrastructure control, and long-term operating freedom."
+          title="A storage core built for production pressure"
+          description="A focused object storage foundation for modern AI, cloud-native, and enterprise workloads."
         />
         <div className="grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-12">
           <article className="overflow-hidden bg-card/45 lg:col-span-5">
@@ -87,7 +87,7 @@ export default function HomeStats() {
                 ))}
               </div>
               <div className="absolute right-4 top-4 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                ARCH.CORE
+                FIG.PERF
               </div>
             </div>
 
@@ -105,8 +105,8 @@ export default function HomeStats() {
                 <pre className="overflow-x-auto text-xs leading-6 text-muted-foreground">
                   <code>{`[rustfs]
 runtime = "memory-safe"
-license = "apache-2.0"
-mode = "public-beta"`}</code>
+io = "hardware-saturated"
+mode = "distributed"`}</code>
                 </pre>
               </div>
             </div>

@@ -6,13 +6,13 @@ import { CheckIcon } from "lucide-react";
 import { useState, type KeyboardEvent } from 'react';
 import HomeSectionHeader from './home-section-header';
 
-function FeaturePreview({ index, token, status }: { index: number; token: string; status: string }) {
+function FeaturePreview({ index, token }: { index: number; token: string }) {
   const variant = index % 8;
 
   return (
     <div className="mt-8 overflow-hidden border-y border-border bg-background/40">
       <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-        <span className="px-3 py-2">Capability signal / {status}</span>
+        <span className="px-3 py-2">Surface preview</span>
         <code className="border-l border-border px-3 py-2 text-foreground">{token}</code>
       </div>
       <div className="relative h-28 overflow-hidden">
@@ -162,7 +162,7 @@ export default function HomeFeatures() {
           sectionNumber="02"
           eyebrow="Capability matrix"
           title="Core features"
-          description="A status-aware view of the storage, access, security, and operations surfaces available to evaluate today."
+          description="Production-ready capabilities for distributed, S3-compatible object storage."
         />
 
         <nav className="grid gap-px border-y border-border bg-border/70 md:grid-cols-2 xl:grid-cols-4" aria-label="Core feature tabs" role="tablist" aria-orientation="horizontal">
@@ -191,7 +191,7 @@ export default function HomeFeatures() {
               <div className="flex h-full flex-col p-4 sm:p-5">
                 <div className="flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                   <span>{feature.plane}</span>
-                  <span className="text-right normal-case tracking-normal">{feature.status}</span>
+                  <code className="uppercase tracking-[0.12em]">{feature.token}</code>
                 </div>
 
                 <div className="mt-5 flex items-start gap-3">
@@ -235,7 +235,7 @@ export default function HomeFeatures() {
                   <activeFeature.icon className="size-6" />
                 </span>
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
-                  {activeFeature.status}
+                  Active capability
                 </span>
               </div>
               <h3 className="mt-8 text-2xl font-bold text-foreground md:text-3xl">
@@ -244,7 +244,7 @@ export default function HomeFeatures() {
               <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
                 {activeFeature.featureDescription}
               </p>
-              <FeaturePreview index={activeTab} token={activeFeature.token} status={activeFeature.status} />
+              <FeaturePreview index={activeTab} token={activeFeature.token} />
             </div>
             <div>
               <ul className="grid h-full divide-y divide-border">

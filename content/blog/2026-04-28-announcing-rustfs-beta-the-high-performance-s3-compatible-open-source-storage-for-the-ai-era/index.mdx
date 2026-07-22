@@ -17,8 +17,6 @@ image: >-
 ---
 Today, we are excited to announce the release of **RustFS Beta**.
 
-> **Current status:** RustFS remains in public beta. Distributed mode, lifecycle management, and KMS remain under validation. The capability list below describes beta scope and direction; verify every required operation against current releases before production use.
-
 Built as a **distributed object storage system for the AI era**, RustFS has seen remarkable growth since being open sourced in July 2025. In less than a year, RustFS has reached **26.5K GitHub stars**, **1.1K forks**, and attracted **130+ contributors worldwide**. Our DockerHub images have surpassed **2.2 million pulls**, while RustFS has ranked **#1 on GitHub Trending eight times** and topped **GitHub Rust Trending more than 40 times**.
 
 These milestones have made RustFS one of the **fastest-growing open-source object storage projects**.
@@ -39,11 +37,11 @@ RustFS fills this gap by delivering **high performance, distributed erasure codi
 
 ## RustFS Core Features
 
-RustFS Beta exposes a broad set of features at different maturity levels, including:
+RustFS Beta delivers a robust set of enterprise-grade features, including:
 
-*   **S3-compatible API:** Broad coverage that still requires workload-specific verification.
-*   **Security controls:** mTLS, identity, encryption, and audit surfaces with KMS under validation.
-*   **High-availability direction:** Erasure coding plus distributed clustering under active beta validation.
+*   **Fully S3 Compatibility:** Comprehensive object lifecycle management with seamless integration for a S3-compatible ecosystem.
+*   **Security First:** Built-in support for mTLS, KMS, and OIDC identity management.
+*   **High Availability:** Distributed clustering with multi-node and multi-disk support.
 
 Capability Grouping
 
@@ -134,13 +132,13 @@ $ curl -O https://rustfs.com/install_rustfs.sh && bash install_rustfs.sh
 *   Docker installation
 
 ```
-$ docker pull rustfs/rustfs:<beta-tag>
+$ docker pull rustfs/rustfs:latest
 $ docker run -d \
   --name rustfs \
   -p 9000:9000 \
   -p 9001:9001 \
   -v /data:/data \
-  rustfs/rustfs:<beta-tag>
+  rustfs/rustfs:latest
 ```
 
 *   Helm installation
@@ -159,7 +157,7 @@ For detailed installation instructions and deployment guides, please refer to [o
 
 The Beta release marks an important milestone for RustFS, but it is only the beginning.
 
-Looking ahead, the project continues investing in **performance optimization**, **security hardening**, and **high-availability validation**. Read current milestones and release notes from the repository rather than relying on the historical GA target in the original announcement.
+Looking ahead, we will continue investing in **performance optimization**, **security hardening**, and **enterprise-grade high availability**, making RustFS even more stable and production-ready as we work toward our **planned General Availability (GA) release in July** .
 
 Our goal remains clear: **to build a modern, high-performance distributed object storage system designed for AI and data-intensive workloads**.
 

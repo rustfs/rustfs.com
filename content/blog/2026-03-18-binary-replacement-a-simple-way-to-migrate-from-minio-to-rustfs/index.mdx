@@ -1,105 +1,184 @@
 ---
-title: 'Evaluate a MinIO-to-RustFS Migration Safely'
+title: 'Drop-in Binary Replacement: Migrate from MinIO to RustFS'
 slug: binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs
 description: >-
-  A backup-first evaluation path for testing RustFS with an existing MinIO
-  workload before a controlled migration and rollback plan.
+  Today we are excited to announce that RustFS has introduced a key feature in
+  the latest release (1.0.0-alpha.89):...
 date: '2026-03-18T05:49:13.000Z'
-author: RustFS
+author: Rustfs
 tags:
   - Announcements
   - Best Practices
-  - Migration
+  - General Usage
 image: '/images/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs/minio-blog.png'
 ---
+Today we are excited to announce that RustFS has introduced a key feature in the latest release (`1.0.0-alpha.8`9): users can now migrate from MinIO to RustFS through direct binary replacement.
 
-> **Migration status update:** RustFS is in public beta. Do not treat it as an in-place, zero-downtime, or fully compatible binary replacement for MinIO. Back up first, test against a copy, pin exact versions, and keep a rehearsed rollback path for any production change.
+As is widely known, MinIO has archived its [open source repository](https://github.com/minio/minio). However, there are still tens of millions of instances worldwide running older open-source versions of MinIO. These versions no longer receive security updates, and over time the security risks associated with these instances continue to grow.
 
-RustFS is an Apache 2.0 S3-compatible object storage project built in Rust. Familiar S3 clients and some existing data workflows can make it a useful migration candidate, but S3 API similarity does not make storage formats, configuration, identity, events, or operational behavior interchangeable.
+[RustFS](https://rustfs.com) is an S3-compatible distributed object storage system written in Rust and released under the Apache License 2.0. The project has already surpassed 23k stars on GitHub. RustFS can serve as a fully compatible replacement for MinIO.
 
-This guide is an evaluation path, not a cutover guarantee.
+## Benefits of Migration
 
-## Scope the test
+*   **Cost Savings**: You don’t need to provision new storage infrastructure for RustFS. Existing MinIO storage infrastructure can be reused directly, which significantly reduces storage costs.Especially for users whose data volumes exceed hundreds of gigabytes or even petabytes.
+*   **Security Assurance**: Instances running the MinIO open-source edition no longer receive security updates and therefore face growing security risks. RustFS is actively maintained, and the team can respond to security issues in a timely manner.
+*   **Seamless Integration**: Because RustFS is fully S3-compatible, this conversion does not introduce significant changes to existing workflows. As a result, RustFS can be seamlessly integrated into existing systems with minimal disruption.
 
-Record the versions on both sides before changing anything. The example that originally accompanied this article used MinIO `RELEASE.2025-04-22T22-12-26Z`; the current RustFS website recommends a pinned public beta release from [GitHub Releases](https://github.com/rustfs/rustfs/releases). Re-run the full test for your actual MinIO build and exact RustFS beta tag.
+## How to Migrate?
 
-Before starting:
+Binary and docker installation can be converted directly.
 
-1. Create and verify a restorable backup.
-2. Clone or snapshot the data into an isolated environment.
-3. Inventory buckets, versions, retention, IAM, lifecycle rules, replication, events, OIDC or LDAP, encryption, and application-specific S3 calls.
-4. Define acceptance checks and a rollback deadline.
-5. Stop writers or redirect them to a disposable test endpoint while validating.
+### For Binary Installation
 
-## Start RustFS against a test copy
+For example, if your MinIO instance was started with the following command:
 
-Download a specific beta asset rather than a mutable `latest` URL:
-
-```bash
-# Replace <beta-tag> and <asset> with an exact release and package from GitHub.
-curl -LO https://github.com/rustfs/rustfs/releases/download/<beta-tag>/<asset>
+```
+minio server /data/minio --console-address ":9001"
 ```
 
-After extracting the package, start RustFS with the copied data path and non-production credentials:
+![Your MinIO Instance](/images/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs/rkzulxu5be.png)
 
-```bash
-./rustfs /data/minio-copy \
-  --address ":9000" \
-  --console-enable \
-  --console-address ":9001" \
-  --access-key "<test-access-key>" \
-  --secret-key "<test-secret-key>"
+Then you can follow the steps below to complete the migration.
+
+*   Step 1: Download the latest version
+
+Download the [latest RustFS binary](https://github.com/rustfs/rustfs/releases) for your OS and architecture:
+
+```
+curl -LO https://github.com/rustfs/rustfs/releases/download/1.0.0-alpha.89/rustfs-linux-x86_64-gnu-latest.zip
 ```
 
-Keep the original MinIO data and service unchanged during this evaluation.
+*   Step 2: Extract the archive and prepare the binary
 
-For a container test, pin the RustFS image to the same beta tag:
+```
+unzip rustfs-linux-x86_64-gnu-latest.zip
+chmod +x rustfs
+```
 
-```yaml
+*   Step 3: Start the RustFS instance
+
+Starting the RustFS instance with MinIO data,
+
+```
+./rustfs /data/minio --address ":9000" --console-enable --console-address ":9001" --access-key "rustfsadmin" --secret-key "rustfsadmin"
+```
+
+After the conversion, you can verify the migration by accessing `http://ip:9001`.
+
+![Your RustFS Instance](/images/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs/bjlrwg_cwx.png)
+
+### For Docker Installation
+
+If your instance installed with `docker-compose.yml`,
+
+```
 services:
-  rustfs-evaluation:
-    image: rustfs/rustfs:<beta-tag>
-    command: /data
-    environment:
-      RUSTFS_ADDRESS: 0.0.0.0:9000
-      RUSTFS_CONSOLE_ENABLE: "true"
-      RUSTFS_CONSOLE_ADDRESS: 0.0.0.0:9001
-      RUSTFS_ACCESS_KEY: <test-access-key>
-      RUSTFS_SECRET_KEY: <test-secret-key>
+  MinIO:
+    hostname: MinIO
+    image: MinIO/MinIO:RELEASE.2025-04-22T22-12-26Z
+    command: server --console-address ":9001" /data{1...4}
     ports:
       - "9000:9000"
       - "9001:9001"
+    environment:
+      MinIO_ROOT_USER: MinIOadmin
+      MinIO_ROOT_PASSWORD: MinIOadmin
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     volumes:
-      - ./minio-copy:/data
+      - data1:/data1
+      - data2:/data2
+      - data3:/data3
+      - data4:/data4
+    networks:
+      - minio-rustfs
+
+volumes:
+  data1:
+  data2:
+  data3:
+  data4:
+
+networks:
+  minio-rustfs:
+    driver: bridge
 ```
 
-## What to verify
+You can migrate to RustFS by replacing the image and updating the environment variables:
 
-The internal data formats and control planes differ. Validate every required item rather than assuming automatic migration.
+```
+services:
+  rustfs:
+    image: rustfs/rustfs:1.0.0-alpha.89
+    container_name: rustfs
+    hostname: rustfs
+    environment:
+      - RUSTFS_VOLUMES=/data{1...4}
+      - RUSTFS_ADDRESS=0.0.0.0:9000
+      - RUSTFS_CONSOLE_ENABLE=true
+      - RUSTFS_CONSOLE_ADDRESS=0.0.0.0:9001
+      - RUSTFS_ACCESS_KEY=rustfsadmin
+      - RUSTFS_SECRET_KEY=rustfsadmin
+    ports:
+      - "9000:9000"  # API endpoint
+      - "9001:9001"  # Console
+    volumes:
+      - data1:/data1
+      - data2:/data2
+      - data3:/data3
+      - data4:/data4
+    networks:
+      - minio-rustfs
 
-The migration work has covered evaluation paths for items such as bucket metadata, objects, tags, Object Lock, versioning, replication configuration, IAM, and lifecycle configuration. Coverage can change between beta releases, so verify each item with the pinned versions.
+networks:
+  rustfs:
+    driver: bridge
+    name: minio-rustfs
 
-Do not assume automatic migration for:
+volumes:
+  data1:
+  data2:
+  data3:
+  data4:
+```
 
-- site replication;
-- event notifications;
-- MinIO-specific online configuration;
-- LDAP and OIDC configuration;
-- KMS keys or external security integrations;
-- monitoring, alerting, upgrade, and disaster-recovery runbooks.
+## Supported Migrated Items
 
-Also exercise the exact application operations shown in the [S3 compatibility overview](https://docs.rustfs.com/features/s3-compatibility/) and report gaps with a reproducible case.
+Because the internal data formats of MinIO and RustFS are different, not all MinIO data can currently be migrated automatically. The latest version supports migration of the following items:
 
-## Plan a controlled cutover
+1.  Bucket metadata
+2.  Objects, including labels, object locks, and versioning
+3.  Bucket replication configuration
+4.  IAM configuration
+5.  Lifecycle management
+6.  Layer management
 
-A production plan should include:
+The following items are currently **not supported**:
 
-- an application write-freeze or explicit replication strategy;
-- integrity and object-count checks before and after cutover;
-- client, identity, lifecycle, event, and encryption verification;
-- monitoring for errors, latency, capacity, and recovery behavior;
-- a documented rollback owner, trigger, and time window.
+1.  Site replication
+2.  Event notifications
+3.  MinIO online configuration
+4.  LDAP and OIDC
 
-If any required behavior is unclear, keep the workload on the original system and open an issue in the [RustFS repository](https://github.com/rustfs/rustfs/issues) before proceeding.
+If you encounter any issue during the migration, please feedback in [GitHub repo issue](https://github.com/rustfs/rustfs/issues).
 
-> “MinIO” is a registered trademark of MinIO, Inc. RustFS is an independent open-source project and has no affiliation, sponsorship, or endorsement from MinIO, Inc.
+## RustFS Roadmap
+
+Currently, RustFS is in the alpha. The planned timeline for upcoming releases will be:
+
+*   **Beta**: We plan to move RustFS to beta in April.
+*   **GA**: We plan to release the GA version in July.
+
+Also, we plan to support RDMA, DPU etc, and we will build RustFS as the key storage system for AI infrastructure in AI era.
+
+## Get Started with RustFS
+
+Try RustFS today and experience seamless migration from MinIO.
+
+*   GitHub: https://github.com/rustfs/rustfs
+*   Website: https://rustfs.com
+
+> Disclaimer: “MinIO” is a registered trademark of MinIO, Inc. Any references to MinIO in this post are strictly for comparative and compatibility-demonstration purposes. RustFS is an independent open-source project and has no affiliation, sponsorship, or endorsement from MinIO, Inc.
