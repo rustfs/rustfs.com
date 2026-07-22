@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Native Multi-Protocol Access | S3, Swift, WebDAV, FTP(s) & MCP | RustFS",
-  description: "Connect RustFS natively to any workload via S3, Swift, FTP(s), WebDAV, and MCP. Zero code modifications, no legacy proxies, and multi-protocol data coexistence.",
+  description: "Connect RustFS natively to any workload via S3, Swift, FTP(s), WebDAV, and MCP. Zero code modifications, no legacy proxies, and absolute multi-protocol data coexistence.",
   keywords: [
     "RustFS",
     "multi-protocol access",
@@ -14,6 +14,8 @@ export const metadata: Metadata = {
     "FTPS",
     "Model Context Protocol",
     "MCP AI",
+    "data silos",
+    "legacy modernization",
     "MinIO",
   ],
 };
@@ -33,7 +35,7 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "Drop-in MinIO replacement",
-        description: "Avoid config overhauls, API rewrites, and migration friction when moving from MinIO.",
+        description: "Zero config overhauls, no API rewrites, and zero migration friction.",
       },
       {
         title: "Native virtual host mode",
@@ -55,7 +57,7 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "Secure file operations",
-        description: "Full TLS/HTTPS protocol support for encrypted data transfer.",
+        description: "Full TLS/HTTPS protocol support delivering enterprise-grade encryption for peace-of-mind data transfer.",
       },
     ],
   },
@@ -71,10 +73,6 @@ const sections: FeaturePageSection[] = [
         title: "Dual-protocol coexistence",
         description: "Break down data silos and accelerate data mobility across S3 and Swift clients.",
       },
-      {
-        title: "Enterprise ecosystem fit",
-        description: "Support legacy enterprise and private-cloud workloads without forcing immediate application rewrites.",
-      },
     ],
   },
   {
@@ -89,10 +87,6 @@ const sections: FeaturePageSection[] = [
         title: "Hardened enterprise security",
         description: "Support FTPS over TLS to guarantee encrypted data transfer in transit.",
       },
-      {
-        title: "Unified storage backend",
-        description: "Keep S3, WebDAV, Swift, FTP(s), and MCP clients pointed at one consistent storage foundation.",
-      },
     ],
   },
   {
@@ -105,7 +99,7 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "Customized toolset",
-        description: "Customize and extend your own agent toolset while keeping storage access explicit and governed.",
+        description: "Customize and extend your own toolset legally.",
       },
     ],
   },
@@ -115,9 +109,24 @@ export default function MultipleProtocolAccessPage() {
   return (
     <FeaturePage
       title="Multiple Protocol Access"
-      description="Native multi-protocol accessibility delivery. By speaking S3, Swift, FTP(s), WebDAV, and MCP out of the box, RustFS integrates naturally into existing environments with no gateways, no legacy proxies, and no code modifications."
+      description="Native multi-protocol accessibility delivery. By speaking S3, Swift, FTP(s), and MCP out of the box, RustFS integrates naturally and effortlessly into any environment. No gateways, no legacy proxies, and absolutely zero code modifications required. Instantly connect to a massive, thriving ecosystem of AI pipelines, big data frameworks, and legacy enterprise workloads while maintaining a single, high-performance source of truth."
       sections={sections}
       variant="protocol"
+      highlightsTitle="Flexibility & Simplicity"
+      highlights={[
+        {
+          title: "Native support",
+          description: "Out-of-the-box setup lets you launch your storage services immediately.",
+        },
+        {
+          title: "Built for any workload",
+          description: "Adaptive to diverse use cases, from cloud-native microservices to legacy enterprise infrastructure.",
+        },
+        {
+          title: "Seamless integration",
+          description: "Native compatibility with industry-standard protocols. Connect flawlessly with your existing ecosystem.",
+        },
+      ]}
       links={[
         { label: "Plan protocol access", href: "/contact-us" },
         { label: "Read docs", href: "/docs", variant: "outline" },

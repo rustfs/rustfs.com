@@ -1,13 +1,29 @@
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import AppleIcon from "@/public/svgs/brands/apple.svg";
+import WindowsIcon from "@/public/svgs/brands/windows.svg";
+import { DataFlowLine, DataFlowPulse } from "./data-flow-motion";
+import ProductSectionIllustration from "./product-section-illustration";
 import {
   ActivityIcon,
   ArrowRightIcon,
+  BotIcon,
+  BracesIcon,
   CheckIcon,
+  CloudCogIcon,
+  CloudIcon,
   DatabaseIcon,
-  LockKeyholeIcon,
+  FolderIcon,
+  LockIcon,
+  MonitorCogIcon,
   NetworkIcon,
+  ServerCogIcon,
   ServerIcon,
   ShieldCheckIcon,
+  SquareTerminalIcon,
+  TimerResetIcon,
+  WorkflowIcon,
+  WrenchIcon,
   type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
@@ -36,109 +52,35 @@ interface FeaturePageProps {
   sections: FeaturePageSection[];
   links?: FeaturePageLink[];
   variant?: FeaturePageVariant;
+  highlightsTitle?: string;
+  highlights?: {
+    title: string;
+    description: string;
+  }[];
 }
 
 const variantMeta: Record<
   FeaturePageVariant,
   {
-    label: string;
-    code: string;
     Icon: LucideIcon;
   }
 > = {
   protocol: {
-    label: "Integration surface",
-    code: "S3.MCP",
     Icon: NetworkIcon,
   },
   data: {
-    label: "Data surface",
-    code: "S3.TABLE",
     Icon: DatabaseIcon,
   },
   scale: {
-    label: "Scale surface",
-    code: "EC.POOL",
     Icon: ServerIcon,
   },
   ops: {
-    label: "Ops surface",
-    code: "OTEL.RC",
     Icon: ActivityIcon,
   },
   security: {
-    label: "Trust surface",
-    code: "IAM.KMS",
     Icon: ShieldCheckIcon,
   },
 };
-
-function slugCode(value: string) {
-  const stopWords = new Set(["and", "or", "the", "for", "to", "of", "with", "&"]);
-  const words = value
-    .split(/\s+/)
-    .filter((word) => !stopWords.has(word.toLowerCase()))
-    .map((word) => word.replace(/[^a-z0-9]/gi, "").toUpperCase())
-    .filter(Boolean);
-
-  return words
-    .slice(0, 2)
-    .map((word) => (word.length > 4 ? word.slice(0, 4) : word))
-    .join(".");
-}
-
-function flattenItems(sections: FeaturePageSection[]) {
-  return sections.flatMap((section) =>
-    (section.items ?? []).map((item) => ({
-      ...item,
-      group: section.title,
-    }))
-  );
-}
-
-function SectionKicker({
-  label,
-  code,
-}: {
-  label: string;
-  code?: string;
-}) {
-  return (
-    <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em]">
-      <span aria-hidden="true" className="h-px w-8 bg-brand" />
-      <span className="text-muted-foreground">{label}</span>
-      {code ? (
-        <span className="text-muted-foreground/45">/ {code}</span>
-      ) : null}
-    </div>
-  );
-}
-
-function FeatureLine({ item }: {
-  item: { title: string; description: string; group?: string };
-}) {
-  return (
-    <article className="border-t border-border/60 py-6 first:border-t-0">
-      <div>
-        {item.group && (
-          <p className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            {slugCode(item.group)}
-          </p>
-        )}
-        <h3 className="text-lg font-semibold leading-6 tracking-tight text-foreground">{item.title}</h3>
-        <p className="mt-3 max-w-xl text-sm leading-7 text-muted-foreground">{item.description}</p>
-      </div>
-    </article>
-  );
-}
-
-function MiniChip({ children }: { children: ReactNode }) {
-  return (
-    <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-      {children}
-    </span>
-  );
-}
 
 function ProductLinks({ links }: { links?: FeaturePageLink[] }) {
   const productLinks = links ?? [
@@ -166,613 +108,310 @@ function ProductLinks({ links }: { links?: FeaturePageLink[] }) {
   );
 }
 
-function ProtocolVisual({ sections }: { sections: FeaturePageSection[] }) {
-  const labels = ["S3", "Swift", "WebDAV", "FTP(s)", "MCP"];
-
+function VisualFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="motion-reveal relative overflow-hidden border border-border bg-card/55" data-motion-delay="1">
-      <div className="grid grid-cols-[1fr_auto] border-b border-border">
-        <span className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-          Native access plane
-        </span>
-        <code className="border-l border-border px-5 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
-          Gateway free
-        </code>
-      </div>
-      <div className="grid gap-px bg-border sm:grid-cols-5">
-        {labels.map((label, index) => (
-          <div key={label} className="relative flex flex-col justify-between gap-6 bg-card/95 p-5">
-            <div>
-              <p className="text-2xl font-semibold text-foreground">{label}</p>
-              <p className="mt-3 text-xs leading-5 text-muted-foreground">
-                {sections[index]?.title ?? "Protocol"}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="grid gap-px bg-border sm:grid-cols-3">
-        {["No proxy", "No rewrite", "One source"].map((item) => (
-          <div key={item} className="bg-background/80 px-5 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            {item}
-          </div>
-        ))}
-      </div>
+    <div
+      aria-hidden="true"
+      className="relative flex h-full min-h-80 items-center overflow-hidden border border-border bg-card p-6 [&>*]:w-full sm:p-8"
+    >
+      {children}
     </div>
   );
 }
 
-function DataVisual() {
+function DiagramNode({
+  icon: Icon,
+  label,
+  accent = false,
+}: {
+  icon: LucideIcon;
+  label: string;
+  accent?: boolean;
+}) {
   return (
-    <div className="motion-reveal border border-border bg-card/55" data-motion-delay="1">
-      <div className="grid grid-cols-[1fr_auto] border-b border-border">
-        <span className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-          Lifecycle rail
-        </span>
-        <code className="border-l border-border px-5 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
-          S3.Table
-        </code>
-      </div>
-      <div className="grid gap-px bg-border lg:grid-cols-[1fr_1.1fr]">
-        <div className="bg-card/95 p-6">
-          <div className="grid gap-px bg-border">
-            {["Bucket and object", "Lifecycle rules", "Multipart upload"].map((item) => (
-              <div key={item} className="bg-background/60 px-4 py-5">
-                <span className="text-sm font-semibold text-foreground">{item}</span>
-              </div>
-            ))}
-          </div>
+    <div
+      className={cn(
+        "flex items-center gap-3 border border-border bg-background px-4 py-4",
+        accent && "border-brand/60 bg-brand/5"
+      )}
+    >
+      <Icon className={cn("size-4 shrink-0 text-muted-foreground", accent && "text-brand")} />
+      <span className="text-sm font-semibold text-foreground">{label}</span>
+    </div>
+  );
+}
+
+function S3ProtocolVisual() {
+  return (
+    <VisualFrame>
+      <div className="grid min-h-64 items-center gap-4 sm:grid-cols-[minmax(0,0.9fr)_auto_minmax(0,1.1fr)]">
+        <div className="grid gap-3">
+          <DataFlowPulse delay={0}>
+            <DiagramNode icon={BracesIcon} label="AWS SDKs" />
+          </DataFlowPulse>
+          <DataFlowPulse delay={0.18}>
+            <DiagramNode icon={CloudIcon} label="Cloud apps" />
+          </DataFlowPulse>
+          <DataFlowPulse delay={0.36}>
+            <DiagramNode icon={SquareTerminalIcon} label="S3 tools" />
+          </DataFlowPulse>
         </div>
-        <div className="relative overflow-hidden bg-muted/25 p-6 text-foreground">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 opacity-25 [background-image:repeating-linear-gradient(135deg,transparent_0_20px,rgba(255,255,255,0.35)_20px_21px,transparent_21px_40px)]"
-          />
-          <div className="relative flex flex-col justify-between gap-12">
-            <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] opacity-80">
-                Coming soon
-              </p>
-              <h2 className="mt-5 max-w-sm text-3xl font-semibold leading-tight">
-                S3 Tables for unified lakehouse data.
-              </h2>
-            </div>
-            <div className="grid gap-px bg-border sm:grid-cols-3">
-              {["Snapshots", "Metadata", "Iceberg"].map((item) => (
-                <span key={item} className="bg-background/80 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  {item}
+        <div className="flex items-center justify-center gap-2 text-brand sm:flex-col">
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em]">S3 API</span>
+          <DataFlowLine direction="vertical" className="sm:hidden" />
+          <DataFlowLine direction="horizontal" className="hidden sm:block" />
+        </div>
+        <DataFlowPulse delay={0.9} accent>
+          <div className="border border-brand/60 bg-brand/5 p-5">
+            <DatabaseIcon className="size-5 text-brand" />
+            <p className="mt-5 text-xl font-semibold text-foreground">RustFS object layer</p>
+            <div className="mt-6 grid grid-cols-3 gap-2">
+              {["Object", "Bucket", "Policy"].map((label) => (
+                <span
+                  key={label}
+                  className="border border-border bg-background px-2 py-3 text-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+                >
+                  {label}
                 </span>
               ))}
             </div>
           </div>
-        </div>
+        </DataFlowPulse>
       </div>
-    </div>
+    </VisualFrame>
   );
 }
 
-function ScaleVisual() {
+function WebDavProtocolVisual() {
+  const platforms = [
+    { label: "Windows", Icon: WindowsIcon },
+    { label: "macOS", Icon: AppleIcon },
+    { label: "Linux", Icon: SquareTerminalIcon },
+  ];
+
   return (
-    <div className="motion-reveal border border-border bg-card/55" data-motion-delay="1">
-      <div className="grid grid-cols-[1fr_auto] border-b border-border">
-        <span className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-          Topology planner
-        </span>
-        <code className="border-l border-border px-5 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
-          EC
-        </code>
-      </div>
-      <div className="relative overflow-hidden p-6">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-55 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:36px_36px]"
-        />
-        <div className="relative grid h-full gap-5">
-          <div className="grid gap-px bg-border sm:grid-cols-3">
-            {["Node", "Pool", "Region"].map((item) => (
-              <div key={item} className="bg-card/95 p-4">
-                <p className="mt-6 text-xl font-semibold text-foreground">{item}</p>
+    <VisualFrame>
+      <div className="flex min-h-64 flex-col justify-center">
+        <div className="grid grid-cols-3 gap-3">
+          {platforms.map(({ label, Icon }, index) => (
+            <DataFlowPulse key={label} delay={index * 0.18}>
+              <div className="border border-border bg-background p-4 text-center">
+                <Icon className="mx-auto size-5 text-muted-foreground" />
+                <p className="mt-3 text-xs font-semibold text-foreground">{label}</p>
               </div>
-            ))}
-          </div>
-          <div className="grid gap-px bg-border sm:grid-cols-4">
-            {["Disk fault", "Node fault", "Rebalance", "Self-heal"].map((item) => (
-              <span key={item} className="bg-background/90 px-4 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                {item}
-              </span>
-            ))}
-          </div>
+            </DataFlowPulse>
+          ))}
         </div>
-      </div>
-    </div>
-  );
-}
-
-function OpsVisual() {
-  return (
-    <div className="motion-reveal border border-border bg-card/55" data-motion-delay="1">
-      <div className="grid grid-cols-[1fr_auto] border-b border-border">
-        <span className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-          Signal flow
-        </span>
-        <code className="border-l border-border px-5 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
-          OTEL
-        </code>
-      </div>
-      <div className="divide-y divide-border">
-        {[
-          ["Console", "Pool expansion, rebalancing, object lifecycle"],
-          ["OpenTelemetry", "Logs, metrics, monitoring, traces"],
-          ["rc CLI", "Objects, buckets, clusters, security workflows"],
-        ].map(([label, detail]) => (
-          <div key={label} className="px-5 py-6">
+        <DataFlowLine direction="vertical" className="mx-auto" />
+        <DataFlowPulse className="mx-auto w-full max-w-md" delay={0.9} accent>
+          <div className="flex items-center gap-4 border border-brand/60 bg-brand/5 p-5">
+            <FolderIcon className="size-8 text-brand" />
             <div>
-              <p className="text-lg font-semibold text-foreground">{label}</p>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">{detail}</p>
+              <p className="text-lg font-semibold text-foreground">Mounted RustFS storage</p>
+              <p className="mt-1 text-xs text-muted-foreground">Native WebDAV access</p>
             </div>
           </div>
-        ))}
+        </DataFlowPulse>
       </div>
-      <div className="grid gap-px bg-border sm:grid-cols-3">
-        {["Prometheus", "Grafana", "Loki"].map((item) => (
-          <span key={item} className="bg-background/80 px-5 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            {item}
-          </span>
-        ))}
-      </div>
-    </div>
+    </VisualFrame>
   );
 }
 
-function SecurityVisual() {
+function SwiftProtocolVisual() {
   return (
-    <div className="motion-reveal border border-border bg-card/55" data-motion-delay="1">
-      <div className="grid grid-cols-[1fr_auto] border-b border-border">
-        <span className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-          Zero-trust stack
-        </span>
-        <code className="border-l border-border px-5 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
-          Audit
-        </code>
+    <VisualFrame>
+      <div className="mx-auto grid min-h-64 w-full max-w-md content-center">
+        <DataFlowPulse accent>
+          <DiagramNode icon={CloudCogIcon} label="OpenStack" accent />
+        </DataFlowPulse>
+        <DataFlowLine direction="vertical" className="mx-auto h-7" />
+        <div className="grid grid-cols-2 gap-3">
+          <DataFlowPulse delay={0.45}>
+            <DiagramNode icon={NetworkIcon} label="Private cloud" />
+          </DataFlowPulse>
+          <DataFlowPulse delay={0.63}>
+            <DiagramNode icon={BracesIcon} label="Swift clients" />
+          </DataFlowPulse>
+        </div>
+        <DataFlowLine direction="vertical" className="mx-auto h-7" delay={0.45} />
+        <DataFlowPulse delay={1.08} accent>
+          <DiagramNode icon={CloudCogIcon} label="RustFS Swift endpoint" accent />
+        </DataFlowPulse>
       </div>
-      <div className="grid gap-px bg-border sm:grid-cols-2">
-        {[
-          ["IAM", "Least privilege"],
-          ["STS", "Temporary access"],
-          ["SSE/KMS", "Key boundaries"],
-          ["OIDC", "Enterprise SSO"],
-          ["mTLS", "Mutual identity"],
-          ["Kafka/Pulsar", "Audit streams"],
-        ].map(([label, value]) => (
-          <div key={label} className="bg-card px-5 py-6">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
-              {label}
-            </p>
-            <p className="mt-4 text-sm font-semibold text-foreground">{value}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    </VisualFrame>
   );
 }
 
-function HeroVisual({
+function FtpProtocolVisual() {
+  return (
+    <VisualFrame>
+      <div className="grid min-h-64 items-center gap-5 sm:grid-cols-[1fr_auto_1fr]">
+        <div className="grid gap-3">
+          <DataFlowPulse>
+            <DiagramNode icon={MonitorCogIcon} label="Legacy apps" />
+          </DataFlowPulse>
+          <DataFlowPulse delay={0.18}>
+            <DiagramNode icon={TimerResetIcon} label="Batch jobs" />
+          </DataFlowPulse>
+        </div>
+        <div className="flex flex-col items-center gap-3 text-brand">
+          <DataFlowLine direction="vertical" className="sm:hidden" />
+          <DataFlowLine direction="horizontal" className="hidden sm:block" />
+          <DataFlowPulse delay={0.58} accent>
+            <span className="flex size-12 items-center justify-center border border-brand/60 bg-brand/5">
+              <LockIcon className="size-5" />
+            </span>
+          </DataFlowPulse>
+          <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em]">FTPS / TLS</span>
+          <DataFlowLine direction="vertical" className="sm:hidden" delay={0.45} />
+          <DataFlowLine direction="horizontal" className="hidden sm:block" delay={0.45} />
+        </div>
+        <DataFlowPulse delay={1.08} accent>
+          <div className="border border-brand/60 bg-brand/5 p-5">
+            <ServerCogIcon className="size-5 text-brand" />
+            <p className="mt-5 text-xl font-semibold text-foreground">RustFS transfer endpoint</p>
+            <p className="mt-2 text-xs leading-5 text-muted-foreground">Encrypted file transfer into object storage</p>
+          </div>
+        </DataFlowPulse>
+      </div>
+    </VisualFrame>
+  );
+}
+
+function McpProtocolVisual() {
+  return (
+    <VisualFrame>
+      <div className="mx-auto flex min-h-64 w-full max-w-lg flex-col justify-center">
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { label: "AI agent", Icon: BotIcon },
+            { label: "Automation", Icon: WorkflowIcon },
+            { label: "Tool client", Icon: WrenchIcon },
+          ].map(({ label, Icon }, index) => (
+            <DataFlowPulse key={label} delay={index * 0.18}>
+              <div className="border border-border bg-background p-4 text-center">
+                <Icon className="mx-auto size-5 text-muted-foreground" />
+                <p className="mt-3 text-xs font-semibold text-foreground">{label}</p>
+              </div>
+            </DataFlowPulse>
+          ))}
+        </div>
+        <DataFlowLine direction="vertical" className="mx-auto h-6" />
+        <DataFlowPulse delay={0.7} accent>
+          <DiagramNode icon={WrenchIcon} label="Controlled MCP tools" accent />
+        </DataFlowPulse>
+        <DataFlowLine direction="vertical" className="mx-auto h-6" delay={0.45} />
+        <DataFlowPulse delay={1.25} accent>
+          <DiagramNode icon={DatabaseIcon} label="RustFS objects and operations" accent />
+        </DataFlowPulse>
+      </div>
+    </VisualFrame>
+  );
+}
+
+function ProtocolIllustration({ section }: { section: FeaturePageSection }) {
+  const title = section.title.toLowerCase();
+
+  if (title.includes("webdav")) return <WebDavProtocolVisual />;
+  if (title.includes("swift")) return <SwiftProtocolVisual />;
+  if (title.includes("ftp")) return <FtpProtocolVisual />;
+  if (title.includes("mcp")) return <McpProtocolVisual />;
+  return <S3ProtocolVisual />;
+}
+
+function SectionIllustration({
   variant,
-  sections,
+  sectionIndex,
+  section,
 }: {
   variant: FeaturePageVariant;
-  sections: FeaturePageSection[];
+  sectionIndex: number;
+  section: FeaturePageSection;
 }) {
-  if (variant === "data") {
-    return <DataVisual />;
+  if (variant === "protocol") {
+    return <ProtocolIllustration section={section} />;
   }
 
-  if (variant === "scale") {
-    return <ScaleVisual />;
-  }
-
-  if (variant === "ops") {
-    return <OpsVisual />;
-  }
-
-  if (variant === "security") {
-    return <SecurityVisual />;
-  }
-
-  return <ProtocolVisual sections={sections} />;
+  return <ProductSectionIllustration variant={variant} sectionIndex={sectionIndex} />;
 }
 
-function ProtocolBody({ sections }: { sections: FeaturePageSection[] }) {
-  const [primarySection, ...restSections] = sections;
+function FeatureSection({
+  section,
+  sectionIndex,
+  variant,
+}: {
+  section: FeaturePageSection;
+  sectionIndex: number;
+  variant: FeaturePageVariant;
+}) {
+  const items = section.items ?? [];
+  const reverse = sectionIndex % 2 === 1;
 
   return (
-    <div className="grid gap-8">
-      {primarySection && (
-        <section className="grid gap-10 border-y border-border py-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
-          <div className="py-2">
-            <MiniChip>Gateway-free access</MiniChip>
-            <h2 className="mt-5 max-w-xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              One storage foundation, many native clients.
-            </h2>
-            {primarySection.description && (
-              <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
-                {primarySection.description}
-              </p>
-            )}
-            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
-              {sections.map((section) => (
-                <MiniChip key={section.title}>{section.title}</MiniChip>
-              ))}
-            </div>
-          </div>
-          <div className="border-y border-border/70">
-            <div className="divide-y divide-border/70">
-              {primarySection.items?.map((item) => (
-                <article key={item.title} className="py-5">
-                  <div>
-                    <h3 className="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
-                    <p className="mt-2 max-w-xl text-sm leading-7 text-muted-foreground">{item.description}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      <div className="grid gap-x-12 gap-y-10 lg:grid-cols-2">
-        {restSections.map((section) => (
-          <section key={section.title} className="border-t border-border pt-6">
-            <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-                {slugCode(section.title)}
-              </p>
-              <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
-                {section.title}
-              </h2>
-            </div>
-            {section.description && (
-              <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                {section.description}
-              </p>
-            )}
-            <div className="mt-5 divide-y divide-border/70 border-y border-border/70">
-              {section.items?.map((item) => (
-                <FeatureLine key={item.title} item={item} />
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function DataBody({ sections }: { sections: FeaturePageSection[] }) {
-  const tableSection = sections.find((section) => section.title.toLowerCase().includes("tables"));
-  const routineSections = sections.filter((section) => section !== tableSection);
-  const routineItems = flattenItems(routineSections);
-
-  return (
-    <div className="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
-      <section className="border-t border-border pt-6">
-        <div>
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-            Object lifecycle
-          </p>
-          <h2 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-foreground">
-            Manage buckets, objects, lifecycle, and uploads from one S3 surface.
-          </h2>
-        </div>
-        <div className="mt-8 grid gap-x-8 md:grid-cols-2">
-          {routineItems.map((item) => (
-            <article
-              key={item.title}
-              className="border-t border-border/70 py-5"
-            >
-              <h3 className="text-base font-semibold leading-6 text-foreground">{item.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className="grid content-start gap-8">
-        {tableSection && (
-          <article className="border-t-2 border-brand py-6">
-            <div>
-              <MiniChip>Coming soon</MiniChip>
-              <h3 className="mt-6 text-3xl font-semibold tracking-tight text-foreground">{tableSection.title}</h3>
-              {tableSection.description && (
-                <p className="mt-4 text-sm leading-7 text-muted-foreground">{tableSection.description}</p>
-              )}
-              <div className="mt-7 flex flex-wrap gap-x-5 gap-y-3">
-                {tableSection.items?.map((item) => (
-                  <MiniChip key={item.title}>{item.title}</MiniChip>
-                ))}
-              </div>
-            </div>
-          </article>
-        )}
-
-        {routineSections.map((section) => (
-          <article key={section.title} className="border-t border-border pt-6">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-              {slugCode(section.title)}
-            </p>
-            <h3 className="mt-3 text-xl font-semibold tracking-tight text-foreground">{section.title}</h3>
-            {section.description && (
-              <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                {section.description}
-              </p>
-            )}
-            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3">
-              {section.items?.map((item) => (
-                <MiniChip key={item.title}>
-                  {item.title}
-                </MiniChip>
-              ))}
-            </div>
-          </article>
-        ))}
-      </section>
-    </div>
-  );
-}
-
-function ScaleBody({ sections }: { sections: FeaturePageSection[] }) {
-  const items = flattenItems(sections);
-
-  return (
-    <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-      <aside className="border-t border-border pt-6">
-        <div className="relative border-b border-border pb-6">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 opacity-40 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:32px_32px]"
-          />
-          <div className="relative flex h-full items-end gap-3">
-            {[
-              ["SNSD", "1"],
-              ["SNMD", "4"],
-              ["MNMD", "16"],
-            ].map(([label, value]) => (
-              <div key={label} className="flex-1 border border-border bg-background/80 p-4">
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">{label}</p>
-                <p className="mt-8 text-3xl font-semibold text-foreground">{value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="py-7">
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-            EC calculator
-          </p>
-          <h2 className="mt-5 text-3xl font-semibold leading-tight text-foreground">
-            Choose parity after you know the failure domain.
-          </h2>
-          <p className="mt-5 text-sm leading-7 text-muted-foreground">
-            Match disk count, node count, and recovery target before production expansion.
-          </p>
-        </div>
-        <Link
-          href="/erasure-code-calculator"
-          className="group flex items-center justify-between border-y border-border py-5 text-sm font-semibold text-brand"
-        >
-          Open calculator
-          <ArrowRightIcon className="motion-arrow size-4" />
-        </Link>
-      </aside>
-      <section className="grid gap-6">
-        <div className="grid gap-4 md:grid-cols-2">
-          {sections.map((section) => (
-            <article key={section.title} className="border-t border-border pt-5">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-                {slugCode(section.title)}
-              </p>
-              <h3 className="mt-4 text-2xl font-semibold tracking-tight text-foreground">{section.title}</h3>
-              {section.description && (
-                <p className="mt-3 text-sm leading-7 text-muted-foreground">{section.description}</p>
-              )}
-            </article>
-          ))}
-        </div>
-        <div className="border-y border-border px-1">
-          {items.map((item) => (
-            <FeatureLine key={item.title} item={item} />
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-}
-
-function OpsBody({ sections }: { sections: FeaturePageSection[] }) {
-  const consoleSection = sections[1] ?? sections[0];
-  const signalSections = sections.filter((section) => section !== consoleSection);
-  const [primarySignal, ...supportingSignals] = signalSections;
-
-  return (
-    <div className="border-y border-border">
-      <section className="grid lg:grid-cols-[0.82fr_1.18fr]">
-        <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-            Console operations
-          </p>
-          <h2 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-foreground">
-            One control plane for data, security, and pool operations.
-          </h2>
-        </div>
-        <div className="grid sm:grid-cols-3">
-          {consoleSection.items?.map((item) => (
-            <article
-              key={item.title}
-              className="border-b border-border p-6 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0"
-            >
-              <CheckIcon className="size-4 text-brand" />
-              <h3 className="mt-10 text-base font-semibold text-foreground">{item.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">{item.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {primarySignal ? (
-        <section className="border-t border-border">
-          <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
-            <div className="relative border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
-              <span aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-brand" />
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                {slugCode(primarySignal.title)}
-              </p>
-              <h3 className="mt-5 max-w-sm text-3xl font-semibold tracking-tight text-foreground">
-                {primarySignal.title}
-              </h3>
-            </div>
-            <div className="divide-y divide-border">
-              {primarySignal.items?.map((item) => (
-                <div
-                  key={item.title}
-                  className="grid gap-2 p-5 sm:grid-cols-[minmax(10rem,0.55fr)_1fr] sm:gap-6 sm:px-6"
-                >
-                  <p className="text-sm font-semibold text-foreground">{item.title}</p>
-                  <p className="text-sm leading-6 text-muted-foreground">{item.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid border-t border-border md:grid-cols-3">
-            {supportingSignals.map((section) => (
-              <article
-                key={section.title}
-                className="border-b border-border p-6 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
-              >
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  {slugCode(section.title)}
-                </p>
-                <h3 className="mt-5 text-2xl font-semibold tracking-tight text-foreground">
-                  {section.title}
-                </h3>
-                <div className="mt-6 divide-y divide-border">
-                  {section.items?.map((item) => (
-                    <div key={item.title} className="py-4 first:pt-0 last:pb-0">
-                      <p className="text-sm font-semibold leading-6 text-foreground">{item.title}</p>
-                      <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      ) : null}
-    </div>
-  );
-}
-
-function SecurityBody({ sections }: { sections: FeaturePageSection[] }) {
-  const items = flattenItems(sections);
-  const primarySections = sections.slice(0, 3);
-  const restSections = sections.slice(3);
-
-  return (
-    <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-      <section className="relative border-t border-border pt-6">
-        <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 bg-brand" />
-        <div className="flex items-center justify-between gap-4">
-          <MiniChip>Secure by default</MiniChip>
-          <LockKeyholeIcon className="size-5 text-brand" />
-        </div>
-        <h2 className="mt-7 max-w-2xl text-3xl font-semibold tracking-tight text-foreground">
-            Layered controls from identity to evidence.
+    <section className="border-t border-border py-16 sm:py-20">
+      <div>
+        <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+          {section.title}
         </h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-3">
-          {primarySections.map((section) => (
-            <article key={section.title} className="border-t border-border pt-5">
-              <div className="flex items-center gap-3">
-                <CheckIcon className="size-4 shrink-0 text-brand" />
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
-                  {slugCode(section.title)}
+        {section.description ? (
+          <p className="mt-4 text-base leading-8 text-muted-foreground">
+            {section.description}
+          </p>
+        ) : null}
+      </div>
+
+      <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-12">
+        <div className={cn("h-full", reverse && "lg:order-2")}>
+          <SectionIllustration
+            variant={variant}
+            sectionIndex={sectionIndex}
+            section={section}
+          />
+        </div>
+
+        <div className={cn("h-full divide-y divide-border border border-border bg-card", reverse && "lg:order-1")}>
+          {items.map((item) => (
+            <article key={item.title} className="grid gap-4 p-6 sm:grid-cols-[2.5rem_1fr]">
+              <span className="flex size-9 items-center justify-center bg-background text-brand">
+                <CheckIcon className="size-4" />
+              </span>
+              <div>
+                <h3 className="text-lg font-semibold tracking-tight text-foreground">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                  {item.description}
                 </p>
               </div>
-              <h3 className="mt-4 text-xl font-semibold tracking-tight text-foreground">{section.title}</h3>
-              {section.description && (
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">{section.description}</p>
-              )}
             </article>
           ))}
         </div>
-        <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3">
-          {restSections.map((section) => (
-            <MiniChip key={section.title}>{section.title}</MiniChip>
-          ))}
-        </div>
-      </section>
-      <section className="border-y border-border py-2">
-        <div className="px-1 py-4">
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-            Control checklist
-          </p>
-        </div>
-        <div>
-          {items.map((item) => (
-            <FeatureLine key={`${item.group}-${item.title}`} item={item} />
-          ))}
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
-}
-
-function VariantBody({
-  variant,
-  sections,
-}: {
-  variant: FeaturePageVariant;
-  sections: FeaturePageSection[];
-}) {
-  if (variant === "data") {
-    return <DataBody sections={sections} />;
-  }
-
-  if (variant === "scale") {
-    return <ScaleBody sections={sections} />;
-  }
-
-  if (variant === "ops") {
-    return <OpsBody sections={sections} />;
-  }
-
-  if (variant === "security") {
-    return <SecurityBody sections={sections} />;
-  }
-
-  return <ProtocolBody sections={sections} />;
 }
 
 function ProductionReview({ variant }: { variant: FeaturePageVariant }) {
   const Icon = variantMeta[variant].Icon;
 
   return (
-    <div className="mt-20 border-y border-border">
-      <Link href="/contact-us" className="group grid gap-6 py-8 md:grid-cols-[8rem_1fr_auto] md:items-center lg:grid-cols-[10rem_1fr_auto]">
-        <div>
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
-            Production review
-          </p>
-        </div>
-        <div>
-          <h2 className="max-w-2xl text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            Need help mapping this surface?
-          </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
-            Share your topology, identity model, and operations constraints before production rollout.
-          </p>
-        </div>
-        <span className="motion-icon-tile relative flex size-12 items-center justify-center text-brand">
+    <div className="border border-border bg-card p-6 sm:p-8">
+      <Link
+        href="/contact-us"
+        className="group grid gap-6 sm:grid-cols-[auto_1fr_auto] sm:items-center"
+      >
+        <span className="flex size-12 items-center justify-center bg-background text-brand">
           <Icon className="size-5" />
-          <span className="sr-only">Contact RustFS</span>
         </span>
+        <div>
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+            Plan your RustFS deployment
+          </h2>
+          <p className="mt-3 text-sm leading-7 text-muted-foreground">
+            Share your topology, identity model, and operations constraints with the RustFS team.
+          </p>
+        </div>
+        <ArrowRightIcon className="motion-arrow size-5 text-brand" />
       </Link>
     </div>
   );
@@ -784,40 +423,54 @@ export default function FeaturePage({
   sections,
   links,
   variant = "protocol",
+  highlightsTitle,
+  highlights,
 }: FeaturePageProps) {
-  const meta = variantMeta[variant];
-
   return (
     <main className="relative z-10 flex-1 text-foreground">
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
-        <div className="relative h-px bg-border">
-          <span className="absolute left-0 top-0 h-0.5 w-28 -translate-y-px bg-brand" />
-        </div>
-
-        <div className="mt-8 grid min-w-0 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div className="min-w-0">
-            <SectionKicker label={meta.label} code={meta.code} />
-            <h1 className="mt-10 max-w-4xl font-display text-4xl font-extrabold leading-none text-foreground sm:text-6xl lg:text-7xl">
-              {title}
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground">
-              {description}
-            </p>
-            <ProductLinks links={links} />
+        <h1 className="font-display text-5xl font-extrabold leading-tight text-foreground sm:text-6xl">
+          {title}
+        </h1>
+        <p className="mt-6 text-base leading-8 text-muted-foreground">
+          {description}
+        </p>
+        <ProductLinks links={links} />
+        {highlights?.length ? (
+          <div className="mt-12">
+            {highlightsTitle ? (
+              <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
+                {highlightsTitle}
+              </h2>
+            ) : null}
+            <dl className="mt-5 grid gap-4 md:grid-cols-3">
+              {highlights.map((highlight) => (
+                <div
+                  key={highlight.title}
+                  className="border border-border bg-card p-5 sm:p-6"
+                >
+                  <dt className="font-semibold text-foreground">{highlight.title}</dt>
+                  <dd className="mt-3 text-sm leading-7 text-muted-foreground">
+                    {highlight.description}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
-
-          <div className="min-w-0">
-            <HeroVisual variant={variant} sections={sections} />
-          </div>
-        </div>
+        ) : null}
       </section>
 
-      <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
-          <VariantBody variant={variant} sections={sections} />
-          <ProductionReview variant={variant} />
-        </div>
-      </section>
+      <div className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
+        {sections.map((section, sectionIndex) => (
+          <FeatureSection
+            key={section.title}
+            section={section}
+            sectionIndex={sectionIndex}
+            variant={variant}
+          />
+        ))}
+        <ProductionReview variant={variant} />
+      </div>
     </main>
   );
 }

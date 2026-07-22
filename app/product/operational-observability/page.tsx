@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "RustFS Cluster Operations & OTEL Observability | Enterprise Management",
-  description: "Simplify RustFS management with an intuitive console, rich rc CLI, and full-stack OTEL observability. Deploy Prometheus, Grafana, and Loki for real-time cluster insights.",
+  description: "Simplify RustFS management with an intuitive console, rich rc CLI, and full-stack OTEL observability. Deploy Prometheus, Grafana, and Loki with one click for real-time cluster insights.",
   keywords: [
     "RustFS",
     "cluster observability",
@@ -20,37 +20,19 @@ export const metadata: Metadata = {
 
 const sections: FeaturePageSection[] = [
   {
-    title: "Enterprise insights",
-    description: "Operate RustFS with real-time signals and a unified administration surface.",
-    items: [
-      {
-        title: "Real-time insights",
-        description: "Visibility into node health, disk status, capacity metrics, and object or bucket counts.",
-      },
-      {
-        title: "Operational flexibility",
-        description: "Effortless deployment across operating systems and installation methods including source, binary, Docker, and Kubernetes.",
-      },
-      {
-        title: "Simplified administration",
-        description: "Comprehensive console and CLI controls for full-lifecycle bucket management and granular IAM security.",
-      },
-    ],
-  },
-  {
     title: "Console operations",
     items: [
       {
-        title: "Data management",
-        description: "Manage the full lifecycle of objects and buckets from the console.",
+        title: "Intuitive data management",
+        description: "Streamlining full lifecycle operations for buckets and objects.",
       },
       {
-        title: "Security management",
-        description: "Operate IAM, security audit, authentication, authorization, and data encryption from one place.",
+        title: "Granular security administration",
+        description: "Reinforcing IAM, audit logging, and data encryption.",
       },
       {
-        title: "Cluster management",
-        description: "Expand, rebalance, and retire pools directly from the console.",
+        title: "Centralized cluster orchestration",
+        description: "Simplifying pool expansion, rebalancing, and decommissioning.",
       },
     ],
   },
@@ -64,11 +46,11 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "One-click containerized deployment",
-        description: "Spin up Prometheus, Grafana, and Loki instances quickly for operational review.",
+        description: "Spinning up Prometheus, Grafana, and Loki instances instantly.",
       },
       {
-        title: "Flexible configuration",
-        description: "Control observability features through environment variables for deployment-specific needs.",
+        title: "Flexible environment configuration",
+        description: "Tailoring feature toggles to customized enterprise needs.",
       },
     ],
   },
@@ -99,8 +81,8 @@ const sections: FeaturePageSection[] = [
         description: "Cover object, bucket, cluster, and security operations from the command line.",
       },
       {
-        title: "Secure and convenient",
-        description: "Support Linux, macOS, and Windows with binary and Docker installation options.",
+        title: "Multi-platform deployment",
+        description: "Securing frictionless setup via binaries or Docker across Linux, macOS, and Windows.",
       },
       {
         title: "Continuous iteration",
@@ -117,6 +99,21 @@ export default function OperationalObservabilityPage() {
       description="RustFS gives operators practical control over storage operations with console workflows, OpenTelemetry support, cluster insights, and rc CLI automation."
       sections={sections}
       variant="ops"
+      highlightsTitle="Enterprise insights"
+      highlights={[
+        {
+          title: "Real-time insights",
+          description: "Visibility into node health, disk status, capacity metrics, and object or bucket counts.",
+        },
+        {
+          title: "Operational flexibility",
+          description: "Effortless deployment across operating systems and installation methods including source, binary, Docker, and Kubernetes.",
+        },
+        {
+          title: "Simplified administration",
+          description: "Comprehensive console and CLI controls for full-lifecycle bucket management and granular IAM security.",
+        },
+      ]}
       links={[
         { label: "Review operations", href: "/contact-us" },
         { label: "Read docs", href: "/docs", variant: "outline" },

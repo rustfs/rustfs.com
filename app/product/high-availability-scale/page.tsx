@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "RustFS High Availability & Scalability | Enterprise Distributed Storage",
   description:
-    "Discover RustFS enterprise distributed architecture. Experience scaling from PB to EB levels with distributed EC, automated self-healing, and data reliability.",
+    "Discover RustFS enterprise distributed architecture. Experience limitless scaling from PB to EB levels with distributed EC, automated self-healing, and absolute data reliability.",
   keywords: [
     "RustFS",
     "distributed object storage",
@@ -21,89 +21,81 @@ export const metadata: Metadata = {
 const sections: FeaturePageSection[] = [
   {
     title: "Distributed deployment",
-    description:
-      "Enterprise-grade distributed architecture for massive data availability and customized storage policies.",
     items: [
       {
-        title: "Enterprise-grade architecture",
+        title: "Enterprise-grade distributed architecture",
         description:
-          "Satisfy high-availability requirements for massive data through distributed system design.",
+          "Satisfying high-availability requirements for massive data.",
       },
       {
-        title: "Flexible multi-node topology",
+        title: "Flexible multi-node and multi-disk topologies",
         description:
-          "Use multi-node and multi-disk layouts to match enterprise storage policies.",
+          "Fulfilling customized enterprise storage policies.",
       },
       {
-        title: "Node and disk fault tolerance",
+        title: "Resilient node- and disk-level fault tolerance",
         description:
-          "Keep service and data available when disks or nodes fail.",
+          "Guaranteeing continuous service and data availability.",
       },
     ],
   },
   {
     title: "EC configuration",
-    description:
-      "Distributed Erasure Coding balances resilience, disaster recovery, storage efficiency, and reliability.",
     items: [
       {
         title: "Distributed EC",
         description:
-          "Maximize cluster resilience and disaster recovery with distributed Erasure Coding.",
+          "Maximizing RustFS cluster resilience and disaster recovery.",
       },
       {
         title: "Optimized EC configurations",
         description:
-          "Balance storage efficiency and data reliability for each workload.",
+          "Balancing storage efficiency and data reliability.",
       },
       {
         title: "EC Calculator",
         description:
-          "Match workloads with best-practice configurations before production rollout.",
+          "Matching your workloads with best-practice configurations instantly.",
       },
     ],
   },
   {
     title: "Infinite scaling",
-    description:
-      "Scale horizontally and vertically from PB to EB-level data management while preserving operational continuity.",
     items: [
       {
         title: "Horizontal and vertical scaling",
         description:
-          "Expand capacity and deployment shape as data volume grows.",
+          "Enabling PB to EB-level data management.",
       },
       {
         title: "Automated data rebalancing",
         description:
-          "Improve cluster-wide disk utilization as pools expand.",
+          "Achieving uniform disk utilization.",
       },
       {
         title: "Zero-downtime expansion",
         description:
-          "Minimize impact on active workloads during online expansion.",
+          "Minimizing the performance impact on active workloads.",
       },
     ],
   },
   {
     title: "Node healing",
-    description:
-      "Automated recovery and integrity verification keep cluster state visible and reliable.",
     items: [
       {
         title: "Automated data self-healing",
         description:
-          "Recover data automatically to maintain enterprise-grade reliability.",
+          "Delivering enterprise-grade data reliability.",
       },
       {
         title: "Data integrity verification",
         description:
-          "Secure cluster consistency through verification workflows.",
+          "Securing consistency of cluster data.",
       },
       {
         title: "Real-time progress tracking",
         description:
-          "Provide operational visibility into cluster health and healing progress.",
+          "Providing deep insights into cluster health.",
       },
     ],
   },
@@ -113,9 +105,24 @@ export default function HighAvailabilityScalePage() {
   return (
     <FeaturePage
       title="High Availability & Scale"
-      description="RustFS combines enterprise distributed architecture, distributed Erasure Coding, resilient node and disk fault tolerance, and automated healing to support reliable PB to EB-scale storage."
+      description="Driven by enterprise-grade distributed architecture, distributed Erasure Coding (EC), and resilient fault tolerance, RustFS achieves a perfect win-win between limitless scaling and absolute data consistency. RustFS safeguards reliable, high-efficiency data management for enterprise storage scaling from PB to EB levels, and even more."
       sections={sections}
       variant="scale"
+      highlightsTitle="Reliability & Efficiency"
+      highlights={[
+        {
+          title: "Enterprise Solution",
+          description: "Satisfying enterprise demands for both high availability and rigorous reliability in mass storage.",
+        },
+        {
+          title: "Cost saving",
+          description: "Exceptional cost-efficiency, driving down both hardware storage costs and operational workload for enterprises.",
+        },
+        {
+          title: "High Flexibility",
+          description: "Flexibly adapting to efficient data management across diverse business scenarios and any data scale.",
+        },
+      ]}
       links={[
         { label: "Open EC calculator", href: "/erasure-code-calculator" },
         { label: "Plan scaling", href: "/contact-us", variant: "outline" },

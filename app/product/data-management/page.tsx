@@ -21,85 +21,36 @@ export const metadata: Metadata = {
 
 const sections: FeaturePageSection[] = [
   {
-    title: "S3 compatibility",
-    description:
-      "Use the native S3 protocol to manage object storage data efficiently while keeping migration paths open from any S3-compatible system.",
+    title: "S3",
     items: [
       {
-        title: "Bucket and object management",
-        description:
-          "Manage bucket and object operations through a stable S3-compatible surface.",
+        title: "Bucket & Object",
+        description: "Making object storage data management remarkably stable and efficient.",
       },
       {
-        title: "Bucket quota control",
-        description:
-          "Keep capacity boundaries explicit for teams, tenants, and application workloads.",
+        title: "Lifecycle Management",
+        description: "Optimizing overall storage costs and reducing operational burdens.",
       },
       {
-        title: "Object Lock support",
-        description:
-          "Protect selected data from accidental or unauthorized mutation when retention policies require it.",
+        title: "Multipart Upload",
+        description: "Accelerating large file transfers and maximizing network utilization.",
       },
     ],
   },
   {
-    title: "Lifecycle management",
-    description:
-      "Use fine-grained lifecycle controls to reduce operational burden and lower enterprise storage cost.",
+    title: "S3 Tables (Coming soon)",
     items: [
       {
-        title: "Automated lifecycle rules",
-        description:
-          "Optimize storage cost by moving, expiring, or retaining data according to workload policy.",
+        title: "Automated Small File Management",
+        description: "Automating backend merges and snapshots to simplify and reduce operational costs.",
       },
       {
-        title: "Versioning workflows",
-        description:
-          "Preserve object history when applications need rollback, recovery, or audit-friendly state changes.",
+        title: "Performance Acceleration",
+        description: "Optimizing the dedicated metadata layer to drastically lower query latency and accelerate data analytics.",
       },
       {
-        title: "Cost efficiency",
-        description:
-          "Reduce total cost of ownership with precise data lifecycle decisions instead of coarse storage tiers.",
-      },
-    ],
-  },
-  {
-    title: "Multipart upload",
-    description:
-      "Accelerate large-file transfer paths and keep network utilization high for data-heavy applications.",
-    items: [
-      {
-        title: "Large file acceleration",
-        description:
-          "Improve write efficiency for large objects through multipart transfer behavior.",
-      },
-      {
-        title: "Network utilization",
-        description:
-          "Maximize available bandwidth for long-running data ingest and migration workflows.",
-      },
-    ],
-  },
-  {
-    title: "S3 Tables",
-    description:
-      "Coming soon: unify structured and unstructured data management with native Iceberg-ready table storage.",
-    items: [
-      {
-        title: "Automated small file management",
-        description:
-          "Automate backend merges, snapshots, and maintenance to simplify operational overhead.",
-      },
-      {
-        title: "Performance acceleration",
-        description:
-          "Use a dedicated metadata layer to lower query latency and accelerate analytics workloads.",
-      },
-      {
-        title: "Native Iceberg support",
-        description:
-          "Connect seamlessly with leading big data and AI ecosystems through Apache Iceberg compatibility.",
+        title: "Native Iceberg Support",
+        description: "Seamlessly connecting with leading big data and AI ecosystems.",
       },
     ],
   },
@@ -109,9 +60,24 @@ export default function DataManagementPage() {
   return (
     <FeaturePage
       title="Data Management"
-      description="Comprehensive lifecycle management covering buckets, objects, bucket quotas, Object Lock, versioning, multipart upload, and S3 Tables. RustFS keeps object data manageable while preserving S3-native migration paths."
+      description="Comprehensive lifecycle management covering bucket quotas, Object Lock, and versioning. Featuring native S3 compatibility to enable seamless data migration from any S3-compliant system to RustFS."
       sections={sections}
       variant="data"
+      highlightsTitle="Resilience & Durability"
+      highlights={[
+        {
+          title: "S3 compatibility",
+          description: "S3 protocol natively supported to manage object storage data with high efficiency.",
+        },
+        {
+          title: "Unified management",
+          description: "Powered by S3 Tables to unify structured and unstructured data management.",
+        },
+        {
+          title: "Cost efficiency",
+          description: "Fine-grained data lifecycle management implemented to reduce enterprise storage costs.",
+        },
+      ]}
       links={[
         { label: "Plan data workflows", href: "/contact-us" },
         { label: "Read docs", href: "/docs", variant: "outline" },

@@ -32,14 +32,6 @@ const sections: FeaturePageSection[] = [
         title: "Dynamic STS temporary credentials",
         description: "Issue token-based temporary credentials to reduce long-term secret exposure and simplify controlled delegation.",
       },
-      {
-        title: "Role-oriented administration",
-        description: "Separate storage operations, security administration, and application access into explicit permission surfaces.",
-      },
-      {
-        title: "Zero-trust by default",
-        description: "Enforce the principle of least privilege across the entire storage environment.",
-      },
     ],
   },
   {
@@ -54,13 +46,19 @@ const sections: FeaturePageSection[] = [
         title: "Seamless KMS integration",
         description: "Centralize key lifecycle, access control, and auditability through enterprise-grade key management systems.",
       },
+    ],
+  },
+  {
+    title: "Security audit",
+    description: "Turn storage activity into reviewable operational evidence for incident response and compliance processes.",
+    items: [
       {
-        title: "Encryption-by-design operations",
-        description: "Keep encryption decisions close to storage policy so secure defaults can be applied consistently.",
+        title: "Deep operational insights",
+        description: "Spotting destructive actions instantly to safeguard critical data assets.",
       },
       {
-        title: "Compliance-ready key boundaries",
-        description: "Support deployments that need explicit separation between storage operators, application teams, and key owners.",
+        title: "Log streaming destination",
+        description: "Forward audit trails to Kafka and Pulsar for deeper security analytics.",
       },
     ],
   },
@@ -75,14 +73,6 @@ const sections: FeaturePageSection[] = [
       {
         title: "Visual console integration",
         description: "Simplify OIDC infrastructure setup and reduce operational complexity.",
-      },
-      {
-        title: "Credential exposure reduction",
-        description: "Prefer scoped sessions, controlled rotation, and temporary credentials over broad permanent secrets.",
-      },
-      {
-        title: "Consistent access surface",
-        description: "Apply the same security model across S3, WebDAV, Swift, FTP(s), MCP, console, and rc operations.",
       },
     ],
   },
@@ -100,37 +90,30 @@ const sections: FeaturePageSection[] = [
       },
     ],
   },
-  {
-    title: "Security audit",
-    description: "Turn storage activity into reviewable operational evidence for incident response and compliance processes.",
-    items: [
-      {
-        title: "Administrative action visibility",
-        description: "Spot destructive actions and security-sensitive control-plane changes quickly.",
-      },
-      {
-        title: "Log streaming destination",
-        description: "Forward audit trails to Kafka and Pulsar for deeper security analytics.",
-      },
-      {
-        title: "Compliance evidence workflows",
-        description: "Help operators answer who accessed what, when, and through which controlled interface.",
-      },
-      {
-        title: "Operational review loop",
-        description: "Feed audit signals into monitoring, alerting, and incident response workflows alongside RustFS telemetry.",
-      },
-    ],
-  },
 ];
 
 export default function SecurityCompliancePage() {
   return (
     <FeaturePage
-      title="Security & Compliance"
-      description="RustFS provides a defense-in-depth security foundation for enterprise object storage: policy-based access control, temporary credentials, server-side encryption, KMS integration, OIDC authentication, mTLS, and auditable operations."
+      title="Enterprise Security & Compliance"
+      description="Comprehensive enterprise-grade security and compliance framework, natively encompassing authentication, authorization, log auditing, and event handling to satisfy rigorous corporate compliance mandates right out of the box."
       sections={sections}
       variant="security"
+      highlightsTitle="Secure by Default"
+      highlights={[
+        {
+          title: "Zero-Trust",
+          description: "Enforcing the principle of least privilege across the entire enterprise.",
+        },
+        {
+          title: "Defense in depth",
+          description: "Implementing multi-layered protections to guarantee end-to-end security across the entire data pipeline.",
+        },
+        {
+          title: "Out-of-the-Box",
+          description: "Enabling robust protection instantly without requiring extra or complex configurations.",
+        },
+      ]}
       links={[
         { label: "Review security model", href: "/contact-us" },
         { label: "Read docs", href: "/docs", variant: "outline" },
