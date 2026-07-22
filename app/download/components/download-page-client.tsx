@@ -80,7 +80,7 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
       href={releaseUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="motion-card group relative grid overflow-hidden border border-border bg-card/90 transition-colors hover:border-foreground/40 lg:grid-cols-[1fr_auto]"
+      className="motion-card group relative block overflow-hidden border border-border bg-card/90 transition-colors hover:border-foreground/40"
       aria-label="Open current RustFS server release on GitHub"
     >
       <div className="relative p-5 sm:p-6">
@@ -105,25 +105,6 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
             <ArrowUpRightIcon className="motion-arrow size-4" />
           </span>
         </div>
-      </div>
-
-      <div className="grid border-t border-border bg-background/35 lg:w-52 lg:border-l lg:border-t-0">
-        <span className="grid gap-1 border-b border-border px-4 py-4">
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-            Artifacts
-          </span>
-          <span className="text-sm font-semibold text-foreground">
-            {release?.assets?.length ? `${release.assets.length} files` : 'Release page'}
-          </span>
-        </span>
-        <span className="grid gap-1 px-4 py-4">
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-            Destination
-          </span>
-          <span className="text-sm font-semibold text-foreground">
-            GitHub
-          </span>
-        </span>
       </div>
     </a>
   );
