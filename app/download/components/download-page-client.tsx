@@ -5,13 +5,13 @@ import { cn } from '@/lib/utils'
 import { formatReleaseDate, formatVersion, getDownloadUrlForPlatform, type GitHubRelease } from '@/lib/github'
 import AppleIcon from '@/public/svgs/brands/apple.svg'
 import DockerIcon from '@/public/svgs/brands/docker.svg'
+import KubernetesIcon from '@/public/svgs/brands/kubernetes.svg'
 import LinuxIcon from '@/public/svgs/brands/linux.svg'
 import WindowsIcon from '@/public/svgs/brands/windows.svg'
 import {
     ArrowUpRightIcon,
     BinaryIcon,
     BookOpenIcon,
-    CloudIcon,
     DownloadIcon,
     HardDriveIcon,
     LayersIcon,
@@ -271,7 +271,7 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
       title: 'Install with Helm',
       summary: 'Use Helm for cloud-native deployment, GitOps review, and repeatable cluster configuration.',
       bestFor: 'Kubernetes, GitOps, cluster rollout',
-      Icon: CloudIcon,
+      Icon: KubernetesIcon,
       commandTitle: 'Helm install',
       command: [
         'helm repo add rustfs https://charts.rustfs.com',
