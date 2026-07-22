@@ -8,7 +8,9 @@ import DockerIcon from '@/public/svgs/brands/docker.svg'
 import KubernetesIcon from '@/public/svgs/brands/kubernetes.svg'
 import LinuxIcon from '@/public/svgs/brands/linux.svg'
 import WindowsIcon from '@/public/svgs/brands/windows.svg'
+import Link from 'next/link'
 import {
+    ArrowLeftIcon,
     ArrowUpRightIcon,
     BinaryIcon,
     BookOpenIcon,
@@ -17,15 +19,14 @@ import {
     LayersIcon,
     MessageCircleIcon,
     ServerIcon,
+    TerminalIcon,
 } from 'lucide-react'
 import { useState, type ComponentType, type KeyboardEvent, type ReactNode } from 'react'
 import CodeBlock from './code-block'
 import InstallationTopology from './installation-topology'
-import RcDownloadSection from './rc-download-section'
 
-interface DownloadPageClientProps {
+interface ServerDownloadPageProps {
   release: GitHubRelease | null;
-  cliRelease: GitHubRelease | null;
 }
 
 function findReleaseAsset(
@@ -70,6 +71,54 @@ function SectionHeader({
   );
 }
 
+function ProductDownloadLink({
+  href,
+  eyebrow,
+  title,
+  description,
+  methods,
+  Icon,
+}: {
+  href: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  methods: string[];
+  Icon: ComponentType<{ className?: string }>;
+}) {
+  return (
+    <Link
+      href={href}
+      className="motion-card group flex min-h-80 flex-col px-6 py-8 transition-colors hover:bg-muted/20 sm:px-8"
+    >
+      <div className="flex items-start justify-between gap-6">
+        <div>
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-brand">{eyebrow}</p>
+          <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">{title}</h2>
+        </div>
+        <span className="motion-icon-tile flex size-11 shrink-0 items-center justify-center text-brand">
+          <Icon className="size-6" />
+        </span>
+      </div>
+
+      <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground">{description}</p>
+
+      <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
+        {methods.map((method) => (
+          <span key={method} className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            {method}
+          </span>
+        ))}
+      </div>
+
+      <span className="mt-auto inline-flex items-center gap-2 pt-10 text-sm font-semibold text-brand">
+        Choose install method
+        <ArrowUpRightIcon className="motion-arrow size-4" />
+      </span>
+    </Link>
+  );
+}
+
 function ReleasePanel({ release }: { release: GitHubRelease | null }) {
   const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
   const publishedAt = release?.published_at ? formatReleaseDate(release.published_at, 'en-US') : 'GitHub latest';
@@ -110,40 +159,6 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
   );
 }
 
-function HeroStripeCard({ releaseUrl }: { releaseUrl: string }) {
-  return (
-    <a
-      href={releaseUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative block border-y border-border py-4 transition-colors hover:border-foreground/35"
-    >
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-50 [background-image:repeating-linear-gradient(135deg,transparent_0_18px,var(--border)_18px_19px,transparent_19px_36px)]"
-      />
-      <div className="relative flex flex-col justify-between gap-5 sm:flex-row sm:items-center">
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-          Fast route
-        </p>
-
-        <div className="grid gap-3">
-          <div className="flex flex-wrap gap-x-5 gap-y-3">
-            <PlatformBadge icon={<LinuxIcon className="size-4" />} label="Linux" />
-            <PlatformBadge icon={<DockerIcon className="size-4" />} label="Docker" />
-            <PlatformBadge icon={<AppleIcon className="size-4" />} label="macOS" />
-            <PlatformBadge icon={<WindowsIcon className="size-4" />} label="Windows" />
-          </div>
-          <span className="inline-flex items-center gap-2 text-sm font-semibold text-brand">
-            Open GitHub releases
-            <ArrowUpRightIcon className="motion-arrow size-4" />
-          </span>
-        </div>
-      </div>
-    </a>
-  );
-}
-
 function ArtifactButton({
   href,
   label,
@@ -163,21 +178,6 @@ function ArtifactButton({
         <DownloadIcon data-icon="inline-end" className="size-4" />
       </a>
     </Button>
-  );
-}
-
-function PlatformBadge({
-  icon,
-  label,
-}: {
-  icon: ReactNode;
-  label: string;
-}) {
-  return (
-    <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-      <span className="size-4 text-foreground">{icon}</span>
-      {label}
-    </span>
   );
 }
 
@@ -329,92 +329,82 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
 
   return (
     <div className="overflow-hidden border-y border-border">
-      <div className="grid lg:grid-cols-[18rem_1fr]">
-        <div className="border-b border-border bg-background/40 lg:border-b-0 lg:border-r">
-          <div className="border-b border-border p-5">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-brand">Choose one path</p>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">Pick the environment first. Only the matching command stays visible.</p>
-          </div>
-          <div className="grid" role="tablist" aria-label="Server install paths">
-            {paths.map((path, index) => {
-              const Icon = path.Icon;
-              const isActive = path.id === activePath.id;
+      <div className="overflow-x-auto border-b border-border bg-background/40">
+        <div className="flex min-w-max" role="tablist" aria-label="Server install paths">
+          {paths.map((path, index) => {
+            const Icon = path.Icon;
+            const isActive = path.id === activePath.id;
 
-              return (
-                <button
-                  key={path.id}
-                  type="button"
-                  role="tab"
-                  id={`install-path-tab-${path.id}`}
-                  aria-selected={isActive}
-                  aria-controls={`install-path-${path.id}`}
-                  onClick={() => setActivePathId(path.id)}
-                  onKeyDown={(event) => handlePathKeyDown(event, index)}
-                  tabIndex={isActive ? 0 : -1}
-                  className={cn(
-                    "group grid grid-cols-[2.5rem_1fr] gap-3 border-b border-border border-l-2 border-l-transparent px-5 py-4 text-left transition-colors last:border-b-0 hover:bg-muted/35",
-                    isActive && "border-l-brand bg-brand/10"
-                  )}
-                >
-                  <span className="motion-icon-tile flex size-10 items-center justify-center text-brand">
-                    <Icon className="size-5" />
-                  </span>
-                  <span>
-                    <span className={cn("block text-sm font-semibold text-foreground", isActive && "text-brand")}>{path.label}</span>
-                    <span className="mt-1 block text-xs leading-5 text-muted-foreground">{path.bestFor}</span>
-                  </span>
-                </button>
-              );
-            })}
+            return (
+              <button
+                key={path.id}
+                type="button"
+                role="tab"
+                id={`install-path-tab-${path.id}`}
+                aria-selected={isActive}
+                aria-controls={`install-path-${path.id}`}
+                onClick={() => setActivePathId(path.id)}
+                onKeyDown={(event) => handlePathKeyDown(event, index)}
+                tabIndex={isActive ? 0 : -1}
+                className={cn(
+                  "group flex min-h-14 items-center gap-2 border-b-2 border-b-transparent px-5 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted/30 hover:text-foreground",
+                  isActive && "border-b-brand bg-brand/10 text-brand"
+                )}
+              >
+                <Icon className="size-4" />
+                {path.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div
+        id={`install-path-${activePath.id}`}
+        role="tabpanel"
+        aria-labelledby={`install-path-tab-${activePath.id}`}
+        className="min-w-0"
+      >
+        <div className="grid gap-6 border-b border-border p-5 sm:p-6 lg:grid-cols-[1fr_auto] lg:items-start">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="motion-icon-tile flex size-5 items-center justify-center text-brand">
+                <ActiveIcon className="size-4" />
+              </span>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">{activePath.label}</p>
+            </div>
+            <h3 className="mt-6 text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">{activePath.title}</h3>
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">{activePath.summary}</p>
+            <p className="mt-3 text-xs leading-5 text-muted-foreground">{activePath.bestFor}</p>
+          </div>
+          <div className="flex flex-wrap gap-x-5 gap-y-3 lg:max-w-72 lg:justify-end">
+            {activePath.chips.map((chip) => (
+              <span key={chip} className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                {chip}
+              </span>
+            ))}
           </div>
         </div>
 
-        <div
-          id={`install-path-${activePath.id}`}
-          role="tabpanel"
-          aria-labelledby={`install-path-tab-${activePath.id}`}
-          className="min-w-0"
-        >
-          <div className="grid gap-6 border-b border-border p-5 sm:p-6 lg:grid-cols-[1fr_auto] lg:items-start">
-            <div>
-              <div className="flex items-center gap-3">
-                <span className="motion-icon-tile flex size-5 items-center justify-center text-brand">
-                  <ActiveIcon className="size-4" />
-                </span>
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">{activePath.label}</p>
-              </div>
-              <h3 className="mt-6 text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">{activePath.title}</h3>
-              <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">{activePath.summary}</p>
-            </div>
-            <div className="flex flex-wrap gap-x-5 gap-y-3 lg:max-w-72 lg:justify-end">
-              {activePath.chips.map((chip) => (
-                <span key={chip} className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                  {chip}
-                </span>
+        <div className="grid gap-5 p-5 sm:p-6">
+          <CodeBlock
+            title={activePath.commandTitle}
+            code={activePath.command}
+            className="border-brand/60 shadow-[0_0_0_1px_rgba(39,112,246,0.18),0_18px_60px_rgba(39,112,246,0.12)]"
+          />
+
+          {activePath.actions ? (
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {activePath.actions.map((action) => (
+                <ArtifactButton
+                  key={action.label}
+                  href={action.href}
+                  label={action.label}
+                  icon={action.icon}
+                />
               ))}
             </div>
-          </div>
-
-          <div className="grid gap-5 p-5 sm:p-6">
-            <CodeBlock
-              title={activePath.commandTitle}
-              code={activePath.command}
-              className="border-brand/60 shadow-[0_0_0_1px_rgba(39,112,246,0.18),0_18px_60px_rgba(39,112,246,0.12)]"
-            />
-
-            {activePath.actions ? (
-              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                {activePath.actions.map((action) => (
-                  <ArtifactButton
-                    key={action.label}
-                    href={action.href}
-                    label={action.label}
-                    icon={action.icon}
-                  />
-                ))}
-              </div>
-            ) : null}
-          </div>
+          ) : null}
         </div>
       </div>
     </div>
@@ -471,21 +461,77 @@ function HelpPanel() {
   );
 }
 
-export default function DownloadPageClient({ release, cliRelease }: DownloadPageClientProps) {
-  const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
-
+export default function DownloadPageClient() {
   return (
     <main className="relative z-10 min-h-[100dvh] text-foreground">
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[0.96fr_1.04fr] lg:items-end">
+          <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Download surface</p>
               <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
                 Install RustFS for real deployments.
               </h1>
             </div>
-            <HeroStripeCard releaseUrl={releaseUrl} />
+            <p className="max-w-2xl text-sm leading-7 text-muted-foreground lg:justify-self-end">
+              Choose the product first, then use the install path that matches the environment where it runs.
+            </p>
+          </div>
+
+          <div className="mt-14 grid divide-y divide-border border-y border-border md:grid-cols-2 md:divide-x md:divide-y-0">
+            <ProductDownloadLink
+              href="/download/server"
+              eyebrow="Data service"
+              title="RustFS Server"
+              description="Server binary, Docker image, and source archive."
+              methods={['Linux', 'Docker', 'Compose', 'Kubernetes', 'macOS', 'Windows']}
+              Icon={ServerIcon}
+            />
+            <ProductDownloadLink
+              href="/download/cli"
+              eyebrow="Admin CLI"
+              title="RustFS CLI (rc)"
+              description="Use rc for bucket, object, cluster, identity, and operational workflows."
+              methods={['Homebrew', 'Scoop', 'Linux', 'macOS', 'Windows', 'Docker', 'Source']}
+              Icon={TerminalIcon}
+            />
+          </div>
+        </div>
+      </section>
+
+      <HelpPanel />
+    </main>
+  );
+}
+
+export function ServerDownloadPage({ release }: ServerDownloadPageProps) {
+  const releaseUrl = release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest';
+
+  return (
+    <main className="relative z-10 min-h-[100dvh] text-foreground">
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Link
+            href="/download"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ArrowLeftIcon className="size-4" />
+            All downloads
+          </Link>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Data service</p>
+              <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
+                RustFS Server
+              </h1>
+              <p className="mt-4 max-w-2xl text-lg font-semibold leading-8 text-foreground sm:text-xl">
+                Start small, then keep the same operating model.
+              </p>
+            </div>
+            <p className="max-w-2xl text-sm leading-7 text-muted-foreground lg:justify-self-end">
+              Choose the environment first, then copy the exact command for that path.
+            </p>
           </div>
 
           <div className="mt-12">
@@ -496,12 +542,6 @@ export default function DownloadPageClient({ release, cliRelease }: DownloadPage
 
       <section className="pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            eyebrow="Server install paths"
-            title="Start small, then keep the same operating model."
-            description="Choose the environment first, then copy the exact command for that path."
-          />
-
           <ServerInstallTabs release={release} />
 
           <div className="mt-10 flex flex-col gap-4 border-y border-border py-5 sm:flex-row sm:items-center sm:justify-between">
@@ -519,9 +559,7 @@ export default function DownloadPageClient({ release, cliRelease }: DownloadPage
         </div>
       </section>
 
-      <RcDownloadSection cliRelease={cliRelease} />
       <InstallationTopology />
-      <HelpPanel />
     </main>
   );
 }
