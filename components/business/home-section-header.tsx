@@ -4,7 +4,6 @@ interface HomeSectionHeaderProps {
   eyebrow: string;
   title: string;
   description: string;
-  sectionNumber?: string;
   className?: string;
   headingLevel?: 1 | 2;
 }
@@ -13,7 +12,6 @@ export default function HomeSectionHeader({
   eyebrow,
   title,
   description,
-  sectionNumber,
   className,
   headingLevel = 2,
 }: HomeSectionHeaderProps) {
@@ -28,12 +26,7 @@ export default function HomeSectionHeader({
       <div className="mt-7 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
         <div className="min-w-0">
           <div className="mb-5 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            {sectionNumber ? (
-              <span className="font-mono text-xs tracking-[0.16em] text-brand">
-                {sectionNumber}
-              </span>
-            ) : null}
-            <span className="font-mono text-border">&gt;</span>
+            <span aria-hidden="true" className="h-px w-5 bg-brand/70" />
             <span>{eyebrow}</span>
           </div>
           <Heading className="text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-foreground md:text-5xl">

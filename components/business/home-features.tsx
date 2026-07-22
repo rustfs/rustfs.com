@@ -159,7 +159,6 @@ export default function HomeFeatures() {
     <section className="relative border-t border-border bg-background pt-20 pb-14 sm:pt-24 sm:pb-20 lg:pt-28 lg:pb-28">
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <HomeSectionHeader
-          sectionNumber="02"
           eyebrow="Capability matrix"
           title="Core features"
           description="Production-ready capabilities for distributed, S3-compatible object storage."

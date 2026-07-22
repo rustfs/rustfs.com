@@ -97,20 +97,15 @@ function flattenItems(sections: FeaturePageSection[]) {
 }
 
 function SectionKicker({
-  index,
   label,
   code,
 }: {
-  index: number;
   label: string;
   code?: string;
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-4 font-mono text-[11px] font-semibold uppercase tracking-[0.22em]">
-      <span className="bg-brand px-4 py-3 text-sm tracking-[0.14em] text-brand-foreground">
-        {String(index).padStart(2, "0")}
-      </span>
-      <span className="text-brand">&gt;</span>
+    <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em]">
+      <span aria-hidden="true" className="h-px w-8 bg-brand" />
       <span className="text-muted-foreground">{label}</span>
       {code ? (
         <span className="text-muted-foreground/45">/ {code}</span>
@@ -119,18 +114,11 @@ function SectionKicker({
   );
 }
 
-function FeatureLine({
-  item,
-  index,
-}: {
+function FeatureLine({ item }: {
   item: { title: string; description: string; group?: string };
-  index: number;
 }) {
   return (
-    <article className="grid gap-3 border-t border-border/60 py-6 first:border-t-0 sm:grid-cols-[3rem_1fr] sm:items-start">
-      <span className="mt-1 font-mono text-xs font-semibold text-brand">
-        {String(index + 1).padStart(2, "0")}
-      </span>
+    <article className="border-t border-border/60 py-6 first:border-t-0">
       <div>
         {item.group && (
           <p className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
@@ -193,10 +181,7 @@ function ProtocolVisual({ sections }: { sections: FeaturePageSection[] }) {
       </div>
       <div className="grid gap-px bg-border sm:grid-cols-5">
         {labels.map((label, index) => (
-          <div key={label} className="relative flex flex-col justify-between gap-10 bg-card/95 p-5">
-            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              0{index + 1}
-            </span>
+          <div key={label} className="relative flex flex-col justify-between gap-6 bg-card/95 p-5">
             <div>
               <p className="text-2xl font-semibold text-foreground">{label}</p>
               <p className="mt-3 text-xs leading-5 text-muted-foreground">
@@ -231,12 +216,9 @@ function DataVisual() {
       <div className="grid gap-px bg-border lg:grid-cols-[1fr_1.1fr]">
         <div className="bg-card/95 p-6">
           <div className="grid gap-px bg-border">
-            {["Bucket and object", "Lifecycle rules", "Multipart upload"].map((item, index) => (
-              <div key={item} className="grid grid-cols-[3rem_1fr] items-center bg-background/60">
-                <span className="px-4 py-5 font-mono text-xs text-brand">
-                  0{index + 1}
-                </span>
-                <span className="px-4 py-5 text-sm font-semibold text-foreground">{item}</span>
+            {["Bucket and object", "Lifecycle rules", "Multipart upload"].map((item) => (
+              <div key={item} className="bg-background/60 px-4 py-5">
+                <span className="text-sm font-semibold text-foreground">{item}</span>
               </div>
             ))}
           </div>
@@ -287,12 +269,9 @@ function ScaleVisual() {
         />
         <div className="relative grid h-full gap-5">
           <div className="grid gap-px bg-border sm:grid-cols-3">
-            {["Node", "Pool", "Region"].map((item, index) => (
+            {["Node", "Pool", "Region"].map((item) => (
               <div key={item} className="bg-card/95 p-4">
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
-                  0{index + 1}
-                </p>
-                <p className="mt-10 text-xl font-semibold text-foreground">{item}</p>
+                <p className="mt-6 text-xl font-semibold text-foreground">{item}</p>
               </div>
             ))}
           </div>
@@ -325,9 +304,8 @@ function OpsVisual() {
           ["Console", "Pool expansion, rebalancing, object lifecycle"],
           ["OpenTelemetry", "Logs, metrics, monitoring, traces"],
           ["rc CLI", "Objects, buckets, clusters, security workflows"],
-        ].map(([label, detail], index) => (
-          <div key={label} className="grid gap-4 px-5 py-6 sm:grid-cols-[4rem_1fr] sm:items-center">
-            <span className="font-mono text-xs font-semibold text-brand">0{index + 1}</span>
+        ].map(([label, detail]) => (
+          <div key={label} className="px-5 py-6">
             <div>
               <p className="text-lg font-semibold text-foreground">{label}</p>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">{detail}</p>
@@ -429,11 +407,8 @@ function ProtocolBody({ sections }: { sections: FeaturePageSection[] }) {
           </div>
           <div className="border-y border-border/70">
             <div className="divide-y divide-border/70">
-              {primarySection.items?.map((item, index) => (
-                <article key={item.title} className="grid gap-3 py-5 sm:grid-cols-[3rem_1fr]">
-                  <p className="pt-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
-                    0{index + 1}
-                  </p>
+              {primarySection.items?.map((item) => (
+                <article key={item.title} className="py-5">
                   <div>
                     <h3 className="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
                     <p className="mt-2 max-w-xl text-sm leading-7 text-muted-foreground">{item.description}</p>
@@ -446,20 +421,15 @@ function ProtocolBody({ sections }: { sections: FeaturePageSection[] }) {
       )}
 
       <div className="grid gap-x-12 gap-y-10 lg:grid-cols-2">
-        {restSections.map((section, index) => (
+        {restSections.map((section) => (
           <section key={section.title} className="border-t border-border pt-6">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-                  {slugCode(section.title)}
-                </p>
-                <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
-                  {section.title}
-                </h2>
-              </div>
-              <span className="font-mono text-xs font-semibold text-muted-foreground">
-                P0{index + 2}
-              </span>
+            <div>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+                {slugCode(section.title)}
+              </p>
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
+                {section.title}
+              </h2>
             </div>
             {section.description && (
               <p className="mt-4 text-sm leading-7 text-muted-foreground">
@@ -467,8 +437,8 @@ function ProtocolBody({ sections }: { sections: FeaturePageSection[] }) {
               </p>
             )}
             <div className="mt-5 divide-y divide-border/70 border-y border-border/70">
-              {section.items?.map((item, itemIndex) => (
-                <FeatureLine key={item.title} item={item} index={itemIndex} />
+              {section.items?.map((item) => (
+                <FeatureLine key={item.title} item={item} />
               ))}
             </div>
           </section>
@@ -495,15 +465,12 @@ function DataBody({ sections }: { sections: FeaturePageSection[] }) {
           </h2>
         </div>
         <div className="mt-8 grid gap-x-8 md:grid-cols-2">
-          {routineItems.map((item, index) => (
+          {routineItems.map((item) => (
             <article
               key={item.title}
               className="border-t border-border/70 py-5"
             >
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-4 text-base font-semibold leading-6 text-foreground">{item.title}</h3>
+              <h3 className="text-base font-semibold leading-6 text-foreground">{item.title}</h3>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
             </article>
           ))}
@@ -597,10 +564,10 @@ function ScaleBody({ sections }: { sections: FeaturePageSection[] }) {
       </aside>
       <section className="grid gap-6">
         <div className="grid gap-4 md:grid-cols-2">
-          {sections.map((section, index) => (
+          {sections.map((section) => (
             <article key={section.title} className="border-t border-border pt-5">
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-                0{index + 1} / {slugCode(section.title)}
+                {slugCode(section.title)}
               </p>
               <h3 className="mt-4 text-2xl font-semibold tracking-tight text-foreground">{section.title}</h3>
               {section.description && (
@@ -610,8 +577,8 @@ function ScaleBody({ sections }: { sections: FeaturePageSection[] }) {
           ))}
         </div>
         <div className="border-y border-border px-1">
-          {items.map((item, index) => (
-            <FeatureLine key={item.title} item={item} index={index} />
+          {items.map((item) => (
+            <FeatureLine key={item.title} item={item} />
           ))}
         </div>
       </section>
@@ -645,16 +612,11 @@ function OpsBody({ sections }: { sections: FeaturePageSection[] }) {
         </div>
       </section>
       <section className="grid gap-6">
-        {signalSections.map((section, index) => (
+        {signalSections.map((section) => (
           <article key={section.title} className="border-t border-border pt-5">
-            <div className="flex items-center justify-between gap-4">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-                0{index + 1}
-              </p>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                {slugCode(section.title)}
-              </p>
-            </div>
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              {slugCode(section.title)}
+            </p>
             <h3 className="mt-5 text-2xl font-semibold tracking-tight text-foreground">{section.title}</h3>
             <div className="mt-5 grid gap-3">
               {section.items?.map((item) => (
@@ -718,8 +680,8 @@ function SecurityBody({ sections }: { sections: FeaturePageSection[] }) {
           </p>
         </div>
         <div>
-          {items.map((item, index) => (
-            <FeatureLine key={`${item.group}-${item.title}`} item={item} index={index} />
+          {items.map((item) => (
+            <FeatureLine key={`${item.group}-${item.title}`} item={item} />
           ))}
         </div>
       </section>
@@ -799,7 +761,7 @@ export default function FeaturePage({
 
         <div className="mt-8 grid min-w-0 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="min-w-0">
-            <SectionKicker index={1} label={meta.label} code={meta.code} />
+            <SectionKicker label={meta.label} code={meta.code} />
             <h1 className="mt-10 max-w-4xl font-display text-4xl font-extrabold leading-none text-foreground sm:text-6xl lg:text-7xl">
               {title}
             </h1>

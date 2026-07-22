@@ -141,7 +141,7 @@ function RecentPostGrid({ posts }: { posts: BlogPostMeta[] }) {
 
   return (
     <div className="grid gap-x-8 gap-y-10 pt-10 md:grid-cols-3">
-      {posts.map((post, index) => (
+      {posts.map((post) => (
         <Link
           key={post.slug}
           href={`/blog/${post.slug}`}
@@ -158,8 +158,7 @@ function RecentPostGrid({ posts }: { posts: BlogPostMeta[] }) {
             </div>
           ) : null}
           <div className="flex flex-1 flex-col pt-5">
-            <div className="flex items-center justify-between gap-4 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              <span className="text-brand">Post.{String(index + 2).padStart(2, "0")}</span>
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
               <span>{formatShortDate(post.date)}</span>
             </div>
             <h3 className="mt-5 line-clamp-3 text-xl font-semibold leading-tight tracking-tight text-foreground">

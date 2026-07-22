@@ -32,7 +32,6 @@ export default function HomeMultiClouds() {
     <section className="border-t border-border bg-background py-20 md:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
-          sectionNumber="05"
           eyebrow="Field posts"
           title="Built for the next generation of object storage"
           description="RustFS combines Rust-native engineering, Apache 2.0 licensing, and S3 compatibility for AI infrastructure and direct MinIO migrations."

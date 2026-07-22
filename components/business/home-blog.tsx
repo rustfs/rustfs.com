@@ -26,7 +26,6 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
     >
       <div className="mx-auto flex max-w-7xl flex-col justify-center px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
-          sectionNumber="07"
           eyebrow="Technical posts"
           title="Latest from RustFS Blog"
           description="Read product updates, release posts, and technical deep dives from the RustFS team."
@@ -74,16 +73,12 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
           </Link>
 
           <div className="grid gap-px bg-border">
-            {otherPosts.map((post, index) => (
+            {otherPosts.map((post) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="motion-card group grid min-h-40 gap-5 bg-card/45 p-5 text-left transition-colors hover:bg-muted/30 sm:grid-cols-[3.5rem_1fr_auto] sm:items-start sm:p-6"
+                className="motion-card group grid min-h-40 gap-5 bg-card/45 p-5 text-left transition-colors hover:bg-muted/30 sm:grid-cols-[1fr_auto] sm:items-start sm:p-6"
               >
-                <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">
-                  {String(index + 2).padStart(2, "0")}
-                </div>
-
                 <div className="min-w-0">
                   <PostDate date={post.date} />
                   <h3 className="mt-4 line-clamp-2 text-xl font-semibold leading-tight text-foreground">

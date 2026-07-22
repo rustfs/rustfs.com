@@ -77,7 +77,6 @@ export default function SoftwareLogos() {
     <section className="relative overflow-hidden border-t border-border bg-background py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
-          sectionNumber="01"
           eyebrow="Integration surface"
           title="Works with the storage ecosystem"
           description="RustFS keeps S3 compatibility at the center, so existing analytics, observability, AI, and delivery tools can keep using the object storage interfaces they already know."

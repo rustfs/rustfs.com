@@ -28,7 +28,6 @@ export default function GetStartedToday() {
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
-          sectionNumber="06"
           eyebrow="Deploy surface"
           title="Start building with RustFS"
           description="Download RustFS for local testing, or contact us to plan production deployment, migration, and enterprise support."

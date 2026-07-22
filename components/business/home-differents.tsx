@@ -35,7 +35,6 @@ export default function HomeDifferents() {
     <section className="relative border-t border-border bg-background py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
-          sectionNumber="04"
           eyebrow="Competitive profile"
           title="RustFS vs. legacy object storage"
           description="Choose RustFS when memory safety, S3 compatibility, open licensing, and predictable operations matter more than vendor lock-in."
@@ -52,7 +51,7 @@ export default function HomeDifferents() {
           </div>
 
           <div className="divide-y divide-border">
-            {comparisonRows.map((row, index) => (
+            {comparisonRows.map((row) => (
               <div key={row.rustfs} className="grid lg:grid-cols-2">
                 <div className="grid grid-cols-[3rem_1fr] border-b border-border text-muted-foreground lg:border-b-0 lg:border-r">
                   <span className="flex items-center justify-center border-r border-border">
@@ -65,9 +64,6 @@ export default function HomeDifferents() {
                     <CheckIcon className="size-4" aria-hidden="true" />
                   </span>
                   <span className="px-5 py-4 text-sm font-medium leading-6">
-                    <span className="mr-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                      WIN.{String(index + 1).padStart(2, "0")}
-                    </span>
                     {row.rustfs}
                   </span>
                 </div>

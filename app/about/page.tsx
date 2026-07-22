@@ -138,8 +138,6 @@ export default function AboutPage() {
                 )}
               >
                 <div className="flex items-center gap-3 border-b border-border px-5 py-4 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] sm:border-b-0 sm:border-r">
-                  <span className="text-brand">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="h-px flex-1 bg-border" />
                   <time className="text-muted-foreground">{item.date}</time>
                 </div>
                 <div className="grid gap-4 px-5 py-4 sm:grid-cols-[1fr_auto] sm:items-start">

@@ -169,12 +169,11 @@ export default function PricingPage() {
               </div>
               <div className="grid flex-1 divide-y divide-border">
                 {[
-                  ["01", "Evaluate", "Run RustFS without a sales gate."],
-                  ["02", "Plan", "Review topology and migration pressure."],
-                  ["03", "Operate", "Add support for production ownership."],
-                ].map(([step, title, detail]) => (
-                  <div key={step} className="grid gap-4 px-5 py-5 sm:grid-cols-[3rem_1fr]">
-                    <span className="font-mono text-[10px] font-semibold text-brand">{step}</span>
+                  ["Evaluate", "Run RustFS without a sales gate."],
+                  ["Plan", "Review topology and migration pressure."],
+                  ["Operate", "Add support for production ownership."],
+                ].map(([title, detail]) => (
+                  <div key={title} className="px-5 py-5">
                     <span>
                       <span className="block text-sm font-semibold text-foreground">{title}</span>
                       <span className="mt-1 block text-sm leading-6 text-muted-foreground">{detail}</span>

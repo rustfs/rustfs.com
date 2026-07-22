@@ -63,7 +63,6 @@ export default function HomeStats() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
-          sectionNumber="03"
           eyebrow="Why RustFS"
           title="A storage core built for production pressure"
           description="A focused object storage foundation for modern AI, cloud-native, and enterprise workloads."

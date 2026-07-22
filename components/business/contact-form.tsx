@@ -16,10 +16,6 @@ import { ArrowUpRightIcon, MailIcon, MessageCircleIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import HomeSectionHeader from './home-section-header'
 
-interface ContactFormProps {
-  sectionNumber?: string;
-}
-
 const COUNTRIES = [
   'United States',
   'United Kingdom',
@@ -97,7 +93,7 @@ function GitHubIcon({ className }: { className?: string }) {
   )
 }
 
-export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
+export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [submitError, setSubmitError] = useState('')
@@ -217,7 +213,6 @@ export default function ContactForm({ sectionNumber }: ContactFormProps = {}) {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
-          sectionNumber={sectionNumber}
           eyebrow="Contact channel"
           title="Contact Us"
           description="Get in touch with the RustFS team for deployment planning, migration support, and enterprise requirements."
