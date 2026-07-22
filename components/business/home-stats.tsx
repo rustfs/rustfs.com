@@ -85,16 +85,10 @@ export default function HomeStats() {
                   </span>
                 ))}
               </div>
-              <div className="absolute right-4 top-4 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                FIG.PERF
-              </div>
             </div>
 
             <div className="p-6 sm:p-8">
-              <code className="border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-                {reasons[0].token}
-              </code>
-              <h3 className="mt-8 text-2xl font-semibold text-foreground">
+              <h3 className="text-2xl font-semibold text-foreground">
                 {reasons[0].title}
               </h3>
               <p className="mt-4 text-sm leading-7 text-muted-foreground">
@@ -113,27 +107,27 @@ mode = "distributed"`}</code>
 
           <div className="flex overflow-hidden border border-border bg-card lg:col-span-7">
             <div className="grid min-h-full w-full grid-rows-4 divide-y divide-border">
-                {reasons.slice(1, 5).map((item, index) => {
-                  const Icon = reasonIcons[index];
+              {reasons.slice(1, 5).map((item, index) => {
+                const Icon = reasonIcons[index];
 
-                  return (
-                    <article
-                      key={item.title}
-                      className="grid min-h-0 gap-4 px-5 py-5 sm:grid-cols-[3rem_1fr_auto] sm:items-center"
-                    >
-                      <span className="flex size-11 items-center justify-center bg-background text-brand">
-                        <Icon className="size-4" />
-                      </span>
-                      <div>
-                        <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
-                        <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
-                      </div>
-                      <code className="w-fit text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                        {item.token}
-                      </code>
-                    </article>
-                  );
-                })}
+                return (
+                  <article
+                    key={item.title}
+                    className="grid min-h-0 gap-4 px-5 py-5 sm:grid-cols-[3rem_1fr_auto] sm:items-center"
+                  >
+                    <span className="flex size-11 items-center justify-center bg-background text-brand">
+                      <Icon className="size-4" />
+                    </span>
+                    <div>
+                      <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                    </div>
+                    <code className="w-fit text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                      {item.token}
+                    </code>
+                  </article>
+                );
+              })}
             </div>
           </div>
 

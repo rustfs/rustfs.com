@@ -36,7 +36,7 @@ export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
               High-performance Rust core, native S3 compatibility, and self-hosted control for AI data centers, cloud-native platforms, and MinIO migrations.
             </p>
 
-            <dl className="mt-8 grid gap-x-6 gap-y-4 text-sm sm:grid-cols-2 xl:grid-cols-4">
+            <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 text-sm xl:grid-cols-4">
               {stackItems.map((item) => (
                 <div key={item.label} className="relative pl-4">
                   <span className="absolute left-0 top-1 h-8 w-px bg-border" />

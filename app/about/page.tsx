@@ -43,6 +43,11 @@ const milestones = [
     title: "Beta release",
     description: "The project moved into production-oriented S3-compatible storage validation.",
   },
+  {
+    date: "2026.07.20",
+    title: "30,000 GitHub stars",
+    description: "The global open-source community pushed RustFS past 30,000 GitHub stars.",
+  },
 ];
 
 function ValueCard({
@@ -55,7 +60,7 @@ function ValueCard({
   description: string;
 }) {
   return (
-    <article className="border-t border-border py-6">
+    <article className="border border-border bg-card p-6">
       <Icon className="size-5 text-brand" />
       <h3 className="mt-6 text-lg font-semibold text-foreground">{title}</h3>
       <p className="mt-3 text-sm leading-7 text-muted-foreground">{description}</p>
@@ -67,29 +72,29 @@ export default function AboutPage() {
   return (
     <main className="relative z-10 flex-1 text-foreground">
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <div className="max-w-4xl">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">About RustFS</p>
-          <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-            Object storage built for Rust-native infrastructure.
+        <div>
+          <h1 className="font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
+            Object storage built for <span className="whitespace-nowrap">Rust-native</span>{" "}
+            infrastructure
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground">
-            RustFS is a next-generation Apache 2.0 distributed object storage system built in Rust. It has surpassed 28,000 GitHub stars, 3 million Docker Hub pulls, and 1 million global instances across S3-compatible and AI data center workloads.
+          <p className="mt-6 text-base leading-8 text-muted-foreground">
+            RustFS is a next-generation Apache 2.0 distributed object storage system built in Rust. It has surpassed 30,000 GitHub stars, 3 million Docker Hub pulls, and 1.5 million global instances across S3-compatible and AI data center workloads.
           </p>
         </div>
 
-        <div className="mt-12 grid border-y border-border lg:grid-cols-[0.86fr_1.14fr]">
-          <div className="border-b border-border p-6 lg:border-b-0 lg:border-r lg:p-8">
-            <span className="flex h-14 w-48 items-center border border-border bg-background px-4">
+        <div className="mt-12 grid gap-4 lg:grid-cols-2">
+          <div className="border border-border bg-card p-6 lg:p-8">
+            <span className="flex h-14 w-48 items-center">
               <RustFSLogo className="h-auto w-full" />
             </span>
             <h2 className="mt-10 max-w-xl text-3xl font-semibold leading-tight text-foreground">
-              A storage foundation that stays open, self-hosted, and programmable.
+              A storage foundation that stays open, self-hosted, and programmable
             </h2>
             <p className="mt-5 text-sm leading-7 text-muted-foreground">
               RustFS manages object, bucket, IAM, lifecycle, and cluster workflows while keeping 100% native S3 compatibility stable for existing tools and applications.
             </p>
           </div>
-          <div className="grid gap-x-8 px-6 sm:grid-cols-2 lg:px-8">
+          <div className="grid gap-4 sm:grid-cols-2">
             <ValueCard
               icon={ShieldCheckIcon}
               title="Apache 2.0 foundation"
@@ -115,10 +120,9 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="grid gap-8 border-t border-border pt-8 lg:grid-cols-[0.42fr_1fr]">
+        <div className="grid gap-8 lg:grid-cols-[0.42fr_1fr]">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Milestones</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground">
+            <h2 className="text-3xl font-semibold tracking-tight text-foreground">
               Project timeline
             </h2>
             <p className="mt-4 text-sm leading-7 text-muted-foreground">
@@ -126,7 +130,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <ol className="overflow-hidden border-y border-border">
+          <ol className="overflow-hidden border border-border bg-card">
             {[...milestones].reverse().map((item, index) => (
               <li
                 key={`${item.date}-${item.title}`}
@@ -138,14 +142,11 @@ export default function AboutPage() {
                 <div className="flex items-center gap-3 border-b border-border px-5 py-4 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] sm:border-b-0 sm:border-r">
                   <time className="text-muted-foreground">{item.date}</time>
                 </div>
-                <div className="grid gap-4 px-5 py-4 sm:grid-cols-[1fr_auto] sm:items-start">
+                <div className="px-5 py-4">
                   <div>
                     <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
                     <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
                   </div>
-                  <span className="w-fit border border-border bg-background px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                    {index === 0 ? "Latest" : "Event"}
-                  </span>
                 </div>
               </li>
             ))}
@@ -153,15 +154,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-muted/20">
+      <section className="bg-muted/20">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid gap-8 border-y border-border py-8 lg:grid-cols-[0.36fr_1fr_auto] lg:items-center">
-            <span className="flex h-20 max-w-xs items-center border border-border bg-background px-5">
+          <div className="grid gap-8 border border-border bg-card p-8 lg:grid-cols-[0.36fr_1fr_auto] lg:items-center">
+            <span className="flex h-20 max-w-xs items-center">
               <NvidiaLogo className="h-auto w-full" />
             </span>
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">AI infrastructure</p>
-              <h2 className="mt-3 text-2xl font-semibold text-foreground">NVIDIA Inception Program</h2>
+              <h2 className="text-2xl font-semibold text-foreground">NVIDIA Inception Program</h2>
               <p className="mt-3 text-sm leading-7 text-muted-foreground">
                 RustFS is accelerating AI data center storage with native RDMA support and future DPU offload for Erasure Coding and encryption.
               </p>

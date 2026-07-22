@@ -81,31 +81,29 @@ export default function SoftwareLogos() {
           title="Works with the storage ecosystem"
           description="RustFS keeps S3 compatibility at the center, so existing analytics, observability, AI, and delivery tools can keep using the object storage interfaces they already know."
         />
-        <div className="border-y border-border bg-card/20">
-          <ul role="list" className="grid gap-px bg-border/70 sm:grid-cols-2 lg:grid-cols-4">
-            {softwares.map((software) => {
-              const IconComponent = iconMap[software];
+        <ul role="list" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {softwares.map((software) => {
+            const IconComponent = iconMap[software];
 
-              return (
-                <li
-                  key={software}
-                  className="group relative grid min-h-24 place-items-center overflow-hidden bg-background/80 px-6 py-4 transition-colors duration-300 before:absolute before:inset-0 before:opacity-0 before:transition-[opacity,background-position] before:duration-500 before:[background-image:repeating-linear-gradient(135deg,transparent_0,transparent_12px,var(--muted)_12px,var(--muted)_24px)] before:[background-position:0_0] before:[background-size:34px_34px] hover:bg-muted/35 hover:before:opacity-20 hover:before:[background-position:34px_0] sm:min-h-28"
-                >
-                  <span className="relative z-10 grid h-14 w-full max-w-40 place-items-center text-foreground/75 transition duration-300 group-hover:-translate-y-0.5 group-hover:text-foreground sm:h-16 sm:max-w-44">
-                    <IconComponent
-                      className="block h-full w-full"
-                      style={{ color: "currentColor" }}
-                      fill="currentColor"
-                    />
-                  </span>
-                  <span className="sr-only">
-                    {softwareLabels[software]}
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+            return (
+              <li
+                key={software}
+                className="group relative grid min-h-24 place-items-center overflow-hidden border border-border bg-card px-6 py-4 transition-colors duration-300 before:absolute before:inset-0 before:opacity-0 before:transition-[opacity,background-position] before:duration-500 before:[background-image:repeating-linear-gradient(135deg,transparent_0,transparent_12px,var(--muted)_12px,var(--muted)_24px)] before:[background-position:0_0] before:[background-size:34px_34px] hover:bg-muted/35 hover:before:opacity-20 hover:before:[background-position:34px_0] sm:min-h-28"
+              >
+                <span className="relative z-10 grid h-14 w-full max-w-40 place-items-center text-foreground/75 transition duration-300 group-hover:-translate-y-0.5 group-hover:text-foreground sm:h-16 sm:max-w-44">
+                  <IconComponent
+                    className="block h-full w-full"
+                    style={{ color: "currentColor" }}
+                    fill="currentColor"
+                  />
+                </span>
+                <span className="sr-only">
+                  {softwareLabels[software]}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
