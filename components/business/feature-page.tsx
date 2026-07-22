@@ -589,11 +589,12 @@ function ScaleBody({ sections }: { sections: FeaturePageSection[] }) {
 function OpsBody({ sections }: { sections: FeaturePageSection[] }) {
   const consoleSection = sections[1] ?? sections[0];
   const signalSections = sections.filter((section) => section !== consoleSection);
+  const [primarySignal, ...supportingSignals] = signalSections;
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-      <section className="border-t border-border pt-6">
-        <div>
+    <div className="border-y border-border">
+      <section className="grid lg:grid-cols-[0.82fr_1.18fr]">
+        <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
           <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
             Console operations
           </p>
@@ -601,36 +602,70 @@ function OpsBody({ sections }: { sections: FeaturePageSection[] }) {
             One control plane for data, security, and pool operations.
           </h2>
         </div>
-        <div className="mt-8 grid gap-6 sm:grid-cols-3">
+        <div className="grid sm:grid-cols-3">
           {consoleSection.items?.map((item) => (
-            <article key={item.title} className="border-t border-border pt-5">
+            <article
+              key={item.title}
+              className="border-b border-border p-6 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0"
+            >
               <CheckIcon className="size-4 text-brand" />
-              <h3 className="mt-8 text-base font-semibold text-foreground">{item.title}</h3>
+              <h3 className="mt-10 text-base font-semibold text-foreground">{item.title}</h3>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">{item.description}</p>
             </article>
           ))}
         </div>
       </section>
-      <section className="grid gap-6">
-        {signalSections.map((section) => (
-          <article key={section.title} className="border-t border-border pt-5">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              {slugCode(section.title)}
-            </p>
-            <h3 className="mt-5 text-2xl font-semibold tracking-tight text-foreground">{section.title}</h3>
-            <div className="mt-5 grid gap-3">
-              {section.items?.map((item) => (
-                <div key={item.title} className="grid grid-cols-[1rem_1fr] gap-3 text-sm leading-6 text-muted-foreground">
-                  <span className="mt-2 size-1.5 bg-brand" />
-                  <p>
-                    <span className="font-semibold text-foreground">{item.title}</span> - {item.description}
-                  </p>
+
+      {primarySignal ? (
+        <section className="border-t border-border">
+          <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
+            <div className="relative border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
+              <span aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-brand" />
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                {slugCode(primarySignal.title)}
+              </p>
+              <h3 className="mt-5 max-w-sm text-3xl font-semibold tracking-tight text-foreground">
+                {primarySignal.title}
+              </h3>
+            </div>
+            <div className="divide-y divide-border">
+              {primarySignal.items?.map((item) => (
+                <div
+                  key={item.title}
+                  className="grid gap-2 p-5 sm:grid-cols-[minmax(10rem,0.55fr)_1fr] sm:gap-6 sm:px-6"
+                >
+                  <p className="text-sm font-semibold text-foreground">{item.title}</p>
+                  <p className="text-sm leading-6 text-muted-foreground">{item.description}</p>
                 </div>
               ))}
             </div>
-          </article>
-        ))}
-      </section>
+          </div>
+
+          <div className="grid border-t border-border md:grid-cols-3">
+            {supportingSignals.map((section) => (
+              <article
+                key={section.title}
+                className="border-b border-border p-6 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
+              >
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  {slugCode(section.title)}
+                </p>
+                <h3 className="mt-5 text-2xl font-semibold tracking-tight text-foreground">
+                  {section.title}
+                </h3>
+                <div className="mt-6 divide-y divide-border">
+                  {section.items?.map((item) => (
+                    <div key={item.title} className="py-4 first:pt-0 last:pb-0">
+                      <p className="text-sm font-semibold leading-6 text-foreground">{item.title}</p>
+                      <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
     </div>
   );
 }
