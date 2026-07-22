@@ -5,10 +5,11 @@ import { cn } from "@/lib/utils";
 import AppleIcon from "@/public/svgs/brands/apple.svg";
 import DockerIcon from "@/public/svgs/brands/docker.svg";
 import KubernetesIcon from "@/public/svgs/brands/kubernetes.svg";
+import LinuxIcon from "@/public/svgs/brands/linux.svg";
 import WindowsIcon from "@/public/svgs/brands/windows.svg";
-import GrafanaLogo from "@/public/svgs/softwares/grafana.svg";
+import GrafanaMark from "@/public/svgs/softwares/grafana-mark.svg";
 import KafkaLogo from "@/public/svgs/softwares/kafka.svg";
-import PrometheusLogo from "@/public/svgs/softwares/prometheus.svg";
+import PrometheusMark from "@/public/svgs/softwares/prometheus-mark.svg";
 import {
   ActivityIcon,
   BlocksIcon,
@@ -357,6 +358,12 @@ function ConsoleVisual() {
 }
 
 function OtelVisual() {
+  const targets = [
+    { label: "Prometheus", icon: <PrometheusMark className="size-5" /> },
+    { label: "Grafana", icon: <GrafanaMark className="size-5" /> },
+    { label: "Loki", icon: <ScrollTextIcon className="size-5" /> },
+  ];
+
   return (
     <IllustrationFrame label="OpenTelemetry pipeline">
       <div className="grid w-full max-w-lg grid-cols-[minmax(0,0.7fr)_auto_minmax(0,1.3fr)] items-center gap-3">
@@ -375,22 +382,14 @@ function OtelVisual() {
           <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.14em] text-brand">OTel</span>
         </div>
         <div className="grid gap-2">
-          <Reveal>
-            <div className="flex h-11 items-center border border-border bg-background px-3">
-              <PrometheusLogo className="h-6 w-28 max-w-full text-foreground" />
-            </div>
-          </Reveal>
-          <Reveal delay={0.12}>
-            <div className="flex h-11 items-center border border-border bg-background px-3">
-              <GrafanaLogo className="h-6 w-24 max-w-full text-foreground" />
-            </div>
-          </Reveal>
-          <Reveal delay={0.24}>
-            <div className="flex h-11 items-center gap-3 border border-border bg-background px-3">
-              <ScrollTextIcon className="size-4 text-muted-foreground" />
-              <span className="text-xs font-semibold text-foreground">Loki</span>
-            </div>
-          </Reveal>
+          {targets.map((target, index) => (
+            <Reveal key={target.label} delay={index * 0.12}>
+              <div className="grid h-11 grid-cols-[1.25rem_1fr] items-center gap-3 border border-border bg-background px-4 text-foreground">
+                <span className="flex size-5 items-center justify-center">{target.icon}</span>
+                <span className="text-sm font-semibold leading-none">{target.label}</span>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </IllustrationFrame>
@@ -450,7 +449,7 @@ function CliVisual() {
         </div>
         <div className="mt-3 grid grid-cols-4 gap-2">
           {[
-            { label: "Linux", Icon: SquareTerminalIcon },
+            { label: "Linux", Icon: LinuxIcon },
             { label: "macOS", Icon: AppleIcon },
             { label: "Windows", Icon: WindowsIcon },
             { label: "Docker", Icon: DockerIcon },

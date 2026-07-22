@@ -1,6 +1,7 @@
 'use client'
 
-import { Code2Icon, GaugeIcon, NetworkIcon, ShieldCheckIcon } from "lucide-react";
+import { ActivityIcon, Code2Icon, GaugeIcon, HardDriveIcon, NetworkIcon, ShieldCheckIcon } from "lucide-react";
+import { DataFlowLine } from "./data-flow-motion";
 import HomeSectionHeader from "./home-section-header";
 
 const reasons = [
@@ -69,21 +70,42 @@ export default function HomeStats() {
         />
         <div className="grid gap-4 lg:grid-cols-12">
           <article className="motion-card overflow-hidden border border-border bg-card lg:col-span-5">
-            <div className="relative h-48 overflow-hidden border-b border-border bg-background">
+            <div className="relative h-52 overflow-hidden border-b border-border bg-background">
               <div
                 aria-hidden="true"
                 className="absolute inset-0 opacity-45 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:32px_32px]"
               />
-              <div className="relative flex h-full items-end gap-2 p-5">
-                {[42, 68, 54, 86, 72, 96].map((height, index) => (
-                  <span
-                    key={`${height}-${index}`}
-                    className="w-full border border-border bg-card"
-                    style={{ height: `${height}%` }}
-                  >
-                    <span className="block h-1/2 bg-brand/45" />
+              <div className="absolute inset-x-5 top-4 flex items-center justify-between font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                <span>Parallel I/O path</span>
+                <span className="text-brand">Rust core</span>
+              </div>
+              <div className="relative grid h-full grid-cols-[4.5rem_auto_6rem_auto_minmax(0,1fr)] items-center gap-2 px-5 pb-5 pt-10">
+                <div className="grid h-20 place-items-center border border-border bg-card px-2 text-center">
+                  <ActivityIcon className="size-4 text-brand" />
+                  <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                    S3 requests
                   </span>
-                ))}
+                </div>
+                <DataFlowLine direction="horizontal" className="w-5 sm:w-7" />
+                <div className="grid h-24 place-items-center border border-brand bg-brand/10 px-3 text-center">
+                  <GaugeIcon className="size-5 text-brand" />
+                  <div>
+                    <p className="font-mono text-[10px] font-semibold text-foreground">RustFS I/O</p>
+                    <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.1em] text-muted-foreground">scheduler</p>
+                  </div>
+                </div>
+                <DataFlowLine direction="horizontal" className="w-5 sm:w-7" delay={0.35} />
+                <div className="grid gap-2">
+                  {["Disk 01", "Disk 02", "Disk 03"].map((disk, index) => (
+                    <div key={disk} className="flex items-center gap-2 border border-border bg-card px-2 py-2">
+                      <HardDriveIcon className="size-3.5 shrink-0 text-brand" />
+                      <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
+                        {disk}
+                      </span>
+                      <span className="ml-auto h-1 w-3 bg-brand/40" style={{ opacity: 1 - index * 0.2 }} />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 

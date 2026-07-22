@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import AppleIcon from "@/public/svgs/brands/apple.svg";
+import LinuxIcon from "@/public/svgs/brands/linux.svg";
 import WindowsIcon from "@/public/svgs/brands/windows.svg";
 import { DataFlowLine, DataFlowPulse } from "./data-flow-motion";
 import ProductSectionIllustration from "./product-section-illustration";
@@ -112,9 +113,10 @@ function VisualFrame({ children }: { children: ReactNode }) {
   return (
     <div
       aria-hidden="true"
-      className="relative flex h-full min-h-80 items-center overflow-hidden border border-border bg-card p-6 [&>*]:w-full sm:p-8"
+      className="relative flex h-full min-h-80 items-center overflow-hidden border border-border bg-card p-6 sm:p-8"
     >
-      {children}
+      <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:32px_32px]" />
+      <div className="relative w-full">{children}</div>
     </div>
   );
 }
@@ -186,7 +188,7 @@ function WebDavProtocolVisual() {
   const platforms = [
     { label: "Windows", Icon: WindowsIcon },
     { label: "macOS", Icon: AppleIcon },
-    { label: "Linux", Icon: SquareTerminalIcon },
+    { label: "Linux", Icon: LinuxIcon },
   ];
 
   return (

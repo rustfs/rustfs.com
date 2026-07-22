@@ -68,7 +68,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <main className="relative flex-1">
       <article className="border-y border-border text-foreground">
         <header className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-          <div className="border-t border-border pt-8">
+          <div className="pt-8">
             <Link
               href="/blog"
               className="inline-flex text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground"

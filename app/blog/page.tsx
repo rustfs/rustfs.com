@@ -30,7 +30,7 @@ export default async function BlogPage() {
     <main className="relative flex-1">
       <section className="border-y border-border py-16 text-foreground sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="border-t border-border pt-8">
+          <div className="pt-8">
             <div>
               <div className="mb-8 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                 <span className="h-1 w-24 bg-brand" />

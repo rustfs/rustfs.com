@@ -1,6 +1,8 @@
 'use client'
 
+import { DataFlowLine } from '@/components/business/data-flow-motion';
 import { NetworkIcon, ServerIcon, SquareStackIcon } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
 import { useState, type ComponentType, type KeyboardEvent } from 'react';
 
 type Topology = {
@@ -47,44 +49,78 @@ const topologies: Topology[] = [
   },
 ];
 
+function ArrivalGlow({ delay = 0 }: { delay?: number }) {
+  const reduceMotion = useReducedMotion();
+
+  if (reduceMotion) {
+    return null;
+  }
+
+  return (
+    <motion.span
+      className="pointer-events-none absolute inset-0 bg-brand/10"
+      animate={{ opacity: [0, 0, 0.75, 0] }}
+      transition={{ duration: 2.6, delay, ease: 'easeInOut', repeat: Infinity }}
+    />
+  );
+}
+
 function TopologyDiagram({ id }: { id: string }) {
+  const reduceMotion = useReducedMotion();
+  const entrance = reduceMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 6 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.35, ease: 'easeOut' as const },
+      };
+
   if (id === 'single-disk') {
     return (
-      <div className="flex min-h-44 items-center justify-center p-6" aria-hidden="true">
+      <motion.div {...entrance} className="flex min-h-44 items-center justify-center p-6" aria-hidden="true">
         <div className="grid w-full max-w-72 gap-5">
           <div className="mx-auto flex h-16 w-28 items-center justify-center border border-border bg-card">
             <ServerIcon className="size-6 text-brand" />
           </div>
-          <div className="mx-auto h-8 w-px bg-foreground/25" />
-          <div className="mx-auto h-12 w-32 border border-border bg-muted/50" />
+          <DataFlowLine direction="vertical" className="mx-auto h-8" />
+          <div className="relative mx-auto h-12 w-32 overflow-hidden border border-border bg-muted/50">
+            <ArrivalGlow delay={1.05} />
+          </div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   if (id === 'single-node-multi-disk') {
     return (
-      <div className="flex min-h-44 items-center justify-center p-6" aria-hidden="true">
+      <motion.div {...entrance} className="flex min-h-44 items-center justify-center p-6" aria-hidden="true">
         <div className="grid w-full max-w-80 gap-5">
           <div className="mx-auto flex h-16 w-32 items-center justify-center border border-border bg-card">
             <ServerIcon className="size-6 text-brand" />
           </div>
-          <div className="mx-auto h-8 w-px bg-foreground/25" />
-          <div className="grid grid-cols-4 gap-2">
+          <DataFlowLine direction="vertical" className="mx-auto h-8" />
+          <div className="relative grid grid-cols-4 gap-2 pt-4">
+            <div className="absolute left-[12.5%] right-[12.5%] top-0 h-px bg-border" />
+            <DataFlowLine direction="horizontal" className="absolute left-[12.5%] right-[12.5%] top-0 w-auto" delay={0.35} />
             {[1, 2, 3, 4].map((disk) => (
-              <div key={disk} className="h-12 border border-border bg-muted/50" />
+              <div key={disk} className="relative h-12 border border-border bg-muted/50 before:absolute before:-top-4 before:left-1/2 before:h-4 before:w-px before:bg-border">
+                <ArrivalGlow delay={0.9 + disk * 0.14} />
+              </div>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div className="flex min-h-44 items-center justify-center p-5" aria-hidden="true">
-      <div className="grid w-full max-w-96 grid-cols-4 gap-3">
+    <motion.div {...entrance} className="flex min-h-44 items-center justify-center p-5" aria-hidden="true">
+      <div className="relative grid w-full max-w-96 grid-cols-4 gap-3 pt-5">
+        <div className="absolute left-[12.5%] right-[12.5%] top-0 h-px bg-border" />
+        <DataFlowLine direction="horizontal" className="absolute left-[12.5%] right-[12.5%] top-0 w-auto" delay={0.2} />
         {[1, 2, 3, 4].map((node) => (
-          <div key={node} className="border border-border bg-card p-2">
+          <div key={node} className="relative border border-border bg-card p-2 before:absolute before:-top-5 before:left-1/2 before:h-5 before:w-px before:bg-border">
+            <ArrivalGlow delay={0.75 + node * 0.18} />
             <div className="mb-2 flex h-10 items-center justify-center border border-border bg-muted/35">
               <ServerIcon className="size-4 text-brand" />
             </div>
@@ -96,7 +132,7 @@ function TopologyDiagram({ id }: { id: string }) {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -196,7 +232,7 @@ export default function InstallationTopology() {
                   <span className="px-3 py-3">Topology shape</span>
                   <span className="border-l border-border px-3 py-3 text-brand">{activeTopology.code}</span>
                 </div>
-                <TopologyDiagram id={activeTopology.id} />
+                <TopologyDiagram key={activeTopology.id} id={activeTopology.id} />
                 <div className="grid border-t border-border text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:grid-cols-3">
                   {activeTopology.notes.map((note) => (
                     <span key={note} className="border-b border-border px-3 py-3 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
