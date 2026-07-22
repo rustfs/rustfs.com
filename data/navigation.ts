@@ -62,7 +62,7 @@ export const footerNavigation = [
   {
     title: "Product features",
     links: [
-      { title: "S3 Compatible", href: docs_url("features/s3-compatibility") },
+      { title: "S3 Compatible", href: docs_url("developer/sdk") },
       { title: "Multiple Protocol Access", href: "/product/multiple-protocol-access" },
       { title: "Data Management", href: "/product/data-management" },
       { title: "High Availability & Scale", href: "/product/high-availability-scale" },
@@ -74,7 +74,7 @@ export const footerNavigation = [
     title: "Resources",
     links: [
       { title: "RustFS Download", href: "/download" },
-      { title: "rc Download", href: "/download#rc" },
+      { title: "rc Download", href: "/download/cli" },
       { title: "Blog", href: "/blog" },
       { title: "EC Calculator", href: "/erasure-code-calculator" },
       { title: "Documentation", href: "/docs" },
