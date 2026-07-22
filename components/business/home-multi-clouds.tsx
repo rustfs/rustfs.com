@@ -12,7 +12,7 @@ const stories = [
     token: "rdma+dpu",
     label: "AI infrastructure",
     description:
-      "RustFS has joined the NVIDIA Inception Program. We are accelerating AI data center storage with native RDMA support and future DPU offload for Erasure Coding and encryption.",
+      "RustFS has joined the NVIDIA Inception Program. We are accelerating the future of AI data center storage. By leveraging NVIDIA’s cutting-edge platform, RustFS is pioneering native RDMA support and offloading Erasure Coding and data encryption directly to next-generation DPUs for unparalleled performance.",
     href: "/blog/big-news-rustfs-joins-the-nvidia-inception-program",
     linkText: "Read the story",
   },
@@ -21,7 +21,7 @@ const stories = [
     token: "minio swap",
     label: "Migration path",
     description:
-      "Migrate instantly without data moving headaches. RustFS supports seamless, in-place migration from MinIO by swapping the binary or container image.",
+      "Migrate instantly without data moving headaches. RustFS supports seamless, in-place migration from MinIO by simply swapping the binary or container image, drastically reducing your migration overhead and engineering costs.",
     href: "/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs",
     linkText: "Read the migration guide",
   },

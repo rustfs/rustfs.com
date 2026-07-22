@@ -6,14 +6,24 @@ import { CheckIcon } from "lucide-react";
 import { useState, type KeyboardEvent } from 'react';
 import HomeSectionHeader from './home-section-header';
 
-function FeaturePreview({ index, token }: { index: number; token: string }) {
+function FeaturePreview({
+  index,
+  token,
+  className,
+}: {
+  index: number;
+  token: string;
+  className?: string;
+}) {
   const variant = index % 8;
 
   return (
-    <div className="relative mt-7 h-28 overflow-hidden bg-background/70">
-      <code className="absolute right-3 top-3 z-10 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-        {token}
-      </code>
+    <div className={cn("relative overflow-hidden bg-background/70", className)}>
+      {token ? (
+        <code className="absolute right-3 top-3 z-10 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          {token}
+        </code>
+      ) : null}
       <div className="relative h-full overflow-hidden">
         <div
           aria-hidden="true"
@@ -21,14 +31,14 @@ function FeaturePreview({ index, token }: { index: number; token: string }) {
         />
 
         {variant === 0 && (
-          <div className="relative flex h-full items-end gap-2 p-5">
-            {["h-10", "h-14", "h-8", "h-16"].map((height, barIndex) => (
+          <div className="relative flex h-full items-end gap-3 p-8">
+            {["h-20", "h-32", "h-16", "h-40"].map((height, barIndex) => (
               <span
                 key={`${height}-${barIndex}`}
-                className={cn("w-10 border border-brand/60 bg-brand/15", height)}
+                className={cn("w-full max-w-16 border border-brand/60 bg-brand/15", height)}
               />
             ))}
-            <span className="ml-auto grid size-14 place-items-center border border-border bg-card font-mono text-xs font-semibold text-brand">
+            <span className="ml-auto grid size-16 place-items-center border border-border bg-card font-mono text-xs font-semibold text-brand">
               EC
             </span>
           </div>
@@ -38,7 +48,7 @@ function FeaturePreview({ index, token }: { index: number; token: string }) {
           <div className="relative flex h-full items-center justify-between px-8">
             <span className="absolute left-10 right-10 top-1/2 h-px bg-border" />
             {[1, 2, 3, 4].map((node) => (
-              <span key={node} className="relative grid size-12 place-items-center border border-border bg-card font-mono text-[10px] text-muted-foreground">
+              <span key={node} className="relative grid size-14 place-items-center border border-border bg-card font-mono text-xs text-muted-foreground">
                 N{node}
               </span>
             ))}
@@ -46,9 +56,9 @@ function FeaturePreview({ index, token }: { index: number; token: string }) {
         )}
 
         {variant === 2 && (
-          <div className="relative flex h-full flex-col justify-center gap-3 p-5">
+          <div className="relative flex h-full flex-col justify-center gap-5 p-8">
             {[68, 44, 82].map((width, row) => (
-              <span key={width} className="h-3 border border-border bg-card">
+              <span key={width} className="h-4 border border-border bg-card">
                 <span className="block h-full bg-brand/45" style={{ width: `${width}%` }} />
                 <span className="sr-only">Pool rail {row + 1}</span>
               </span>
@@ -57,7 +67,7 @@ function FeaturePreview({ index, token }: { index: number; token: string }) {
         )}
 
         {variant === 3 && (
-          <div className="relative grid h-full grid-cols-2 gap-px bg-border p-5 sm:grid-cols-4">
+          <div className="relative grid h-full grid-cols-2 gap-px bg-border p-8 sm:grid-cols-4">
             {["S3", "IAM", "MCP", "OTEL"].map((item) => (
               <span key={item} className="grid place-items-center bg-card font-mono text-xs font-semibold text-muted-foreground">
                 {item}
@@ -67,13 +77,13 @@ function FeaturePreview({ index, token }: { index: number; token: string }) {
         )}
 
         {variant === 4 && (
-          <div className="relative grid h-full grid-cols-[3rem_1fr] gap-4 p-5">
-            <span className="grid size-12 place-items-center border border-brand bg-brand/15 font-mono text-xs font-semibold text-brand">
+          <div className="relative grid h-full grid-cols-[4rem_1fr] items-center gap-6 p-8">
+            <span className="grid size-16 place-items-center border border-brand bg-brand/15 font-mono text-xs font-semibold text-brand">
               KMS
             </span>
             <div className="space-y-2">
               {["IAM policy", "mTLS path", "Audit log"].map((item) => (
-                <span key={item} className="flex items-center justify-between border border-border bg-card px-3 py-1.5 text-[11px] text-muted-foreground">
+                <span key={item} className="flex items-center justify-between border border-border bg-card px-4 py-3 text-xs text-muted-foreground">
                   {item}
                   <CheckIcon className="size-3 text-brand" />
                 </span>
@@ -83,7 +93,7 @@ function FeaturePreview({ index, token }: { index: number; token: string }) {
         )}
 
         {variant === 5 && (
-          <div className="relative flex h-full items-end gap-2 p-5">
+          <div className="relative flex h-full items-end gap-3 p-8">
             {[28, 48, 38, 72, 52, 86, 44, 62].map((height, barIndex) => (
               <span
                 key={`${height}-${barIndex}`}
@@ -97,13 +107,13 @@ function FeaturePreview({ index, token }: { index: number; token: string }) {
         )}
 
         {variant === 6 && (
-          <div className="relative flex h-full flex-col justify-center gap-3 p-5">
-            <code className="border border-border bg-card px-3 py-2 text-xs text-foreground">
+          <div className="relative flex h-full flex-col justify-center gap-5 p-8">
+            <code className="border border-border bg-card px-4 py-3 text-xs text-foreground">
               helm install rustfs
             </code>
             <div className="grid grid-cols-3 gap-px bg-border">
               {["pod", "pvc", "svc"].map((item) => (
-                <span key={item} className="bg-card px-3 py-2 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                <span key={item} className="bg-card px-4 py-4 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
                   {item}
                 </span>
               ))}
@@ -112,14 +122,14 @@ function FeaturePreview({ index, token }: { index: number; token: string }) {
         )}
 
         {variant === 7 && (
-          <div className="relative flex h-full items-center gap-4 p-5">
-            <span className="grid size-14 place-items-center border border-border bg-card font-mono text-xs font-semibold text-brand">
+          <div className="relative flex h-full items-center gap-6 p-8">
+            <span className="grid size-16 place-items-center border border-border bg-card font-mono text-xs font-semibold text-brand">
               rc
             </span>
             <div className="flex-1 space-y-2">
-              <span className="block h-2 w-10/12 bg-foreground/20" />
-              <span className="block h-2 w-7/12 bg-brand/50" />
-              <span className="block h-2 w-9/12 bg-foreground/20" />
+              <span className="block h-3 w-10/12 bg-foreground/20" />
+              <span className="block h-3 w-7/12 bg-brand/50" />
+              <span className="block h-3 w-9/12 bg-foreground/20" />
             </div>
           </div>
         )}
@@ -189,7 +199,9 @@ export default function HomeFeatures() {
               <div className="flex h-full flex-col p-4 sm:p-5">
                 <div className="flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                   <span>{feature.plane}</span>
-                  <code className="uppercase tracking-[0.12em]">{feature.token}</code>
+                  {feature.token ? (
+                    <code className="uppercase tracking-[0.12em]">{feature.token}</code>
+                  ) : null}
                 </div>
 
                 <div className="mt-5 flex items-center gap-3">
@@ -233,19 +245,13 @@ export default function HomeFeatures() {
               <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
                 {activeFeature.featureDescription}
               </p>
-              <FeaturePreview index={activeTab} token={activeFeature.token} />
             </div>
-            <div>
-              <ul className="grid h-full divide-y divide-border">
-                {activeFeature.features.map((item) => (
-                  <li className="flex items-center gap-4 px-5 py-5 sm:px-8" key={item}>
-                    <span className="motion-icon-tile flex size-8 shrink-0 items-center justify-center border border-border bg-background text-brand">
-                      <CheckIcon className="size-4" aria-hidden="true" />
-                    </span>
-                    <span className="text-sm font-medium leading-6 text-foreground">{item}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="min-h-72 border-t border-border lg:border-t-0">
+              <FeaturePreview
+                index={activeTab}
+                token={activeFeature.token}
+                className="h-full min-h-72"
+              />
             </div>
           </div>
         </div>
