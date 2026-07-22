@@ -444,17 +444,15 @@ export default function ErasureCodeCalculator() {
   return (
     <div className="relative z-10 border-y border-border py-16 text-foreground sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 border-t border-border pt-8 lg:grid-cols-[minmax(0,0.7fr)_0.3fr] lg:items-end">
-          <div>
-            <div className="mb-8 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-              <span className="h-1 w-24 bg-brand" />
-              <span>Erasure coding planner</span>
-            </div>
-            <h1 className="max-w-4xl font-display text-5xl font-semibold tracking-tight text-foreground sm:text-7xl">
-              Size a RustFS erasure set before you deploy.
-            </h1>
+        <div className="max-w-4xl border-t border-border pt-8">
+          <div className="mb-8 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+            <span className="h-1 w-24 bg-brand" />
+            <span>Erasure coding planner</span>
           </div>
-          <p className="max-w-xl text-sm leading-7 text-muted-foreground">
+          <h1 className="max-w-4xl font-display text-5xl font-semibold tracking-tight text-foreground sm:text-7xl">
+            Size a RustFS erasure set before you deploy.
+          </h1>
+          <p className="mt-6 max-w-xl text-sm leading-7 text-muted-foreground">
             Model raw capacity, usable capacity, stripe layout, and failure tolerance from the
             hardware shape you plan to run.
           </p>

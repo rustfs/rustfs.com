@@ -56,14 +56,12 @@ function SectionHeader({
 }) {
   return (
     <div className="border-t border-border pt-10">
-      <div className="mb-10 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">{eyebrow}</p>
-          <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
-            {title}
-          </h2>
-        </div>
-        <p className="max-w-2xl text-sm leading-7 text-muted-foreground lg:justify-self-end">
+      <div className="mb-10 max-w-4xl">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">{eyebrow}</p>
+        <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
+          {title}
+        </h2>
+        <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
           {description}
         </p>
       </div>
@@ -466,14 +464,12 @@ export default function DownloadPageClient() {
     <main className="relative z-10 min-h-[100dvh] text-foreground">
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Download surface</p>
-              <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-                Install RustFS for real deployments.
-              </h1>
-            </div>
-            <p className="max-w-2xl text-sm leading-7 text-muted-foreground lg:justify-self-end">
+          <div className="max-w-4xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Download surface</p>
+            <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
+              Install RustFS for real deployments.
+            </h1>
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-muted-foreground">
               Choose the product first, then use the install path that matches the environment where it runs.
             </p>
           </div>
@@ -519,17 +515,15 @@ export function ServerDownloadPage({ release }: ServerDownloadPageProps) {
             All downloads
           </Link>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Data service</p>
-              <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
-                RustFS Server
-              </h1>
-              <p className="mt-4 max-w-2xl text-lg font-semibold leading-8 text-foreground sm:text-xl">
-                Start small, then keep the same operating model.
-              </p>
-            </div>
-            <p className="max-w-2xl text-sm leading-7 text-muted-foreground lg:justify-self-end">
+          <div className="mt-10 max-w-4xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Data service</p>
+            <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
+              RustFS Server
+            </h1>
+            <p className="mt-4 max-w-2xl text-lg font-semibold leading-8 text-foreground sm:text-xl">
+              Start small, then keep the same operating model.
+            </p>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
               Choose the environment first, then copy the exact command for that path.
             </p>
           </div>

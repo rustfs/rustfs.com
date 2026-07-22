@@ -131,14 +131,12 @@ export default function InstallationTopology() {
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="border-t border-border pt-10">
-          <div className="mb-10 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Deployment topology</p>
-              <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
-                Pick topology after you know the failure domain.
-              </h2>
-            </div>
-            <p className="max-w-2xl text-sm leading-7 text-muted-foreground lg:justify-self-end">
+          <div className="mb-10 max-w-4xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Deployment topology</p>
+            <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
+              Pick topology after you know the failure domain.
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
               RustFS can start on one machine, but production planning should be explicit about disks, nodes, and recovery expectations.
             </p>
           </div>

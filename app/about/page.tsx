@@ -67,14 +67,12 @@ export default function AboutPage() {
   return (
     <main className="relative z-10 flex-1 text-foreground">
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">About RustFS</p>
-            <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-              Object storage built for Rust-native infrastructure.
-            </h1>
-          </div>
-          <p className="max-w-2xl text-base leading-8 text-muted-foreground lg:ml-auto">
+        <div className="max-w-4xl">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">About RustFS</p>
+          <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
+            Object storage built for Rust-native infrastructure.
+          </h1>
+          <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground">
             RustFS is a next-generation Apache 2.0 distributed object storage system built in Rust. It has surpassed 28,000 GitHub stars, 3 million Docker Hub pulls, and 1 million global instances across S3-compatible and AI data center workloads.
           </p>
         </div>

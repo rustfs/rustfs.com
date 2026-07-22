@@ -86,18 +86,16 @@ export default function PricingPage() {
   return (
     <main className="relative z-10 flex-1 text-foreground">
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <div className="grid gap-10 lg:grid-cols-[0.98fr_1.02fr] lg:items-end">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Pricing</p>
-            <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-              Open-source storage, clear support path.
-            </h1>
-          </div>
-          <div className="flex flex-col gap-6">
-            <p className="max-w-2xl text-base leading-8 text-muted-foreground lg:ml-auto">
+        <div className="max-w-4xl">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Pricing</p>
+          <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
+            Open-source storage, clear support path.
+          </h1>
+          <div className="mt-6 flex flex-col items-start gap-6">
+            <p className="max-w-2xl text-base leading-8 text-muted-foreground">
               Run RustFS freely, then involve the team for deployment planning, migration, and production support.
             </p>
-            <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
+            <div className="flex flex-col gap-3 sm:flex-row">
               <DownloadLink className="!h-12 !px-5 !py-0 leading-none" />
               <ContactUsButton className="!h-12 !px-5 !py-0 leading-none bg-background text-foreground shadow-[inset_0_0_0_1px_var(--border)] hover:bg-muted hover:text-foreground" />
             </div>

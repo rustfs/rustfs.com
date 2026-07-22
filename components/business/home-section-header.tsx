@@ -23,17 +23,15 @@ export default function HomeSectionHeader({
         <span className="absolute left-0 top-0 h-px w-16 bg-brand" />
       </div>
 
-      <div className="mt-7 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-        <div className="min-w-0">
-          <div className="mb-5 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            <span aria-hidden="true" className="h-px w-5 bg-brand/70" />
-            <span>{eyebrow}</span>
-          </div>
-          <Heading className="text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-foreground md:text-5xl">
-            {title}
-          </Heading>
+      <div className="mt-7 max-w-4xl">
+        <div className="mb-5 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          <span aria-hidden="true" className="h-px w-5 bg-brand/70" />
+          <span>{eyebrow}</span>
         </div>
-        <p className="max-w-2xl text-[15px] leading-7 text-muted-foreground lg:justify-self-end lg:text-right">
+        <Heading className="text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-foreground md:text-5xl">
+          {title}
+        </Heading>
+        <p className="mt-5 max-w-2xl text-[15px] leading-7 text-muted-foreground">
           {description}
         </p>
       </div>

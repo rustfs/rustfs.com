@@ -243,17 +243,15 @@ export default function RcDownloadSection({ cliRelease }: RcDownloadSectionProps
             All downloads
           </Link>
 
-          <div className="mt-10 grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Admin CLI</p>
-              <h1 className="mt-4 max-w-3xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
-                RustFS CLI (rc)
-              </h1>
-              <p className="mt-4 max-w-2xl text-lg font-semibold leading-8 text-foreground sm:text-xl">
-                rc is the operator surface after RustFS is running.
-              </p>
-            </div>
-            <div className="flex flex-col gap-5 lg:items-end">
+          <div className="mt-10 max-w-4xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Admin CLI</p>
+            <h1 className="mt-4 max-w-3xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
+              RustFS CLI (rc)
+            </h1>
+            <p className="mt-4 max-w-2xl text-lg font-semibold leading-8 text-foreground sm:text-xl">
+              rc is the operator surface after RustFS is running.
+            </p>
+            <div className="mt-4 flex flex-col items-start gap-5">
               <p className="max-w-2xl text-sm leading-7 text-muted-foreground">
                 Use rc for bucket, object, cluster, identity, and operational workflows. Install it where you operate RustFS, not necessarily where the server runs.
               </p>
