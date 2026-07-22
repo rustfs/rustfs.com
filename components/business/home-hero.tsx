@@ -2,23 +2,16 @@
 
 import { WordRotate } from "@/components/magicui/word-rotate";
 import { Globe } from "@/components/ui/globe";
-import type { GitHubMetrics } from "@/lib/github";
+import { useMetrics } from "@/hooks/use-metrics";
 import { useTheme } from "next-themes";
 import { useMemo } from "react";
 import ContactUsButton from "./buttons/contact-us";
 import DownloadLink from "./buttons/download-link";
 import StatsStrip from "./stats-strip";
-//import GetStartedButton from "./buttons/get-started";
 
-// 导入所有软件SVG图标
-
-interface HomeHeroProps {
-  dockerPulls: number;
-  metrics: GitHubMetrics;
-}
-
-export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
+export default function HomeHero() {
   const { theme } = useTheme();
+  const { metrics, dockerPulls } = useMetrics();
 
   const isDark = theme === "dark";
 
@@ -74,9 +67,6 @@ export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
           <h1 className="font-display text-3xl font-extrabold tracking-tight text-primary sm:text-4xl md:text-5xl xl:text-6xl leading-tight">
             The fast data foundation for the AI era.
           </h1>
-          {/* <p className="mx-auto lg:mx-0 max-w-2xl text-lg tracking-tight text-secondary-foreground">
-            RustFS is developed with the popular and secure Rust language, compatible with S3 protocol. Suitable for AI/ML and massive data storage, big data, internet, industrial and confidential storage scenarios. Significantly reduces TCO. Follows Apache 2 license, Compatible with diverse hardware ecosystems.
-          </p> */}
           <div className="text-lg font-semibold text-primary/90 flex items-center justify-center lg:justify-start gap-2">
             <span>Built for</span>
             <WordRotate
