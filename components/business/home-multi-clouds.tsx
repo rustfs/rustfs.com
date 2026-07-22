@@ -36,7 +36,7 @@ export default function HomeMultiClouds() {
           title="Built for the next generation of object storage"
           description="RustFS combines Rust-native engineering, Apache 2.0 licensing, and S3 compatibility for AI infrastructure and direct MinIO migrations."
         />
-        <div className="grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-[minmax(0,2fr)_minmax(20rem,1fr)]">
           <Link
             href={stories[0].href}
             className="motion-card group block overflow-hidden bg-card/45 transition-colors hover:bg-muted/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
