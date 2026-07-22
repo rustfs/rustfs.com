@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRightIcon, Code2Icon, GaugeIcon, NetworkIcon, ShieldCheckIcon } from "lucide-react";
+import { Code2Icon, GaugeIcon, NetworkIcon, ShieldCheckIcon } from "lucide-react";
 import HomeSectionHeader from "./home-section-header";
 
 const reasons = [
@@ -59,16 +59,16 @@ const reasonIcons = [ShieldCheckIcon, NetworkIcon, Code2Icon, GaugeIcon];
 export default function HomeStats() {
   return (
     <section
-      className="relative overflow-hidden border-t border-border bg-background py-20 text-foreground sm:py-24 lg:py-28"
+      className="relative overflow-hidden border-t border-border bg-background py-20 text-foreground sm:py-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           eyebrow="Why RustFS"
-          title="A storage core built for production pressure"
+          title={<><span className="lg:whitespace-nowrap">A storage core built for</span>{" "}<span className="lg:whitespace-nowrap">production pressure</span></>}
           description="A focused object storage foundation for modern AI, cloud-native, and enterprise workloads."
         />
-        <div className="grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-12">
-          <article className="overflow-hidden bg-card/45 lg:col-span-5">
+        <div className="grid gap-4 lg:grid-cols-12">
+          <article className="motion-card overflow-hidden border border-border bg-card lg:col-span-5">
             <div className="relative h-48 overflow-hidden border-b border-border bg-background">
               <div
                 aria-hidden="true"
@@ -91,7 +91,7 @@ export default function HomeStats() {
             </div>
 
             <div className="p-6 sm:p-8">
-              <code className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
+              <code className="border border-border bg-background px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                 {reasons[0].token}
               </code>
               <h3 className="mt-8 text-2xl font-semibold text-foreground">
@@ -100,7 +100,7 @@ export default function HomeStats() {
               <p className="mt-4 text-sm leading-7 text-muted-foreground">
                 {reasons[0].description}
               </p>
-              <div className="mt-8 border-l border-brand/35 pl-4">
+              <div className="mt-8 border border-border bg-background p-4">
                 <pre className="overflow-x-auto text-xs leading-6 text-muted-foreground">
                   <code>{`[rustfs]
 runtime = "memory-safe"
@@ -111,13 +111,8 @@ mode = "distributed"`}</code>
             </div>
           </article>
 
-          <div className="flex overflow-hidden bg-card/40 lg:col-span-7">
-            <div className="flex min-h-full w-full flex-col">
-              <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                <span className="px-5 py-3">Operating advantages</span>
-                <span className="border-l border-border px-4 py-3 text-brand">04 paths</span>
-              </div>
-              <div className="grid flex-1 grid-rows-4 divide-y divide-border">
+          <div className="flex overflow-hidden border border-border bg-card lg:col-span-7">
+            <div className="grid min-h-full w-full grid-rows-4 divide-y divide-border">
                 {reasons.slice(1, 5).map((item, index) => {
                   const Icon = reasonIcons[index];
 
@@ -126,67 +121,35 @@ mode = "distributed"`}</code>
                       key={item.title}
                       className="grid min-h-0 gap-4 px-5 py-5 sm:grid-cols-[3rem_1fr_auto] sm:items-center"
                     >
-                      <span className="motion-icon-tile flex size-11 items-center justify-center text-brand">
-                        <Icon className="size-5" />
+                      <span className="flex size-11 items-center justify-center bg-background text-brand">
+                        <Icon className="size-4" />
                       </span>
                       <div>
                         <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
                         <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
                       </div>
-                      <code className="w-fit text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                      <code className="w-fit text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
                         {item.token}
                       </code>
                     </article>
                   );
                 })}
-              </div>
             </div>
           </div>
 
-          <article className="grid overflow-hidden bg-card/40 lg:col-span-12 lg:grid-cols-[0.86fr_1.14fr]">
-            <div className="relative min-h-72 overflow-hidden border-b border-border bg-background lg:border-b-0 lg:border-r">
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 opacity-55 [background-image:radial-gradient(circle,var(--brand)_1px,transparent_1.5px)] [background-size:18px_18px]"
-              />
-              <div className="relative flex h-full flex-col justify-between p-6 sm:p-8">
-                <div>
-                  <code className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
-                    {reasons[5].token}
-                  </code>
-                  <h3 className="mt-8 max-w-md text-2xl font-semibold text-foreground">
-                    {reasons[5].title}
-                  </h3>
-                  <p className="mt-4 max-w-md text-sm leading-7 text-muted-foreground">
-                    {reasons[5].description}
-                  </p>
-                </div>
-                <div className="mt-8 grid grid-cols-3 gap-px bg-border text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                  {["SDK", "Tools", "Apps"].map((item) => (
-                    <span key={item} className="bg-card/90 px-3 py-3">{item}</span>
-                  ))}
-                </div>
+          <article className="grid overflow-hidden border border-border bg-card lg:col-span-12 lg:grid-cols-4">
+            <div className="border-b border-border p-6 lg:border-b-0 lg:border-r">
+              <code className="text-[10px] uppercase tracking-[0.14em] text-brand">{reasons[5].token}</code>
+              <h3 className="mt-3 text-xl font-semibold text-foreground">{reasons[5].title}</h3>
+              <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">{reasons[5].description}</p>
+            </div>
+            {compatibilityRows.map((item) => (
+              <div key={item.title} className="border-b border-border p-6 last:border-b-0 lg:border-b-0 lg:border-r lg:last:border-r-0">
+                <code className="text-[10px] font-semibold uppercase tracking-[0.14em] text-brand">{item.meta}</code>
+                <h4 className="mt-3 text-base font-semibold text-foreground">{item.title}</h4>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.detail}</p>
               </div>
-            </div>
-            <div className="divide-y divide-border">
-              {compatibilityRows.map((item) => (
-                <div
-                  key={item.title}
-                  className="grid min-h-28 gap-4 px-6 py-5 sm:grid-cols-[1fr_auto] sm:items-center sm:px-8"
-                >
-                  <div>
-                    <h4 className="text-base font-semibold text-foreground">{item.title}</h4>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.detail}</p>
-                  </div>
-                  <span className="inline-flex items-center gap-3">
-                    <code className="w-fit text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                      {item.meta}
-                    </code>
-                    <ArrowRightIcon className="size-4 text-brand" aria-hidden="true" />
-                  </span>
-                </div>
-              ))}
-            </div>
+            ))}
           </article>
         </div>
       </div>

@@ -103,7 +103,6 @@ function TopologyDiagram({ id }: { id: string }) {
 export default function InstallationTopology() {
   const [activeId, setActiveId] = useState(topologies[0].id);
   const activeTopology = topologies.find((item) => item.id === activeId) ?? topologies[0];
-  const ActiveIcon = activeTopology.icon;
 
   const handleTopologyKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
     let nextIndex = index;
@@ -130,19 +129,19 @@ export default function InstallationTopology() {
   return (
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="border-t border-border pt-10">
-          <div className="mb-10 max-w-4xl">
+        <div>
+          <div className="mb-10">
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Deployment topology</p>
-            <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
+            <h2 className="mt-4 w-full font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
               Pick topology after you know the failure domain.
             </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
+            <p className="mt-4 w-full text-sm leading-7 text-muted-foreground">
               RustFS can start on one machine, but production planning should be explicit about disks, nodes, and recovery expectations.
             </p>
           </div>
         </div>
 
-        <div className="border-y border-border">
+        <div className="border border-border bg-card">
           <div
             role="tablist"
             aria-label="Deployment topology"
@@ -192,17 +191,7 @@ export default function InstallationTopology() {
             className="grid lg:grid-cols-[0.86fr_1.14fr]"
           >
             <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
-              <div className="flex items-center gap-4">
-                <span className="flex size-8 shrink-0 items-center justify-center text-brand">
-                  <ActiveIcon className="size-5" />
-                </span>
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">{activeTopology.code}</p>
-                  <h3 className="mt-2 text-2xl font-semibold leading-tight text-foreground">{activeTopology.name}</h3>
-                </div>
-              </div>
-
-              <div className="mt-8 border-y border-border">
+              <div className="border border-border">
                 <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                   <span className="px-3 py-3">Topology shape</span>
                   <span className="border-l border-border px-3 py-3 text-brand">{activeTopology.code}</span>

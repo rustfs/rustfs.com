@@ -3,11 +3,12 @@
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { formatVersion, type GitHubRelease } from '@/lib/github';
+import DockerIcon from '@/public/svgs/brands/docker.svg';
 import {
   ArrowLeftIcon,
   ArrowUpRightIcon,
   BracesIcon,
-  BoxesIcon,
+  DownloadIcon,
   LaptopIcon,
   TerminalIcon,
 } from 'lucide-react';
@@ -48,12 +49,10 @@ function findAsset(
 
 function CliPackageCard({
   title,
-  description,
   arch,
   asset,
 }: {
   title: string;
-  description: string;
   arch: string;
   asset: ReturnType<typeof findAsset>;
 }) {
@@ -64,19 +63,17 @@ function CliPackageCard({
       rel="noopener noreferrer"
       aria-label={`${title} package: ${asset.filename}`}
       title={asset.filename}
-      className="motion-card group flex min-h-44 min-w-0 flex-col border-t border-border py-5 transition-colors hover:border-foreground/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+      className="motion-card group flex min-h-24 min-w-0 items-center justify-between gap-4 border border-border bg-card p-5 transition-colors hover:border-foreground/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="min-w-0">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{arch}</p>
+        <h3 className="mt-2 truncate text-base font-semibold text-foreground">{title}</h3>
+      </div>
+      {asset.isDirect ? (
+        <DownloadIcon className="motion-arrow size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
+      ) : (
         <ArrowUpRightIcon className="motion-arrow size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
-      </div>
-      <h3 className="mt-5 text-xl font-semibold text-foreground">{title}</h3>
-      <p className="mt-3 text-sm leading-6 text-muted-foreground">{description}</p>
-      <div className="mt-auto pt-6">
-        <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
-          {asset.isDirect ? 'Download package' : 'GitHub releases'}
-        </span>
-      </div>
+      )}
     </a>
   );
 }
@@ -119,9 +116,9 @@ function PackageManagerCard() {
 function DockerInstallCard() {
   return (
     <article className="min-w-0 p-6 sm:p-8">
-      <div className="max-w-3xl">
+      <div>
         <div className="flex items-center gap-3">
-          <BoxesIcon className="motion-icon-tile size-5 text-brand" />
+          <DockerIcon className="motion-icon-tile size-5 text-brand" />
           <h3 className="text-xl font-semibold text-foreground">Run rc in Docker</h3>
         </div>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
@@ -143,7 +140,7 @@ function DockerInstallCard() {
 function SourceInstallCard() {
   return (
     <article className="min-w-0 p-6 sm:p-8">
-      <div className="max-w-3xl">
+      <div>
         <div className="flex items-center gap-3">
           <BracesIcon className="motion-icon-tile size-5 text-brand" />
           <h3 className="text-xl font-semibold text-foreground">Build from source</h3>
@@ -203,7 +200,7 @@ export default function RcDownloadSection({ cliRelease }: RcDownloadSectionProps
   const methods: CliInstallMethod[] = [
     { id: 'package-managers', label: 'Package managers', Icon: TerminalIcon },
     { id: 'binaries', label: 'Direct binaries', Icon: LaptopIcon },
-    { id: 'docker', label: 'Docker', Icon: BoxesIcon },
+    { id: 'docker', label: 'Docker', Icon: DockerIcon },
     { id: 'source', label: 'Source', Icon: BracesIcon },
   ];
   const [activeMethodId, setActiveMethodId] = useState<CliInstallMethod['id']>(methods[0].id);
@@ -243,18 +240,14 @@ export default function RcDownloadSection({ cliRelease }: RcDownloadSectionProps
             All downloads
           </Link>
 
-          <div className="mt-10 max-w-4xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Admin CLI</p>
-            <h1 className="mt-4 max-w-3xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
+          <div className="mt-10">
+            <h1 className="w-full font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
               RustFS CLI (rc)
             </h1>
-            <p className="mt-4 max-w-2xl text-lg font-semibold leading-8 text-foreground sm:text-xl">
+            <p className="mt-4 w-full text-lg font-semibold leading-8 text-foreground sm:text-xl">
               rc is the operator surface after RustFS is running.
             </p>
-            <div className="mt-4 flex flex-col items-start gap-5">
-              <p className="max-w-2xl text-sm leading-7 text-muted-foreground">
-                Use rc for bucket, object, cluster, identity, and operational workflows. Install it where you operate RustFS, not necessarily where the server runs.
-              </p>
+            <div className="mt-6">
               <Button asChild variant="outline" size="lg" className="h-11 px-4 text-sm font-semibold">
                 <a href={releaseUrl} target="_blank" rel="noopener noreferrer">
                   rc {version}
@@ -264,7 +257,7 @@ export default function RcDownloadSection({ cliRelease }: RcDownloadSectionProps
             </div>
           </div>
 
-          <div className="mt-12 overflow-hidden border-y border-border">
+          <div className="mt-12 overflow-hidden border border-border bg-card">
             <div className="overflow-x-auto border-b border-border bg-background/40">
               <div className="flex min-w-max" role="tablist" aria-label="CLI install methods">
                 {methods.map((method, index) => {
@@ -305,34 +298,29 @@ export default function RcDownloadSection({ cliRelease }: RcDownloadSectionProps
 
               {activeMethod.id === 'binaries' ? (
                 <div className="p-6 sm:p-8">
-                  <div className="grid gap-x-8 sm:grid-cols-2 xl:grid-cols-3 [&>*]:min-w-0">
+                  <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 [&>*]:min-w-0">
                     <CliPackageCard
                       title="Linux x86_64"
-                      description="Use this on common AMD64 Linux servers, CI runners, and admin hosts."
                       arch="amd64"
                       asset={linuxX86}
                     />
                     <CliPackageCard
                       title="Linux ARM64"
-                      description="Use this for ARM servers, edge nodes, and Apple Silicon Linux environments."
                       arch="arm64"
                       asset={linuxArm}
                     />
                     <CliPackageCard
                       title="macOS Intel"
-                      description="A direct package for Intel-based macOS workstations and jump hosts."
                       arch="amd64"
                       asset={macIntel}
                     />
                     <CliPackageCard
                       title="macOS Apple Silicon"
-                      description="A native package for M-series Macs used as operator workstations."
                       arch="arm64"
                       asset={macArm}
                     />
                     <CliPackageCard
                       title="Windows x86_64"
-                      description="Use this for Windows-based admin machines, lab environments, and compatibility checks."
                       arch="amd64"
                       asset={windows}
                     />

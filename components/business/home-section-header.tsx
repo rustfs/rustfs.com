@@ -1,9 +1,10 @@
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 interface HomeSectionHeaderProps {
   eyebrow: string;
-  title: string;
-  description: string;
+  title: ReactNode;
+  description: ReactNode;
   className?: string;
   headingLevel?: 1 | 2;
 }
@@ -19,19 +20,17 @@ export default function HomeSectionHeader({
 
   return (
     <div className={cn("motion-reveal mb-9 lg:mb-12", className)}>
-      <div className="relative h-px bg-border/70">
-        <span className="absolute left-0 top-0 h-px w-16 bg-brand" />
+      <div className="mb-7 flex items-center gap-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+        <span className="h-px w-8 shrink-0 bg-brand" aria-hidden="true" />
+        <span className="shrink-0">{eyebrow}</span>
+        <span className="h-px min-w-8 flex-1 bg-border" aria-hidden="true" />
       </div>
 
-      <div className="mt-7 max-w-4xl">
-        <div className="mb-5 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-          <span aria-hidden="true" className="h-px w-5 bg-brand/70" />
-          <span>{eyebrow}</span>
-        </div>
-        <Heading className="text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-foreground md:text-5xl">
+      <div className="min-w-0">
+        <Heading className="w-full break-words text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-foreground md:text-5xl">
           {title}
         </Heading>
-        <p className="mt-5 max-w-2xl text-[15px] leading-7 text-muted-foreground">
+        <p className="mt-5 w-full text-left text-[15px] leading-7 text-muted-foreground">
           {description}
         </p>
       </div>

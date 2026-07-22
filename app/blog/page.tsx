@@ -36,7 +36,7 @@ export default async function BlogPage() {
                 <span className="h-1 w-24 bg-brand" />
                 <span>RustFS journal</span>
               </div>
-              <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[0.98] tracking-tight text-foreground sm:text-6xl">
+              <h1 className="max-w-4xl font-display text-5xl font-semibold tracking-tight text-foreground sm:text-7xl">
                 Engineering posts from the storage layer.
               </h1>
               <p className="mt-6 max-w-2xl text-sm leading-7 text-muted-foreground">
@@ -46,7 +46,7 @@ export default async function BlogPage() {
           </div>
 
           {featuredPost ? (
-            <div className="mt-14 border-t border-border">
+            <div className="mt-12 space-y-4">
               <FeaturedPost post={featuredPost} />
               <RecentPostGrid posts={recentPosts} />
             </div>
@@ -59,15 +59,15 @@ export default async function BlogPage() {
       </section>
 
       {olderPosts.length ? (
-        <section className="border-b border-border py-20">
+        <section className="border-b border-border bg-muted/20 py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-8 flex items-end justify-between gap-4 border-t border-border pt-8">
-              <h2 className="text-3xl font-semibold tracking-tight text-foreground">Older posts</h2>
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <h2 className="text-2xl font-semibold text-foreground">Older posts</h2>
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 {olderPosts.length} posts
               </span>
             </div>
-            <div className="border-t border-border">
+            <div className="border border-border bg-card">
               {olderPosts.map((post) => (
                 <ArchiveRow key={post.slug} post={post} />
               ))}
@@ -85,48 +85,37 @@ function FeaturedPost({ post }: { post: BlogPostMeta }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="motion-card group block border-b border-border py-10"
+      className="motion-card group block overflow-hidden border border-border bg-card transition-colors hover:bg-muted/30"
     >
       <div
         className={`grid ${
-          hasImage ? "gap-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:items-stretch xl:gap-12" : ""
+          hasImage ? "lg:grid-cols-[0.9fr_1.1fr]" : ""
         }`}
       >
         {hasImage ? (
-          <div className="relative min-h-64 overflow-hidden bg-background">
+          <div className="relative min-h-64 overflow-hidden border-b border-border bg-background lg:min-h-96 lg:border-r lg:border-b-0">
             <img
               src={post.image}
               alt=""
               className="absolute inset-0 size-full object-cover transition duration-300 group-hover:scale-[1.02]"
               loading="eager"
             />
-            <span className="absolute left-4 top-4 border border-border bg-background/85 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
-              Featured
-            </span>
           </div>
         ) : null}
 
-        <div className="flex flex-col py-1">
-          <div className="mb-7 flex items-center gap-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+        <div className="flex flex-col p-6 sm:p-8 lg:p-10">
+          <div className="flex items-center gap-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <span className="text-brand">Featured post</span>
             <span className="h-px flex-1 bg-border" aria-hidden="true" />
             <span>{formatShortDate(post.date)}</span>
           </div>
-          <PostMeta post={post} />
-          <h2 className="mt-5 max-w-4xl text-3xl font-semibold leading-[1.08] tracking-tight text-foreground sm:text-4xl">
+          <h2 className="mt-8 max-w-4xl text-2xl font-semibold leading-tight text-foreground sm:text-4xl">
             {post.title}
           </h2>
-          <p className="mt-5 line-clamp-2 max-w-2xl text-sm leading-7 text-muted-foreground">
-            {post.description}
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+          <PostMeta post={post} className="mt-5" />
+          <div className="mt-auto flex flex-wrap items-end justify-between gap-4 pt-10">
             <PostTags tags={post.tags.slice(0, 4)} />
-            <span className="inline-flex items-center text-sm font-semibold text-brand">
-              Read the post
-              <span className="motion-arrow ml-2 inline-block" aria-hidden="true">
-                ↗
-              </span>
-            </span>
+            <span className="motion-arrow text-lg text-brand" aria-hidden="true">↗</span>
           </div>
         </div>
       </div>
@@ -140,15 +129,15 @@ function RecentPostGrid({ posts }: { posts: BlogPostMeta[] }) {
   }
 
   return (
-    <div className="grid gap-x-8 gap-y-10 pt-10 md:grid-cols-3">
-      {posts.map((post) => (
+    <div className="grid gap-4 md:grid-cols-3">
+      {posts.map((post, index) => (
         <Link
           key={post.slug}
           href={`/blog/${post.slug}`}
-          className="motion-card group flex min-h-72 flex-col border-t border-border pt-5"
+          className="motion-card group flex flex-col overflow-hidden border border-border bg-card transition-colors hover:bg-muted/30"
         >
           {shouldShowImage(post.image) ? (
-            <div className="relative aspect-[16/10] overflow-hidden bg-background">
+            <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-background">
               <img
                 src={post.image}
                 alt=""
@@ -157,11 +146,12 @@ function RecentPostGrid({ posts }: { posts: BlogPostMeta[] }) {
               />
             </div>
           ) : null}
-          <div className="flex flex-1 flex-col pt-5">
-            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          <div className="flex flex-1 flex-col p-5">
+            <div className="flex items-center justify-between gap-4 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <span className="text-brand">Post.{String(index + 2).padStart(2, "0")}</span>
               <span>{formatShortDate(post.date)}</span>
             </div>
-            <h3 className="mt-5 line-clamp-3 text-xl font-semibold leading-tight tracking-tight text-foreground">
+            <h3 className="mt-4 line-clamp-3 text-lg font-semibold leading-tight text-foreground">
               {post.title}
             </h3>
             <div className="mt-auto flex items-center justify-between pt-6 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
@@ -183,7 +173,7 @@ function ArchiveRow({ post }: { post: BlogPostMeta }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className={`group grid gap-6 border-b border-border py-8 last:border-b-0 hover:border-foreground/35 ${
+      className={`group grid gap-5 border-b border-border px-5 py-6 last:border-b-0 hover:bg-muted/35 ${
         hasImage
           ? "md:grid-cols-[8rem_8.5rem_minmax(0,1fr)_7rem]"
           : "md:grid-cols-[8rem_minmax(0,1fr)_7rem]"
@@ -194,7 +184,7 @@ function ArchiveRow({ post }: { post: BlogPostMeta }) {
       </div>
       {hasImage ? <PostThumbnail image={post.image} className="hidden md:block" /> : null}
       <div>
-        <h3 className="text-xl font-semibold leading-tight tracking-tight text-foreground sm:text-2xl">{post.title}</h3>
+        <h3 className="text-xl font-semibold leading-tight text-foreground">{post.title}</h3>
         <p className="mt-3 line-clamp-2 max-w-3xl text-sm leading-7 text-muted-foreground">
           {post.description}
         </p>
@@ -227,10 +217,9 @@ function PostThumbnail({ image, className }: { image?: string; className?: strin
   );
 }
 
-function PostMeta({ post }: { post: BlogPostMeta }) {
+function PostMeta({ post, className }: { post: BlogPostMeta; className?: string }) {
   return (
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-      <span>{formatShortDate(post.date)}</span>
+    <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground ${className ?? ""}`}>
       <span>{post.author}</span>
       <span>{post.readingMinutes} min read</span>
     </div>
@@ -243,11 +232,11 @@ function PostTags({ tags, className }: { tags: string[]; className?: string }) {
   }
 
   return (
-    <div className={`flex flex-wrap gap-x-4 gap-y-2 ${className ?? ""}`}>
+    <div className={`flex flex-wrap gap-x-3 gap-y-2 ${className ?? ""}`}>
       {tags.map((tag) => (
         <span
           key={tag}
-          className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
+          className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground before:mr-3 before:text-border before:content-['/'] first:before:hidden"
         >
           {tag}
         </span>

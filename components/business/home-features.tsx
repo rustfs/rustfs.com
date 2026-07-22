@@ -10,12 +10,11 @@ function FeaturePreview({ index, token }: { index: number; token: string }) {
   const variant = index % 8;
 
   return (
-    <div className="mt-8 overflow-hidden border-y border-border bg-background/40">
-      <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-        <span className="px-3 py-2">Surface preview</span>
-        <code className="border-l border-border px-3 py-2 text-foreground">{token}</code>
-      </div>
-      <div className="relative h-28 overflow-hidden">
+    <div className="relative mt-7 h-28 overflow-hidden bg-background/70">
+      <code className="absolute right-3 top-3 z-10 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+        {token}
+      </code>
+      <div className="relative h-full overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-0 opacity-45 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:28px_28px]"
@@ -156,7 +155,7 @@ export default function HomeFeatures() {
   };
 
   return (
-    <section className="relative border-t border-border bg-background pt-20 pb-14 sm:pt-24 sm:pb-20 lg:pt-28 lg:pb-28">
+    <section className="relative border-t border-border bg-background pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32">
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <HomeSectionHeader
           eyebrow="Capability matrix"
@@ -164,15 +163,15 @@ export default function HomeFeatures() {
           description="Production-ready capabilities for distributed, S3-compatible object storage."
         />
 
-        <nav className="grid gap-px border-y border-border bg-border/70 md:grid-cols-2 xl:grid-cols-4" aria-label="Core feature tabs" role="tablist" aria-orientation="horizontal">
+        <nav className="flex gap-px overflow-x-auto border border-border bg-border md:grid md:grid-cols-2 xl:grid-cols-4" aria-label="Core feature tabs" role="tablist" aria-orientation="horizontal">
           {features.map((feature, index) => (
             <button
               key={`${feature.title}-${index}`}
               id={`core-feature-tab-${index}`}
               type="button"
               className={cn(
-                "group relative min-h-32 bg-background/85 text-left transition-colors hover:bg-muted/30 focus:outline-hidden focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-brand/40",
-                activeTab === index && "bg-card/80"
+                "group relative min-h-28 min-w-72 bg-card text-left transition-colors hover:bg-muted/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-brand/40 md:min-w-0",
+                activeTab === index && "bg-muted/35"
               )}
               onClick={() => setActiveTab(index)}
               onKeyDown={(event) => handleTabKeyDown(event, index)}
@@ -193,12 +192,12 @@ export default function HomeFeatures() {
                   <code className="uppercase tracking-[0.12em]">{feature.token}</code>
                 </div>
 
-                <div className="mt-5 flex items-start gap-3">
+                <div className="mt-5 flex items-center gap-3">
                   <span className={cn(
-                    "motion-icon-tile flex size-10 shrink-0 items-center justify-center border border-border/70 bg-background/40 text-foreground transition-colors",
-                    activeTab === index && "border-brand/40 bg-brand/10 text-brand"
+                    "motion-icon-tile flex size-9 shrink-0 items-center justify-center border border-border bg-background text-foreground transition-colors",
+                    activeTab === index && "border-brand bg-brand text-brand-foreground"
                   )}>
-                    <feature.icon className="size-5" />
+                    <feature.icon className="size-4" />
                   </span>
                   <span className={cn(
                     "block text-base font-semibold leading-6 text-foreground",
@@ -214,30 +213,21 @@ export default function HomeFeatures() {
 
         <div
           id="core-feature-panel"
-          className="mt-8 border border-border bg-card/45"
+          className="mt-6 overflow-hidden border border-border bg-card"
           role="tabpanel"
           aria-labelledby={`core-feature-tab-${activeTab}`}
         >
-          <div className="grid border-b border-border text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground sm:grid-cols-[1fr_auto] sm:tracking-[0.2em]">
-            <span className="px-5 py-3 sm:px-8">
-              Selected surface / {activeFeature.plane}
-            </span>
-            <code className="border-t border-border px-5 py-3 text-[11px] uppercase tracking-[0.12em] text-foreground sm:border-l sm:border-t-0 sm:px-4">
-              {activeFeature.token}
-            </code>
-          </div>
-
-          <div key={activeTab} className="motion-reveal grid lg:grid-cols-[0.82fr_1.18fr]">
-            <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r lg:p-10">
+          <div key={activeTab} className="motion-reveal grid lg:grid-cols-2">
+            <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
               <div className="flex items-center gap-4">
                 <span className="motion-icon-tile flex size-12 items-center justify-center border border-brand bg-brand text-brand-foreground">
                   <activeFeature.icon className="size-6" />
                 </span>
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
-                  Active capability
+                  {activeFeature.plane}
                 </span>
               </div>
-              <h3 className="mt-8 text-2xl font-bold text-foreground md:text-3xl">
+              <h3 className="mt-6 text-2xl font-bold text-foreground md:text-3xl">
                 {activeFeature.title}
               </h3>
               <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
@@ -248,8 +238,8 @@ export default function HomeFeatures() {
             <div>
               <ul className="grid h-full divide-y divide-border">
                 {activeFeature.features.map((item) => (
-                  <li className="flex min-h-20 items-center gap-4 px-5 py-4 sm:px-8" key={item}>
-                    <span className="motion-icon-tile flex size-8 shrink-0 items-center justify-center bg-brand/10 text-brand">
+                  <li className="flex items-center gap-4 px-5 py-5 sm:px-8" key={item}>
+                    <span className="motion-icon-tile flex size-8 shrink-0 items-center justify-center border border-border bg-background text-brand">
                       <CheckIcon className="size-4" aria-hidden="true" />
                     </span>
                     <span className="text-sm font-medium leading-6 text-foreground">{item}</span>

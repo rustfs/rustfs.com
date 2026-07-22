@@ -6,21 +6,6 @@ import HomeSectionHeader from './home-section-header'
 
 const ctaButtonClassName = "!h-12 !min-h-12 w-full shrink-0 !px-5 !py-0 leading-none sm:!w-48";
 
-const deployPaths = [
-  {
-    label: "Validate",
-    detail: "single node",
-  },
-  {
-    label: "Migrate",
-    detail: "S3-compatible",
-  },
-  {
-    label: "Operate",
-    detail: "multi-node",
-  },
-];
-
 export default function GetStartedToday() {
   return (
     <section
@@ -41,19 +26,11 @@ export default function GetStartedToday() {
 
           <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-center">
             <div className="p-6 sm:p-8 lg:p-10">
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="border border-brand-foreground/25 bg-brand-foreground/10 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-foreground/80">
-                  Production ready
-                </span>
-                <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-foreground/55">
-                  open source / s3 api
-                </span>
-              </div>
-
-              <h2 className="mt-5 max-w-3xl text-3xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
-                Deploy RustFS locally. Keep the same path to production.
+              <h2 className="w-full text-3xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
+                <span className="sm:whitespace-nowrap">Deploy RustFS locally.</span>{" "}
+                <span className="sm:whitespace-nowrap">Keep the same path to production.</span>
               </h2>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-brand-foreground/75">
+              <p className="mt-4 w-full text-sm leading-7 text-brand-foreground/75">
                 Start with one machine, then carry the same S3-compatible storage layer into migration and multi-node operations.
               </p>
             </div>
@@ -64,21 +41,6 @@ export default function GetStartedToday() {
             </div>
           </div>
 
-          <div className="relative grid border-t border-brand-foreground/20 bg-black/10 sm:grid-cols-3">
-            {deployPaths.map((path) => (
-              <div
-                key={path.label}
-                className="border-b border-brand-foreground/15 px-6 py-4 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0 lg:px-10"
-              >
-                <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-foreground/55">
-                  {path.label}
-                </div>
-                <div className="mt-2 text-sm font-semibold text-brand-foreground">
-                  {path.detail}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

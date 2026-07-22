@@ -107,7 +107,7 @@
   --warning-foreground: #ffffff;
   --info: #06b6d4;
   --info-foreground: #ffffff;
-  --border: #11182717;
+  --border: #e5e5e5;
   --input: #00000024;
   --ring: #006bff;
   --chart-1: oklch(0.809 0.105 251.813);
@@ -151,7 +151,7 @@
   --warning-foreground: #ffffff;
   --info: #06b6d4;
   --info-foreground: #ffffff;
-  --border: #ffffff17;
+  --border: #212121;
   --input: #ffffff24;
   --ring: #47a8ff;
   --chart-1: oklch(0.809 0.105 251.813);

@@ -12,12 +12,11 @@ import Link from 'next/link'
 import {
     ArrowLeftIcon,
     ArrowUpRightIcon,
-    BinaryIcon,
     BookOpenIcon,
     DownloadIcon,
-    HardDriveIcon,
     LayersIcon,
     MessageCircleIcon,
+    MonitorIcon,
     ServerIcon,
     TerminalIcon,
 } from 'lucide-react'
@@ -55,8 +54,8 @@ function SectionHeader({
   description: string;
 }) {
   return (
-    <div className="border-t border-border pt-10">
-      <div className="mb-10 max-w-4xl">
+    <div>
+      <div className="mb-8 max-w-4xl">
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">{eyebrow}</p>
         <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
           {title}
@@ -87,7 +86,7 @@ function ProductDownloadLink({
   return (
     <Link
       href={href}
-      className="motion-card group flex min-h-80 flex-col px-6 py-8 transition-colors hover:bg-muted/20 sm:px-8"
+      className="motion-card group flex min-h-80 flex-col border border-border bg-card px-6 py-8 transition-colors hover:bg-muted/20 sm:px-8"
     >
       <div className="flex items-start justify-between gap-6">
         <div>
@@ -167,7 +166,12 @@ function ArtifactButton({
   icon: ReactNode;
 }) {
   return (
-    <Button asChild size="lg" className="h-11 w-full justify-between px-4 text-sm font-semibold">
+    <Button
+      asChild
+      variant="outline"
+      size="lg"
+      className="h-11 w-full justify-between border-border bg-card px-4 text-sm font-semibold text-foreground dark:border-border dark:bg-card"
+    >
       <a href={href} target="_blank" rel="noopener noreferrer">
         <span className="inline-flex items-center gap-2">
           {icon}
@@ -218,7 +222,7 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
       title: 'Install directly on a server',
       summary: 'Best when RustFS should run as a small native service with explicit control over disks and systemd.',
       bestFor: 'Production hosts, bare metal, VMs',
-      Icon: BinaryIcon,
+      Icon: LinuxIcon,
       commandTitle: 'Fast validation',
       command: [
         'curl -O https://rustfs.com/install_rustfs.sh && bash install_rustfs.sh',
@@ -284,7 +288,7 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
       title: 'Validate from a workstation',
       summary: 'Use workstation binaries for client testing, demos, and compatibility checks outside Linux servers.',
       bestFor: 'Client validation, isolated testing',
-      Icon: HardDriveIcon,
+      Icon: MonitorIcon,
       commandTitle: 'macOS Homebrew',
       command: [
         'brew tap rustfs/homebrew-tap',
@@ -326,7 +330,7 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
   };
 
   return (
-    <div className="overflow-hidden border-y border-border">
+    <div className="overflow-hidden border border-border bg-card">
       <div className="overflow-x-auto border-b border-border bg-background/40">
         <div className="flex min-w-max" role="tablist" aria-label="Server install paths">
           {paths.map((path, index) => {
@@ -411,7 +415,7 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
 
 function HelpPanel() {
   return (
-    <section className="py-20">
+    <section className="pb-20 sm:pb-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Support surface"
@@ -419,39 +423,39 @@ function HelpPanel() {
           description="Move from local validation to production with documentation, community help, or direct planning support."
         />
 
-        <div className="grid gap-8 border-y border-border py-8 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-3">
           <a
             href="https://docs.rustfs.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="motion-card group border-t border-border pt-5 transition-colors hover:border-foreground/35"
+            className="motion-card group flex min-h-72 flex-col border border-border bg-card p-6 transition-colors hover:bg-muted/30 sm:p-7"
           >
             <BookOpenIcon className="motion-icon-tile size-5 text-brand" />
             <h3 className="mt-6 text-xl font-semibold text-foreground">Read the docs</h3>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">Configuration, deployment, S3 clients, and operations guidance.</p>
-            <ArrowUpRightIcon className="motion-arrow mt-8 size-5 text-brand" />
+            <ArrowUpRightIcon className="motion-arrow mt-auto size-5 text-brand" />
           </a>
           <a
             href="https://github.com/rustfs/rustfs/issues"
             target="_blank"
             rel="noopener noreferrer"
-            className="motion-card group border-t border-border pt-5 transition-colors hover:border-foreground/35"
+            className="motion-card group flex min-h-72 flex-col border border-border bg-card p-6 transition-colors hover:bg-muted/30 sm:p-7"
           >
             <MessageCircleIcon className="motion-icon-tile size-5 text-brand" />
             <h3 className="mt-6 text-xl font-semibold text-foreground">Report an issue</h3>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">Share compatibility feedback, installation friction, or operational questions.</p>
-            <ArrowUpRightIcon className="motion-arrow mt-8 size-5 text-brand" />
+            <ArrowUpRightIcon className="motion-arrow mt-auto size-5 text-brand" />
           </a>
           <a
             href="https://discord.gg/NcKBCEJp6P"
             target="_blank"
             rel="noopener noreferrer"
-            className="motion-card group border-t border-border pt-5 transition-colors hover:border-foreground/35"
+            className="motion-card group flex min-h-72 flex-col border border-border bg-card p-6 transition-colors hover:bg-muted/30 sm:p-7"
           >
             <ServerIcon className="motion-icon-tile size-5 text-brand" />
             <h3 className="mt-6 text-xl font-semibold text-foreground">Join Discord</h3>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">Discuss installation, operations, and migration questions with the RustFS community.</p>
-            <ArrowUpRightIcon className="motion-arrow mt-8 size-5 text-brand" />
+            <ArrowUpRightIcon className="motion-arrow mt-auto size-5 text-brand" />
           </a>
         </div>
       </div>
@@ -462,19 +466,18 @@ function HelpPanel() {
 export default function DownloadPageClient() {
   return (
     <main className="relative z-10 min-h-[100dvh] text-foreground">
-      <section className="py-20 sm:py-28">
+      <section className="pt-20 pb-12 sm:pt-28 sm:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Download surface</p>
-            <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-              Install RustFS for real deployments.
+          <div>
+            <h1 className="w-full font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
+              Download RustFS
             </h1>
-            <p className="mt-5 max-w-2xl text-sm leading-7 text-muted-foreground">
+            <p className="mt-5 w-full text-sm leading-7 text-muted-foreground">
               Choose the product first, then use the install path that matches the environment where it runs.
             </p>
           </div>
 
-          <div className="mt-14 grid divide-y divide-border border-y border-border md:grid-cols-2 md:divide-x md:divide-y-0">
+          <div className="mt-14 grid gap-4 md:grid-cols-2">
             <ProductDownloadLink
               href="/download/server"
               eyebrow="Data service"
@@ -516,15 +519,11 @@ export function ServerDownloadPage({ release }: ServerDownloadPageProps) {
           </Link>
 
           <div className="mt-10 max-w-4xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Data service</p>
-            <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
+            <h1 className="max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
               RustFS Server
             </h1>
             <p className="mt-4 max-w-2xl text-lg font-semibold leading-8 text-foreground sm:text-xl">
               Start small, then keep the same operating model.
-            </p>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
-              Choose the environment first, then copy the exact command for that path.
             </p>
           </div>
 
@@ -538,7 +537,7 @@ export function ServerDownloadPage({ release }: ServerDownloadPageProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ServerInstallTabs release={release} />
 
-          <div className="mt-10 flex flex-col gap-4 border-y border-border py-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm font-semibold text-foreground">Prefer browsing every release artifact?</p>
               <p className="mt-1 text-xs leading-6 text-muted-foreground">Use GitHub when you need older versions, checksums, or non-default packages.</p>

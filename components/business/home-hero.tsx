@@ -29,10 +29,10 @@ export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
             <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
               Rust-native object storage
             </p>
-            <h1 className="max-w-3xl font-display text-4xl font-bold leading-[1.04] tracking-[-0.04em] text-primary sm:text-5xl xl:text-6xl">
-              S3-compatible object storage for AI data centers.
+            <h1 className="w-full font-display text-4xl font-bold leading-[1.04] tracking-[-0.04em] text-primary sm:text-5xl xl:text-6xl">
+              S3-compatible object storage for AI data centers
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg md:leading-8">
+            <p className="mt-6 w-full text-base leading-7 text-muted-foreground md:text-lg md:leading-8">
               High-performance Rust core, native S3 compatibility, and self-hosted control for AI data centers, cloud-native platforms, and MinIO migrations.
             </p>
 

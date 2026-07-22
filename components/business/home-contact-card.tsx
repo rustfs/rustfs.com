@@ -25,15 +25,10 @@ export default function HomeContactCard() {
             className="absolute inset-0 opacity-[0.1] [background-image:repeating-linear-gradient(135deg,transparent_0_16px,var(--brand-foreground)_16px_17px,transparent_17px_34px)]"
           />
           <div className="relative p-6 pr-24 sm:p-8 sm:pr-28 lg:p-10 lg:pr-32">
-            <span
-              className="relative inline-flex border border-brand-foreground/25 bg-brand-foreground/10 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-foreground/75"
-            >
-              Production handoff
-            </span>
-            <h3 className="relative mt-4 max-w-2xl text-2xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
+            <h3 className="relative w-full text-2xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
               Talk to the RustFS team.
             </h3>
-            <p className="relative mt-4 max-w-3xl text-sm leading-7 text-brand-foreground/75">
+            <p className="relative mt-4 w-full text-sm leading-7 text-brand-foreground/75">
               Bring deployment context for topology, migration, or production support.
             </p>
           </div>
