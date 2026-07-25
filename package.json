@@ -12,9 +12,12 @@
     "sitemap": "node scripts/generate-sitemap.js",
     "sync:blog": "node scripts/sync-wordpress-blog.mjs"
   },
-  "packageManager": "pnpm@10.28.2",
-  "engines": {
-    "pnpm": ">=10.28.2"
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.5.3",
+      "onFail": "error"
+    }
   },
   "dependencies": {
     "@base-ui/react": "^1.2.0",

@@ -1,6 +1,7 @@
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver
+allowBuilds:
+  msw: false
+  sharp: false
+  unrs-resolver: false
 
 overrides:
-  svgo@>=3.0.0 <3.3.3: '>=3.3.3' # https://github.com/advisories/GHSA-xpqw-6gx7-v673
+  svgo@>=3.0.0 <3.3.3: ">=3.3.3" # https://github.com/advisories/GHSA-xpqw-6gx7-v673
