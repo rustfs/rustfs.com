@@ -8,8 +8,8 @@ RustFS is a high-performance distributed object storage system developed in Rust
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 16.2.2 (App Router)
-- **Language**: TypeScript (ES2022+, Strict Mode)
+- **Framework**: Next.js 16.2.11 (App Router)
+- **Language**: TypeScript (ES2025+, Strict Mode)
 - **Styling**: Tailwind CSS 4 + shadcn/ui
 - **Icons**: Lucide React
 - **Theme**: next-themes (Dark Mode Support)
@@ -102,12 +102,14 @@ pnpm start
 - **NEVER change responsive design or dark mode implementations**
 
 **When making changes:**
+
 - ✅ Only modify what is explicitly requested
 - ✅ Preserve ALL existing styles, animations, and interactions
 - ✅ Keep complex layouts and visual hierarchies intact
 - ✅ Maintain all custom component implementations
 
 **This rule applies to ALL development tasks, including:**
+
 - Internationalization updates
 - Bug fixes
 - Feature additions
