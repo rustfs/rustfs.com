@@ -2,16 +2,20 @@
 
 import { WordRotate } from "@/components/magicui/word-rotate";
 import { Globe } from "@/components/ui/globe";
-import { useMetrics } from "@/hooks/use-metrics";
+import type { GitHubMetrics } from "@/lib/github";
 import { useTheme } from "next-themes";
 import { useMemo } from "react";
 import ContactUsButton from "./buttons/contact-us";
 import DownloadLink from "./buttons/download-link";
 import StatsStrip from "./stats-strip";
 
-export default function HomeHero() {
+interface HomeHeroProps {
+  dockerPulls: number;
+  metrics: GitHubMetrics;
+}
+
+export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
   const { theme } = useTheme();
-  const { metrics, dockerPulls } = useMetrics();
 
   const isDark = theme === "dark";
 
