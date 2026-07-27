@@ -7,6 +7,8 @@ import HomeHero from "@/components/business/home-hero";
 import HomeMultiClouds from "@/components/business/home-multi-clouds";
 import HomeStats from "@/components/business/home-stats";
 import SoftwareLogos from "@/components/business/software-logos";
+import { getDockerPulls } from "@/lib/docker";
+import { getGitHubMetrics } from "@/lib/github";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -27,11 +29,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [dockerPulls, metrics] = await Promise.all([
+    getDockerPulls(),
+    getGitHubMetrics(),
+  ]);
+
   return (
     <main className="flex-1 relative">
       <div className="relative z-10">
-        <HomeHero />
+        <HomeHero dockerPulls={dockerPulls} metrics={metrics} />
         <SoftwareLogos />
         <HomeFeatures />
         <HomeStats />
