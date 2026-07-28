@@ -1,0 +1,292 @@
+---
+title: 'RustFS 1.0.0-beta.10 Released: A Milestone Leap Forward in Distributed Storage Performance'
+slug: rustfs-1-0-0-beta-10-released-a-milestone-leap-forward-in-distributed-storage-performance
+description: >-
+  RustFS 1.0.0-beta.10 delivers major performance and stability improvements,
+  outperforming MinIO across PUT workloads while strengthening security,
+  replication, architecture, and release quality.
+date: '2026-07-17T00:00:00.000Z'
+author: RustFS Team
+tags:
+  - RustFS
+  - Release
+  - Performance
+  - S3
+  - Distributed Storage
+image: /images/blog/rustfs-1-0-0-beta-10-released-a-milestone-leap-forward-in-distributed-storage-performance/cover.png
+---
+
+Today, we’re excited to announce the official release of **RustFS 1\.0\.0\-beta\.10**\.
+
+This is a milestone release for RustFS\. Compared with previous versions, **1\.0\.0\-beta\.10 delivers major improvements in both performance and stability**\. In our benchmarks against MinIO, RustFS now **outperforms MinIO across PUT requests**, while the performance gap for GET requests continues to narrow\.
+
+## Key Architectural \& Quality Improvements
+
+While raw performance is the headline, `1.0.0-beta.10` also introduces rigorous production\-grade enhancements across the entire software stack:
+
+- **Optimized Core Storage Path:** Streamlined data paths with reduced locking latency, enhanced IO observability, and improved overall throughput stability\.
+- **S3 Compatibility \& Replication:** Resolved a high volume of edge\-case compliance issues, bucket replication deadlocks, and lifecycle convergence lags\.
+- **Hardened Default Security:** Remediated multiple GHSA\-class authorization vulnerabilities and eliminated risky default configuration fallbacks\.
+- **Decoupled Modular Architecture:** Extracted core storage, configuration, and execution runtime contracts to systematically reduce legacy coupling with `ECStore`\.
+- **Enterprise\-Grade CI/CD Gateways:** Upgraded our release pipeline with automated Software Bill of Materials \(SBOM\) generation, SLSA provenance verification, strict dependency pinning, and multi\-layered end\-to\-end \(E2E\) regression testing\.
+
+## Performance Benchmarks
+
+To validate these gains, we deployed both RustFS and MinIO in a mirrored enterprise environment on Azure Cloud\.
+
+### Test Environment Setup
+
+|Node num|Disk num/node<br />|Disk storage capacity|Disk IOPS|OS|CPU core<br />|RAM|Cloud provider|
+|---|---|---|---|---|---|---|---|
+|4|4|300GB|32000|Ubuntu 24\.04|8|16GB|Azure|
+
+### Methodology \& Version Info
+
+**Benchmarking Tool:** MinIO's open\-source `warp` tool running 11 object sizes with 64 concurrent clients for 5 minutes per run \(covering GET, PUT, and Mixed phases\)\.
+
+- RustFS Build Profile:
+
+```YAML
+rustfs 1.0.0-beta.10
+build time   : 2026-07-17 04:58:16 +00:00
+build profile: release
+build os     : linux-x86_64
+rust version : rustc 1.97.1 (8bab26f4f 2026-07-14)
+rust channel : stable-x86_64-unknown-linux-gnu
+git branch   : 
+git commit   : f67e8a6cdcb3e08dfa3c3c390412a9815837d0b2
+git tag      : 1.0.0-beta.10
+git status   :
+```
+
+- MinIO Build Profile:
+
+```Plain Text
+minio version RELEASE.2026-06-06T02-44-06Z (commit-id=a5e7b80cc659ff4b75d6d3d7be2caf72317b7a23)
+Runtime: go1.26.4 linux/amd64
+License: MinIO AIStor License
+Copyright: 2015-2026 MinIO, Inc.
+```
+
+### Cluster Configurations
+
+- RustFS Env Config:
+
+```Plain Text
+RUSTFS_ACCESS_KEY=rustfstest
+RUSTFS_SECRET_KEY=rustfstest
+RUSTFS_VOLUMES="http://rustfs-node{1...4}:9000/data/rustfs{1...4}/mnmd"
+RUSTFS_ADDRESS=":9000"
+RUSTFS_CONSOLE_ADDRESS=":9001"
+RUSTFS_CONSOLE_ENABLE=true
+RUSTFS_OBS_LOGGER_LEVEL=error
+```
+
+- MinIO Env Config:
+
+```Plain Text
+MINIO_ROOT_USER=minioadmin
+MINIO_ROOT_PASSWORD=minioadmin
+MINIO_LICENSE="/opt/minio/minio.license"
+MINIO_BROWSER="on"
+MINIO_VOLUMES="http://rustfs-node{5...8}:19000/data/rustfs{1...4}/mnmd"
+MINIO_OPTS="--address :19000 --console-address :19001"
+```
+
+## Benchmark Results: Evolution \& Head\-to\-Head
+
+### Part 1: RustFS `1.0.0-beta.8` vs\. `1.0.0-beta.10`
+
+The performance jump between our two most recent versions is extraordinary\. Writes \(PUT\) are up to **2\.4x faster**, and reads \(GET\) have consistently achieved **100%\+ improvement** across almost all payload sizes\.
+
+#### PUT
+
+|Object size|1\.0\.0\-beta\.10|1\.0\.0\-beta\.8|percentage improvement|
+|---|---|---|---|
+|1KiB|2,195\.91|1,524|**\+44\.1%**|
+|4KiB|2,150\.88|1,562|**\+37\.7%**|
+|10KiB|2,150\.42|1,518|**\+41\.7%**|
+|16KiB|2,082\.30|1,559|**\+33\.6%**|
+|32KiB|2,006\.79|1,436|**\+39\.7%**|
+|100KiB|1,850\.76|1,093|**\+69\.3%**|
+|1MiB|1,017\.72|293|**\+247\.3%**|
+|4MiB|652\.31|481|**\+35\.6%**|
+|10MiB|301\.34|267|**\+12\.9%**|
+|16MiB|190\.33|175|**\+8\.8%**|
+|32MiB|90\.67|69|**\+31\.4%**|
+
+#### GET
+
+|Object size|1\.0\.0\-beta\.10|1\.0\.0\-beta\.8|percentage improvement|
+|---|---|---|---|
+|1KiB|12,409\.74|6,125|**\+102\.6%**|
+|4KiB|12,071\.08|5,829|**\+107\.1%**|
+|10KiB|11,556\.06|5,656|**\+104\.3%**|
+|16KiB|11,239\.02|5,463|**\+105\.7%**|
+|32KiB|10,209\.60|5,194|**\+96\.6%**|
+|100KiB|7,152\.31|3,689|**\+93\.9%**|
+|1MiB|1,327\.43|705|**\+88\.3%**|
+|4MiB|1,549\.36|271|**\+471\.7%**|
+|10MiB|595\.67|248|**\+140\.2%**|
+|16MiB|370\.21|ERROR|N/A|
+|32MiB|187\.66|ERROR|N/A|
+
+### Part 2: RustFS vs\. MinIO
+
+RustFS now **outperforms MinIO across all PUT workloads**, reaching **up to 2\.x the performance of MinIO** for certain object sizes\. For GET performance, RustFS continues to **narrow the gap with MinIO**\.
+
+#### PUT
+
+Thanks to highly parallelized metadata serialization and lockless memory\-mapped IO operations, **RustFS outperforms MinIO across 100% of the write workloads**, delivering up to **2\.85x** the throughput\.
+
+|Object size|RustFS|MinIO|Ratio|Leader|
+|---|---|---|---|---|
+|1KiB|2,195\.91|1,470|1\.49|**RustFS** ✅|
+|4KiB|2,150\.88|1,077|2\.00|**RustFS** ✅|
+|10KiB|2,150\.42|1,075|2\.00|**RustFS** ✅|
+|16KiB|2,082\.30|1,219|1\.71|**RustFS** ✅|
+|32KiB|2,006\.79|1,155|1\.74|**RustFS** ✅|
+|100KiB|1,850\.76|712|2\.60|**RustFS** ✅|
+|1MiB|1,017\.72|470|2\.17|**RustFS** ✅|
+|4MiB|652\.31|229|2\.85|**RustFS** ✅|
+|10MiB|301\.34|146|2\.06|**RustFS** ✅|
+|16MiB|190\.33|182|1\.05|**RustFS** ✅|
+|32MiB|90\.67|69|1\.31|**RustFS** ✅|
+
+#### GET
+
+For read performance, RustFS has closed the gap to a razor\-thin margin\. Crucially, our optimized read\-ahead caching mechanism and zero\-copy data routing allow us to **beat MinIO in small\-file classes and multiple large object segments \(\>4MiB\)**\.
+
+|Object size|RustFS|MinIO|Ratio|Leader|
+|---|---|---|---|---|
+|1KiB|12,409\.74|11,938|1\.04|**RustFS** ✅|
+|4KiB|12,071\.08|11,769|1\.03|**RustFS** ✅|
+|10KiB|11,556\.06|11,009|1\.05|**RustFS** ✅|
+|16KiB|11,239\.02|10,963|1\.03|**RustFS** ✅|
+|32KiB|10,209\.60|10,887|0\.94|MinIO|
+|100KiB|7,152\.31|9,965|0\.72|MinIO|
+|1MiB|1,327\.43|5,893|0\.23|MinIO|
+|4MiB|1,549\.36|1,234|1\.26|**RustFS** ✅|
+|10MiB|595\.67|550|1\.08|**RustFS** ✅|
+|16MiB|370\.21|315|1\.18|**RustFS** ✅|
+|32MiB|187\.66|166|1\.13|**RustFS** ✅|
+
+## Important Migration \& Upgrade Notes
+
+To align with modern security best practices and prevent unauthorized access on default deployments, **we have deprecated the hardcoded default fallback credentials** \(`rustfsadmin`\)\.
+
+### Security Enhancements:
+
+- Users must now **explicitly specify** values for `RUSTFS_ACCESS_KEY` and `RUSTFS_SECRET_KEY` prior to launching the server\.
+- The runtime will no longer allow the server to boot if default placeholders are left unchanged\.
+
+### Action Required for Existing Clusters:
+
+- If your active `RUSTFS_SECRET_KEY` is still set to `rustfsadmin`, you must add an additional environment variable: `RUSTFS_RPC_SECRET`\.
+- *Note:* The value of `RUSTFS_RPC_SECRET` **must be different** from `RUSTFS_SECRET_KEY`\.
+- If you are already utilizing custom access/secret keys, no additional action is required\.
+
+## Ecosystem Updates
+
+An enterprise\-grade object storage system relies on an equally robust developer toolset\. Along with the server, we have released critical updates to our CLI utility and Kubernetes Operator\.
+
+### `rc` CLI \(v0\.1\.27\) — The Native Command\-Line Utility
+
+Our dedicated CLI companion, `rc` \(similar to MinIO’s `mc`\), has been updated with enhanced multi\-stream upload logic and faster local\-to\-remote directory syncs\.
+
+- **Quick Setup \& Verification:**
+
+```Plain Text
+# Set a cluster connection alias
+$ rc alias set rustfs http://<your-ip>:9000 rustfstest rustfstest
+✓ Alias 'rustfs' configured successfully.
+
+# Create and list buckets
+$ rc mb rustfs/benchmark-bucket
+✓ Bucket 'rustfs/benchmark-bucket' created successfully.
+
+$ rc ls rustfs
+[2026-07-16 14:30:01]         0B benchmark-bucket/
+
+# Stream-upload a local file
+$ echo "RustFS performance milestone" > test-object.txt
+$ rc cp test-object.txt rustfs/benchmark-bucket
+test-object.txt -> rustfs/benchmark-bucket/test-object.txt (29 B)
+```
+
+For detailed usage, explore the [RustFS CLI GitHub Repository](https://github.com/rustfs/cli)\.
+
+### RustFS Operator \(v0\.0\.5\) — Native Kubernetes Orchestration
+
+Our cloud\-native **RustFS Operator** has achieved full\-infrastructure automation, adding native **multi\-tenant management** and **dynamic storage pool expansion**\.
+
+- Step 1: Add the Official Helm Repository
+
+Our charts are published natively to [ArtifactHub](https://artifacthub.io/packages/helm/operator/rustfs-operator)\.
+
+```Plain Text
+$ helm repo add operator https://operator.rustfs.com
+```
+
+- Step 2: Install the Operator \& Management Console
+
+```Plain Text
+helm install operator operator/rustfs-operator --version 0.0.5
+```
+
+Once deployed, you will see the operator controller and administrative console pods up and running:
+
+```Plain Text
+kubectl -n rustfs-system get pods
+NAME                                                READY   STATUS    RESTARTS   AGE
+operator-rustfs-operator-978454bf4-zgdp9            1/1     Running   0          3d14h
+operator-rustfs-operator-console-7cfbf88c84-m7ct2   1/1     Running   0          3d14h
+```
+
+- Step 3: Deploy a Declarative Multi\-Tenant Cluster
+
+Simply apply the following custom resource \(CRD\) to automatically provision a resilient 4\-node tenant cluster with 16 storage disks:
+
+```YAML
+kubectl apply -f - <<EOF
+apiVersion: rustfs.com/v1alpha1
+kind: Tenant
+metadata:
+  name: svt-minimal
+  namespace: tenant-svt
+spec:
+  image: rustfs/rustfs:latest
+  pools:
+    - name: dev-pool
+      servers: 4
+      persistence:
+        volumesPerServer: 4
+EOF
+```
+
+Check the tenant info
+
+```SQL
+# kubectl -n tenant-svt get tenant
+NAME          STATE   AGE
+svt-minimal   Ready   3d14h
+
+# kubectl -n tenant-svt get pods
+NAME                     READY   STATUS    RESTARTS        AGE
+svt-minimal-dev-pool-0   1/1     Running   0               3d14h
+svt-minimal-dev-pool-1   1/1     Running   0               3d14h
+svt-minimal-dev-pool-2   1/1     Running   0               3d14h
+svt-minimal-dev-pool-3   1/1     Running   0               3d14h
+```
+
+For full Helm value mappings and advanced configuration profiles, visit our [RustFS Kubernetes Operator GitHub Repository](https://github.com/rustfs/operator)\.
+
+## What’s Next: The Road to General Availability \(GA\)
+
+The milestones achieved in **1\.0\.0\-beta\.10** represent the maturation of RustFS into a reliable, high\-performance distributed storage engine\. As we charge toward our GA release, we will focus our development cycles on refining Galois Field lookup matrices for Reed\-Solomon Erasure Coding, optimizing multi\-tenant network policies, and further expanding unified analytical S3 Tables structures\.
+
+We are an open\-source, community\-driven project\. If you have any feature requests, bug reports, or questions, please join our growing community of developers on GitHub:
+
+- **Core RustFS Server:** [github\.com/rustfs/rustfs](https://github.com/rustfs/rustfs)
+- **Command Line Tool \(****`rc`****\):** [github\.com/rustfs/cli](https://github.com/rustfs/cli)
+- **Kubernetes Operator:** [github\.com/rustfs/operator](https://github.com/rustfs/operator)
