@@ -13,6 +13,7 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { ArrowUpRightIcon, MailIcon, MessageCircleIcon } from 'lucide-react'
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import HomeSectionHeader from './home-section-header'
 
@@ -54,6 +55,9 @@ const COUNTRIES = [
   'Russia',
   'Other'
 ]
+
+const DATA_CAPACITIES = ['TB', 'PB', 'EB']
+const S3_SYSTEMS = ['RustFS', 'AWS S3', 'MinIO', 'Ceph', 'SeaweedFS', 'Garage', 'Others']
 
 const CONTACT_CHANNELS = [
   {
@@ -108,6 +112,9 @@ export default function ContactForm() {
     phone: '',
     country: '',
     company: '',
+    dataCapacity: '',
+    currentS3System: '',
+    marketingConsent: true,
     message: ''
   })
 
@@ -173,6 +180,9 @@ export default function ContactForm() {
           phone: formData.phone || undefined,
           country: formData.country,
           company: formData.company,
+          data_capacity: formData.dataCapacity,
+          current_s3_system: formData.currentS3System,
+          marketing_consent: formData.marketingConsent ? 'Yes' : 'No',
           message: formData.message,
           'h-captcha-response': hCaptchaToken,
           from_name: 'RustFS Contact Form'
@@ -190,6 +200,9 @@ export default function ContactForm() {
           phone: '',
           country: '',
           company: '',
+          dataCapacity: '',
+          currentS3System: '',
+          marketingConsent: true,
           message: ''
         })
         setHCaptchaToken(null)
@@ -291,6 +304,57 @@ export default function ContactForm() {
 
           <div className="mt-6 grid gap-6 sm:grid-cols-2">
             <div>
+              <label htmlFor="dataCapacity" className="mb-2 block text-sm font-medium text-foreground">
+                Data Capacity <span className="text-destructive" aria-hidden="true">*</span>
+              </label>
+              <Select
+                name="dataCapacity"
+                required
+                value={formData.dataCapacity}
+                onValueChange={(value) => setFormData((previous) => ({ ...previous, dataCapacity: value }))}
+              >
+                <SelectTrigger id="dataCapacity" className="w-full text-foreground">
+                  <SelectValue placeholder="Select a capacity range" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {DATA_CAPACITIES.map((capacity) => (
+                      <SelectItem key={capacity} value={capacity}>
+                        {capacity}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label htmlFor="currentS3System" className="mb-2 block text-sm font-medium text-foreground">
+                S3 system used currently <span className="text-destructive" aria-hidden="true">*</span>
+              </label>
+              <Select
+                name="currentS3System"
+                required
+                value={formData.currentS3System}
+                onValueChange={(value) => setFormData((previous) => ({ ...previous, currentS3System: value }))}
+              >
+                <SelectTrigger id="currentS3System" className="w-full text-foreground">
+                  <SelectValue placeholder="Select your current system" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {S3_SYSTEMS.map((system) => (
+                      <SelectItem key={system} value={system}>
+                        {system}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-6 sm:grid-cols-2">
+            <div>
               <label htmlFor="country" className="mb-2 block text-sm font-medium text-foreground">
                 Country <span className="text-destructive" aria-hidden="true">*</span>
               </label>
@@ -346,6 +410,23 @@ export default function ContactForm() {
               className="w-full text-foreground"
             />
           </div>
+
+          <label className="mt-6 flex items-start gap-3 border border-border bg-muted/20 p-4 text-sm leading-6 text-muted-foreground">
+            <input
+              type="checkbox"
+              name="marketingConsent"
+              checked={formData.marketingConsent}
+              onChange={(event) => setFormData((previous) => ({ ...previous, marketingConsent: event.target.checked }))}
+              className="mt-1 size-4 shrink-0 accent-brand"
+            />
+            <span>
+              I agree to receive communications from RustFS about products, services, and upcoming events. You can unsubscribe at any time. For more information, see our{' '}
+              <Link href="/privacy-policy" className="font-semibold text-brand hover:text-foreground">
+                Privacy Policy
+              </Link>
+              .
+            </span>
+          </label>
 
           <div ref={captchaMountRef} className="mt-8 flex min-h-20 items-center justify-center">
             {shouldLoadCaptcha ? (
