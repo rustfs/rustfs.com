@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { cn, docs_url } from '@/lib/utils'
 import { formatReleaseDate, formatVersion, getDownloadUrlForPlatform, type GitHubRelease } from '@/lib/github'
 import AppleIcon from '@/public/svgs/brands/apple.svg'
 import DockerIcon from '@/public/svgs/brands/docker.svg'
@@ -130,9 +130,8 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
       aria-label="Open current RustFS server release on GitHub"
     >
       <div className="relative p-5 sm:p-6">
-        <div className="mb-5 grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-          <span className="text-brand">Current server release</span>
-          <span>{'//'}</span>
+        <div className="mb-5 grid grid-cols-[auto_1fr_auto] items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          <span className="text-brand">Current version</span>
           <span className="h-px bg-border" />
           <span>{publishedAt}</span>
         </div>
@@ -468,7 +467,7 @@ export default function DownloadPageClient() {
     <main className="relative z-10 min-h-[100dvh] text-foreground">
       <section className="pt-20 pb-12 sm:pt-28 sm:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div>
+          <div className="text-center">
             <h1 className="w-full font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
               Download RustFS
             </h1>
@@ -495,6 +494,13 @@ export default function DownloadPageClient() {
               Icon={TerminalIcon}
             />
           </div>
+
+          <p className="mt-8 text-center text-sm font-semibold text-muted-foreground">
+            Need help?{' '}
+            <Link href="/contact-us" className="text-brand transition-colors hover:text-foreground">
+              Talk to our team →
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -518,11 +524,11 @@ export function ServerDownloadPage({ release }: ServerDownloadPageProps) {
             All downloads
           </Link>
 
-          <div className="mt-10 max-w-4xl">
-            <h1 className="max-w-4xl font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
+          <div className="mx-auto mt-10 max-w-4xl text-center">
+            <h1 className="font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
               RustFS Server
             </h1>
-            <p className="mt-4 max-w-2xl text-lg font-semibold leading-8 text-foreground sm:text-xl">
+            <p className="mx-auto mt-4 max-w-2xl text-lg font-semibold leading-8 text-foreground sm:text-xl">
               Start small, then keep the same operating model.
             </p>
           </div>
@@ -542,13 +548,46 @@ export function ServerDownloadPage({ release }: ServerDownloadPageProps) {
               <p className="text-sm font-semibold text-foreground">Prefer browsing every release artifact?</p>
               <p className="mt-1 text-xs leading-6 text-muted-foreground">Use GitHub when you need older versions, checksums, or non-default packages.</p>
             </div>
-            <Button asChild variant="outline" size="lg" className="h-11 px-4 text-sm font-semibold">
-              <a href={releaseUrl} target="_blank" rel="noopener noreferrer">
-                Release page
-                <ArrowUpRightIcon data-icon="inline-end" className="size-4" />
-              </a>
-            </Button>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button asChild variant="outline" size="lg" className="h-11 px-4 text-sm font-semibold">
+                <a href={releaseUrl} target="_blank" rel="noopener noreferrer">
+                  Release page
+                  <ArrowUpRightIcon data-icon="inline-end" className="size-4" />
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="h-11 px-4 text-sm font-semibold">
+                <a href={docs_url('/installation/')} target="_blank" rel="noopener noreferrer">
+                  Documentation
+                  <BookOpenIcon data-icon="inline-end" className="size-4" />
+                </a>
+              </Button>
+            </div>
           </div>
+
+          <aside className="mt-8 border border-border bg-muted/30 p-5 sm:p-6" aria-labelledby="server-install-notes">
+            <h2 id="server-install-notes" className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
+              Notes
+            </h2>
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-7 text-muted-foreground">
+              <li>
+                Please change <code className="text-foreground">RUSTFS_ACCESS_KEY</code> and{' '}
+                <code className="text-foreground">RUSTFS_SECRET_KEY</code> immediately. The default value{' '}
+                <code className="text-foreground">rustfsadmin</code> is not allowed.
+              </li>
+              <li>
+                For step-by-step instructions, see the{' '}
+                <a
+                  href={docs_url('/installation/')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-brand hover:text-foreground"
+                >
+                  Installation Documentation
+                </a>
+                .
+              </li>
+            </ul>
+          </aside>
         </div>
       </section>
 

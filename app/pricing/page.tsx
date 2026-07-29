@@ -1,8 +1,10 @@
 import ContactUsButton from "@/components/business/buttons/contact-us";
 import DownloadLink from "@/components/business/buttons/download-link";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { BadgeCheckIcon, Building2Icon, Code2Icon, LifeBuoyIcon } from "lucide-react";
+import { ArrowRightIcon, BadgeCheckIcon, Building2Icon, Code2Icon, LifeBuoyIcon } from "lucide-react";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,18 +15,18 @@ export const metadata: Metadata = {
 function PricingCard({
   label,
   title,
-  price,
   description,
   points,
   chips,
+  action,
   emphasized,
 }: {
   label: string;
   title: string;
-  price: string;
   description: string;
   points: string[];
   chips: string[];
+  action: { label: string; href: string };
   emphasized?: boolean;
 }) {
   const isEmphasized = Boolean(emphasized);
@@ -38,8 +40,7 @@ function PricingCard({
     >
       <div className="relative flex flex-1 flex-col border-b border-border p-6">
         <p className="relative text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">{label}</p>
-        <h2 className="relative mt-4 text-2xl font-semibold text-foreground">{title}</h2>
-        <p className="relative mt-5 font-display text-3xl font-semibold text-foreground">{price}</p>
+        <h2 className="relative mt-4 font-display text-3xl font-semibold text-foreground">{title}</h2>
         <div className="relative mt-5 flex flex-wrap gap-2">
           {chips.map((chip) => (
             <Badge
@@ -56,13 +57,12 @@ function PricingCard({
         </div>
         <p className="relative mt-4 text-sm leading-7 text-muted-foreground">{description}</p>
         <div className="relative mt-auto pt-6">
-          <div className="grid grid-cols-[auto_1fr_auto] border-y border-border text-[10px] font-semibold uppercase tracking-[0.12em]">
-            <span className="border-r border-border px-3 py-2 text-muted-foreground">Path</span>
-            <span className="px-3 py-2 text-foreground">{label}</span>
-            <span className="border-l border-border px-3 py-2 text-muted-foreground">
-              {price === "$0" ? "OSS" : "Plan"}
-            </span>
-          </div>
+          <Button asChild variant={isEmphasized ? "default" : "outline"} size="lg" className="h-11 px-4 text-sm font-semibold">
+            <Link href={action.href}>
+              {action.label}
+              <ArrowRightIcon data-icon="inline-end" className="size-4" />
+            </Link>
+          </Button>
         </div>
       </div>
       <ul>
@@ -89,11 +89,11 @@ export default function PricingPage() {
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Pricing</p>
           <h1 className="mt-5 w-full font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-            Open source. Support when you need it.
+            Get Started with RustFS
           </h1>
           <div className="mt-6 flex flex-col items-start gap-6">
             <p className="w-full text-base leading-8 text-muted-foreground">
-              Run RustFS freely, then involve the team for deployment planning, migration, and production support.
+              From local testing to petabyte-scale production clusters—get fast, memory-safe, and S3-compatible object storage up and running in minutes.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <DownloadLink className="!h-12 !px-5 !py-0 leading-none" />
@@ -104,11 +104,11 @@ export default function PricingPage() {
 
         <div className="mt-12 grid items-stretch gap-4 lg:grid-cols-2">
           <PricingCard
-            label="Free"
-            title="Self-hosted RustFS"
-            price="$0"
+            label="Personal"
+            title="Free"
             description="Use RustFS under Apache 2.0 for development, testing, and production deployments you operate yourself."
             chips={["Apache 2.0", "Self-hosted"]}
+            action={{ label: "Download", href: "/download" }}
             points={[
               "Apache 2.0 license",
               "S3-compatible object storage",
@@ -118,11 +118,11 @@ export default function PricingPage() {
           />
           <PricingCard
             label="Production"
-            title="Deployment support"
-            price="Talk to us"
+            title="Enterprise"
             description="For teams moving from evaluation to production and needing topology, migration, and operations planning."
             emphasized
             chips={["Planning", "Migration"]}
+            action={{ label: "Talk to expert", href: "/contact-us" }}
             points={[
               "Migration planning",
               "Capacity and topology review",
