@@ -64,15 +64,14 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
           </Link>
 
           <div className="self-start divide-y divide-border border border-border bg-card">
-            {otherPosts.map((post, index) => (
+            {otherPosts.map((post) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group grid gap-5 p-5 text-left transition-colors hover:bg-muted/30 sm:grid-cols-[4.5rem_1fr_auto] sm:items-start sm:p-6"
+                className="group grid gap-5 p-5 text-left transition-colors hover:bg-muted/30 sm:grid-cols-[7.5rem_1fr_auto] sm:items-start sm:p-6"
               >
                 <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  <span className="block text-brand">{String(index + 2).padStart(2, "0")}</span>
-                  <span className="mt-3 block"><PostDate date={post.date} /></span>
+                  <PostDate date={post.date} />
                 </div>
 
                 <div className="min-w-0">
