@@ -77,6 +77,10 @@ export default function HomeMultiClouds() {
             <StoryContent story={stories[1]} className="border-t border-border" />
           </Link>
         </div>
+
+        <p className="mt-4 text-xs leading-6 text-muted-foreground" role="note">
+          MinIO is a registered trademark of MinIO, Inc. RustFS is not affiliated with, endorsed by, or sponsored by MinIO, Inc. All other trademarks and registered trademarks are the property of their respective owners.
+        </p>
       </div>
     </section>
   );
