@@ -1,4 +1,4 @@
-
+import { Marquee } from "@/components/magicui/marquee";
 import ClickhouseIcon from "../../public/svgs/softwares/clickhouse.svg";
 import DockerIcon from "../../public/svgs/softwares/docker.svg";
 import ElasticIcon from "../../public/svgs/softwares/elastic.svg";
@@ -81,14 +81,22 @@ export default function SoftwareLogos() {
           title="Works with the storage ecosystem"
           description="RustFS keeps S3 compatibility at the center, so existing analytics, observability, AI, and delivery tools can keep using the object storage interfaces they already know."
         />
-        <ul role="list" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      </div>
+
+      <div className="relative mx-auto max-w-[100rem] overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] sm:[mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+        <Marquee
+          aria-hidden="true"
+          pauseOnHover
+          repeat={2}
+          className="[--duration:48s] [--gap:1rem] motion-reduce:[&>div]:animate-none sm:[--gap:1.5rem]"
+        >
           {softwares.map((software) => {
             const IconComponent = iconMap[software];
 
             return (
-              <li
+              <div
                 key={software}
-                className="group relative grid min-h-24 place-items-center overflow-hidden border border-border bg-card px-6 py-4 transition-colors duration-300 before:absolute before:inset-0 before:opacity-0 before:transition-[opacity,background-position] before:duration-500 before:[background-image:repeating-linear-gradient(135deg,transparent_0,transparent_12px,var(--muted)_12px,var(--muted)_24px)] before:[background-position:0_0] before:[background-size:34px_34px] hover:bg-muted/35 hover:before:opacity-20 hover:before:[background-position:34px_0] sm:min-h-28"
+                className="group relative grid h-24 w-44 shrink-0 place-items-center overflow-hidden border border-border bg-card px-6 py-4 transition-colors duration-300 before:absolute before:inset-0 before:opacity-0 before:transition-[opacity,background-position] before:duration-500 before:[background-image:repeating-linear-gradient(135deg,transparent_0,transparent_12px,var(--muted)_12px,var(--muted)_24px)] before:[background-position:0_0] before:[background-size:34px_34px] hover:bg-muted/35 hover:before:opacity-20 hover:before:[background-position:34px_0] sm:h-28 sm:w-52"
               >
                 <span className="relative z-10 grid h-14 w-full max-w-40 place-items-center text-foreground/75 transition duration-300 group-hover:-translate-y-0.5 group-hover:text-foreground sm:h-16 sm:max-w-44">
                   <IconComponent
@@ -97,14 +105,17 @@ export default function SoftwareLogos() {
                     fill="currentColor"
                   />
                 </span>
-                <span className="sr-only">
-                  {softwareLabels[software]}
-                </span>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </Marquee>
       </div>
+
+      <ul className="sr-only">
+        {softwares.map((software) => (
+          <li key={software}>{softwareLabels[software]}</li>
+        ))}
+      </ul>
     </section>
   );
 }
