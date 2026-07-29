@@ -128,7 +128,7 @@ export default function MultipleProtocolAccessPage() {
         },
       ]}
       links={[
-        { label: "Plan protocol access", href: "/contact-us" },
+        { label: "Download", href: "/download" },
         { label: "Read docs", href: "/docs", variant: "outline" },
       ]}
     />

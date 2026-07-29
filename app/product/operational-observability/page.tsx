@@ -115,7 +115,7 @@ export default function OperationalObservabilityPage() {
         },
       ]}
       links={[
-        { label: "Review operations", href: "/contact-us" },
+        { label: "Download", href: "/download" },
         { label: "Read docs", href: "/docs", variant: "outline" },
       ]}
     />

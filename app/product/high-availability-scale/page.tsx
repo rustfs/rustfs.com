@@ -124,7 +124,7 @@ export default function HighAvailabilityScalePage() {
         },
       ]}
       links={[
-        { label: "Open EC calculator", href: "/erasure-code-calculator" },
+        { label: "Download", href: "/download" },
         { label: "Plan scaling", href: "/contact-us", variant: "outline" },
       ]}
     />

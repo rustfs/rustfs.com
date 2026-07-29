@@ -400,7 +400,7 @@ function ProductionReview({ variant }: { variant: FeaturePageVariant }) {
     <div className="border border-border bg-card p-6 sm:p-8">
       <Link
         href="/contact-us"
-        className="group grid gap-6 sm:grid-cols-[auto_1fr_auto] sm:items-center"
+        className="group grid gap-6 bg-brand/5 p-5 transition-colors hover:bg-brand/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:grid-cols-[auto_1fr_auto] sm:items-center"
       >
         <span className="flex size-12 items-center justify-center bg-background text-brand">
           <Icon className="size-5" />
@@ -413,7 +413,9 @@ function ProductionReview({ variant }: { variant: FeaturePageVariant }) {
             Share your topology, identity model, and operations constraints with the RustFS team.
           </p>
         </div>
-        <ArrowRightIcon className="motion-arrow size-5 text-brand" />
+        <span className="flex size-12 items-center justify-center bg-brand text-brand-foreground">
+          <ArrowRightIcon className="motion-arrow size-5" />
+        </span>
       </Link>
     </div>
   );
@@ -441,11 +443,11 @@ export default function FeaturePage({
         {highlights?.length ? (
           <div className="mt-12">
             {highlightsTitle ? (
-              <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
+              <h2 className="text-center text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                 {highlightsTitle}
               </h2>
             ) : null}
-            <dl className="mt-5 grid gap-4 md:grid-cols-3">
+            <dl className="mt-8 grid gap-4 md:grid-cols-3">
               {highlights.map((highlight) => (
                 <div
                   key={highlight.title}

@@ -25,7 +25,6 @@ import {
   LockKeyholeIcon,
   RadioTowerIcon,
   RefreshCwIcon,
-  ScrollTextIcon,
   ServerIcon,
   ShieldCheckIcon,
   SquareTerminalIcon,
@@ -35,6 +34,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { MotionConfig, motion } from "motion/react";
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 type ProductIllustrationVariant = "data" | "scale" | "ops" | "security";
@@ -359,9 +359,12 @@ function ConsoleVisual() {
 
 function OtelVisual() {
   const targets = [
-    { label: "Prometheus", icon: <PrometheusMark className="size-5" /> },
-    { label: "Grafana", icon: <GrafanaMark className="size-5" /> },
-    { label: "Loki", icon: <ScrollTextIcon className="size-5" /> },
+    { label: "Prometheus", icon: <PrometheusMark className="size-5 text-[#E6522C]" /> },
+    { label: "Grafana", icon: <GrafanaMark className="size-5 text-[#F46800]" /> },
+    {
+      label: "Loki",
+      icon: <Image src="/images/brands/loki-logo.png" alt="" width={20} height={20} className="size-5 object-contain" />,
+    },
   ];
 
   return (
@@ -369,11 +372,11 @@ function OtelVisual() {
       <div className="grid w-full max-w-lg grid-cols-[minmax(0,0.7fr)_auto_minmax(0,1.3fr)] items-center gap-3">
         <div className="grid gap-2">
           <div className="flex items-center gap-3 border border-border bg-background p-3">
-            <DockerIcon className="size-5 text-muted-foreground" />
+            <DockerIcon className="size-5 text-[#2496ED]" />
             <span className="text-xs font-semibold text-foreground">Docker</span>
           </div>
           <div className="flex items-center gap-3 border border-border bg-background p-3">
-            <KubernetesIcon className="size-5 text-muted-foreground" />
+            <KubernetesIcon className="size-5 text-[#326CE5]" />
             <span className="text-xs font-semibold text-foreground">Kubernetes</span>
           </div>
         </div>
@@ -429,7 +432,7 @@ function CliVisual() {
   return (
     <IllustrationFrame label="rc client">
       <div className="w-full max-w-lg">
-        <div className="border border-border bg-[#050505] p-4">
+        <div className="border border-border bg-muted/60 p-4">
           <div className="flex items-center gap-2 font-mono text-[10px] text-muted-foreground">
             <span className="text-brand">$</span>
             <span>rc admin info production</span>

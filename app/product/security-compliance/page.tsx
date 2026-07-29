@@ -115,7 +115,7 @@ export default function SecurityCompliancePage() {
         },
       ]}
       links={[
-        { label: "Review security model", href: "/contact-us" },
+        { label: "Download", href: "/download" },
         { label: "Read docs", href: "/docs", variant: "outline" },
       ]}
     />
