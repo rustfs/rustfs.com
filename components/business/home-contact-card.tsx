@@ -20,10 +20,6 @@ export default function HomeContactCard() {
           aria-label="Open the RustFS contact page"
           className="motion-card group relative block overflow-hidden border border-brand bg-brand text-left text-brand-foreground transition-colors hover:bg-brand/95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
         >
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 opacity-[0.1] [background-image:repeating-linear-gradient(135deg,transparent_0_16px,var(--brand-foreground)_16px_17px,transparent_17px_34px)]"
-          />
           <div className="relative p-6 pr-24 sm:p-8 sm:pr-28 lg:p-10 lg:pr-32">
             <h3 className="relative w-full text-2xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
               Talk to the RustFS team.

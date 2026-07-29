@@ -19,11 +19,6 @@ export default function GetStartedToday() {
         />
 
         <div className="motion-card group relative overflow-hidden border border-brand bg-brand text-brand-foreground">
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 opacity-[0.1] [background-image:repeating-linear-gradient(135deg,transparent_0_18px,var(--brand-foreground)_18px_19px,transparent_19px_36px)]"
-          />
-
           <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-center">
             <div className="p-6 sm:p-8 lg:p-10">
               <h2 className="w-full text-3xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
