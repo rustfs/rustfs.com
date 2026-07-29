@@ -52,6 +52,7 @@ export default function HomeMultiClouds() {
                 alt="NVIDIA Inception Program member"
                 width={494}
                 height={198}
+                unoptimized
                 className="relative h-auto w-full max-w-sm"
               />
             </div>

@@ -96,12 +96,12 @@ export default async function RootLayout({
           </div>
           <AppFooter />
           <FixedContactButton />
-          <Script
-            id="baidu-analytics"
-            src="https://hm.baidu.com/hm.js?968e7103a8e28fb30f7d69e42b7c82bc"
-            strategy="afterInteractive" // Ensure script loads after page interaction
-          />
         </ThemeProvider>
+        <Script
+          id="baidu-analytics"
+          src="https://hm.baidu.com/hm.js?968e7103a8e28fb30f7d69e42b7c82bc"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

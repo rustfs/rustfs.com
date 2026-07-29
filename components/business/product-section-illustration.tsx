@@ -363,7 +363,7 @@ function OtelVisual() {
     { label: "Grafana", icon: <GrafanaMark className="size-5 text-[#F46800]" /> },
     {
       label: "Loki",
-      icon: <Image src="/images/brands/loki-logo.png" alt="" width={20} height={20} className="size-5 object-contain" />,
+      icon: <Image src="/images/brands/loki-logo.png" alt="" width={20} height={20} unoptimized className="size-5 object-contain" />,
     },
   ];
 
