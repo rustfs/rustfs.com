@@ -37,7 +37,7 @@ const features = [
   {
     "title": "Multi-Protocol Access",
     "plane": "Access plane",
-    "token": "",
+    "token": "S3",
     "description": "Expose the same storage through S3, Swift, FTP(s), WebDAV, and MCP.",
     "icon": WorkflowIcon,
     "featureDescription": "Break down data silos by letting applications use Amazon S3, OpenStack Swift, FTP(s), WebDAV, and MCP to read, write, and manage the same storage without protocol translation bottlenecks.",
