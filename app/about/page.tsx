@@ -1,7 +1,6 @@
 import ContactUsButton from "@/components/business/buttons/contact-us"
 import { cn } from "@/lib/utils"
 import RustFSLogo from "@/public/rustfs.logo.svg"
-import NvidiaLogo from "@/public/svgs/softwares/nvidia.svg"
 import { CpuIcon, DatabaseIcon, GitBranchIcon, ShieldCheckIcon } from "lucide-react"
 import type { Metadata } from "next"
 import type { ComponentType } from "react"
@@ -156,15 +155,14 @@ export default function AboutPage() {
 
       <section className="bg-muted/20">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid gap-8 border border-border bg-card p-8 lg:grid-cols-[0.36fr_1fr_auto] lg:items-center">
-            <span className="flex h-20 max-w-xs items-center">
-              <NvidiaLogo className="h-auto w-full" />
-            </span>
+          <div className="grid gap-8 border border-border bg-card p-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
-              <h2 className="text-2xl font-semibold text-foreground">NVIDIA Inception Program</h2>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                RustFS is accelerating AI data center storage with native RDMA support and future DPU offload for Erasure Coding and encryption.
-              </p>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">RustFS</p>
+              <h2 className="mt-4 text-3xl font-semibold text-foreground">Contact us</h2>
+              <address className="mt-5 text-base not-italic leading-8 text-muted-foreground">
+                3550 Lenox Road<br />
+                NE Atlanta, Georgia 30326
+              </address>
             </div>
             <ContactUsButton className="!h-12 !px-5 !py-0 leading-none" />
           </div>
