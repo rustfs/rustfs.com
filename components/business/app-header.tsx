@@ -2,9 +2,11 @@
 
 import { cn } from "@/lib/utils";
 import { productNavigation, resourceNavigation, type NavigationItem } from "@/data/navigation";
+import { homeAnnouncement } from "@/data/announcement";
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useRef, type RefObject } from 'react';
 import LinkGitHub from "./buttons/link-github";
 import LinkTwitter from "./buttons/link-twitter";
@@ -96,6 +98,8 @@ function NavigationMenu({ label, items, wide = false }: { label: string; items: 
 }
 
 export default function AppHeader() {
+  const pathname = usePathname()
+  const showHomeAnnouncement = pathname === '/' && homeAnnouncement.enabled
   const navs = [
     {
       label: 'Download',
@@ -115,8 +119,29 @@ export default function AppHeader() {
   ]
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 py-4 xl:py-5">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95">
+      {showHomeAnnouncement ? (
+        <Link
+          href={homeAnnouncement.href}
+          className="group relative flex min-h-11 items-center justify-center overflow-hidden bg-foreground px-4 py-2 text-center text-sm text-background transition-colors hover:bg-foreground/90"
+        >
+          <span
+            aria-hidden="true"
+            className="absolute inset-y-0 right-0 w-1/3 bg-brand/35 [clip-path:polygon(26%_0,100%_0,100%_100%,0_100%)]"
+          />
+          <span className="relative inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+            <span className="border border-background/35 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em]">
+              {homeAnnouncement.badge}
+            </span>
+            <span>{homeAnnouncement.message}</span>
+            <span className="font-semibold underline decoration-background/45 underline-offset-4">
+              {homeAnnouncement.linkText} <span className="motion-arrow inline-block">→</span>
+            </span>
+          </span>
+        </Link>
+      ) : null}
+
+      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8 xl:py-5">
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center lg:gap-x-12">
             <Link href="/" aria-label="Go to homepage">
