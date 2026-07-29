@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { SITE_CONFIG } from "@/app.config";
 import { getBlogPosts, type BlogPostMeta } from "@/lib/mdx-blog";
+import BlogArchive from "./blog-archive";
 
 export const metadata: Metadata = {
   title: "RustFS Blog | Engineering posts for object storage",
@@ -58,23 +59,7 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      {olderPosts.length ? (
-        <section className="border-b border-border bg-muted/20 py-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-6 flex items-center justify-between gap-4">
-              <h2 className="text-2xl font-semibold text-foreground">Older posts</h2>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                {olderPosts.length} posts
-              </span>
-            </div>
-            <div className="border border-border bg-card">
-              {olderPosts.map((post) => (
-                <ArchiveRow key={post.slug} post={post} />
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
+      {olderPosts.length ? <BlogArchive posts={olderPosts} /> : null}
     </main>
   );
 }
@@ -163,56 +148,6 @@ function RecentPostGrid({ posts }: { posts: BlogPostMeta[] }) {
           </div>
         </Link>
       ))}
-    </div>
-  );
-}
-
-function ArchiveRow({ post }: { post: BlogPostMeta }) {
-  const hasImage = shouldShowImage(post.image);
-
-  return (
-    <Link
-      href={`/blog/${post.slug}`}
-      className={`group grid gap-5 border-b border-border px-5 py-6 last:border-b-0 hover:bg-muted/35 ${
-        hasImage
-          ? "md:grid-cols-[8rem_8.5rem_minmax(0,1fr)_7rem]"
-          : "md:grid-cols-[8rem_minmax(0,1fr)_7rem]"
-      }`}
-    >
-      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-        {formatShortDate(post.date)}
-      </div>
-      {hasImage ? <PostThumbnail image={post.image} className="hidden md:block" /> : null}
-      <div>
-        <h3 className="text-xl font-semibold leading-tight text-foreground">{post.title}</h3>
-        <p className="mt-3 line-clamp-2 max-w-3xl text-sm leading-7 text-muted-foreground">
-          {post.description}
-        </p>
-        <PostTags tags={post.tags.slice(0, 3)} className="mt-5" />
-      </div>
-      <div className="flex items-start justify-between gap-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground md:justify-end">
-        <span>{post.readingMinutes} min</span>
-        <span className="motion-arrow text-brand" aria-hidden="true">
-          ↗
-        </span>
-      </div>
-    </Link>
-  );
-}
-
-function PostThumbnail({ image, className }: { image?: string; className?: string }) {
-  if (!shouldShowImage(image)) {
-    return null;
-  }
-
-  return (
-    <div className={`relative aspect-[4/3] overflow-hidden border border-border bg-background ${className ?? ""}`}>
-      <img
-        src={image}
-        alt=""
-        className="absolute inset-0 size-full object-cover transition duration-300 group-hover:scale-[1.03]"
-        loading="lazy"
-      />
     </div>
   );
 }
