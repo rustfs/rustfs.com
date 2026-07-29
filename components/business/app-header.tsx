@@ -130,7 +130,7 @@ export default function AppHeader() {
             className="absolute inset-y-0 right-0 w-1/3 bg-brand/35 [clip-path:polygon(26%_0,100%_0,100%_100%,0_100%)]"
           />
           <span className="relative inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-            <span className="border border-background/35 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em]">
+            <span className="inline-flex h-5 items-center border border-background/35 px-2 font-mono text-[9px] font-semibold uppercase leading-none tracking-[0.16em]">
               {homeAnnouncement.badge}
             </span>
             <span>{homeAnnouncement.message}</span>
