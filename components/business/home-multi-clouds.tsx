@@ -42,7 +42,7 @@ export default function HomeMultiClouds() {
             className="motion-card group flex min-h-[30rem] flex-col bg-card transition-colors hover:bg-muted/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
             aria-label={stories[0].linkText}
           >
-            <div className="relative flex min-h-52 items-center overflow-hidden bg-background p-8 sm:p-10">
+            <div className="relative flex h-60 shrink-0 items-center overflow-hidden bg-background p-8 sm:p-10">
               <div
                 aria-hidden="true"
                 className="absolute inset-0 opacity-50 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:34px_34px]"
@@ -69,7 +69,7 @@ export default function HomeMultiClouds() {
               aria-hidden="true"
               className="absolute inset-0 opacity-0 transition-[opacity,background-position] duration-500 [background-image:repeating-linear-gradient(135deg,transparent_0_20px,var(--border)_20px_21px,transparent_21px_40px)] group-hover:bg-[position:32px_0] group-hover:opacity-45"
             />
-            <div className="relative flex min-h-52 items-center p-8 sm:p-10">
+            <div className="relative flex h-60 shrink-0 items-center p-8 sm:p-10">
               <p className="text-4xl font-semibold tracking-[-0.04em] text-foreground sm:text-5xl">
                 S3 Migration
               </p>
