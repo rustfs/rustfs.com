@@ -51,6 +51,8 @@
   --radius-md: 0rem;
   --radius-lg: 0rem;
   --radius-xl: 0rem;
+  --text-sm: 1rem;
+  --text-sm--line-height: 1.75rem;
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
 

@@ -1,9 +1,8 @@
 'use client'
 
 import { ArrowUpRightIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import MinioIcon from "../../public/svgs/softwares/minio.svg";
-import NvidiaLogo from "../../public/svgs/softwares/nvidia.svg";
 import HomeSectionHeader from "./home-section-header";
 
 const stories = [
@@ -48,9 +47,12 @@ export default function HomeMultiClouds() {
                 aria-hidden="true"
                 className="absolute inset-0 opacity-50 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:34px_34px]"
               />
-              <NvidiaLogo
-                className="relative h-12 w-full max-w-sm text-foreground sm:h-14"
-                aria-label="NVIDIA"
+              <Image
+                src="/images/brands/nvidia-inception-badge.webp"
+                alt="NVIDIA Inception Program member"
+                width={494}
+                height={198}
+                className="relative h-auto w-full max-w-sm"
               />
             </div>
 
@@ -67,7 +69,9 @@ export default function HomeMultiClouds() {
               className="absolute inset-0 opacity-0 transition-[opacity,background-position] duration-500 [background-image:repeating-linear-gradient(135deg,transparent_0_20px,var(--border)_20px_21px,transparent_21px_40px)] group-hover:bg-[position:32px_0] group-hover:opacity-45"
             />
             <div className="relative flex min-h-52 items-center p-8 sm:p-10">
-              <MinioIcon className="h-11 w-full max-w-xs" aria-label="MinIO" />
+              <p className="text-4xl font-semibold tracking-[-0.04em] text-foreground sm:text-5xl">
+                S3 Migration
+              </p>
             </div>
 
             <StoryContent story={stories[1]} className="border-t border-border" />

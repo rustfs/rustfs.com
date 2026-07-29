@@ -40,8 +40,8 @@ export default async function HomePage() {
       <div className="relative z-10">
         <HomeHero dockerPulls={dockerPulls} metrics={metrics} />
         <SoftwareLogos />
-        <HomeFeatures />
         <HomeStats />
+        <HomeFeatures />
         <HomeDifferents />
         <HomeMultiClouds />
         {/* <HomeReviews /> */}

@@ -53,7 +53,7 @@ function NavigationMenu({ label, items, wide = false }: { label: string; items: 
       {({ close, open }) => (
         <>
           <ClosePopoverOnOutsideClick close={close} open={open} popoverRef={popoverRef} />
-          <Popover.Button className="inline-flex items-center gap-1 px-2 py-1 text-sm text-primary transition-colors hover:text-brand">
+          <Popover.Button className="inline-flex items-center gap-1 px-2 py-1 text-base text-primary transition-colors hover:text-brand">
             <span>{label}</span>
             <ChevronDownIcon className="size-3" />
           </Popover.Button>
@@ -107,6 +107,11 @@ export default function AppHeader() {
       url: '/pricing',
       classes: '',
     },
+    {
+      label: 'Contact us',
+      url: '/contact-us',
+      classes: '',
+    },
   ]
 
   return (
@@ -124,7 +129,7 @@ export default function AppHeader() {
                 return (
                   <a
                     key={index}
-                    className={cn(`inline-block px-2 py-1 text-sm text-primary transition-colors hover:text-brand`, item.classes)}
+                    className={cn(`inline-block px-2 py-1 text-base text-primary transition-colors hover:text-brand`, item.classes)}
                     href={item.url}
                   >
                     {item.label}

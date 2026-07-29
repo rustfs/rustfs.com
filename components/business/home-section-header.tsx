@@ -30,7 +30,7 @@ export default function HomeSectionHeader({
         <Heading className="w-full break-words text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-foreground md:text-5xl">
           {title}
         </Heading>
-        <p className="mt-5 w-full text-left text-[15px] leading-7 text-muted-foreground">
+        <p className="mt-5 w-full text-left text-base leading-7 text-muted-foreground">
           {description}
         </p>
       </div>

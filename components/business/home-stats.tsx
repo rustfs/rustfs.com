@@ -64,9 +64,9 @@ export default function HomeStats() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
-          eyebrow="Why RustFS"
-          title={<><span className="lg:whitespace-nowrap">A storage core built for</span>{" "}<span className="lg:whitespace-nowrap">production pressure</span></>}
-          description="A focused object storage foundation for modern AI, cloud-native, and enterprise workloads."
+          eyebrow="Production foundation"
+          title="Why RustFS"
+          description="The purpose-built object storage foundation designed to handle high-pressure AI, cloud-native, and enterprise workloads"
         />
         <div className="grid gap-4 lg:grid-cols-12">
           <article className="motion-card overflow-hidden border border-border bg-card lg:col-span-5">
