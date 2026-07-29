@@ -91,10 +91,13 @@ async function getLatestReleaseForRepo(repo: string): Promise<GitHubRelease | nu
     if (response.ok) {
       const releases = await response.json()
 
-      // Prioritize latest non-draft version with assets
-      const releaseWithAssets = releases.find((release: GitHubRelease) =>
+      // Prefer a concise release over preview builds when both publish artifacts.
+      const releasesWithAssets = releases.filter((release: GitHubRelease) =>
         !release.draft && release.assets && release.assets.length > 0
       )
+      const releaseWithAssets = releasesWithAssets.find(
+        (release: GitHubRelease) => !/(?:^|[-.])preview(?:[.-]|$)/i.test(release.tag_name)
+      ) ?? releasesWithAssets[0]
 
       if (releaseWithAssets) {
         return releaseWithAssets
