@@ -1,6 +1,5 @@
 'use client'
 
-import { SITE_CONFIG } from '@/app.config';
 import { footerNavigation } from '@/data/navigation';
 import LinkDiscord from './buttons/link-discord';
 import LinkGitHub from './buttons/link-github';
@@ -52,12 +51,6 @@ export default function AppFooter() {
           <div className="mt-8 flex flex-col gap-4 border-t border-border/50 pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p>&copy; {new Date().getFullYear()} RustFS. All rights reserved.</p>
             <div className="flex items-center gap-4">
-              <a
-                href={SITE_CONFIG.secondaryDomain}
-                className="text-sm transition-colors hover:text-foreground"
-              >
-                简体中文
-              </a>
               <LinkTwitter size="size-4" className="group inline-flex" />
               <LinkDiscord size="size-4" className="group inline-flex" />
               <LinkGitHub className="group inline-flex" />
