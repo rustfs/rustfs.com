@@ -77,7 +77,7 @@ export default function AboutPage() {
             infrastructure
           </h1>
           <p className="mt-6 text-base leading-8 text-muted-foreground">
-            RustFS is a next-generation Apache 2.0 distributed object storage system built in Rust. It has surpassed 30,000 GitHub stars, 3 million Docker Hub pulls, and 1.5 million global instances across S3-compatible and AI data center workloads.
+            RustFS is a next-generation Apache 2.0 distributed object storage system built in Rust. It has surpassed 30,000 GitHub stars, 7 million Docker Hub pulls, and 1.5 million global instances across S3-compatible and AI data center workloads.
           </p>
         </div>
 
