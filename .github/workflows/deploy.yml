@@ -45,6 +45,8 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies and build
+        env:
+          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ vars.GOOGLE_ANALYTICS_ID }}
         run: |
           pnpm install --no-frozen-lockfile
           pnpm run build

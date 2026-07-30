@@ -32,7 +32,7 @@ export default function PrivacyPolicyPage() {
             </p>
           </div>
           <p className="border border-border bg-card px-4 py-3 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-            Effective July 23, 2026
+            Effective July 30, 2026
           </p>
         </div>
 
@@ -127,7 +127,14 @@ export default function PrivacyPolicyPage() {
               <h3 className={subheadingClassName}>B. Automatically Collected Website Data</h3>
               <ul className={listClassName}>
                 <li>
-                  <strong className="text-foreground">Server Logs &amp; Analytics:</strong> Standard web server logs collect basic technical data (for example, browser type, operating system, referring URL, IP address, and timestamps) solely for security auditing, network performance monitoring, and anti-abuse enforcement.
+                  <strong className="text-foreground">Server and Security Logs:</strong> Website hosting, delivery, and security systems may process basic technical data (for example, browser type, operating system, referring URL, IP address, and timestamps) for service delivery, security auditing, network performance, and anti-abuse enforcement.
+                </li>
+                <li>
+                  <strong className="text-foreground">Consent-Based Analytics:</strong> If you accept analytics technologies, Google Analytics may process visit, page usage, referring source, device, browser, IP address, and similar technical data to help us understand and improve website usage. Analytics is disabled until you consent, and advertising signals and ad personalization are disabled. Details are provided in our{' '}
+                  <a className="font-medium text-brand underline-offset-4 hover:underline" href="/cookie-policy">
+                    Cookie Policy
+                  </a>
+                  .
                 </li>
               </ul>
             </div>
@@ -143,7 +150,7 @@ export default function PrivacyPolicyPage() {
                 <strong className="text-foreground">Legitimate Interest:</strong> Operating our website securely, analyzing aggregate deployment statistics (anonymous version counts), and responding to user inquiries.
               </li>
               <li>
-                <strong className="text-foreground">Consent:</strong> Sending marketing communications and newsletters where you have explicitly opted in.
+                <strong className="text-foreground">Consent:</strong> Sending marketing communications and newsletters where you have explicitly opted in, and operating optional website analytics after you accept them.
               </li>
               <li>
                 <strong className="text-foreground">Contractual Necessity:</strong> Delivering enterprise support, binary releases, or licensing services under a formal agreement.
@@ -161,7 +168,7 @@ export default function PrivacyPolicyPage() {
                 <strong className="text-foreground">No Data Selling:</strong> We do <strong className="text-foreground">not</strong> sell, rent, trade, or monetize your personal information or usage statistics to third parties.
               </li>
               <li>
-                <strong className="text-foreground">Third-Party Service Providers:</strong> We may share website interaction data with trusted infrastructure vendors (for example, website hosting and transactional email services) strictly bound by data processing agreements (DPAs) and confidentiality obligations.
+                <strong className="text-foreground">Third-Party Service Providers:</strong> Website hosting, content delivery, security, form, and communications providers may process data on our behalf where needed to deliver their services. The contact form uses Web3Forms for submission delivery and hCaptcha for anti-abuse verification. Google Analytics processes website usage data only after analytics consent. We assess contractual, confidentiality, and data-protection safeguards as required by applicable law.
               </li>
               <li>
                 <strong className="text-foreground">Legal Requirements:</strong> We will only disclose information if required by a binding court order, subpoena, or legally enforceable government request.
@@ -172,7 +179,7 @@ export default function PrivacyPolicyPage() {
           <section className={sectionClassName}>
             <h2 className={headingClassName}>5. International Data Transfers</h2>
             <p className={`${paragraphClassName} mt-5`}>
-              RustFS operates globally. If you interact with our website or submit personal information from the European Economic Area (EEA), UK, or Switzerland, your data may be transferred to and processed in countries outside your jurisdiction (such as the United States). In such cases, we ensure appropriate legal safeguards (such as Standard Contractual Clauses—SCCs) are in place to protect your data.
+              RustFS operates globally. If you interact with our website or submit personal information from the European Economic Area (EEA), UK, or Switzerland, your data may be transferred to and processed in countries outside your jurisdiction, including the United States depending on the service involved. Where required, we use contractual or other legally recognized safeguards, assess applicable transfer requirements, and limit processing to the stated purpose. You may reject analytics to prevent analytics-related transfers.
             </p>
           </section>
 
@@ -210,7 +217,18 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className={sectionClassName}>
-            <h2 className={headingClassName}>9. Contact Us</h2>
+            <h2 className={headingClassName}>9. Cookies and Similar Technologies</h2>
+            <p className={`${paragraphClassName} mt-5`}>
+              We use browser storage for requested preferences and privacy choices. Optional analytics technologies are disabled until you consent and can be disabled again at any time. Our{' '}
+              <a className="font-medium text-brand underline-offset-4 hover:underline" href="/cookie-policy">
+                Cookie Policy
+              </a>{' '}
+              lists the technologies, providers, purposes, and retention periods and provides access to Cookie Settings.
+            </p>
+          </section>
+
+          <section className={sectionClassName}>
+            <h2 className={headingClassName}>10. Contact Us</h2>
             <p className={`${paragraphClassName} mt-5`}>
               If you have questions, concerns, or requests regarding this Privacy Policy or RustFS data practices, please contact our legal/privacy team:
             </p>
