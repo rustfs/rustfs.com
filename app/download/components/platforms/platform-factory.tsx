@@ -10,11 +10,10 @@ import { type GitHubRelease } from '@/lib/github';
 interface PlatformFactoryProps {
   platform: PlatformInfoData;
   release: GitHubRelease | null;
-  launcherRelease: GitHubRelease | null;
   className?: string;
 }
 
-export default function PlatformFactory({ platform, release, launcherRelease, className }: PlatformFactoryProps) {switch (platform.id) {
+export default function PlatformFactory({ platform, release, className }: PlatformFactoryProps) {switch (platform.id) {
     case 'linux':
       return <LinuxDownloadSection platform={platform} release={release} className={className} />;
     case 'docker':
@@ -22,7 +21,7 @@ export default function PlatformFactory({ platform, release, launcherRelease, cl
     case 'macos':
       return <MacOSDownloadSection platform={platform} release={release} className={className} />;
     case 'windows':
-      return <WindowsDownloadSection platform={platform} release={release} launcherRelease={launcherRelease} className={className} />;
+      return <WindowsDownloadSection platform={platform} release={release} className={className} />;
     default:
       // Fallback for unknown platforms
       return (

@@ -18,15 +18,39 @@ export interface GitHubMetrics {
   commits: number;
 }
 
+const GITHUB_FETCH_TIMEOUT_MS = 3500;
+
+async function fetchGitHub(
+  url: string,
+  init: RequestInit & { next?: { revalidate?: number } } = {}
+) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), GITHUB_FETCH_TIMEOUT_MS);
+
+  try {
+    return await fetch(url, {
+      ...init,
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+function isAbortError(error: unknown) {
+  return error instanceof Error && error.name === "AbortError";
+}
+
 /**
- * Get the latest release information (including pre-releases)
+ * Get the latest release information for a GitHub repository.
+ * @param repo Repository path, e.g. "rustfs/rustfs"
  * @returns Promise<GitHubRelease | null>
  */
-export async function getLatestRelease(): Promise<GitHubRelease | null> {
+async function getLatestReleaseForRepo(repo: string): Promise<GitHubRelease | null> {
   // Try to get the latest official release first
   try {
-    const response = await fetch(
-      'https://api.github.com/repos/rustfs/rustfs/releases/latest',
+    const response = await fetchGitHub(
+      `https://api.github.com/repos/${repo}/releases/latest`,
       {
         headers: {
           'Accept': 'application/vnd.github.v3+json',
@@ -42,13 +66,18 @@ export async function getLatestRelease(): Promise<GitHubRelease | null> {
       return release
     }
   } catch (error) {
-    console.warn('Failed to fetch latest release:', error)
+    if (isAbortError(error)) {
+      console.warn(`Timed out fetching latest release for ${repo}`);
+      return null;
+    }
+
+    console.warn(`Failed to fetch latest release for ${repo}:`, error)
   }
 
   // If official release doesn't exist (404), get the latest version with assets
   try {
-    const response = await fetch(
-      'https://api.github.com/repos/rustfs/rustfs/releases?per_page=10',
+    const response = await fetchGitHub(
+      `https://api.github.com/repos/${repo}/releases?per_page=10`,
       {
         headers: {
           'Accept': 'application/vnd.github.v3+json',
@@ -62,10 +91,13 @@ export async function getLatestRelease(): Promise<GitHubRelease | null> {
     if (response.ok) {
       const releases = await response.json()
 
-      // Prioritize latest non-draft version with assets
-      const releaseWithAssets = releases.find((release: GitHubRelease) =>
+      // Prefer a concise release over preview builds when both publish artifacts.
+      const releasesWithAssets = releases.filter((release: GitHubRelease) =>
         !release.draft && release.assets && release.assets.length > 0
       )
+      const releaseWithAssets = releasesWithAssets.find(
+        (release: GitHubRelease) => !/(?:^|[-.])preview(?:[.-]|$)/i.test(release.tag_name)
+      ) ?? releasesWithAssets[0]
 
       if (releaseWithAssets) {
         return releaseWithAssets
@@ -76,10 +108,31 @@ export async function getLatestRelease(): Promise<GitHubRelease | null> {
       return latestNonDraft || null
     }
   } catch (error) {
-    console.error('Failed to fetch releases:', error)
+    if (isAbortError(error)) {
+      console.warn(`Timed out fetching releases for ${repo}`);
+      return null;
+    }
+
+    console.error(`Failed to fetch releases for ${repo}:`, error)
   }
 
   return null
+}
+
+/**
+ * Get the latest RustFS server release information (including pre-releases).
+ * @returns Promise<GitHubRelease | null>
+ */
+export async function getLatestRelease(): Promise<GitHubRelease | null> {
+  return getLatestReleaseForRepo('rustfs/rustfs');
+}
+
+/**
+ * Get the latest RustFS CLI release information.
+ * @returns Promise<GitHubRelease | null>
+ */
+export async function getLatestCliRelease(): Promise<GitHubRelease | null> {
+  return getLatestReleaseForRepo('rustfs/cli');
 }
 
 /**
@@ -95,14 +148,14 @@ export async function getGitHubMetrics(): Promise<GitHubMetrics> {
 
   try {
     const [repoRes, commitsRes] = await Promise.all([
-      fetch('https://api.github.com/repos/rustfs/rustfs', {
+      fetchGitHub('https://api.github.com/repos/rustfs/rustfs', {
         headers: {
           Accept: 'application/vnd.github+json',
           'User-Agent': 'RustFS-Website',
         },
         next: { revalidate: 3600 },
       }),
-      fetch('https://api.github.com/repos/rustfs/rustfs/commits?per_page=1', {
+      fetchGitHub('https://api.github.com/repos/rustfs/rustfs/commits?per_page=1', {
         headers: {
           Accept: 'application/vnd.github+json',
           'User-Agent': 'RustFS-Website',
@@ -133,7 +186,12 @@ export async function getGitHubMetrics(): Promise<GitHubMetrics> {
       commits: Number.isFinite(commits) && commits > 0 ? commits : fallback.commits,
     };
   } catch (error) {
-    console.warn('Failed to fetch GitHub metrics:', error);
+    if (isAbortError(error)) {
+      console.warn('Timed out fetching GitHub metrics');
+    } else {
+      console.warn('Failed to fetch GitHub metrics:', error);
+    }
+
     return fallback;
   }
 }
@@ -200,70 +258,6 @@ export async function getLatestVersion(): Promise<string> {
 }
 
 /**
- * Get the latest launcher release information
- * @returns Promise<GitHubRelease | null>
- */
-export async function getLatestLauncherRelease(): Promise<GitHubRelease | null> {
-  // Try to get the latest official release first
-  try {
-    const response = await fetch(
-      'https://api.github.com/repos/rustfs/launcher/releases/latest',
-      {
-        headers: {
-          'Accept': 'application/vnd.github.v3+json',
-          'User-Agent': 'RustFS-Website'
-        },
-        // Cache for 1 hour
-        next: { revalidate: 3600 }
-      }
-    )
-
-    if (response.ok) {
-      const release = await response.json()
-      return release
-    }
-  } catch (error) {
-    console.warn('Failed to fetch latest launcher release:', error)
-  }
-
-  // If official release doesn't exist (404), get the latest version with assets
-  try {
-    const response = await fetch(
-      'https://api.github.com/repos/rustfs/launcher/releases?per_page=10',
-      {
-        headers: {
-          'Accept': 'application/vnd.github.v3+json',
-          'User-Agent': 'RustFS-Website'
-        },
-        // Cache for 1 hour
-        next: { revalidate: 3600 }
-      }
-    )
-
-    if (response.ok) {
-      const releases = await response.json()
-
-      // Prioritize latest non-draft version with assets
-      const releaseWithAssets = releases.find((release: GitHubRelease) =>
-        !release.draft && release.assets && release.assets.length > 0
-      )
-
-      if (releaseWithAssets) {
-        return releaseWithAssets
-      }
-
-      // If no version with assets found, return latest non-draft version
-      const latestNonDraft = releases.find((release: GitHubRelease) => !release.draft)
-      return latestNonDraft || null
-    }
-  } catch (error) {
-    console.error('Failed to fetch launcher releases:', error)
-  }
-
-  return null
-}
-
-/**
  * Get download link for a version
  * @param release GitHub release information
  * @param platform Platform identifier
@@ -282,6 +276,8 @@ export function getDownloadUrlForPlatform(
   // Match filename pattern based on platform and architecture
   const platformPatterns: Record<string, RegExp[]> = {
     windows: [
+      /rustfs-windows-x86_64.*\.zip/i,
+      /windows.*x86_64.*\.zip/i,
       /rustfs-windows-x86_64.*\.exe/i,
       /windows.*x86_64.*\.exe/i,
       /windows/i

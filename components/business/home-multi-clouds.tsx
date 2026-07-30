@@ -1,77 +1,113 @@
 'use client'
 
-import ContactUsButton from "./buttons/contact-us";
+import { ArrowUpRightIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import HomeSectionHeader from "./home-section-header";
 
-export default function HomeMultiClouds() {return (
-    <section className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            {'True Multi-Cloud Storage'}
-          </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            {'Multi-cloud object storage allows enterprises to build AWS S3-compatible data infrastructure on any cloud. The result is a consistent, portable interface for data and applications - meaning you can run anywhere, from edge to public cloud, without changing a line of code.'}
-          </p>
-          <div className="mt-10 flex items-center justify-center gap-x-6">
-            <ContactUsButton />
-            {/* <a href="#" className="text-sm font-semibold leading-6 text-gray-900 dark:text-neutral-100">
-              {'Contact Us'} <span aria-hidden="true">→</span>
-            </a> */}
-          </div>
+const stories = [
+  {
+    title: "NVIDIA Inception Program",
+    token: "rdma+dpu",
+    label: "AI infrastructure",
+    description:
+      "RustFS has joined the NVIDIA Inception Program. We are accelerating the future of AI data center storage. By leveraging NVIDIA’s cutting-edge platform, RustFS is pioneering native RDMA support and offloading Erasure Coding and data encryption directly to next-generation DPUs for unparalleled performance.",
+    href: "/blog/big-news-rustfs-joins-the-nvidia-inception-program",
+    linkText: "Read the story",
+  },
+  {
+    title: "Drop-in Replacement for MinIO",
+    token: "minio swap",
+    label: "Migration path",
+    description:
+      "Migrate instantly without data moving headaches. RustFS supports seamless, in-place migration from MinIO by simply swapping the binary or container image, drastically reducing your migration overhead and engineering costs.",
+    href: "/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs",
+    linkText: "Read the migration guide",
+  },
+];
+
+export default function HomeMultiClouds() {
+  return (
+    <section className="border-t border-border bg-background py-20 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <HomeSectionHeader
+          eyebrow="Field posts"
+          title="Built for the next generation of object storage"
+          description="RustFS combines Rust-native engineering, Apache 2.0 licensing, and S3 compatibility for AI infrastructure and direct MinIO migrations."
+        />
+
+        <div className="grid border border-border lg:grid-cols-2">
+          <Link
+            href={stories[0].href}
+            className="motion-card group flex min-h-[30rem] flex-col bg-card transition-colors hover:bg-muted/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            aria-label={stories[0].linkText}
+          >
+            <div className="relative flex h-60 shrink-0 items-center overflow-hidden bg-background p-8 sm:p-10">
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 opacity-50 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:34px_34px]"
+              />
+              <Image
+                src="/images/brands/nvidia-inception-badge.webp"
+                alt="NVIDIA Inception Program member"
+                width={494}
+                height={198}
+                unoptimized
+                className="relative h-auto w-full max-w-sm"
+              />
+            </div>
+
+            <StoryContent story={stories[0]} className="border-t border-border" />
+          </Link>
+
+          <Link
+            href={stories[1].href}
+            className="motion-card group relative flex min-h-[30rem] flex-col overflow-hidden border-t border-border bg-card transition-colors hover:!border-border hover:bg-muted/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand lg:border-l lg:border-t-0"
+            aria-label={stories[1].linkText}
+          >
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 opacity-0 transition-[opacity,background-position] duration-500 [background-image:repeating-linear-gradient(135deg,transparent_0_20px,var(--border)_20px_21px,transparent_21px_40px)] group-hover:bg-[position:32px_0] group-hover:opacity-45"
+            />
+            <div className="relative flex h-60 shrink-0 items-center p-8 sm:p-10">
+              <p className="text-4xl font-semibold tracking-[-0.04em] text-foreground sm:text-5xl">
+                S3 Migration
+              </p>
+            </div>
+
+            <StoryContent story={stories[1]} className="border-t border-border" />
+          </Link>
         </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-            <div className="flex flex-col">
-              <dt className="text-base font-semibold leading-7 text-foreground">
-                <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-brand">
-                  <svg className="h-6 w-6 text-brand-foreground" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                  </svg>
-                </div>
-                {'Public Cloud'}
-              </dt>
-              <dd className="mt-1 flex flex-auto flex-col text-base leading-7 text-muted-foreground">
-                <p className="flex-auto">
-                  {'RustFS is powered by Kubernetes and provides scalable, secure, S3-compatible object storage for every public cloud. Free yourself from vendor lock-in and treat clouds for what they are - commodity compute, network, and drives.'}
-                </p>
 
-              </dd>
-            </div>
-            <div className="flex flex-col">
-              <dt className="text-base font-semibold leading-7 text-foreground">
-                <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-brand">
-                  <svg className="h-6 w-6 text-brand-foreground" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                  </svg>
-                </div>
-                {'Private Cloud'}
-              </dt>
-              <dd className="mt-1 flex flex-auto flex-col text-base leading-7 text-muted-foreground">
-                <p className="flex-auto">
-                  {'From OpenShift to Tanzu, RustFS is the only object storage that is part of the infrastructure foundation of leading Kubernetes distributions. With its massive portfolio of integrated applications, RustFS completes the software-defined picture.'}
-                </p>
-
-              </dd>
-            </div>
-            <div className="flex flex-col">
-              <dt className="text-base font-semibold leading-7 text-foreground">
-                <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-brand">
-                  <svg className="h-6 w-6 text-brand-foreground" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
-                  </svg>
-                </div>
-                {'Edge'}
-              </dt>
-              <dd className="mt-1 flex flex-auto flex-col text-base leading-7 text-muted-foreground">
-                <p className="flex-auto">
-                  {'The complete RustFS multi-cloud storage binary is less than 100MB, capable of powering object storage anywhere - from ARM SOCs, 5G POPs, and edge cache devices to mini data centers. This is why RustFS dominates the edge storage market.'}
-                </p>
-
-              </dd>
-            </div>
-          </dl>
-        </div>
+        <p className="mt-4 text-xs leading-6 text-muted-foreground" role="note">
+          MinIO is a registered trademark of MinIO, Inc. RustFS is not affiliated with, endorsed by, or sponsored by MinIO, Inc. All other trademarks and registered trademarks are the property of their respective owners.
+        </p>
       </div>
     </section>
-  )
+  );
+}
+
+function StoryContent({
+  story,
+  className = "",
+}: {
+  story: (typeof stories)[number];
+  className?: string;
+}) {
+  return (
+    <div className={`relative flex flex-1 flex-col p-6 sm:p-8 ${className}`}>
+      <div className="flex items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <span className="text-brand">{story.label}</span>
+        <span className="h-px flex-1 bg-border" />
+        <code>{story.token}</code>
+      </div>
+      <h3 className="mt-7 max-w-xl text-2xl font-semibold leading-tight text-foreground sm:text-3xl">
+        {story.title}
+      </h3>
+      <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
+        {story.description}
+      </p>
+      <ArrowUpRightIcon className="motion-arrow mt-auto size-5 self-end text-brand" />
+    </div>
+  );
 }

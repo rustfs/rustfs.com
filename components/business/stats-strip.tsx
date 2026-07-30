@@ -19,7 +19,7 @@ export default function StatsStrip({
   const items = useMemo(
     () => [
       { label: "GitHub Stars", value: metrics.stars },
-      { label: "GitHub Forks", value: metrics.forks },
+      { label: "Global Instances", text: "1500000+" },
       { label: "Repo Commits", value: metrics.commits },
       { label: "Docker Pulls", value: dockerPulls },
     ],
@@ -27,24 +27,29 @@ export default function StatsStrip({
   );
 
   return (
-    <section className={cn("text-muted-foreground body-font", className)}>
-      <div className="container px-5 py-12 lg:py-16 xl:py-20 mx-auto">
-        <div className="flex flex-wrap -m-4 text-left">
-          {items.map(({ label, value }) => (
-            <div key={label} className="px-4 sm:w-1/4 w-1/2 pl-6 border-l mt-4 xl:mt-0">
-              <h2 className="title-font font-extrabold sm:text-4xl text-2xl text-foreground">
+    <section className={cn("text-muted-foreground", className)}>
+      <dl className="grid overflow-hidden border-y border-border bg-card/20 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map(({ label, value, text }) => (
+          <div
+            key={label}
+            className="flex min-h-24 flex-col justify-end border-b border-border/80 p-4 last:border-b-0 sm:[&:nth-child(n+3)]:border-b-0 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0 sm:p-5"
+          >
+            <dt className="order-2 mt-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              {label}
+            </dt>
+            <dd className="order-1 text-3xl font-semibold tracking-[-0.035em] text-foreground sm:text-4xl">
+              {typeof value === "number" ? (
                 <NumberTicker
                   value={value}
                   className="text-foreground"
                 />
-              </h2>
-              <p className="mt-4 text-base text-muted-foreground font-bold text-left uppercase">
-                {label}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+              ) : (
+                <span>{text}</span>
+              )}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }

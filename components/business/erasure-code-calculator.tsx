@@ -1,6 +1,17 @@
 'use client'
 
 import { useEffect, useMemo, useState } from "react";
+import {
+  ArrowUpRightIcon,
+  CheckIcon,
+  DatabaseIcon,
+  DownloadIcon,
+  HardDriveIcon,
+  LinkIcon,
+  LifeBuoyIcon,
+  ServerIcon,
+  ShieldCheckIcon,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -116,8 +127,8 @@ export default function ErasureCodeCalculator() {
   const [drivesPerServerInput, setDrivesPerServerInput] = useState<string | null>(null);
   const [driveCapacity, setDriveCapacity] = useState(8);
   const [driveCapacityInput, setDriveCapacityInput] = useState<string | null>(null);
-  const [stripeSize, setStripeSize] = useState(0);
-  const [parity, setParity] = useState(0);
+  const [stripeSize, setStripeSize] = useState(16);
+  const [parity, setParity] = useState(4);
   const [shareCopied, setShareCopied] = useState(false);
   const [exportBusy, setExportBusy] = useState(false);
   const [appliedFeedback, setAppliedFeedback] = useState(false);
@@ -210,26 +221,43 @@ export default function ErasureCodeCalculator() {
   }, [stripeInfo, servers, drivesPerServer]);
 
   useEffect(() => {
+    let nextStripeSize: number | null = null;
+
     if (stripeInfo.stripeSizes.length === 0) {
-      setStripeSize(0);
+      nextStripeSize = 0;
+    } else if (!stripeInfo.stripeSizes.includes(stripeSize)) {
+      nextStripeSize = stripeInfo.stripeSizes[0];
+    }
+
+    if (nextStripeSize === null) {
       return;
     }
 
-    if (!stripeInfo.stripeSizes.includes(stripeSize)) {
-      setStripeSize(stripeInfo.stripeSizes[0]);
-    }
+    const frame = window.requestAnimationFrame(() => {
+      setStripeSize(nextStripeSize);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [stripeInfo.stripeSizes, stripeSize]);
 
   useEffect(() => {
+    let nextParity: number | null = null;
+
     if (parityOptions.length === 0) {
-      setParity(0);
+      nextParity = 0;
+    } else if (!parityOptions.includes(parity)) {
+      nextParity = totalDrives >= 16 && parityOptions.includes(4) ? 4 : parityOptions[0];
+    }
+
+    if (nextParity === null) {
       return;
     }
 
-    if (!parityOptions.includes(parity)) {
-      const preferred = totalDrives >= 16 && parityOptions.includes(4) ? 4 : parityOptions[0];
-      setParity(preferred);
-    }
+    const frame = window.requestAnimationFrame(() => {
+      setParity(nextParity);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [parityOptions, parity, totalDrives]);
 
   useEffect(() => {
@@ -254,11 +282,15 @@ export default function ErasureCodeCalculator() {
         Number.isFinite(nextStripe) &&
         Number.isFinite(nextParity)
       ) {
-        setServers(nextServers);
-        setDrivesPerServer(nextDrives);
-        setDriveCapacity(nextCapacity);
-        setStripeSize(nextStripe);
-        setParity(nextParity);
+        const frame = window.requestAnimationFrame(() => {
+          setServers(nextServers);
+          setDrivesPerServer(nextDrives);
+          setDriveCapacity(nextCapacity);
+          setStripeSize(nextStripe);
+          setParity(nextParity);
+        });
+
+        return () => window.cancelAnimationFrame(frame);
       }
     }
   }, []);
@@ -311,6 +343,12 @@ export default function ErasureCodeCalculator() {
     stripeInfo.numServersPerShard,
     stripeInfo.numShards,
   ]);
+
+  const usablePercent =
+    validationError || results.efficiency <= 0
+      ? 0
+      : Math.min(100, Math.max(0, Math.round(results.efficiency * 100)));
+  const parityPercent = usablePercent > 0 ? 100 - usablePercent : 0;
 
   const handleCopyShareLink = async () => {
     setShareCopied(false);
@@ -404,270 +442,445 @@ export default function ErasureCodeCalculator() {
   };
 
   return (
-    <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
-      <div className="max-w-2xl">
-        <h1 className="text-3xl sm:text-4xl font-semibold text-foreground">
-          Erasure Code Calculator
-        </h1>
-        <p className="mt-4 text-muted-foreground">
-          Estimate raw and usable capacity along with failure tolerance for RustFS erasure coding.
-        </p>
-      </div>
+    <div className="relative z-10 py-16 text-foreground sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div>
+          <h1 className="font-display text-5xl font-semibold tracking-tight text-foreground sm:text-6xl">
+            Size a RustFS erasure set before you deploy
+          </h1>
+          <p className="mt-6 text-sm leading-7 text-muted-foreground">
+            Model raw capacity, usable capacity, stripe layout, and failure tolerance from the
+            hardware shape you plan to run.
+          </p>
+        </div>
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-        <section className="rounded-xl border border-border bg-background p-6 sm:p-8 shadow-sm">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-foreground">Configuration</h2>
-            <Button variant="outline" size="sm" type="button" onClick={handleCopyShareLink}>
-              {shareCopied ? "Copied" : "Copy share link"}
-            </Button>
-          </div>
-
-          {validationError && (
-            <div className="mt-4 rounded-md border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-destructive">
-              {validationError}
+        <div className="mt-12 grid gap-4 sm:grid-cols-3">
+          <div className="border border-border bg-card px-5 py-6">
+            <ServerIcon className="size-5 text-brand" />
+            <div className="mt-5 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              Servers
             </div>
-          )}
-
-          <div className="mt-6 space-y-6">
-            <label className="block">
-              <span className="text-sm font-medium text-foreground">Number of servers</span>
-              <Input
-                type="number"
-                min={1}
-                value={serversInput !== null ? serversInput : servers}
-                onFocus={() => setServersInput(String(servers))}
-                onChange={(event) => {
-                  const formatted = formatIntegerInput(event.target.value);
-                  setServersInput(formatted);
-                  if (formatted !== "") setServers(Number(formatted));
-                }}
-                onBlur={() => {
-                  if (serversInput === "" || Number(serversInput) < 1) setServers(1);
-                  setServersInput(null);
-                }}
-                className="mt-2"
-              />
-            </label>
-
-            <label className="block">
-              <span className="text-sm font-medium text-foreground">Drives per server</span>
-              <Input
-                type="number"
-                min={1}
-                max={256}
-                value={drivesPerServerInput !== null ? drivesPerServerInput : drivesPerServer}
-                onFocus={() => setDrivesPerServerInput(String(drivesPerServer))}
-                onChange={(event) => {
-                  const formatted = formatIntegerInput(event.target.value);
-                  setDrivesPerServerInput(formatted);
-                  if (formatted !== "") setDrivesPerServer(Number(formatted));
-                }}
-                onBlur={() => {
-                  if (drivesPerServerInput === "" || Number(drivesPerServerInput) < 1) {
-                    setDrivesPerServer(1);
-                  } else if (Number(drivesPerServerInput) > 256) {
-                    setDrivesPerServer(256);
-                  }
-                  setDrivesPerServerInput(null);
-                }}
-                className="mt-2"
-              />
-            </label>
-
-            <label className="block">
-              <span className="text-sm font-medium text-foreground">Drive capacity (TiB)</span>
-              <Input
-                type="number"
-                min={1}
-                value={driveCapacityInput !== null ? driveCapacityInput : driveCapacity}
-                onFocus={() => setDriveCapacityInput(String(driveCapacity))}
-                onChange={(event) => {
-                  const formatted = formatIntegerInput(event.target.value);
-                  setDriveCapacityInput(formatted);
-                  if (formatted !== "") setDriveCapacity(Number(formatted));
-                }}
-                onBlur={() => {
-                  if (driveCapacityInput === "" || Number(driveCapacityInput) < 1) {
-                    setDriveCapacity(1);
-                  }
-                  setDriveCapacityInput(null);
-                }}
-                className="mt-2"
-              />
-            </label>
-
-            <label className="block">
-              <span className="text-sm font-medium text-foreground">Stripe size (K + M)</span>
-              <Select
-                value={stripeSize ? String(stripeSize) : undefined}
-                onValueChange={(value) => setStripeSize(Number(value))}
-                disabled={stripeInfo.stripeSizes.length === 0}
-              >
-                <SelectTrigger className="mt-2">
-                  <SelectValue placeholder="Unavailable" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {stripeInfo.stripeSizes.map((value) => (
-                      <SelectItem key={value} value={String(value)}>
-                        {value}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <p className="mt-2 text-xs text-muted-foreground">
-                Stripe size is the number of drives in each erasure set (data + parity). Larger
-                stripes improve efficiency when capacity allows.
-              </p>
-            </label>
-
-            <label className="block">
-              <span className="text-sm font-medium text-foreground">Parity (M)</span>
-              <Select
-                value={parity ? String(parity) : undefined}
-                onValueChange={(value) => setParity(Number(value))}
-                disabled={parityOptions.length === 0}
-              >
-                <SelectTrigger className="mt-2">
-                  <SelectValue placeholder="Unavailable" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {parityOptions.map((value) => (
-                      <SelectItem key={value} value={String(value)}>
-                        {value}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <p className="mt-2 text-xs text-muted-foreground">
-                Parity controls resiliency. Higher M increases fault tolerance but reduces usable
-                capacity.
-              </p>
-            </label>
+            <div className="mt-2 font-mono text-3xl font-semibold text-foreground">{servers}</div>
           </div>
+          <div className="border border-border bg-card px-5 py-6">
+            <HardDriveIcon className="size-5 text-brand" />
+            <div className="mt-5 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              Total drives
+            </div>
+            <div className="mt-2 font-mono text-3xl font-semibold text-foreground">{totalDrives}</div>
+          </div>
+          <div className="border border-border bg-card px-5 py-6">
+            <DatabaseIcon className="size-5 text-brand" />
+            <div className="mt-5 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              Raw capacity
+            </div>
+            <div className="mt-2 font-mono text-3xl font-semibold text-foreground">
+              {validationError ? "--" : niceBytes(results.rawBytes)}
+            </div>
+          </div>
+        </div>
 
-          {recommendedConfig && (
-            <div className="mt-8 rounded-lg border border-border bg-muted/40 px-4 py-4 text-sm">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <div className="font-medium text-foreground">Recommended configuration</div>
-                  <div className="mt-1 text-muted-foreground">
-                    {recommendedConfig.serversCorrected != null ? (
-                      <>
-                        At least 4 servers, {recommendedConfig.drivesCorrected} drives per server.
-                        Stripe size {recommendedConfig.stripe}, parity {recommendedConfig.parity}.
-                      </>
-                    ) : (
-                      <>
-                        Stripe size {recommendedConfig.stripe}, parity {recommendedConfig.parity}.
-                        Balanced for efficiency and availability.
-                      </>
-                    )}
-                  </div>
+        <div className="mt-10 grid items-start gap-6 lg:grid-cols-[minmax(0,0.6fr)_0.4fr]">
+          <section className="flex flex-col border border-border bg-card">
+            <div className="border-b border-border px-6 py-6">
+              <h2 className="text-lg font-semibold text-foreground">Cluster input</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Hardware first, then choose the erasure layout.
+              </p>
+            </div>
+
+            {validationError ? (
+              <div className="border-b border-destructive/40 bg-destructive/10 px-6 py-4 text-sm text-destructive">
+                {validationError}
+              </div>
+            ) : null}
+
+            <div className="grid gap-5 border-b border-border px-6 py-6 md:grid-cols-3">
+              <label className="block">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  Servers
+                </span>
+                <Input
+                  type="number"
+                  min={1}
+                  value={serversInput !== null ? serversInput : servers}
+                  onFocus={() => setServersInput(String(servers))}
+                  onChange={(event) => {
+                    const formatted = formatIntegerInput(event.target.value);
+                    setServersInput(formatted);
+                    if (formatted !== "") setServers(Number(formatted));
+                  }}
+                  onBlur={() => {
+                    if (serversInput === "" || Number(serversInput) < 1) setServers(1);
+                    setServersInput(null);
+                  }}
+                  className="mt-3 h-11 bg-background font-mono text-base"
+                />
+              </label>
+
+              <label className="block">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  Drives / server
+                </span>
+                <Input
+                  type="number"
+                  min={1}
+                  max={256}
+                  value={drivesPerServerInput !== null ? drivesPerServerInput : drivesPerServer}
+                  onFocus={() => setDrivesPerServerInput(String(drivesPerServer))}
+                  onChange={(event) => {
+                    const formatted = formatIntegerInput(event.target.value);
+                    setDrivesPerServerInput(formatted);
+                    if (formatted !== "") setDrivesPerServer(Number(formatted));
+                  }}
+                  onBlur={() => {
+                    if (drivesPerServerInput === "" || Number(drivesPerServerInput) < 1) {
+                      setDrivesPerServer(1);
+                    } else if (Number(drivesPerServerInput) > 256) {
+                      setDrivesPerServer(256);
+                    }
+                    setDrivesPerServerInput(null);
+                  }}
+                  className="mt-3 h-11 bg-background font-mono text-base"
+                />
+              </label>
+
+              <label className="block">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  Drive TiB
+                </span>
+                <Input
+                  type="number"
+                  min={1}
+                  value={driveCapacityInput !== null ? driveCapacityInput : driveCapacity}
+                  onFocus={() => setDriveCapacityInput(String(driveCapacity))}
+                  onChange={(event) => {
+                    const formatted = formatIntegerInput(event.target.value);
+                    setDriveCapacityInput(formatted);
+                    if (formatted !== "") setDriveCapacity(Number(formatted));
+                  }}
+                  onBlur={() => {
+                    if (driveCapacityInput === "" || Number(driveCapacityInput) < 1) {
+                      setDriveCapacity(1);
+                    }
+                    setDriveCapacityInput(null);
+                  }}
+                  className="mt-3 h-11 bg-background font-mono text-base"
+                />
+              </label>
+            </div>
+
+            <div className="grid gap-5 border-b border-border px-6 py-6 md:grid-cols-2">
+              <label className="block">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  Stripe size (K + M)
+                </span>
+                <Select
+                  value={stripeSize ? String(stripeSize) : undefined}
+                  onValueChange={(value) => setStripeSize(Number(value))}
+                  disabled={stripeInfo.stripeSizes.length === 0}
+                >
+                  <SelectTrigger className="mt-3 h-11 w-full bg-background font-mono text-base">
+                    <SelectValue placeholder="Unavailable" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {stripeInfo.stripeSizes.map((value) => (
+                        <SelectItem key={value} value={String(value)}>
+                          {value}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                  Drives per erasure set. Larger stripes improve efficiency when the hardware
+                  shape allows it.
+                </p>
+              </label>
+
+              <label className="block">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  Parity (M)
+                </span>
+                <Select
+                  value={parity ? String(parity) : undefined}
+                  onValueChange={(value) => setParity(Number(value))}
+                  disabled={parityOptions.length === 0}
+                >
+                  <SelectTrigger className="mt-3 h-11 w-full bg-background font-mono text-base">
+                    <SelectValue placeholder="Unavailable" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {parityOptions.map((value) => (
+                        <SelectItem key={value} value={String(value)}>
+                          {value}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                  Higher parity increases fault tolerance and reduces usable capacity.
+                </p>
+              </label>
+            </div>
+
+            <div className="grid gap-5 border-b border-border px-6 py-5 sm:grid-cols-3">
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  Data shards
                 </div>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (
-                      recommendedConfig.serversCorrected != null &&
-                      recommendedConfig.drivesCorrected != null
-                    ) {
-                      setServers(recommendedConfig.serversCorrected);
-                      setDrivesPerServer(recommendedConfig.drivesCorrected);
-                      setServersInput(null);
-                      setDrivesPerServerInput(null);
-                      queueMicrotask(() => {
+                <div className="mt-2 font-mono text-xl font-semibold text-foreground">
+                  {validationError ? "--" : stripeSize - parity}
+                </div>
+              </div>
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  Parity shards
+                </div>
+                <div className="mt-2 font-mono text-xl font-semibold text-foreground">
+                  {validationError ? "--" : parity}
+                </div>
+              </div>
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  Erasure set
+                </div>
+                <div className="mt-2 font-mono text-xl font-semibold text-foreground">
+                  {validationError ? "--" : `${stripeSize} drives`}
+                </div>
+              </div>
+            </div>
+
+            {recommendedConfig ? (
+              <div className="flex flex-1 border-b border-border px-6 py-6 text-sm">
+                <div className="grid w-full gap-4 sm:grid-cols-[1fr_auto] sm:items-start">
+                  <div>
+                    <div className="font-medium text-foreground">Recommended layout</div>
+                    <div className="mt-1 leading-6 text-muted-foreground">
+                      {recommendedConfig.serversCorrected != null ? (
+                        <>
+                          Use at least 4 servers, {recommendedConfig.drivesCorrected} drives per
+                          server, stripe {recommendedConfig.stripe}, parity{" "}
+                          {recommendedConfig.parity}.
+                        </>
+                      ) : (
+                        <>
+                          Stripe {recommendedConfig.stripe}, parity {recommendedConfig.parity}.
+                          Balanced for availability and efficiency.
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (
+                        recommendedConfig.serversCorrected != null &&
+                        recommendedConfig.drivesCorrected != null
+                      ) {
+                        setServers(recommendedConfig.serversCorrected);
+                        setDrivesPerServer(recommendedConfig.drivesCorrected);
+                        setServersInput(null);
+                        setDrivesPerServerInput(null);
+                        queueMicrotask(() => {
+                          setStripeSize(recommendedConfig.stripe);
+                          setParity(recommendedConfig.parity);
+                        });
+                      } else {
                         setStripeSize(recommendedConfig.stripe);
                         setParity(recommendedConfig.parity);
-                      });
-                    } else {
-                      setStripeSize(recommendedConfig.stripe);
-                      setParity(recommendedConfig.parity);
-                    }
-                    setAppliedFeedback(true);
-                    setTimeout(() => setAppliedFeedback(false), 1500);
-                  }}
-                >
-                  {appliedFeedback ? "Applied" : "Apply"}
+                      }
+                      setAppliedFeedback(true);
+                      setTimeout(() => setAppliedFeedback(false), 1500);
+                    }}
+                  >
+                    {appliedFeedback ? <CheckIcon className="size-4" /> : <ShieldCheckIcon className="size-4" />}
+                    {appliedFeedback ? "Applied" : "Apply"}
+                  </Button>
+                </div>
+              </div>
+            ) : null}
+
+            <div className="mt-auto grid gap-8 px-6 py-6 md:grid-cols-[1fr_0.92fr]">
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  Production check
+                </div>
+                <div className="mt-4 grid gap-3 text-sm">
+                  <div className="grid grid-cols-[1fr_auto] gap-4 border-b border-border pb-3">
+                    <span className="text-muted-foreground">Failure domain</span>
+                    <span className="font-medium text-foreground">rack / node</span>
+                  </div>
+                  <div className="grid grid-cols-[1fr_auto] gap-4 border-b border-border pb-3">
+                    <span className="text-muted-foreground">Rebuild headroom</span>
+                    <span className="font-medium text-foreground">capacity + I/O</span>
+                  </div>
+                  <div className="grid grid-cols-[1fr_auto] gap-4">
+                    <span className="text-muted-foreground">Ops baseline</span>
+                    <span className="font-medium text-foreground">alerts + spares</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col border-l border-border pl-6">
+                <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <LifeBuoyIcon className="size-4 text-brand" />
+                  Need a sizing review?
+                </div>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                  Share your node count, drive model, expected growth, and failure-domain target
+                  with the RustFS team before ordering hardware.
+                </p>
+                <Button asChild variant="outline" size="sm" className="mt-auto w-fit">
+                  <a href="/contact-us">
+                    Contact us
+                    <ArrowUpRightIcon className="size-4" />
+                  </a>
                 </Button>
               </div>
             </div>
-          )}
-        </section>
+          </section>
 
-        <section className="rounded-xl border border-border bg-muted/40 p-6 sm:p-8">
-          <h2 className="text-lg font-semibold text-foreground">Results</h2>
+          <section className="border border-border bg-card">
+            <div className="border-b border-border px-6 py-6">
+              <h2 className="text-lg font-semibold text-foreground">Capacity output</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Usable data after parity reservation.
+              </p>
+            </div>
 
-          <div className="mt-6 space-y-4 text-sm text-muted-foreground">
-            <div className="flex items-center justify-between">
-              <span>Usable capacity</span>
-              <span className="text-base font-semibold text-foreground">
+            <div className="p-6">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                Usable capacity
+              </div>
+              <div className="mt-3 font-mono text-5xl font-semibold tracking-tight text-foreground">
                 {validationError ? "--" : niceBytes(results.usableBytes)}
-              </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>Raw capacity</span>
-              <span className="text-base font-semibold text-foreground">
-                {validationError ? "--" : niceBytes(results.rawBytes)}
-              </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>Storage efficiency</span>
-              <span className="text-base font-semibold text-foreground">
-                {validationError ? "--" : `${Math.floor(results.efficiency * 100)}%`}
-              </span>
-            </div>
-          </div>
+              </div>
 
-          <div className="mt-6 rounded-lg border border-border bg-background px-4 py-4 text-sm">
-            <div className="font-medium text-foreground">Drive failure tolerance</div>
-            <div className="mt-2 text-muted-foreground">
-              {validationError
-                ? "--"
-                : `${results.driveFailuresTotal} drives across cluster`}
-            </div>
-            <div className="text-muted-foreground">
-              {validationError
-                ? ""
-                : `(${results.driveFailures} out of ${stripeSize} drives per stripe)`}
-            </div>
-          </div>
+              <div className="mt-8 border border-border bg-background">
+                <div className="grid grid-cols-[1fr_auto] border-b border-border text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  <span className="px-3 py-2">Capacity split</span>
+                  <span className="border-l border-border px-3 py-2">
+                    {validationError ? "--" : `${usablePercent}% usable`}
+                  </span>
+                </div>
+                <div className="flex h-4 bg-muted">
+                  <div
+                    className="bg-brand"
+                    style={{ width: `${usablePercent}%` }}
+                    aria-hidden="true"
+                  />
+                  <div
+                    className="bg-foreground/20"
+                    style={{ width: `${parityPercent}%` }}
+                    aria-hidden="true"
+                  />
+                </div>
+              </div>
 
-          <div className="mt-4 rounded-lg border border-border bg-background px-4 py-4 text-sm">
-            <div className="font-medium text-foreground">Server failure tolerance</div>
-            <div className="mt-2 text-muted-foreground">
-              {validationError
-                ? "--"
-                : `${results.serverFailuresTotal} servers across cluster`}
-            </div>
-            <div className="text-muted-foreground">
-              {validationError
-                ? ""
-                : `(${results.serverFailuresPerShard} out of ${stripeInfo.numServersPerShard} servers per shard)`}
-            </div>
-          </div>
+              <div className="mt-6 grid gap-6 border-y border-border py-5 sm:grid-cols-2">
+                <div>
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    Raw
+                  </div>
+                  <div className="mt-2 font-mono text-xl font-semibold text-foreground">
+                    {validationError ? "--" : niceBytes(results.rawBytes)}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    Efficiency
+                  </div>
+                  <div className="mt-2 font-mono text-xl font-semibold text-foreground">
+                    {validationError ? "--" : `${Math.floor(results.efficiency * 100)}%`}
+                  </div>
+                </div>
+              </div>
 
-          <div className="mt-6 text-xs text-muted-foreground">
-            Calculation uses parity and stripe sizing to estimate capacity and tolerances. Results are
-            rounded down to match quorum-safe limits.
-          </div>
+              <div className="mt-6 divide-y divide-border border-y border-border">
+                <div className="py-5">
+                  <div className="flex items-center gap-2 font-medium text-foreground">
+                    <HardDriveIcon className="size-4 text-brand" />
+                    Drive failure tolerance
+                  </div>
+                  <div className="mt-2 text-sm leading-6 text-muted-foreground">
+                    {validationError
+                      ? "--"
+                      : `${results.driveFailuresTotal} drives across cluster`}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {validationError
+                      ? ""
+                      : `${results.driveFailures} out of ${stripeSize} drives per stripe`}
+                  </div>
+                </div>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button type="button" variant="outline" onClick={handleExportCsv} disabled={!!validationError}>
-              Download CSV
-            </Button>
-            <Button type="button" variant="outline" onClick={handleExportSvg} disabled={!!validationError || exportBusy}>
-              {exportBusy ? "Exporting..." : "Download SVG"}
-            </Button>
-          </div>
-        </section>
+                <div className="py-5">
+                  <div className="flex items-center gap-2 font-medium text-foreground">
+                    <ServerIcon className="size-4 text-brand" />
+                    Server failure tolerance
+                  </div>
+                  <div className="mt-2 text-sm leading-6 text-muted-foreground">
+                    {validationError
+                      ? "--"
+                      : `${results.serverFailuresTotal} servers across cluster`}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {validationError
+                      ? ""
+                      : `${results.serverFailuresPerShard} out of ${stripeInfo.numServersPerShard} servers per shard`}
+                  </div>
+                </div>
+              </div>
+
+              <p className="mt-5 text-xs leading-6 text-muted-foreground">
+                Results are rounded down to quorum-safe limits and should be treated as planning
+                estimates before production sizing.
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleExportCsv}
+                  disabled={!!validationError}
+                  className="min-w-28"
+                >
+                  <DownloadIcon className="size-4" />
+                  CSV
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleExportSvg}
+                  disabled={!!validationError || exportBusy}
+                  className="min-w-28"
+                >
+                  <DownloadIcon className="size-4" />
+                  {exportBusy ? "Exporting" : "SVG"}
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleCopyShareLink}
+                  className="min-w-32"
+                >
+                  {shareCopied ? (
+                    <CheckIcon className="size-4" />
+                  ) : (
+                    <LinkIcon className="size-4" />
+                  )}
+                  {shareCopied ? "Copied" : "Copy link"}
+                </Button>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );

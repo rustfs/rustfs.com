@@ -80,7 +80,9 @@ export default function LinuxDownloadSection({ platform, release, className }: L
             code={[
               `curl -O ${finalX86_64Url}`,
               `unzip ${getFilenameFromUrl(finalX86_64Url, 'x86_64')}`,
-              "./rustfs --version",
+              "chmod +x rustfs",
+              "cp rustfs /usr/local/bin/",
+              "rustfs --version",
             ]}
             title={'Installation Commands'}
           />
@@ -113,7 +115,9 @@ export default function LinuxDownloadSection({ platform, release, className }: L
             code={[
               `curl -O ${finalAarch64Url}`,
               `unzip ${getFilenameFromUrl(finalAarch64Url, 'aarch64')}`,
-              "./rustfs --version",
+              "chmod +x rustfs",
+              "cp rustfs /usr/local/bin/",
+              "rustfs --version",
             ]}
             title={'Installation Commands'}
           />

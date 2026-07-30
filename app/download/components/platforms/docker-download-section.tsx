@@ -70,71 +70,57 @@ export default function DockerDownloadSection({ platform, release, className }: 
           />
         </div>
 
-        {/* Alpha Version */}
+        {/* Docker Compose */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="font-medium text-foreground">{'Latest Alpha'}</h4>
+              <h4 className="font-medium text-foreground">{'Docker Compose'}</h4>
               <p className="text-sm text-muted-foreground">
-                {'Architecture'}: alpha
+                {'Run RustFS with docker compose'}
               </p>
             </div>
             <a
-              href="https://hub.docker.com/r/rustfs/rustfs/tags"
+              href="https://github.com/rustfs/rustfs/blob/main/docker-compose.yml"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-              <DownloadIcon className="w-4 h-4" />
-              <span>{'Download'}</span>
+              <ExternalLinkIcon className="w-4 h-4" />
+              <span>{'View Compose File'}</span>
             </a>
           </div>
 
           <CodeBlock
             code={[
-              "docker pull rustfs/rustfs:alpha",
-              "docker run -d \\",
-              "  --name rustfs-alpha \\",
-              "  -p 9000:9000 \\",
-              "  -p 9001:9001 \\",
-              "  -v /data:/data \\",
-              "  rustfs/rustfs:alpha",
+              "wget https://raw.githubusercontent.com/rustfs/rustfs/main/docker-compose.yml",
+              "docker compose up -d",
             ]}
             title={'Installation Commands'}
           />
-
-          <Note type="warning">
-            {'Development version - not recommended for production use'}
-          </Note>
         </div>
 
-        {/* Specific Version */}
+        {/* Kubernetes */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="font-medium text-foreground">{'Specific Version'}</h4>
+              <h4 className="font-medium text-foreground">{'Kubernetes'}</h4>
               <p className="text-sm text-muted-foreground">
-                {'Architecture'}: 1.0.0-alpha.18
+                {'Install with Helm Charts'}
               </p>
             </div>
             <a
-              href="https://hub.docker.com/r/rustfs/rustfs/tags"
+              href="https://charts.rustfs.com"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-              <DownloadIcon className="w-4 h-4" />
-              <span>{'Download'}</span>
+              <ExternalLinkIcon className="w-4 h-4" />
+              <span>{'View Charts'}</span>
             </a>
           </div>
 
           <CodeBlock
             code={[
-              "docker pull rustfs/rustfs:1.0.0-alpha.18",
-              "docker run -d \\",
-              "  --name rustfs-v1-0-0-alpha-18 \\",
-              "  -p 9000:9000 \\",
-              "  -p 9001:9001 \\",
-              "  -v /data:/data \\",
-              "  rustfs/rustfs:1.0.0-alpha.18",
+              "helm repo add rustfs https://charts.rustfs.com",
+              "helm install my-rustfs rustfs/rustfs --version 0.5.0",
             ]}
             title={'Installation Commands'}
           />

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function LinkTwitter({ className, size = 'size-4' }: { className?: string | string[], size?: string }) {
   return (
-    <Link className={cn('inline-block text-muted-foreground hover:text-primary', className)} href="https://x.com/rustfsofficial" aria-label="RustFS Twitter" target="_blank" rel="noopener noreferrer">
+    <Link className={cn('inline-flex size-10 items-center justify-center text-muted-foreground hover:text-primary', className)} href="https://x.com/rustfsofficial" aria-label="RustFS Twitter" target="_blank" rel="noopener noreferrer">
       <svg
         role="img"
         viewBox="0 0 24 24"

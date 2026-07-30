@@ -1,5 +1,6 @@
 'use client'
 
+import { RedirectPanel } from "@/components/business/redirect-panel";
 import { useEffect } from "react";
 
 export default function EnRedirectPage() {
@@ -8,11 +9,13 @@ export default function EnRedirectPage() {
   }, []);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <p className="text-sm text-muted-foreground">Redirecting to RustFS...</p>
-      </div>
-    </main>
+    <RedirectPanel
+      actionLabel="Open home"
+      description="You are being redirected to the English RustFS homepage."
+      eyebrow="RustFS"
+      href="/"
+      label="Home"
+      title="Opening RustFS."
+    />
   );
 }
-

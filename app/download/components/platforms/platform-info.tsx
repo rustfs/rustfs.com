@@ -18,14 +18,15 @@ interface PlatformInfoProps {
   className?: string;
 }
 
-export default function PlatformInfo({ data, isSelected, onClick, className }: PlatformInfoProps) {const { name, icon, description, available, comingSoon } = data;
+export default function PlatformInfo({ data, isSelected, onClick, className }: PlatformInfoProps) {
+  const { name, icon, description, available, comingSoon } = data;
 
   return (
     <button
       onClick={onClick}
       disabled={!available}
       className={cn(
-        "flex flex-col items-center p-6 rounded-lg border-2 transition-all duration-200",
+        "flex flex-col items-center border p-6 transition-colors duration-200",
         available
           ? cn(
             "hover:shadow-md cursor-pointer",

@@ -1,4 +1,4 @@
-
+import { Marquee } from "@/components/magicui/marquee";
 import ClickhouseIcon from "../../public/svgs/softwares/clickhouse.svg";
 import DockerIcon from "../../public/svgs/softwares/docker.svg";
 import ElasticIcon from "../../public/svgs/softwares/elastic.svg";
@@ -11,6 +11,7 @@ import PrometheusIcon from "../../public/svgs/softwares/prometheus.svg";
 import SparkIcon from "../../public/svgs/softwares/spark.svg";
 import TensorflowIcon from "../../public/svgs/softwares/tensorflow.svg";
 import WebhooksIcon from "../../public/svgs/softwares/webhooks.svg";
+import HomeSectionHeader from "./home-section-header";
 
 type SoftwareKey =
   | "docker"
@@ -41,6 +42,21 @@ const softwares: SoftwareKey[] = [
   "webhooks",
 ];
 
+const softwareLabels: Record<SoftwareKey, string> = {
+  docker: "Docker",
+  elastic: "Elastic",
+  grafana: "Grafana",
+  kafka: "Kafka",
+  mysql: "MySQL",
+  nginx: "Nginx",
+  postgresql: "PostgreSQL",
+  clickhouse: "ClickHouse",
+  prometheus: "Prometheus",
+  spark: "Spark",
+  tensorflow: "TensorFlow",
+  webhooks: "Webhooks",
+};
+
 const iconMap: Record<SoftwareKey, React.ComponentType<{ className?: string; style?: React.CSSProperties; fill?: string }>> = {
   docker: DockerIcon,
   elastic: ElasticIcon,
@@ -58,35 +74,48 @@ const iconMap: Record<SoftwareKey, React.ComponentType<{ className?: string; sty
 
 export default function SoftwareLogos() {
   return (
-    <section className="bg-muted/40 relative overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 pb-16 lg:pt-32">
-      <div className="max-w-7xl mx-auto">
-        <p className="font-display text-base text-foreground font-bold text-center">
-          {
-            "Trusted by the open-source community / Enterprise-grade open source solution"
-          }
-        </p>
-        <p className="font-display text-base text-muted-foreground font-bold text-center">compatible with over Compatible with 1,500+ applications and integrations</p>
-        <ul
-          role="list"
-          className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:flex-col sm:gap-x-0 sm:gap-y-10 md:flex-row xl:gap-x-16 xl:gap-y-6"
+    <section className="relative overflow-hidden border-t border-border bg-background py-20 sm:py-24 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <HomeSectionHeader
+          eyebrow="Integration surface"
+          title="Works with the storage ecosystem"
+          description="RustFS keeps S3 compatibility at the center, so existing analytics, observability, AI, and delivery tools can keep using the object storage interfaces they already know."
+        />
+      </div>
+
+      <div className="relative mx-auto max-w-[100rem] overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] sm:[mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+        <Marquee
+          aria-hidden="true"
+          pauseOnHover
+          repeat={2}
+          className="[--duration:48s] [--gap:1rem] motion-reduce:[&>div]:animate-none sm:[--gap:1.5rem]"
         >
           {softwares.map((software) => {
             const IconComponent = iconMap[software];
 
             return (
-              <li key={software} className="flex">
-                <div className="w-40 h-20 text-foreground/70 transition-colors duration-200 flex items-center justify-center">
+              <div
+                key={software}
+                className="group relative grid h-24 w-44 shrink-0 place-items-center overflow-hidden border border-border bg-card px-6 py-4 transition-colors duration-300 before:absolute before:inset-0 before:opacity-0 before:transition-[opacity,background-position] before:duration-500 before:[background-image:repeating-linear-gradient(135deg,transparent_0,transparent_12px,var(--muted)_12px,var(--muted)_24px)] before:[background-position:0_0] before:[background-size:34px_34px] hover:bg-muted/35 hover:before:opacity-20 hover:before:[background-position:34px_0] sm:h-28 sm:w-52"
+              >
+                <span className="relative z-10 grid h-14 w-full max-w-40 place-items-center text-foreground/75 transition duration-300 group-hover:-translate-y-0.5 group-hover:text-foreground sm:h-16 sm:max-w-44">
                   <IconComponent
-                    className="w-full h-full"
+                    className="block h-full w-full"
                     style={{ color: "currentColor" }}
                     fill="currentColor"
                   />
-                </div>
-              </li>
+                </span>
+              </div>
             );
           })}
-        </ul>
+        </Marquee>
       </div>
+
+      <ul className="sr-only">
+        {softwares.map((software) => (
+          <li key={software}>{softwareLabels[software]}</li>
+        ))}
+      </ul>
     </section>
   );
 }

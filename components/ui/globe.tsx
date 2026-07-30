@@ -72,6 +72,7 @@ export function Globe({
   }
 
   useEffect(() => {
+    const canvas = canvasRef.current
     const onResize = () => {
       if (canvasRef.current) {
         widthRef.current = canvasRef.current.offsetWidth
@@ -81,21 +82,37 @@ export function Globe({
     window.addEventListener("resize", onResize)
     onResize()
 
-    const globe = createGlobe(canvasRef.current!, {
-      ...config,
-      width: widthRef.current * 2,
-      height: widthRef.current * 2,
-      onRender: (state) => {
-        if (!pointerInteracting.current) phiRef.current += 0.005
-        state.phi = phiRef.current + rs.get()
-        state.width = widthRef.current * 2
-        state.height = widthRef.current * 2
-      },
-    })
+    if (!canvas || !hasWebGLContext(canvas)) {
+      return () => window.removeEventListener("resize", onResize)
+    }
 
-    setTimeout(() => (canvasRef.current!.style.opacity = "1"), 0)
+    let globe: ReturnType<typeof createGlobe> | null = null
+
+    try {
+      globe = createGlobe(canvas, {
+        ...config,
+        width: widthRef.current * 2,
+        height: widthRef.current * 2,
+        onRender: (state) => {
+          if (!pointerInteracting.current) phiRef.current += 0.005
+          state.phi = phiRef.current + rs.get()
+          state.width = widthRef.current * 2
+          state.height = widthRef.current * 2
+        },
+      })
+    } catch {
+      return () => window.removeEventListener("resize", onResize)
+    }
+
+    const opacityTimer = window.setTimeout(() => {
+      if (canvasRef.current) {
+        canvasRef.current.style.opacity = "1"
+      }
+    }, 0)
+
     return () => {
-      globe.destroy()
+      window.clearTimeout(opacityTimer)
+      globe?.destroy()
       window.removeEventListener("resize", onResize)
     }
   }, [rs, config])
@@ -124,5 +141,13 @@ export function Globe({
         }
       />
     </div>
+  )
+}
+
+function hasWebGLContext(canvas: HTMLCanvasElement) {
+  return Boolean(
+    canvas.getContext("webgl2") ??
+      canvas.getContext("webgl") ??
+      canvas.getContext("experimental-webgl")
   )
 }

@@ -10,11 +10,15 @@ export async function getDockerPulls(): Promise<number> {
   ];
 
   for (const endpoint of endpoints) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
+
     try {
       const response = await fetch(endpoint, {
         headers: {
           'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36',
         },
+        signal: controller.signal,
         // Cache for 1 hour
         next: { revalidate: 3600 },
       });
@@ -26,9 +30,15 @@ export async function getDockerPulls(): Promise<number> {
         }
       }
     } catch (error) {
-      console.warn(`Failed to fetch Docker pulls from ${endpoint}:`, error);
+      if (error instanceof Error && error.name === 'AbortError') {
+        console.warn(`Timed out fetching Docker pulls from ${endpoint}`);
+      } else {
+        console.warn(`Failed to fetch Docker pulls from ${endpoint}:`, error);
+      }
+    } finally {
+      clearTimeout(timeoutId);
     }
   }
 
-  return 6371731
+  return 6371731;
 }

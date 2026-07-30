@@ -3,17 +3,19 @@
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
+
+function useMounted() {
+  return useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+}
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
-  // Ensure component displays theme state after client-side hydration
-  const [mounted, setMounted] = useState(false)
-
-  // 确保组件在客户端完全水合后再显示主题状态
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = useMounted()
 
   const toggleTheme = () => {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
@@ -24,7 +26,7 @@ export function ThemeToggle() {
     return (
       <button
         type="button"
-        className="relative p-0 text-muted-foreground hover:text-primary transition-colors"
+        className="relative inline-flex size-10 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
         aria-label="Toggle theme"
         disabled
       >
@@ -42,7 +44,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="relative p-0 text-muted-foreground hover:text-primary transition-colors"
+      className="relative inline-flex size-10 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
       aria-label="Toggle theme"
     >
       <div className="relative size-5">
