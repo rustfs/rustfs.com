@@ -1,0 +1,40 @@
+# RustFS
+
+> RustFS is an open-source, Apache 2.0-licensed distributed object storage system written in Rust. It provides an Amazon S3-compatible API for AI, cloud-native, and self-hosted workloads.
+
+RustFS supports distributed deployment, erasure coding, data management, identity and access controls, encryption, observability, and multiple access protocols. Use the documentation for installation, configuration, administration, and API details. Use the website for product overviews, downloads, project news, and company information.
+
+## Documentation
+
+- [Official documentation](https://docs.rustfs.com/): Deployment, configuration, administration, developer, and API guides.
+- [GitHub repository](https://github.com/rustfs/rustfs): Source code, issues, contribution history, and the Apache 2.0 license.
+- [GitHub releases](https://github.com/rustfs/rustfs/releases): Published RustFS versions and release assets.
+
+## Product
+
+- [Product overview](https://rustfs.com/): Overview of RustFS and its primary use cases.
+- [Multiple protocol access](https://rustfs.com/product/multiple-protocol-access/): S3, WebDAV, Swift, FTP(S), and MCP access.
+- [Data management](https://rustfs.com/product/data-management/): Buckets, lifecycle rules, Object Lock, versioning, multipart uploads, and S3 Tables.
+- [High availability and scale](https://rustfs.com/product/high-availability-scale/): Distributed topology, erasure coding, pool orchestration, rebalancing, and self-healing.
+- [Security and compliance](https://rustfs.com/product/security-compliance/): IAM, OIDC, mTLS, encryption, KMS, audit, and event handling.
+- [Operations and observability](https://rustfs.com/product/operational-observability/): Cluster management, OpenTelemetry signals, and rc operations.
+
+## Downloads and tools
+
+- [Download RustFS](https://rustfs.com/download/): Server and client downloads for supported platforms and deployment methods.
+- [Download RustFS Server](https://rustfs.com/download/server/): Server installation options.
+- [Download rc](https://rustfs.com/download/cli/): RustFS command-line client installation options.
+- [Erasure code calculator](https://rustfs.com/erasure-code-calculator/): Compare durability and storage efficiency configurations.
+- [Docker Hub](https://hub.docker.com/r/rustfs/rustfs): Official RustFS container images.
+
+## Project resources
+
+- [Blog](https://rustfs.com/blog/): Engineering articles, release announcements, migration guides, and project news.
+- [About RustFS](https://rustfs.com/about/): Project background, values, and milestones.
+- [Community discussions](https://github.com/rustfs/rustfs/discussions): Questions and community conversations.
+- [Contact](https://rustfs.com/contact-us/): Contact the RustFS team.
+
+## Optional
+
+- [Privacy policy](https://rustfs.com/privacy-policy/): Website privacy policy.
+- [Cookie policy](https://rustfs.com/cookie-policy/): Website cookie policy.
