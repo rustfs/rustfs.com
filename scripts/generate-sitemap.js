@@ -8,6 +8,7 @@ import { pathToFileURL } from 'node:url';
 const BASE_URL = 'https://rustfs.com'
 const OUT_DIR = 'out'
 const SITEMAP_OUTPUT = 'out/sitemap.xml'
+const EXCLUDED_URLS = new Set(['/404/', '/_not-found/'])
 
 // Page priority configuration
 const PAGE_PRIORITIES = {
@@ -98,6 +99,12 @@ function validateSitemap(sitemap) {
     throw new Error('No URLs found in sitemap')
   }
 
+  for (const url of EXCLUDED_URLS) {
+    if (sitemap.includes(`<loc>${BASE_URL}${url}</loc>`)) {
+      throw new Error(`Excluded URL found in sitemap: ${url}`)
+    }
+  }
+
   return true
 }
 
@@ -112,7 +119,7 @@ function main() {
   }
 
   // Scan directory to get all URLs
-  const urls = scanDirectory(OUT_DIR)
+  const urls = scanDirectory(OUT_DIR).filter(url => !EXCLUDED_URLS.has(url))
 
   if (urls.length === 0) {
     console.log('⚠️  No URLs found in out directory.')

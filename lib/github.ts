@@ -141,9 +141,9 @@ export async function getLatestCliRelease(): Promise<GitHubRelease | null> {
  */
 export async function getGitHubMetrics(): Promise<GitHubMetrics> {
   const fallback: GitHubMetrics = {
-    stars: 28000,
-    forks: 500,
-    commits: 1000,
+    stars: 30000,
+    forks: 1300,
+    commits: 4800,
   };
 
   try {
