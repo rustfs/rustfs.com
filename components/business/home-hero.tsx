@@ -33,7 +33,7 @@ export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
               High-Performance, S3-Compatible Object Storage for AI Data Centers
             </h1>
             <p className="mt-6 w-full text-base leading-7 text-muted-foreground md:text-lg md:leading-8">
-              RustFS is the world&apos;s fastest-growing, next-generation distributed object storage. Built from the ground up in Rust and open-sourced under the Apache 2.0 license, RustFS offers native S3 compatibility, serving as a powerful, production-ready alternative to MinIO and Ceph.
+              RustFS is the world&apos;s fastest-growing open-source distributed object storage system. Built from the ground up in Rust and open-sourced under the Apache 2.0 license, RustFS offers native S3 compatibility, serving as a powerful, production-ready alternative to MinIO and Ceph.
             </p>
 
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 text-sm xl:grid-cols-4">
