@@ -4,6 +4,7 @@ import { footerNavigation } from '@/data/navigation';
 import LinkDiscord from './buttons/link-discord';
 import LinkGitHub from './buttons/link-github';
 import LinkTwitter from './buttons/link-twitter';
+import { CookieSettingsButton } from './cookie-consent';
 import { Logo } from './logo';
 
 export default function AppFooter() {
@@ -50,7 +51,11 @@ export default function AppFooter() {
           </p>
           <div className="mt-8 flex flex-col gap-4 border-t border-border/50 pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p>&copy; {new Date().getFullYear()} RustFS. All rights reserved.</p>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <CookieSettingsButton className="transition-colors hover:text-foreground" />
+              <a href="/cookie-policy" className="transition-colors hover:text-foreground">
+                Cookie Policy
+              </a>
               <LinkTwitter size="size-4" className="group inline-flex" />
               <LinkDiscord size="size-4" className="group inline-flex" />
               <LinkGitHub className="group inline-flex" />

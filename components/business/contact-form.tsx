@@ -114,7 +114,7 @@ export default function ContactForm() {
     company: '',
     dataCapacity: '',
     currentS3System: '',
-    marketingConsent: true,
+    marketingConsent: false,
     message: ''
   })
 
@@ -202,7 +202,7 @@ export default function ContactForm() {
           company: '',
           dataCapacity: '',
           currentS3System: '',
-          marketingConsent: true,
+          marketingConsent: false,
           message: ''
         })
         setHCaptchaToken(null)

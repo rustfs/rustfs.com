@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 
 import { SITE_CONFIG, SITE_METADATA } from '@/app.config';
 import AppFooter from '@/components/business/app-footer';
 import AppHeader from '@/components/business/app-header';
 import FixedContactButton from '@/components/business/buttons/fixed-contact-button';
+import { CookieConsentProvider } from '@/components/business/cookie-consent';
 import FixedLanguageBanner from '@/components/business/fixed-language-banner';
 import SkipLink from '@/components/business/skip-link';
 import BackgroundGrid from '@/components/ui/background-grid';
@@ -82,38 +82,23 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} flex h-full flex-col overflow-x-clip antialiased`}
       >
-        <ThemeProvider enableSystem attribute="class">
-          <SkipLink />
-          <BackgroundGrid />
-          <FixedLanguageBanner />
-          <AppHeader />
-          <div
-            id="main-content"
-            tabIndex={-1}
-            className="flex min-h-0 flex-1 flex-col outline-none"
-          >
-            {children}
-          </div>
-          <AppFooter />
-          <FixedContactButton />
-        </ThemeProvider>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-TWW7WMTWL9"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-TWW7WMTWL9');
-          `}
-        </Script>
-        <Script
-          id="baidu-analytics"
-          src="https://hm.baidu.com/hm.js?968e7103a8e28fb30f7d69e42b7c82bc"
-          strategy="afterInteractive"
-        />
+        <CookieConsentProvider>
+          <ThemeProvider enableSystem attribute="class">
+            <SkipLink />
+            <BackgroundGrid />
+            <FixedLanguageBanner />
+            <AppHeader />
+            <div
+              id="main-content"
+              tabIndex={-1}
+              className="flex min-h-0 flex-1 flex-col outline-none"
+            >
+              {children}
+            </div>
+            <AppFooter />
+            <FixedContactButton />
+          </ThemeProvider>
+        </CookieConsentProvider>
       </body>
     </html>
   );
