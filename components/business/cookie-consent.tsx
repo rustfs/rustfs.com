@@ -29,7 +29,7 @@ const CONSENT_STORAGE_KEY = 'rustfs-cookie-consent'
 const CONSENT_EVENT = 'rustfs-cookie-consent-change'
 const CONSENT_VERSION = 1
 const CONSENT_LIFETIME_MS = 180 * 24 * 60 * 60 * 1000
-const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
+const GOOGLE_ANALYTICS_ID = 'G-TWW7WMTWL9'
 
 declare global {
   interface Window {
