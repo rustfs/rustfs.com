@@ -199,6 +199,64 @@ type ServerInstallPath = {
   }[];
 };
 
+function KubernetesInstallCommands() {
+  const methods = [
+    {
+      id: 'helm-chart',
+      label: 'Helm Chart',
+      title: 'Helm Chart install',
+      command: [
+        'helm repo add rustfs https://charts.rustfs.com',
+        'helm repo update',
+        'helm install rustfs rustfs/rustfs --namespace rustfs --create-namespace',
+      ],
+    },
+    {
+      id: 'operator',
+      label: 'Operator',
+      title: 'Operator install',
+      command: [
+        'helm repo add operator https://operator.rustfs.com',
+        'helm repo update',
+        'helm install operator operator/rustfs-operator --namespace rustfs-system --create-namespace',
+      ],
+    },
+  ];
+  const [activeMethodId, setActiveMethodId] = useState(methods[0].id);
+  const activeMethod = methods.find((method) => method.id === activeMethodId) ?? methods[0];
+
+  return (
+    <div>
+      <div className="mb-3 flex border-b border-border" role="tablist" aria-label="Kubernetes install methods">
+        {methods.map((method) => {
+          const isActive = method.id === activeMethod.id;
+
+          return (
+            <button
+              key={method.id}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => setActiveMethodId(method.id)}
+              className={cn(
+                "border-b-2 border-b-transparent px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground",
+                isActive && "border-b-brand text-brand"
+              )}
+            >
+              {method.label}
+            </button>
+          );
+        })}
+      </div>
+      <CodeBlock
+        title={activeMethod.title}
+        code={activeMethod.command}
+        className="border-brand/60 shadow-[0_0_0_1px_rgba(39,112,246,0.18),0_18px_60px_rgba(39,112,246,0.12)]"
+      />
+    </div>
+  );
+}
+
 function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
   const x86Musl = findReleaseAsset(release, [/rustfs-linux-x86_64-musl.*\.zip/i], 'rustfs-linux-x86_64-musl-latest.zip');
   const x86Gnu = findReleaseAsset(release, [/rustfs-linux-x86_64-gnu.*\.zip/i], 'rustfs-linux-x86_64-gnu-latest.zip');
@@ -225,8 +283,6 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
       commandTitle: 'Fast validation',
       command: [
         'curl -O https://rustfs.com/install_rustfs.sh && bash install_rustfs.sh',
-        'mkdir -p ~/rustfs-data',
-        'rustfs ~/rustfs-data',
       ],
       chips: ['MUSL / GNU', 'x86_64 / ARM64', 'system service'],
       actions: [
@@ -388,11 +444,15 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
         </div>
 
         <div className="grid gap-5 p-5 sm:p-6">
-          <CodeBlock
-            title={activePath.commandTitle}
-            code={activePath.command}
-            className="border-brand/60 shadow-[0_0_0_1px_rgba(39,112,246,0.18),0_18px_60px_rgba(39,112,246,0.12)]"
-          />
+          {activePath.id === 'kubernetes' ? (
+            <KubernetesInstallCommands />
+          ) : (
+            <CodeBlock
+              title={activePath.commandTitle}
+              code={activePath.command}
+              className="border-brand/60 shadow-[0_0_0_1px_rgba(39,112,246,0.18),0_18px_60px_rgba(39,112,246,0.12)]"
+            />
+          )}
 
           {activePath.actions ? (
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -488,7 +548,7 @@ export default function DownloadPageClient() {
             <ProductDownloadLink
               href="/download/cli"
               eyebrow="Admin CLI"
-              title="RustFS CLI (rc)"
+              title="RustFS CLI Client (rc)"
               description="Use rc for bucket, object, cluster, identity, and operational workflows."
               methods={['Homebrew', 'Scoop', 'Linux', 'macOS', 'Windows', 'Docker', 'Source']}
               Icon={TerminalIcon}

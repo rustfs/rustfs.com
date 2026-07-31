@@ -242,7 +242,7 @@ export default function RcDownloadSection({ cliRelease }: RcDownloadSectionProps
 
           <div className="mt-10">
             <h1 className="w-full font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
-              RustFS CLI (rc)
+              RustFS CLI Client (rc)
             </h1>
             <p className="mt-4 w-full text-lg font-semibold leading-8 text-foreground sm:text-xl">
               rc is the operator surface after RustFS is running.
@@ -337,6 +337,26 @@ export default function RcDownloadSection({ cliRelease }: RcDownloadSectionProps
               {activeMethod.id === 'source' ? <SourceInstallCard /> : null}
             </div>
           </div>
+
+          <aside className="mt-8 border border-border bg-muted/30 p-5 sm:p-6" aria-labelledby="cli-install-notes">
+            <h2 id="cli-install-notes" className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
+              Notes
+            </h2>
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-7 text-muted-foreground">
+              <li>
+                For step-by-step instructions, see the{' '}
+                <a
+                  href="https://docs.rustfs.com/en/operations/rc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-brand hover:text-foreground"
+                >
+                  Installation Documentation
+                </a>
+                .
+              </li>
+            </ul>
+          </aside>
         </div>
       </section>
     </main>
