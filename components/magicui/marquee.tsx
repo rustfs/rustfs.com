@@ -58,7 +58,7 @@ export function Marquee({
         .map((_, i) => (
           <div
             key={i}
-            className={cn("flex shrink-0 justify-around gap-(--gap)", {
+            className={cn("flex shrink-0 justify-around gap-(--gap) motion-reduce:animate-none", {
               "animate-marquee flex-row": !vertical,
               "animate-marquee-vertical flex-col": vertical,
               "group-hover:paused": pauseOnHover,

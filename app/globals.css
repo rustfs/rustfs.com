@@ -280,6 +280,24 @@
   .motion-reveal[data-motion-delay="3"] {
     animation-delay: 210ms;
   }
+
+  [data-scroll-reveal] {
+    transition-duration: 640ms;
+    transition-property: opacity, transform;
+    transition-timing-function: var(--motion-ease-emphasized);
+  }
+
+  [data-scroll-reveal="pending"] {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    will-change: opacity, transform;
+  }
+
+  [data-scroll-reveal="visible"] {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -287,10 +305,15 @@
   .motion-card,
   .motion-icon-tile,
   .motion-arrow,
-  .motion-reveal {
+  .motion-reveal,
+  [data-scroll-reveal] {
     animation: none !important;
     transform: none !important;
     transition: none !important;
+  }
+
+  [data-scroll-reveal="pending"] {
+    opacity: 1 !important;
   }
 }
 

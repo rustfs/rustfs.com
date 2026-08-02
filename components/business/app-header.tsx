@@ -194,15 +194,15 @@ export default function AppHeader() {
                   >
                     <div className="px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Product</div>
                     {productNavigation.map((item) => (
-                      <a key={item.title} className="block w-full p-2 text-sm hover:bg-muted/50" href={item.href}>{item.title}</a>
+                      <a key={item.title} className="block w-full p-2 text-base hover:bg-muted/50" href={item.href}>{item.title}</a>
                     ))}
                     <div className="mt-3 px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Resources</div>
                     {resourceNavigation.map((item) => (
-                      <a key={item.title} className="block w-full p-2 text-sm hover:bg-muted/50" href={item.href}>{item.title}</a>
+                      <a key={item.title} className="block w-full p-2 text-base hover:bg-muted/50" href={item.href}>{item.title}</a>
                     ))}
                     <div className="mt-3 px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Links</div>
                     {navs.map((item, index) => (
-                      <a key={index} className="block w-full p-2 text-sm hover:bg-muted/50" href={item.url}>{item.label}</a>
+                      <a key={index} className="block w-full p-2 text-base hover:bg-muted/50" href={item.url}>{item.label}</a>
                     ))}
                   </Popover.Panel>
                 </Transition>

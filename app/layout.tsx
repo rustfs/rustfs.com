@@ -8,6 +8,7 @@ import AppHeader from '@/components/business/app-header';
 import FixedContactButton from '@/components/business/buttons/fixed-contact-button';
 import { CookieConsentProvider } from '@/components/business/cookie-consent';
 import FixedLanguageBanner from '@/components/business/fixed-language-banner';
+import SiteScrollMotion from '@/components/business/site-scroll-motion';
 import SkipLink from '@/components/business/skip-link';
 import BackgroundGrid from '@/components/ui/background-grid';
 import "./globals.css";
@@ -88,6 +89,7 @@ export default async function RootLayout({
             <BackgroundGrid />
             <FixedLanguageBanner />
             <AppHeader />
+            <SiteScrollMotion />
             <div
               id="main-content"
               tabIndex={-1}
