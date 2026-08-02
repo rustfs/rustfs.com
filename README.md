@@ -75,6 +75,18 @@ pnpm build
 pnpm start
 ```
 
+### Homepage Metrics Cache
+
+The deployment workflow refreshes GitHub and Docker Hub metrics at 05:00 and
+17:00 Beijing time, as well as on every deployment from `main`. The validated
+values are stored in `public/homepage-metrics.json` and embedded into the static
+homepage during the build.
+
+Each source refreshes independently. If an upstream API is unavailable, the
+workflow keeps that source's values from the last deployed cache. The committed
+JSON file is the bootstrap fallback for the first deployment, so no manual cache
+maintenance is required.
+
 ## 📝 Development Guidelines
 
 ### Code Style

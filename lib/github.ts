@@ -216,10 +216,6 @@ export async function getGitHubMetrics(): Promise<GitHubMetrics> {
       console.warn('Failed to fetch GitHub metrics:', error);
     }
 
-    if (process.env.REQUIRE_LIVE_HOMEPAGE_METRICS === 'true') {
-      throw new Error('Unable to fetch live GitHub homepage metrics', { cause: error });
-    }
-
     return GITHUB_METRICS_FALLBACK;
   }
 }

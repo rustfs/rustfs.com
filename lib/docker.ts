@@ -5,7 +5,6 @@
  */
 const DOCKER_FETCH_TIMEOUT_MS = 10_000;
 const DOCKER_PULLS_FALLBACK = 7_166_727;
-const REQUIRE_LIVE_HOMEPAGE_METRICS = process.env.REQUIRE_LIVE_HOMEPAGE_METRICS === 'true';
 
 export async function getDockerPulls(): Promise<number> {
   const injectedPullsValue = process.env.HOMEPAGE_DOCKER_PULLS;
@@ -52,10 +51,6 @@ export async function getDockerPulls(): Promise<number> {
     } finally {
       clearTimeout(timeoutId);
     }
-  }
-
-  if (REQUIRE_LIVE_HOMEPAGE_METRICS) {
-    throw new Error('Unable to fetch live Docker Hub homepage metrics');
   }
 
   return DOCKER_PULLS_FALLBACK;
