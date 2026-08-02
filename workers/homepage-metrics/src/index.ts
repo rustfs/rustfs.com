@@ -156,11 +156,23 @@ export function mergeHomepageMetrics(
 }
 
 async function readCachedMetrics(env: Env): Promise<HomepageMetrics> {
-  const cached = await env.HOMEPAGE_METRICS.get<unknown>(CACHE_KEY, {
+  const cached = await readStoredMetrics(env);
+  return isHomepageMetrics(cached) ? cached : fallbackMetrics;
+}
+
+async function readStoredMetrics(env: Env): Promise<unknown> {
+  return env.HOMEPAGE_METRICS.get<unknown>(CACHE_KEY, {
     type: "json",
     cacheTtl: 300,
   });
-  return isHomepageMetrics(cached) ? cached : fallbackMetrics;
+}
+
+export async function loadOrRefreshHomepageMetrics(
+  read: () => Promise<unknown>,
+  refresh: () => Promise<RefreshResult>,
+): Promise<HomepageMetrics> {
+  const cached = await read();
+  return isHomepageMetrics(cached) ? cached : (await refresh()).metrics;
 }
 
 export async function refreshHomepageMetrics(env: Env): Promise<RefreshResult> {
@@ -212,7 +224,11 @@ export default {
     }
 
     try {
-      return metricsResponse(await readCachedMetrics(env), request.method);
+      const metrics = await loadOrRefreshHomepageMetrics(
+        () => readStoredMetrics(env),
+        () => refreshHomepageMetrics(env),
+      );
+      return metricsResponse(metrics, request.method);
     } catch (error) {
       console.error(JSON.stringify({
         event: "homepage_metrics_read_failed",
