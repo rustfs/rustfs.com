@@ -77,15 +77,27 @@ pnpm start
 
 ### Homepage Metrics Cache
 
-The deployment workflow refreshes GitHub and Docker Hub metrics at 05:00 and
-17:00 Beijing time, as well as on every deployment from `main`. The validated
-values are stored in `public/homepage-metrics.json` and embedded into the static
-homepage during the build.
+The `rustfs-homepage-metrics` Cloudflare Worker refreshes GitHub and Docker Hub
+metrics at 05:00 and 17:00 Beijing time. It stores the last successful values in
+Workers KV and serves them from `https://rustfs.com/api/homepage-metrics`.
 
-Each source refreshes independently. If an upstream API is unavailable, the
-workflow keeps that source's values from the last deployed cache. The committed
-JSON file is the bootstrap fallback for the first deployment, so no manual cache
-maintenance is required.
+Each source refreshes independently. A failed upstream request never overwrites
+that source's last successful values. The homepage reads the API after hydration
+and keeps `public/homepage-metrics.json` as its build-time and runtime fallback,
+so a Worker, KV, or upstream outage cannot reset the displayed values.
+
+The Worker is deployed automatically after relevant changes reach `main`.
+Wrangler creates and binds the KV namespace on the first deployment. Configure
+the `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` repository secrets once;
+subsequent deployments and twice-daily refreshes require no manual action.
+
+Local verification:
+
+```bash
+pnpm exec wrangler types workers/homepage-metrics/worker-configuration.d.ts \
+  --config workers/homepage-metrics/wrangler.jsonc
+pnpm run check:homepage-metrics-worker
+```
 
 ## 📝 Development Guidelines
 

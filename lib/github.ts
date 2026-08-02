@@ -1,3 +1,5 @@
+import homepageMetrics from "@/public/homepage-metrics.json";
+
 export interface GitHubRelease {
   tag_name: string;
   name: string;
@@ -20,11 +22,7 @@ export interface GitHubMetrics {
 
 const GITHUB_FETCH_TIMEOUT_MS = 10_000;
 
-const GITHUB_METRICS_FALLBACK: GitHubMetrics = {
-  stars: 30_530,
-  forks: 1_349,
-  commits: 5_089,
-};
+const GITHUB_METRICS_FALLBACK: GitHubMetrics = homepageMetrics.github;
 
 async function fetchGitHub(
   url: string,
@@ -170,54 +168,7 @@ export async function getGitHubMetrics(): Promise<GitHubMetrics> {
     throw new Error('Invalid injected GitHub homepage metrics');
   }
 
-  try {
-    const [repoRes, commitsRes] = await Promise.all([
-      fetchGitHub('https://api.github.com/repos/rustfs/rustfs', {
-        headers: {
-          Accept: 'application/vnd.github+json',
-          'User-Agent': 'RustFS-Website',
-        },
-        next: { revalidate: 3600 },
-      }),
-      fetchGitHub('https://api.github.com/repos/rustfs/rustfs/commits?per_page=1', {
-        headers: {
-          Accept: 'application/vnd.github+json',
-          'User-Agent': 'RustFS-Website',
-        },
-        next: { revalidate: 3600 },
-      }),
-    ]);
-
-    if (!repoRes.ok || !commitsRes.ok) {
-      throw new Error(`GitHub metrics API returned ${repoRes.status}/${commitsRes.status}`);
-    }
-
-    const repo = await repoRes.json() as { stargazers_count?: number; forks_count?: number };
-    const link = commitsRes.headers.get('link');
-    let commits = 0;
-
-    const match = link?.match(/page=(\d+)>; rel="last"/);
-    if (match?.[1]) {
-      commits = Number(match[1]);
-    } else {
-      const data = await commitsRes.json();
-      commits = Array.isArray(data) ? data.length : 0;
-    }
-
-    return {
-      stars: repo.stargazers_count ?? GITHUB_METRICS_FALLBACK.stars,
-      forks: repo.forks_count ?? GITHUB_METRICS_FALLBACK.forks,
-      commits: Number.isFinite(commits) && commits > 0 ? commits : GITHUB_METRICS_FALLBACK.commits,
-    };
-  } catch (error) {
-    if (isAbortError(error)) {
-      console.warn('Timed out fetching GitHub metrics');
-    } else {
-      console.warn('Failed to fetch GitHub metrics:', error);
-    }
-
-    return GITHUB_METRICS_FALLBACK;
-  }
+  return GITHUB_METRICS_FALLBACK;
 }
 
 /**
