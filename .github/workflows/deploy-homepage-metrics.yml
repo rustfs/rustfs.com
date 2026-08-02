@@ -42,8 +42,67 @@ jobs:
       - name: Verify Worker
         run: pnpm run check:homepage-metrics-worker
 
+      - name: Validate Cloudflare credentials
+        shell: bash
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${CLOUDFLARE_ACCOUNT_ID}" ]]; then
+            echo "::error::Missing CLOUDFLARE_ACCOUNT_ID repository secret."
+            exit 1
+          fi
+
+          if [[ -z "${CLOUDFLARE_API_TOKEN}" ]]; then
+            echo "::error::Missing CLOUDFLARE_API_TOKEN repository secret."
+            exit 1
+          fi
+
+          pnpm exec wrangler whoami
+
+      - name: Provision homepage metrics KV
+        shell: bash
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          KV_NAMESPACE_TITLE: rustfs-homepage-metrics
+          KV_BINDING: HOMEPAGE_METRICS
+        run: |
+          set -euo pipefail
+
+          namespaces_json="$(pnpm exec wrangler kv namespace list)"
+          namespace_id="$(
+            jq -r --arg title "${KV_NAMESPACE_TITLE}" \
+              '[.[] | select(.title == $title)][0].id // empty' \
+              <<<"${namespaces_json}"
+          )"
+
+          if [[ -z "${namespace_id}" ]]; then
+            pnpm exec wrangler kv namespace create "${KV_NAMESPACE_TITLE}"
+            namespaces_json="$(pnpm exec wrangler kv namespace list)"
+            namespace_id="$(
+              jq -r --arg title "${KV_NAMESPACE_TITLE}" \
+                '[.[] | select(.title == $title)][0].id // empty' \
+                <<<"${namespaces_json}"
+            )"
+          fi
+
+          if [[ -z "${namespace_id}" ]]; then
+            echo "::error::KV namespace was not found after provisioning."
+            exit 1
+          fi
+
+          jq \
+            --arg binding "${KV_BINDING}" \
+            --arg id "${namespace_id}" \
+            '(.kv_namespaces[] | select(.binding == $binding) | .id) = $id' \
+            workers/homepage-metrics/wrangler.jsonc \
+            > workers/homepage-metrics/wrangler.deploy.jsonc
+
       - name: Deploy Worker
-        run: pnpm exec wrangler deploy --config workers/homepage-metrics/wrangler.jsonc
+        run: pnpm exec wrangler deploy --config workers/homepage-metrics/wrangler.deploy.jsonc
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
