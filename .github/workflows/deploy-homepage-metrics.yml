@@ -106,3 +106,9 @@ jobs:
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Warm homepage metrics cache
+        run: >-
+          curl --fail --silent --show-error --retry 5 --retry-all-errors
+          --retry-delay 2 --max-time 45 --output /dev/null
+          https://rustfs.com/api/homepage-metrics
