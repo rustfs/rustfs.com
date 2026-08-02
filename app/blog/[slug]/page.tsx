@@ -66,7 +66,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <main className="relative flex-1">
-      <article className="border-y border-border text-foreground">
+      <article className="border-b border-border text-foreground">
         <header className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
           <div className="pt-8">
             <Link

@@ -42,16 +42,16 @@ export default function HomeMultiClouds() {
             className="motion-card group flex min-h-[30rem] flex-col bg-card transition-colors hover:bg-muted/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
             aria-label={stories[0].linkText}
           >
-            <div className="relative flex h-60 shrink-0 items-center overflow-hidden bg-background p-8 sm:p-10">
+            <div className="relative flex h-60 shrink-0 items-center justify-center overflow-hidden bg-background p-8 sm:p-10">
               <div
                 aria-hidden="true"
                 className="absolute inset-0 opacity-50 [background-image:linear-gradient(90deg,var(--border)_1px,transparent_1px),linear-gradient(0deg,var(--border)_1px,transparent_1px)] [background-size:34px_34px]"
               />
               <Image
-                src="/images/brands/nvidia-inception-badge.webp"
-                alt="NVIDIA Inception Program member"
-                width={494}
-                height={198}
+                src="/images/nvidia-inception-program-badge.png"
+                alt="NVIDIA Inception Program member badge"
+                width={501}
+                height={217}
                 unoptimized
                 className="relative h-auto w-full max-w-sm"
               />
