@@ -18,7 +18,13 @@ export interface GitHubMetrics {
   commits: number;
 }
 
-const GITHUB_FETCH_TIMEOUT_MS = 3500;
+const GITHUB_FETCH_TIMEOUT_MS = 10_000;
+
+const GITHUB_METRICS_FALLBACK: GitHubMetrics = {
+  stars: 30_530,
+  forks: 1_349,
+  commits: 5_089,
+};
 
 async function fetchGitHub(
   url: string,
@@ -140,11 +146,29 @@ export async function getLatestCliRelease(): Promise<GitHubRelease | null> {
  * @returns Promise<GitHubMetrics>
  */
 export async function getGitHubMetrics(): Promise<GitHubMetrics> {
-  const fallback: GitHubMetrics = {
-    stars: 30000,
-    forks: 1300,
-    commits: 4800,
-  };
+  const injectedMetricValues = [
+    process.env.HOMEPAGE_GITHUB_STARS,
+    process.env.HOMEPAGE_GITHUB_FORKS,
+    process.env.HOMEPAGE_GITHUB_COMMITS,
+  ];
+
+  if (injectedMetricValues.some((value) => value !== undefined)) {
+    if (injectedMetricValues.some((value) => value === undefined)) {
+      throw new Error('Incomplete injected GitHub homepage metrics');
+    }
+
+    const injectedMetrics = {
+      stars: Number(injectedMetricValues[0]),
+      forks: Number(injectedMetricValues[1]),
+      commits: Number(injectedMetricValues[2]),
+    };
+
+    if (Object.values(injectedMetrics).every((value) => Number.isInteger(value) && value > 0)) {
+      return injectedMetrics;
+    }
+
+    throw new Error('Invalid injected GitHub homepage metrics');
+  }
 
   try {
     const [repoRes, commitsRes] = await Promise.all([
@@ -165,7 +189,7 @@ export async function getGitHubMetrics(): Promise<GitHubMetrics> {
     ]);
 
     if (!repoRes.ok || !commitsRes.ok) {
-      return fallback;
+      throw new Error(`GitHub metrics API returned ${repoRes.status}/${commitsRes.status}`);
     }
 
     const repo = await repoRes.json() as { stargazers_count?: number; forks_count?: number };
@@ -181,9 +205,9 @@ export async function getGitHubMetrics(): Promise<GitHubMetrics> {
     }
 
     return {
-      stars: repo.stargazers_count ?? fallback.stars,
-      forks: repo.forks_count ?? fallback.forks,
-      commits: Number.isFinite(commits) && commits > 0 ? commits : fallback.commits,
+      stars: repo.stargazers_count ?? GITHUB_METRICS_FALLBACK.stars,
+      forks: repo.forks_count ?? GITHUB_METRICS_FALLBACK.forks,
+      commits: Number.isFinite(commits) && commits > 0 ? commits : GITHUB_METRICS_FALLBACK.commits,
     };
   } catch (error) {
     if (isAbortError(error)) {
@@ -192,7 +216,11 @@ export async function getGitHubMetrics(): Promise<GitHubMetrics> {
       console.warn('Failed to fetch GitHub metrics:', error);
     }
 
-    return fallback;
+    if (process.env.REQUIRE_LIVE_HOMEPAGE_METRICS === 'true') {
+      throw new Error('Unable to fetch live GitHub homepage metrics', { cause: error });
+    }
+
+    return GITHUB_METRICS_FALLBACK;
   }
 }
 

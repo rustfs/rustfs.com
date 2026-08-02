@@ -45,7 +45,14 @@ jobs:
         with:
           node-version: 24
 
+      - name: Fetch homepage metrics
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/fetch-homepage-metrics.sh
+
       - name: Install dependencies and build
+        env:
+          REQUIRE_LIVE_HOMEPAGE_METRICS: "true"
         run: |
           pnpm install --no-frozen-lockfile
           pnpm run build
