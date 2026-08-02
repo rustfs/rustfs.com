@@ -4,10 +4,10 @@ import { cn } from "@/lib/utils";
 import { productNavigation, resourceNavigation, type NavigationItem } from "@/data/navigation";
 import { homeAnnouncement } from "@/data/announcement";
 import { Popover, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment, useEffect, useRef, type RefObject } from 'react';
+import { Fragment, useEffect, useRef, useState, type RefObject } from 'react';
 import LinkGitHub from "./buttons/link-github";
 import LinkTwitter from "./buttons/link-twitter";
 import { Logo } from "./logo";
@@ -99,6 +99,7 @@ function NavigationMenu({ label, items, wide = false }: { label: string; items: 
 
 export default function AppHeader() {
   const pathname = usePathname()
+  const [isAnnouncementDismissed, setIsAnnouncementDismissed] = useState(false)
   const showHomeAnnouncement = pathname === '/' && homeAnnouncement.enabled
   const navs = [
     {
@@ -120,25 +121,35 @@ export default function AppHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95">
-      {showHomeAnnouncement ? (
-        <Link
-          href={homeAnnouncement.href}
-          className="group relative flex min-h-11 items-center justify-center overflow-hidden bg-foreground px-4 py-2 text-center text-sm text-background transition-colors hover:bg-foreground/90"
-        >
-          <span
-            aria-hidden="true"
-            className="absolute inset-y-0 right-0 w-1/3 bg-brand/35 [clip-path:polygon(26%_0,100%_0,100%_100%,0_100%)]"
-          />
-          <span className="relative inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-            <span className="inline-flex h-5 items-center border border-background/35 px-2 font-mono text-[9px] font-semibold uppercase leading-none tracking-[0.16em]">
-              {homeAnnouncement.badge}
+      {showHomeAnnouncement && !isAnnouncementDismissed ? (
+        <div className="relative bg-foreground text-background">
+          <Link
+            href={homeAnnouncement.href}
+            className="group relative flex min-h-11 items-center justify-center overflow-hidden px-12 py-2 text-center text-sm transition-colors hover:bg-foreground/90"
+          >
+            <span
+              aria-hidden="true"
+              className="absolute inset-y-0 right-0 w-1/3 bg-brand/35 [clip-path:polygon(26%_0,100%_0,100%_100%,0_100%)]"
+            />
+            <span className="relative inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+              <span className="inline-flex h-5 items-center border border-background/35 px-2 font-mono text-[9px] font-semibold uppercase leading-none tracking-[0.16em]">
+                {homeAnnouncement.badge}
+              </span>
+              <span>{homeAnnouncement.message}</span>
+              <span className="font-semibold underline decoration-background/45 underline-offset-4">
+                {homeAnnouncement.linkText} <span className="motion-arrow inline-block">→</span>
+              </span>
             </span>
-            <span>{homeAnnouncement.message}</span>
-            <span className="font-semibold underline decoration-background/45 underline-offset-4">
-              {homeAnnouncement.linkText} <span className="motion-arrow inline-block">→</span>
-            </span>
-          </span>
-        </Link>
+          </Link>
+          <button
+            type="button"
+            onClick={() => setIsAnnouncementDismissed(true)}
+            aria-label="Dismiss announcement"
+            className="absolute right-3 top-1/2 z-10 -translate-y-1/2 p-1 text-background/75 transition-colors hover:bg-background/10 hover:text-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
+          >
+            <XIcon className="size-4" />
+          </button>
+        </div>
       ) : null}
 
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8 xl:py-5">
