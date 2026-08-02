@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "github": {
+    "stars": 30530,
+    "forks": 1349,
+    "commits": 5089,
+    "updatedAt": "2026-08-01T16:52:28Z"
+  },
+  "docker": {
+    "pulls": 7166727,
+    "updatedAt": "2026-08-01T17:05:00Z"
+  }
+}

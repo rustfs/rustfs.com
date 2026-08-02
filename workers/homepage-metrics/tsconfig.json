@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "incremental": false,
+    "lib": ["ES2024"],
+    "types": []
+  },
+  "include": [
+    "worker-configuration.d.ts",
+    "src/**/*.ts",
+    "../../lib/homepage-metrics.ts",
+    "../../public/homepage-metrics.json"
+  ]
+}

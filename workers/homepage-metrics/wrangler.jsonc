@@ -1,0 +1,32 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "rustfs-homepage-metrics",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-29",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "rustfs.com/api/homepage-metrics*",
+      "zone_name": "rustfs.com"
+    }
+  ],
+  "triggers": {
+    "crons": ["0 9,21 * * *"]
+  },
+  "kv_namespaces": [
+    {
+      "binding": "HOMEPAGE_METRICS"
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "head_sampling_rate": 1
+    },
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 0.1
+    }
+  }
+}

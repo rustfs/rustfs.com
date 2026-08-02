@@ -9,9 +9,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "check:homepage-metrics-worker": "pnpm run typecheck:homepage-metrics-worker && pnpm run test:homepage-metrics-worker && wrangler deploy --dry-run --config workers/homepage-metrics/wrangler.jsonc",
     "postbuild": "node scripts/generate-sitemap.js",
     "sitemap": "node scripts/generate-sitemap.js",
-    "sync:blog": "node scripts/sync-wordpress-blog.mjs"
+    "sync:blog": "node scripts/sync-wordpress-blog.mjs",
+    "test:homepage-metrics-worker": "node --experimental-strip-types --test workers/homepage-metrics/src/index.test.ts",
+    "typecheck:homepage-metrics-worker": "wrangler types workers/homepage-metrics/worker-configuration.d.ts --check --config workers/homepage-metrics/wrangler.jsonc && tsc --noEmit -p workers/homepage-metrics/tsconfig.json"
   },
   "dependencies": {
     "@base-ui/react": "^1.2.0",

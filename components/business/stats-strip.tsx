@@ -2,8 +2,9 @@
 
 import { NumberTicker } from "@/components/ui/number-ticker";
 import type { GitHubMetrics } from "@/lib/github";
+import { HOMEPAGE_METRICS_API_PATH, isHomepageMetrics } from "@/lib/homepage-metrics";
 import { cn } from "@/lib/utils";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface StatsStripProps {
   className?: string;
@@ -16,14 +17,44 @@ export default function StatsStrip({
   metrics,
   dockerPulls,
 }: StatsStripProps) {
+  const [currentMetrics, setCurrentMetrics] = useState(metrics);
+  const [currentDockerPulls, setCurrentDockerPulls] = useState(dockerPulls);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function refreshMetrics() {
+      try {
+        const response = await fetch(HOMEPAGE_METRICS_API_PATH, {
+          headers: { Accept: "application/json" },
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          return;
+        }
+
+        const refreshedMetrics: unknown = await response.json();
+        if (isHomepageMetrics(refreshedMetrics)) {
+          setCurrentMetrics(refreshedMetrics.github);
+          setCurrentDockerPulls(refreshedMetrics.docker.pulls);
+        }
+      } catch {
+        // Keep the build-time fallback when the runtime cache is unavailable.
+      }
+    }
+
+    void refreshMetrics();
+    return () => controller.abort();
+  }, []);
+
   const items = useMemo(
     () => [
-      { label: "GitHub Stars", value: metrics.stars },
+      { label: "GitHub Stars", value: currentMetrics.stars },
       { label: "Global Instances", text: "1500000+" },
-      { label: "Repo Commits", value: metrics.commits },
-      { label: "Docker Pulls", value: dockerPulls },
+      { label: "Repo Commits", value: currentMetrics.commits },
+      { label: "Docker Pulls", value: currentDockerPulls },
     ],
-    [metrics, dockerPulls],
+    [currentMetrics, currentDockerPulls],
   );
 
   return (

@@ -3,9 +3,9 @@
  * This function is called at build time on the server side
  * @returns Promise<number> Docker pull count or fallback value
  */
-const DOCKER_FETCH_TIMEOUT_MS = 10_000;
-const DOCKER_PULLS_FALLBACK = 7_166_727;
-const REQUIRE_LIVE_HOMEPAGE_METRICS = process.env.REQUIRE_LIVE_HOMEPAGE_METRICS === 'true';
+import homepageMetrics from "@/public/homepage-metrics.json";
+
+const DOCKER_PULLS_FALLBACK = homepageMetrics.docker.pulls;
 
 export async function getDockerPulls(): Promise<number> {
   const injectedPullsValue = process.env.HOMEPAGE_DOCKER_PULLS;
@@ -16,46 +16,6 @@ export async function getDockerPulls(): Promise<number> {
     }
 
     throw new Error('Invalid injected Docker Hub homepage metrics');
-  }
-
-  const endpoints = [
-    'https://hub.docker.com/v2/repositories/rustfs/rustfs/',
-    'https://hub.docker.com/v2/namespaces/rustfs/repositories/rustfs',
-  ];
-
-  for (const endpoint of endpoints) {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), DOCKER_FETCH_TIMEOUT_MS);
-
-    try {
-      const response = await fetch(endpoint, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36',
-        },
-        signal: controller.signal,
-        // Cache for 1 hour
-        next: { revalidate: 3600 },
-      });
-
-      if (response.ok) {
-        const json = await response.json() as { pull_count?: number };
-        if (typeof json.pull_count === 'number' && Number.isFinite(json.pull_count)) {
-          return json.pull_count;
-        }
-      }
-    } catch (error) {
-      if (error instanceof Error && error.name === 'AbortError') {
-        console.warn(`Timed out fetching Docker pulls from ${endpoint}`);
-      } else {
-        console.warn(`Failed to fetch Docker pulls from ${endpoint}:`, error);
-      }
-    } finally {
-      clearTimeout(timeoutId);
-    }
-  }
-
-  if (REQUIRE_LIVE_HOMEPAGE_METRICS) {
-    throw new Error('Unable to fetch live Docker Hub homepage metrics');
   }
 
   return DOCKER_PULLS_FALLBACK;
