@@ -103,6 +103,11 @@ export default function AppHeader() {
   const showHomeAnnouncement = pathname === '/' && homeAnnouncement.enabled
   const navs = [
     {
+      label: 'Integration',
+      url: '/blog/integration',
+      classes: '',
+    },
+    {
       label: 'Download',
       url: `/download`,
       classes: '',

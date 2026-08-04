@@ -21,6 +21,14 @@ const FALLBACK_COVERS = [
   "/images/covers/4.jpg",
   "/images/covers/5.jpg",
 ];
+const TAG_ALIASES = {
+  ai: "AI",
+  helm: "Helm",
+  integrations: "Integration",
+  released: "Release",
+  rustfs: "RustFS",
+  security: "Security",
+};
 
 const turndown = new TurndownService({
   codeBlockStyle: "fenced",
@@ -137,7 +145,8 @@ function getTags(post) {
   const tags = Array.isArray(terms[1]) ? terms[1] : [];
   const names = [...tags, ...categories]
     .map((term) => decodeHtml(term?.name))
-    .filter(Boolean);
+    .filter(Boolean)
+    .map((name) => TAG_ALIASES[name.toLowerCase()] ?? name);
 
   return Array.from(new Set(names)).slice(0, 6);
 }

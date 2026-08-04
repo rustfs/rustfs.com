@@ -7,7 +7,7 @@ import { useRef, useState, type ReactNode } from 'react'
 
 const POSTS_PER_PAGE = 5
 
-export default function BlogArchive({ posts }: { posts: BlogPostMeta[] }) {
+export default function BlogArchive({ posts, title = 'Older posts' }: { posts: BlogPostMeta[]; title?: string }) {
   const [currentPage, setCurrentPage] = useState(1)
   const archiveRef = useRef<HTMLElement>(null)
   const pageCount = Math.ceil(posts.length / POSTS_PER_PAGE)
@@ -18,7 +18,7 @@ export default function BlogArchive({ posts }: { posts: BlogPostMeta[] }) {
     <section ref={archiveRef} className="scroll-mt-24 border-b border-border bg-muted/20 py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-6 flex items-center justify-between gap-4">
-          <h2 className="text-2xl font-semibold text-foreground">Older posts</h2>
+          <h2 className="text-2xl font-semibold text-foreground">{title}</h2>
           <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
             {posts.length} posts
           </span>

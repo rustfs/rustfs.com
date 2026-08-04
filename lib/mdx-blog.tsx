@@ -29,6 +29,15 @@ export interface BlogPost extends BlogPostMeta {
   content: ReactElement;
 }
 
+const TAG_ALIASES: Record<string, string> = {
+  ai: "AI",
+  helm: "Helm",
+  integrations: "Integration",
+  released: "Release",
+  rustfs: "RustFS",
+  security: "Security",
+};
+
 export const getBlogPosts = cache(async (): Promise<BlogPostMeta[]> => {
   let entries: Dirent[];
 
@@ -176,10 +185,13 @@ function toStringArray(value: unknown): string[] {
     return [];
   }
 
-  return value
+  const tags = value
     .filter((item): item is string => typeof item === "string")
     .map((item) => item.trim())
-    .filter(Boolean);
+    .filter(Boolean)
+    .map((tag) => TAG_ALIASES[tag.toLowerCase()] ?? tag);
+
+  return Array.from(new Set(tags));
 }
 
 function getReadingMinutes(content: string): number {
