@@ -100,11 +100,11 @@ function FeaturedPost({ post }: { post: BlogPostMeta }) {
         }`}
       >
         {hasImage ? (
-          <div className="relative min-h-64 overflow-hidden border-b border-border bg-background lg:min-h-96 lg:border-r lg:border-b-0">
+          <div className="relative min-h-64 overflow-hidden border-b border-border bg-muted/30 lg:min-h-96 lg:border-r lg:border-b-0">
             <img
               src={post.image}
               alt=""
-              className="absolute inset-0 size-full object-cover transition duration-300 group-hover:scale-[1.02]"
+              className="absolute inset-0 size-full object-contain transition duration-300 group-hover:scale-[1.02]"
               loading="eager"
             />
           </div>
