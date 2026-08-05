@@ -104,7 +104,7 @@ export default function AppHeader() {
   const navs = [
     {
       label: 'Integration',
-      url: '/blog/integration',
+      url: '/integration',
       classes: '',
     },
     {
