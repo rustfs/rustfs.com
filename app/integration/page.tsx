@@ -5,8 +5,8 @@ import { integrationCategories } from "@/data/integrations";
 import IntegrationCatalog from "./integration-catalog";
 
 export const metadata: Metadata = {
-  title: "RustFS Integrations | AI, DevOps, Security, Big Data and Proxy Docs",
-  description: "Explore verified RustFS integration guides across AI, DevOps, Backup, Security, Big Data, and Reverse Proxy workflows.",
+  title: "RustFS Integration Directory | AI, DevOps, Security, Big Data, Reverse Proxy",
+  description: "Explore RustFS integration documentation by category, including AI, DevOps, Backup, Security, Big Data, and Reverse Proxy workflows.",
   keywords: [
     "RustFS integrations",
     "RustFS AI integration",
@@ -19,23 +19,51 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${SITE_CONFIG.primaryDomain}/integration/`,
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "RustFS Integrations",
-    description: "Integration docs and compatibility references for RustFS ecosystem workflows.",
+    title: "RustFS Integration Directory",
+    description: "Category-based integration documentation for RustFS-compatible workflows.",
     url: `${SITE_CONFIG.primaryDomain}/integration/`,
     siteName: "RustFS",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "RustFS Integrations",
-    description: "Browse RustFS integration docs by category with tab-based navigation.",
+    title: "RustFS Integration Directory",
+    description: "Browse integration documentation by category with hash-shareable tabs.",
   },
 };
 
 export default function IntegrationPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "RustFS Integration Directory",
+    description: "Category-based integration documentation for RustFS-compatible workflows.",
+    url: `${SITE_CONFIG.primaryDomain}/integration/`,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: integrationCategories.flatMap((category, categoryIndex) =>
+        category.projects.map((project, projectIndex) => ({
+          "@type": "ListItem",
+          position: categoryIndex * 100 + projectIndex + 1,
+          name: `${category.label}: ${project.name}`,
+          url: project.docsUrl,
+        })),
+      ),
+    },
+  };
+
   return (
     <main className="relative flex-1">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <section className="relative overflow-hidden border-y border-border py-16 text-foreground sm:py-24">
         <div
           aria-hidden="true"
@@ -66,6 +94,9 @@ export default function IntegrationPage() {
               All third-party project names are referenced only to describe technical compatibility and integration scenarios.
               Third-party trademarks, names, and brands are the property of their respective owners. RustFS does not imply
               endorsement, partnership, or affiliation unless explicitly stated in separate written agreements.
+            </p>
+            <p className="mt-2 text-sm leading-7 text-muted-foreground">
+              External documentation links may direct to third-party websites managed by their respective owners.
             </p>
           </section>
         </div>

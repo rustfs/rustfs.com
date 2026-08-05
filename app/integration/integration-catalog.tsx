@@ -196,7 +196,7 @@ export default function IntegrationCatalog({ categories }: IntegrationCatalogPro
                 </div>
 
                 <div className="mt-auto flex items-center gap-2 pt-6">
-                  <ActionButton href={project.docsUrl} label="Docs" kind="primary" />
+                  <ActionButton href={project.docsUrl} label="Docs" />
                 </div>
               </article>
             );
@@ -217,19 +217,15 @@ function getCategoryPalette(categoryId: string) {
   };
 }
 
-function ActionButton({ href, label, kind }: { href: string; label: string; kind: "primary" | "secondary" }) {
+function ActionButton({ href, label }: { href: string; label: string }) {
   const isExternal = href.startsWith("http://") || href.startsWith("https://");
 
   return (
     <Link
       href={href}
       target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noreferrer noopener" : undefined}
-      className={`inline-flex items-center border px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] transition-colors ${
-        kind === "primary"
-          ? "border-brand bg-brand text-brand-foreground hover:bg-brand/90"
-          : "border-border bg-card text-muted-foreground hover:border-brand hover:text-foreground"
-      }`}
+      rel={isExternal ? "noreferrer noopener external" : undefined}
+      className="inline-flex items-center border border-brand bg-brand px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-foreground transition-colors hover:bg-brand/90"
     >
       <span>{label}</span>
       <span className="motion-arrow ml-1.5" aria-hidden="true">
