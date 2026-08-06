@@ -1,0 +1,348 @@
+---
+title: "Managing AI Fine-Tuning Storage with Nawāt and RustFS"
+slug: nawat-ai-training-storage-with-rustfs
+description: "How Nawāt manages AI training storage using RustFS and Unsloth, turning workstations into controlled training workspaces instead of permanent archives."
+date: '2026-08-06T00:00:00.000Z'
+author: RustFS Team
+tags:
+  - AI
+  - Integration
+  - Use Case
+image: /images/blog/nawat-ai-training-storage-with-rustfs/cover.png
+---
+
+> Author: [Murtadha](https://github.com/murtadha-lap)
+
+As AI research grows, storage can quickly become a larger constraint than GPU compute. A workstation may be capable of fine-tuning multiple 7B or 11B models, but over time its local SSD fills with base models, datasets, training checkpoints, LoRA adapters, merged models, GGUF exports, and logs.
+
+**Nawāt** solves this by treating the local SSD as a bounded working cache and **RustFS** as the durable S3-compatible object storage backend.
+
+## The storage problem
+
+A single fine-tuning run may need the base model, processed dataset, optimizer state, recurring checkpoints, final adapter, merged weights, and one or more export formats at the same time. Eventually there may not be enough free space to save the next checkpoint or generate a new export.
+
+Manual cleanup is risky. A researcher can easily delete an adapter that was never copied elsewhere, remove a checkpoint needed to resume a failed run, or lose the connection between a result and the exact model, dataset, and parameters that produced it.
+
+## Before Nawāt
+
+A normal Unsloth script downloads the model and dataset through the usual libraries and writes the result to a local folder:
+
+```python
+from datasets import load_dataset
+from unsloth import FastVisionModel
+
+model, tokenizer = FastVisionModel.from_pretrained(
+    "unsloth/Qwen3.5-0.8B",
+    load_in_4bit=False,
+    use_gradient_checkpointing="unsloth",
+)
+
+dataset = load_dataset(
+    "unsloth/LaTeX_OCR",
+    split="train",
+)
+
+# Configure and run the normal Unsloth / TRL training workflow.
+
+model.save_pretrained("qwen_lora")
+tokenizer.save_pretrained("qwen_lora")
+```
+
+This works for one experiment, but the storage lifecycle remains manual:
+
+- The base model stays in the local cache.
+- The dataset stays on the workstation.
+- Checkpoints accumulate in local directories.
+- Adapters and exports must be moved manually.
+- Cleanup depends on the researcher remembering what is safe to delete.
+
+## After Nawāt
+
+The training code remains ordinary Unsloth code. Nawāt only provides managed paths for the model, dataset, checkpoints, and outputs:
+
+```python
+import nawat
+from datasets import load_dataset
+from unsloth import FastVisionModel
+
+model, tokenizer = FastVisionModel.from_pretrained(
+    nawat.model_dir(),
+    load_in_4bit=False,
+    use_gradient_checkpointing="unsloth",
+)
+
+dataset = load_dataset(
+    nawat.dataset_dir(),
+    split="train",
+)
+
+# Configure and run the normal Unsloth / TRL training workflow.
+
+adapter_dir = nawat.artifact_dir("adapter")
+model.save_pretrained(adapter_dir)
+tokenizer.save_pretrained(adapter_dir)
+```
+
+The model configuration, data conversion, trainer, optimizer, and hyperparameters are unchanged. The difference is the storage behavior:
+
+| Call | Storage behavior |
+| --- | --- |
+| `nawat.model_dir()` | Resolves the requested model into the bounded local cache and protects it while the run is active |
+| `nawat.dataset_dir()` | Resolves the dataset and prevents it from being reclaimed during training |
+| `nawat.artifact_dir("adapter")` | Creates a managed output directory that is published to RustFS after a successful run |
+| `nawat.checkpoint_args(...)` | Places resumable checkpoints in the run workspace |
+| `nawat.resume_from()` | Returns the newest valid checkpoint when resuming a run |
+
+A run can be submitted with stable model and dataset keys:
+
+```bash
+nawat submit train_latex_ocr.py \
+  --model models/unsloth/Qwen3.5-0.8B \
+  --dataset datasets/unsloth/LaTeX_OCR \
+  --param max_steps=500 \
+  --param learning_rate=2e-4 \
+  --param rank=16 \
+  --notes "LaTeX OCR baseline"
+```
+
+## End-to-end Unsloth example
+
+```python
+import nawat
+from datasets import load_dataset
+from trl import SFTConfig, SFTTrainer
+from unsloth import FastVisionModel
+from unsloth.trainer import UnslothVisionDataCollator
+
+MAX_STEPS = nawat.param("max_steps", 500)
+LEARNING_RATE = nawat.param("learning_rate", 2e-4)
+RANK = nawat.param("rank", 16)
+
+model, tokenizer = FastVisionModel.from_pretrained(
+    nawat.model_dir(),
+    load_in_4bit=False,
+    use_gradient_checkpointing="unsloth",
+)
+
+model = FastVisionModel.get_peft_model(
+    model,
+    finetune_vision_layers=True,
+    finetune_language_layers=True,
+    finetune_attention_modules=True,
+    finetune_mlp_modules=True,
+    r=RANK,
+    lora_alpha=RANK,
+    lora_dropout=0,
+    bias="none",
+    random_state=3407,
+)
+
+dataset = load_dataset(
+    nawat.dataset_dir(),
+    split="train",
+)
+
+instruction = "Write the LaTeX representation for this image."
+
+def convert_to_conversation(sample):
+    return {
+        "messages": [
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": instruction},
+                    {"type": "image", "image": sample["image"]},
+                ],
+            },
+            {
+                "role": "assistant",
+                "content": [
+                    {"type": "text", "text": sample["text"]},
+                ],
+            },
+        ]
+    }
+
+converted_dataset = [
+    convert_to_conversation(sample)
+    for sample in dataset
+]
+
+FastVisionModel.for_training(model)
+
+trainer = SFTTrainer(
+    model=model,
+    tokenizer=tokenizer,
+    data_collator=UnslothVisionDataCollator(model, tokenizer),
+    train_dataset=converted_dataset,
+    callbacks=[nawat.metrics.trainer_callback()],
+    args=SFTConfig(
+        per_device_train_batch_size=2,
+        gradient_accumulation_steps=4,
+        warmup_steps=5,
+        max_steps=MAX_STEPS,
+        learning_rate=LEARNING_RATE,
+        logging_steps=1,
+        optim="adamw_8bit",
+        weight_decay=0.001,
+        lr_scheduler_type="linear",
+        seed=3407,
+        report_to="none",
+        remove_unused_columns=False,
+        dataset_text_field="",
+        dataset_kwargs={"skip_prepare_dataset": True},
+        max_length=2048,
+        **nawat.checkpoint_args(
+            save_steps=250,
+            save_total_limit=3,
+        ),
+    ),
+)
+
+trainer.train(
+    resume_from_checkpoint=nawat.resume_from()
+)
+
+adapter_dir = nawat.artifact_dir("adapter")
+model.save_pretrained(adapter_dir)
+tokenizer.save_pretrained(adapter_dir)
+```
+
+Merged weights and GGUF exports can be written as separate managed artifacts when needed:
+
+```python
+exports = {
+    value.strip()
+    for value in nawat.param("export", "").split(",")
+    if value.strip()
+}
+
+if exports & {"merged", "gguf"}:
+    merged_dir = nawat.artifact_dir("merged")
+    model.save_pretrained_merged(
+        str(merged_dir),
+        tokenizer,
+    )
+
+if "gguf" in exports:
+    gguf_dir = nawat.artifact_dir("gguf")
+    model.save_pretrained_gguf(
+        str(gguf_dir),
+        tokenizer,
+        quantization_method=nawat.param(
+            "quantization",
+            "q4_k_m",
+        ),
+    )
+```
+
+## Storage lifecycle
+
+Each run follows the same storage lifecycle:
+
+```text
+Resolve inputs
+      ↓
+Reserve local working space
+      ↓
+Lease the active model and dataset
+      ↓
+Train with Unsloth
+      ↓
+Write checkpoints and artifacts
+      ↓
+Upload artifacts to RustFS
+      ↓
+Verify the remote manifest
+      ↓
+Mark local copies as reclaimable
+```
+
+RustFS is the durable S3-compatible store. Nawāt manages local cache limits, minimum free-space protection, input staging, active-process leases, run metadata, checkpoint paths, artifact publishing, remote verification, and safe local reclamation.
+
+## Stable artifact keys
+
+Nawāt maps each artifact key directly to a RustFS prefix and a local cache path:
+
+```text
+s3://nawat/
+├── models/unsloth/Qwen3.5-0.8B/
+├── models/unsloth/Qwen2.5-VL-7B-Instruct/
+├── datasets/unsloth/LaTeX_OCR/
+├── datasets/ocr-arabic-v3/
+├── runs/latex-ocr-v1/checkpoints/
+├── runs/latex-ocr-v1/adapter/
+├── runs/latex-ocr-v1/merged/
+├── runs/latex-ocr-v1/gguf/
+├── runs/latex-ocr-v1/logs/
+└── runs/latex-ocr-v1/metrics/
+```
+
+The same key is used to identify the object-storage prefix, resolve the local path, record the run input or output, and restore an artifact later. There is no separate naming layer between the object store and the training workspace.
+
+## Safe reclamation
+
+Nawāt does not delete a local output immediately after upload. After publishing an artifact, it lists the destination prefix in RustFS and compares the remote manifest with the local directory.
+
+The current verification checks file name, relative path, and file size. If a file is missing or its size does not match, the publish operation fails and the local copy remains in place. Only verified artifacts become eligible for local reclamation.
+
+Nawāt also protects active inputs with leases. A model or dataset used by a live process cannot be reclaimed because the disk is under pressure.
+
+## RustFS integration
+
+Nawāt communicates with RustFS through standard S3 operations:
+
+| S3 operation | Use in Nawāt |
+| --- | --- |
+| `ListObjectsV2` | Build remote manifests and verify prefixes |
+| `GetObject` | Restore models, datasets, checkpoints, and artifacts |
+| `PutObject` | Publish adapters, exports, logs, and metrics |
+| `DeleteObjects` | Remove remote artifacts only on explicit request |
+| `CreateBucket` | Prepare the storage namespace during setup |
+
+The client uses `boto3` with SigV4 authentication, path-style S3 addressing, multipart transfers, threaded uploads and downloads, and retry handling. Large files are transferred in multiple parts. Completed downloads are first written into temporary paths and renamed into place only after the transfer finishes.
+
+## Configuration
+
+```bash
+NAWAT_S3_ENDPOINT=http://127.0.0.1:9000
+NAWAT_S3_BUCKET=nawat
+NAWAT_S3_REGION=us-east-1
+NAWAT_S3_ACCESS_KEY=rustfsadmin
+NAWAT_S3_SECRET_KEY=change-me-before-first-use
+
+NAWAT_CACHE_ROOT=/home/user/nawat/cache
+NAWAT_WORKSPACE=/home/user/nawat/workspace
+NAWAT_CACHE_CEILING=120GB
+NAWAT_MIN_FREE=10GB
+```
+
+After configuring RustFS, validate the storage workflow:
+
+```bash
+nawat check --create-bucket
+```
+
+This tests connectivity, bucket access, upload, listing, verification, download, and cleanup.
+
+## Result
+
+Nawāt does not remove the need for local storage. The active model, dataset, checkpoints, and temporary exports still require working space.
+
+What changes is what must remain permanently on the workstation:
+
+- Active files stay local while they are needed.
+- Live jobs are protected from eviction.
+- Completed artifacts are uploaded to RustFS.
+- Local copies become reclaimable only after verification.
+- Older artifacts can be restored later by stable key.
+
+The workstation becomes a controlled training workspace instead of a permanent archive.
+
+## Project links
+
+- **Nawāt:** [github.com/murtadha-lap/nawat](https://github.com/murtadha-lap/nawat)
+- **RustFS:** [github.com/rustfs/rustfs](https://github.com/rustfs/rustfs)
+- **Unsloth:** [github.com/unslothai/unsloth](https://github.com/unslothai/unsloth)
+
+> Nawāt is an independent project and is not affiliated with or endorsed by RustFS or Unsloth. It supports S3-compatible object storage backends; RustFS is the backend used in this workflow.
