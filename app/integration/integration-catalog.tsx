@@ -1,10 +1,11 @@
 'use client';
 
+import { ArrowUpRightIcon, PlugZapIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState, type KeyboardEvent } from "react";
 
-import { cn } from "@/lib/utils";
 import type { IntegrationCategory, IntegrationProject } from "@/data/integrations";
+import { cn } from "@/lib/utils";
 
 interface IntegrationCatalogProps {
   categories: IntegrationCategory[];
@@ -104,11 +105,14 @@ export default function IntegrationCatalog({ categories }: IntegrationCatalogPro
   };
 
   return (
-    <div className="mt-8">
-      <nav className="flex gap-px overflow-x-auto border border-border bg-border" role="tablist" aria-label="Integration category tabs">
+    <div>
+      <nav
+        className="flex gap-px overflow-x-auto border border-border bg-border xl:grid xl:grid-cols-7"
+        role="tablist"
+        aria-label="Integration category tabs"
+      >
         {tabs.map((tab, index) => {
           const isActive = activeTab === tab.id;
-          const palette = getCategoryPalette(tab.id);
 
           return (
             <button
@@ -122,18 +126,21 @@ export default function IntegrationCatalog({ categories }: IntegrationCatalogPro
               onClick={() => setActiveTab(tab.id)}
               onKeyDown={(event) => handleTabKeyDown(event, index)}
               className={cn(
-                "group relative min-h-12 min-w-40 border-0 bg-card px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground focus:outline-hidden focus-visible:ring-2 focus-visible:ring-brand/40",
-                isActive ? cn("text-foreground", palette.tabActive) : "hover:bg-muted/40",
+                "group relative min-h-16 min-w-44 bg-card px-4 py-4 text-left text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:bg-muted/40 hover:text-foreground focus:outline-hidden focus-visible:ring-2 focus-visible:ring-brand/40 xl:min-w-0",
+                isActive && "bg-muted/35 text-foreground",
               )}
             >
               <span
                 aria-hidden="true"
                 className={cn(
                   "absolute inset-y-0 left-0 w-0.5 bg-transparent transition-colors",
-                  isActive && palette.tabStripe,
+                  isActive && "bg-brand",
                 )}
               />
-              {tab.label}
+              <span className="block font-mono text-[8px] tracking-[0.14em] text-muted-foreground">
+                {String(index).padStart(2, "0")}
+              </span>
+              <span className="mt-1 block">{tab.label}</span>
             </button>
           );
         })}
@@ -143,81 +150,53 @@ export default function IntegrationCatalog({ categories }: IntegrationCatalogPro
         id="integration-tab-panel"
         role="tabpanel"
         aria-labelledby={`integration-tab-${activeTab}`}
-        className="mt-5 border border-border bg-card p-4 sm:p-5"
+        className="mt-4 border border-border bg-background p-4 sm:p-5"
       >
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Active tab</p>
-          <div className="flex items-center gap-3">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">{activeTabLabel}</p>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{projects.length} projects</p>
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Documentation paths</p>
+          <div className="flex items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em]">
+            <p className="text-brand">{activeTabLabel}</p>
+            <span className="h-3 w-px bg-border" aria-hidden="true" />
+            <p className="text-muted-foreground">{projects.length} projects</p>
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {projects.map((project, index) => {
-            const palette = getCategoryPalette(project.categoryId);
-
-            return (
-              <article
-                key={`${project.categoryLabel}-${project.name}`}
-                data-motion-delay={String(index % 4)}
-                className={cn(
-                  "motion-card motion-reveal group relative flex min-h-56 flex-col overflow-hidden border p-5 transition-colors",
-                  "border-border bg-card hover:border-brand/60 hover:bg-muted/30",
-                )}
-              >
-                <span
-                  aria-hidden="true"
-                  className={cn(
-                    "absolute inset-x-0 top-0 h-0.5",
-                    palette.cardTop,
-                  )}
-                />
-                <span
-                  aria-hidden="true"
-                  className={cn(
-                    "pointer-events-none absolute -right-12 -top-12 h-24 w-24 blur-2xl",
-                    palette.cardAura,
-                  )}
-                />
-
-                <div className="mb-4 flex items-center justify-between gap-4">
-                  <span className={cn("text-[10px] font-semibold uppercase tracking-[0.16em]", palette.caseText)}>
-                    Case.{String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">{project.categoryLabel}</span>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {projects.map((project, index) => (
+            <article
+              key={`${project.categoryLabel}-${project.name}`}
+              data-motion-delay={String(index % 4)}
+              className="motion-card motion-reveal group flex min-h-64 flex-col border border-border bg-card p-5 transition-colors hover:border-brand/40 hover:bg-muted/20 sm:p-6"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <span className="motion-icon-tile flex size-11 items-center justify-center border border-border bg-background text-brand">
+                  <PlugZapIcon className="size-4" />
+                </span>
+                <div className="text-right font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                  <p>{project.categoryLabel}</p>
+                  <p className="mt-1 text-brand">Case.{String(index + 1).padStart(2, "0")}</p>
                 </div>
+              </div>
 
-                <div>
-                  <h3 className="text-lg font-semibold leading-tight text-foreground">
-                    {project.name}
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{project.description}</p>
-                </div>
+              <div className="mt-8">
+                <h3 className="text-xl font-semibold leading-tight tracking-tight text-foreground">
+                  {project.name}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">{project.description}</p>
+              </div>
 
-                <div className="mt-auto flex items-center gap-2 pt-6">
-                  <ActionButton href={project.docsUrl} label="Docs" />
-                </div>
-              </article>
-            );
-          })}
+              <div className="mt-auto pt-7">
+                <ActionButton href={project.docsUrl} />
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
-function getCategoryPalette(categoryId: string) {
-  return {
-    tabActive: categoryId === "all" ? "bg-[#0062FF]/12" : "bg-[#0062FF]/10",
-    tabStripe: "bg-[#0062FF]",
-    cardTop: "bg-[#0062FF]",
-    cardAura: "bg-[#0062FF]/25",
-    caseText: "text-[#0062FF]",
-  };
-}
-
-function ActionButton({ href, label }: { href: string; label: string }) {
+function ActionButton({ href }: { href: string }) {
   const isExternal = href.startsWith("http://") || href.startsWith("https://");
 
   return (
@@ -225,12 +204,10 @@ function ActionButton({ href, label }: { href: string; label: string }) {
       href={href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noreferrer noopener external" : undefined}
-      className="inline-flex items-center border border-brand bg-brand px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-foreground transition-colors hover:bg-brand/90"
+      className="motion-button group inline-flex h-10 items-center gap-2 border border-border bg-background px-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground hover:border-foreground hover:bg-foreground hover:text-background"
     >
-      <span>{label}</span>
-      <span className="motion-arrow ml-1.5" aria-hidden="true">
-        ↗
-      </span>
+      <span>Open docs</span>
+      <ArrowUpRightIcon className="motion-arrow size-3.5" aria-hidden="true" />
     </Link>
   );
 }
