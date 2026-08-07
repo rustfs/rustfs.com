@@ -178,18 +178,22 @@ function S3TablesVisual() {
   );
 }
 
-function DistributedVisual() {
+function DistributedVisual({
+  entityLabel = "Node",
+}: {
+  entityLabel?: "Node" | "Site";
+}) {
   return (
     <IllustrationFrame label="Distributed cluster">
       <div className="relative w-full max-w-md p-3">
         <div className="absolute left-1/2 top-1/2 h-px w-2/3 -translate-x-1/2 bg-border" />
         <div className="absolute left-1/2 top-1/2 h-2/3 w-px -translate-y-1/2 bg-border" />
         <div className="relative grid grid-cols-2 gap-8">
-          {["Node A", "Node B", "Node C", "Node D"].map((node, index) => (
-            <Reveal key={node} delay={index * 0.1}>
+          {["A", "B", "C", "D"].map((suffix, index) => (
+            <Reveal key={suffix} delay={index * 0.1}>
               <Tile
                 icon={ServerIcon}
-                label={node}
+                label={`${entityLabel} ${suffix}`}
                 detail={index === 3 ? "recovering" : "available"}
                 accent={index === 3}
               />
@@ -601,7 +605,13 @@ function MtlsVisual() {
 const illustrations: Record<ProductIllustrationVariant, ((props: { sectionIndex: number }) => ReactNode)> = {
   data: ({ sectionIndex }) => (sectionIndex === 0 ? <S3ManagementVisual /> : <S3TablesVisual />),
   scale: ({ sectionIndex }) => {
-    const visuals = [<DistributedVisual key="distributed" />, <ErasureCodingVisual key="ec" />, <ScalingVisual key="scaling" />, <HealingVisual key="healing" />];
+    const visuals = [
+      <DistributedVisual key="distributed" />,
+      <ErasureCodingVisual key="ec" />,
+      <ScalingVisual key="scaling" />,
+      <HealingVisual key="healing" />,
+      <DistributedVisual key="site-replication" entityLabel="Site" />,
+    ];
     return visuals[sectionIndex] ?? visuals[0];
   },
   ops: ({ sectionIndex }) => {
