@@ -206,7 +206,7 @@ function ActionButton({ href }: { href: string }) {
       rel={isExternal ? "noreferrer noopener external" : undefined}
       className="motion-button group inline-flex h-10 items-center gap-2 border border-border bg-background px-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground hover:border-foreground hover:bg-foreground hover:text-background"
     >
-      <span>Open docs</span>
+      <span>Read more</span>
       <ArrowUpRightIcon className="motion-arrow size-3.5" aria-hidden="true" />
     </Link>
   );

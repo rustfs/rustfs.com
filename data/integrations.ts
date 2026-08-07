@@ -22,6 +22,11 @@ export const integrationCategories: IntegrationCategory[] = [
         description: "Build vector database workflows on S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/milvus",
       },
+      {
+        name: "Nawāt",
+        description: "Manage AI fine-tuning storage with RustFS as the durable S3-compatible backend for Unsloth training workflows.",
+        docsUrl: "/blog/nawat-ai-training-storage-with-rustfs",
+      },
     ],
   },
   {
