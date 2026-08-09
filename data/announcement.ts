@@ -1,7 +1,7 @@
 export const homeAnnouncement = {
   enabled: true,
   badge: 'New',
-  message: 'RustFS 1.0 Beta is available for production-oriented testing.',
+  message: 'RustFS 1.0.0-rc.1 is now available.',
   linkText: 'Explore the release',
-  href: '/download/server',
+  href: 'https://github.com/rustfs/rustfs/releases/tag/1.0.0-rc.1',
 } as const
