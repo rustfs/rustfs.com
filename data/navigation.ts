@@ -45,6 +45,11 @@ export const resourceNavigation: NavigationItem[] = [
     description: "Optimal EC configurations for durability and storage efficiency.",
   },
   {
+    title: "Config Generator",
+    href: "/rustfs-config-generator",
+    description: "Generate a ready-to-use /etc/default/rustfs configuration file.",
+  },
+  {
     title: "Multi-tenant management",
     href: "/product/operational-observability#multi-tenant-management",
     description: "Operator-driven elastic scaling, MNMD provisioning, and tenant isolation.",
@@ -81,6 +86,7 @@ export const footerNavigation = [
       { title: "rc Download", href: "/download/cli" },
       { title: "Blog", href: "/blog" },
       { title: "EC Calculator", href: "/erasure-code-calculator" },
+      { title: "Config Generator", href: "/rustfs-config-generator" },
       { title: "Documentation", href: "/docs" },
     ],
   },
