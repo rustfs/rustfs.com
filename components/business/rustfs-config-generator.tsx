@@ -13,6 +13,7 @@ import {
   LinkIcon,
   LockKeyholeIcon,
   NetworkIcon,
+  RefreshCwIcon,
   RotateCcwIcon,
   ScrollTextIcon,
   Settings2Icon,
@@ -35,6 +36,10 @@ type LogLevel = (typeof LOG_LEVELS)[number];
 
 const KMS_BACKENDS = ["local", "vault"] as const;
 type KmsBackend = (typeof KMS_BACKENDS)[number];
+
+const ACCESS_KEY_CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const SECRET_KEY_CHARACTERS =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
 interface ConfigState {
   s3Port: string;
@@ -107,6 +112,26 @@ const QUERY_KEYS: Record<keyof ConfigState, string> = {
 
 const isPort = (value: string) =>
   /^\d{1,5}$/.test(value) && Number(value) >= 1 && Number(value) <= 65535;
+
+const generateRandomString = (characters: string, length: number) => {
+  const output: string[] = [];
+  const randomBytes = new Uint8Array(length * 2);
+  const unbiasedLimit = Math.floor(256 / characters.length) * characters.length;
+
+  while (output.length < length) {
+    crypto.getRandomValues(randomBytes);
+    for (const byte of randomBytes) {
+      if (byte < unbiasedLimit) {
+        output.push(characters[byte % characters.length]);
+      }
+      if (output.length === length) {
+        break;
+      }
+    }
+  }
+
+  return output.join("");
+};
 
 // Quote values containing shell-sensitive characters so the file stays valid in systemd.
 const formatEnvValue = (value: string) => {
@@ -303,6 +328,14 @@ export default function RustfsConfigGenerator() {
     setConfig(DEFAULT_CONFIG);
     setCopied(false);
     setLinkCopied(false);
+  };
+
+  const handleGenerateCredentials = () => {
+    setConfig((current) => ({
+      ...current,
+      accessKey: generateRandomString(ACCESS_KEY_CHARACTERS, 20),
+      secretKey: generateRandomString(SECRET_KEY_CHARACTERS, 40),
+    }));
   };
 
   const handleCopyShareLink = async () => {
@@ -538,9 +571,20 @@ export default function RustfsConfigGenerator() {
             </div>
 
             <div className="border-b border-border px-6 py-6">
-              <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                <KeyRoundIcon className="size-4 text-brand" />
-                Credentials
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  <KeyRoundIcon className="size-4 text-brand" />
+                  Credentials
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleGenerateCredentials}
+                >
+                  <RefreshCwIcon className="size-3.5" />
+                  Generate
+                </Button>
               </div>
               <div className="mt-5 grid gap-5 md:grid-cols-2">
                 <label className="block">
