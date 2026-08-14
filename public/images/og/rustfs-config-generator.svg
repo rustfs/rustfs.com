@@ -1,0 +1,7 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1200" fill="#0062FF"/>
+  <rect x="0" y="346" width="24" height="508" fill="#FF6A00"/>
+  <text x="88" y="580" font-family="Arial, Helvetica, sans-serif" font-size="80" font-weight="bold" fill="#FFFFFF">RustFS Config Generator</text>
+  <text x="92" y="672" font-family="Arial, Helvetica, sans-serif" font-size="40" fill="#DCEBFF">Generate a ready-to-use /etc/default/rustfs file</text>
+  <text x="92" y="730" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#DCEBFF">S3 API · Console · Volumes · Credentials · KMS · OTEL</text>
+</svg>

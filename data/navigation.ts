@@ -1,5 +1,3 @@
-import { docs_url } from "@/lib/utils";
-
 export interface NavigationItem {
   title: string;
   href: string;
@@ -47,6 +45,16 @@ export const resourceNavigation: NavigationItem[] = [
     description: "Optimal EC configurations for durability and storage efficiency.",
   },
   {
+    title: "Config Generator",
+    href: "/rustfs-config-generator",
+    description: "Generate a ready-to-use /etc/default/rustfs configuration file.",
+  },
+  {
+    title: "Multi-tenant management",
+    href: "/product/operational-observability#multi-tenant-management",
+    description: "Operator-driven elastic scaling, MNMD provisioning, and tenant isolation.",
+  },
+  {
     title: "Documentation",
     href: "/docs",
     description: "Deploy, configure, and manage RustFS from quickstarts to API references.",
@@ -62,11 +70,12 @@ export const footerNavigation = [
   {
     title: "Product features",
     links: [
-      { title: "S3 Compatible", href: docs_url("developer/sdk") },
+      { title: "S3 Compatible", href: "/product/multiple-protocol-access#s3-api-compatibility" },
       { title: "Multiple Protocol Access", href: "/product/multiple-protocol-access" },
       { title: "Data Management", href: "/product/data-management" },
       { title: "High Availability & Scale", href: "/product/high-availability-scale" },
       { title: "Operational & Observability", href: "/product/operational-observability" },
+      { title: "Multi-tenant management", href: "/product/operational-observability#multi-tenant-management" },
       { title: "Security & Compliance", href: "/product/security-compliance" },
     ],
   },
@@ -77,6 +86,7 @@ export const footerNavigation = [
       { title: "rc Download", href: "/download/cli" },
       { title: "Blog", href: "/blog" },
       { title: "EC Calculator", href: "/erasure-code-calculator" },
+      { title: "Config Generator", href: "/rustfs-config-generator" },
       { title: "Documentation", href: "/docs" },
     ],
   },

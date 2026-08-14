@@ -55,7 +55,6 @@ export default async function RootLayout({
         <meta name="yandexbot" content="index, follow" />
         <meta key="twitter:site" name="twitter:site" content="@rustfs" />
         <meta key="twitter:creator" name="twitter:creator" content="@rustfs" />
-        <meta key="og:type" property="og:type" content="article" />
         <meta name="baidu-site-verification" content="codeva-TTcVEynElc" />
         <link
           rel="apple-touch-icon"

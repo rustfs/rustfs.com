@@ -31,9 +31,19 @@ async function fetchGitHub(
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), GITHUB_FETCH_TIMEOUT_MS);
 
+  const headers: Record<string, string> = {
+    ...(init.headers as Record<string, string>),
+  };
+
+  const token = process.env.GITHUB_TOKEN;
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
   try {
     return await fetch(url, {
       ...init,
+      headers,
       signal: controller.signal,
     });
   } finally {

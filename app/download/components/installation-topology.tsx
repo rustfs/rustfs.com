@@ -163,7 +163,7 @@ export default function InstallationTopology() {
   };
 
   return (
-    <section className="py-20">
+    <section id="topology" className="scroll-mt-24 py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div>
           <div className="mb-10">

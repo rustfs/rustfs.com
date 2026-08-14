@@ -432,6 +432,43 @@ function InsightsVisual() {
   );
 }
 
+function MultiTenantVisual() {
+  const tenants = [
+    { label: "Tenant A", quota: "5 TB" },
+    { label: "Tenant B", quota: "2 TB" },
+    { label: "Tenant C", quota: "500 GB" },
+  ];
+
+  return (
+    <IllustrationFrame label="Operator-managed multi-tenancy">
+      <div className="grid w-full max-w-lg grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3">
+        <div className="grid gap-2">
+          {tenants.map((tenant, index) => (
+            <Reveal key={tenant.label} delay={index * 0.1}>
+              <Tile icon={UsersIcon} label={tenant.label} detail={tenant.quota} />
+            </Reveal>
+          ))}
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <DataFlowLine direction="horizontal" className="w-8" />
+          <motion.span
+            className="flex size-11 items-center justify-center border border-brand/60 bg-brand/5"
+            animate={{ boxShadow: ["0 0 0px transparent", "0 0 18px var(--color-brand)", "0 0 0px transparent"] }}
+            transition={{ duration: 2.2, repeat: Infinity }}
+          >
+            <BlocksIcon className="size-5 text-brand" />
+          </motion.span>
+          <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-brand">Operator</span>
+        </div>
+        <div className="grid gap-2">
+          <Tile icon={DatabaseIcon} label="Pool 01" detail="auto-scaling" accent />
+          <Tile icon={ServerIcon} label="Pool 02" detail="MNMD cluster" />
+        </div>
+      </div>
+    </IllustrationFrame>
+  );
+}
+
 function CliVisual() {
   return (
     <IllustrationFrame label="rc client">
@@ -615,7 +652,13 @@ const illustrations: Record<ProductIllustrationVariant, ((props: { sectionIndex:
     return visuals[sectionIndex] ?? visuals[0];
   },
   ops: ({ sectionIndex }) => {
-    const visuals = [<ConsoleVisual key="console" />, <OtelVisual key="otel" />, <InsightsVisual key="insights" />, <CliVisual key="cli" />];
+    const visuals = [
+      <MultiTenantVisual key="multi-tenant" />,
+      <ConsoleVisual key="console" />,
+      <OtelVisual key="otel" />,
+      <InsightsVisual key="insights" />,
+      <CliVisual key="cli" />,
+    ];
     return visuals[sectionIndex] ?? visuals[0];
   },
   security: ({ sectionIndex }) => {

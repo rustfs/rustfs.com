@@ -36,6 +36,7 @@ const sections: FeaturePageSection[] = [
       {
         title: "Drop-in MinIO replacement",
         description: "Zero config overhauls, no API rewrites, and zero migration friction.",
+        href: "/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs/",
       },
       {
         title: "Native virtual host mode",
