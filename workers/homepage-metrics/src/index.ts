@@ -6,6 +6,8 @@ import {
 import fallbackMetricsJson from "../../../public/homepage-metrics.json" with { type: "json" };
 
 const CACHE_KEY = "homepage-metrics:v1";
+export const DOCKER_CACHE_KEY = "docker-metrics:v1";
+const MAX_DOCKER_AGE_MS = 24 * 60 * 60 * 1000;
 const FETCH_TIMEOUT_MS = 10_000;
 const FETCH_ATTEMPTS = 3;
 const RESPONSE_HEADERS = {
@@ -105,32 +107,6 @@ async function fetchGitHubMetrics(): Promise<GitHubApiMetrics> {
   };
 }
 
-async function fetchDockerMetrics(): Promise<DockerApiMetrics> {
-  const endpoints = [
-    "https://hub.docker.com/v2/repositories/rustfs/rustfs/",
-    "https://hub.docker.com/v2/namespaces/rustfs/repositories/rustfs",
-  ];
-  let lastError: unknown;
-
-  for (const endpoint of endpoints) {
-    try {
-      const response = await fetchWithRetry(endpoint, {
-        headers: { "User-Agent": "RustFS-Homepage-Metrics" },
-      });
-      const repository = await response.json<unknown>();
-      if (!isRecord(repository)) {
-        throw new Error("Invalid Docker Hub response");
-      }
-
-      return { pulls: readPositiveInteger(repository, "pull_count") };
-    } catch (error) {
-      lastError = error;
-    }
-  }
-
-  throw lastError instanceof Error ? lastError : new Error("Docker Hub request failed");
-}
-
 export function mergeHomepageMetrics(
   current: HomepageMetrics,
   githubResult: PromiseSettledResult<GitHubApiMetrics>,
@@ -157,14 +133,37 @@ export function mergeHomepageMetrics(
 
 async function readCachedMetrics(env: Env): Promise<HomepageMetrics> {
   const cached = await readStoredMetrics(env);
-  return isHomepageMetrics(cached) ? cached : fallbackMetrics;
+  if (isHomepageMetrics(cached)) return cached;
+  const docker = await env.HOMEPAGE_METRICS.get<unknown>(DOCKER_CACHE_KEY, { type: "json", cacheTtl: 300 });
+  return mergeStoredDockerMetrics(fallbackMetrics, docker);
+}
+
+export function mergeStoredDockerMetrics(
+  current: HomepageMetrics,
+  docker: unknown,
+): HomepageMetrics {
+  const candidate = { ...current, docker };
+  if (!isHomepageMetrics(candidate)) return current;
+  if (Date.parse(candidate.docker.updatedAt) < Date.parse(current.docker.updatedAt)) return current;
+  if (Date.parse(candidate.docker.updatedAt) > Date.now() + 60_000) return current;
+  return candidate;
+}
+
+export function assertDockerMetricsFresh(metrics: HomepageMetrics, now = Date.now()): void {
+  if (now - Date.parse(metrics.docker.updatedAt) > MAX_DOCKER_AGE_MS) {
+    throw new Error(`Docker metrics are stale: last successful collection ${metrics.docker.updatedAt}`);
+  }
 }
 
 async function readStoredMetrics(env: Env): Promise<unknown> {
-  return env.HOMEPAGE_METRICS.get<unknown>(CACHE_KEY, {
-    type: "json",
-    cacheTtl: 300,
-  });
+  const [cached, docker] = await Promise.all([
+    env.HOMEPAGE_METRICS.get<unknown>(CACHE_KEY, { type: "json", cacheTtl: 300 }),
+    env.HOMEPAGE_METRICS.get<unknown>(DOCKER_CACHE_KEY, { type: "json", cacheTtl: 300 }),
+  ]);
+  // The collector owns the Docker key. Cron only writes the original aggregate key.
+  // Overlay on every read so a concurrent GitHub refresh cannot hide a Docker update.
+  if (isHomepageMetrics(cached)) return mergeStoredDockerMetrics(cached, docker);
+  return cached;
 }
 
 export async function loadOrRefreshHomepageMetrics(
@@ -177,14 +176,11 @@ export async function loadOrRefreshHomepageMetrics(
 
 export async function refreshHomepageMetrics(env: Env): Promise<RefreshResult> {
   const current = await readCachedMetrics(env);
-  const [githubResult, dockerResult] = await Promise.allSettled([
-    fetchGitHubMetrics(),
-    fetchDockerMetrics(),
-  ]);
+  const [githubResult] = await Promise.allSettled([fetchGitHubMetrics()]);
   const result = mergeHomepageMetrics(
     current,
     githubResult,
-    dockerResult,
+    { status: "rejected", reason: "Docker is collected by GitHub Actions" },
     new Date().toISOString(),
   );
 
@@ -195,9 +191,9 @@ export async function refreshHomepageMetrics(env: Env): Promise<RefreshResult> {
   console.log(JSON.stringify({
     event: "homepage_metrics_refresh",
     github: result.githubRefreshed ? "refreshed" : "retained",
-    docker: result.dockerRefreshed ? "refreshed" : "retained",
+    docker: "external_collector",
+    dockerUpdatedAt: result.metrics.docker.updatedAt,
     githubError: githubResult.status === "rejected" ? String(githubResult.reason) : undefined,
-    dockerError: dockerResult.status === "rejected" ? String(dockerResult.reason) : undefined,
   }));
 
   return result;
@@ -239,6 +235,10 @@ export default {
   },
 
   scheduled(_controller, env, ctx): void {
-    ctx.waitUntil(refreshHomepageMetrics(env));
+    ctx.waitUntil(refreshHomepageMetrics(env).then((result) => {
+      // Reject the scheduled invocation after preserving successful GitHub values.
+      // Stale Docker data must be visible as a failure, not silently reported as success.
+      assertDockerMetricsFresh(result.metrics);
+    }));
   },
 } satisfies ExportedHandler<Env>;

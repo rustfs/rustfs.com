@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import type { HomepageMetrics } from "../../../lib/homepage-metrics.ts";
-import { loadOrRefreshHomepageMetrics, mergeHomepageMetrics } from "./index.ts";
+import worker, { assertDockerMetricsFresh, DOCKER_CACHE_KEY, loadOrRefreshHomepageMetrics, mergeHomepageMetrics, mergeStoredDockerMetrics, refreshHomepageMetrics } from "./index.ts";
 
 const current: HomepageMetrics = {
   schemaVersion: 1,
@@ -106,4 +106,53 @@ test("refreshes metrics when the cache is empty", async () => {
 
   assert.deepEqual(result, refreshed);
   assert.equal(refreshCalls, 1);
+});
+
+test("overlays independently collected Docker data without changing its collection time", () => {
+  const docker = { pulls: 10041572, updatedAt: refreshedAt };
+  const result = mergeStoredDockerMetrics(current, docker);
+  assert.deepEqual(result.github, current.github);
+  assert.deepEqual(result.docker, docker);
+  for (const invalid of [null, { pulls: 0, updatedAt: refreshedAt }, { pulls: 500, updatedAt: "invalid" },
+    { pulls: 500, updatedAt: "2026-07-01T00:00:00Z" }, { pulls: 500, updatedAt: "2099-01-01T00:00:00Z" }]) {
+    assert.deepEqual(mergeStoredDockerMetrics(current, invalid), current);
+  }
+});
+
+test("reports data older than 24 hours as a failure", () => {
+  const collected = Date.parse(current.docker.updatedAt);
+  assert.doesNotThrow(() => assertDockerMetricsFresh(current, collected + 24 * 3600_000));
+  assert.throws(() => assertDockerMetricsFresh(current, collected + 24 * 3600_000 + 1), /stale/);
+});
+
+test("GitHub refresh never fetches Docker or writes its independently owned key", async (t) => {
+  const docker = { pulls: 10041572, updatedAt: new Date().toISOString() };
+  const writes: string[] = [];
+  const env = {
+    HOMEPAGE_METRICS: {
+      get: async (key: string) => key === DOCKER_CACHE_KEY ? docker : current,
+      put: async (key: string) => { writes.push(key); },
+    },
+  } as Env;
+  t.mock.method(globalThis, "fetch", async (url: string) => {
+    assert.ok(url.startsWith("https://api.github.com/"));
+    return url.includes("/commits?")
+      ? new Response("[]", { headers: { Link: '<https://api.github.com/repos/rustfs/rustfs/commits?per_page=1&page=6563>; rel="last"' } })
+      : Response.json({ stargazers_count: 31863, forks_count: 1427 });
+  });
+  const result = await refreshHomepageMetrics(env);
+  assert.deepEqual(result.metrics.docker, docker);
+  assert.equal(result.metrics.github.stars, 31863);
+  assert.deepEqual(writes, ["homepage-metrics:v1"]);
+});
+
+test("HTTP responses overlay the Docker key even while the aggregate has an old snapshot", async () => {
+  const docker = { pulls: 10041572, updatedAt: new Date().toISOString() };
+  const env = {
+    HOMEPAGE_METRICS: { get: async (key: string) => key === DOCKER_CACHE_KEY ? docker : current },
+  } as Env;
+  const response = await worker.fetch(new Request("https://rustfs.com/api/homepage-metrics"), env);
+  const metrics = await response.json() as HomepageMetrics;
+  assert.deepEqual(metrics.docker, docker);
+  assert.deepEqual(metrics.github, current.github);
 });

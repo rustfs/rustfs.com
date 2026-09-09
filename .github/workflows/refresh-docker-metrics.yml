@@ -1,0 +1,54 @@
+name: Refresh Docker metrics
+
+on:
+  schedule:
+    # UTC; collect before the Worker's 09:00/21:00 freshness checks.
+    - cron: "17 8,20 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # Serialize KV writes with the deployment workflow.
+  group: homepage-metrics-worker
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          cache: true
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Collect Docker metrics
+        run: node scripts/fetch-docker-metrics.mjs "$RUNNER_TEMP/docker-metrics.json"
+
+      - name: Publish Docker metrics to KV
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          namespace_id="$(pnpm exec wrangler kv namespace list | jq -er \
+            '[.[] | select(.title == "rustfs-homepage-metrics")] | if length == 1 then .[0].id else error("Expected one homepage metrics namespace") end')"
+          pnpm exec wrangler kv key put docker-metrics:v1 \
+            --namespace-id "$namespace_id" --remote \
+            --path "$RUNNER_TEMP/docker-metrics.json"
+
+      - name: Verify fresh Docker metrics on the homepage
+        run: node scripts/verify-docker-metrics.mjs "$RUNNER_TEMP/docker-metrics.json"

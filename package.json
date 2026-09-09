@@ -13,7 +13,7 @@
     "postbuild": "node scripts/generate-sitemap.js",
     "sitemap": "node scripts/generate-sitemap.js",
     "sync:blog": "node scripts/sync-wordpress-blog.mjs",
-    "test:homepage-metrics-worker": "node --experimental-strip-types --test workers/homepage-metrics/src/index.test.ts",
+    "test:homepage-metrics-worker": "node --experimental-strip-types --test workers/homepage-metrics/src/index.test.ts && node --test scripts/fetch-docker-metrics.test.mjs",
     "typecheck:homepage-metrics-worker": "wrangler types workers/homepage-metrics/worker-configuration.d.ts --check --config workers/homepage-metrics/wrangler.jsonc && tsc --noEmit -p workers/homepage-metrics/tsconfig.json"
   },
   "dependencies": {
