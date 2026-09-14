@@ -80,7 +80,7 @@ export default function DockerDownloadSection({ platform, release, className }: 
               </p>
             </div>
             <a
-              href="https://github.com/rustfs/rustfs/blob/main/docker-compose.yml"
+              href="https://rustfs.com/docker-compose.yml"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
@@ -91,7 +91,7 @@ export default function DockerDownloadSection({ platform, release, className }: 
 
           <CodeBlock
             code={[
-              "wget https://raw.githubusercontent.com/rustfs/rustfs/main/docker-compose.yml",
+              "curl -O https://rustfs.com/docker-compose.yml",
               "docker compose up -d",
             ]}
             title={'Installation Commands'}
