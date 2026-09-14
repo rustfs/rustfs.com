@@ -2,7 +2,11 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "rustfs-com",
   "compatibility_date": "2026-07-30",
+  // Proxies /docker-compose.yml from rustfs/rustfs; every other path stays a static asset.
+  "main": "workers/site/src/index.ts",
   "assets": {
-    "directory": "./out"
+    "directory": "./out",
+    "binding": "ASSETS",
+    "run_worker_first": ["/docker-compose.yml"]
   }
 }
