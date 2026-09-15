@@ -38,7 +38,7 @@ const sections: FeaturePageSection[] = [
     ],
   },
   {
-    title: "S3 Tables (Coming soon)",
+    title: "S3 Tables",
     items: [
       {
         title: "Automated Small File Management",
