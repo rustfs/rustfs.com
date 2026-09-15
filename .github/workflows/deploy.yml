@@ -42,6 +42,8 @@ jobs:
           node-version: 24
 
       - name: Install dependencies and build
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           pnpm install --no-frozen-lockfile
           pnpm run build
