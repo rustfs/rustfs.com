@@ -50,7 +50,7 @@ export default function StatsStrip({
   const items = useMemo(
     () => [
       { label: "GitHub Stars", value: currentMetrics.stars },
-      { label: "Global Instances", text: "1500000+" },
+      { label: "Global Instances", text: "2,700,000+" },
       { label: "Repo Commits", value: currentMetrics.commits },
       { label: "Docker Pulls", value: currentDockerPulls },
     ],
