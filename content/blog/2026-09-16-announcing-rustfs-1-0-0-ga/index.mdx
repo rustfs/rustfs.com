@@ -1,0 +1,124 @@
+---
+title: "Announcing RustFS 1.0.0 GA: Production-Ready, Open Source, S3-Compatible Object Storage"
+slug: announcing-rustfs-1-0-0-ga
+description: "RustFS 1.0.0 GA is here: our open source, S3-compatible object storage is now production-ready. Explore the journey, core features, and Docker quick start."
+date: '2026-09-16T00:00:00.000Z'
+author: Jinghe Ma
+tags:
+  - Announcements
+  - Release
+image: /images/blog/announcing-rustfs-1-0-0-ga/cover.png
+---
+
+> **TL;DR:** RustFS 1.0.0 GA is now generally available. Written in Rust and released under the Apache 2.0 license, RustFS has grown from its first commit in February 2024 into a distributed object storage platform with 32,000+ GitHub stars and 2.7 million+ instances deployed worldwide. The core object storage engine is stable and ready for production.
+
+Today, we are excited to announce that **RustFS 1.0.0 GA** is officially available. From Alpha to Beta, RC, and now GA, the 1.0.0 release marks the moment RustFS is ready for **production workloads**.
+
+[RustFS](https://rustfs.com) is a next-generation **distributed object storage system written in Rust**. From the first line of code in February 2024 to today, the team has spent **two years and seven months** building and refining it. The 1.0.0 release means our core capability — object storage — is stable, and users can run it in production with confidence.
+
+## The Journey of RustFS
+
+RustFS has come a long way from an empty editor window to a generally available platform:
+
+| Date | Milestone |
+| --- | --- |
+| February 2024 | First line of code |
+| July 2025 | Open sourced |
+| October 2025 | 10,000+ GitHub stars |
+| January 2026 | 20,000+ GitHub stars |
+| April 2026 | Beta release |
+| July 2026 | 30,000+ GitHub stars |
+| August 2026 | RC release |
+| September 2026 | GA release |
+
+## What RustFS Has Achieved
+
+Since open sourcing in July 2025, RustFS has grown rapidly and reached a series of milestones:
+
+* **32,000+ GitHub stars**
+* **10 million+** image pulls on Docker Hub
+* **2.7 million+** instances deployed worldwide
+* **160+ contributors** across the globe
+* Featured on **GitHub Trending 9 times**
+* Featured on **GitHub Rust Trending 50+ times**
+* Joined the **NVIDIA Inception Program**
+
+## RustFS 1.0.0 Core Features at a Glance
+
+### Data Management
+
+* Full bucket lifecycle management
+* Full object lifecycle management
+* Multipart upload for large files
+* Erasure coding (EC)
+* Data tiering
+* Lifecycle management
+* [S3 Tables](/blog/rustfs-s3-tables-iceberg-rest-catalog-quickstart/) — Apache Iceberg REST Catalog built into the storage kernel
+
+### Multi-Protocol Support
+
+* Amazon S3-compatible API
+* WebDAV
+* Swift API
+* FTP/FTPS
+* MCP
+
+### Security & Compliance
+
+* IAM
+* OIDC
+* KMS integration
+* Server-side encryption (SSE)
+* STS token service
+* Security auditing
+* mTLS
+
+### High Availability & Scalability
+
+* Distributed deployment
+* Pool expansion
+* Data rebalancing
+* Self-healing nodes
+* Site replication / bucket replication
+
+### Operations & Observability
+
+* Event notifications
+* OpenTelemetry (OTEL) support
+* Capacity statistics
+* Cluster health inspection
+* Multi-tenancy support
+* Storage pool decommissioning
+* Cloud-native support
+
+## Quick Start
+
+RustFS supports multiple operating systems (Linux, Windows, macOS) and multiple installation methods, including source builds, binaries, Docker, and Kubernetes.
+
+The fastest way to try RustFS 1.0.0 GA is with the official `docker-compose.yml`, which boots a RustFS instance inside a Docker container:
+
+```bash
+# Clone the repository
+git clone git@github.com:rustfs/rustfs.git
+
+# Start the container instance
+cd rustfs
+docker compose -f docker-compose-simple.yml up -d
+```
+
+> Before running the command, change `RUSTFS_ACCESS_KEY` and `RUSTFS_SECRET_KEY` to values other than the default `rustfsadmin`.
+
+Then open `http://ip:9001` in your browser to access the RustFS console:
+
+![RustFS web console showing the bucket management page after a fresh 1.0.0 GA installation](/images/blog/announcing-rustfs-1-0-0-ga/console-buckets.png)
+
+For more installation options, see the [download page](/download).
+
+## What's Next?
+
+The 1.0.0 GA release is a major milestone for RustFS — and a new beginning. As more and more users run RustFS in production, our next steps are to:
+
+* Actively respond to user and customer feedback and keep polishing RustFS to make it more robust
+* Add support for **S3 Vectors** and build **RustFS 2.0** around AI, bringing RustFS into AI data centers
+
+If you have any questions, reach us through our website at [https://rustfs.com](https://rustfs.com) or open an issue on the RustFS GitHub repository: [https://github.com/rustfs/rustfs](https://github.com/rustfs/rustfs).
