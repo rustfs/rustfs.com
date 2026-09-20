@@ -179,9 +179,20 @@ export default function IntegrationCatalog({ categories }: IntegrationCatalogPro
               </div>
 
               <div className="mt-8">
-                <h3 className="text-xl font-semibold leading-tight tracking-tight text-foreground">
-                  {project.name}
-                </h3>
+                {project.logo ? (
+                  <span className="inline-flex w-fit items-center rounded-sm border border-border bg-white px-2.5 py-1.5">
+                    <img
+                      src={project.logo}
+                      alt={project.name}
+                      className="h-6 w-auto object-contain"
+                      loading="lazy"
+                    />
+                  </span>
+                ) : (
+                  <h3 className="text-xl font-semibold leading-tight tracking-tight text-foreground">
+                    {project.name}
+                  </h3>
+                )}
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">{project.description}</p>
               </div>
 
