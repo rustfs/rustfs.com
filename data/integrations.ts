@@ -2,6 +2,7 @@ export interface IntegrationProject {
   name: string;
   description: string;
   docsUrl: string;
+  logo?: string;
 }
 
 export interface IntegrationCategory {
@@ -43,6 +44,7 @@ export const integrationCategories: IntegrationCategory[] = [
         name: "OpenObserve",
         description: "Store OpenObserve logs, metrics, and traces in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/openobserve",
+        logo: "/images/integrations/openobserve-logo.png",
       },
     ],
   },
