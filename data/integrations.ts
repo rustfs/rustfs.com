@@ -90,6 +90,18 @@ export const integrationCategories: IntegrationCategory[] = [
     ],
   },
   {
+    id: "database",
+    label: "Database",
+    description: "Embedded and analytical databases that read and write data in object storage.",
+    projects: [
+      {
+        name: "DuckDB",
+        description: "Run fast in-process SQL analytics over data lakes stored in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/duckdb",
+      },
+    ],
+  },
+  {
     id: "reverse-proxy",
     label: "Reverse Proxy",
     description: "Ingress and traffic control layers in front of storage services.",
