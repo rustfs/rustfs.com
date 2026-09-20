@@ -39,6 +39,11 @@ export const integrationCategories: IntegrationCategory[] = [
         description: "Use OIDC SSO and S3-compatible object storage for pipelines and artifacts.",
         docsUrl: "https://docs.gitlab.com/administration/object_storage/",
       },
+      {
+        name: "OpenObserve",
+        description: "Store OpenObserve logs, metrics, and traces in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/openobserve",
+      },
     ],
   },
   {
