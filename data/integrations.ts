@@ -102,11 +102,6 @@ export const integrationCategories: IntegrationCategory[] = [
         description: "Use open table formats with RustFS as the reliable object storage layer.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/iceberg",
       },
-      {
-        name: "InfluxDB",
-        description: "Store InfluxDB time-series data in S3-compatible object storage.",
-        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/influxdb",
-      },
     ],
   },
   {
@@ -118,6 +113,11 @@ export const integrationCategories: IntegrationCategory[] = [
         name: "DuckDB",
         description: "Run fast in-process SQL analytics over data lakes stored in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/duckdb",
+      },
+      {
+        name: "InfluxDB",
+        description: "Store InfluxDB time-series data in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/influxdb",
       },
     ],
   },
