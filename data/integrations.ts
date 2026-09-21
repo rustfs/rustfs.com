@@ -46,6 +46,28 @@ export const integrationCategories: IntegrationCategory[] = [
         docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/openobserve",
         logo: "/images/integrations/openobserve-logo.png",
       },
+      {
+        name: "Harbor",
+        description: "Store Harbor container registry images and charts in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/registry/harbor",
+      },
+    ],
+  },
+  {
+    id: "observability",
+    label: "Observability",
+    description: "Logs, metrics, and traces platforms backed by durable S3-compatible storage.",
+    projects: [
+      {
+        name: "Loki",
+        description: "Store Loki log data durably in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/loki",
+      },
+      {
+        name: "Tempo",
+        description: "Keep Tempo distributed traces in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/tempo",
+      },
     ],
   },
   {
@@ -86,6 +108,11 @@ export const integrationCategories: IntegrationCategory[] = [
         name: "Iceberg",
         description: "Use open table formats with RustFS as the reliable object storage layer.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/iceberg",
+      },
+      {
+        name: "InfluxDB",
+        description: "Store InfluxDB time-series data in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/influxdb",
       },
     ],
   },
