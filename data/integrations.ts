@@ -61,6 +61,16 @@ export const integrationCategories: IntegrationCategory[] = [
         description: "Keep Tempo distributed traces in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/tempo",
       },
+      {
+        name: "Terraform",
+        description: "Use S3-compatible object storage as the Terraform state backend.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/devops/terraform",
+      },
+      {
+        name: "Elasticsearch",
+        description: "Store Elasticsearch snapshots in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/devops/elasticsearch",
+      },
     ],
   },
   {
@@ -101,6 +111,21 @@ export const integrationCategories: IntegrationCategory[] = [
         name: "Iceberg",
         description: "Use open table formats with RustFS as the reliable object storage layer.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/iceberg",
+      },
+      {
+        name: "Trino",
+        description: "Run distributed SQL queries over data lakes in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/trino",
+      },
+      {
+        name: "Flink",
+        description: "Back Flink checkpoints and state with S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/flink",
+      },
+      {
+        name: "Spark",
+        description: "Read and write lakehouse data from Spark jobs in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/spark",
       },
     ],
   },
