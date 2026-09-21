@@ -51,13 +51,6 @@ export const integrationCategories: IntegrationCategory[] = [
         description: "Store Harbor container registry images and charts in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/registry/harbor",
       },
-    ],
-  },
-  {
-    id: "observability",
-    label: "Observability",
-    description: "Logs, metrics, and traces platforms backed by durable S3-compatible storage.",
-    projects: [
       {
         name: "Loki",
         description: "Store Loki log data durably in S3-compatible object storage.",
