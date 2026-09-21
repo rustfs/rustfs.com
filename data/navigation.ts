@@ -71,6 +71,7 @@ export const footerNavigation = [
     title: "Product features",
     links: [
       { title: "S3 Compatible", href: "/product/multiple-protocol-access#s3-api-compatibility" },
+      { title: "S3 Tables", href: "/product/data-management#s3-tables" },
       { title: "Multiple Protocol Access", href: "/product/multiple-protocol-access" },
       { title: "Data Management", href: "/product/data-management" },
       { title: "High Availability & Scale", href: "/product/high-availability-scale" },

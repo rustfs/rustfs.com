@@ -38,6 +38,7 @@ const sections: FeaturePageSection[] = [
     ],
   },
   {
+    id: "s3-tables",
     title: "S3 Tables",
     items: [
       {
