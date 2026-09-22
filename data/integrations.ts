@@ -28,6 +28,11 @@ export const integrationCategories: IntegrationCategory[] = [
         description: "Manage AI fine-tuning storage with RustFS as the durable S3-compatible backend for Unsloth training workflows.",
         docsUrl: "/blog/nawat-ai-training-storage-with-rustfs",
       },
+      {
+        name: "Ray",
+        description: "Read and write Ray datasets and checkpoints in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/ai/ray",
+      },
     ],
   },
   {
@@ -91,6 +96,11 @@ export const integrationCategories: IntegrationCategory[] = [
         description: "Keep Thanos metrics blocks in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/thanos",
       },
+      {
+        name: "Fluentd",
+        description: "Ship and archive Fluentd logs in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/fluentd",
+      },
     ],
   },
   {
@@ -102,6 +112,16 @@ export const integrationCategories: IntegrationCategory[] = [
         name: "Restic",
         description: "Store encrypted repository snapshots in S3-compatible backends.",
         docsUrl: "https://restic.readthedocs.io/en/stable/",
+      },
+      {
+        name: "Velero",
+        description: "Back up and restore Kubernetes clusters with Velero backups in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/backup/velero",
+      },
+      {
+        name: "Kopia",
+        description: "Store deduplicated, encrypted backup snapshots in S3-compatible backends.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/backup/kopia",
       },
     ],
   },
@@ -171,6 +191,21 @@ export const integrationCategories: IntegrationCategory[] = [
         name: "MLflow",
         description: "Store MLflow artifacts and model registries in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/mlflow",
+      },
+      {
+        name: "Zeppelin",
+        description: "Explore data lakes from Apache Zeppelin notebooks backed by S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/zeppelin",
+      },
+      {
+        name: "Hudi",
+        description: "Build incremental data lakes with Apache Hudi tables in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/hudi",
+      },
+      {
+        name: "lakeFS",
+        description: "Manage data lake branches and versions with lakeFS on S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/lakefs",
       },
     ],
   },
