@@ -6,6 +6,7 @@ import type { Metadata } from "next"
 import type { ComponentType } from "react"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "about/" },
   title: "About RustFS | Next-Generation Distributed Object Storage for AI",
   description: "Learn about RustFS, an Apache 2.0 open-source distributed object storage system built in Rust. Powering AI data centers with native RDMA and DPU acceleration.",
   keywords: "about RustFS, RustFS project, open source object storage, distributed object storage, Rust infrastructure, NVIDIA Inception, RDMA storage, DPU hardware acceleration",

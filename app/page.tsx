@@ -12,6 +12,7 @@ import { getGitHubMetrics } from "@/lib/github";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/" },
   title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
   description: 'RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, drop-in replacement for MinIO and Amazon S3 engineered for AI workloads.',
   keywords: 'RustFS, object storage, distributed storage, open source, Rust, Amazon S3, MinIO alternative, MinIO migration, Apache 2.0, cloud native storage, AI infrastructure',

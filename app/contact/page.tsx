@@ -2,6 +2,7 @@ import ContactForm from '@/components/business/contact-form'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: "contact/" },
   title: "Contact Us | RustFS | The High-Performance, Apache 2.0 Object Storage for AI",
   description: 'Get in touch with the RustFS team. Contact us for questions, support, or partnership opportunities.',
   openGraph: {

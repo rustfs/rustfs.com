@@ -2,6 +2,7 @@ import FeaturePage, { type FeaturePageSection } from "@/components/business/feat
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "product/data-management/" },
   title: "Data Management & S3 Tables | RustFS High-Performance Storage",
   description:
     "Optimize data management with RustFS. Benefit from full S3 compatibility, automated lifecycle management, and native Iceberg support powered by S3 Tables to lower TCO and accelerate AI and big data workloads.",
