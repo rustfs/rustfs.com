@@ -2,6 +2,7 @@ import FeaturePage, { type FeaturePageSection } from "@/components/business/feat
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "product/security-compliance/" },
   title: "Security & Compliance | RustFS",
   description: "RustFS provides enterprise-grade authentication, authorization, log auditing, event handling, SSE/KMS encryption, OIDC SSO, and mTLS security controls.",
   keywords: [

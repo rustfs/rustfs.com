@@ -18,7 +18,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ tag: string }> }): Promise<Metadata> {
   const { tag } = await params;
   const label = await findTag(tag);
-  return { title: label ? `${label} | RustFS Blog` : "RustFS Blog" };
+  return {
+    title: label ? `${label} | RustFS Blog` : "RustFS Blog",
+    alternates: { canonical: `/blog/tag/${tag}/` },
+  };
 }
 
 export default async function BlogTagPage({ params }: { params: Promise<{ tag: string }> }) {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "privacy-policy/" },
   title: "Privacy Policy | RustFS",
   description:
     "Learn how RustFS handles privacy for self-hosted software deployments and the RustFS official website.",

@@ -2,6 +2,7 @@ import FeaturePage, { type FeaturePageSection } from "@/components/business/feat
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "product/multiple-protocol-access/" },
   title: "Native Multi-Protocol Access | S3, Swift, WebDAV, FTP(s) & MCP | RustFS",
   description: "Connect RustFS natively to any workload via S3, Swift, FTP(s), WebDAV, and MCP. Zero code modifications, no legacy proxies, and absolute multi-protocol data coexistence.",
   keywords: [

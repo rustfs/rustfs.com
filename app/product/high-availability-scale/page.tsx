@@ -2,6 +2,7 @@ import FeaturePage, { type FeaturePageSection } from "@/components/business/feat
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "product/high-availability-scale/" },
   title: "RustFS High Availability & Scalability | Enterprise Distributed Storage",
   description:
     "Discover RustFS enterprise distributed architecture. Experience limitless scaling from PB to EB levels with distributed EC, automated self-healing, and absolute data reliability.",

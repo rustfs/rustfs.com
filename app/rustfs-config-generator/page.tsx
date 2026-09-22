@@ -19,14 +19,14 @@ export const metadata: Metadata = {
     "RustFS configuration file",
   ],
   alternates: {
-    canonical: "/rustfs-config-generator",
+    canonical: "/rustfs-config-generator/",
   },
   openGraph: {
     title: "RustFS Config Generator | Generate /etc/default/rustfs Online",
     description:
       "Generate a RustFS /etc/default/rustfs config file in seconds — set S3 API and console ports, volumes, access keys, log level, and OpenTelemetry.",
     type: "website",
-    url: "/rustfs-config-generator",
+    url: "/rustfs-config-generator/",
     locale: "en_US",
     siteName: "RustFS",
     images: [

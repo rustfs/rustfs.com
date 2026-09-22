@@ -36,6 +36,7 @@ const notices = [
 ];
 
 export const metadata: Metadata = {
+  alternates: { canonical: "demo/" },
   title: "RustFS Demo | Public Demo Environment",
   description:
     "Review the RustFS public demo credentials, daily reset schedule, and data safety notice before entering the demo environment.",

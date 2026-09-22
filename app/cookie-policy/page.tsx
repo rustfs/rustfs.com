@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { CookieSettingsButton } from '@/components/business/cookie-consent'
 
 export const metadata: Metadata = {
+  alternates: { canonical: "cookie-policy/" },
   title: 'Cookie Policy | RustFS',
   description: 'Learn how RustFS uses cookies and similar technologies on the official website.',
 }

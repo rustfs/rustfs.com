@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "product/operational-observability/" },
   title: "RustFS Cluster Operations & OTEL Observability | Enterprise Management",
   description: "Simplify RustFS management with an intuitive console, rich rc CLI, and full-stack OTEL observability. Deploy Prometheus, Grafana, and Loki with one click for real-time cluster insights.",
   keywords: [
