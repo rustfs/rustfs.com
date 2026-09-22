@@ -103,6 +103,16 @@ export const integrationCategories: IntegrationCategory[] = [
         description: "Store encrypted repository snapshots in S3-compatible backends.",
         docsUrl: "https://restic.readthedocs.io/en/stable/",
       },
+      {
+        name: "Velero",
+        description: "Back up and restore Kubernetes clusters with Velero backups in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/backup/velero",
+      },
+      {
+        name: "Kopia",
+        description: "Store deduplicated, encrypted backup snapshots in S3-compatible backends.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/backup/kopia",
+      },
     ],
   },
   {
@@ -171,6 +181,16 @@ export const integrationCategories: IntegrationCategory[] = [
         name: "MLflow",
         description: "Store MLflow artifacts and model registries in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/mlflow",
+      },
+      {
+        name: "Zeppelin",
+        description: "Explore data lakes from Apache Zeppelin notebooks backed by S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/zeppelin",
+      },
+      {
+        name: "Hudi",
+        description: "Build incremental data lakes with Apache Hudi tables in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/hudi",
       },
     ],
   },
