@@ -1,0 +1,5 @@
+# Documentation lives on docs.rustfs.com; /docs permanently redirects there.
+# Replaces the former client-side redirect page (app/docs/page.tsx).
+/docs https://docs.rustfs.com/ 301
+/docs/ https://docs.rustfs.com/ 301
+/docs/* https://docs.rustfs.com/:splat 301
