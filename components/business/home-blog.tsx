@@ -40,7 +40,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
               <div className="relative aspect-[16/7] overflow-hidden border-b border-border bg-background">
                 <img
                   src={featuredPost.image}
-                  alt=""
+                  alt={featuredPost.title}
                   className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
                   loading="lazy"
                 />

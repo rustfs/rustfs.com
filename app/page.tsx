@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
   description: 'RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, drop-in replacement for MinIO and Amazon S3 engineered for AI workloads.',
-  keywords: 'RustFS, object storage, distributed storage, open source, Rust, Amazon S3, MinIO alternative, MinIO migration, Apache 2.0, cloud native storage, AI infrastructure',
   authors: [{ name: 'RustFS Team' }],
   openGraph: {
     title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
@@ -50,6 +49,30 @@ export default async function HomePage() {
         <HomeBlog />
         <HomeContactCard />
       </div>
+    <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "RustFS",
+            url: "https://rustfs.com",
+            logo: "https://rustfs.com/images/rustfs-logo.png",
+            description: "RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust.",
+            foundingDate: "2024",
+            sameAs: [
+              "https://github.com/rustfs/rustfs",
+              "https://x.com/rustfsofficial",
+              "https://discord.gg/rustfs"
+            ],
+            contactPoint: {
+              "@type": "ContactPoint",
+              contactType: "sales",
+              url: "https://rustfs.com/contact-us/"
+            }
+          })
+        }}
+      />
     </main>
   );
 }

@@ -151,6 +151,36 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </aside>
             ) : null}
           </div>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                headline: post.title,
+                description: post.description,
+                image: shouldShowImage(post.image) ? post.image : undefined,
+                datePublished: post.date,
+                dateModified: post.date,
+                author: {
+                  "@type": "Person",
+                  name: post.author
+                },
+                publisher: {
+                  "@type": "Organization",
+                  name: "RustFS",
+                  logo: {
+                    "@type": "ImageObject",
+                    url: "https://rustfs.com/images/rustfs-logo.png"
+                  }
+                },
+                mainEntityOfPage: {
+                  "@type": "WebPage",
+                  "@id": `${SITE_CONFIG.primaryDomain}/blog/${post.slug}/`
+                }
+              })
+            }}
+          />
         </div>
       </article>
     </main>

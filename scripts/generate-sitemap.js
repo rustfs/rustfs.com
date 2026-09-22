@@ -2,6 +2,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { execSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 
 // Configuration
@@ -20,6 +21,61 @@ const PAGE_PRIORITIES = {
 const PAGE_CHANGE_FREQ = {
   '/': 'weekly',
   '/download/': 'monthly',
+}
+
+
+/**
+ * Get the last git commit date for a given directory/file path.
+ * Falls back to current time if git is unavailable or path is untracked.
+ */
+function getGitLastMod(filePath) {
+  try {
+    const result = execSync(
+      `git log -1 --format=%cI -- "${filePath}"`,
+      { encoding: 'utf8', timeout: 3000 }
+    ).trim();
+    if (result) return result;
+  } catch {
+    // git not available or path not in repo; fall through
+  }
+  return new Date().toISOString();
+}
+
+const URL_SOURCE_MAP = {
+  '/': ['app/page.tsx', 'app/layout.tsx'],
+  '/download/': ['app/download/page.tsx'],
+  '/download/server/': ['app/download/server/page.tsx'],
+  '/download/cli/': ['app/download/cli/page.tsx'],
+  '/pricing/': ['app/pricing/page.tsx'],
+  '/about/': ['app/about/page.tsx'],
+}
+
+function urlToSourcePath(url) {
+  if (URL_SOURCE_MAP[url]) return URL_SOURCE_MAP[url];
+  if (url.startsWith('/blog/') && url !== '/blog/' && !url.startsWith('/blog/tag/')) {
+    const slug = url.replace('/blog/', '').replace(/\/$/, '');
+    // Blog dirs are content/blog/<date>-<slug>/index.mdx
+    const matchingDirs = fs.readdirSync('content/blog').filter(d => d.endsWith(slug));
+    if (matchingDirs.length > 0) {
+      return [`content/blog/${matchingDirs[0]}/index.mdx`];
+    }
+    return [`content/blog/${slug}/index.mdx`];
+  }
+  if (url.startsWith('/product/')) {
+    return [`app${url}page.tsx`];
+  }
+  return [`app${url}page.tsx`];
+}
+
+function getLastMod(url) {
+  const sourcePaths = urlToSourcePath(url);
+  let latestDate = null;
+  for (const src of sourcePaths) {
+    if (!fs.existsSync(src)) continue;
+    const date = getGitLastMod(src);
+    if (!latestDate || date > latestDate) latestDate = date;
+  }
+  return latestDate || new Date().toISOString();
 }
 
 // Scan directory and generate URL list
@@ -62,18 +118,16 @@ function getPageChangeFreq(url) {
 
 // Generate sitemap XML
 function generateSitemap(urls) {
-  const now = new Date().toISOString()
-
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 
   for (const url of urls) {
+    const lastmod = getLastMod(url)
     xml += '  <url>\n'
     xml += `    <loc>${BASE_URL}${url}</loc>\n`
-    xml += `    <lastmod>${now}</lastmod>\n`
+    xml += `    <lastmod>${lastmod}</lastmod>\n`
     xml += `    <changefreq>${getPageChangeFreq(url)}</changefreq>\n`
     xml += `    <priority>${getPagePriority(url)}</priority>\n`
-
     xml += '  </url>\n'
   }
 
@@ -128,6 +182,8 @@ function main() {
 
   console.log(`📝 Found ${urls.length} URLs:`)
   urls.forEach(url => console.log(`   ${url}`))
+
+  console.log('🕐 Fetching git commit dates for realistic lastmod values...');
 
   // Generate sitemap
   const sitemap = generateSitemap(urls)
