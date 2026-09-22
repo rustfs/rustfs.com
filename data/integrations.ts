@@ -71,6 +71,26 @@ export const integrationCategories: IntegrationCategory[] = [
         description: "Store Elasticsearch snapshots in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/devops/elasticsearch",
       },
+      {
+        name: "Jenkins",
+        description: "Store Jenkins build artifacts in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/devops/jenkins",
+      },
+      {
+        name: "Gitea",
+        description: "Store Gitea LFS, packages, and attachments in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/devops/gitea",
+      },
+      {
+        name: "OpenTelemetry",
+        description: "Export RustFS telemetry with the OpenTelemetry (OTEL) standard.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/opentelemetry",
+      },
+      {
+        name: "Thanos",
+        description: "Keep Thanos metrics blocks in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/thanos",
+      },
     ],
   },
   {
@@ -126,6 +146,31 @@ export const integrationCategories: IntegrationCategory[] = [
         name: "Spark",
         description: "Read and write lakehouse data from Spark jobs in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/spark",
+      },
+      {
+        name: "ClickHouse",
+        description: "Store ClickHouse disks and backups in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/clickhouse",
+      },
+      {
+        name: "PyIceberg",
+        description: "Work with Iceberg tables in S3-compatible object storage using PyIceberg.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/pyiceberg",
+      },
+      {
+        name: "Doris",
+        description: "Power Apache Doris analytics with S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/doris",
+      },
+      {
+        name: "OpenDAL",
+        description: "Connect applications to S3-compatible object storage through Apache OpenDAL.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/opendal",
+      },
+      {
+        name: "MLflow",
+        description: "Store MLflow artifacts and model registries in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/mlflow",
       },
     ],
   },
