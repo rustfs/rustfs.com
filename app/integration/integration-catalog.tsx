@@ -107,7 +107,7 @@ export default function IntegrationCatalog({ categories }: IntegrationCatalogPro
   return (
     <div>
       <nav
-        className="flex gap-px overflow-x-auto border border-border bg-border xl:grid xl:grid-cols-8"
+        className="flex gap-px overflow-x-auto border border-border bg-border xl:grid xl:grid-cols-9"
         role="tablist"
         aria-label="Integration category tabs"
       >
