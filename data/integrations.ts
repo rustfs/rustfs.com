@@ -224,6 +224,28 @@ export const integrationCategories: IntegrationCategory[] = [
         description: "Store InfluxDB time-series data in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/influxdb",
       },
+      {
+        name: "Vitess",
+        description: "Store Vitess backups and exports in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/vitess",
+      },
+    ],
+  },
+  {
+    id: "cloud-native",
+    label: "Cloud Native",
+    description: "Kubernetes-native components for GitOps delivery, metrics, and cluster operations.",
+    projects: [
+      {
+        name: "Cortex",
+        description: "Keep Cortex metrics chunks in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/cloud-native/cortex",
+      },
+      {
+        name: "Flux",
+        description: "Use S3-compatible object storage as a Flux source for Kubernetes GitOps artifacts.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/cloud-native/flux",
+      },
     ],
   },
   {
