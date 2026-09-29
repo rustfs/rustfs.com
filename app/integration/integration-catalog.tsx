@@ -180,14 +180,20 @@ export default function IntegrationCatalog({ categories }: IntegrationCatalogPro
 
               <div className="mt-8">
                 {project.logo ? (
-                  <span className="inline-flex w-fit items-center rounded-sm border border-border bg-white px-2.5 py-1.5">
+                  <a
+                    href={project.projectUrl ?? project.docsUrl}
+                    target="_blank"
+                    rel="noreferrer noopener external"
+                    aria-label={`${project.name} official website`}
+                    className="inline-flex w-fit items-center rounded-sm border border-border bg-white px-2.5 py-1.5 transition-colors hover:border-brand/40"
+                  >
                     <img
                       src={project.logo}
-                      alt={project.name}
+                      alt={`${project.name} logo`}
                       className="h-6 w-auto object-contain"
                       loading="lazy"
                     />
-                  </span>
+                  </a>
                 ) : (
                   <h3 className="text-xl font-semibold leading-tight tracking-tight text-foreground">
                     {project.name}
