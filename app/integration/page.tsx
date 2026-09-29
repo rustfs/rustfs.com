@@ -175,7 +175,28 @@ export default function IntegrationPage() {
             <div className="p-5 sm:p-6">
               <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Trademark notice</p>
               <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                Third-party project names describe technical compatibility only. Their trademarks, names, brands, and external documentation remain the property and responsibility of their respective owners. No endorsement, partnership, or affiliation is implied unless separately stated in writing.
+                Third-party project names, logos, and brands shown on this page are the property of their
+                respective owners and are used solely to indicate that RustFS interoperates with these
+                products. Their trademarks, names, brands, and external documentation remain the property
+                and responsibility of their respective owners. No endorsement, partnership, or affiliation
+                is implied unless separately stated in writing.
+              </p>
+              <p className="mt-3 text-xs leading-6 text-muted-foreground">
+                Apache®, Apache Doris, Apache Flink, Apache Hudi, Apache Iceberg, Apache OpenDAL,
+                Apache Spark, Apache Zeppelin, and their respective project logos are either
+                registered trademarks or trademarks of the Apache Software Foundation in the United
+                States and/or other countries. No endorsement by The Apache Software Foundation is
+                implied. Terraform and the Terraform logo are trademarks of HashiCorp, Inc.
+                HAProxy® is a trademark registered by HAProxy Technologies SAS and is not affiliated
+                with, and does not endorse, this website. Jenkins® is a registered trademark of LF
+                Charities, Inc. GITLAB is a trademark of GitLab Inc. in the United States and other
+                countries and regions. Elasticsearch is a trademark of Elasticsearch B.V., registered
+                in the U.S. and in other countries. ClickHouse® is a registered trademark of
+                ClickHouse, Inc. InfluxDB® is a trademark of InfluxData, Inc. NGINX® is a registered
+                trademark of F5, Inc. Loki and Tempo are trademarks of Grafana Labs. Trino is a
+                trademark of the Trino Software Foundation. DuckDB is a trademark of the DuckDB
+                Foundation. All other product names, logos, and brands are property of their
+                respective owners.
               </p>
             </div>
           </section>
