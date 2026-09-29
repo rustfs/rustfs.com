@@ -721,7 +721,7 @@ export function ServerDownloadPage({ release }: ServerDownloadPageProps) {
                 </a>
               </Button>
               <Button asChild variant="outline" size="lg" className="h-11 px-4 text-sm font-semibold">
-                <a href={docs_url('/installation/')} target="_blank" rel="noopener noreferrer">
+                <a href={docs_url('/en/installation')} target="_blank" rel="noopener noreferrer">
                   Documentation
                   <BookOpenIcon data-icon="inline-end" className="size-4" />
                 </a>
@@ -742,7 +742,7 @@ export function ServerDownloadPage({ release }: ServerDownloadPageProps) {
               <li>
                 For step-by-step instructions, see the{' '}
                 <a
-                  href={docs_url('/installation/')}
+                  href={docs_url('/en/installation')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-semibold text-brand hover:text-foreground"
