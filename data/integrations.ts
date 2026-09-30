@@ -41,6 +41,11 @@ export const integrationCategories: IntegrationCategory[] = [
         logo: "/images/integrations/ray-logo.svg",
         projectUrl: "https://www.ray.io",
       },
+      {
+        name: "vLLM",
+        description: "Load and serve vLLM model weights from S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/ai/vllm",
+      },
     ],
   },
   {
@@ -123,6 +128,26 @@ export const integrationCategories: IntegrationCategory[] = [
         docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/fluentd",
         logo: "/images/integrations/fluentd-logo.svg",
         projectUrl: "https://www.fluentd.org",
+      },
+      {
+        name: "GreptimeDB",
+        description: "Store GreptimeDB time-series data in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/greptimedb",
+      },
+      {
+        name: "rclone",
+        description: "Sync and manage files in S3-compatible object storage with rclone.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/others/rclone",
+      },
+      {
+        name: "tusd",
+        description: "Store resumable tus uploads in S3-compatible object storage with tusd.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/others/tusd",
+      },
+      {
+        name: "VictoriaMetrics",
+        description: "Back up and restore VictoriaMetrics metrics in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/victoriametrics",
       },
     ],
   },
@@ -256,6 +281,21 @@ export const integrationCategories: IntegrationCategory[] = [
         logo: "/images/integrations/lakefs-logo.png",
         projectUrl: "https://lakefs.io",
       },
+      {
+        name: "Apache Airflow®",
+        description: "Store Apache Airflow® task logs and artifacts in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/airflow",
+      },
+      {
+        name: "Apache Kafka®",
+        description: "Land Apache Kafka® topic data durably in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/kafka",
+      },
+      {
+        name: "Delta Lake",
+        description: "Use Delta Lake table format with RustFS as the reliable object storage layer.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/delta-lake",
+      },
     ],
   },
   {
@@ -301,6 +341,16 @@ export const integrationCategories: IntegrationCategory[] = [
         logo: "/images/integrations/flux-logo.svg",
         projectUrl: "https://fluxcd.io",
       },
+      {
+        name: "JuiceFS",
+        description: "Build JuiceFS shared file systems on S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/others/juicefs",
+      },
+      {
+        name: "Nextcloud",
+        description: "Store Nextcloud files in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/others/nextcloud",
+      },
     ],
   },
   {
@@ -333,6 +383,11 @@ export const integrationCategories: IntegrationCategory[] = [
         docsUrl: "https://docs.rustfs.com/en/developer/integration/reverse-proxy",
         logo: "/images/integrations/haproxy-logo.svg",
         projectUrl: "https://www.haproxy.com",
+      },
+      {
+        name: "Envoy",
+        description: "Expose RustFS endpoints through the Envoy edge and service proxy.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/reverse-proxy/envoy",
       },
     ],
   },
