@@ -182,11 +182,12 @@ export default function IntegrationPage() {
                 is implied unless separately stated in writing.
               </p>
               <p className="mt-3 text-xs leading-6 text-muted-foreground">
-                Apache®, Apache Doris, Apache Flink, Apache Hudi, Apache Iceberg, Apache OpenDAL,
-                Apache Spark, Apache Zeppelin, and their respective project logos are either
-                registered trademarks or trademarks of the Apache Software Foundation in the United
-                States and/or other countries. No endorsement by The Apache Software Foundation is
-                implied. Terraform and the Terraform logo are trademarks of HashiCorp, Inc.
+                Apache®, Apache Airflow, Apache Doris, Apache Flink, Apache Hudi, Apache Iceberg,
+                Apache Kafka, Apache OpenDAL, Apache Spark, Apache Zeppelin, and their respective
+                project logos are either registered trademarks or trademarks of the Apache Software
+                Foundation in the United States and/or other countries. No endorsement by The Apache
+                Software Foundation is implied. Terraform and the Terraform logo are trademarks of
+                HashiCorp, Inc.
                 HAProxy® is a trademark registered by HAProxy Technologies SAS and is not affiliated
                 with, and does not endorse, this website. Jenkins® is a registered trademark of LF
                 Charities, Inc. GITLAB is a trademark of GitLab Inc. in the United States and other
