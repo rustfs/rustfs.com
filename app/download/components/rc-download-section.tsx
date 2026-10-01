@@ -156,8 +156,8 @@ function DockerInstallCard() {
         </p>
         <CodeBlock
           code={[
-            'docker pull rustfs/cli:latest',
-            'docker run --rm rustfs/cli:latest rc --help',
+            'docker pull rustfs/rc:latest',
+            'docker run --rm rustfs/rc:latest rc --help',
           ]}
           title="Container CLI"
           className="mt-5"
