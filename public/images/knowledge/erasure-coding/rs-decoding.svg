@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660">
+  <style>
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #171717; }
+    .t { font-size: 27px; font-weight: 700; }
+    .lbl { font-size: 18px; font-weight: 600; }
+    .cap { fill: #6b7280; font-size: 15px; }
+    .w { fill: #ffffff; }
+    .chip { font-size: 18px; font-weight: 700; fill: #ffffff; }
+    .lost { fill: #9ca3af; }
+    .note { fill: #374151; font-size: 16px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .boxlbl { fill: #374151; font-size: 17px; }
+  </style>
+
+  <rect width="1200" height="660" fill="#ffffff"/>
+  <text x="40" y="56" class="t">Recovery: any 4 surviving shards rebuild the 2 lost ones</text>
+
+  <!-- top row: 6 shards, 2 lost -->
+  <g>
+    <rect x="60" y="110" width="120" height="60" rx="6" fill="#2568f5"/>
+    <text x="120" y="147" class="chip" text-anchor="middle">D0</text>
+
+    <rect x="200" y="110" width="120" height="60" rx="6" fill="#e5e7eb" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="6 4"/>
+    <text x="260" y="147" class="chip lost" text-anchor="middle">D1</text>
+    <g stroke="#dc2626" stroke-width="4" stroke-linecap="round">
+      <path d="M222 122 L 298 158"/>
+      <path d="M298 122 L 222 158"/>
+    </g>
+
+    <rect x="340" y="110" width="120" height="60" rx="6" fill="#2568f5"/>
+    <text x="400" y="147" class="chip" text-anchor="middle">D2</text>
+
+    <rect x="480" y="110" width="120" height="60" rx="6" fill="#2568f5"/>
+    <text x="540" y="147" class="chip" text-anchor="middle">D3</text>
+
+    <rect x="620" y="110" width="120" height="60" rx="6" fill="#e5e7eb" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="6 4"/>
+    <text x="680" y="147" class="chip lost" text-anchor="middle">P0</text>
+    <g stroke="#dc2626" stroke-width="4" stroke-linecap="round">
+      <path d="M642 122 L 718 158"/>
+      <path d="M718 122 L 642 158"/>
+    </g>
+
+    <rect x="760" y="110" width="120" height="60" rx="6" fill="#ea580c"/>
+    <text x="820" y="147" class="chip" text-anchor="middle">P1</text>
+
+    <text x="450" y="210" class="cap" text-anchor="middle">two drives failed · four shards survive</text>
+  </g>
+
+  <!-- flow arrows -->
+  <g stroke="#9ca3af" stroke-width="2.5" fill="none">
+    <path d="M300 230 L 300 290" marker-end="url(#ar)"/>
+    <path d="M760 230 L 760 290" marker-end="url(#ar)"/>
+  </g>
+  <text x="530" y="272" class="cap" text-anchor="middle">collect any 4 survivors</text>
+
+  <!-- middle: sub-matrix inversion -->
+  <g>
+    <rect x="220" y="300" width="620" height="150" rx="8" fill="#f9fafb" stroke="#d1d5db" stroke-width="1.5"/>
+    <text x="530" y="338" class="boxlbl" text-anchor="middle" font-weight="700">build the 4×4 sub-matrix from the survivors' rows in G</text>
+    <text x="530" y="366" class="mono" style="font-size:17px" text-anchor="middle">Gsub = [ row(D0) ; row(D2) ; row(D3) ; row(P1) ]</text>
+    <text x="530" y="404" class="boxlbl" text-anchor="middle">invert it over GF(2⁸) and multiply by the 4 surviving shards:</text>
+    <text x="530" y="432" class="mono" style="font-size:17px" text-anchor="middle">lost = Gsub⁻¹ × [ D0 ; D2 ; D3 ; P1 ]</text>
+  </g>
+
+  <!-- flow arrows down -->
+  <g stroke="#9ca3af" stroke-width="2.5" fill="none">
+    <path d="M300 450 L 300 510" marker-end="url(#ar)"/>
+    <path d="M760 450 L 760 510" marker-end="url(#ar)"/>
+  </g>
+
+  <!-- bottom: recovered shards -->
+  <g>
+    <rect x="220" y="515" width="120" height="60" rx="6" fill="#16a34a" stroke="#15803d" stroke-width="2"/>
+    <text x="280" y="552" class="chip" text-anchor="middle">D1</text>
+    <text x="280" y="598" class="cap" text-anchor="middle">rebuilt ✓</text>
+
+    <rect x="360" y="515" width="120" height="60" rx="6" fill="#16a34a" stroke="#15803d" stroke-width="2"/>
+    <text x="420" y="552" class="chip" text-anchor="middle">P0</text>
+    <text x="420" y="598" class="cap" text-anchor="middle">rebuilt ✓</text>
+
+    <text x="680" y="540" class="note">Recovered shards are written to replacement drives;</text>
+    <text x="680" y="568" class="note">the set is whole again, and reads go back to 6 drives.</text>
+    <text x="680" y="612" class="cap" text-anchor="start">No backup tape, no second copy — the parity math is the redundancy.</text>
+  </g>
+
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+</svg>

@@ -47,6 +47,7 @@ const sections: FeaturePageSection[] = [
         title: "Distributed EC",
         description:
           "Maximizing RustFS cluster resilience and disaster recovery.",
+        href: "/knowledge-center/erasure-coding-explained",
       },
       {
         title: "Optimized EC configurations",

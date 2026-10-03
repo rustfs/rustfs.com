@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420">
+  <style>
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #171717; }
+    .t { font-size: 27px; font-weight: 700; }
+    .lbl { font-size: 19px; font-weight: 600; }
+    .cap { fill: #6b7280; font-size: 16px; }
+    .w { fill: #ffffff; }
+    .chip { font-size: 17px; font-weight: 700; fill: #ffffff; }
+    .big { font-size: 24px; font-weight: 700; fill: #171717; }
+    .note { fill: #374151; font-size: 17px; }
+  </style>
+
+  <rect width="1200" height="420" fill="#ffffff"/>
+  <text x="40" y="56" class="t">Storage overhead: replication vs. erasure coding</text>
+
+  <!-- Row 1: 3x replication -->
+  <text x="40" y="140" class="lbl">3× replication</text>
+  <g>
+    <rect x="260" y="102" width="180" height="72" rx="6" fill="#9ca3af"/>
+    <text x="350" y="145" class="chip" text-anchor="middle">copy 1 · 6 TB</text>
+    <rect x="452" y="102" width="180" height="72" rx="6" fill="#9ca3af"/>
+    <text x="542" y="145" class="chip" text-anchor="middle">copy 2 · 6 TB</text>
+    <rect x="644" y="102" width="180" height="72" rx="6" fill="#9ca3af"/>
+    <text x="734" y="145" class="chip" text-anchor="middle">copy 3 · 6 TB</text>
+    <text x="870" y="138" class="big">18 TB</text>
+    <text x="870" y="164" class="cap">raw for 6 TB of data · 300%</text>
+  </g>
+
+  <!-- Row 2: EC 4+2 -->
+  <text x="40" y="270" class="lbl">Erasure coding 4+2</text>
+  <g>
+    <rect x="260" y="232" width="86" height="72" rx="6" fill="#2568f5"/>
+    <text x="303" y="275" class="chip" text-anchor="middle">D0</text>
+    <rect x="358" y="232" width="86" height="72" rx="6" fill="#2568f5"/>
+    <text x="401" y="275" class="chip" text-anchor="middle">D1</text>
+    <rect x="456" y="232" width="86" height="72" rx="6" fill="#2568f5"/>
+    <text x="499" y="275" class="chip" text-anchor="middle">D2</text>
+    <rect x="554" y="232" width="86" height="72" rx="6" fill="#2568f5"/>
+    <text x="597" y="275" class="chip" text-anchor="middle">D3</text>
+    <rect x="652" y="232" width="86" height="72" rx="6" fill="#ea580c"/>
+    <text x="695" y="275" class="chip" text-anchor="middle">P0</text>
+    <rect x="750" y="232" width="86" height="72" rx="6" fill="#ea580c"/>
+    <text x="793" y="275" class="chip" text-anchor="middle">P1</text>
+    <text x="870" y="268" class="big">9 TB</text>
+    <text x="870" y="294" class="cap">raw for 6 TB of data · 150%</text>
+  </g>
+
+  <!-- bottom note -->
+  <rect x="40" y="330" width="1120" height="64" rx="8" fill="#eff4ff" stroke="#2568f5" stroke-width="1.5"/>
+  <text x="600" y="369" class="note" text-anchor="middle">
+    Both schemes survive any two drive failures — erasure coding does it with half the raw capacity.
+  </text>
+</svg>
