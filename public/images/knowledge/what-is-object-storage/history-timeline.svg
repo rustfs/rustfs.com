@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560">
+  <style>
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #171717; }
+    .t { font-size: 27px; font-weight: 700; }
+    .year { font-size: 19px; font-weight: 700; fill: #2568f5; }
+    .lbl { font-size: 16px; font-weight: 600; }
+    .cap { fill: #6b7280; font-size: 14px; }
+  </style>
+
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="40" y="56" class="t">How object storage got here</text>
+
+  <!-- timeline spine -->
+  <line x1="70" y1="300" x2="1130" y2="300" stroke="#d1d5db" stroke-width="3"/>
+
+  <!-- node 1 (above): 1990s research -->
+  <circle cx="110" cy="300" r="9" fill="#6b7280"/>
+  <line x1="110" y1="300" x2="110" y2="248" stroke="#d1d5db" stroke-width="2"/>
+  <text x="110" y="164" class="cap" text-anchor="middle">distributed storage and</text>
+  <text x="110" y="184" text-anchor="middle" class="cap">CAS ideas mature</text>
+  <text x="110" y="212" class="year" text-anchor="middle">1990s</text>
+  <text x="110" y="236" class="lbl" text-anchor="middle">research systems</text>
+
+  <!-- node 2 (below): 2006 S3 -->
+  <circle cx="260" cy="300" r="9" fill="#2568f5"/>
+  <line x1="260" y1="300" x2="260" y2="352" stroke="#d1d5db" stroke-width="2"/>
+  <text x="260" y="376" class="year" text-anchor="middle">2006</text>
+  <text x="260" y="400" class="lbl" text-anchor="middle">Amazon S3 launches</text>
+  <text x="260" y="424" class="cap" text-anchor="middle">the HTTP API that becomes</text>
+  <text x="260" y="444" text-anchor="middle" class="cap">the industry's lingua franca</text>
+
+  <!-- node 3 (above): 2008-2010 clouds -->
+  <circle cx="410" cy="300" r="9" fill="#6b7280"/>
+  <line x1="410" y1="300" x2="410" y2="248" stroke="#d1d5db" stroke-width="2"/>
+  <text x="410" y="164" class="cap" text-anchor="middle">Azure Blob storage and</text>
+  <text x="410" y="184" text-anchor="middle" class="cap">Google Cloud Storage</text>
+  <text x="410" y="212" class="year" text-anchor="middle">2008–2010</text>
+  <text x="410" y="236" class="lbl" text-anchor="middle">cloud peers arrive</text>
+
+  <!-- node 4 (below): 2010 Swift -->
+  <circle cx="560" cy="300" r="9" fill="#6b7280"/>
+  <line x1="560" y1="300" x2="560" y2="352" stroke="#d1d5db" stroke-width="2"/>
+  <text x="560" y="376" class="year" text-anchor="middle">2010</text>
+  <text x="560" y="400" class="lbl" text-anchor="middle">OpenStack Swift</text>
+  <text x="560" y="424" class="cap" text-anchor="middle">open-source object storage</text>
+  <text x="560" y="444" text-anchor="middle" class="cap">goes mainstream</text>
+
+  <!-- node 5 (above): Ceph -->
+  <circle cx="710" cy="300" r="9" fill="#6b7280"/>
+  <line x1="710" y1="300" x2="710" y2="248" stroke="#d1d5db" stroke-width="2"/>
+  <text x="710" y="164" class="cap" text-anchor="middle">unified platform adds an</text>
+  <text x="710" y="184" text-anchor="middle" class="cap">S3-compatible gateway</text>
+  <text x="710" y="212" class="year" text-anchor="middle">2007 →</text>
+  <text x="710" y="236" class="lbl" text-anchor="middle">Ceph</text>
+
+  <!-- node 6 (below): 2014 MinIO -->
+  <circle cx="860" cy="300" r="9" fill="#6b7280"/>
+  <line x1="860" y1="300" x2="860" y2="352" stroke="#d1d5db" stroke-width="2"/>
+  <text x="860" y="376" class="year" text-anchor="middle">2014</text>
+  <text x="860" y="400" class="lbl" text-anchor="middle">MinIO</text>
+  <text x="860" y="424" class="cap" text-anchor="middle">lightweight, S3-first storage</text>
+  <text x="860" y="444" text-anchor="middle" class="cap">for private cloud</text>
+
+  <!-- node 7 (above): 2020 consistency -->
+  <circle cx="1010" cy="300" r="9" fill="#6b7280"/>
+  <line x1="1010" y1="300" x2="1010" y2="248" stroke="#d1d5db" stroke-width="2"/>
+  <text x="1010" y="164" class="cap" text-anchor="middle">S3 adopts read-after-write</text>
+  <text x="1010" y="184" text-anchor="middle" class="cap">consistency for all reads</text>
+  <text x="1010" y="212" class="year" text-anchor="middle">2020</text>
+  <text x="1010" y="236" class="lbl" text-anchor="middle">strong consistency</text>
+
+  <!-- today marker -->
+  <text x="1128" y="340" class="lbl" text-anchor="end" style="fill:#6b7280">today →</text>
+
+  <text x="600" y="500" class="cap" text-anchor="middle">Two decades later, the S3 API is the interoperability layer of cloud storage — and a new generation of open-source,</text>
+  <text x="600" y="524" text-anchor="middle" class="cap">S3-compatible systems (RustFS among them) runs it on private infrastructure.</text>
+</svg>

@@ -282,7 +282,7 @@ const mdxComponents = {
   table({ className, ...props }: ComponentPropsWithoutRef<"table">) {
     return (
       <div className="my-8 overflow-x-auto border border-border">
-        <table className={cn("w-full min-w-[40rem] text-left text-sm", className)} {...props} />
+        <table className={cn("w-full min-w-[40rem] text-left text-sm !m-0", className)} {...props} />
       </div>
     );
   },
