@@ -1,0 +1,343 @@
+---
+title: "Erasure Coding Explained: How Reed-Solomon Keeps Data Safe When Drives Fail"
+slug: erasure-coding-explained
+description: >-
+  A deep dive into erasure coding: why replication is expensive, how
+  Reed-Solomon codes compute parity over finite fields, how lost shards are
+  rebuilt with matrix inversion, and how RustFS implements it all in its
+  storage engine.
+date: '2026-10-03T09:00:00.000Z'
+author: Jinghe Ma
+tags:
+  - Erasure Coding
+  - Object Storage
+  - Durability
+  - RustFS
+image: /images/knowledge/erasure-coding/cover.svg
+---
+
+Drives fail. It is not a rare emergency — it is a statistical certainty. If you
+run a few hundred drives, one of them will die this quarter. If you run a
+hundred thousand, several will die today. The question every storage system
+must answer is not *whether* hardware fails, but **what happens to your bytes
+when it does**.
+
+Erasure coding is the answer that object storage systems reach for: instead of
+keeping extra copies of your data, they *compute* redundancy — mathematically
+derived shards that can rebuild the originals if some pieces go missing. Used
+well, it survives multiple simultaneous drive failures at a fraction of the
+cost of replication.
+
+This article walks the whole path: from the problem, through the algebra that
+makes erasure coding possible, down to how RustFS actually stores shards on
+disk — with the source code as our guide.
+
+## The naive answer: keep three copies
+
+The simplest way to survive drive failure is replication: write every object to
+three drives instead of one. Any two drives can fail and the data survives.
+Replication is fast to read and trivial to reason about — but it costs **300%
+of your raw capacity** to store 100% of your data.
+
+Erasure coding reaches the same fault tolerance far more cheaply. A common
+layout stores 4 data shards plus 2 parity shards (written as EC:4+2): the data
+is split into four pieces, two extra "check" pieces are computed, and all six
+are spread across six drives. **Any four of the six shards reconstruct the
+whole object.** Two drives can fail — the same tolerance as three-way
+replication — at **150% raw overhead** instead of 300%.
+
+![Storage overhead comparison: three full copies versus a 4+2 erasure coding layout with data and parity shards](/images/knowledge/erasure-coding/replication-vs-ec.svg)
+
+For petabyte-scale deployments, that difference is the entire business case.
+But how can six *different* pieces of data, none of which is a copy, recover an
+object? To answer that, we have to leave simple arithmetic behind.
+
+## Split, then compute: the shape of an erasure code
+
+Every erasure code works in three steps:
+
+1. **Split** the object into `k` equally sized *data shards* (this article uses
+   4+2 as our running example, so `k = 4`).
+2. **Compute** `m` *parity shards* from the data shards (here `m = 2`). Parity
+   shards are pure redundancy — each one is a mathematical function of the data,
+   not a copy of any of it.
+3. **Spread** all `k + m` shards so that no two shards of the same object share
+   a drive.
+
+![How one object becomes six shards: split into data shards, compute parity shards, spread across drives](/images/knowledge/erasure-coding/ec-overview.svg)
+
+The magic property — the one every design decision serves — is that **any `k`
+of the `k + m` shards are sufficient to reconstruct everything**. Lose one
+shard? Five remain; any four rebuild it. Lose two? Four remain; still enough.
+Lose three? Only three remain, and the object is gone. That gives the scheme
+its tolerance: an EC:4+2 object survives any 2 simultaneous shard losses.
+
+So the question becomes: *what kind of math* can turn 4 pieces into 6, such
+that any 4 of the 6 give the original back?
+
+## From XOR to Reed-Solomon
+
+You already know one erasure code, even if you have never called it that. XOR.
+
+In a RAID-5 array, a parity block is the XOR of all data blocks. If any one
+block is lost, XOR the survivors with the parity and the missing block
+reappears. But XOR parity has a hard ceiling: **one** equation, **one** unknown
+recovered. Lose two blocks and the single parity equation has two unknowns —
+unsolvable.
+
+The conceptual leap of Reed-Solomon coding is to build `m` *different* parity
+equations instead of one, with `m` *different* coefficient sets — and to do the
+arithmetic in a number system where every equation is solvable. Ordinary
+integer arithmetic does not work here: with fixed-width bytes, addition
+overflows, subtraction needs borrows, and division is often impossible (there
+is no integer `x` such that `3x = 1 mod 256`... well, actually 171 works for
+that one, but `2x = 1 mod 256` has no solution at all — even numbers never
+produce odd results).
+
+The fix is to replace integer arithmetic with **finite field** arithmetic.
+
+## GF(2^8): arithmetic on bytes without overflow
+
+A finite field is a number system with the properties algebra needs — you can
+add, subtract, multiply, and divide (except by zero) — but it wraps around a
+finite set of values. For byte-oriented data the natural choice is `GF(2^8)`: a
+field of exactly 256 elements, one per byte value.
+
+Its rules are unusual at first glance, and they are worth internalizing:
+
+- **Addition is XOR.** No carries, no overflow. `0x57 ⊕ 0x83 = 0xD4`, and that
+  is the whole definition. A pleasant consequence: addition and subtraction are
+  the same operation (`a - b = a ⊕ b`).
+- **Multiplication is polynomial multiplication.** Treat each byte as a
+  polynomial of degree 7 whose coefficients are bits, multiply the polynomials,
+  then reduce the result modulo a fixed *primitive polynomial*
+  `x^8 + x^4 + x^3 + x^2 + 1` (written `0x11D`). Reduction here is polynomial
+  long division with XOR in place of subtraction — so again, no carries.
+- **Every non-zero element has a multiplicative inverse.** This is the property
+  integers mod 256 lack, and it is what makes matrix inversion — and therefore
+  recovery — always possible. `2x = 1` has no solution mod 256, but in GF(2^8)
+  every byte has a partner that multiplies to 1.
+
+Under these rules, bytes stop being fragile quantities that overflow and start
+behaving like well-behaved algebra. And algebra is exactly what we need.
+
+## Encoding: one matrix multiplication
+
+With GF(2^8) arithmetic in hand, Reed-Solomon encoding is compactly described
+as **matrix multiplication**. Take the `k` data bytes at some position across
+the data shards (one byte from each shard), arranged as a column vector
+`[d0, d1, d2, d3]`. Multiply it by a generator matrix `G` with `k + m` rows and
+`k` columns:
+
+![Reed-Solomon encoding as matrix multiplication over GF(2^8), with the generator matrix in systematic form](/images/knowledge/erasure-coding/rs-encoding.svg)
+
+The top `k` rows form an identity matrix, which is a deliberate design choice
+called **systematic form**: the data shards pass through unchanged, so reading
+an intact object is just concatenation — no decoding required. The bottom `m`
+rows hold the parity coefficients. Row `i` of a Vandermonde-style matrix
+carries successive powers of a field element `α`, giving parity bytes like:
+
+```
+p0 = 1·d0 ⊕ α·d1 ⊕ α²·d2 ⊕ α³·d3
+p1 = 1·d0 ⊕ α²·d1 ⊕ α⁴·d2 ⊕ α⁶·d3
+```
+
+Each row is a *different* linear combination of the data — `m` independent
+equations rather than one. Because `α` is a generator of the field's
+multiplicative group, the rows are guaranteed to be independent in exactly the
+way recovery requires: **every square `k × k` sub-matrix of `G` is
+invertible**.
+
+In practice the multiplication is applied per byte-stripe: the shards are cut
+into matching byte positions (one symbol per byte), and each position is
+encoded independently. That is why encoding is cheap — it is one pass of XOR
+and table-driven GF multiplications per byte.
+
+## Decoding: invert the survivors
+
+Recovery is the same mathematics run backwards. Suppose shards D1 and P0 are
+lost. Four shards survive — D0, D2, D3, and P1 — and any four are enough:
+
+![Recovery: build the sub-matrix from the four surviving shards, invert it, and multiply to rebuild the two lost shards](/images/knowledge/erasure-coding/rs-decoding.svg)
+
+1. Pick the 4 surviving shards and collect their corresponding rows from `G`.
+2. That `4 × 4` sub-matrix is invertible (the property above). Compute its
+   inverse over GF(2^8).
+3. Multiply the inverse by the surviving shard values. Out come the original
+   data bytes — including the bytes of the lost data shard D1.
+4. Re-encode parity to regenerate P0, and the set is whole again.
+
+Note what this does *not* require: no second copy of the data, no backup, no
+rebuild from a remote replica. The redundancy is the parity math itself. This
+is also why erasure coding is sometimes described as "spare capacity converted
+into algebra."
+
+## Inside RustFS: theory meets disk
+
+The mathematics above is textbook. What makes a storage system reliable is how
+faithfully — and how *defensively* — it implements the theory. Here is how
+RustFS does it (paths refer to the
+[rustfs/rustfs](https://github.com/rustfs/rustfs) repository).
+
+### Stripes and shards
+
+RustFS erasure-codes objects in **1 MiB blocks**, called stripes
+(`BLOCK_SIZE_V2` in `crates/filemeta/src/fileinfo.rs`). A 100 MiB object is 98
+full stripes plus a short tail stripe; each stripe is split into `k` data
+shards of `ceil(stripe / k)` bytes and `m` parity shards of the same size
+(`calc_shard_size` in `crates/ecstore/src/erasure/coding/erasure.rs`). Working
+in fixed stripes bounds memory use (a streaming write never holds the whole
+object), makes partial reads efficient (a GET range touches only its stripes),
+and keeps the codec's SIMD working set cache-friendly.
+
+### Choosing k and m: parity scales with the set
+
+RustFS derives default parity from the number of drives in an erasure set
+(`default_parity_count` in `crates/ecstore/src/config/storageclass.rs`):
+
+| Drives per set | Default parity | Layout on a full set |
+| --- | --- | --- |
+| 1 | 0 | no redundancy |
+| 2–3 | 1 | EC:1+1 (2 drives) or EC:2+1 (3 drives) |
+| 4–5 | 2 | EC:2+2 (4 drives) or EC:3+2 (5 drives) |
+| 6–7 | 3 | EC:3+3 (6 drives) or EC:4+3 (7 drives) |
+| 8+ | 4 | EC:4+4 (8 drives) up to EC:12+4 (16 drives) |
+
+Two guardrails sit on top of this: parity can never exceed **half the drives**
+(`parity <= drives / 2`) — which makes sense, since parity beyond the data
+count buys little — and total shards per object must fit in GF(2^8), so at most
+**255 shards** (`MODERN_MAX_TOTAL_SHARDS`). Erasure sets run from 2 to 16
+drives. Operators can override everything via the `RUSTFS_STORAGE_CLASS_*`
+environment variables (for example `RUSTFS_STORAGE_CLASS_STANDARD=EC:3`), and
+the `REDUCED_REDUNDANCY` class deliberately trades durability for capacity at
+`EC:1`.
+
+### Placement: which shard lands on which drive
+
+Shard placement is not arbitrary. Each object gets a **permutation** derived
+from the CRC32 hash of its `bucket/object` key (`FileInfo::new` in
+`crates/filemeta/src/fileinfo.rs`): a rotation of shard indices starting at
+`hash % (k + m)`. Two consequences matter in production:
+
+- **Failure domains spread.** Different objects put their shard 0 on different
+  drives, so a single dead drive damages every object only slightly (one shard
+  each) rather than destroying any one object completely.
+- **Sets stay balanced.** The distribution recorded in the object metadata is a
+  valid permutation by construction, and writes/reads shuffle disk order by it.
+
+### Two codecs, one contract
+
+RustFS's erasure layer (`crates/ecstore/src/erasure/coding/erasure.rs`) runs
+two Reed-Solomon implementations behind one interface:
+
+- **The modern codec** — `rustfs-erasure-codec`, a GF(2^8) implementation with
+  SIMD acceleration — handles new writes.
+- **A legacy codec** — the `reed-solomon-simd` crate (the engine RustFS used in
+  earlier versions) — remains in the read and heal paths for objects written in
+  the old on-disk format (`uses_legacy_checksum` in the object metadata).
+
+The two differ in an on-disk detail: legacy shard sizes are rounded up to an
+even number of bytes, while the modern formula uses plain ceiling division.
+Keeping both engines means old data is never stranded — a principle worth
+stating plainly: **a storage system may evolve its codec, but it must never
+lose the ability to read what it wrote.**
+
+For speed, codec instances are cached per `(k, m)` pair, encoder workspaces are
+reused across calls, and the hot path allocates a single buffer per stripe.
+The cost is real but small: the codebase measures EC encode at roughly
+**110 µs per 1 MiB block** (p99 around 542 µs) on its target hardware — a
+few percent of what the network and disks spend moving those bytes.
+
+### Silent corruption: bitrot detection
+
+Drive failures are loud — the drive disappears. *Bit rot* is quiet: sectors
+decay and serve plausible-looking garbage. An erasure code alone cannot catch
+this (corrupt bytes look like valid bytes), so RustFS protects every shard
+block with a checksum:
+
+- On disk, each shard is a sequence of `[32-byte hash][data]` frames
+  (`crates/ecstore/src/erasure/coding/bitrot.rs`). The hash is
+  **HighwayHash-256** in streaming mode — fast enough to run on every read,
+  with a fixed key (the HighwayHash of the first 100 decimals of π, for the
+  curious).
+- Every read verifies each block's hash **before the bytes reach the caller**.
+  A mismatch is treated as a corrupt shard — and then erasure coding does what
+  it does best: the corrupt shard is simply *discarded*, and the object is
+  reconstructed from the remaining shards. Corruption and failure converge on
+  the same recovery path.
+- RustFS additionally re-verifies freshly written shards after a PUT (write
+  self-verify) and supports per-stripe SHA-256 Merkle proof trees
+  (`shard-integrity-v1`) for end-to-end verification.
+
+### Reads under failure
+
+A healthy read is trivial: the `k` data shards concatenate back into the
+object, no codec work needed. A degraded read is where the design shows:
+
+- RustFS opens shard readers across the set's drives and reads **just enough**
+  shards — `k` successes per stripe — preferring data shards and engaging
+  parity only when a data shard is missing or fails its checksum. Latency-wise,
+  the first `k` responders win.
+- If fewer than `k` shards can be read, the request fails with a read-quorum
+  error — the honest answer that the object is temporarily (or permanently)
+  unreadable.
+- When reconstruction is driven by suspect data, RustFS can **verify the
+  rebuild**: it regenerates parity and byte-compares it against surviving parity
+  shards, rejecting inconsistent sources rather than silently propagating
+  corruption.
+
+### Healing: rebuilding what was lost
+
+Failures are repaired by the heal path (`Erasure::heal` in
+`crates/ecstore/src/erasure/coding/heal.rs` and the heal orchestration in
+`crates/ecstore/src/set_disk/ops/heal.rs`):
+
+1. Read surviving shards stripe by stripe (each already hash-verified).
+2. Reconstruct data shards and regenerate parity from the same geometry used at
+   write time — including the legacy codec for legacy-format objects.
+3. Stream rebuilt shards to replacement drives, with a deliberately lenient
+   write quorum of 1 per target: a flaky replacement disk must not block
+   recovery of the healthy ones. Progress is preserved block by block.
+
+Because healing streams stripes — the same 1 MiB units used for writes and
+reads — a rebuild of a 10 TB drive reads `k × 10 TB` across the survivors,
+which is the operational cost of erasure coding: **durability is bought with
+rebuild I/O**. This is exactly why parity is capped at half the set and why
+cluster sizing counts rebuild bandwidth, not just steady-state throughput.
+
+## What erasure coding costs you
+
+Erasure coding is not free, and honest documentation says so:
+
+- **CPU.** Encoding and decoding are GF(2^8) math per byte. SIMD keeps this in
+  the noise for sequential workloads (about 110 µs per MiB), but it is not
+  zero, and small random writes feel it more than big sequential ones.
+- **Small objects.** Splitting a 3 KB object into four shards is mostly
+  overhead. RustFS mitigates this by inlining tiny shards into the object's
+  metadata file (below the 128 KiB per-shard inline threshold), but for a
+  workload of millions of tiny objects, replication can still be the better
+  trade. Match the tool to the workload.
+- **Rebuild time.** Restoring redundancy after a failure reads broadly across
+  the surviving set. Larger sets and bigger parity make rebuilds longer — plan
+  failure domains and spare capacity accordingly.
+- **Sub-matrix math on paper is free; in production it must also be *correct*.**
+  The edge cases — short tail stripes, zero-length objects, corrupted metadata,
+  mixed codec generations — are where storage systems actually earn their
+  reliability, and where RustFS's defensive checks (dimension validation,
+  parity cross-checks, quorum rules) live.
+
+## Putting the math to work
+
+Erasure coding is one of those ideas that is simple at the edges (split, add
+parity, survive failures) and deep at the center (finite fields, generator
+matrixes, invertible sub-matrixes). The payoff is durability that scales with
+math instead of with copies: EC:4+2 keeps data safe through two simultaneous
+drive failures at half the raw overhead of three-way replication.
+
+If you are sizing a cluster, the
+[erasure code calculator](/erasure-code-calculator) turns these trade-offs
+into concrete numbers for your drive count and object sizes. And if you want
+the rest of the story — how objects land in erasure sets, how healing is
+scheduled, how S3 semantics ride on top — the
+[RustFS documentation](https://docs.rustfs.com) goes deeper, and the
+[engineering blog](/blog) covers the implementation as it evolves.

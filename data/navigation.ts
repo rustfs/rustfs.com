@@ -64,6 +64,11 @@ export const resourceNavigation: NavigationItem[] = [
     href: "/blog",
     description: "Production best practices, technical deep dives, and expert insights.",
   },
+  {
+    title: "Knowledge Center",
+    href: "/knowledge",
+    description: "Object storage and RustFS concepts explained from first principles.",
+  },
 ];
 
 export const footerNavigation = [
@@ -86,6 +91,7 @@ export const footerNavigation = [
       { title: "RustFS Download", href: "/download" },
       { title: "rc Download", href: "/download/cli" },
       { title: "Blog", href: "/blog" },
+      { title: "Knowledge Center", href: "/knowledge" },
       { title: "EC Calculator", href: "/erasure-code-calculator" },
       { title: "Config Generator", href: "/rustfs-config-generator" },
       { title: "Documentation", href: "/docs" },

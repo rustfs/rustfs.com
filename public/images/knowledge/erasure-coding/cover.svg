@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="1600" height="700">
+  <style>
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #171717; }
+    .eyebrow { fill: #2568f5; font-size: 22px; font-weight: 700; letter-spacing: 4px; }
+    .title { font-size: 66px; font-weight: 700; }
+    .sub { fill: #6b7280; font-size: 27px; }
+    .w { fill: #ffffff; }
+    .chip { font-size: 21px; font-weight: 700; fill: #ffffff; }
+    .cap { fill: #6b7280; font-size: 16px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  </style>
+
+  <rect width="1600" height="700" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="8" fill="#2568f5"/>
+
+  <!-- text block -->
+  <text x="100" y="248" class="eyebrow">RUSTFS KNOWLEDGE CENTER</text>
+  <text x="100" y="336" class="title">Erasure Coding,</text>
+  <text x="100" y="412" class="title">Explained</text>
+  <text x="100" y="478" class="sub">The Reed–Solomon math that keeps your data safe</text>
+  <text x="100" y="518" class="sub">when drives fail</text>
+
+  <!-- object bar -->
+  <rect x="905" y="120" width="560" height="72" rx="8" fill="#171717"/>
+  <text x="1185" y="165" class="chip" text-anchor="middle">one object · 12 MB</text>
+
+  <!-- fan-out arrows -->
+  <g stroke="#9ca3af" stroke-width="2" fill="none">
+    <path d="M1185 192 L 945 300"/>
+    <path d="M1185 192 L 1040 300"/>
+    <path d="M1185 192 L 1135 300"/>
+    <path d="M1185 192 L 1230 300"/>
+    <path d="M1185 192 L 1325 300"/>
+    <path d="M1185 192 L 1420 300"/>
+  </g>
+
+  <!-- shard chips -->
+  <g>
+    <rect x="905" y="306" width="80" height="58" rx="6" fill="#2568f5"/>
+    <text x="945" y="342" class="chip" text-anchor="middle">D0</text>
+    <rect x="1000" y="306" width="80" height="58" rx="6" fill="#2568f5"/>
+    <text x="1040" y="342" class="chip" text-anchor="middle">D1</text>
+    <rect x="1095" y="306" width="80" height="58" rx="6" fill="#2568f5"/>
+    <text x="1135" y="342" class="chip" text-anchor="middle">D2</text>
+    <rect x="1190" y="306" width="80" height="58" rx="6" fill="#2568f5"/>
+    <text x="1230" y="342" class="chip" text-anchor="middle">D3</text>
+    <rect x="1285" y="306" width="80" height="58" rx="6" fill="#ea580c"/>
+    <text x="1325" y="342" class="chip" text-anchor="middle">P0</text>
+    <rect x="1380" y="306" width="80" height="58" rx="6" fill="#ea580c"/>
+    <text x="1420" y="342" class="chip" text-anchor="middle">P1</text>
+  </g>
+
+  <!-- drives -->
+  <g>
+    <rect x="905" y="430" width="80" height="150" rx="6" fill="#f3f4f6" stroke="#d1d5db" stroke-width="2"/>
+    <rect x="1000" y="430" width="80" height="150" rx="6" fill="#f3f4f6" stroke="#d1d5db" stroke-width="2"/>
+    <rect x="1095" y="430" width="80" height="150" rx="6" fill="#f3f4f6" stroke="#d1d5db" stroke-width="2"/>
+    <rect x="1190" y="430" width="80" height="150" rx="6" fill="#f3f4f6" stroke="#d1d5db" stroke-width="2"/>
+    <rect x="1285" y="430" width="80" height="150" rx="6" fill="#f3f4f6" stroke="#d1d5db" stroke-width="2"/>
+    <rect x="1380" y="430" width="80" height="150" rx="6" fill="#f3f4f6" stroke="#d1d5db" stroke-width="2"/>
+    <g stroke="#9ca3af" stroke-width="2">
+      <path d="M945 364 L 945 424" marker-end="url(#ar)"/>
+      <path d="M1040 364 L 1040 424" marker-end="url(#ar)"/>
+      <path d="M1135 364 L 1135 424" marker-end="url(#ar)"/>
+      <path d="M1230 364 L 1230 424" marker-end="url(#ar)"/>
+      <path d="M1325 364 L 1325 424" marker-end="url(#ar)"/>
+      <path d="M1420 364 L 1420 424" marker-end="url(#ar)"/>
+    </g>
+    <g class="cap" text-anchor="middle">
+      <text x="945" y="608">drive 1</text>
+      <text x="1040" y="608">drive 2</text>
+      <text x="1135" y="608">drive 3</text>
+      <text x="1230" y="608">drive 4</text>
+      <text x="1325" y="608">drive 5</text>
+      <text x="1420" y="608">drive 6</text>
+    </g>
+  </g>
+
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <text x="1185" y="652" class="cap" text-anchor="middle">4 data shards + 2 parity shards · any 4 of the 6 restore the object</text>
+</svg>

@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640">
+  <style>
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #171717; }
+    .t { font-size: 27px; font-weight: 700; }
+    .lbl { font-size: 18px; font-weight: 600; }
+    .cap { fill: #6b7280; font-size: 15px; }
+    .w { fill: #ffffff; }
+    .chip { font-size: 18px; font-weight: 700; fill: #ffffff; }
+    .cell { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 19px; }
+    .note { fill: #374151; font-size: 16px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  </style>
+
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="40" y="56" class="t">Reed–Solomon encoding = matrix math over GF(2⁸)</text>
+
+  <!-- data vector -->
+  <g>
+    <rect x="60" y="140" width="110" height="56" rx="6" fill="#2568f5"/>
+    <text x="115" y="175" class="chip" text-anchor="middle">d₀</text>
+    <rect x="60" y="206" width="110" height="56" rx="6" fill="#2568f5"/>
+    <text x="115" y="241" class="chip" text-anchor="middle">d₁</text>
+    <rect x="60" y="272" width="110" height="56" rx="6" fill="#2568f5"/>
+    <text x="115" y="307" class="chip" text-anchor="middle">d₂</text>
+    <rect x="60" y="338" width="110" height="56" rx="6" fill="#2568f5"/>
+    <text x="115" y="373" class="chip" text-anchor="middle">d₃</text>
+    <text x="115" y="120" class="lbl" text-anchor="middle">data shards</text>
+    <text x="115" y="430" class="cap" text-anchor="middle">each dᵢ is one GF(2⁸) symbol</text>
+    <text x="115" y="452" class="cap" text-anchor="middle">(one byte of the shard)</text>
+  </g>
+
+  <text x="215" y="275" style="font-size:34px; font-weight:700">×</text>
+
+  <!-- generator matrix -->
+  <g>
+    <!-- identity block -->
+    <g class="cell" text-anchor="middle">
+      <!-- row 0 -->
+      <rect x="270" y="128" width="64" height="52" fill="#eff4ff" stroke="#2568f5" stroke-width="1.5"/>
+      <text x="302" y="161">1</text>
+      <rect x="338" y="128" width="64" height="52" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="370" y="161">0</text>
+      <rect x="406" y="128" width="64" height="52" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="438" y="161">0</text>
+      <rect x="474" y="128" width="64" height="52" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="506" y="161">0</text>
+      <!-- row 1 -->
+      <rect x="270" y="184" width="64" height="52" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="302" y="217">0</text>
+      <rect x="338" y="184" width="64" height="52" fill="#eff4ff" stroke="#2568f5" stroke-width="1.5"/>
+      <text x="370" y="217">1</text>
+      <rect x="406" y="184" width="64" height="52" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="438" y="217">0</text>
+      <rect x="474" y="184" width="64" height="52" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="506" y="217">0</text>
+      <!-- row 2 -->
+      <rect x="270" y="240" width="64" height="52" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="302" y="273">0</text>
+      <rect x="338" y="240" width="64" height="52" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="370" y="273">0</text>
+      <rect x="406" y="240" width="64" height="52" fill="#eff4ff" stroke="#2568f5" stroke-width="1.5"/>
+      <text x="438" y="273">1</text>
+      <rect x="474" y="240" width="64" height="52" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="506" y="273">0</text>
+      <!-- row 3 -->
+      <rect x="270" y="296" width="64" height="52" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="302" y="329">0</text>
+      <rect x="338" y="296" width="64" height="52" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="370" y="329">0</text>
+      <rect x="406" y="296" width="64" height="52" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="438" y="329">0</text>
+      <rect x="474" y="296" width="64" height="52" fill="#eff4ff" stroke="#2568f5" stroke-width="1.5"/>
+      <text x="506" y="329">1</text>
+      <!-- parity row 0 -->
+      <rect x="270" y="356" width="64" height="52" fill="#fff3e8" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="302" y="389">1</text>
+      <rect x="338" y="356" width="64" height="52" fill="#fff3e8" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="370" y="389">α</text>
+      <rect x="406" y="356" width="64" height="52" fill="#fff3e8" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="438" y="389">α²</text>
+      <rect x="474" y="356" width="64" height="52" fill="#fff3e8" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="506" y="389">α³</text>
+      <!-- parity row 1 -->
+      <rect x="270" y="412" width="64" height="52" fill="#fff3e8" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="302" y="445">1</text>
+      <rect x="338" y="412" width="64" height="52" fill="#fff3e8" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="370" y="445">α²</text>
+      <rect x="406" y="412" width="64" height="52" fill="#fff3e8" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="438" y="445">α⁴</text>
+      <rect x="474" y="412" width="64" height="52" fill="#fff3e8" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="506" y="445">α⁶</text>
+    </g>
+    <!-- matrix brackets -->
+    <g stroke="#171717" stroke-width="2.5" fill="none">
+      <path d="M258 128 L 248 128 L 248 464 L 258 464"/>
+      <path d="M550 128 L 560 128 L 560 464 L 550 464"/>
+    </g>
+    <text x="404" y="108" class="lbl" text-anchor="middle">generator matrix G (6 × 4)</text>
+    <text x="404" y="500" class="cap" text-anchor="middle">top: identity (data passes through) · bottom: parity coefficients in GF(2⁸)</text>
+  </g>
+
+  <text x="600" y="275" style="font-size:34px; font-weight:700">=</text>
+
+  <!-- output vector -->
+  <g>
+    <rect x="650" y="112" width="110" height="52" rx="6" fill="#2568f5"/>
+    <text x="705" y="145" class="chip" text-anchor="middle">d₀</text>
+    <rect x="650" y="172" width="110" height="52" rx="6" fill="#2568f5"/>
+    <text x="705" y="205" class="chip" text-anchor="middle">d₁</text>
+    <rect x="650" y="232" width="110" height="52" rx="6" fill="#2568f5"/>
+    <text x="705" y="265" class="chip" text-anchor="middle">d₂</text>
+    <rect x="650" y="292" width="110" height="52" rx="6" fill="#2568f5"/>
+    <text x="705" y="325" class="chip" text-anchor="middle">d₃</text>
+    <rect x="650" y="352" width="110" height="52" rx="6" fill="#ea580c"/>
+    <text x="705" y="385" class="chip" text-anchor="middle">p₀</text>
+    <rect x="650" y="412" width="110" height="52" rx="6" fill="#ea580c"/>
+    <text x="705" y="445" class="chip" text-anchor="middle">p₁</text>
+    <text x="705" y="92" class="lbl" text-anchor="middle">encoded shards</text>
+    <text x="705" y="500" class="cap" text-anchor="middle">written to 6 separate drives</text>
+  </g>
+
+  <!-- notes panel -->
+  <g>
+    <rect x="810" y="112" width="350" height="380" rx="8" fill="#f9fafb" stroke="#d1d5db" stroke-width="1.5"/>
+    <text x="834" y="150" class="lbl">GF(2⁸) arithmetic</text>
+    <text x="834" y="186" class="note">Addition is XOR — no carries:</text>
+    <text x="834" y="212" class="note mono">01010101 ⊕ 00110011 = 01100110</text>
+    <text x="834" y="252" class="note">Multiplication is polynomial</text>
+    <text x="834" y="276" class="note">multiplication modulo</text>
+    <text x="834" y="300" class="note mono">x⁸ + x⁴ + x³ + x² + 1 (0x11D)</text>
+    <text x="834" y="344" class="note">One parity symbol:</text>
+    <text x="834" y="372" class="note mono">p₀ = 1·d₀ ⊕ α·d₁ ⊕ α²·d₂ ⊕ α³·d₃</text>
+    <text x="834" y="416" class="note">Every 4×4 sub-matrix of G is</text>
+    <text x="834" y="440" class="note">invertible over GF(2⁸), so any</text>
+    <text x="834" y="464" class="note">4 surviving shards rebuild all 6.</text>
+  </g>
+
+  <!-- bottom note -->
+  <text x="600" y="580" class="cap" text-anchor="middle">Systematic form: the data shards are stored untouched; parity is pure redundancy computed from them.</text>
+  <text x="600" y="608" class="cap" text-anchor="middle">RustFS runs this same math per byte-stripe through the reed-solomon-simd crate, using the CPU's vector instructions.</text>
+</svg>

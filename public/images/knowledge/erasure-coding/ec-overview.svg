@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="1200" height="620">
+  <style>
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #171717; }
+    .t { font-size: 27px; font-weight: 700; }
+    .lbl { font-size: 18px; font-weight: 600; }
+    .cap { fill: #6b7280; font-size: 16px; }
+    .w { fill: #ffffff; }
+    .chip { font-size: 18px; font-weight: 700; fill: #ffffff; }
+    .note { fill: #374151; font-size: 17px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  </style>
+
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="40" y="56" class="t">How one object becomes six shards</text>
+
+  <!-- Panel A: object -->
+  <text x="60" y="120" class="lbl">1 · Object</text>
+  <rect x="60" y="280" width="180" height="110" rx="8" fill="#171717"/>
+  <text x="150" y="328" class="chip" text-anchor="middle">object</text>
+  <text x="150" y="356" class="chip mono" text-anchor="middle" style="font-size:15px">12 MB</text>
+  <text x="150" y="430" class="cap" text-anchor="middle">as uploaded to S3</text>
+
+  <!-- arrow A->B -->
+  <g stroke="#9ca3af" stroke-width="2.5" fill="none">
+    <path d="M255 335 L 330 335" marker-end="url(#ar)"/>
+  </g>
+
+  <!-- Panel B: shards -->
+  <text x="345" y="120" class="lbl">2 · Split + compute parity</text>
+  <g>
+    <rect x="345" y="150" width="200" height="52" rx="6" fill="#2568f5"/>
+    <text x="445" y="183" class="chip" text-anchor="middle">D0 · data · 3 MB</text>
+    <rect x="345" y="214" width="200" height="52" rx="6" fill="#2568f5"/>
+    <text x="445" y="247" class="chip" text-anchor="middle">D1 · data · 3 MB</text>
+    <rect x="345" y="278" width="200" height="52" rx="6" fill="#2568f5"/>
+    <text x="445" y="311" class="chip" text-anchor="middle">D2 · data · 3 MB</text>
+    <rect x="345" y="342" width="200" height="52" rx="6" fill="#2568f5"/>
+    <text x="445" y="375" class="chip" text-anchor="middle">D3 · data · 3 MB</text>
+    <rect x="345" y="410" width="200" height="52" rx="6" fill="#ea580c"/>
+    <text x="445" y="443" class="chip" text-anchor="middle">P0 · parity · 3 MB</text>
+    <rect x="345" y="474" width="200" height="52" rx="6" fill="#ea580c"/>
+    <text x="445" y="507" class="chip" text-anchor="middle">P1 · parity · 3 MB</text>
+  </g>
+  <text x="445" y="562" class="cap" text-anchor="middle">parity is computed, never uploaded</text>
+
+  <!-- arrow B->C -->
+  <g stroke="#9ca3af" stroke-width="2.5" fill="none">
+    <path d="M560 335 L 640 335" marker-end="url(#ar)"/>
+  </g>
+
+  <!-- Panel C: drives -->
+  <text x="655" y="120" class="lbl">3 · Spread across drives</text>
+  <g>
+    <!-- drive columns -->
+    <g fill="#f9fafb" stroke="#d1d5db" stroke-width="2">
+      <rect x="655" y="150" width="70" height="376" rx="6"/>
+      <rect x="737" y="150" width="70" height="376" rx="6"/>
+      <rect x="819" y="150" width="70" height="376" rx="6"/>
+      <rect x="901" y="150" width="70" height="376" rx="6"/>
+      <rect x="983" y="150" width="70" height="376" rx="6"/>
+      <rect x="1065" y="150" width="70" height="376" rx="6"/>
+    </g>
+    <!-- shard chips in columns -->
+    <g>
+      <rect x="667" y="170" width="46" height="34" rx="5" fill="#2568f5"/>
+      <text x="690" y="193" class="chip" text-anchor="middle" style="font-size:15px">D0</text>
+      <rect x="749" y="170" width="46" height="34" rx="5" fill="#2568f5"/>
+      <text x="772" y="193" class="chip" text-anchor="middle" style="font-size:15px">D1</text>
+      <rect x="831" y="170" width="46" height="34" rx="5" fill="#2568f5"/>
+      <text x="854" y="193" class="chip" text-anchor="middle" style="font-size:15px">D2</text>
+      <rect x="913" y="170" width="46" height="34" rx="5" fill="#2568f5"/>
+      <text x="936" y="193" class="chip" text-anchor="middle" style="font-size:15px">D3</text>
+      <rect x="995" y="170" width="46" height="34" rx="5" fill="#ea580c"/>
+      <text x="1018" y="193" class="chip" text-anchor="middle" style="font-size:15px">P0</text>
+      <rect x="1077" y="170" width="46" height="34" rx="5" fill="#ea580c"/>
+      <text x="1100" y="193" class="chip" text-anchor="middle" style="font-size:15px">P1</text>
+    </g>
+    <!-- column arrows -->
+    <g stroke="#9ca3af" stroke-width="2" fill="none">
+      <path d="M445 206 L 445 240" />
+    </g>
+  </g>
+  <g class="cap" text-anchor="middle">
+    <text x="690" y="556">drive 1</text>
+    <text x="772" y="556">drive 2</text>
+    <text x="854" y="556">drive 3</text>
+    <text x="936" y="556">drive 4</text>
+    <text x="1018" y="556">drive 5</text>
+    <text x="1100" y="556">drive 6</text>
+    <text x="895" y="588">one shard per drive — drives may live on different nodes</text>
+  </g>
+
+  <!-- bottom note -->
+  <rect x="40" y="560" width="0" height="0"/>
+  <rect x="655" y="430" width="480" height="86" rx="8" fill="#eff4ff" stroke="#2568f5" stroke-width="1.5"/>
+  <text x="895" y="464" class="note" text-anchor="middle">
+    <tspan font-weight="700">Any 4 of the 6 shards</tspan> restore the object.
+  </text>
+  <text x="895" y="492" class="note" text-anchor="middle">The set survives any 2 simultaneous drive failures.</text>
+
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+</svg>
