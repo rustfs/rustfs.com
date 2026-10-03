@@ -5,6 +5,7 @@ import { productNavigation, resourceNavigation, type NavigationItem } from "@/da
 import { homeAnnouncement } from "@/data/announcement";
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon, XIcon } from "lucide-react";
+import { useReducedMotion } from 'motion/react';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useRef, useState, type RefObject } from 'react';
@@ -49,24 +50,25 @@ function ClosePopoverOnOutsideClick({
 
 function NavigationMenu({ label, items, wide = false }: { label: string; items: NavigationItem[]; wide?: boolean }) {
   const popoverRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   return (
     <Popover ref={popoverRef} className="relative">
       {({ close, open }) => (
         <>
           <ClosePopoverOnOutsideClick close={close} open={open} popoverRef={popoverRef} />
-          <Popover.Button className="inline-flex items-center gap-1 px-2 py-1 text-base text-primary transition-colors hover:text-brand">
+          <Popover.Button className="inline-flex items-center gap-1 whitespace-nowrap px-2 py-1 text-base text-primary transition-colors hover:text-brand motion-reduce:transition-none">
             <span>{label}</span>
             <ChevronDownIcon className="size-3" />
           </Popover.Button>
           <Transition
             as={Fragment}
-            enter="duration-150 ease-out"
-            enterFrom="opacity-0 translate-y-1"
-            enterTo="opacity-100 translate-y-0"
-            leave="duration-100 ease-in"
-            leaveFrom="opacity-100 translate-y-0"
-            leaveTo="opacity-0 translate-y-1"
+            enter={reduceMotion ? '' : 'duration-150 ease-out'}
+            enterFrom={reduceMotion ? '' : 'opacity-0 translate-y-1'}
+            enterTo={reduceMotion ? '' : 'opacity-100 translate-y-0'}
+            leave={reduceMotion ? '' : 'duration-100 ease-in'}
+            leaveFrom={reduceMotion ? '' : 'opacity-100 translate-y-0'}
+            leaveTo={reduceMotion ? '' : 'opacity-0 translate-y-1'}
           >
             <Popover.Panel
               className={cn(
@@ -99,6 +101,7 @@ function NavigationMenu({ label, items, wide = false }: { label: string; items: 
 
 export default function AppHeader() {
   const pathname = usePathname()
+  const reduceMotion = useReducedMotion()
   const [isAnnouncementDismissed, setIsAnnouncementDismissed] = useState(false)
   const showHomeAnnouncement = pathname === '/' && homeAnnouncement.enabled
   const navs = [
@@ -130,13 +133,13 @@ export default function AppHeader() {
         <div className="relative bg-foreground text-background">
           <Link
             href={homeAnnouncement.href}
-            className="group relative flex min-h-11 items-center justify-center overflow-hidden px-12 py-2 text-center text-sm transition-colors hover:bg-foreground/90"
+            className="group relative flex min-h-11 items-center justify-center overflow-hidden px-10 py-2 text-center text-[12px] leading-[18px] transition-colors hover:bg-foreground/90 sm:px-12 sm:text-sm sm:leading-7 motion-reduce:transition-none"
           >
             <span
               aria-hidden="true"
               className="absolute inset-y-0 right-0 w-1/3 bg-brand/35 [clip-path:polygon(26%_0,100%_0,100%_100%,0_100%)]"
             />
-            <span className="relative inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+            <span className="relative inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 sm:gap-x-3">
               <span className="inline-flex h-5 items-center border border-background/35 px-2 font-mono text-[9px] font-semibold uppercase leading-none tracking-[0.16em]">
                 {homeAnnouncement.badge}
               </span>
@@ -159,18 +162,18 @@ export default function AppHeader() {
 
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8 xl:py-5">
         <nav className="relative z-50 flex justify-between">
-          <div className="flex items-center lg:gap-x-12">
+          <div className="flex items-center lg:gap-x-8 xl:gap-x-12">
             <Link href="/" aria-label="Go to homepage">
               <Logo className="h-5 w-auto" />
             </Link>
-            <div className="hidden lg:flex lg:items-center lg:gap-x-4">
+            <div className="hidden lg:flex lg:items-center lg:gap-x-3 xl:gap-x-4">
               <NavigationMenu label="Product" items={productNavigation} wide />
               <NavigationMenu label="Resources" items={resourceNavigation} wide />
               {navs.map((item, index) => {
                 return (
                   <a
                     key={index}
-                    className={cn(`inline-block px-2 py-1 text-base text-primary transition-colors hover:text-brand`, item.classes)}
+                    className={cn(`inline-block whitespace-nowrap px-2 py-1 text-base text-primary transition-colors hover:text-brand motion-reduce:transition-none`, item.classes)}
                     href={item.url}
                   >
                     {item.label}
@@ -183,30 +186,30 @@ export default function AppHeader() {
             <div className="hidden items-center gap-x-5 lg:flex">
               <LinkGitHub showText={true} className="group inline-flex" />
               <LinkTwitter className="group inline-flex" />
-              <ThemeToggle />
             </div>
+            <ThemeToggle />
             <div className="-mr-1 lg:hidden">
               <Popover>
                 <Popover.Button className="relative z-10 flex h-8 w-8 items-center justify-center focus:not-data-focus:outline-hidden" aria-label="Toggle Navigation">
                   {({ open }) => (
                     <svg aria-hidden="true" className="h-3.5 w-3.5 overflow-visible stroke-foreground/70" fill="none" strokeWidth="2" strokeLinecap="round">
-                      <path d="M0 1H14M0 7H14M0 13H14" className={`origin-center transition ${open ? 'scale-90 opacity-0' : ''}`} />
-                      <path d="M2 2L12 12M12 2L2 12" className={`origin-center transition ${open ? '' : 'scale-90 opacity-0'}`} />
+                      <path d="M0 1H14M0 7H14M0 13H14" className={`origin-center transition motion-reduce:transition-none ${open ? 'scale-90 opacity-0' : ''}`} />
+                      <path d="M2 2L12 12M12 2L2 12" className={`origin-center transition motion-reduce:transition-none ${open ? '' : 'scale-90 opacity-0'}`} />
                     </svg>
                   )}
                 </Popover.Button>
                 <Transition
                   as={Fragment}
-                  enter="duration-150 ease-out"
-                  enterFrom="opacity-0 scale-95"
-                  enterTo="opacity-100 scale-100"
-                  leave="duration-100 ease-in"
-                  leaveFrom="opacity-100 scale-100"
-                  leaveTo="opacity-0 scale-95"
+                  enter={reduceMotion ? '' : 'duration-150 ease-out'}
+                  enterFrom={reduceMotion ? '' : 'opacity-0 scale-95'}
+                  enterTo={reduceMotion ? '' : 'opacity-100 scale-100'}
+                  leave={reduceMotion ? '' : 'duration-100 ease-in'}
+                  leaveFrom={reduceMotion ? '' : 'opacity-100 scale-100'}
+                  leaveTo={reduceMotion ? '' : 'opacity-0 scale-95'}
                 >
                   <Popover.Panel
                     focus
-                    className="absolute inset-x-0 top-full mt-4 flex max-h-[calc(100dvh-7rem)] origin-top flex-col overflow-y-auto overscroll-contain bg-popover p-4 text-lg tracking-tight text-popover-foreground shadow-xl ring-1 ring-border/60"
+                    className="absolute inset-x-0 top-full mt-4 flex max-h-[calc(100dvh-16rem)] origin-top flex-col overflow-y-auto overscroll-contain bg-popover p-4 text-lg tracking-tight text-popover-foreground shadow-xl ring-1 ring-border/60 sm:max-h-[calc(100dvh-12rem)]"
                   >
                     <div className="px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Product</div>
                     {productNavigation.map((item) => (

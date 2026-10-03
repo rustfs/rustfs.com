@@ -27,10 +27,10 @@ export default function HomeSectionHeader({
       </div>
 
       <div className="min-w-0">
-        <Heading className="w-full break-words text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-foreground md:text-5xl">
+        <Heading className="w-full break-words text-balance text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-foreground md:text-5xl">
           {title}
         </Heading>
-        <p className="mt-5 w-full text-left text-base leading-7 text-muted-foreground">
+        <p className="mt-5 max-w-3xl text-pretty text-left text-base leading-7 text-muted-foreground">
           {description}
         </p>
       </div>

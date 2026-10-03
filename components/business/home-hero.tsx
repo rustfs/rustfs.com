@@ -22,14 +22,14 @@ const heroButtonClassName = "!h-14 !min-h-14 w-full !px-0 !py-0 leading-none sm:
 
 export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
   return (
-    <section className="relative overflow-hidden pt-14 pb-16 sm:pt-20 lg:pb-20">
+    <section className="relative overflow-hidden pt-10 pb-16 sm:pt-20 lg:pb-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-8">
           <div className="relative z-10">
             <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
               Rust-native object storage
             </p>
-            <h1 className="w-full font-display text-4xl font-bold leading-[1.04] tracking-[-0.04em] text-primary sm:text-5xl xl:text-6xl">
+            <h1 className="w-full font-display text-[2rem] font-bold leading-[1.04] tracking-[-0.04em] text-primary min-[375px]:text-4xl sm:text-5xl xl:text-6xl">
               High-Performance, S3-Compatible Object Storage for AI Data Centers
             </h1>
             <p className="mt-6 w-full text-base leading-7 text-muted-foreground md:text-lg md:leading-8">
@@ -52,7 +52,7 @@ export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
             </div>
           </div>
 
-          <GlobePanel className="lg:min-h-[34rem]" />
+          <GlobePanel className="min-h-0 sm:min-h-[28rem] lg:min-h-[34rem]" />
         </div>
 
         <StatsStrip className="mt-10" dockerPulls={dockerPulls} metrics={metrics} />

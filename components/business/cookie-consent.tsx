@@ -233,7 +233,7 @@ export function CookieConsentProvider({ children }: { children: React.ReactNode 
         <GoogleAnalytics measurementId={GOOGLE_ANALYTICS_ID} />
       ) : null}
 
-      {isClientReady && !consent ? (
+      {isClientReady && !consent && !settingsOpen ? (
         <section
           aria-labelledby="cookie-consent-title"
           className="fixed inset-x-0 bottom-0 z-[60] border-t border-border bg-background/95 shadow-[0_-12px_40px_rgba(0,0,0,0.12)] backdrop-blur"
@@ -268,7 +268,7 @@ export function CookieConsentProvider({ children }: { children: React.ReactNode 
       ) : null}
 
       <AlertDialog open={settingsOpen} onOpenChange={setSettingsOpen}>
-        <AlertDialogContent className="max-w-[calc(100%-2rem)] gap-6 p-6 sm:max-w-xl">
+        <AlertDialogContent className="max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[calc(100%-2rem)] gap-6 overflow-y-auto p-6 sm:max-w-xl">
           <AlertDialogHeader className="place-items-start text-left">
             <AlertDialogTitle className="text-lg font-semibold">
               Cookie preferences

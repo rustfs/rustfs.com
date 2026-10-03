@@ -1,7 +1,7 @@
 "use client"
 
 import createGlobe, { COBEOptions } from "cobe"
-import { useMotionValue, useSpring } from "motion/react"
+import { useMotionValue, useReducedMotion, useSpring } from "motion/react"
 import { useEffect, useRef } from "react"
 
 import { cn } from "@/lib/utils"
@@ -47,7 +47,7 @@ export function Globe({
   const widthRef = useRef(0)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pointerInteracting = useRef<number | null>(null)
-  const pointerInteractionMovement = useRef(0)
+  const reduceMotion = useReducedMotion()
 
   const r = useMotionValue(0)
   const rs = useSpring(r, {
@@ -66,7 +66,7 @@ export function Globe({
   const updateMovement = (clientX: number) => {
     if (pointerInteracting.current !== null) {
       const delta = clientX - pointerInteracting.current
-      pointerInteractionMovement.current = delta
+      pointerInteracting.current = clientX
       r.set(r.get() + delta / MOVEMENT_DAMPING)
     }
   }
@@ -94,8 +94,8 @@ export function Globe({
         width: widthRef.current * 2,
         height: widthRef.current * 2,
         onRender: (state) => {
-          if (!pointerInteracting.current) phiRef.current += 0.005
-          state.phi = phiRef.current + rs.get()
+          if (pointerInteracting.current === null && !reduceMotion) phiRef.current += 0.005
+          state.phi = phiRef.current + (reduceMotion ? r.get() : rs.get())
           state.width = widthRef.current * 2
           state.height = widthRef.current * 2
         },
@@ -115,7 +115,7 @@ export function Globe({
       globe?.destroy()
       window.removeEventListener("resize", onResize)
     }
-  }, [rs, config])
+  }, [r, rs, config, reduceMotion])
 
   return (
     <div
@@ -126,19 +126,18 @@ export function Globe({
     >
       <canvas
         className={cn(
-          "size-full opacity-0 transition-opacity duration-500 contain-[layout_paint_size]"
+          "size-full cursor-grab touch-pan-y opacity-0 transition-opacity duration-500 motion-reduce:transition-none contain-[layout_paint_size]"
         )}
+        aria-hidden="true"
         ref={canvasRef}
         onPointerDown={(e) => {
-          pointerInteracting.current = e.clientX
+          e.currentTarget.setPointerCapture(e.pointerId)
           updatePointerInteraction(e.clientX)
         }}
         onPointerUp={() => updatePointerInteraction(null)}
-        onPointerOut={() => updatePointerInteraction(null)}
-        onMouseMove={(e) => updateMovement(e.clientX)}
-        onTouchMove={(e) =>
-          e.touches[0] && updateMovement(e.touches[0].clientX)
-        }
+        onPointerCancel={() => updatePointerInteraction(null)}
+        onLostPointerCapture={() => updatePointerInteraction(null)}
+        onPointerMove={(e) => updateMovement(e.clientX)}
       />
     </div>
   )
