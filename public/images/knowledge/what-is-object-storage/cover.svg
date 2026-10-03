@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="1600" height="700">
+  <style>
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #171717; }
+    .eyebrow { fill: #2568f5; font-size: 22px; font-weight: 700; letter-spacing: 4px; }
+    .title { font-size: 66px; font-weight: 700; }
+    .sub { fill: #6b7280; font-size: 27px; }
+    .w { fill: #ffffff; }
+    .chip { font-size: 18px; font-weight: 700; fill: #ffffff; }
+    .cap { fill: #6b7280; font-size: 16px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  </style>
+
+  <rect width="1600" height="700" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="8" fill="#2568f5"/>
+
+  <!-- text block -->
+  <text x="100" y="248" class="eyebrow">RUSTFS KNOWLEDGE CENTER</text>
+  <text x="100" y="336" class="title">What Is Object</text>
+  <text x="100" y="412" class="title">Storage?</text>
+  <text x="100" y="478" class="sub">The architecture behind the cloud's data layer,</text>
+  <text x="100" y="518" class="sub">explained from first principles</text>
+
+  <!-- bucket container -->
+  <rect x="880" y="140" width="620" height="470" rx="14" fill="#f9fafb" stroke="#d1d5db" stroke-width="2"/>
+  <text x="1190" y="180" text-anchor="middle" style="font-size:20px; font-weight:700">bucket · photos</text>
+  <line x1="910" y1="198" x2="1470" y2="198" stroke="#e5e7eb" stroke-width="2"/>
+
+  <!-- object 1 -->
+  <rect x="915" y="225" width="270" height="160" rx="10" fill="#2568f5"/>
+  <text x="935" y="258" class="chip mono" style="font-size:16px">2026/cat.jpg</text>
+  <text x="935" y="292" class="w" style="font-size:14px">data · 12 MB</text>
+  <text x="935" y="316" class="w" style="font-size:14px">content-type: image/jpeg</text>
+  <text x="935" y="340" class="w" style="font-size:14px">etag · version · tags</text>
+
+  <!-- object 2 -->
+  <rect x="1205" y="225" width="270" height="160" rx="10" fill="#ea580c"/>
+  <text x="1225" y="258" class="chip mono" style="font-size:16px">2026/dog.png</text>
+  <text x="1225" y="292" class="w" style="font-size:14px">data · 8 MB</text>
+  <text x="1225" y="316" class="w" style="font-size:14px">content-type: image/png</text>
+  <text x="1225" y="340" class="w" style="font-size:14px">etag · version · tags</text>
+
+  <!-- object 3 -->
+  <rect x="915" y="410" width="270" height="160" rx="10" fill="#ea580c"/>
+  <text x="935" y="443" class="chip mono" style="font-size:16px">video/tutorial.mp4</text>
+  <text x="935" y="477" class="w" style="font-size:14px">data · 1.2 GB</text>
+  <text x="935" y="501" class="w" style="font-size:14px">content-type: video/mp4</text>
+  <text x="935" y="525" class="w" style="font-size:14px">etag · version · tags</text>
+
+  <!-- object 4 -->
+  <rect x="1205" y="410" width="270" height="160" rx="10" fill="#2568f5"/>
+  <text x="1225" y="443" class="chip mono" style="font-size:16px">backup/db-01.tar</text>
+  <text x="1225" y="477" class="w" style="font-size:14px">data · 40 GB</text>
+  <text x="1225" y="501" class="w" style="font-size:14px">content-type: application/x-tar</text>
+  <text x="1225" y="525" class="w" style="font-size:14px">etag · version · tags</text>
+
+  <text x="1190" y="650" class="cap" text-anchor="middle">a flat namespace of data + metadata, addressed over HTTP</text>
+</svg>
