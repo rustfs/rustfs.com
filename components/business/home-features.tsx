@@ -281,7 +281,7 @@ export default function HomeFeatures() {
               id={`core-feature-tab-${index}`}
               type="button"
               className={cn(
-                "group relative min-h-28 min-w-72 bg-card text-left transition-colors hover:bg-muted/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-brand/40 md:min-w-0",
+                "group relative min-h-28 min-w-72 bg-card text-left transition-colors hover:bg-muted/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand/40 md:min-w-0",
                 activeTab === index && "bg-muted/35"
               )}
               onClick={() => setActiveTab(index)}

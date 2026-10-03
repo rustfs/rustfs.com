@@ -68,9 +68,9 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group grid gap-5 p-5 text-left transition-colors hover:bg-muted/30 sm:grid-cols-[7.5rem_1fr_auto] sm:items-start sm:p-6"
+                className="group grid grid-cols-[minmax(0,1fr)_auto] gap-5 p-5 text-left transition-colors hover:bg-muted/30 sm:grid-cols-[7.5rem_1fr_auto] sm:items-start sm:p-6"
               >
-                <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <div className="col-span-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:col-span-1">
                   <PostDate date={post.date} />
                 </div>
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { MoonIcon, SunIcon } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useTheme } from 'next-themes';
 import { useSyncExternalStore } from 'react';
 
@@ -16,6 +16,7 @@ function useMounted() {
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
   const mounted = useMounted()
+  const reduceMotion = useReducedMotion()
 
   const toggleTheme = () => {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
@@ -26,7 +27,7 @@ export function ThemeToggle() {
     return (
       <button
         type="button"
-        className="relative inline-flex size-10 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
+        className="relative inline-flex size-10 shrink-0 items-center justify-center text-muted-foreground transition-colors hover:text-primary motion-reduce:transition-none"
         aria-label="Toggle theme"
         disabled
       >
@@ -44,7 +45,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="relative inline-flex size-10 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
+      className="relative inline-flex size-10 shrink-0 items-center justify-center text-muted-foreground transition-colors hover:text-primary motion-reduce:transition-none"
       aria-label="Toggle theme"
     >
       <div className="relative size-5">
@@ -52,11 +53,11 @@ export function ThemeToggle() {
           {resolvedTheme === 'dark' ? (
             <motion.div
               key="moon"
-              initial={{ scale: 0, rotate: -90, opacity: 0 }}
+              initial={reduceMotion ? false : { scale: 0, rotate: -90, opacity: 0 }}
               animate={{ scale: 1, rotate: 0, opacity: 1 }}
-              exit={{ scale: 0, rotate: 90, opacity: 0 }}
+              exit={reduceMotion ? undefined : { scale: 0, rotate: 90, opacity: 0 }}
               transition={{
-                duration: 0.2,
+                duration: reduceMotion ? 0 : 0.2,
                 ease: [0.4, 0, 0.2, 1]
               }}
               className="absolute inset-0"
@@ -66,11 +67,11 @@ export function ThemeToggle() {
           ) : (
             <motion.div
               key="sun"
-              initial={{ scale: 0, rotate: 90, opacity: 0 }}
+              initial={reduceMotion ? false : { scale: 0, rotate: 90, opacity: 0 }}
               animate={{ scale: 1, rotate: 0, opacity: 1 }}
-              exit={{ scale: 0, rotate: -90, opacity: 0 }}
+              exit={reduceMotion ? undefined : { scale: 0, rotate: -90, opacity: 0 }}
               transition={{
-                duration: 0.2,
+                duration: reduceMotion ? 0 : 0.2,
                 ease: [0.4, 0, 0.2, 1]
               }}
               className="absolute inset-0"

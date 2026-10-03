@@ -79,25 +79,25 @@ export default function HomeStats() {
                 <span>Parallel I/O path</span>
                 <span className="text-brand">Rust core</span>
               </div>
-              <div className="relative grid h-full grid-cols-[4.5rem_auto_6rem_auto_minmax(0,1fr)] items-center gap-2 px-5 pb-5 pt-10">
-                <div className="grid h-20 place-items-center border border-border bg-card px-2 text-center">
+              <div className="relative grid h-full grid-cols-[3.5rem_auto_5rem_auto_minmax(0,1fr)] items-center gap-1 px-3 pb-5 pt-10 sm:grid-cols-[4.5rem_auto_6rem_auto_minmax(0,1fr)] sm:gap-2 sm:px-5">
+                <div className="grid h-20 place-items-center border border-border bg-card px-1 text-center sm:px-2">
                   <ActivityIcon className="size-4 text-brand" />
                   <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
                     S3 requests
                   </span>
                 </div>
-                <DataFlowLine direction="horizontal" className="w-5 sm:w-7" />
-                <div className="grid h-24 place-items-center border border-brand bg-brand/10 px-3 text-center">
+                <DataFlowLine direction="horizontal" className="w-3 sm:w-7" />
+                <div className="grid h-24 place-items-center border border-brand bg-brand/10 px-2 text-center sm:px-3">
                   <GaugeIcon className="size-5 text-brand" />
                   <div>
                     <p className="font-mono text-[10px] font-semibold text-foreground">RustFS I/O</p>
                     <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.1em] text-muted-foreground">scheduler</p>
                   </div>
                 </div>
-                <DataFlowLine direction="horizontal" className="w-5 sm:w-7" delay={0.35} />
+                <DataFlowLine direction="horizontal" className="w-3 sm:w-7" delay={0.35} />
                 <div className="grid gap-2">
                   {["Disk 01", "Disk 02", "Disk 03"].map((disk, index) => (
-                    <div key={disk} className="flex items-center gap-2 border border-border bg-card px-2 py-2">
+                    <div key={disk} className="flex items-center gap-1 border border-border bg-card px-1.5 py-2 sm:gap-2 sm:px-2">
                       <HardDriveIcon className="size-3.5 shrink-0 text-brand" />
                       <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
                         {disk}

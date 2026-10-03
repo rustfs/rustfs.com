@@ -59,20 +59,20 @@ export default function StatsStrip({
 
   return (
     <section className={cn("text-muted-foreground", className)}>
-      <dl className="grid overflow-hidden border-y border-border bg-card/20 sm:grid-cols-2 lg:grid-cols-4">
+      <dl className="grid grid-cols-2 overflow-hidden border-y border-border bg-card/20 lg:grid-cols-4">
         {items.map(({ label, value, text }) => (
           <div
             key={label}
-            className="flex min-h-24 flex-col justify-end border-b border-border/80 p-4 last:border-b-0 sm:[&:nth-child(n+3)]:border-b-0 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0 sm:p-5"
+            className="flex min-h-24 flex-col justify-end border-b border-border/80 px-3 py-4 [&:nth-child(n+3)]:border-b-0 [&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0 sm:p-5"
           >
             <dt className="order-2 mt-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               {label}
             </dt>
-            <dd className="order-1 text-3xl font-semibold tracking-[-0.035em] text-foreground sm:text-4xl">
+            <dd className="order-1 text-[clamp(1.25rem,5.5vw,2rem)] font-semibold tabular-nums tracking-[-0.035em] text-foreground sm:text-4xl">
               {typeof value === "number" ? (
                 <NumberTicker
                   value={value}
-                  className="text-foreground"
+                  className="tracking-[-0.035em] text-foreground"
                 />
               ) : (
                 <span>{text}</span>
