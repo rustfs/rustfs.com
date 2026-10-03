@@ -96,7 +96,7 @@
       <path d="M550 128 L 560 128 L 560 464 L 550 464"/>
     </g>
     <text x="404" y="108" class="lbl" text-anchor="middle">generator matrix G (6 × 4)</text>
-    <text x="404" y="500" class="cap" text-anchor="middle">top: identity (data passes through) · bottom: parity coefficients in GF(2⁸)</text>
+    <text x="404" y="500" class="cap" text-anchor="middle">identity rows on top · parity coefficients below</text>
   </g>
 
   <text x="600" y="275" style="font-size:34px; font-weight:700">=</text>

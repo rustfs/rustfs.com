@@ -75,10 +75,6 @@
       <rect x="1077" y="170" width="46" height="34" rx="5" fill="#ea580c"/>
       <text x="1100" y="193" class="chip" text-anchor="middle" style="font-size:15px">P1</text>
     </g>
-    <!-- column arrows -->
-    <g stroke="#9ca3af" stroke-width="2" fill="none">
-      <path d="M445 206 L 445 240" />
-    </g>
   </g>
   <g class="cap" text-anchor="middle">
     <text x="690" y="556">drive 1</text>
