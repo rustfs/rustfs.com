@@ -10,7 +10,7 @@ import remarkGfm from "remark-gfm";
 
 import { cn } from "@/lib/utils";
 
-const KNOWLEDGE_DIR = path.join(process.cwd(), "content/knowledge");
+const KNOWLEDGE_DIR = path.join(process.cwd(), "content/knowledge-center");
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const DATE_PREFIX_PATTERN = /^\d{4}-\d{2}-\d{2}-/;
 

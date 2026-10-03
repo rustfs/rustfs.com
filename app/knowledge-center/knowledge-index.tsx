@@ -46,7 +46,7 @@ function FeaturedArticle({ article }: { article: KnowledgeArticleMeta }) {
 
   return (
     <Link
-      href={`/knowledge/${article.slug}`}
+      href={`/knowledge-center/${article.slug}`}
       className="motion-card group block overflow-hidden border border-border bg-card transition-colors hover:bg-muted/30"
     >
       <div className={`grid ${hasImage ? "lg:grid-cols-[0.9fr_1.1fr]" : ""}`}>
@@ -89,7 +89,7 @@ function ArticleGrid({ articles }: { articles: KnowledgeArticleMeta[] }) {
       {articles.map((article, index) => (
         <Link
           key={article.slug}
-          href={`/knowledge/${article.slug}`}
+          href={`/knowledge-center/${article.slug}`}
           className="motion-card group flex flex-col overflow-hidden border border-border bg-card transition-colors hover:bg-muted/30"
         >
           {shouldShowImage(article.image) ? (

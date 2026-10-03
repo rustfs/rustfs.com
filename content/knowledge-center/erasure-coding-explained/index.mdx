@@ -336,8 +336,11 @@ drive failures at half the raw overhead of three-way replication.
 
 If you are sizing a cluster, the
 [erasure code calculator](/erasure-code-calculator) turns these trade-offs
-into concrete numbers for your drive count and object sizes. And if you want
-the rest of the story — how objects land in erasure sets, how healing is
-scheduled, how S3 semantics ride on top — the
+into concrete numbers for your drive count and object sizes. To see how the
+erasure layer shows up as a product capability — EC configuration, self-healing,
+and site replication in a running cluster — read the
+[High Availability & Scale](/product/high-availability-scale/) overview. And if
+you want the rest of the story — how objects land in erasure sets, how healing
+is scheduled, how S3 semantics ride on top — the
 [RustFS documentation](https://docs.rustfs.com) goes deeper, and the
 [engineering blog](/blog) covers the implementation as it evolves.

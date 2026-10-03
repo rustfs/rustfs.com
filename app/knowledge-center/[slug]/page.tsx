@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: KnowledgeArticlePageProps): P
     return {};
   }
 
-  const url = `${SITE_CONFIG.primaryDomain}/knowledge/${article.slug}/`;
+  const url = `${SITE_CONFIG.primaryDomain}/knowledge-center/${article.slug}/`;
 
   return {
     title: `${article.title} | RustFS Knowledge Center`,
@@ -74,7 +74,7 @@ export default async function KnowledgeArticlePage({ params }: KnowledgeArticleP
         <header className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
           <div className="pt-8">
             <Link
-              href="/knowledge"
+              href="/knowledge-center"
               className="inline-flex text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground"
             >
               ← Knowledge Center
@@ -202,7 +202,7 @@ export default async function KnowledgeArticlePage({ params }: KnowledgeArticleP
                 },
                 mainEntityOfPage: {
                   "@type": "WebPage",
-                  "@id": `${SITE_CONFIG.primaryDomain}/knowledge/${article.slug}/`
+                  "@id": `${SITE_CONFIG.primaryDomain}/knowledge-center/${article.slug}/`
                 }
               })
             }}
@@ -216,7 +216,7 @@ export default async function KnowledgeArticlePage({ params }: KnowledgeArticleP
 function RelatedArticle({ article }: { article: KnowledgeArticleMeta }) {
   return (
     <Link
-      href={`/knowledge/${article.slug}`}
+      href={`/knowledge-center/${article.slug}`}
       className="group block border-b border-border px-5 py-5 last:border-b-0 hover:bg-muted/35"
     >
       <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
