@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 
 import { SITE_CONFIG } from "@/app.config";
 import { integrationCategories } from "@/data/integrations";
+import IntegrationContributionGuide from "./contribution-guide";
 import IntegrationCatalog from "./integration-catalog";
 
 export const metadata: Metadata = {
@@ -146,6 +147,8 @@ export default function IntegrationPage() {
           </div>
         </div>
       </section>
+
+      <IntegrationContributionGuide />
 
       <section className="border-b border-border bg-muted/20 py-20 sm:py-24 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
