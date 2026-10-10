@@ -466,6 +466,11 @@ export const integrationCategories: IntegrationCategory[] = [
         logo: "/images/integrations/zerofs-logo.svg",
         projectUrl: "https://github.com/Barre/ZeroFS",
       },
+      {
+        name: "celld",
+        description: "Run celld, the self-hosted Durable Objects runtime, with fleet state in S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/cloud-native/celld",
+      },
     ],
   },
   {
