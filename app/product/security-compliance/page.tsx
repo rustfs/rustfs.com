@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   alternates: { canonical: "product/security-compliance/" },
   title: "Security & Compliance | RustFS",
-  description: "RustFS provides enterprise-grade authentication, authorization, log auditing, event handling, SSE/KMS encryption, OIDC SSO, and mTLS security controls.",
+  description: "RustFS provides enterprise-grade authentication, authorization, audit logging, event handling, SSE/KMS encryption, OIDC SSO, and mTLS security controls.",
   keywords: [
     "RustFS",
     "security compliance",
@@ -55,7 +55,7 @@ const sections: FeaturePageSection[] = [
     items: [
       {
         title: "Deep operational insights",
-        description: "Spotting destructive actions instantly to safeguard critical data assets.",
+        description: "Detect destructive actions quickly to protect critical data.",
       },
       {
         title: "Log streaming destination",
@@ -72,7 +72,7 @@ const sections: FeaturePageSection[] = [
         description: "Integrate seamlessly with enterprise identity providers to enable frictionless single sign-on.",
       },
       {
-        title: "Visual console integration",
+        title: "Console-based OIDC setup",
         description: "Simplify OIDC infrastructure setup and reduce operational complexity.",
       },
     ],
@@ -83,7 +83,7 @@ const sections: FeaturePageSection[] = [
     items: [
       {
         title: "Zero-trust mTLS",
-        description: "Enforce mutual TLS verification to achieve bi-directional identity authentication across communications.",
+        description: "Enforce mutual TLS so both sides authenticate each other on every connection.",
       },
       {
         title: "Automated certificate management",
@@ -97,7 +97,7 @@ export default function SecurityCompliancePage() {
   return (
     <FeaturePage
       title="Security & Compliance"
-      description="Comprehensive enterprise-grade security and compliance framework, natively encompassing authentication, authorization, log auditing, and event handling to satisfy rigorous corporate compliance mandates right out of the box."
+      description="Enterprise security and compliance controls—including authentication, authorization, audit logging, and event handling—available out of the box."
       sections={sections}
       variant="security"
       highlightsTitle="Secure by Default"
@@ -111,7 +111,7 @@ export default function SecurityCompliancePage() {
           description: "Implementing multi-layered protections to guarantee end-to-end security across the entire data pipeline.",
         },
         {
-          title: "Out-of-the-Box",
+          title: "Out of the box",
           description: "Enabling robust protection instantly without requiring extra or complex configurations.",
         },
       ]}

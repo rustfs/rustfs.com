@@ -16,7 +16,7 @@ const features = [
     "token": "RS(EC)",
     "description": "Flexible Reed-Solomon EC profiles balance durability and storage efficiency.",
     "icon": DatabaseZapIcon,
-    "featureDescription": "Leverage cutting-edge Reed-Solomon algorithms to maximize storage efficiency while tuning hardware overhead and data durability for each workload.",
+    "featureDescription": "Use flexible Reed-Solomon erasure-coding profiles to balance storage efficiency and durability for each workload.",
   },
   {
     "title": "Distributed Deployment",
@@ -35,12 +35,12 @@ const features = [
     "featureDescription": "Take control of the full cluster lifecycle with pool expansion, automatic data rebalancing, and safe decommissioning for aging hardware without planned downtime.",
   },
   {
-    "title": "Multi-Protocol Access",
+    "title": "Multi-protocol access",
     "plane": "Access plane",
     "token": "S3",
-    "description": "Expose the same storage through S3, Swift, FTP(s), WebDAV, and MCP.",
+    "description": "Expose the same storage through S3, Swift, FTP/FTPS, WebDAV, and MCP.",
     "icon": WorkflowIcon,
-    "featureDescription": "Break down data silos by letting applications use Amazon S3, OpenStack Swift, FTP(s), WebDAV, and MCP to read, write, and manage the same storage without protocol translation bottlenecks.",
+    "featureDescription": "Let applications access the same data over Amazon S3, OpenStack Swift, FTP/FTPS, WebDAV, and MCP—without protocol gateways.",
   },
   {
     "title": "Defense-in-Depth Security",
@@ -59,7 +59,7 @@ const features = [
     "featureDescription": "Streamline operations with native OpenTelemetry integration, instant event notifications, capacity metrics, bucket and object visibility, and node health monitoring.",
   },
   {
-    "title": "Cloud Native Deployment",
+    "title": "Cloud-native deployment",
     "plane": "Runtime plane",
     "token": "helm install",
     "description": "Use Helm Charts and a Kubernetes Operator for automated lifecycle control.",

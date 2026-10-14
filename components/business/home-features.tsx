@@ -127,7 +127,7 @@ function FeaturePreview({
                   <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-brand">RustFS</span>
                 </div>
                 <div className="grid gap-2">
-                  {["FTP(S)", "WebDAV", "SDK"].map((protocol) => (
+                  {["FTP/FTPS", "WebDAV", "SDK"].map((protocol) => (
                     <span key={protocol} className="border border-border bg-card px-3 py-2 text-center font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">{protocol}</span>
                   ))}
                 </div>
@@ -269,7 +269,7 @@ export default function HomeFeatures() {
     <section className="relative border-t border-border bg-background pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32">
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <HomeSectionHeader
-          eyebrow="Capability matrix"
+          eyebrow="Core capabilities"
           title="Core features"
           description="Production-ready capabilities for distributed, S3-compatible object storage."
         />

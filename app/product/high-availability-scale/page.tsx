@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "product/high-availability-scale/" },
   title: "RustFS High Availability & Scalability | Enterprise Distributed Storage",
   description:
-    "Discover RustFS enterprise distributed architecture. Experience limitless scaling from PB to EB levels with distributed EC, automated self-healing, and absolute data reliability.",
+    "Discover RustFS enterprise distributed architecture. Scale from petabytes to exabytes with distributed erasure coding, automated self-healing, and strong data durability.",
   keywords: [
     "RustFS",
     "distributed object storage",
@@ -26,12 +26,12 @@ const sections: FeaturePageSection[] = [
       {
         title: "Enterprise-grade distributed architecture",
         description:
-          "Satisfying high-availability requirements for massive data.",
+          "Meets high-availability requirements for large-scale datasets.",
       },
       {
         title: "Flexible multi-node and multi-disk topologies",
         description:
-          "Fulfilling customized enterprise storage policies.",
+          "Supports customized enterprise storage policies.",
       },
       {
         title: "Resilient node- and disk-level fault tolerance",
@@ -62,7 +62,7 @@ const sections: FeaturePageSection[] = [
     ],
   },
   {
-    title: "Infinite scaling",
+    title: "Elastic scaling",
     items: [
       {
         title: "Horizontal and vertical scaling",
@@ -92,7 +92,7 @@ const sections: FeaturePageSection[] = [
       {
         title: "Data integrity verification",
         description:
-          "Securing consistency of cluster data.",
+          "Helps maintain cluster data integrity.",
       },
       {
         title: "Real-time progress tracking",
@@ -127,18 +127,18 @@ export default function HighAvailabilityScalePage() {
   return (
     <FeaturePage
       title="High Availability & Scale"
-      description="Driven by enterprise-grade distributed architecture, distributed Erasure Coding (EC), and resilient fault tolerance, RustFS achieves a perfect win-win between limitless scaling and absolute data consistency. RustFS safeguards reliable, high-efficiency data management for enterprise storage scaling from PB to EB levels, and even more."
+      description="Driven by enterprise-grade distributed architecture, distributed Erasure Coding (EC), and resilient fault tolerance, RustFS is built to scale out while preserving strong data durability and availability. RustFS supports reliable, efficient data management as enterprise clusters scale from petabytes to exabytes."
       sections={sections}
       variant="scale"
       highlightsTitle="Reliability & Efficiency"
       highlights={[
         {
           title: "Enterprise Solution",
-          description: "Satisfying enterprise demands for both high availability and rigorous reliability in mass storage.",
+          description: "Built for enterprise requirements around high availability and durability at massive scale.",
         },
         {
-          title: "Cost saving",
-          description: "Exceptional cost-efficiency, driving down both hardware storage costs and operational workload for enterprises.",
+          title: "Cost efficiency",
+          description: "Strong cost efficiency that reduces hardware spend and operator workload.",
         },
         {
           title: "High Flexibility",

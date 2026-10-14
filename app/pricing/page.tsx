@@ -105,7 +105,7 @@ export default function PricingPage() {
 
         <div className="mt-12 grid items-stretch gap-4 lg:grid-cols-2">
           <PricingCard
-            label="Personal"
+            label="Community"
             title="Free"
             description="Use RustFS under Apache 2.0 for development, testing, and production deployments you operate yourself."
             chips={["Apache 2.0", "Self-hosted"]}
@@ -123,7 +123,7 @@ export default function PricingPage() {
             description="For teams moving from evaluation to production and needing topology, migration, and operations planning."
             emphasized
             chips={["Planning", "Migration"]}
-            action={{ label: "Talk to expert", href: "/contact-us" }}
+            action={{ label: "Talk to an expert", href: "/contact-us" }}
             points={[
               "Migration planning",
               "Capacity and topology review",
@@ -154,9 +154,9 @@ export default function PricingPage() {
             </div>
             <div className="grid divide-y divide-border">
               {[
-                ["Evaluate", "Run RustFS without a sales gate."],
-                ["Plan", "Review topology and migration pressure."],
-                ["Operate", "Add support for production ownership."],
+                ["Evaluate", "Evaluate RustFS without talking to sales."],
+                ["Plan", "Review topology and migration requirements."],
+                ["Operate", "Add support when you take production ownership."],
               ].map(([title, detail]) => (
                 <div key={title} className="flex flex-col justify-center px-6 py-5 sm:px-8">
                   <span className="block text-sm font-semibold text-foreground">{title}</span>

@@ -20,7 +20,7 @@ const milestones = [
   },
   {
     date: "2025.07.02",
-    title: "Open sourced",
+    title: "Open-sourced",
     description: "RustFS was released to the global community under Apache 2.0.",
   },
   {

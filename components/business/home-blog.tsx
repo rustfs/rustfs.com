@@ -27,7 +27,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
       <div className="mx-auto flex max-w-7xl flex-col justify-center px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           eyebrow="Technical posts"
-          title="Latest from RustFS Blog"
+          title="Latest from the RustFS blog"
           description="Read product updates, release posts, and technical deep dives from the RustFS team."
         />
 
@@ -92,7 +92,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
             href="/blog"
             className="motion-button group inline-flex border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
           >
-            View more on RustFS Blog
+            View more on the RustFS blog
             <span className="motion-arrow ml-1 inline-block" aria-hidden="true">
               ↗
             </span>
