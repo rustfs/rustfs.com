@@ -8,7 +8,7 @@ const reasons = [
   {
     title: "High-Performance",
     token: "perf",
-    description: "Built with Rust. Zero-overhead. Hardware-saturated.",
+    description: "Built in Rust for low overhead and high hardware utilization.",
   },
   {
     title: "Security & Compliance",
@@ -23,12 +23,12 @@ const reasons = [
   {
     title: "Developer-First Experience",
     token: "dx",
-    description: "Cross-platform support, versatile installations, and one-click deployment.",
+    description: "Cross-platform binaries, flexible install paths, and streamlined deployment.",
   },
   {
     title: "Open Source",
     token: "oss",
-    description: "Apache-2.0 licensed, business-friendly, and vendor-independent.",
+    description: "Apache 2.0 licensed, commercially friendly, and free of vendor lock-in.",
   },
   {
     title: "S3-Compatible",
@@ -120,7 +120,7 @@ export default function HomeStats() {
                 <pre className="overflow-x-auto text-xs leading-6 text-muted-foreground">
                   <code>{`[rustfs]
 runtime = "memory-safe"
-io = "hardware-saturated"
+io = "high-utilization"
 mode = "distributed"`}</code>
                 </pre>
               </div>

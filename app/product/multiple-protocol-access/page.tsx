@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: "product/multiple-protocol-access/" },
-  title: "Native Multi-Protocol Access | S3, Swift, WebDAV, FTP(s) & MCP | RustFS",
-  description: "Connect RustFS natively to any workload via S3, Swift, FTP(s), WebDAV, and MCP. Zero code modifications, no legacy proxies, and absolute multi-protocol data coexistence.",
+  title: "Native Multi-protocol Access | S3, Swift, WebDAV, FTP/FTPS & MCP | RustFS",
+  description: "Connect RustFS natively to any workload via S3, Swift, FTP/FTPS, WebDAV, and MCP. No application rewrites, no legacy protocol proxies—just multi-protocol access to the same data.",
   keywords: [
     "RustFS",
     "multi-protocol access",
@@ -36,12 +36,12 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "Drop-in MinIO replacement",
-        description: "Zero config overhauls, no API rewrites, and zero migration friction.",
+        description: "No config overhauls, no API rewrites, and minimal migration friction.",
         href: "/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs/",
       },
       {
         title: "Native virtual host mode",
-        description: "Enterprise-grade bucket addressing, domain-level isolation, and absolute URL compatibility.",
+        description: "Virtual-hosted–style bucket addressing, domain-level isolation, and standard URL compatibility.",
       },
     ],
   },
@@ -55,11 +55,11 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "Instant frictionless setup",
-        description: "Out-of-the-box convenience requiring no extra configuration or heavy third-party integrations.",
+        description: "Works out of the box—no extra configuration or heavyweight third-party gateways.",
       },
       {
         title: "Secure file operations",
-        description: "Full TLS/HTTPS protocol support delivering enterprise-grade encryption for peace-of-mind data transfer.",
+        description: "TLS/HTTPS support for encrypted data in transit.",
       },
     ],
   },
@@ -78,7 +78,7 @@ const sections: FeaturePageSection[] = [
     ],
   },
   {
-    title: "FTP(s)",
+    title: "FTP/FTPS",
     description: "A secure bridge for file-transfer workloads that cannot be rewritten immediately.",
     items: [
       {
@@ -101,7 +101,7 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "Customized toolset",
-        description: "Customize and extend your own toolset legally.",
+        description: "Customize and extend the toolset under a clear open-source license.",
       },
     ],
   },
@@ -110,8 +110,8 @@ const sections: FeaturePageSection[] = [
 export default function MultipleProtocolAccessPage() {
   return (
     <FeaturePage
-      title="Multiple Protocol Access"
-      description="Native multi-protocol accessibility delivery. By speaking S3, Swift, FTP(s), and MCP out of the box, RustFS integrates naturally and effortlessly into any environment. No gateways, no legacy proxies, and absolutely zero code modifications required. Instantly connect to a massive, thriving ecosystem of AI pipelines, big data frameworks, and legacy enterprise workloads while maintaining a single, high-performance source of truth."
+      title="Multi-protocol access"
+      description="Native multi-protocol access. By speaking S3, Swift, FTP/FTPS, and MCP out of the box, RustFS integrates naturally and effortlessly into any environment. No gateways or legacy proxies—and no application code changes required. Instantly connect to a massive, thriving ecosystem of AI pipelines, big data frameworks, and legacy enterprise workloads while maintaining a single, high-performance source of truth."
       sections={sections}
       variant="protocol"
       highlightsTitle="Flexibility & Simplicity"

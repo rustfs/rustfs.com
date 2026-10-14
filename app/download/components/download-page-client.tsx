@@ -582,7 +582,7 @@ function HelpPanel() {
     <section className="pb-20 sm:pb-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          eyebrow="Support surface"
+          eyebrow="Need help?"
           title="Need a production deployment path?"
           description="Move from local validation to production with documentation, community help, or direct planning support."
         />
@@ -736,8 +736,8 @@ export function ServerDownloadPage({ release }: ServerDownloadPageProps) {
             <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-7 text-muted-foreground">
               <li>
                 Please change <code className="text-foreground">RUSTFS_ACCESS_KEY</code> and{' '}
-                <code className="text-foreground">RUSTFS_SECRET_KEY</code> immediately. The default value{' '}
-                <code className="text-foreground">rustfsadmin</code> is not allowed.
+                <code className="text-foreground">RUSTFS_SECRET_KEY</code> immediately. Do not keep the default value{' '}
+                <code className="text-foreground">rustfsadmin</code>.
               </li>
               <li>
                 For step-by-step instructions, see the{' '}

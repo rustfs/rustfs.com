@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   alternates: { canonical: "product/operational-observability/" },
   title: "RustFS Cluster Operations & OTEL Observability | Enterprise Management",
-  description: "Simplify RustFS management with an intuitive console, rich rc CLI, and full-stack OTEL observability. Deploy Prometheus, Grafana, and Loki with one click for real-time cluster insights.",
+  description: "Simplify RustFS management with an intuitive console, rich rc CLI, and full-stack OTEL observability. Deploy Prometheus, Grafana, and Loki quickly for real-time cluster insights.",
   keywords: [
     "RustFS",
     "cluster observability",
@@ -61,7 +61,7 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "Granular security administration",
-        description: "Reinforcing IAM, audit logging, and data encryption.",
+        description: "Manage IAM, audit logging, and encryption from one place.",
       },
       {
         title: "Centralized cluster orchestration",
@@ -83,7 +83,7 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "Flexible environment configuration",
-        description: "Tailoring feature toggles to customized enterprise needs.",
+        description: "Configure feature toggles for your environment.",
       },
     ],
   },
@@ -115,11 +115,11 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "Multi-platform deployment",
-        description: "Securing frictionless setup via binaries or Docker across Linux, macOS, and Windows.",
+        description: "Install quickly via binaries or Docker on Linux, macOS, and Windows.",
       },
       {
         title: "Continuous iteration",
-        description: "The command surface continues to expand to strengthen CLI-based instance management.",
+        description: "The CLI continues to expand for day-to-day cluster administration.",
       },
     ],
   },
@@ -128,7 +128,7 @@ const sections: FeaturePageSection[] = [
 export default function OperationalObservabilityPage() {
   return (
     <FeaturePage
-      title="Operational & Observability"
+      title="Operations & observability"
       description="RustFS gives operators practical control over storage operations with console workflows, OpenTelemetry support, cluster insights, and rc CLI automation."
       sections={sections}
       variant="ops"

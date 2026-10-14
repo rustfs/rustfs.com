@@ -26,15 +26,15 @@ const sections: FeaturePageSection[] = [
     items: [
       {
         title: "Bucket & Object",
-        description: "Making object storage data management remarkably stable and efficient.",
+        description: "Stable, efficient bucket and object management.",
       },
       {
         title: "Lifecycle Management",
-        description: "Optimizing overall storage costs and reducing operational burdens.",
+        description: "Lower storage costs and reduce day-to-day operational load.",
       },
       {
         title: "Multipart Upload",
-        description: "Accelerating large file transfers and maximizing network utilization.",
+        description: "Speed up large-object transfers and make better use of available bandwidth.",
       },
     ],
   },
@@ -62,14 +62,14 @@ export default function DataManagementPage() {
   return (
     <FeaturePage
       title="Data Management"
-      description="Comprehensive lifecycle management covering bucket quotas, Object Lock, and versioning. Featuring native S3 compatibility to enable seamless data migration from any S3-compliant system to RustFS."
+      description="Comprehensive lifecycle management covering bucket quotas, Object Lock, and versioning. Native S3 compatibility helps you migrate data from other S3-compatible systems to RustFS."
       sections={sections}
       variant="data"
       highlightsTitle="Resilience & Durability"
       highlights={[
         {
           title: "S3 compatibility",
-          description: "S3 protocol natively supported to manage object storage data with high efficiency.",
+          description: "Native S3 protocol support for efficient object management.",
         },
         {
           title: "Unified management",
@@ -77,7 +77,7 @@ export default function DataManagementPage() {
         },
         {
           title: "Cost efficiency",
-          description: "Fine-grained data lifecycle management implemented to reduce enterprise storage costs.",
+          description: "Fine-grained lifecycle policies to reduce enterprise storage costs.",
         },
       ]}
       links={[
