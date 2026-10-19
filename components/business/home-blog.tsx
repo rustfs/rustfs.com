@@ -27,7 +27,7 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
       <div className="mx-auto flex max-w-7xl flex-col justify-center px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
           eyebrow="Technical posts"
-          title="Latest from RustFS Blog"
+          title="Latest from the RustFS blog"
           description="Read product updates, release posts, and technical deep dives from the RustFS team."
         />
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   alternates: { canonical: "product/operational-observability/" },
   title: "RustFS Cluster Operations & OTEL Observability | Enterprise Management",
-  description: "Simplify RustFS management with an intuitive console, rich rc CLI, and full-stack OTEL observability. Deploy Prometheus, Grafana, and Loki with one click for real-time cluster insights.",
+  description: "Simplify RustFS management with a web console, the rc CLI, and OpenTelemetry. Deploy Prometheus, Grafana, and Loki with a streamlined setup for real-time cluster insights.",
   keywords: [
     "RustFS",
     "cluster observability",
@@ -40,15 +40,15 @@ const sections: FeaturePageSection[] = [
     items: [
       {
         title: "Elastic storage auto-scaling",
-        description: "Scaling RustFS capacity and disk pools on demand with zero downtime, driven by automated Operator orchestration.",
+        description: "Scale RustFS capacity and disk pools on demand without downtime, using Operator orchestration.",
       },
       {
         title: "MNMD cluster provisioning",
-        description: "Provisioning multi-node, multi-disk RustFS clusters instantly with simultaneous multi-writer access for high-concurrency workloads.",
+        description: "Provision multi-node, multi-disk RustFS clusters with simultaneous multi-writer access for high-concurrency workloads.",
       },
       {
         title: "Tenant-aware resource isolation",
-        description: "Enforcing strict capacity quotas, IOPS limits, and isolated access credentials across dynamically managed RustFS storage pools.",
+        description: "Enforce capacity quotas, IOPS limits, and isolated credentials across storage pools.",
       },
     ],
   },
@@ -57,15 +57,15 @@ const sections: FeaturePageSection[] = [
     items: [
       {
         title: "Intuitive data management",
-        description: "Streamlining full lifecycle operations for buckets and objects.",
+        description: "Run full lifecycle operations for buckets and objects from the console.",
       },
       {
         title: "Granular security administration",
-        description: "Reinforcing IAM, audit logging, and data encryption.",
+        description: "Manage IAM, audit logging, and data encryption.",
       },
       {
         title: "Centralized cluster orchestration",
-        description: "Simplifying pool expansion, rebalancing, and decommissioning.",
+        description: "Expand, rebalance, and decommission pools from one place.",
       },
     ],
   },
@@ -78,12 +78,12 @@ const sections: FeaturePageSection[] = [
         description: "Integrate unified logs, monitoring, and metrics under OpenTelemetry.",
       },
       {
-        title: "One-click containerized deployment",
-        description: "Spinning up Prometheus, Grafana, and Loki instances instantly.",
+        title: "Streamlined container deployment",
+        description: "Spin up Prometheus, Grafana, and Loki for metrics and logs.",
       },
       {
         title: "Flexible environment configuration",
-        description: "Tailoring feature toggles to customized enterprise needs.",
+        description: "Configure feature toggles for enterprise requirements.",
       },
     ],
   },
@@ -115,11 +115,11 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "Multi-platform deployment",
-        description: "Securing frictionless setup via binaries or Docker across Linux, macOS, and Windows.",
+        description: "Install quickly via binaries or Docker on Linux, macOS, and Windows.",
       },
       {
         title: "Continuous iteration",
-        description: "The command surface continues to expand to strengthen CLI-based instance management.",
+        description: "The CLI continues to expand and covers more instance-management tasks.",
       },
     ],
   },
@@ -128,7 +128,7 @@ const sections: FeaturePageSection[] = [
 export default function OperationalObservabilityPage() {
   return (
     <FeaturePage
-      title="Operational & Observability"
+      title="Operations & observability"
       description="RustFS gives operators practical control over storage operations with console workflows, OpenTelemetry support, cluster insights, and rc CLI automation."
       sections={sections}
       variant="ops"
@@ -140,7 +140,7 @@ export default function OperationalObservabilityPage() {
         },
         {
           title: "Operational flexibility",
-          description: "Effortless deployment across operating systems and installation methods including source, binary, Docker, and Kubernetes.",
+          description: "Deployment across operating systems and installation methods, including source, binary, Docker, and Kubernetes.",
         },
         {
           title: "Simplified administration",

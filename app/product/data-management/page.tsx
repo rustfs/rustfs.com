@@ -26,15 +26,15 @@ const sections: FeaturePageSection[] = [
     items: [
       {
         title: "Bucket & Object",
-        description: "Making object storage data management remarkably stable and efficient.",
+        description: "Stable, efficient bucket and object management.",
       },
       {
         title: "Lifecycle Management",
-        description: "Optimizing overall storage costs and reducing operational burdens.",
+        description: "Lower storage costs and reduce operational overhead.",
       },
       {
         title: "Multipart Upload",
-        description: "Accelerating large file transfers and maximizing network utilization.",
+        description: "Speed up large-object transfers and raise network utilization.",
       },
     ],
   },
@@ -44,15 +44,15 @@ const sections: FeaturePageSection[] = [
     items: [
       {
         title: "Automated Small File Management",
-        description: "Automating backend merges and snapshots to simplify and reduce operational costs.",
+        description: "Automatic backend merges and snapshots that simplify operations and reduce cost.",
       },
       {
         title: "Performance Acceleration",
-        description: "Optimizing the dedicated metadata layer to drastically lower query latency and accelerate data analytics.",
+        description: "A dedicated metadata layer lowers query latency and speeds up analytics.",
       },
       {
         title: "Native Iceberg Support",
-        description: "Seamlessly connecting with leading big data and AI ecosystems.",
+        description: "Native connections to leading big data and AI ecosystems.",
       },
     ],
   },
@@ -62,22 +62,22 @@ export default function DataManagementPage() {
   return (
     <FeaturePage
       title="Data Management"
-      description="Comprehensive lifecycle management covering bucket quotas, Object Lock, and versioning. Featuring native S3 compatibility to enable seamless data migration from any S3-compliant system to RustFS."
+      description="Lifecycle management for bucket quotas, Object Lock, and versioning. Native S3 compatibility helps you migrate from any S3-compatible system to RustFS."
       sections={sections}
       variant="data"
       highlightsTitle="Resilience & Durability"
       highlights={[
         {
           title: "S3 compatibility",
-          description: "S3 protocol natively supported to manage object storage data with high efficiency.",
+          description: "Native S3 protocol support for efficient object management.",
         },
         {
           title: "Unified management",
-          description: "Powered by S3 Tables to unify structured and unstructured data management.",
+          description: "S3 Tables keep structured and unstructured data in one object store.",
         },
         {
           title: "Cost efficiency",
-          description: "Fine-grained data lifecycle management implemented to reduce enterprise storage costs.",
+          description: "Fine-grained lifecycle policies reduce enterprise storage costs.",
         },
       ]}
       links={[

@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "product/high-availability-scale/" },
   title: "RustFS High Availability & Scalability | Enterprise Distributed Storage",
   description:
-    "Discover RustFS enterprise distributed architecture. Experience limitless scaling from PB to EB levels with distributed EC, automated self-healing, and absolute data reliability.",
+    "Scale from petabytes to exabytes with distributed erasure coding, automated self-healing, and strong data durability.",
   keywords: [
     "RustFS",
     "distributed object storage",
     "high availability",
-    "infinite scaling",
+    "elastic scaling",
     "erasure coding",
     "self-healing",
     "S3-compatible",
@@ -26,17 +26,17 @@ const sections: FeaturePageSection[] = [
       {
         title: "Enterprise-grade distributed architecture",
         description:
-          "Satisfying high-availability requirements for massive data.",
+          "Meets high-availability requirements for large-scale datasets.",
       },
       {
         title: "Flexible multi-node and multi-disk topologies",
         description:
-          "Fulfilling customized enterprise storage policies.",
+          "Supports customized enterprise storage policies.",
       },
       {
         title: "Resilient node- and disk-level fault tolerance",
         description:
-          "Guaranteeing continuous service and data availability.",
+          "Keeps service and data available through node and disk faults.",
       },
     ],
   },
@@ -46,38 +46,38 @@ const sections: FeaturePageSection[] = [
       {
         title: "Distributed EC",
         description:
-          "Maximizing RustFS cluster resilience and disaster recovery.",
+          "Improves cluster resilience and disaster recovery.",
         href: "/knowledge-center/erasure-coding-explained",
       },
       {
         title: "Optimized EC configurations",
         description:
-          "Balancing storage efficiency and data reliability.",
+          "Balances storage efficiency and data reliability.",
       },
       {
         title: "EC Calculator",
         description:
-          "Matching your workloads with best-practice configurations instantly.",
+          "Matches workloads to best-practice configurations.",
       },
     ],
   },
   {
-    title: "Infinite scaling",
+    title: "Elastic scaling",
     items: [
       {
         title: "Horizontal and vertical scaling",
         description:
-          "Enabling PB to EB-level data management.",
+          "Supports data management from petabytes to exabytes.",
       },
       {
         title: "Automated data rebalancing",
         description:
-          "Achieving uniform disk utilization.",
+          "Keeps disk utilization even across the cluster.",
       },
       {
         title: "Zero-downtime expansion",
         description:
-          "Minimizing the performance impact on active workloads.",
+          "Limits the performance impact on active workloads.",
       },
     ],
   },
@@ -87,17 +87,17 @@ const sections: FeaturePageSection[] = [
       {
         title: "Automated data self-healing",
         description:
-          "Delivering enterprise-grade data reliability.",
+          "Restores data after drive or node loss.",
       },
       {
         title: "Data integrity verification",
         description:
-          "Securing consistency of cluster data.",
+          "Helps maintain cluster data integrity.",
       },
       {
         title: "Real-time progress tracking",
         description:
-          "Providing deep insights into cluster health.",
+          "Shows healing progress and cluster health.",
       },
     ],
   },
@@ -107,17 +107,17 @@ const sections: FeaturePageSection[] = [
       {
         title: "Multi-site replication",
         description:
-          "Providing enhanced reliability and robust disaster recovery.",
+          "Adds reliability and disaster recovery across sites.",
       },
       {
         title: "Bidirectional synchronization",
         description:
-          "Maintaining consistent data across distributed sites.",
+          "Keeps data consistent across distributed sites.",
       },
       {
         title: "Location-aware routing",
         description:
-          "Enabling low-latency access and improved user experience.",
+          "Routes requests for lower access latency.",
       },
     ],
   },
@@ -127,22 +127,22 @@ export default function HighAvailabilityScalePage() {
   return (
     <FeaturePage
       title="High Availability & Scale"
-      description="Driven by enterprise-grade distributed architecture, distributed Erasure Coding (EC), and resilient fault tolerance, RustFS achieves a perfect win-win between limitless scaling and absolute data consistency. RustFS safeguards reliable, high-efficiency data management for enterprise storage scaling from PB to EB levels, and even more."
+      description="Enterprise distributed architecture, erasure coding, and fault tolerance let you scale out while preserving strong data durability. RustFS supports reliable object storage from petabytes to exabytes."
       sections={sections}
       variant="scale"
       highlightsTitle="Reliability & Efficiency"
       highlights={[
         {
           title: "Enterprise Solution",
-          description: "Satisfying enterprise demands for both high availability and rigorous reliability in mass storage.",
+          description: "Built for enterprise requirements for high availability and reliability at large scale.",
         },
         {
-          title: "Cost saving",
-          description: "Exceptional cost-efficiency, driving down both hardware storage costs and operational workload for enterprises.",
+          title: "Cost efficiency",
+          description: "Strong cost efficiency, with lower storage cost and less operational work.",
         },
         {
           title: "High Flexibility",
-          description: "Flexibly adapting to efficient data management across diverse business scenarios and any data scale.",
+          description: "Adapts object management to different workloads and data scales.",
         },
       ]}
       links={[

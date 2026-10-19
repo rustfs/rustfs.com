@@ -11,16 +11,16 @@ const stories = [
     token: "rdma+dpu",
     label: "AI infrastructure",
     description:
-      "RustFS has joined the NVIDIA Inception Program. We are accelerating the future of AI data center storage. By leveraging NVIDIA’s cutting-edge platform, RustFS is pioneering native RDMA support and offloading Erasure Coding and data encryption directly to next-generation DPUs for unparalleled performance.",
+      "RustFS has joined the NVIDIA Inception Program. Native RDMA support is in progress, along with offload of erasure coding and encryption to DPUs.",
     href: "/blog/big-news-rustfs-joins-the-nvidia-inception-program",
     linkText: "Read the story",
   },
   {
-    title: "Drop-in Replacement for MinIO",
+    title: "In-place MinIO migration",
     token: "minio swap",
     label: "Migration path",
     description:
-      "Migrate instantly without data moving headaches. RustFS supports seamless, in-place migration from MinIO by simply swapping the binary or container image, drastically reducing your migration overhead and engineering costs.",
+      "Migrate in place—without a bulk data move. Replace the MinIO binary or container image and keep the existing data directory.",
     href: "/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs",
     linkText: "Read the migration guide",
   },
@@ -31,7 +31,7 @@ export default function HomeMultiClouds() {
     <section className="border-t border-border bg-background py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
-          eyebrow="Field posts"
+          eyebrow="From the blog"
           title="Built for the next generation of object storage"
           description="RustFS combines Rust-native engineering, Apache 2.0 licensing, and S3 compatibility for AI infrastructure and direct MinIO migrations."
         />

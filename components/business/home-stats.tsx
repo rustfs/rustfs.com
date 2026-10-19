@@ -8,7 +8,7 @@ const reasons = [
   {
     title: "High-Performance",
     token: "perf",
-    description: "Built with Rust. Zero-overhead. Hardware-saturated.",
+    description: "Built in Rust for low overhead on the data path.",
   },
   {
     title: "Security & Compliance",
@@ -23,17 +23,17 @@ const reasons = [
   {
     title: "Developer-First Experience",
     token: "dx",
-    description: "Cross-platform support, versatile installations, and one-click deployment.",
+    description: "Cross-platform support, flexible install paths, and streamlined deployment.",
   },
   {
     title: "Open Source",
     token: "oss",
-    description: "Apache-2.0 licensed, business-friendly, and vendor-independent.",
+    description: "Apache 2.0 licensed, business-friendly, and free of vendor lock-in.",
   },
   {
     title: "S3-Compatible",
     token: "s3",
-    description: "Fully S3-compatible for seamless integration and effortless migration.",
+    description: "S3 API compatibility with existing tools and SDKs.",
   },
 ];
 
@@ -51,7 +51,7 @@ const compatibilityRows = [
   {
     title: "Cloud apps",
     detail: "Connect S3-aware analytics, backup, and AI pipelines.",
-    meta: "DROP-IN",
+    meta: "S3",
   },
 ];
 
@@ -120,7 +120,7 @@ export default function HomeStats() {
                 <pre className="overflow-x-auto text-xs leading-6 text-muted-foreground">
                   <code>{`[rustfs]
 runtime = "memory-safe"
-io = "hardware-saturated"
+io = "low-overhead"
 mode = "distributed"`}</code>
                 </pre>
               </div>

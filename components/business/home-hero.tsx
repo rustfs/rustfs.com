@@ -13,9 +13,9 @@ interface HomeHeroProps {
 
 const stackItems = [
   { label: "Apache 2.0", value: "open source" },
-  { label: "S3 API", value: "drop-in" },
+  { label: "S3 API", value: "compatible" },
   { label: "Rust core", value: "memory-safe" },
-  { label: "AI data", value: "petabyte-scale" },
+  { label: "AI workloads", value: "petabyte-ready" },
 ];
 
 const heroButtonClassName = "!h-14 !min-h-14 w-full !px-0 !py-0 leading-none sm:!w-48";
@@ -33,7 +33,7 @@ export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
               High-Performance, S3-Compatible Object Storage for AI Data Centers
             </h1>
             <p className="mt-6 w-full text-base leading-7 text-muted-foreground md:text-lg md:leading-8">
-              RustFS is the world&apos;s fastest-growing open-source distributed object storage system. Built from the ground up in Rust and licensed under Apache 2.0, RustFS is a powerful, production-ready, S3-compatible object storage foundation for AI workloads.
+              RustFS is a fast-growing open-source distributed object storage system. Built in Rust and licensed under Apache 2.0, it is a production-ready, S3-compatible object store for AI workloads.
             </p>
 
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 text-sm xl:grid-cols-4">

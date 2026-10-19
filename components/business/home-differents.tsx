@@ -6,11 +6,11 @@ import HomeSectionHeader from "./home-section-header";
 const comparisonRows = [
   {
     other: "Memory safety depends on runtime and implementation discipline",
-    rustfs: "Memory-safe Rust development",
+    rustfs: "Memory-safe implementation in Rust",
   },
   {
     other: "Telemetry and logging may leave local control boundaries",
-    rustfs: "Self-hosted control with no foreign logging",
+    rustfs: "Self-hosted control plane with no phoning home",
   },
   {
     other: "License terms can restrict commercial redistribution",
@@ -18,7 +18,7 @@ const comparisonRows = [
   },
   {
     other: "S3 behavior can differ across products and gateways",
-    rustfs: "Full S3 support for existing cloud ecosystems",
+    rustfs: "S3 API compatibility with existing tools and SDKs",
   },
   {
     other: "Platform coverage often depends on separate editions",
@@ -35,7 +35,7 @@ export default function HomeDifferents() {
     <section className="relative border-t border-border bg-background py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
-          eyebrow="Competitive profile"
+          eyebrow="How we compare"
           title="RustFS vs. legacy object storage"
           description="Choose RustFS when memory safety, S3 compatibility, open licensing, and predictable operations matter more than vendor lock-in."
         />
