@@ -20,7 +20,7 @@ const milestones = [
   },
   {
     date: "2025.07.02",
-    title: "Open sourced",
+    title: "Open-sourced",
     description: "RustFS was released to the global community under Apache 2.0.",
   },
   {
@@ -159,7 +159,7 @@ export default function AboutPage() {
           <div className="grid gap-8 border border-border bg-card p-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">RustFS</p>
-              <h2 className="mt-4 text-3xl font-semibold text-foreground">Contact us</h2>
+              <h2 className="mt-4 text-3xl font-semibold text-foreground">Contact</h2>
               <address className="mt-5 text-base not-italic leading-8 text-muted-foreground">
                 3550 Lenox Road<br />
                 NE Atlanta, Georgia 30326

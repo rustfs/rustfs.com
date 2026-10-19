@@ -2,121 +2,121 @@
   {
     "name": "Ethan Brooks",
     "position": "Technical Director",
-    "body": "RustFS is a game-changer... It performs excellently, processes data at blazing speeds, and greatly improves my work efficiency. Its security also provides reliable security., no need to worry about data leaks. The features are comprehensive and can meet all my different needs, really great!",
+    "body": "We pointed existing S3 clients at RustFS and kept the same bucket layout. Throughput has been steady enough for our batch jobs, and we did not have to put a gateway in front of the store.",
     "img": "/images/faces/ethan-brooks.jpeg"
   },
   {
     "name": "Olivia Bennett",
     "position": "Product Manager",
-    "body": "After using RustFS, it feels really different. Its performance is outstanding, running very stable and smooth. Security is also extremely high, protecting my important data. The comprehensive features make me feel comfortable during use, highly recommended!",
+    "body": "RustFS gave the team an S3-compatible object store we can run ourselves. Planning capacity stayed on our hardware, and the application SDKs did not change.",
     "img": "/images/faces/olivia-bennett.jpeg"
   },
   {
     "name": "Daniel Carter",
     "position": "Project Manager",
-    "body": "I have to say, RustFS file system is one of the best I've ever used. Powerful performance, excellent handling of both large and small files. Security is guaranteed, giving me peace of mind. Comprehensive features covering all the functions I need daily, really great.",
+    "body": "The cutover plan was concrete: keep the S3 clients, change the endpoint, and validate bucket policies before traffic moved. That kept the migration review short.",
     "img": "/images/faces/daniel-carter.jpeg"
   },
   {
     "name": "Sophia Hayes",
     "position": "Frontend Developer",
-    "body": "RustFS has left a deep impression on me. Its performance is good, able to quickly respond to various operations. Security is also well done, data storage is very secure. And the features are comprehensive, meeting both work and entertainment needs, meets both our development and production needs.",
+    "body": "Our upload flow already used the S3 API. Switching the endpoint to RustFS was a configuration change, and object writes from the app behaved the same.",
     "img": "/images/faces/sophia-hayes.jpeg"
   },
   {
     "name": "Michael Turner",
     "position": "Backend Developer",
-    "body": "I am very satisfied with RustFS file system. Its excellent performance greatly reduces file read/write time. Reliable security, no need to worry about data safety. Features are also comprehensive, providing me with great convenience, easy to use!",
+    "body": "Multipart upload and lifecycle rules cover the object sizes we store. I did not add a translation layer between the service and the bucket.",
     "img": "/images/faces/michael-turner.jpeg"
   },
   {
     "name": "Grace Collins",
     "position": "Test Engineer",
-    "body": "RustFS is really good, great performance and smooth to use. High security, protecting my privacy and data. Features are particularly comprehensive, meeting my diverse needs, genuinely feel it's useful.",
+    "body": "A local RustFS container is enough for integration tests. We run the same S3 calls there that staging uses against the cluster.",
     "img": "/images/faces/grace-collins.jpeg"
   },
   {
     "name": "Andrew Lawson",
     "position": "DevOps Engineer",
-    "body": "After using RustFS for a while, I feel its performance is really strong, fast running speed, no lag. Security is also trustworthy, features are comprehensive and practical, it's a very good file system.",
+    "body": "The binary and Docker installs both matched our node layout. Console health and OpenTelemetry signals are what we use for day-two checks.",
     "img": "/images/faces/andrew-lawson.jpeg"
   },
   {
     "name": "Benjamin Reed",
     "position": "Data Analyst",
-    "body": "RustFS file system is Exceeded our expectations.. Excellent performance, efficient and fast task processing. Security is guaranteed, giving me confidence to use. Comprehensive features bring great convenience to both my life and work, love it!",
+    "body": "Training artifacts and table data sit in one S3-compatible store. The query tools we already had did not need a new connector.",
     "img": "/images/faces/benjamin-reed.jpeg"
   },
   {
     "name": "Natalie Parker",
     "position": "UI Designer",
-    "body": "Have to praise RustFS, good performance, high security, and such comprehensive features. During use, I really felt its power and convenience, It's a standout solution in the market..",
+    "body": "The web console is enough to inspect buckets and objects in our review environment. We did not stand up a separate admin UI for that.",
     "img": "/images/faces/natalie-parker.jpeg"
   },
   {
     "name": "Lucas Mitchell",
     "position": "Architect",
-    "body": "RustFS performance amazes me, fast speed and high efficiency. Security is also great, no need to worry about data loss or leakage. Comprehensive features meet my needs in different scenarios, really useful.",
+    "body": "Erasure coding lets us set durability separately from raw capacity. The cluster model matches how we already design object storage.",
     "img": "/images/faces/lucas-mitchell.jpeg"
   },
   {
     "name": "Abigail Foster",
     "position": "Database Administrator",
-    "body": "I think RustFS file system is excellent, outstanding performance and smooth operation. Good security, protecting my important files. Comprehensive features covering various practical functions, very convenient to use, recommend to everyone.",
+    "body": "We use RustFS for backups and large objects, alongside the databases, not in place of them. Versioning and lifecycle policies are the controls we rely on.",
     "img": "/images/faces/abigail-foster.jpeg"
   },
   {
     "name": "Chloe Simmons",
     "position": "Algorithm Engineer",
-    "body": "RustFS is really a very useful file system, good performance and can quickly complete various file operations. Security is also high, giving me peace of mind. Comprehensive features bring much convenience to my work and life, I like it very much.",
+    "body": "Model checkpoints land in RustFS over the S3 API. Large-object transfers have been stable for the training jobs we run.",
     "img": "/images/faces/chloe-simmons.jpeg"
   },
   {
     "name": "Jonathan Pierce",
     "position": "Security Engineer",
-    "body": "After using RustFS, I am very satisfied with its performance, security and comprehensive features. Its performance exceeded my expectations, it's a trustworthy file system that I will continue to use.",
+    "body": "IAM, audit logging, and TLS are in the product. We can review access and destructive actions without bolting on a second control plane.",
     "img": "/images/faces/jonathan-pierce.jpeg"
   },
   {
     "name": "Ryan Gallagher",
     "position": "Network Engineer",
-    "body": "RustFS file system has excellent performance, stable operation and fast speed. Security is also guaranteed, no need to worry about data security issues. And the features are comprehensive, meeting my daily needs, feels very good.",
+    "body": "FTPS and S3 hit the same object store, so older transfer jobs and newer services share data. We did not add a separate protocol proxy.",
     "img": "/images/faces/ryan-gallagher.jpeg"
   },
   {
     "name": "Matthew Harper",
     "position": "System Administrator",
-    "body": "Have to say, RustFS is an excellent file system with good performance, high security and comprehensive features. During use, it brought me a great experience, I will recommend it to my friends.",
+    "body": "Linux packages, Docker, and a single-node lab are all usable install paths. We replace the default rustfsadmin credential before a node is reachable.",
     "img": "/images/faces/matthew-harper.jpeg"
   },
   {
     "name": "Emily Walters",
     "position": "Sales Manager",
-    "body": "I really like RustFS file system, its performance is excellent and operation is simple and convenient. Security is also good, protecting my privacy. Comprehensive features can meet my various different needs, really great.",
+    "body": "When a customer asks for an S3-compatible store they can run themselves, we can demo RustFS without a license server in the path.",
     "img": "/images/faces/emily-walters.jpeg"
   },
   {
     "name": "Samuel Grant",
     "position": "Marketing Specialist",
-    "body": "RustFS is really so useful! Good performance, high security, and particularly comprehensive features. During use, it feels very smooth without any problems, strongly recommend to everyone.",
+    "body": "Release artifacts go into RustFS, and the site tools already speak S3. We did not introduce a second storage API for publishing.",
     "img": "/images/faces/samuel-grant.jpeg"
   },
   {
     "name": "Victoria Blake",
     "position": "Finance Manager",
-    "body": "After using RustFS, I realized its true value. Powerful performance and super fast running speed. Reliable security with data guarantee. Comprehensive features meeting my diverse needs, really a good file system.",
+    "body": "Apache 2.0 and self-hosting make the cost model easier to explain. We account for disks and support, not a per-request platform fee.",
     "img": "/images/faces/victoria-blake.jpeg"
   },
   {
     "name": "Allison Wright",
     "position": "HR Specialist",
-    "body": "RustFS file system brought me great surprises. Its performance is good with high file processing efficiency. Security is also great, giving me confidence to store data. Comprehensive features and convenient to use, genuinely feel it's good.",
+    "body": "Onboarding packets now go into a bucket with scoped access. We stopped emailing large attachments around the team.",
     "img": "/images/faces/allison-wright.jpeg"
   },
   {
     "name": "Henry Dawson",
     "position": "Administrative Specialist",
-    "body": "I am very satisfied with RustFS, its performance is excellent, security is high, and features are comprehensive. During use, it feels very smooth, bringing much convenience to my work and life, will always support it.",
+    "body": "Shared documents that used to sit on a file share now go into a versioned bucket. The console is enough for our team to retrieve them.",
     "img": "/images/faces/henry-dawson.jpeg"
   }
 ]

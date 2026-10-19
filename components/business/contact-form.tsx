@@ -226,7 +226,7 @@ export default function ContactForm() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
-          eyebrow="Contact channel"
+          eyebrow="Contact"
           title="Contact Us"
           description="Get in touch with the RustFS team for deployment planning, migration support, and enterprise requirements."
           headingLevel={1}
@@ -329,7 +329,7 @@ export default function ContactForm() {
             </div>
             <div>
               <label htmlFor="currentS3System" className="mb-2 block text-sm font-medium text-foreground">
-                S3 system used currently <span className="text-destructive" aria-hidden="true">*</span>
+                Current S3-compatible system <span className="text-destructive" aria-hidden="true">*</span>
               </label>
               <Select
                 name="currentS3System"

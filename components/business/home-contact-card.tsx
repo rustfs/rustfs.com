@@ -10,7 +10,7 @@ export default function HomeContactCard() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <HomeSectionHeader
-          eyebrow="Contact channel"
+          eyebrow="Contact"
           title="Contact Us"
           description="Get in touch with the RustFS team for deployment planning, migration support, and enterprise requirements."
         />

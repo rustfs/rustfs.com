@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: "product/multiple-protocol-access/" },
-  title: "Native Multi-Protocol Access | S3, Swift, WebDAV, FTP(s) & MCP | RustFS",
-  description: "Connect RustFS natively to any workload via S3, Swift, FTP(s), WebDAV, and MCP. Zero code modifications, no legacy proxies, and absolute multi-protocol data coexistence.",
+  title: "Multi-protocol access | S3, Swift, WebDAV, FTP/FTPS & MCP | RustFS",
+  description: "Connect RustFS natively to workloads over S3, Swift, FTP/FTPS, WebDAV, and MCP. No application rewrites, no legacy protocol proxies—just multi-protocol access on one object store.",
   keywords: [
     "RustFS",
     "multi-protocol access",
@@ -28,20 +28,20 @@ const sections: FeaturePageSection[] = [
     items: [
       {
         title: "Comprehensive S3 API capabilities",
-        description: "Pure Rust-powered S3 implementation across object operations, bucket policies, versioning, and lifecycle management.",
+        description: "S3 implementation in Rust for object operations, bucket policies, versioning, and lifecycle management.",
       },
       {
-        title: "Out-of-the-box S3 support",
-        description: "Seamless integration across S3-compliant infrastructure and application ecosystems.",
+        title: "S3 support out of the box",
+        description: "Works with S3-compatible infrastructure and application ecosystems.",
       },
       {
-        title: "Drop-in MinIO replacement",
-        description: "Zero config overhauls, no API rewrites, and zero migration friction.",
+        title: "MinIO alternative",
+        description: "No config overhauls, no API rewrites, and no application code changes.",
         href: "/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs/",
       },
       {
         title: "Native virtual host mode",
-        description: "Enterprise-grade bucket addressing, domain-level isolation, and absolute URL compatibility.",
+        description: "Bucket addressing, domain-level isolation, and virtual-hosted-style URL compatibility.",
       },
     ],
   },
@@ -54,12 +54,12 @@ const sections: FeaturePageSection[] = [
         description: "Operate remote object storage as local directories across Windows, macOS, and Linux without client lock-in.",
       },
       {
-        title: "Instant frictionless setup",
-        description: "Out-of-the-box convenience requiring no extra configuration or heavy third-party integrations.",
+        title: "Quick setup",
+        description: "Works out of the box, with no extra configuration or heavy third-party integrations.",
       },
       {
         title: "Secure file operations",
-        description: "Full TLS/HTTPS protocol support delivering enterprise-grade encryption for peace-of-mind data transfer.",
+        description: "TLS/HTTPS support for encrypted data in transit.",
       },
     ],
   },
@@ -69,25 +69,25 @@ const sections: FeaturePageSection[] = [
     items: [
       {
         title: "OpenStack native support",
-        description: "Frictionless RustFS integration into the OpenStack ecosystem.",
+        description: "Runs in OpenStack environments that already speak Swift.",
       },
       {
         title: "Dual-protocol coexistence",
-        description: "Break down data silos and accelerate data mobility across S3 and Swift clients.",
+        description: "Let S3 and Swift clients access the same data.",
       },
     ],
   },
   {
-    title: "FTP(s)",
+    title: "FTP/FTPS",
     description: "A secure bridge for file-transfer workloads that cannot be rewritten immediately.",
     items: [
       {
         title: "Legacy modernization",
-        description: "Connect traditional applications and automated batch workflows to modern object storage instantly.",
+        description: "Connect traditional applications and automated batch workflows to object storage.",
       },
       {
         title: "Hardened enterprise security",
-        description: "Support FTPS over TLS to guarantee encrypted data transfer in transit.",
+        description: "Support FTPS over TLS so data is encrypted in transit.",
       },
     ],
   },
@@ -97,11 +97,11 @@ const sections: FeaturePageSection[] = [
     items: [
       {
         title: "Agent-native access",
-        description: "Empower AI agents to call and interact with RustFS workflows through controlled storage operations.",
+        description: "Let AI agents call RustFS through controlled storage operations.",
       },
       {
         title: "Customized toolset",
-        description: "Customize and extend your own toolset legally.",
+        description: "Customize and extend your own toolset under a clear open-source license.",
       },
     ],
   },
@@ -110,23 +110,23 @@ const sections: FeaturePageSection[] = [
 export default function MultipleProtocolAccessPage() {
   return (
     <FeaturePage
-      title="Multiple Protocol Access"
-      description="Native multi-protocol accessibility delivery. By speaking S3, Swift, FTP(s), and MCP out of the box, RustFS integrates naturally and effortlessly into any environment. No gateways, no legacy proxies, and absolutely zero code modifications required. Instantly connect to a massive, thriving ecosystem of AI pipelines, big data frameworks, and legacy enterprise workloads while maintaining a single, high-performance source of truth."
+      title="Multi-protocol access"
+      description="Native multi-protocol access. By speaking S3, Swift, FTP/FTPS, WebDAV, and MCP out of the box, RustFS fits existing environments. No gateways, no legacy protocol proxies, and no application code changes. Connect AI pipelines, big data frameworks, and legacy workloads to one object store."
       sections={sections}
       variant="protocol"
       highlightsTitle="Flexibility & Simplicity"
       highlights={[
         {
           title: "Native support",
-          description: "Out-of-the-box setup lets you launch your storage services immediately.",
+          description: "Works out of the box so you can start storage services without a protocol gateway.",
         },
         {
           title: "Built for any workload",
-          description: "Adaptive to diverse use cases, from cloud-native microservices to legacy enterprise infrastructure.",
+          description: "Fits cloud-native services and legacy applications on the same object store.",
         },
         {
           title: "Seamless integration",
-          description: "Native compatibility with industry-standard protocols. Connect flawlessly with your existing ecosystem.",
+          description: "S3, Swift, FTP/FTPS, WebDAV, and MCP against one data set.",
         },
       ]}
       links={[

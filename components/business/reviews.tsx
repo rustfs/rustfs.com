@@ -55,7 +55,7 @@ export default function HomeReviews() {
             {'What customers say about RustFS'}
           </h2>
           <p className="mt-4 text-muted-foreground">
-            {'Exquisite service, professional team, providing you with the best service'}
+            {'What operators and builders say about running RustFS in production'}
           </p>
         </div>
         <div className="relative flex h-[500px] w-full flex-row items-center justify-center overflow-hidden rounded-lg lg:hidden">

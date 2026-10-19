@@ -7,10 +7,10 @@ export interface NavigationItem {
 
 export const productNavigation: NavigationItem[] = [
   {
-    title: "Multiple Protocol Access",
+    title: "Multi-protocol access",
     href: "/product/multiple-protocol-access",
-    description: "Native S3, WebDAV, Swift, FTP(s), and MCP access.",
-    items: ["S3", "WebDAV", "Swift", "FTP(s)", "MCP"],
+    description: "Native S3, WebDAV, Swift, FTP/FTPS, and MCP access.",
+    items: ["S3", "WebDAV", "Swift", "FTP/FTPS", "MCP"],
   },
   {
     title: "Data Management",
@@ -31,7 +31,7 @@ export const productNavigation: NavigationItem[] = [
     items: ["IAM", "OIDC", "mTLS", "SSE/KMS"],
   },
   {
-    title: "Operational & Observability",
+    title: "Operations & observability",
     href: "/product/operational-observability",
     description: "Cluster management, OTEL signals, and rc operations.",
     items: ["Cluster management", "OTEL", "rc"],
@@ -73,14 +73,14 @@ export const resourceNavigation: NavigationItem[] = [
 
 export const footerNavigation = [
   {
-    title: "Product features",
+    title: "Product",
     links: [
-      { title: "S3 Compatible", href: "/product/multiple-protocol-access#s3-api-compatibility" },
+      { title: "S3-compatible", href: "/product/multiple-protocol-access#s3-api-compatibility" },
       { title: "S3 Tables", href: "/product/data-management#s3-tables" },
-      { title: "Multiple Protocol Access", href: "/product/multiple-protocol-access" },
+      { title: "Multi-protocol access", href: "/product/multiple-protocol-access" },
       { title: "Data Management", href: "/product/data-management" },
       { title: "High Availability & Scale", href: "/product/high-availability-scale" },
-      { title: "Operational & Observability", href: "/product/operational-observability" },
+      { title: "Operations & observability", href: "/product/operational-observability" },
       { title: "Multi-tenant management", href: "/product/operational-observability#multi-tenant-management" },
       { title: "Security & Compliance", href: "/product/security-compliance" },
     ],
@@ -89,7 +89,7 @@ export const footerNavigation = [
     title: "Resources",
     links: [
       { title: "RustFS Download", href: "/download" },
-      { title: "rc Download", href: "/download/cli" },
+      { title: "Download rc (CLI)", href: "/download/cli" },
       { title: "Blog", href: "/blog" },
       { title: "Knowledge Center", href: "/knowledge-center" },
       { title: "EC Calculator", href: "/erasure-code-calculator" },
@@ -104,7 +104,7 @@ export const footerNavigation = [
       { title: "Legal", href: "https://github.com/rustfs/rustfs/blob/main/LICENSE" },
       { title: "Privacy Policy", href: "/privacy-policy" },
       { title: "Cookie Policy", href: "/cookie-policy" },
-      { title: "Contact us", href: "/contact-us" },
+      { title: "Contact", href: "/contact-us" },
     ],
   },
 ];
