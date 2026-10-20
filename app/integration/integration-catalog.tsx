@@ -185,20 +185,28 @@ export default function IntegrationCatalog({ categories }: IntegrationCatalogPro
                     target="_blank"
                     rel="noreferrer noopener external"
                     aria-label={`${project.name} official website`}
-                    className="inline-flex w-fit items-center rounded-sm border border-border bg-white px-2.5 py-1.5 transition-colors hover:border-brand/40"
+                    className="flex h-16 w-full items-center justify-center border border-border bg-white px-4 transition-colors hover:border-brand/40"
                   >
                     <img
                       src={project.logo}
                       alt={`${project.name} logo`}
-                      className="h-6 w-auto object-contain"
+                      className="max-h-8 w-auto max-w-full object-contain"
                       loading="lazy"
                     />
                   </a>
                 ) : (
-                  <h3 className="text-xl font-semibold leading-tight tracking-tight text-foreground">
-                    {project.name}
-                  </h3>
+                  <div
+                    aria-hidden="true"
+                    className="flex h-16 w-full items-center justify-center border border-dashed border-border bg-background px-4"
+                  >
+                    <span className="truncate text-center font-mono text-xs font-semibold uppercase tracking-[0.14em] text-foreground/70">
+                      {project.name}
+                    </span>
+                  </div>
                 )}
+                <h3 className="mt-4 text-xl font-semibold leading-tight tracking-tight text-foreground">
+                  {project.name}
+                </h3>
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">{project.description}</p>
               </div>
 
