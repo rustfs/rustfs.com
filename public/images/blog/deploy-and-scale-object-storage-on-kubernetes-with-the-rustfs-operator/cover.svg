@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1584" height="672" viewBox="0 0 1080 458.18" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B1220"/>
+      <stop offset="1" stop-color="#12203B"/>
+    </linearGradient>
+    <linearGradient id="opnode" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FB923C"/>
+      <stop offset="1" stop-color="#EA580C"/>
+    </linearGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+    <marker id="arrw" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#FFFFFF"/>
+    </marker>
+  </defs>
+
+  <rect width="1080" height="458.18" fill="url(#bg)"/>
+
+  <!-- faint decorative arcs -->
+  <circle cx="950" cy="30" r="150" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+  <circle cx="60" cy="440" r="120" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+  <circle cx="530" cy="440" r="90" fill="none" stroke="#16233E" stroke-width="1.5"/>
+
+  <!-- ============ Tenant CR card ============ -->
+  <g>
+    <rect x="60" y="165" width="150" height="120" rx="10" fill="#F8FAFC"/>
+    <line x1="60" y1="189" x2="210" y2="189" stroke="#E2E8F0" stroke-width="1"/>
+    <circle cx="76" cy="177" r="3.5" fill="#F87171"/>
+    <circle cx="88" cy="177" r="3.5" fill="#FBBF24"/>
+    <circle cx="100" cy="177" r="3.5" fill="#34D399"/>
+    <rect x="74" y="203" width="102" height="6" rx="3" fill="#CBD5E1"/>
+    <rect x="74" y="219" width="70" height="6" rx="3" fill="#CBD5E1"/>
+    <rect x="74" y="235" width="88" height="6" rx="3" fill="#34D399"/>
+    <rect x="74" y="251" width="62" height="6" rx="3" fill="#CBD5E1"/>
+    <rect x="86" y="267" width="76" height="6" rx="3" fill="#CBD5E1"/>
+  </g>
+
+  <!-- arrow: CR -> operator -->
+  <line x1="218" y1="225" x2="264" y2="225" stroke="#64748B" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <!-- ============ Operator node (reconcile loop) ============ -->
+  <circle cx="320" cy="225" r="44" fill="url(#opnode)"/>
+  <path d="M320,203 A22,22 0 1,0 341,214" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" marker-end="url(#arrw)"/>
+
+  <!-- arrow: operator -> pods -->
+  <line x1="372" y1="225" x2="404" y2="225" stroke="#64748B" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <!-- ============ Pod cluster 2x2 ============ -->
+  <g>
+    <rect x="412" y="158" width="62" height="62" rx="12" fill="#10B981"/>
+    <rect x="486" y="158" width="62" height="62" rx="12" fill="#34D399"/>
+    <rect x="412" y="232" width="62" height="62" rx="12" fill="#34D399"/>
+    <rect x="486" y="232" width="62" height="62" rx="12" fill="#10B981"/>
+    <!-- small disk glyph in each pod -->
+    <rect x="430" y="200" width="26" height="6" rx="3" fill="#065F46" opacity="0.55"/>
+    <rect x="504" y="200" width="26" height="6" rx="3" fill="#065F46" opacity="0.55"/>
+    <rect x="430" y="274" width="26" height="6" rx="3" fill="#065F46" opacity="0.55"/>
+    <rect x="504" y="274" width="26" height="6" rx="3" fill="#065F46" opacity="0.55"/>
+  </g>
+
+  <!-- ============ Text ============ -->
+  <text x="620" y="218" font-size="52" font-weight="700" fill="#FFFFFF">RustFS <tspan fill="#34D399">Operator</tspan></text>
+  <rect x="622" y="248" width="88" height="3" rx="1.5" fill="#34D399"/>
+  <text x="620" y="296" font-size="20" fill="#94A3B8">Declarative object storage on Kubernetes</text>
+</svg>
