@@ -1,0 +1,291 @@
+---
+title: "Deploy and Scale Object Storage on Kubernetes with the RustFS Operator"
+slug: deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator
+description: "Learn how to install the RustFS Operator, create Tenants with Helm or the web console, and scale S3-compatible object storage on Kubernetes by adding pools."
+date: '2026-10-20T00:00:00.000Z'
+author: Jinghe Ma
+tags:
+  - RustFS
+  - Kubernetes
+  - Operator
+  - Helm
+  - Object Storage
+  - Tutorial
+image: /images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/cover.png
+---
+
+Standing up object storage on Kubernetes by hand means writing a small mountain of StatefulSets, PVCs, and Services — and scaling it later means touching all of them again. The RustFS Operator makes the whole thing declarative: you describe the cluster you want in a `Tenant` custom resource, and the Operator handles the orchestration, credential injection, status tracking, and expansion. It ships with a web console for day-to-day operations.
+
+This walkthrough is based on **rustfs-operator/rustfs-tenant chart v0.0.8** and covers:
+
+- Installing the Operator and logging in to its web console;
+- Creating Tenants two ways — the Web UI and the Tenant Helm chart;
+- Scaling a Tenant by adding storage pools.
+
+Here is the big picture first — everything below happens somewhere in this diagram:
+
+![RustFS Tenant architecture: the Operator reconciles a Tenant custom resource into pools, StatefulSets, PVCs, and shared S3 and console Services](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/architecture.png)
+
+The mental model in one sentence: **one Tenant is one independent RustFS cluster**. The Operator watches Tenant CRs and, for each pool, provisions the matching StatefulSet, PVCs, and Services. A Tenant can contain multiple pools; all pools together form that single RustFS cluster, exposed through one S3 endpoint (:9000) and one console (:9001).
+
+## Installing the Operator
+
+The Operator ships as a Helm chart.
+
+### Add the Helm repository
+
+```bash
+helm repo add operator https://operator.rustfs.com
+helm repo update
+```
+
+> This repository hosts both the `rustfs-operator` and `rustfs-tenant` charts. They are also published on [ArtifactHub](https://artifacthub.io/packages/search?repo=operator), if you prefer to browse there.
+
+### Install the Operator
+
+```bash
+helm install operator operator/rustfs-operator \
+  --version 0.0.8 \
+  --namespace rustfs-system --create-namespace
+```
+
+> See the [Operator chart values](https://github.com/rustfs/operator/blob/main/deploy/rustfs-operator/values.yaml) for the full configuration surface.
+
+Once the install finishes, you should see these resources in the `rustfs-system` namespace:
+
+```bash
+kubectl -n rustfs-system get pods,svc
+```
+
+```text
+NAME                                                    READY   STATUS    RESTARTS   AGE
+pod/operator-rustfs-operator-757f7dcc9b-s6rq8           1/1     Running   0          2d2h
+pod/operator-rustfs-operator-console-54fb7d5fbd-sfbxs   1/1     Running   0          2d2h
+
+NAME                                       TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/operator-rustfs-operator-console   ClusterIP   10.0.209.104   <none>        9090/TCP   6d19h
+service/operator-rustfs-operator-metrics   ClusterIP   10.0.124.119   <none>        8080/TCP   6d19h
+service/operator-rustfs-operator-sts       ClusterIP   10.0.222.192   <none>        4223/TCP   6d19h
+```
+
+What each Service is for:
+
+| Service | Port | Purpose |
+| --- | --- | --- |
+| `*-console` | 9090 | Operator management console (Web UI and API) |
+| `*-metrics` | 8080 | Prometheus metrics |
+| `*-sts` | 4223 | STS temporary-credential service (TLS) |
+
+### Logging in to the Operator console
+
+For production, expose the console through an Ingress. For local testing, a port-forward works fine — note the Service port is **9090**:
+
+```bash
+kubectl -n rustfs-system port-forward svc/operator-rustfs-operator-console 9090:9090
+```
+
+The console authenticates with a Kubernetes ServiceAccount token, which you create as prompted by the login page:
+
+```bash
+kubectl -n rustfs-system create token operator-rustfs-operator-console --duration=24h
+```
+
+![Operator console login page asking for a Kubernetes ServiceAccount token](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/console-login.png)
+
+One security detail worth knowing: after you submit the token, the Console stores it **encrypted, in process**. The browser cookie only carries a random session ID — the raw token never lives in the browser. Sessions expire after 12 hours and you log in again.
+
+## Creating a Tenant
+
+Every Tenant is an independent RustFS cluster; the number of nodes and disks is fully configurable. A Tenant can contain multiple pools, and all of its pools together form that one cluster. There are two supported ways to create a Tenant: the Operator Web UI and the Tenant Helm chart.
+
+### Prerequisite: create the credentials Secret (required)
+
+Whichever path you take, create the credentials Secret **first**:
+
+```bash
+kubectl -n TENANT_NAMESPACE create secret generic TENANT_SECRET_NAME \
+  --from-literal=accesskey='rustfs@test' \
+  --from-literal=secretkey='rustfs@test'
+```
+
+> Replace `TENANT_NAMESPACE` and `TENANT_SECRET_NAME` as you see fit. Both values must be at least 8 characters.
+
+Why "required"? In a multi-node Tenant, RustFS nodes communicate over an authenticated RPC channel, and the key for that channel is derived from the access/secret key pair. Without credentials, a single-node dev instance still runs, but **a multi-node instance fails at startup** with `endpoints include remote nodes but RPC authentication secret is not configured`. This is the most common pitfall in practice.
+
+### Option 1: the Operator Web UI
+
+In the Operator web console, open **Tenants** and click **Create Tenant** on the far right:
+
+![Tenants list in the Operator console, with the Create Tenant button](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/tenants-list.png)
+
+Fill in the essentials:
+
+- Tenant name
+- Namespace for the Tenant
+- RustFS image
+- Credentials (the Secret you created above)
+- Pool layout: number of servers and disks per server (these map to Pods and PVCs)
+
+![Create Tenant form with name, namespace, image, credentials Secret, and a pool of four servers](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/create-tenant-form.png)
+
+Click **Create Tenant**. Under the hood, the console writes a Tenant CR and the Operator starts reconciling it — creating the StatefulSet, PVCs, and Services. Once it's ready:
+
+![tenant-dev shown as ready, with its pool, endpoint, and capacity](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/tenant-created.png)
+
+### Option 2: the Tenant Helm chart
+
+If you prefer a GitOps workflow, declare the Tenant with the dedicated Tenant Helm chart. It lives in the same Helm repository as the Operator chart (and on ArtifactHub), so it works out of the box:
+
+```bash
+helm search repo operator -l | grep tenant
+operator/rustfs-tenant  	0.0.8        	            	A RustFS Tenant with optional S3 and Console in...
+```
+
+First, describe the tenant's node and disk layout. The following creates a 4-node cluster with one disk per node:
+
+```yaml
+tenant:
+  spec:
+    credsSecret:
+      name: tenant-svt-credentials
+    pools:
+      - name: pool-0
+        servers: 4
+        persistence:
+          volumesPerServer: 1
+          volumeClaimTemplate:
+            accessModes: [ReadWriteOnce]
+            resources:
+              requests:
+                storage: 10Gi
+```
+
+Save it as `values-tenant.yaml` and run:
+
+```bash
+helm install tenant-svt operator/rustfs-tenant \
+  -n tenant-svt --create-namespace \
+  -f values-tenant.yaml
+```
+
+Wait for the pods to come up:
+
+```bash
+kubectl -n tenant-svt get pods -w
+```
+
+```text
+NAME                  READY   STATUS    RESTARTS   AGE
+tenant-svt-pool-0-0   1/1     Running   0          32s
+tenant-svt-pool-0-1   1/1     Running   0          63s
+tenant-svt-pool-0-2   1/1     Running   0          92s
+tenant-svt-pool-0-3   1/1     Running   0          2m9s
+```
+
+> Tip: PVCs may show `Pending` early on, with `WaitForFirstConsumer` events. That's the storage class waiting for its first consumer — the PVCs bind as soon as the pods are scheduled. Nothing to fix.
+
+The `tenant-svt` tenant now shows up in the Operator web console:
+
+![tenant-svt listed in the Operator console after the Helm install](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/tenant-helm-console.png)
+
+### Accessing the Tenant
+
+A Tenant exposes two endpoints: the **S3 API (:9000)** and the **RustFS console (:9001)**. Both can be published through Ingress or Gateway API — see the [Tenant chart docs](https://github.com/rustfs/operator/tree/main/deploy/rustfs-tenant) for the configuration. Once set up, log in to the RustFS instance:
+
+![RustFS console login for the Tenant, using the credentials from the Secret](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/rustfs-console-login.png)
+
+## Scaling Out
+
+Adding pools scales a Tenant's capacity linearly, with one hard constraint: **the new pool's EC/striping layout must exactly match the existing pools**.
+
+You can add a pool from the Operator Web UI, or through the Tenant Helm chart.
+
+### Option 1: the Operator Web UI
+
+Find the Tenant you want to expand — say `tenant-dev`. Click **+ Add Pool** on the right, enter the new pool's name, server count, and disks per server, and confirm.
+
+![Add Pool dialog for tenant-dev, set to four servers and two volumes per server](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/add-pool-dialog.png)
+
+When the expansion completes, `tenant-dev` has two pools, each a 4x2 layout:
+
+![tenant-dev after expansion, with pool-0 and pool-1 side by side](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/tenant-pools-expanded.png)
+
+The Operator dashboard gives you a clearer view:
+
+![Operator dashboard summarizing tenant-dev capacity across both pools](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/operator-dashboard.png)
+
+### Option 2: the Tenant Helm chart
+
+This is where declarative management pays off: append the second pool to the values file and upgrade.
+
+```yaml
+tenant:
+  spec:
+    credsSecret:
+      name: tenant-svt-credentials
+    pools:
+      - name: pool-0
+        servers: 4
+        persistence:
+          volumesPerServer: 1
+          volumeClaimTemplate:
+            accessModes: [ReadWriteOnce]
+            resources:
+              requests:
+                storage: 10Gi
+      - name: pool-1
+        servers: 4
+        persistence:
+          volumesPerServer: 1
+          volumeClaimTemplate:
+            accessModes: [ReadWriteOnce]
+            resources:
+              requests:
+                storage: 10Gi
+```
+
+```bash
+helm upgrade tenant-svt operator/rustfs-tenant \
+  -n tenant-svt \
+  -f values-tenant.yaml
+```
+
+Wait for the pods:
+
+```bash
+kubectl -n tenant-svt get pods
+```
+
+```text
+NAME                  READY   STATUS    RESTARTS   AGE
+tenant-svt-pool-0-0   1/1     Running   0          3m29s
+tenant-svt-pool-0-1   1/1     Running   0          4m1s
+tenant-svt-pool-0-2   1/1     Running   0          4m40s
+tenant-svt-pool-0-3   1/1     Running   0          7m22s
+tenant-svt-pool-1-0   1/1     Running   0          7m24s
+tenant-svt-pool-1-1   1/1     Running   0          7m23s
+tenant-svt-pool-1-2   1/1     Running   0          7m23s
+tenant-svt-pool-1-3   1/1     Running   0          7m23s
+```
+
+The new pool shows up on the `tenant-svt` page in the Operator web console:
+
+![tenant-svt pools page after the Helm upgrade, listing pool-0 and pool-1](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/tenant-svt-pools.png)
+
+![Pool detail for pool-1 on tenant-svt, with four servers and one volume each](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/tenant-svt-pool-detail.png)
+
+And in the pool management page of the RustFS instance itself:
+
+![RustFS console pool management page showing the expanded Tenant pools](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/rustfs-pool-management.png)
+
+## Wrapping Up
+
+- **One Tenant is one independent RustFS cluster.** The Operator manages everything declaratively through the Tenant CR — pool count, servers, and disks are all just spec fields.
+- **The credentials Secret is a hard prerequisite for multi-node Tenants.** It serves double duty: login credentials and the source for the internode RPC authentication key.
+- **Scaling is adding a pool.** Keep the new pool's EC layout identical to the existing ones and capacity grows linearly. The Web UI and the Helm chart are two front doors to the same operation — pick the Web UI for visual operations, the chart for GitOps pipelines.
+
+Links:
+
+- RustFS Operator: [https://github.com/rustfs/operator](https://github.com/rustfs/operator)
+- Helm repository: [https://operator.rustfs.com](https://operator.rustfs.com)
+- ArtifactHub: [https://artifacthub.io/packages/search?repo=operator](https://artifacthub.io/packages/search?repo=operator)
