@@ -1,0 +1,7 @@
+# Immutable, content-hashed build assets: skip revalidation round trips.
+# Without this, Workers Assets defaults to `max-age=0, must-revalidate`, so
+# every revisit pays a full (and on cross-border routes, jittery) RTT per
+# asset before the browser reuses its cache — the main delay before first
+# paint on repeat navigations.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
