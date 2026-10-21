@@ -14,7 +14,7 @@ tags:
 image: /images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/cover.png
 ---
 
-Standing up object storage on Kubernetes by hand means writing a small mountain of StatefulSets, PVCs, and Services — and scaling it later means touching all of them again. The RustFS Operator makes the whole thing declarative: you describe the cluster you want in a `Tenant` custom resource, and the Operator handles the orchestration, credential injection, status tracking, and expansion. It ships with a web console for day-to-day operations.
+Standing up [object storage](/knowledge-center/what-is-object-storage/) on Kubernetes by hand means writing a small mountain of StatefulSets, PVCs, and Services — and scaling it later means touching all of them again. The RustFS Operator makes the whole thing declarative: you describe the cluster you want in a `Tenant` custom resource, and the Operator handles the orchestration, credential injection, status tracking, and expansion. It ships with a web console for day-to-day operations.
 
 This walkthrough is based on **rustfs-operator/rustfs-tenant chart v0.0.8** and covers:
 
@@ -26,7 +26,7 @@ Here is the big picture first — everything below happens somewhere in this dia
 
 ![RustFS Tenant architecture: the Operator reconciles a Tenant custom resource into pools, StatefulSets, PVCs, and shared S3 and console Services](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/architecture.png)
 
-The mental model in one sentence: **one Tenant is one independent RustFS cluster**. The Operator watches Tenant CRs and, for each pool, provisions the matching StatefulSet, PVCs, and Services. A Tenant can contain multiple pools; all pools together form that single RustFS cluster, exposed through one S3 endpoint (:9000) and one console (:9001).
+The mental model in one sentence: **one Tenant is one independent [RustFS cluster](/product/high-availability-scale/)**. The Operator watches Tenant CRs and, for each pool, provisions the matching StatefulSet, PVCs, and Services. A Tenant can contain multiple pools; all pools together form that single RustFS cluster, exposed through one S3 endpoint (:9000) and one console (:9001).
 
 ## Installing the Operator
 
@@ -39,7 +39,7 @@ helm repo add operator https://operator.rustfs.com
 helm repo update
 ```
 
-> This repository hosts both the `rustfs-operator` and `rustfs-tenant` charts. They are also published on [ArtifactHub](https://artifacthub.io/packages/search?repo=operator), if you prefer to browse there.
+> This repository hosts both the `rustfs-operator` and `rustfs-tenant` charts. They are also published on [ArtifactHub](https://artifacthub.io/packages/search?repo=operator), if you prefer to browse there. See [RustFS Helm chart is available on ArtifactHub](/blog/rustfs-helm-chart-is-available-on-artifacthub/) for the announcement.
 
 ### Install the Operator
 
@@ -73,7 +73,7 @@ What each Service is for:
 | Service | Port | Purpose |
 | --- | --- | --- |
 | `*-console` | 9090 | Operator management console (Web UI and API) |
-| `*-metrics` | 8080 | Prometheus metrics |
+| `*-metrics` | 8080 | [Prometheus metrics](/product/operational-observability/) |
 | `*-sts` | 4223 | STS temporary-credential service (TLS) |
 
 ### Logging in to the Operator console
@@ -92,7 +92,7 @@ kubectl -n rustfs-system create token operator-rustfs-operator-console --duratio
 
 ![Operator console login page asking for a Kubernetes ServiceAccount token](/images/blog/deploy-and-scale-object-storage-on-kubernetes-with-the-rustfs-operator/console-login.png)
 
-One security detail worth knowing: after you submit the token, the Console stores it **encrypted, in process**. The browser cookie only carries a random session ID — the raw token never lives in the browser. Sessions expire after 12 hours and you log in again.
+One security detail worth knowing: after you submit the token, the Console stores it [**encrypted, in process**](/product/security-compliance/). The browser cookie only carries a random session ID — the raw token never lives in the browser. Sessions expire after 12 hours and you log in again.
 
 ## Creating a Tenant
 
@@ -141,7 +141,7 @@ helm search repo operator -l | grep tenant
 operator/rustfs-tenant  	0.0.8        	            	A RustFS Tenant with optional S3 and Console in...
 ```
 
-First, describe the tenant's node and disk layout. The following creates a 4-node cluster with one disk per node:
+First, describe the tenant's node and disk layout. The following creates a 4-node cluster with one disk per node — the [erasure code calculator](/erasure-code-calculator/) can help you size servers and disks for your durability target:
 
 ```yaml
 tenant:
@@ -196,7 +196,7 @@ A Tenant exposes two endpoints: the **S3 API (:9000)** and the **RustFS console 
 
 ## Scaling Out
 
-Adding pools scales a Tenant's capacity linearly, with one hard constraint: **the new pool's EC/striping layout must exactly match the existing pools**.
+Adding pools scales a Tenant's capacity linearly, with one hard constraint: **the new pool's [EC/striping layout](/knowledge-center/erasure-coding-explained/) must exactly match the existing pools**.
 
 You can add a pool from the Operator Web UI, or through the Tenant Helm chart.
 
@@ -282,10 +282,16 @@ And in the pool management page of the RustFS instance itself:
 
 - **One Tenant is one independent RustFS cluster.** The Operator manages everything declaratively through the Tenant CR — pool count, servers, and disks are all just spec fields.
 - **The credentials Secret is a hard prerequisite for multi-node Tenants.** It serves double duty: login credentials and the source for the internode RPC authentication key.
-- **Scaling is adding a pool.** Keep the new pool's EC layout identical to the existing ones and capacity grows linearly. The Web UI and the Helm chart are two front doors to the same operation — pick the Web UI for visual operations, the chart for GitOps pipelines.
+- **Scaling is adding a pool.** Keep the new pool's [EC layout](/knowledge-center/erasure-coding-explained/) identical to the existing ones and capacity grows linearly. The Web UI and the Helm chart are two front doors to the same operation — pick the Web UI for visual operations, the chart for [GitOps](/integration/) pipelines.
 
 Links:
 
 - RustFS Operator: [https://github.com/rustfs/operator](https://github.com/rustfs/operator)
 - Helm repository: [https://operator.rustfs.com](https://operator.rustfs.com)
 - ArtifactHub: [https://artifacthub.io/packages/search?repo=operator](https://artifacthub.io/packages/search?repo=operator)
+
+Keep exploring rustfs.com:
+
+- [What is object storage?](/knowledge-center/what-is-object-storage/) — the concepts behind the storage layer the Operator manages.
+- [Erasure Coding, Explained](/knowledge-center/erasure-coding-explained/) — the math behind the EC layouts this guide keeps in sync.
+- Moving off MinIO? The [MinIO to RustFS migration guide](/blog/migrating-from-minio-to-rustfs-a-technical-guide/) covers the paths.
