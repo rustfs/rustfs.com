@@ -177,7 +177,6 @@ function RecentPostGrid({ posts }: { posts: BlogPostMeta[] }) {
 function PostMeta({ post, className }: { post: BlogPostMeta; className?: string }) {
   return (
     <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground ${className ?? ""}`}>
-      <span>{post.author}</span>
       <span>{post.readingMinutes} min read</span>
     </div>
   );

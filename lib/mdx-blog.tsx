@@ -19,7 +19,6 @@ export interface BlogPostMeta {
   title: string;
   description: string;
   date: string;
-  author: string;
   tags: string[];
   image?: string;
   readingMinutes: number;
@@ -156,7 +155,6 @@ function getPostMetaFromSource(source: string, fallbackSlug: string): BlogPostMe
   const title = toStringValue(data.title) || fallbackSlug;
   const description = toStringValue(data.description);
   const date = toStringValue(data.date) || new Date(0).toISOString();
-  const author = toStringValue(data.author) || "RustFS Team";
   const slug = toStringValue(data.slug) || fallbackSlug;
 
   return {
@@ -164,7 +162,6 @@ function getPostMetaFromSource(source: string, fallbackSlug: string): BlogPostMe
     title,
     description,
     date,
-    author,
     tags: toStringArray(data.tags),
     image: toOptionalString(data.image),
     readingMinutes: getReadingMinutes(parsed.content),

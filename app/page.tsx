@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
   description: 'RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, S3-compatible object store and drop-in MinIO alternative engineered for AI workloads.',
-  authors: [{ name: 'RustFS Team' }],
   openGraph: {
     title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
     description: 'RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, S3-compatible object store and drop-in MinIO alternative engineered for AI workloads.',
