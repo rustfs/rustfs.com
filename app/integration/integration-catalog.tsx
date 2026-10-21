@@ -178,33 +178,34 @@ export default function IntegrationCatalog({ categories }: IntegrationCatalogPro
                 </div>
               </div>
 
-              <div className="mt-8">
+              <div className="mt-7">
                 {project.logo ? (
                   <a
                     href={project.projectUrl ?? project.docsUrl}
                     target="_blank"
                     rel="noreferrer noopener external"
                     aria-label={`${project.name} official website`}
-                    className="flex h-16 w-full items-center justify-center border border-border bg-white px-4 transition-colors hover:border-brand/40"
+                    className="group/tile flex h-20 w-full items-center justify-center border border-border bg-brand/[0.04] px-4 transition-colors hover:border-brand/50 hover:bg-brand/10"
                   >
                     <img
                       src={project.logo}
                       alt={`${project.name} logo`}
-                      className="max-h-8 w-auto max-w-full object-contain"
+                      className="max-h-10 w-auto max-w-full object-contain"
                       loading="lazy"
                     />
                   </a>
                 ) : (
                   <div
                     aria-hidden="true"
-                    className="flex h-16 w-full items-center justify-center border border-dashed border-border bg-background px-4"
+                    className="flex h-20 w-full items-center justify-center border border-dashed border-border bg-brand/[0.04] px-4 transition-colors group-hover/tile:bg-brand/10"
                   >
-                    <span className="truncate text-center font-mono text-xs font-semibold uppercase tracking-[0.14em] text-foreground/70">
+                    <span className="truncate text-center font-mono text-sm font-semibold uppercase tracking-[0.16em] text-foreground/80">
                       {project.name}
                     </span>
                   </div>
                 )}
-                <h3 className="mt-4 text-xl font-semibold leading-tight tracking-tight text-foreground">
+                <h3 className="mt-5 flex items-center gap-2 text-xl font-semibold leading-tight tracking-tight text-foreground">
+                  <span aria-hidden="true" className="size-1.5 shrink-0 bg-brand" />
                   {project.name}
                 </h3>
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">{project.description}</p>
