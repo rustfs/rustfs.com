@@ -104,7 +104,7 @@ export const footerNavigation = [
       { title: "Legal", href: "https://github.com/rustfs/rustfs/blob/main/LICENSE" },
       { title: "Privacy Policy", href: "/privacy-policy" },
       { title: "Cookie Policy", href: "/cookie-policy" },
-      { title: "Contact", href: "/contact-us" },
+      { title: "Contact", href: "/contact-us/" },
     ],
   },
 ];
