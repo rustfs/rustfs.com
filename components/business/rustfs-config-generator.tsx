@@ -881,7 +881,7 @@ export default function RustfsConfigGenerator() {
                   the RustFS team before going to production.
                 </p>
                 <Button asChild variant="outline" size="sm" className="mt-auto w-fit">
-                  <a href="/contact-us">
+                  <a href="/contact-us/">
                     Contact us
                     <ArrowUpRightIcon className="size-4" />
                   </a>

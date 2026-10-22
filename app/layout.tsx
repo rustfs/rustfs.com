@@ -13,6 +13,14 @@ import SkipLink from '@/components/business/skip-link';
 import BackgroundGrid from '@/components/ui/background-grid';
 import "./globals.css";
 
+const OG_IMAGE_URL = `${SITE_CONFIG.primaryDomain}${SITE_CONFIG.ogImagePath}`;
+const OG_IMAGE = {
+  url: OG_IMAGE_URL,
+  width: 1200,
+  height: 630,
+  alt: "RustFS — High-Performance S3 Object Storage",
+} as const;
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,6 +40,25 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  openGraph: {
+    type: "website",
+    siteName: "RustFS",
+    locale: "en_US",
+    url: `${SITE_CONFIG.primaryDomain}/`,
+    title: SITE_METADATA.title,
+    description: SITE_METADATA.description,
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@rustfs",
+    creator: "@rustfs",
+    images: [OG_IMAGE_URL],
   },
 };
 
@@ -43,18 +70,8 @@ export default async function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <head>
-        <meta
-          key="twitter:card"
-          name="twitter:card"
-          content="summary_large_image"
-        />
-        <meta name="author" content="RustFS" />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />
         <meta name="yandexbot" content="index, follow" />
-        <meta key="twitter:site" name="twitter:site" content="@rustfs" />
-        <meta key="twitter:creator" name="twitter:creator" content="@rustfs" />
         <meta name="baidu-site-verification" content="codeva-TTcVEynElc" />
         <link
           rel="apple-touch-icon"

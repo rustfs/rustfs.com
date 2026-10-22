@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import worker, {
   DOCKER_COMPOSE_UPSTREAM,
+  PERMANENT_REDIRECTS,
   proxyDockerCompose,
   type SiteEnv,
 } from "./index.ts";
@@ -95,6 +99,53 @@ test("does not forward visitor cookies to GitHub", async () => {
   );
 
   assert.equal(response.status, 200);
+});
+
+test("permanently redirects thin locale pages and the duplicate contact URL", async () => {
+  const env = assetsEnv(() => {
+    throw new Error("redirects must not fall through to assets");
+  });
+  const cases = [
+    ["https://rustfs.com/en", "https://rustfs.com/"],
+    ["https://rustfs.com/en/", "https://rustfs.com/"],
+    ["https://rustfs.com/zh", "https://rustfs.com.cn/"],
+    ["https://rustfs.com/zh/", "https://rustfs.com.cn/"],
+    ["https://rustfs.com/contact", "https://rustfs.com/contact-us/"],
+    ["https://rustfs.com/contact/", "https://rustfs.com/contact-us/"],
+    ["https://www.rustfs.com/contact/", "https://www.rustfs.com/contact-us/"],
+  ] as const;
+
+  for (const [requestUrl, location] of cases) {
+    const response = await worker.fetch(new Request(requestUrl), env);
+    assert.equal(response.status, 301, requestUrl);
+    assert.equal(response.headers.get("Location"), location, requestUrl);
+  }
+});
+
+test("keeps worker redirects aligned with public/_redirects", () => {
+  const redirectsPath = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "../../../public/_redirects",
+  );
+  const rules = new Map<string, { target: string; status: string }>();
+
+  for (const line of fs.readFileSync(redirectsPath, "utf8").split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) {
+      continue;
+    }
+    const [source, target, status] = trimmed.split(/\s+/);
+    if (source && target && status && source in PERMANENT_REDIRECTS) {
+      rules.set(source, { target, status });
+    }
+  }
+
+  for (const [source, target] of Object.entries(PERMANENT_REDIRECTS)) {
+    const rule = rules.get(source);
+    assert.ok(rule, `missing _redirects rule for ${source}`);
+    assert.equal(rule.target, target);
+    assert.equal(rule.status, "301");
+  }
 });
 
 test("routes only /docker-compose.yml through the proxy", async () => {

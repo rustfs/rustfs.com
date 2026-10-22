@@ -47,15 +47,27 @@ export default function StatsStrip({
     return () => controller.abort();
   }, []);
 
-  const items = useMemo(
-    () => [
-      { label: "GitHub Stars", value: currentMetrics.stars },
-      { label: "Deployments", text: "2,700,000+" },
-      { label: "Repo Commits", value: currentMetrics.commits },
-      { label: "Docker Pulls", value: currentDockerPulls },
-    ],
-    [currentMetrics, currentDockerPulls],
-  );
+  const items = useMemo(() => {
+    const positiveCount = (value: number) =>
+      Number.isInteger(value) && value > 0 ? value : undefined;
+    const stars = positiveCount(currentMetrics.stars);
+    const commits = positiveCount(currentMetrics.commits);
+    const pulls = positiveCount(currentDockerPulls);
+    const stats: Array<{ label: string; value?: number; text?: string }> = [];
+
+    if (stars !== undefined) {
+      stats.push({ label: "GitHub Stars", value: stars });
+    }
+    stats.push({ label: "Deployments", text: "2,700,000+" });
+    if (commits !== undefined) {
+      stats.push({ label: "Repo Commits", value: commits });
+    }
+    if (pulls !== undefined) {
+      stats.push({ label: "Docker Pulls", value: pulls });
+    }
+
+    return stats;
+  }, [currentMetrics, currentDockerPulls]);
 
   return (
     <section className={cn("text-muted-foreground", className)}>

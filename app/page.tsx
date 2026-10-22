@@ -1,3 +1,4 @@
+import { SITE_CONFIG } from "@/app.config";
 import GetStartedToday from "@/components/business/get-started-today";
 import HomeBlog from "@/components/business/home-blog";
 import HomeContactCard from "@/components/business/home-contact-card";
@@ -11,21 +12,37 @@ import { getDockerPulls } from "@/lib/docker";
 import { getGitHubMetrics } from "@/lib/github";
 import type { Metadata } from "next";
 
+const HOME_TITLE = "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native";
+const HOME_DESCRIPTION = "RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, S3-compatible object store and drop-in MinIO alternative engineered for AI workloads.";
+const OG_IMAGE_URL = `${SITE_CONFIG.primaryDomain}${SITE_CONFIG.ogImagePath}`;
+
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
-  title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
-  description: 'RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, S3-compatible object store and drop-in MinIO alternative engineered for AI workloads.',
-  authors: [{ name: 'RustFS Team' }],
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
   openGraph: {
-    title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
-    description: 'RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, S3-compatible object store and drop-in MinIO alternative engineered for AI workloads.',
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     type: "website",
-    locale: 'en_US',
+    locale: "en_US",
+    url: `${SITE_CONFIG.primaryDomain}/`,
+    siteName: "RustFS",
+    images: [
+      {
+        url: OG_IMAGE_URL,
+        width: 1200,
+        height: 630,
+        alt: "RustFS — High-Performance S3 Object Storage",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native",
-    description: 'RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, S3-compatible object store and drop-in MinIO alternative engineered for AI workloads.',
+    site: "@rustfs",
+    creator: "@rustfs",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [OG_IMAGE_URL],
   },
 };
 

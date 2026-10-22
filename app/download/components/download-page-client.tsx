@@ -662,7 +662,7 @@ export default function DownloadPageClient() {
 
           <p className="mt-8 text-center text-sm font-semibold text-muted-foreground">
             Need help?{' '}
-            <Link href="/contact-us" className="text-brand transition-colors hover:text-foreground">
+            <Link href="/contact-us/" className="text-brand transition-colors hover:text-foreground">
               Talk to our team →
             </Link>
           </p>
