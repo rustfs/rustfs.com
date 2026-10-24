@@ -32,7 +32,7 @@ export default function GetStartedToday() {
 
             <div className="flex flex-col gap-3 px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:py-10">
               <DownloadLink className={`${ctaButtonClassName} !bg-brand-foreground !text-brand hover:!bg-brand-foreground/90 hover:!text-brand`} />
-              <ContactUsButton className={`${ctaButtonClassName} border border-brand-foreground/30 !bg-transparent !text-brand-foreground hover:!bg-brand-foreground/10 hover:!text-brand-foreground`} />
+              <ContactUsButton href="/contact-us" label="Talk to our team" className={`${ctaButtonClassName} border border-brand-foreground/30 !bg-transparent !text-brand-foreground hover:!bg-brand-foreground/10 hover:!text-brand-foreground`} />
             </div>
           </div>
 
