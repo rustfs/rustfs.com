@@ -18,7 +18,7 @@ const comparisonRows = [
   },
   {
     other: "S3 behavior can differ across products and gateways",
-    rustfs: "S3 API compatibility with existing tools and SDKs",
+    rustfs: "S3 API compatibility for common object-storage workflows",
   },
   {
     other: "Platform coverage often depends on separate editions",

@@ -1,8 +1,12 @@
 import ContactUsButton from "@/components/business/buttons/contact-us"
+import { getDockerPulls } from "@/lib/docker"
+import { getGitHubMetrics } from "@/lib/github"
 import { cn } from "@/lib/utils"
+import homepageMetrics from "@/public/homepage-metrics.json"
 import RustFSLogo from "@/public/rustfs.logo.svg"
 import { CpuIcon, DatabaseIcon, GitBranchIcon, ShieldCheckIcon } from "lucide-react"
 import type { Metadata } from "next"
+import Link from "next/link"
 import type { ComponentType } from "react"
 
 export const metadata: Metadata = {
@@ -68,7 +72,26 @@ function ValueCard({
   );
 }
 
-export default function AboutPage() {
+const numberFormat = new Intl.NumberFormat("en-US");
+const snapshotDateFormat = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+});
+
+const docLinkClassName = "text-brand underline decoration-brand/40 underline-offset-4 transition-colors hover:decoration-brand";
+
+function snapshotDate(iso: string) {
+  return snapshotDateFormat.format(new Date(iso));
+}
+
+export default async function AboutPage() {
+  const [dockerPulls, metrics] = await Promise.all([
+    getDockerPulls(),
+    getGitHubMetrics(),
+  ]);
+
   return (
     <main className="relative z-10 flex-1 text-foreground">
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
@@ -78,7 +101,28 @@ export default function AboutPage() {
             infrastructure
           </h1>
           <p className="mt-6 text-base leading-8 text-muted-foreground">
-            RustFS is a next-generation Apache 2.0 distributed object storage system built in Rust. It has surpassed 30,000 GitHub stars, 7 million Docker Hub pulls, and 1.5 million global instances across S3-compatible and AI data center workloads.
+            RustFS is a next-generation Apache 2.0 distributed object storage system built in Rust for S3-compatible and AI data center workloads.
+          </p>
+          <p className="mt-4 text-base leading-8 text-muted-foreground">
+            GitHub stars and Docker Hub pulls use the same homepage metrics helpers:{" "}
+            <a href="https://github.com/rustfs/rustfs" className={docLinkClassName} rel="noreferrer" target="_blank">
+              {numberFormat.format(metrics.stars)} GitHub stars
+            </a>
+            {metrics.stars === homepageMetrics.github.stars
+              ? ` as of ${snapshotDate(homepageMetrics.github.updatedAt)}`
+              : ""}
+            {" "}and{" "}
+            <a href="https://hub.docker.com/r/rustfs/rustfs" className={docLinkClassName} rel="noreferrer" target="_blank">
+              {numberFormat.format(dockerPulls)} Docker Hub pulls
+            </a>
+            {dockerPulls === homepageMetrics.docker.pulls
+              ? ` as of ${snapshotDate(homepageMetrics.docker.updatedAt)}`
+              : ""}
+            . The homepage ticker can refresh those two counts. Deployments stay at 2,700,000+, the figure in the{" "}
+            <Link href="/blog/announcing-rustfs-1-0-0-ga/" className={docLinkClassName}>
+              September 16, 2026 GA announcement
+            </Link>{" "}
+            and on the homepage. Dated star milestones stay in the timeline below.
           </p>
         </div>
 
@@ -91,7 +135,16 @@ export default function AboutPage() {
               A storage foundation that stays open, self-hosted, and programmable
             </h2>
             <p className="mt-5 text-sm leading-7 text-muted-foreground">
-              RustFS manages object, bucket, IAM, lifecycle, and cluster workflows while keeping 100% native S3 compatibility stable for existing tools and applications.
+              RustFS manages object, bucket, IAM, lifecycle, and cluster workflows and provides{" "}
+              <a
+                href="https://docs.rustfs.com/en/administration/protocols/s3"
+                className={docLinkClassName}
+                rel="noreferrer"
+                target="_blank"
+              >
+                S3 API compatibility for common object-storage workflows
+              </a>
+              . It is not identical to every AWS S3 or MinIO API. Configure the endpoint and validate the operations you depend on.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -103,7 +156,7 @@ export default function AboutPage() {
             <ValueCard
               icon={DatabaseIcon}
               title="S3-compatible surface"
-              description="Applications keep speaking the same object storage protocol while RustFS owns the storage layer."
+              description="Applications can use familiar S3 clients while RustFS owns the storage layer. Confirm the operations you need against the S3 protocol docs."
             />
             <ValueCard
               icon={CpuIcon}
@@ -165,7 +218,7 @@ export default function AboutPage() {
                 NE Atlanta, Georgia 30326
               </address>
             </div>
-            <ContactUsButton className="!h-12 !px-5 !py-0 leading-none" />
+            <ContactUsButton href="/contact-us" label="Talk to our team" className="!h-12 !px-5 !py-0 leading-none" />
           </div>
         </div>
       </section>
