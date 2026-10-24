@@ -41,7 +41,6 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       type: "article",
       url,
       publishedTime: post.date,
-      authors: [post.author],
       tags: post.tags,
       images: shouldShowImage(post.image) ? [{ url: post.image!, alt: post.title }] : undefined,
     },
@@ -82,7 +81,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </h1>
               <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 <span>{formatLongDate(post.date)}</span>
-                <span>{post.author}</span>
                 <span>{post.readingMinutes} min read</span>
               </div>
               <div className="mt-5 flex flex-wrap gap-2">
@@ -163,10 +161,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 image: shouldShowImage(post.image) ? post.image : undefined,
                 datePublished: post.date,
                 dateModified: post.date,
-                author: {
-                  "@type": "Person",
-                  name: post.author
-                },
                 publisher: {
                   "@type": "Organization",
                   name: "RustFS",

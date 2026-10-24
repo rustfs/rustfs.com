@@ -27,7 +27,6 @@ export const metadata: Metadata = {
   title: SITE_METADATA.title,
   description: SITE_METADATA.description,
   keywords: SITE_METADATA.keywords,
-  authors: [{ name: "RustFS Team" }],
   metadataBase: new URL(SITE_CONFIG.primaryDomain),
   robots: {
     index: true,
@@ -48,7 +47,6 @@ export default async function RootLayout({
           name="twitter:card"
           content="summary_large_image"
         />
-        <meta name="author" content="RustFS" />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />

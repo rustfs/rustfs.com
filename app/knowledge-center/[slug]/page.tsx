@@ -45,7 +45,6 @@ export async function generateMetadata({ params }: KnowledgeArticlePageProps): P
       type: "article",
       url,
       publishedTime: article.date,
-      authors: [article.author],
       tags: article.tags,
       images: shouldShowImage(article.image) ? [{ url: article.image!, alt: article.title }] : undefined,
     },
@@ -86,7 +85,6 @@ export default async function KnowledgeArticlePage({ params }: KnowledgeArticleP
               </h1>
               <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 <span>{formatLongDate(article.date)}</span>
-                <span>{article.author}</span>
                 <span>{article.readingMinutes} min read</span>
               </div>
               <div className="mt-5 flex flex-wrap gap-2">
@@ -189,10 +187,6 @@ export default async function KnowledgeArticlePage({ params }: KnowledgeArticleP
                 image: shouldShowImage(article.image) ? article.image : undefined,
                 datePublished: article.date,
                 dateModified: article.date,
-                author: {
-                  "@type": "Person",
-                  name: article.author
-                },
                 publisher: {
                   "@type": "Organization",
                   name: "RustFS",
