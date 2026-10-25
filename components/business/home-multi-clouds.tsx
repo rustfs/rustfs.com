@@ -20,9 +20,9 @@ const stories = [
     token: "minio swap",
     label: "Migration path",
     description:
-      "Migrate in place—without a bulk data move. Replace the MinIO binary or container image and keep the existing data directory.",
+      "Replace the MinIO binary or container image and keep the existing data directory. The published steps target RustFS 1.0.0-alpha.89.",
     href: "/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs",
-    linkText: "Read the migration guide",
+    linkText: "Read the alpha.89 migration notes",
   },
 ];
 
@@ -33,7 +33,7 @@ export default function HomeMultiClouds() {
         <HomeSectionHeader
           eyebrow="From the blog"
           title="Built for the next generation of object storage"
-          description="RustFS combines Rust-native engineering, Apache 2.0 licensing, and S3 compatibility for AI infrastructure and direct MinIO migrations."
+          description="RustFS combines Rust-native engineering, Apache 2.0 licensing, and S3 compatibility for AI infrastructure. Published MinIO migration notes need a check against the current release."
         />
 
         <div className="grid border border-border lg:grid-cols-2">
@@ -80,6 +80,26 @@ export default function HomeMultiClouds() {
         </div>
 
         <p className="mt-4 text-xs leading-6 text-muted-foreground" role="note">
+          The in-place card links to a March 18, 2026 post written for RustFS 1.0.0-alpha.89. Confirm those steps against the{" "}
+          <Link href="/blog/announcing-rustfs-1-0-0-ga/" className="text-brand underline decoration-brand/40 underline-offset-4 hover:decoration-brand">
+            1.0.0 GA announcement
+          </Link>{" "}
+          and{" "}
+          <a
+            href="https://github.com/rustfs/rustfs/releases"
+            className="text-brand underline decoration-brand/40 underline-offset-4 hover:decoration-brand"
+            rel="noreferrer"
+            target="_blank"
+          >
+            current releases
+          </a>{" "}
+          before a production cutover. A separate{" "}
+          <Link href="/blog/migrating-from-minio-to-rustfs-a-technical-guide/" className="text-brand underline decoration-brand/40 underline-offset-4 hover:decoration-brand">
+            copy-based migration guide
+          </Link>{" "}
+          uses the MinIO client to move data into a new RustFS deployment.
+        </p>
+        <p className="mt-2 text-xs leading-6 text-muted-foreground" role="note">
           MinIO is a registered trademark of MinIO, Inc. RustFS is not affiliated with, endorsed by, or sponsored by MinIO, Inc. All other trademarks and registered trademarks are the property of their respective owners.
         </p>
       </div>

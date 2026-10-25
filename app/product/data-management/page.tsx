@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "product/data-management/" },
   title: "Data Management & S3 Tables | RustFS High-Performance Storage",
   description:
-    "Optimize data management with RustFS. Benefit from full S3 compatibility, automated lifecycle management, and native Iceberg support powered by S3 Tables to lower TCO and accelerate AI and big data workloads.",
+    "Manage buckets, lifecycle rules, and S3 Tables on RustFS. S3 API compatibility covers common object-storage workflows. See the S3 protocol docs before depending on advanced AWS or MinIO behavior.",
   keywords: [
     "RustFS",
     "data management",

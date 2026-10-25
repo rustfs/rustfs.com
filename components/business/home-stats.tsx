@@ -13,7 +13,7 @@ const reasons = [
   {
     title: "Security & Compliance",
     token: "trust",
-    description: "Self-hosted control, built-in security, and enterprise compliance.",
+    description: "Self-hosted control with IAM, encryption, and audit features you configure. Not a compliance certification.",
   },
   {
     title: "Availability & Scale",
@@ -40,7 +40,7 @@ const reasons = [
 const compatibilityRows = [
   {
     title: "AWS SDKs",
-    detail: "Keep application storage code unchanged.",
+    detail: "Use familiar SDKs, configure the RustFS endpoint, and validate the operations you depend on.",
     meta: "S3 API",
   },
   {

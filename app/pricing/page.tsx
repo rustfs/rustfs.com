@@ -90,11 +90,11 @@ export default function PricingPage() {
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Pricing</p>
           <h1 className="mt-5 w-full font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
-            Get Started with RustFS
+            RustFS Pricing and Enterprise Support
           </h1>
           <div className="mt-6 flex flex-col items-start gap-6">
             <p className="w-full text-base leading-8 text-muted-foreground">
-              From local testing to petabyte-scale production clusters—get fast, memory-safe, and S3-compatible object storage up and running in minutes.
+              Self-host RustFS under Apache 2.0 with no license fee. Evaluation starts from the download and install guides. Petabyte-scale production is a separate planning step for topology, erasure coding, and operations. Optional paid support is available from the RustFS team. This page does not list prices or SLAs.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <DownloadLink className="!h-12 !px-5 !py-0 leading-none" />
@@ -120,7 +120,7 @@ export default function PricingPage() {
           <PricingCard
             label="Production"
             title="Enterprise"
-            description="For teams moving from evaluation to production and needing topology, migration, and operations planning."
+            description="Optional paid support for teams moving from evaluation to production. Contact the team for scope. Prices and SLAs are not published here."
             emphasized
             chips={["Planning", "Migration"]}
             action={{ label: "Talk to an expert", href: "/contact-us/" }}

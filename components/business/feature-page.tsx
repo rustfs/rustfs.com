@@ -71,6 +71,7 @@ interface FeaturePageProps {
     title: string;
     description: string;
   }[];
+  children?: ReactNode;
 }
 
 const variantMeta: Record<
@@ -454,6 +455,7 @@ export default function FeaturePage({
   variant = "protocol",
   highlightsTitle,
   highlights,
+  children,
 }: FeaturePageProps) {
   return (
     <main className="relative z-10 flex-1 text-foreground">
@@ -490,6 +492,7 @@ export default function FeaturePage({
       </section>
 
       <div className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
+        {children}
         {sections.map((section, sectionIndex) => (
           <FeatureSection
             key={section.title}
