@@ -98,7 +98,7 @@ const variantMeta: Record<
 
 function ProductLinks({ links }: { links?: FeaturePageLink[] }) {
   const productLinks = links ?? [
-    { label: "Talk to us", href: "/contact-us" },
+    { label: "Talk to us", href: "/contact-us/" },
     { label: "Read docs", href: "/docs", variant: "outline" as const },
   ];
 
@@ -424,7 +424,7 @@ function ProductionReview({ variant }: { variant: FeaturePageVariant }) {
   return (
     <div className="border border-border bg-card p-6 sm:p-8">
       <Link
-        href="/contact-us"
+        href="/contact-us/"
         className="group grid gap-6 bg-brand/5 p-5 transition-colors hover:bg-brand/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:grid-cols-[auto_1fr_auto] sm:items-center"
       >
         <span className="flex size-12 items-center justify-center bg-background text-brand">

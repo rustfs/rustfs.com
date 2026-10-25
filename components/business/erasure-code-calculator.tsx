@@ -737,7 +737,7 @@ export default function ErasureCodeCalculator() {
                   with the RustFS team before ordering hardware.
                 </p>
                 <Button asChild variant="outline" size="sm" className="mt-auto w-fit">
-                  <a href="/contact-us">
+                  <a href="/contact-us/">
                     Contact us
                     <ArrowUpRightIcon className="size-4" />
                   </a>

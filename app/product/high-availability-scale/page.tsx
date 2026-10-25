@@ -147,7 +147,7 @@ export default function HighAvailabilityScalePage() {
       ]}
       links={[
         { label: "Download", href: "/download" },
-        { label: "Plan scaling", href: "/contact-us", variant: "outline" },
+        { label: "Plan scaling", href: "/contact-us/", variant: "outline" },
       ]}
     />
   );

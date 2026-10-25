@@ -122,7 +122,7 @@ export default function AppHeader() {
     },
     {
       label: 'Contact',
-      url: '/contact-us',
+      url: '/contact-us/',
       classes: '',
     },
   ]

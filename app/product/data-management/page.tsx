@@ -81,7 +81,7 @@ export default function DataManagementPage() {
         },
       ]}
       links={[
-        { label: "Plan data workflows", href: "/contact-us" },
+        { label: "Plan data workflows", href: "/contact-us/" },
         { label: "Read docs", href: "/docs", variant: "outline" },
       ]}
     />

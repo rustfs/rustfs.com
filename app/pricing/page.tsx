@@ -123,7 +123,7 @@ export default function PricingPage() {
             description="For teams moving from evaluation to production and needing topology, migration, and operations planning."
             emphasized
             chips={["Planning", "Migration"]}
-            action={{ label: "Talk to an expert", href: "/contact-us" }}
+            action={{ label: "Talk to an expert", href: "/contact-us/" }}
             points={[
               "Migration planning",
               "Capacity and topology review",

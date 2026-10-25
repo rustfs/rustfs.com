@@ -3,3 +3,13 @@
 /docs https://docs.rustfs.com/ 301
 /docs/ https://docs.rustfs.com/ 301
 /docs/* https://docs.rustfs.com/:splat 301
+
+# Thin locale shells are not real pages.
+/en https://rustfs.com/ 301
+/en/ https://rustfs.com/ 301
+/zh https://rustfs.com.cn/ 301
+/zh/ https://rustfs.com.cn/ 301
+
+# /contact and /contact/ duplicate the canonical contact page.
+/contact /contact-us/ 301
+/contact/ /contact-us/ 301
