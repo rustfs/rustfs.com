@@ -5,6 +5,9 @@ import { notFound } from "next/navigation";
 import { SITE_CONFIG } from "@/app.config";
 import { getBlogPost, getBlogPosts, type BlogPostMeta } from "@/lib/mdx-blog";
 
+const HISTORICAL_MINIO_MIGRATION_SLUG = "binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs";
+const EVERGREEN_MINIO_MIGRATION_PATH = "/blog/migrating-from-minio-to-rustfs-a-technical-guide/";
+
 type BlogPostPageProps = {
   params: Promise<{
     slug: string;
@@ -80,6 +83,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-6xl">
                 {post.title}
               </h1>
+              {post.slug === HISTORICAL_MINIO_MIGRATION_SLUG ? <HistoricalMigrationBanner /> : null}
               <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 <span>{formatLongDate(post.date)}</span>
                 <span>{post.author}</span>
@@ -185,6 +189,31 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
       </article>
     </main>
+  );
+}
+
+function HistoricalMigrationBanner() {
+  return (
+    <aside
+      className="mt-6 border border-border bg-card px-5 py-4 text-sm leading-7 text-foreground"
+      role="note"
+    >
+      <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
+        Historical example · RustFS 1.0.0-alpha.89
+      </p>
+      <p className="mt-2">
+        This post records an in-place binary replacement demonstrated with RustFS 1.0.0-alpha.89. It is not the current recommended migration path.
+      </p>
+      <p className="mt-2">
+        <Link
+          href={EVERGREEN_MINIO_MIGRATION_PATH}
+          className="font-medium text-brand underline decoration-brand/40 underline-offset-4 hover:decoration-brand"
+        >
+          Read the MinIO to RustFS migration guide
+        </Link>{" "}
+        for a current 1.0 release. Back up, stop writes, copy over S3, verify the data, and keep the MinIO source for rollback.
+      </p>
+    </aside>
   );
 }
 

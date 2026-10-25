@@ -72,8 +72,8 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "MinIO migration notes",
-        description: "Use familiar S3 SDKs, point them at the RustFS endpoint, and validate the operations your application uses. The linked in-place guide documents RustFS 1.0.0-alpha.89. Check current releases before a production cutover.",
-        href: "/blog/binary-replacement-a-simple-way-to-migrate-from-minio-to-rustfs/",
+        description: "Use familiar S3 SDKs, point them at the RustFS endpoint, and validate the operations your application uses. The linked guide is the recommended copy path onto a current 1.0 release.",
+        href: "/blog/migrating-from-minio-to-rustfs-a-technical-guide/",
       },
       {
         title: "Virtual-hosted-style access",
