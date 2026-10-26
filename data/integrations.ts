@@ -48,6 +48,13 @@ export const integrationCategories: IntegrationCategory[] = [
         logo: "/images/integrations/vllm-logo.png",
         projectUrl: "https://vllm.dev",
       },
+      {
+        name: "SGLang",
+        description: "Stream SGLang model weights directly from S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/ai/sglang",
+        logo: "/images/integrations/sglang-logo.svg",
+        projectUrl: "https://sglang.io",
+      },
     ],
   },
   {
@@ -104,6 +111,13 @@ export const integrationCategories: IntegrationCategory[] = [
         projectUrl: "https://www.jenkins.io",
       },
       {
+        name: "Helm",
+        description: "Host a private Helm chart repository in S3-compatible object storage with helm-s3.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/devops/helm",
+        logo: "/images/integrations/helm-logo.svg",
+        projectUrl: "https://helm.sh",
+      },
+      {
         name: "Gitea",
         description: "Store Gitea LFS, packages, and attachments in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/devops/gitea",
@@ -130,6 +144,13 @@ export const integrationCategories: IntegrationCategory[] = [
         docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/fluentd",
         logo: "/images/integrations/fluentd-logo.svg",
         projectUrl: "https://www.fluentd.org",
+      },
+      {
+        name: "Fluent Bit",
+        description: "Deliver Fluent Bit logs and events to S3-compatible object storage with the S3 output.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/fluent-bit",
+        logo: "/images/integrations/fluent-bit-logo.png",
+        projectUrl: "https://fluentbit.io",
       },
       {
         name: "GreptimeDB",
@@ -382,6 +403,13 @@ export const integrationCategories: IntegrationCategory[] = [
         projectUrl: "https://seatunnel.apache.org",
       },
       {
+        name: "Apache Pulsar",
+        description: "Offload cold Apache Pulsar topic ledgers to S3-compatible object storage with tiered storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/pulsar",
+        logo: "/images/integrations/pulsar-logo.svg",
+        projectUrl: "https://pulsar.apache.org",
+      },
+      {
         name: "Alluxio",
         description: "Cache S3-compatible object storage buckets with Alluxio for faster reads.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/storage/alluxio",
@@ -470,6 +498,20 @@ export const integrationCategories: IntegrationCategory[] = [
         name: "celld",
         description: "Run celld, the self-hosted Durable Objects runtime, with fleet state in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/cloud-native/celld",
+      },
+      {
+        name: "Dapr",
+        description: "Read and write S3-compatible object storage from any Dapr application through the S3 binding.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/cloud-native/dapr",
+        logo: "/images/integrations/dapr-logo.svg",
+        projectUrl: "https://dapr.io",
+      },
+      {
+        name: "Apache Camel",
+        description: "Route data in and out of S3-compatible object storage with Camel integration routes.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/cloud-native/camel",
+        logo: "/images/integrations/camel-logo.svg",
+        projectUrl: "https://camel.apache.org",
       },
     ],
   },
