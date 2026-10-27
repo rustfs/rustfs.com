@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import LiveDemoLink from "@/components/business/buttons/live-demo-link";
+
 const DEMO_URL = "https://play.rustfs.com";
 
 const notices = [
@@ -97,10 +99,9 @@ export default function DemoPage() {
               </div>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
+                <LiveDemoLink
                   className="motion-button group inline-flex h-14 items-center justify-center gap-2 bg-foreground px-6 text-sm font-semibold text-background hover:bg-foreground/90"
                   href={DEMO_URL}
-                  rel="noopener noreferrer"
                 >
                   Enter the public demo
                   <ArrowUpRight
@@ -108,7 +109,7 @@ export default function DemoPage() {
                     strokeWidth={2.5}
                     aria-hidden="true"
                   />
-                </a>
+                </LiveDemoLink>
                 <Link
                   className="motion-button group inline-flex h-14 items-center justify-center gap-2 border border-border bg-background/60 px-6 text-sm font-semibold text-foreground hover:bg-muted"
                   href="/"

@@ -11,6 +11,7 @@ import {
   SelectValue
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
+import { ANALYTICS_EVENTS, trackAnalyticsEvent } from '@/lib/analytics'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { ArrowUpRightIcon, MailIcon, MessageCircleIcon } from 'lucide-react'
 import Link from 'next/link'
@@ -192,6 +193,10 @@ export default function ContactForm() {
       const result = await response.json()
 
       if (result.success) {
+        trackAnalyticsEvent(ANALYTICS_EVENTS.contactFormSubmitSuccess, {
+          form_id: 'contact',
+          link_location: '/contact-us/',
+        })
         setSubmitStatus('success')
         setFormData({
           firstName: '',

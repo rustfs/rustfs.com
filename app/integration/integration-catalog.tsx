@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState, type KeyboardEvent } from "react";
 
 import type { IntegrationCategory, IntegrationProject } from "@/data/integrations";
+import { INTEGRATION_DOC_SOURCE_LABEL, integrationDocSource, integrationLinkText } from "@/lib/integration-docs";
 import { cn } from "@/lib/utils";
 
 interface IntegrationCatalogProps {
@@ -212,7 +213,7 @@ export default function IntegrationCatalog({ categories }: IntegrationCatalogPro
               </div>
 
               <div className="mt-auto pt-7">
-                <ActionButton href={project.docsUrl} />
+                <ActionButton project={project} />
               </div>
             </article>
           ))}
@@ -222,18 +223,26 @@ export default function IntegrationCatalog({ categories }: IntegrationCatalogPro
   );
 }
 
-function ActionButton({ href }: { href: string }) {
+function ActionButton({ project }: { project: IntegrationProject }) {
+  const href = project.docsUrl;
   const isExternal = href.startsWith("http://") || href.startsWith("https://");
+  const source = integrationDocSource(href);
+  const linkText = integrationLinkText(project);
 
   return (
-    <Link
-      href={href}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noreferrer noopener external" : undefined}
-      className="motion-button group inline-flex h-10 items-center gap-2 border border-border bg-background px-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground hover:border-foreground hover:bg-foreground hover:text-background"
-    >
-      <span>Read more</span>
-      <ArrowUpRightIcon className="motion-arrow size-3.5" aria-hidden="true" />
-    </Link>
+    <div>
+      <p className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+        {INTEGRATION_DOC_SOURCE_LABEL[source]}
+      </p>
+      <Link
+        href={href}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noreferrer noopener external" : undefined}
+        className="motion-button group inline-flex min-h-10 items-center gap-2 border border-border bg-background px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground hover:border-foreground hover:bg-foreground hover:text-background"
+      >
+        <span>{linkText}</span>
+        <ArrowUpRightIcon className="motion-arrow size-3.5 shrink-0" aria-hidden="true" />
+      </Link>
+    </div>
   );
 }

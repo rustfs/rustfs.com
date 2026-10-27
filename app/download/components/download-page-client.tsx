@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { trackDownloadClick } from '@/lib/analytics'
 import { cn, docs_url } from '@/lib/utils'
 import { formatReleaseDate, formatVersion, getDownloadUrlForPlatform, type GitHubRelease } from '@/lib/github'
 import AppleIcon from '@/public/svgs/brands/apple.svg'
@@ -86,6 +87,7 @@ function ProductDownloadLink({
   return (
     <Link
       href={href}
+      onClick={() => trackDownloadClick(href, title, "download_catalog")}
       className="motion-card group flex min-h-80 flex-col border border-border bg-card px-6 py-8 transition-colors hover:bg-muted/20 sm:px-8"
     >
       <div className="flex items-start justify-between gap-6">
@@ -171,7 +173,12 @@ function ArtifactButton({
       size="lg"
       className="h-11 w-full justify-between border-border bg-card px-4 text-sm font-semibold text-foreground dark:border-border dark:bg-card"
     >
-      <a href={href} target="_blank" rel="noopener noreferrer">
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => trackDownloadClick(href, label, "server_artifact")}
+      >
         <span className="inline-flex items-center gap-2">
           {icon}
           {label}

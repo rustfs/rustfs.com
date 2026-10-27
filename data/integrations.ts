@@ -7,6 +7,8 @@ export interface IntegrationProject {
   // by the Apache Software Foundation, Linux Foundation/CNCF, and HashiCorp
   // trademark policies for referential logo use.
   projectUrl?: string;
+  // Visible anchor when the default "Configure {name} with RustFS" text is not specific enough.
+  linkText?: string;
 }
 
 export interface IntegrationCategory {
@@ -65,7 +67,8 @@ export const integrationCategories: IntegrationCategory[] = [
       {
         name: "GitLab",
         description: "Use OIDC SSO and S3-compatible object storage for pipelines and artifacts.",
-        docsUrl: "https://docs.gitlab.com/administration/object_storage/",
+        docsUrl: "/blog/gitlab-rustfs-integration",
+        linkText: "Configure GitLab object storage with RustFS",
       },
       {
         name: "OpenObserve",
@@ -85,6 +88,7 @@ export const integrationCategories: IntegrationCategory[] = [
         name: "Loki",
         description: "Store Loki log data durably in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/loki",
+        linkText: "Configure Grafana Loki with RustFS",
       },
       {
         name: "Tempo",
@@ -217,7 +221,7 @@ export const integrationCategories: IntegrationCategory[] = [
       {
         name: "Restic",
         description: "Store encrypted repository snapshots in S3-compatible backends.",
-        docsUrl: "https://restic.readthedocs.io/en/stable/",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/backup/restic",
         logo: "/images/integrations/restic-logo.png",
         projectUrl: "https://restic.net",
       },
@@ -259,7 +263,8 @@ export const integrationCategories: IntegrationCategory[] = [
       {
         name: "GitLab",
         description: "Configure GitLab as OIDC identity provider for enterprise login governance.",
-        docsUrl: "https://docs.rustfs.com/en/security-compliance/oidc/keycloak",
+        docsUrl: "/blog/gitlab-rustfs-integration",
+        linkText: "Configure GitLab OIDC with RustFS",
       },
     ],
   },
@@ -307,7 +312,7 @@ export const integrationCategories: IntegrationCategory[] = [
       {
         name: "Apache Doris®",
         description: "Power Apache Doris® analytics with S3-compatible object storage.",
-        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/doris",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/database/doris",
         logo: "/images/integrations/doris-logo.svg",
         projectUrl: "https://doris.apache.org",
       },
@@ -450,7 +455,7 @@ export const integrationCategories: IntegrationCategory[] = [
       {
         name: "Vitess",
         description: "Store Vitess backups and exports in S3-compatible object storage.",
-        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/vitess",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/database/vitess",
         logo: "/images/integrations/vitess-logo.svg",
         projectUrl: "https://vitess.io",
       },

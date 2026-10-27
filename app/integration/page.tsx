@@ -162,8 +162,16 @@ export default function IntegrationPage() {
               Find your integration path.
             </h2>
             <p className="mt-5 text-base leading-7 text-muted-foreground">
-              Browse implementation guides by workload. Each path opens the most relevant RustFS or upstream documentation.
+              Browse implementation guides by workload. Each card names the task and labels the link as a RustFS guide, a site write-up, or upstream product documentation.
             </p>
+            <p className="mt-4 text-sm leading-7 text-muted-foreground">
+              These high-value entries still need a version-checked tutorial on docs.rustfs.com. The cards open the closest existing write-up.
+            </p>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-muted-foreground">
+              <li>GitLab object storage for CI artifacts. docs.rustfs.com has no GitLab page, so the card opens the site walkthrough.</li>
+              <li>GitLab OIDC sign-in for the RustFS console. The Keycloak guide is a different identity provider.</li>
+              <li>GitLab LFS and the package registry as their own tested procedures. The site walkthrough only notes that the same object-storage pattern can cover them.</li>
+            </ul>
           </div>
 
           <IntegrationCatalog categories={integrationCategories} />

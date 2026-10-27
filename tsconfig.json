@@ -31,5 +31,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "workers", "lib/scrollReveal.test.ts"]
+    "exclude": ["node_modules", "workers", "lib/scrollReveal.test.ts", "lib/*.test.ts"]
 }
