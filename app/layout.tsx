@@ -35,7 +35,6 @@ export const metadata: Metadata = {
   title: SITE_METADATA.title,
   description: SITE_METADATA.description,
   keywords: SITE_METADATA.keywords,
-  authors: [{ name: "RustFS Team" }],
   metadataBase: new URL(SITE_CONFIG.primaryDomain),
   robots: {
     index: true,
