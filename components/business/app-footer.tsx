@@ -1,6 +1,7 @@
 'use client'
 
 import { footerNavigation } from '@/data/navigation';
+import { trackDownloadClick } from '@/lib/analytics';
 import LinkDiscord from './buttons/link-discord';
 import LinkGitHub from './buttons/link-github';
 import LinkTwitter from './buttons/link-twitter';
@@ -35,6 +36,12 @@ export default function AppFooter() {
                     <a
                       href={item.href}
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      onClick={() => {
+                        if (item.href === '/download' || item.href.startsWith('/download/')) {
+                          const linkUrl = item.href.endsWith('/') ? item.href : `${item.href}/`
+                          trackDownloadClick(linkUrl, item.title, 'footer')
+                        }
+                      }}
                     >
                       {item.title}
                     </a>

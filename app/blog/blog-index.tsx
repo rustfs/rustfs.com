@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { BLOG_INDEX_H1, BLOG_INDEX_OVERVIEW, getTagListing, toTagSlug } from "@/lib/blog-tags";
 import { getBlogPosts, type BlogPostMeta } from "@/lib/mdx-blog";
 import BlogArchive from "./blog-archive";
 
@@ -8,10 +9,16 @@ const BLOG_FILTER_TAGS = ["AI", "Security", "Release", "Integration", "Cloud Nat
 export default async function BlogIndex({ requestedTag }: { requestedTag?: string }) {
   const allPosts = await getBlogPosts();
   const tags = BLOG_FILTER_TAGS;
-  const activeTag = tags.find((tag) => tag.toLowerCase() === requestedTag?.toLowerCase());
-  const posts = activeTag
-    ? allPosts.filter((post) => post.tags.some((tag) => tag.toLowerCase() === activeTag.toLowerCase()))
+  const requestedLabel = requestedTag
+    ? allPosts
+        .flatMap((post) => post.tags)
+        .find((tag) => tag.toLowerCase() === requestedTag.toLowerCase()) ?? requestedTag
+    : undefined;
+  const activeTag = tags.find((tag) => tag.toLowerCase() === requestedLabel?.toLowerCase());
+  const posts = requestedLabel
+    ? allPosts.filter((post) => post.tags.some((tag) => tag.toLowerCase() === requestedLabel.toLowerCase()))
     : allPosts;
+  const listing = requestedLabel ? getTagListing(requestedLabel, posts.length) : null;
   const [featuredPost, ...archivePosts] = posts;
   const recentPosts = archivePosts.slice(0, 3);
   const olderPosts = archivePosts.slice(3);
@@ -27,13 +34,13 @@ export default async function BlogIndex({ requestedTag }: { requestedTag?: strin
                 <span>RustFS journal</span>
               </div>
               <h1 className="max-w-4xl font-display text-5xl font-semibold tracking-tight text-foreground sm:text-7xl">
-                Engineering posts from the storage layer.
+                {listing?.h1 ?? BLOG_INDEX_H1}
               </h1>
               <p className="mt-6 max-w-2xl text-sm leading-7 text-muted-foreground">
-                Product updates, migration guides, security work, and field lessons from the RustFS team.
+                {listing?.overview ?? BLOG_INDEX_OVERVIEW}
               </p>
               <nav className="mt-8 flex flex-wrap gap-2" aria-label="Filter blog posts by tag">
-                <TagFilter href="/blog" label="All posts" active={!activeTag} />
+                <TagFilter href="/blog" label="All posts" active={!requestedLabel} />
                 {tags.map((tag) => (
                   <TagFilter
                     key={tag}
@@ -54,20 +61,16 @@ export default async function BlogIndex({ requestedTag }: { requestedTag?: strin
           ) : (
             <div className="mt-12 border border-border bg-card p-8">
               <p className="text-sm text-muted-foreground">
-                {activeTag ? `No posts are tagged ${activeTag} yet.` : "No blog posts have been synced yet."}
+                {requestedLabel ? `No posts are tagged ${requestedLabel} yet.` : "No blog posts have been synced yet."}
               </p>
             </div>
           )}
         </div>
       </section>
 
-      {olderPosts.length ? <BlogArchive posts={olderPosts} title={activeTag ? `More in ${activeTag}` : undefined} /> : null}
+      {olderPosts.length ? <BlogArchive posts={olderPosts} title={requestedLabel ? `More in ${requestedLabel}` : undefined} /> : null}
     </main>
   );
-}
-
-function toTagSlug(tag: string) {
-  return tag.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
 function TagFilter({ href, label, active }: { href: string; label: string; active: boolean }) {

@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button';
+import { trackDownloadClick } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
 import { formatVersion, type GitHubRelease } from '@/lib/github';
 import DockerIcon from '@/public/svgs/brands/docker.svg';
@@ -72,6 +73,7 @@ function CliPackageCard({
       rel="noopener noreferrer"
       aria-label={`${title} package: ${asset.filename}`}
       title={asset.filename}
+      onClick={() => trackDownloadClick(asset.url, title, "rc_package")}
       className="motion-card group flex min-h-24 min-w-0 items-center justify-between gap-4 border border-border bg-card p-5 transition-colors hover:border-foreground/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
     >
       <div className="min-w-0">

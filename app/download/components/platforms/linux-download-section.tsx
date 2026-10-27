@@ -1,5 +1,6 @@
 'use client'
 
+import { trackDownloadClick } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import { DownloadIcon } from "lucide-react";
 import CodeBlock from "../code-block";
@@ -70,6 +71,7 @@ export default function LinuxDownloadSection({ platform, release, className }: L
               href={finalX86_64Url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackDownloadClick(finalX86_64Url, "Download", "linux_x86_64")}
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
               <DownloadIcon className="w-4 h-4" />
               <span>{'Download'}</span>
@@ -105,6 +107,7 @@ export default function LinuxDownloadSection({ platform, release, className }: L
               href={finalAarch64Url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackDownloadClick(finalAarch64Url, "Download", "linux_aarch64")}
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
               <DownloadIcon className="w-4 h-4" />
               <span>{'Download'}</span>

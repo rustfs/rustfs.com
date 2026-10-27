@@ -1,5 +1,6 @@
 'use client'
 
+import { trackDownloadClick } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import { productNavigation, resourceNavigation, type NavigationItem } from "@/data/navigation";
 import { homeAnnouncement } from "@/data/announcement";
@@ -175,6 +176,11 @@ export default function AppHeader() {
                     key={index}
                     className={cn(`inline-block whitespace-nowrap px-2 py-1 text-base text-primary transition-colors hover:text-brand motion-reduce:transition-none`, item.classes)}
                     href={item.url}
+                    onClick={() => {
+                      if (item.label === "Download") {
+                        trackDownloadClick("/download/", item.label, "header");
+                      }
+                    }}
                   >
                     {item.label}
                   </a>
@@ -221,7 +227,18 @@ export default function AppHeader() {
                     ))}
                     <div className="mt-3 px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Links</div>
                     {navs.map((item, index) => (
-                      <a key={index} className="block w-full p-2 text-base hover:bg-muted/50" href={item.url}>{item.label}</a>
+                      <a
+                        key={index}
+                        className="block w-full p-2 text-base hover:bg-muted/50"
+                        href={item.url}
+                        onClick={() => {
+                          if (item.label === "Download") {
+                            trackDownloadClick("/download/", item.label, "header");
+                          }
+                        }}
+                      >
+                        {item.label}
+                      </a>
                     ))}
                   </Popover.Panel>
                 </Transition>
