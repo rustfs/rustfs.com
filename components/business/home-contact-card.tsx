@@ -16,7 +16,7 @@ export default function HomeContactCard() {
         />
 
         <Link
-          href="/contact-us"
+          href="/contact-us/"
           aria-label="Open the RustFS contact page"
           className="motion-card group relative block overflow-hidden border border-brand bg-brand text-left text-brand-foreground transition-colors hover:bg-brand/95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
         >

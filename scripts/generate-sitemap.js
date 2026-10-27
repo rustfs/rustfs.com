@@ -9,7 +9,14 @@ import { pathToFileURL } from 'node:url';
 const BASE_URL = 'https://rustfs.com'
 const OUT_DIR = 'out'
 const SITEMAP_OUTPUT = 'out/sitemap.xml'
-const EXCLUDED_URLS = new Set(['/404/', '/_not-found/'])
+// `/en/` and `/zh/` are permanent redirects, not pages. `/contact/` duplicates `/contact-us/`.
+const EXCLUDED_URLS = new Set([
+  '/404/',
+  '/_not-found/',
+  '/en/',
+  '/zh/',
+  '/contact/',
+])
 
 // Page priority configuration
 const PAGE_PRIORITIES = {
@@ -106,6 +113,29 @@ function scanDirectory(dirPath, basePath = '') {
   return urls
 }
 
+function pageHtmlPath(url) {
+  if (url === '/') return path.join(OUT_DIR, 'index.html')
+  const relative = url.replace(/^\//, '').replace(/\/$/, '')
+  return path.join(OUT_DIR, relative, 'index.html')
+}
+
+function htmlHasNoindex(html) {
+  const robotsMeta = /<meta\b[^>]*>/gi
+  const tags = html.match(robotsMeta) ?? []
+
+  return tags.some((tag) => {
+    const isRobots = /\bname=["'](?:robots|googlebot)["']/i.test(tag)
+    const noindex = /\bcontent=["'][^"']*\bnoindex\b/i.test(tag)
+    return isRobots && noindex
+  })
+}
+
+function isNoindexUrl(url) {
+  const filePath = pageHtmlPath(url)
+  if (!fs.existsSync(filePath)) return false
+  return htmlHasNoindex(fs.readFileSync(filePath, 'utf8'))
+}
+
 // Get page priority
 function getPagePriority(url) {
   return PAGE_PRIORITIES[url] || 0.5
@@ -173,7 +203,14 @@ function main() {
   }
 
   // Scan directory to get all URLs
-  const urls = scanDirectory(OUT_DIR).filter(url => !EXCLUDED_URLS.has(url))
+  const scannedUrls = scanDirectory(OUT_DIR).filter(url => !EXCLUDED_URLS.has(url))
+  const noindexUrls = scannedUrls.filter((url) => isNoindexUrl(url))
+  const urls = scannedUrls.filter((url) => !noindexUrls.includes(url))
+
+  if (noindexUrls.length > 0) {
+    console.log(`🚫 Omitting ${noindexUrls.length} noindex URLs:`)
+    noindexUrls.forEach(url => console.log(`   ${url}`))
+  }
 
   if (urls.length === 0) {
     console.log('⚠️  No URLs found in out directory.')
@@ -216,4 +253,4 @@ if (isMainModule) {
   main()
 }
 
-export { generateSitemap, scanDirectory, validateSitemap }
+export { generateSitemap, htmlHasNoindex, scanDirectory, validateSitemap }

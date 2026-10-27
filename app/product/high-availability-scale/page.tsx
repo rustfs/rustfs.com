@@ -34,9 +34,10 @@ const sections: FeaturePageSection[] = [
           "Supports customized enterprise storage policies.",
       },
       {
-        title: "Resilient node- and disk-level fault tolerance",
+        title: "Quorum-scoped fault tolerance",
         description:
-          "Keeps service and data available through node and disk faults.",
+          "With erasure coding, reads and writes continue while the set still meets quorum. A documented 12+4 multi-node layout tolerates one server failure and up to four disk losses. EC:0 has no redundancy.",
+        href: "https://docs.rustfs.com/en/operations/cluster-lifecycle",
       },
     ],
   },
@@ -75,9 +76,10 @@ const sections: FeaturePageSection[] = [
           "Keeps disk utilization even across the cluster.",
       },
       {
-        title: "Zero-downtime expansion",
+        title: "Pool expansion",
         description:
-          "Limits the performance impact on active workloads.",
+          "Add capacity as a new pool, keep existing pools unchanged, then restart and verify. Existing objects stay in place until rebalance. The runbook does not describe this as zero-downtime. Availability depends on remaining quorum.",
+        href: "https://docs.rustfs.com/en/operations/cluster-lifecycle",
       },
     ],
   },
@@ -127,7 +129,7 @@ export default function HighAvailabilityScalePage() {
   return (
     <FeaturePage
       title="High Availability & Scale"
-      description="Enterprise distributed architecture, erasure coding, and fault tolerance let you scale out while preserving strong data durability. RustFS supports reliable object storage from petabytes to exabytes."
+      description="Distributed deployment and erasure coding keep object storage available while a set still meets read and write quorum. Scale-out adds pools. It does not promise unlimited fault tolerance or zero-downtime expansion."
       sections={sections}
       variant="scale"
       highlightsTitle="Reliability & Efficiency"
@@ -147,7 +149,7 @@ export default function HighAvailabilityScalePage() {
       ]}
       links={[
         { label: "Download", href: "/download" },
-        { label: "Plan scaling", href: "/contact-us", variant: "outline" },
+        { label: "Plan scaling", href: "/contact-us/", variant: "outline" },
       ]}
     />
   );

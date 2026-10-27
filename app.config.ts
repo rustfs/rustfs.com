@@ -3,6 +3,7 @@ export const SITE_CONFIG = {
   primaryDomain: 'https://rustfs.com',
   secondaryDomain: 'https://rustfs.com.cn',
   docsDomain: 'https://docs.rustfs.com',
+  ogImagePath: '/images/og/rustfs-og.png',
 } as const
 
 // Site meta information

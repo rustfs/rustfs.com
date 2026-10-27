@@ -1,0 +1,118 @@
+---
+title: 'RustFS 1.0.4 Security Patch: Fixing eMudhra / emSign Certificate Trust Risk'
+slug: rustfs-1-0-4-security-patch-emudhra-emsign-certificate-trust
+description: >-
+  RustFS 1.0.4 is a security patch for the eMudhra (emSign) weak intermediate CA
+  incident. Upgrade now to refresh WebPKI roots, distrust emSign ECC Root CA -
+  G3, and harden Docker trust stores.
+date: '2026-10-27T04:00:00.000Z'
+tags:
+  - Release
+  - Security
+  - RustFS
+  - TLS
+  - Announcements
+image: /images/blog/rustfs-1-0-4-security-patch-emudhra-emsign-certificate-trust/cover.svg
+---
+
+Last week, certificate authority **eMudhra** (emSign) disclosed a serious certificate trust incident. Several intermediate CA private keys were recoverable, and major browsers and operating systems quickly revoked trust in the affected chains.
+
+RustFS TLS dependencies and container trust stores were also in scope. We released **RustFS 1.0.4** to close that risk. If you are still on `1.0.3` or earlier, upgrade as soon as possible.
+
+## What happened
+
+eMudhra provides PKI, SSL/TLS, and digital signature services. In mid-October 2026, researchers reported that multiple emSign intermediate CAs were created with critically weak key material during a key generation ceremony. Those private keys could be recovered quickly.
+
+The public impact covers **eight** intermediate CAs (TLS and code-signing related). Anyone holding those keys could, in theory, mint certificates that still-trusting clients would accept.
+
+Browsers received emergency updates. The remaining exposure is mainly in servers, containers, and runtimes that ship their own CA bundles and may not pick up revocation quickly.
+
+## Impact on RustFS
+
+RustFS verifies TLS with `rustls` / WebPKI and, in container images, with the system CA bundle. In **1.0.3 and earlier**, trust paths could still involve the now-distrusted **emSign ECC Root CA - G3**.
+
+If a node makes outbound HTTPS calls, an outdated trust store could accept a forged certificate. Browser protection does **not** automatically protect an older RustFS process or image.
+
+## What RustFS 1.0.4 fixes
+
+1.0.4 addresses the issue on two paths.
+
+### 1. Upgrade in-process TLS and trust-root crates
+
+| Component | Version | Advisory |
+| --- | --- | --- |
+| `webpki-roots` | `1.0.11` | [RUSTSEC-2026-0381](https://rustsec.org/advisories/RUSTSEC-2026-0381) |
+| `webpki-root-certs` | `1.0.11` | [RUSTSEC-2026-0383](https://rustsec.org/advisories/RUSTSEC-2026-0383) |
+| `rustls-webpki` | `0.103.16` | [RUSTSEC-2026-0382](https://rustsec.org/advisories/RUSTSEC-2026-0382) |
+
+These RustSec advisories are part of the same emSign distrust response family as **CVE-2026-111943** on the Go side. RustFS is not a Go runtime patch; it remediates the Rust WebPKI / root-bundle path.
+
+### 2. Harden the Docker image system trust store
+
+During image build, RustFS explicitly disables `emSign ECC Root CA - G3` and verifies that the published trust store no longer contains that root. This does not rely only on whether the base distribution `ca-certificates` package has already caught up.
+
+Release notes: [RustFS 1.0.4](https://github.com/rustfs/rustfs/releases/tag/1.0.4).
+
+## Affected versions
+
+- **Affected:** `1.0.3` and earlier
+- **Fixed:** `1.0.4` and later
+
+Upgrade to `1.0.4` now.
+
+## How to upgrade
+
+### Binary installs
+
+Download the package for your OS from [GitHub Releases · 1.0.4](https://github.com/rustfs/rustfs/releases/tag/1.0.4), verify checksums, replace the binary, and restart the service.
+
+### Docker
+
+Pull `1.0.4` (or `latest` after confirming it points to this release) and roll your workloads. Images are published to Docker Hub, Quay.io, and GHCR:
+
+```bash
+# Docker Hub
+docker pull rustfs/rustfs:1.0.4
+# or
+docker pull rustfs/rustfs:latest
+
+# Quay.io
+docker pull quay.io/rustfs/rustfs:1.0.4
+
+# GHCR
+docker pull ghcr.io/rustfs/rustfs:1.0.4
+```
+
+### Helm Chart
+
+Upgrade with your chart repository and the matching chart version for this release:
+
+```bash
+helm upgrade my-rustfs rustfs/rustfs --version 1.0.4
+```
+
+### Operator / Tenant
+
+In Operator deployments, update the Tenant image/version. Reuse the same values file you used at install time:
+
+```bash
+helm upgrade tenant operator/rustfs-tenant \
+  -n tenant \
+  -f values-tenant.yaml
+```
+
+Keep your original `values.yaml` so custom settings are not overwritten.
+
+## Feedback
+
+If you hit any issue while upgrading, please open a ticket on [GitHub Issues](https://github.com/rustfs/rustfs/issues).
+
+## Related links
+
+1. [Issue #8819](https://github.com/rustfs/rustfs/issues/8819)
+2. [PR #8923](https://github.com/rustfs/rustfs/pull/8923)
+3. [PR #8930](https://github.com/rustfs/rustfs/pull/8930)
+4. [RUSTSEC-2026-0381](https://rustsec.org/advisories/RUSTSEC-2026-0381)
+5. [RUSTSEC-2026-0382](https://rustsec.org/advisories/RUSTSEC-2026-0382)
+6. [RUSTSEC-2026-0383](https://rustsec.org/advisories/RUSTSEC-2026-0383)
+7. [RustFS 1.0.4 Release Notes](https://github.com/rustfs/rustfs/releases/tag/1.0.4)

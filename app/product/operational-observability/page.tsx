@@ -40,7 +40,7 @@ const sections: FeaturePageSection[] = [
     items: [
       {
         title: "Elastic storage auto-scaling",
-        description: "Scale RustFS capacity and disk pools on demand without downtime, using Operator orchestration.",
+        description: "Add disk pools through the Operator. Expansion still follows erasure-coding quorum rules and a coordinated restart. See the cluster lifecycle guide before treating it as disruption-free.",
       },
       {
         title: "MNMD cluster provisioning",

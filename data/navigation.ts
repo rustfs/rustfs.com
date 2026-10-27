@@ -9,7 +9,7 @@ export const productNavigation: NavigationItem[] = [
   {
     title: "Multi-protocol access",
     href: "/product/multiple-protocol-access",
-    description: "Native S3, WebDAV, Swift, FTP/FTPS, and MCP access.",
+    description: "S3 is primary. WebDAV, Swift, FTP/FTPS, and MCP need the setup in the docs.",
     items: ["S3", "WebDAV", "Swift", "FTP/FTPS", "MCP"],
   },
   {
@@ -104,7 +104,7 @@ export const footerNavigation = [
       { title: "Legal", href: "https://github.com/rustfs/rustfs/blob/main/LICENSE" },
       { title: "Privacy Policy", href: "/privacy-policy" },
       { title: "Cookie Policy", href: "/cookie-policy" },
-      { title: "Contact", href: "/contact-us" },
+      { title: "Contact", href: "/contact-us/" },
     ],
   },
 ];

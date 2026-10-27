@@ -98,9 +98,40 @@ export async function proxyDockerCompose(
   }
 }
 
+// Keep these in sync with public/_redirects. Static export cannot emit
+// Next.js redirects, so Cloudflare serves the same rules from _redirects
+// before this worker runs. The worker covers requests that miss an asset.
+export const PERMANENT_REDIRECTS: Record<string, string> = {
+  "/en": "https://rustfs.com/",
+  "/en/": "https://rustfs.com/",
+  "/zh": "https://rustfs.com.cn/",
+  "/zh/": "https://rustfs.com.cn/",
+  "/contact": "/contact-us/",
+  "/contact/": "/contact-us/",
+};
+
+export function permanentRedirect(pathname: string, requestUrl: string): Response | null {
+  const target = PERMANENT_REDIRECTS[pathname];
+  if (!target) {
+    return null;
+  }
+
+  return new Response(null, {
+    status: 301,
+    headers: {
+      Location: new URL(target, requestUrl).toString(),
+    },
+  });
+}
+
 const worker = {
   async fetch(request: Request, env: SiteEnv): Promise<Response> {
     const url = new URL(request.url);
+    const redirect = permanentRedirect(url.pathname, request.url);
+    if (redirect) {
+      return redirect;
+    }
+
     if (url.pathname === DOCKER_COMPOSE_PATH) {
       return proxyDockerCompose(request);
     }

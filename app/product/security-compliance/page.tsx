@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   alternates: { canonical: "product/security-compliance/" },
   title: "Security & Compliance | RustFS",
-  description: "RustFS provides enterprise-grade authentication, authorization, audit logging, event handling, SSE/KMS encryption, OIDC SSO, and mTLS security controls.",
+  description: "RustFS includes IAM, STS, SSE/KMS, OIDC, audit targets, and mTLS. Configure them before production. This page describes product controls, not SOC 2, ISO, or HIPAA certification.",
   keywords: [
     "RustFS",
     "security compliance",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const sections: FeaturePageSection[] = [
   {
     title: "Identity and access management",
-    description: "Define clear access boundaries for users, services, applications, and automated agents without relying on long-lived shared credentials.",
+    description: "RustFS includes a built-in IAM system. Root credentials from the server environment bypass identity-policy checks, so production use means creating users, groups, and policies.",
     items: [
       {
         title: "Granular policy-based access control",
@@ -40,26 +40,30 @@ const sections: FeaturePageSection[] = [
     description: "Protect object data at rest and keep key ownership aligned with enterprise security requirements.",
     items: [
       {
-        title: "Comprehensive SSE support",
-        description: "Use server-side encryption modes including SSE-S3, SSE-KMS, and SSE-C for workload-specific protection.",
+        title: "SSE-S3, SSE-KMS, and SSE-C",
+        description: "Server-side encryption modes are available after you configure them. SSE-S3 uses the configured KMS to wrap per-object keys. It is not already enabled for production data.",
+        href: "https://docs.rustfs.com/en/security-compliance/encryption",
       },
       {
-        title: "Seamless KMS integration",
-        description: "Centralize key lifecycle, access control, and auditability through enterprise-grade key management systems.",
+        title: "KMS when you enable it",
+        description: "SSE-KMS can use a local backend, Vault KV2, or Vault Transit. KMS is off until RUSTFS_KMS_ENABLE is set and the backend is configured.",
+        href: "https://docs.rustfs.com/en/security-compliance/encryption",
       },
     ],
   },
   {
     title: "Security audit",
-    description: "Turn storage activity into reviewable operational evidence for incident response and compliance processes.",
+    description: "Audit records can support incident review after you enable a target. Audit delivery is disabled by default, and a target is not a compliance certification.",
     items: [
       {
-        title: "Deep operational insights",
-        description: "Detect destructive actions and protect critical data.",
+        title: "Request-level audit records",
+        description: "When an audit target is enabled, RustFS can send request activity to an external system for review. Delivery is off until you configure it.",
+        href: "https://docs.rustfs.com/en/security-compliance/audit-logs",
       },
       {
-        title: "Log streaming destination",
-        description: "Forward audit trails to Kafka and Pulsar for deeper security analytics.",
+        title: "Audit targets you enable",
+        description: "Audit delivery is disabled by default. After you configure a target, supported families include webhook, Kafka, and Pulsar.",
+        href: "https://docs.rustfs.com/en/security-compliance/audit-logs",
       },
     ],
   },
@@ -68,12 +72,13 @@ const sections: FeaturePageSection[] = [
     description: "Integrate RustFS into enterprise identity systems without turning login and operator access into custom glue code.",
     items: [
       {
-        title: "Unified OIDC-driven SSO",
-        description: "Integrate seamlessly with enterprise identity providers to enable frictionless single sign-on.",
+        title: "OIDC for Console SSO",
+        description: "Console single sign-on needs an OIDC provider, a confidential client, a callback URL, and claim-to-policy mapping. It is not active until that setup is done.",
+        href: "https://docs.rustfs.com/en/security-compliance/oidc",
       },
       {
-        title: "Console-based OIDC setup",
-        description: "Set up OIDC from the web console and reduce operational complexity.",
+        title: "Provider setup required",
+        description: "Follow the provider guide for your identity system. RustFS policies still authorize S3 and admin operations after the provider authenticates the user.",
       },
     ],
   },
@@ -82,12 +87,14 @@ const sections: FeaturePageSection[] = [
     description: "Protect service-to-service traffic with mutual identity verification and certificate automation.",
     items: [
       {
-        title: "Zero-trust mTLS",
-        description: "Enforce mutual TLS so both sides authenticate on each connection.",
+        title: "mTLS when enabled",
+        description: "Mutual TLS is off until RUSTFS_SERVER_MTLS_ENABLE is set and client certificates are in place. On Kubernetes, the Helm chart can turn it on.",
+        href: "https://docs.rustfs.com/en/installation/cloud-native/helm-chart/mtls",
       },
       {
-        title: "Automated certificate management",
-        description: "Support cert-manager natively to automate certificate issuance and rotation.",
+        title: "cert-manager on Kubernetes",
+        description: "The Helm chart can use cert-manager to issue and renew Ingress and mTLS certificates when you enable that configuration. Install cert-manager first.",
+        href: "https://docs.rustfs.com/en/installation/cloud-native/helm-chart/cert-manager",
       },
     ],
   },
@@ -97,27 +104,27 @@ export default function SecurityCompliancePage() {
   return (
     <FeaturePage
       title="Security & Compliance"
-      description="Enterprise security and compliance, with authentication, authorization, audit logging, and event handling out of the box."
+      description="RustFS ships identity, encryption, audit, and transport controls. Built-in does not mean already configured for production. Change default credentials, define IAM policies, enable TLS, and turn on encryption or audit targets before you expose a cluster. The controls on this page are product features, not SOC 2, ISO, or HIPAA certifications."
       sections={sections}
       variant="security"
-      highlightsTitle="Secure by Default"
+      highlightsTitle="Configure before production"
       highlights={[
         {
-          title: "Zero-Trust",
-          description: "Applies least privilege across users, services, and buckets.",
+          title: "Least privilege",
+          description: "IAM can model least privilege. Root credentials bypass identity policies until you create users and attach policies.",
         },
         {
-          title: "Defense in depth",
-          description: "Layered controls across access, encryption, and audit logging.",
+          title: "Separate controls",
+          description: "Access, encryption, audit delivery, and TLS are configured separately. Enabling one does not enable the others.",
         },
         {
-          title: "Out of the box",
-          description: "Protection is available without extra configuration.",
+          title: "Not a certification",
+          description: "These controls can support a review. RustFS does not claim SOC 2, ISO, or HIPAA certification on this page.",
         },
       ]}
       links={[
         { label: "Download", href: "/download" },
-        { label: "Read docs", href: "/docs", variant: "outline" },
+        { label: "Security checklist", href: "https://docs.rustfs.com/en/installation/requirement/checklists/security-checklists", variant: "outline" },
       ]}
     />
   );

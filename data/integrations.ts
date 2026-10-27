@@ -7,6 +7,8 @@ export interface IntegrationProject {
   // by the Apache Software Foundation, Linux Foundation/CNCF, and HashiCorp
   // trademark policies for referential logo use.
   projectUrl?: string;
+  // Visible anchor when the default "Configure {name} with RustFS" text is not specific enough.
+  linkText?: string;
 }
 
 export interface IntegrationCategory {
@@ -48,6 +50,13 @@ export const integrationCategories: IntegrationCategory[] = [
         logo: "/images/integrations/vllm-logo.png",
         projectUrl: "https://vllm.dev",
       },
+      {
+        name: "SGLang",
+        description: "Stream SGLang model weights directly from S3-compatible object storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/ai/sglang",
+        logo: "/images/integrations/sglang-logo.svg",
+        projectUrl: "https://sglang.io",
+      },
     ],
   },
   {
@@ -58,7 +67,8 @@ export const integrationCategories: IntegrationCategory[] = [
       {
         name: "GitLab",
         description: "Use OIDC SSO and S3-compatible object storage for pipelines and artifacts.",
-        docsUrl: "https://docs.gitlab.com/administration/object_storage/",
+        docsUrl: "/blog/gitlab-rustfs-integration",
+        linkText: "Configure GitLab object storage with RustFS",
       },
       {
         name: "OpenObserve",
@@ -78,6 +88,7 @@ export const integrationCategories: IntegrationCategory[] = [
         name: "Loki",
         description: "Store Loki log data durably in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/loki",
+        linkText: "Configure Grafana Loki with RustFS",
       },
       {
         name: "Tempo",
@@ -102,6 +113,13 @@ export const integrationCategories: IntegrationCategory[] = [
         docsUrl: "https://docs.rustfs.com/en/developer/integration/devops/jenkins",
         logo: "/images/integrations/jenkins-logo.svg",
         projectUrl: "https://www.jenkins.io",
+      },
+      {
+        name: "Helm",
+        description: "Host a private Helm chart repository in S3-compatible object storage with helm-s3.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/devops/helm",
+        logo: "/images/integrations/helm-logo.svg",
+        projectUrl: "https://helm.sh",
       },
       {
         name: "Gitea",
@@ -130,6 +148,13 @@ export const integrationCategories: IntegrationCategory[] = [
         docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/fluentd",
         logo: "/images/integrations/fluentd-logo.svg",
         projectUrl: "https://www.fluentd.org",
+      },
+      {
+        name: "Fluent Bit",
+        description: "Deliver Fluent Bit logs and events to S3-compatible object storage with the S3 output.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/observability/fluent-bit",
+        logo: "/images/integrations/fluent-bit-logo.png",
+        projectUrl: "https://fluentbit.io",
       },
       {
         name: "GreptimeDB",
@@ -196,7 +221,7 @@ export const integrationCategories: IntegrationCategory[] = [
       {
         name: "Restic",
         description: "Store encrypted repository snapshots in S3-compatible backends.",
-        docsUrl: "https://restic.readthedocs.io/en/stable/",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/backup/restic",
         logo: "/images/integrations/restic-logo.png",
         projectUrl: "https://restic.net",
       },
@@ -238,7 +263,8 @@ export const integrationCategories: IntegrationCategory[] = [
       {
         name: "GitLab",
         description: "Configure GitLab as OIDC identity provider for enterprise login governance.",
-        docsUrl: "https://docs.rustfs.com/en/security-compliance/oidc/keycloak",
+        docsUrl: "/blog/gitlab-rustfs-integration",
+        linkText: "Configure GitLab OIDC with RustFS",
       },
     ],
   },
@@ -286,7 +312,7 @@ export const integrationCategories: IntegrationCategory[] = [
       {
         name: "Apache Doris®",
         description: "Power Apache Doris® analytics with S3-compatible object storage.",
-        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/doris",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/database/doris",
         logo: "/images/integrations/doris-logo.svg",
         projectUrl: "https://doris.apache.org",
       },
@@ -382,6 +408,13 @@ export const integrationCategories: IntegrationCategory[] = [
         projectUrl: "https://seatunnel.apache.org",
       },
       {
+        name: "Apache Pulsar",
+        description: "Offload cold Apache Pulsar topic ledgers to S3-compatible object storage with tiered storage.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/pulsar",
+        logo: "/images/integrations/pulsar-logo.svg",
+        projectUrl: "https://pulsar.apache.org",
+      },
+      {
         name: "Alluxio",
         description: "Cache S3-compatible object storage buckets with Alluxio for faster reads.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/storage/alluxio",
@@ -422,7 +455,7 @@ export const integrationCategories: IntegrationCategory[] = [
       {
         name: "Vitess",
         description: "Store Vitess backups and exports in S3-compatible object storage.",
-        docsUrl: "https://docs.rustfs.com/en/developer/integration/big-data/vitess",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/database/vitess",
         logo: "/images/integrations/vitess-logo.svg",
         projectUrl: "https://vitess.io",
       },
@@ -470,6 +503,20 @@ export const integrationCategories: IntegrationCategory[] = [
         name: "celld",
         description: "Run celld, the self-hosted Durable Objects runtime, with fleet state in S3-compatible object storage.",
         docsUrl: "https://docs.rustfs.com/en/developer/integration/cloud-native/celld",
+      },
+      {
+        name: "Dapr",
+        description: "Read and write S3-compatible object storage from any Dapr application through the S3 binding.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/cloud-native/dapr",
+        logo: "/images/integrations/dapr-logo.svg",
+        projectUrl: "https://dapr.io",
+      },
+      {
+        name: "Apache Camel",
+        description: "Route data in and out of S3-compatible object storage with Camel integration routes.",
+        docsUrl: "https://docs.rustfs.com/en/developer/integration/cloud-native/camel",
+        logo: "/images/integrations/camel-logo.svg",
+        projectUrl: "https://camel.apache.org",
       },
     ],
   },

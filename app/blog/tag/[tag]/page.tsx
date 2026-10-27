@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import BlogIndex from "../../blog-index";
+import { getTagListing, toTagSlug } from "@/lib/blog-tags";
 import { getBlogPosts } from "@/lib/mdx-blog";
+import BlogIndex from "../../blog-index";
 
 export const dynamicParams = false;
 
@@ -18,9 +19,26 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ tag: string }> }): Promise<Metadata> {
   const { tag } = await params;
   const label = await findTag(tag);
+
+  if (!label) {
+    return { title: "RustFS Blog" };
+  }
+
+  const posts = await getBlogPosts();
+  const postCount = posts.filter((post) => post.tags.some((postTag) => postTag.toLowerCase() === label.toLowerCase())).length;
+  const listing = getTagListing(label, postCount);
+
   return {
-    title: label ? `${label} | RustFS Blog` : "RustFS Blog",
+    title: `${listing.h1} | RustFS Blog`,
+    description: listing.overview,
     alternates: { canonical: `/blog/tag/${tag}/` },
+    robots: listing.indexable
+      ? { index: true, follow: true }
+      : {
+          index: false,
+          follow: true,
+          googleBot: { index: false, follow: true },
+        },
   };
 }
 
@@ -35,8 +53,4 @@ export default async function BlogTagPage({ params }: { params: Promise<{ tag: s
 async function findTag(slug: string) {
   const posts = await getBlogPosts();
   return Array.from(new Set(posts.flatMap((post) => post.tags))).find((tag) => toTagSlug(tag) === slug);
-}
-
-function toTagSlug(tag: string) {
-  return tag.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }

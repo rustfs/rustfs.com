@@ -1,7 +1,9 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+
+import { REVEAL_ROOT_MARGIN, shouldRevealImmediately } from "@/lib/scrollReveal";
 
 const REVEAL_SELECTOR = [
   "main section",
@@ -14,54 +16,91 @@ export default function SiteScrollMotion() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const elements = Array.from(
-      document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR)
-    );
+    const elements = Array.from(document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR));
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const clearReveal = () => {
+      elements.forEach((element) => {
+        delete element.dataset.scrollReveal;
+      });
+    };
 
     if (reduceMotion || !("IntersectionObserver" in window)) {
       elements.forEach((element) => {
         element.dataset.scrollReveal = "visible";
       });
 
-      return () => {
-        elements.forEach((element) => delete element.dataset.scrollReveal);
-      };
+      return clearReveal;
     }
 
-    const viewportThreshold = window.innerHeight * 0.9;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
+    const pending = new Set<HTMLElement>();
+    let frame = 0;
+    let observer: IntersectionObserver | null = null;
 
-          const element = entry.target as HTMLElement;
-          element.dataset.scrollReveal = "visible";
-          observer.unobserve(element);
-        });
+    const publish = () => {
+      const viewportHeight = window.innerHeight;
+
+      for (const element of pending) {
+        if (!shouldRevealImmediately(element.getBoundingClientRect(), viewportHeight)) {
+          continue;
+        }
+
+        element.dataset.scrollReveal = "visible";
+        pending.delete(element);
+        observer?.unobserve(element);
+      }
+    };
+
+    observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          publish();
+        }
       },
       {
-        threshold: 0.08,
-        rootMargin: "0px 0px -8% 0px",
-      }
+        // Any positive intersection. A target-ratio threshold never fires
+        // when the required slice is taller than the viewport.
+        threshold: 0,
+        rootMargin: REVEAL_ROOT_MARGIN,
+      },
     );
 
+    const viewportHeight = window.innerHeight;
+
     elements.forEach((element) => {
-      const bounds = element.getBoundingClientRect();
-      const initiallyVisible = bounds.top < viewportThreshold && bounds.bottom > 0;
-
-      element.dataset.scrollReveal = initiallyVisible ? "visible" : "pending";
-
-      if (!initiallyVisible) {
-        observer.observe(element);
+      if (shouldRevealImmediately(element.getBoundingClientRect(), viewportHeight)) {
+        element.dataset.scrollReveal = "visible";
+        return;
       }
+
+      element.dataset.scrollReveal = "pending";
+      pending.add(element);
+      observer?.observe(element);
     });
 
+    const schedulePublish = () => {
+      if (frame !== 0 || pending.size === 0) {
+        return;
+      }
+
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        publish();
+      });
+    };
+
+    window.addEventListener("scroll", schedulePublish, { passive: true });
+    window.addEventListener("resize", schedulePublish);
+
     return () => {
-      observer.disconnect();
-      elements.forEach((element) => delete element.dataset.scrollReveal);
+      if (frame !== 0) {
+        window.cancelAnimationFrame(frame);
+      }
+
+      window.removeEventListener("scroll", schedulePublish);
+      window.removeEventListener("resize", schedulePublish);
+      observer?.disconnect();
+      clearReveal();
     };
   }, [pathname]);
 

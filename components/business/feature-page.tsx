@@ -71,6 +71,7 @@ interface FeaturePageProps {
     title: string;
     description: string;
   }[];
+  children?: ReactNode;
 }
 
 const variantMeta: Record<
@@ -98,7 +99,7 @@ const variantMeta: Record<
 
 function ProductLinks({ links }: { links?: FeaturePageLink[] }) {
   const productLinks = links ?? [
-    { label: "Talk to us", href: "/contact-us" },
+    { label: "Talk to us", href: "/contact-us/" },
     { label: "Read docs", href: "/docs", variant: "outline" as const },
   ];
 
@@ -424,7 +425,7 @@ function ProductionReview({ variant }: { variant: FeaturePageVariant }) {
   return (
     <div className="border border-border bg-card p-6 sm:p-8">
       <Link
-        href="/contact-us"
+        href="/contact-us/"
         className="group grid gap-6 bg-brand/5 p-5 transition-colors hover:bg-brand/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:grid-cols-[auto_1fr_auto] sm:items-center"
       >
         <span className="flex size-12 items-center justify-center bg-background text-brand">
@@ -454,6 +455,7 @@ export default function FeaturePage({
   variant = "protocol",
   highlightsTitle,
   highlights,
+  children,
 }: FeaturePageProps) {
   return (
     <main className="relative z-10 flex-1 text-foreground">
@@ -490,6 +492,7 @@ export default function FeaturePage({
       </section>
 
       <div className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
+        {children}
         {sections.map((section, sectionIndex) => (
           <FeatureSection
             key={section.title}

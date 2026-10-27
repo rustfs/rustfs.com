@@ -1,5 +1,6 @@
 'use client'
 
+import { trackDownloadClick } from '@/lib/analytics';
 import { getDownloadUrlForPlatform, type GitHubRelease } from '@/lib/github';
 import { cn } from "@/lib/utils";
 import { DownloadIcon, ExternalLinkIcon } from "lucide-react";
@@ -49,6 +50,7 @@ export default function WindowsDownloadSection({ platform, release, className }:
                         href={finalDownloadUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => trackDownloadClick(finalDownloadUrl, "Download Windows x86_64", "windows_x86_64")}
                         className="inline-flex items-center space-x-1 text-primary hover:underline"
                       >
                         <span>{downloadUrl ? filename : 'GitHub Release page'}</span>
@@ -65,6 +67,7 @@ export default function WindowsDownloadSection({ platform, release, className }:
                     href={finalDownloadUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackDownloadClick(finalDownloadUrl, "Download Windows x86_64", "windows_x86_64")}
                     className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
                   >
                     <DownloadIcon className="w-4 h-4" />
