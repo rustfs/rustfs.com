@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="1600" height="700">
+  <style>
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #171717; }
+    .eyebrow { fill: #2568f5; font-size: 23px; font-weight: 700; letter-spacing: 5px; }
+    .title { font-size: 108px; font-weight: 800; letter-spacing: -2px; }
+    .sub { fill: #6b7280; font-size: 33px; }
+    .chip { font-size: 21px; font-weight: 700; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .stamp { fill: #dc2626; font-size: 30px; font-weight: 800; letter-spacing: 6px; }
+    .w { fill: #ffffff; }
+    .cardline { stroke: #c7d7f5; stroke-width: 8; stroke-linecap: round; }
+    .cap { fill: #9ca3af; font-size: 19px; }
+  </style>
+
+  <rect width="1600" height="700" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="8" fill="#2568f5"/>
+
+  <!-- decorative trust-chain circles, outside the 16:10 safe band -->
+  <g fill="none" stroke="#eff4ff" stroke-width="26">
+    <circle cx="80" cy="330" r="150"/>
+    <circle cx="1530" cy="560" r="170"/>
+  </g>
+  <g fill="none" stroke="#dbe7fb" stroke-width="10">
+    <path d="M60 210 C 40 300, 40 380, 70 460"/>
+    <path d="M1440 640 C 1500 610, 1540 560, 1560 470"/>
+  </g>
+
+  <!-- text block -->
+  <text x="300" y="168" class="eyebrow">SECURITY ADVISORY</text>
+  <text x="300" y="308" class="title">RustFS 1.0.4</text>
+  <text x="300" y="378" class="sub">eMudhra / emSign certificate trust risk — patched</text>
+
+  <!-- status chips -->
+  <g>
+    <rect x="300" y="432" width="384" height="52" rx="26" fill="#ecfdf3" stroke="#16a34a" stroke-width="2"/>
+    <circle cx="332" cy="458" r="11" fill="#16a34a"/>
+    <path d="M326 458 l4 5 l9 -10" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <text x="356" y="466" class="chip" fill="#15803d">WebPKI roots refreshed</text>
+
+    <rect x="300" y="502" width="520" height="52" rx="26" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+    <text x="326" y="536" class="chip mono" fill="#b91c1c">emSign ECC Root CA - G3 ✕ distrusted</text>
+  </g>
+
+  <text x="300" y="614" class="cap mono">Upgrade from ≤ 1.0.3 · RUSTSEC-2026-0381 / 0382 / 0383</text>
+
+  <!-- motif: distrusted certificate -->
+  <g>
+    <rect x="1046" y="152" width="330" height="236" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
+    <rect x="1046" y="152" width="330" height="46" rx="12" fill="#f1f5f9"/>
+    <text x="1068" y="183" class="mono" fill="#64748b" style="font-size:19px; font-weight:700">CA CERTIFICATE</text>
+    <g class="cardline">
+      <line x1="1076" y1="238" x2="1320" y2="238"/>
+      <line x1="1076" y1="272" x2="1290" y2="272"/>
+      <line x1="1076" y1="306" x2="1330" y2="306"/>
+    </g>
+    <circle cx="1322" cy="356" r="24" fill="none" stroke="#dc2626" stroke-width="4"/>
+    <text x="1322" y="364" text-anchor="middle" fill="#dc2626" class="mono" style="font-size:19px; font-weight:800">CA</text>
+    <!-- distrust X -->
+    <g stroke="#dc2626" stroke-width="14" stroke-linecap="round">
+      <line x1="1066" y1="172" x2="1356" y2="368"/>
+      <line x1="1356" y1="172" x2="1066" y2="368"/>
+    </g>
+    <!-- stamp -->
+    <g transform="rotate(-8 1180 420)">
+      <rect x="1016" y="392" width="330" height="58" fill="none" stroke="#dc2626" stroke-width="5"/>
+      <text x="1181" y="432" text-anchor="middle" class="stamp">DISTRUSTED</text>
+    </g>
+  </g>
+
+  <!-- motif: patched shield -->
+  <g>
+    <path d="M934 452 L 934 512 C 934 552 962 578 992 590 C 1022 578 1050 552 1050 512 L 1050 452 L 992 432 Z"
+          fill="#16a34a" stroke="#15803d" stroke-width="3"/>
+    <path d="M960 508 l 20 22 l 44 -48" stroke="#ffffff" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="992" y="628" text-anchor="middle" class="mono" fill="#15803d" style="font-size:21px; font-weight:800">FIXED · 1.0.4</text>
+  </g>
+
+  <!-- motif: padlock -->
+  <g>
+    <rect x="820" y="486" width="76" height="60" rx="8" fill="#1e3a8a"/>
+    <path d="M834 486 v-18 a24 24 0 0 1 48 0 v18" fill="none" stroke="#1e3a8a" stroke-width="9"/>
+    <circle cx="858" cy="512" r="8" fill="#ffffff"/>
+    <rect x="854" y="512" width="8" height="16" rx="3" fill="#ffffff"/>
+  </g>
+
+  <text x="800" y="676" text-anchor="middle" class="cap">RustFS 1.0.4 — refresh WebPKI roots, distrust emSign, harden Docker trust stores</text>
+</svg>
