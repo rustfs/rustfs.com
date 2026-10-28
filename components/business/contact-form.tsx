@@ -57,9 +57,6 @@ const COUNTRIES = [
   'Other'
 ]
 
-const DATA_CAPACITIES = ['TB', 'PB', 'EB']
-const S3_SYSTEMS = ['RustFS', 'AWS S3', 'MinIO', 'Ceph', 'SeaweedFS', 'Garage', 'Others']
-
 const CONTACT_CHANNELS = [
   {
     title: 'Email',
@@ -113,8 +110,6 @@ export default function ContactForm() {
     phone: '',
     country: '',
     company: '',
-    dataCapacity: '',
-    currentS3System: '',
     marketingConsent: false,
     message: ''
   })
@@ -181,8 +176,6 @@ export default function ContactForm() {
           phone: formData.phone || undefined,
           country: formData.country,
           company: formData.company,
-          data_capacity: formData.dataCapacity,
-          current_s3_system: formData.currentS3System,
           marketing_consent: formData.marketingConsent ? 'Yes' : 'No',
           message: formData.message,
           'h-captcha-response': hCaptchaToken,
@@ -205,8 +198,6 @@ export default function ContactForm() {
           phone: '',
           country: '',
           company: '',
-          dataCapacity: '',
-          currentS3System: '',
           marketingConsent: false,
           message: ''
         })
@@ -304,57 +295,6 @@ export default function ContactForm() {
                 onChange={handleChange}
                 className="w-full text-foreground"
               />
-            </div>
-          </div>
-
-          <div className="mt-6 grid gap-6 sm:grid-cols-2">
-            <div>
-              <label htmlFor="dataCapacity" className="mb-2 block text-sm font-medium text-foreground">
-                Data Capacity <span className="text-destructive" aria-hidden="true">*</span>
-              </label>
-              <Select
-                name="dataCapacity"
-                required
-                value={formData.dataCapacity}
-                onValueChange={(value) => setFormData((previous) => ({ ...previous, dataCapacity: value }))}
-              >
-                <SelectTrigger id="dataCapacity" className="w-full text-foreground">
-                  <SelectValue placeholder="Select a capacity range" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {DATA_CAPACITIES.map((capacity) => (
-                      <SelectItem key={capacity} value={capacity}>
-                        {capacity}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <label htmlFor="currentS3System" className="mb-2 block text-sm font-medium text-foreground">
-                Current S3-compatible system <span className="text-destructive" aria-hidden="true">*</span>
-              </label>
-              <Select
-                name="currentS3System"
-                required
-                value={formData.currentS3System}
-                onValueChange={(value) => setFormData((previous) => ({ ...previous, currentS3System: value }))}
-              >
-                <SelectTrigger id="currentS3System" className="w-full text-foreground">
-                  <SelectValue placeholder="Select your current system" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {S3_SYSTEMS.map((system) => (
-                      <SelectItem key={system} value={system}>
-                        {system}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
             </div>
           </div>
 
