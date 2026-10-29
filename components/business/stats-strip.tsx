@@ -58,7 +58,7 @@ export default function StatsStrip({
     if (stars !== undefined) {
       stats.push({ label: "GitHub Stars", value: stars });
     }
-    stats.push({ label: "Deployments", text: "2,700,000+" });
+    stats.push({ label: "Deployments", text: "3,700,000+" });
     if (commits !== undefined) {
       stats.push({ label: "Repo Commits", value: commits });
     }
