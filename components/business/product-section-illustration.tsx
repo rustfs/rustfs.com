@@ -37,7 +37,7 @@ import { MotionConfig, motion } from "motion/react";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
-type ProductIllustrationVariant = "data" | "scale" | "ops" | "security";
+type ProductIllustrationVariant = "data" | "scale" | "ops" | "security" | "replication";
 
 interface ProductSectionIllustrationProps {
   variant: ProductIllustrationVariant;
@@ -639,6 +639,123 @@ function MtlsVisual() {
   );
 }
 
+function SiteRelationshipVisual() {
+  const sites = ["site-a", "site-b", "site-c"];
+
+  return (
+    <IllustrationFrame label="Linked deployments">
+      <div className="w-full max-w-lg">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3">
+          {sites.map((site, index) => (
+            <Reveal key={site} delay={index * 0.1}>
+              <div className={cn("border bg-background p-3", index === 1 ? "border-brand/60 bg-brand/5" : "border-border")}>
+                <ServerIcon className={cn("size-4", index === 1 ? "text-brand" : "text-muted-foreground")} />
+                <p className="mt-3 text-xs font-semibold text-foreground">{site}</p>
+                <div className="mt-3 grid grid-cols-3 gap-1">
+                  {["D1", "D2", "V"].map((shard) => (
+                    <span
+                      key={shard}
+                      className={cn(
+                        "grid h-6 place-items-center border font-mono text-[8px]",
+                        shard === "V" ? "border-brand/60 bg-brand/15 text-brand" : "border-border text-muted-foreground"
+                      )}
+                    >
+                      {shard}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-4 flex items-center justify-between border border-border bg-background px-3 py-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
+          <span>one replicate add</span>
+          <span className="text-brand">async</span>
+        </div>
+      </div>
+    </IllustrationFrame>
+  );
+}
+
+function ReplicatedResourcesVisual() {
+  const resources = [
+    { icon: DatabaseIcon, label: "Buckets and versions", detail: "object versions" },
+    { icon: FileTextIcon, label: "Delete markers", detail: "versioned deletes" },
+    { icon: UsersIcon, label: "Supported IAM", detail: "users groups policies" },
+  ];
+
+  return (
+    <IllustrationFrame label="Replicated resources">
+      <div className="grid w-full max-w-lg gap-2">
+        {resources.map((resource, index) => (
+          <Reveal key={resource.label} delay={index * 0.1}>
+            <Tile icon={resource.icon} label={resource.label} detail={resource.detail} accent={index === 0} />
+          </Reveal>
+        ))}
+        <div className="mt-2 grid grid-cols-8 gap-1">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <span
+              key={index}
+              className={cn("h-4 border", index > 5 ? "border-brand/60 bg-brand/20" : "border-border bg-background")}
+            />
+          ))}
+        </div>
+        <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">versioning required on every site</p>
+      </div>
+    </IllustrationFrame>
+  );
+}
+
+function BucketRuleVisual() {
+  return (
+    <IllustrationFrame label="Bucket rule">
+      <div className="grid w-full max-w-lg grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3">
+        <Tile icon={DatabaseIcon} label="Source bucket" detail="versioned" />
+        <div className="flex flex-col items-center gap-2">
+          <DataFlowLine direction="horizontal" className="w-8 sm:w-10" />
+          <span className="border border-border bg-background px-2 py-2 text-center font-mono text-[8px] uppercase tracking-[0.12em] text-muted-foreground">
+            prefix / tags
+          </span>
+          <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-brand">async</span>
+        </div>
+        <Tile icon={DatabaseIcon} label="Target bucket" detail="s3-compatible" accent />
+      </div>
+    </IllustrationFrame>
+  );
+}
+
+function ReplicationStatusVisual() {
+  const rows = [
+    ["buckets", "per site"],
+    ["iam", "users policies"],
+    ["metrics", "sample lag"],
+  ];
+
+  return (
+    <IllustrationFrame label="Replication status">
+      <div className="w-full max-w-lg border border-border bg-muted/60 p-4">
+        <div className="flex items-center gap-2 font-mono text-[10px] text-muted-foreground">
+          <span className="text-brand">$</span>
+          <span className="truncate">rc admin replicate status site1</span>
+        </div>
+        <div className="mt-4 grid gap-2">
+          {rows.map(([label, detail], index) => (
+            <Reveal key={label} delay={index * 0.1}>
+              <div className="flex items-center justify-between border border-border bg-background px-3 py-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
+                <span>{label}</span>
+                <span className="text-brand">{detail}</span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-4 border border-border bg-background px-3 py-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
+          resync status is a saved snapshot
+        </div>
+      </div>
+    </IllustrationFrame>
+  );
+}
+
 const illustrations: Record<ProductIllustrationVariant, ((props: { sectionIndex: number }) => ReactNode)> = {
   data: ({ sectionIndex }) => (sectionIndex === 0 ? <S3ManagementVisual /> : <S3TablesVisual />),
   scale: ({ sectionIndex }) => {
@@ -663,6 +780,15 @@ const illustrations: Record<ProductIllustrationVariant, ((props: { sectionIndex:
   },
   security: ({ sectionIndex }) => {
     const visuals = [<IamVisual key="iam" />, <EncryptionVisual key="encryption" />, <AuditVisual key="audit" />, <AuthenticationVisual key="authentication" />, <MtlsVisual key="mtls" />];
+    return visuals[sectionIndex] ?? visuals[0];
+  },
+  replication: ({ sectionIndex }) => {
+    const visuals = [
+      <SiteRelationshipVisual key="site-relationship" />,
+      <ReplicatedResourcesVisual key="replicated-resources" />,
+      <BucketRuleVisual key="bucket-rule" />,
+      <ReplicationStatusVisual key="replication-status" />,
+    ];
     return visuals[sectionIndex] ?? visuals[0];
   },
 };

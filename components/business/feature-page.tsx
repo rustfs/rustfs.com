@@ -15,6 +15,7 @@ import {
   CloudIcon,
   DatabaseIcon,
   FolderIcon,
+  GitBranchIcon,
   LockIcon,
   MonitorCogIcon,
   NetworkIcon,
@@ -58,7 +59,7 @@ export interface FeaturePageLink {
   variant?: "default" | "outline";
 }
 
-export type FeaturePageVariant = "protocol" | "data" | "scale" | "ops" | "security";
+export type FeaturePageVariant = "protocol" | "data" | "scale" | "ops" | "security" | "replication";
 
 interface FeaturePageProps {
   title: string;
@@ -94,6 +95,9 @@ const variantMeta: Record<
   },
   security: {
     Icon: ShieldCheckIcon,
+  },
+  replication: {
+    Icon: GitBranchIcon,
   },
 };
 

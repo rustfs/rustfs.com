@@ -109,17 +109,19 @@ const sections: FeaturePageSection[] = [
       {
         title: "Multi-site replication",
         description:
-          "Adds reliability and disaster recovery across sites.",
+          "Links independent RustFS deployments and synchronizes buckets, object versions, delete markers, and supported IAM data.",
+        href: "/product/site-replication",
       },
       {
-        title: "Bidirectional synchronization",
+        title: "Asynchronous copies",
         description:
-          "Keeps data consistent across distributed sites.",
+          "A successful write confirms only the site that accepted it. Measure replication lag under your workload.",
+        href: "https://docs.rustfs.com/en/operations/high-availability/site-replication",
       },
       {
-        title: "Location-aware routing",
+        title: "Recovery planned separately",
         description:
-          "Routes requests for lower access latency.",
+          "DNS failover, traffic routing, and application recovery stay outside site replication.",
       },
     ],
   },
