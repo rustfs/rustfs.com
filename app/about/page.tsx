@@ -118,7 +118,7 @@ export default async function AboutPage() {
             {dockerPulls === homepageMetrics.docker.pulls
               ? ` as of ${snapshotDate(homepageMetrics.docker.updatedAt)}`
               : ""}
-            . The homepage ticker can refresh those two counts. Deployments stay at 2,700,000+, the figure in the{" "}
+            . The homepage ticker can refresh those two counts. Deployments stay at 3,700,000+, the figure in the{" "}
             <Link href="/blog/announcing-rustfs-1-0-0-ga/" className={docLinkClassName}>
               September 16, 2026 GA announcement
             </Link>{" "}
