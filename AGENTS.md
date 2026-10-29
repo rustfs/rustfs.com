@@ -60,7 +60,7 @@ This document provides development guidelines and rules for AI Agents to ensure 
 ### Deployment
 
 - Production website deployment is managed by Cloudflare.
-- `.github/workflows/deploy.yml` builds the website, generates the sitemap, and notifies IndexNow; it must not deploy to Aliyun OSS.
+- `.github/workflows/deploy.yml` builds the website, generates the sitemap, wrangler-deploys the site Worker and static assets to Cloudflare, and notifies IndexNow; it must not deploy to Aliyun OSS.
 - `.github/workflows/deploy-homepage-metrics.yml` remains responsible for the separate homepage metrics Worker.
 
 ### Local CI Simulation
