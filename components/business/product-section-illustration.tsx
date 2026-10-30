@@ -12,7 +12,7 @@ import KafkaLogo from "@/public/svgs/softwares/kafka.svg";
 import PrometheusMark from "@/public/svgs/softwares/prometheus-mark.svg";
 import {
   ActivityIcon,
-  ArrowRightLeftIcon,
+  ArrowRightIcon,
   BlocksIcon,
   BoxIcon,
   CheckIcon,
@@ -23,9 +23,7 @@ import {
   FingerprintIcon,
   FolderKeyIcon,
   GitBranchIcon,
-  GlobeIcon,
   KeyRoundIcon,
-  LayersIcon,
   Link2Icon,
   LockKeyholeIcon,
   PlusIcon,
@@ -35,7 +33,6 @@ import {
   ShieldCheckIcon,
   SquareTerminalIcon,
   TablePropertiesIcon,
-  TagsIcon,
   UserRoundCheckIcon,
   UsersIcon,
   type LucideIcon,
@@ -648,7 +645,7 @@ function MtlsVisual() {
 
 function BucketMultiTargetVisual() {
   const toggles = [
-    { label: "Use TLS", on: false },
+    { label: "Use TLS", on: true },
     { label: "Existing objects", on: true },
     { label: "Delete markers", on: true },
     { label: "Replicate delete", on: true },
@@ -696,7 +693,7 @@ function BucketMultiTargetVisual() {
 
           <div className="hidden flex-col items-center justify-center gap-1 sm:flex">
             <DataFlowLine direction="horizontal" className="w-8" />
-            <ArrowRightLeftIcon className="size-3.5 text-brand" />
+            <ArrowRightIcon className="size-3.5 text-brand" />
             <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">replicate</span>
           </div>
 
@@ -769,7 +766,7 @@ function BucketMultiTargetVisual() {
               </Reveal>
               <div className="flex items-center justify-between px-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
                 <span>multi-target ready</span>
-                <span className="text-brand">rpo by mode</span>
+                <span className="text-brand">monitor replication</span>
               </div>
             </div>
           </div>

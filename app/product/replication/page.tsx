@@ -5,9 +5,11 @@ import Link from "next/link";
 
 import FeaturePage, { type FeaturePageSection } from "@/components/business/feature-page";
 
-const title = "Replication | RustFS";
+const title = "S3 Bucket & Site Replication | RustFS";
 const description =
-  "Align S3-compatible object data across sites and copy selected buckets with sync or async replication. Choose RPO with bucket rules, or keep multi-site deployments in sync—plan DNS, traffic routing, and app failover separately.";
+  "Replicate S3 object data across RustFS sites or selected buckets. Plan recovery with versioned copies, prefix and tag filters, and multi-target rules.";
+const heroDescription =
+  "Build remote copies of S3-compatible object data to support disaster recovery and business continuity. Link independent RustFS sites or replicate selected bucket data. Plan DNS, traffic routing, and application failover separately.";
 
 export const metadata: Metadata = {
   alternates: { canonical: "product/replication/" },
@@ -20,7 +22,8 @@ export const metadata: Metadata = {
     "bucket replication",
     "multi-site object storage",
     "S3-compatible",
-    "RPO",
+    "disaster recovery",
+    "business continuity",
     "async replication",
     "sync replication",
     "rc",
@@ -55,24 +58,24 @@ const sections: FeaturePageSection[] = [
     id: "bucket-replication",
     title: "Bucket Replication",
     description:
-      "Directional bucket replication copies objects from a versioned source bucket to one or more versioned targets. Filter by prefix or tags, pick sync or async for your RPO, and keep selective datasets aligned without linking every site.",
+      "Directional bucket replication copies objects from a versioned source bucket to one or more versioned targets. Filter by prefix or tags and use separate rules to keep selected datasets aligned without linking every site.",
     items: [
       {
         title: "Sync and async modes",
         description:
-          "Sync waits for the remote write before the source call returns. Async returns after local success and replicates in the background. Choose the mode that matches the RPO you can accept.",
+          "Synchronous mode waits for a replication attempt before returning; asynchronous mode transfers objects in the background. Monitor replication status and failures: source write success alone does not guarantee a completed remote copy.",
         href: "https://docs.rustfs.com/en/administration/data/bucket/replication",
       },
       {
         title: "Flexible rules",
         description:
-          "Limit bucket replication with prefix and tag filters so only matching objects leave the source. Objects that match no enabled rule stay local.",
+          "Limit replication with prefix and tag filters. Objects that match no enabled rule stay local. Existing-object replication and delete propagation are configured separately; verify backfill completion before relying on a destination for recovery.",
         href: "https://docs.rustfs.com/en/administration/data/bucket/replication",
       },
       {
         title: "Multi-target",
         description:
-          "One source bucket can configure multiple remote sites or S3-compatible targets. Use separate rules when you need different filters or sync modes per destination.",
+          "Configure multiple destinations with separate filters and replication modes. S3-compatible targets require enabled versioning, suitable permissions, and compatible replication operations. Validate each destination before production use.",
         href: "https://docs.rustfs.com/en/administration/data/bucket/replication",
       },
     ],
@@ -117,32 +120,38 @@ const sections: FeaturePageSection[] = [
 export default function ReplicationPage() {
   return (
     <FeaturePage
-      title="Replication"
-      description={description}
+      title="Object Storage Replication"
+      description={heroDescription}
       sections={sections}
       variant="replication"
       highlightsTitle="Why replication"
       highlights={[
         {
-          title: "Cross-site data durability foundation",
+          title: "Reduce single-site failure exposure",
           description:
-            "Keep S3-compatible object data aligned across independent RustFS sites as a foundation for multi-site durability—not a full DR cutover by itself.",
+            "Maintain another copy of object data in an independent location, reducing reliance on a single site when infrastructure or a location becomes unavailable.",
         },
         {
-          title: "Selective bucket copies with RPO choice",
+          title: "Prepare for recovery and business continuity",
           description:
-            "Replicate whole buckets or filtered prefixes and tags. Use sync or async bucket replication to match the RPO your workload needs.",
+            "Build a secondary dataset for recovery workflows. Validate replication completeness and rehearse application and traffic cutover against your recovery objectives.",
         },
         {
-          title: "Operate with Console and CLI",
+          title: "Protect the datasets that matter",
           description:
-            "Configure site and bucket replication in the Web Console or with the rc CLI, keeping administration credentials on a secured host.",
+            "Replicate selected prefixes and object tags to prioritize critical data and control cross-site transfer and storage costs.",
         },
       ]}
       links={[
         { label: "Talk to us", href: "/contact-us/" },
         { label: "Download", href: "/download", variant: "outline" },
       ]}
-    />
+    >
+      <p className="text-base leading-8 text-muted-foreground">
+        Replication complements backup; it does not replace it. Configured deletions and unwanted changes
+        can propagate. Combine replication with versioning, Object Lock where supported, access isolation,
+        and tested recovery procedures.
+      </p>
+    </FeaturePage>
   );
 }

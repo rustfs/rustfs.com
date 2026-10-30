@@ -27,7 +27,7 @@ export const productNavigation: NavigationItem[] = [
   {
     title: "Replication",
     href: "/product/replication",
-    description: "Site and bucket replication for multi-site sync and selective copies with sync or async RPO choice.",
+    description: "Site and bucket replication for remote data copies and recovery planning.",
     items: ["Sites", "Buckets", "Sync"],
   },
   {
