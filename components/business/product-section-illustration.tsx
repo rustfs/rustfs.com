@@ -678,7 +678,7 @@ function BucketMultiTargetVisual() {
               <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-brand">Source bucket</span>
               <div className="mt-2 flex items-center gap-2">
                 <DatabaseIcon className="size-4 text-brand" />
-                <span className="text-xs font-semibold text-foreground">invoices</span>
+                <span className="text-xs font-semibold text-foreground">source-bucket</span>
               </div>
               <p className="mt-2 font-mono text-[8px] uppercase tracking-[0.1em] text-muted-foreground">
                 versioned · local
@@ -707,7 +707,7 @@ function BucketMultiTargetVisual() {
               </span>
               <div className="mt-2 flex items-center gap-2">
                 <DatabaseIcon className="size-4 text-muted-foreground" />
-                <span className="text-xs font-semibold text-foreground">invoices-dr</span>
+                <span className="text-xs font-semibold text-foreground">dest-bucket</span>
               </div>
               <p className="mt-2 truncate font-mono text-[8px] text-muted-foreground">
                 https://site2.rustfs.com
