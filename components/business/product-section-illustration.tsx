@@ -741,106 +741,89 @@ function BucketMultiTargetVisual() {
 }
 
 function FourSiteMeshVisual() {
-  const remotes = [
-    { name: "eu-west", endpoint: "eu.rustfs.internal", status: "joined" },
-    { name: "us-east", endpoint: "us.rustfs.internal", status: "joined" },
-    { name: "ap-south", endpoint: "ap.rustfs.internal", status: "joining" },
+  const peers = [
+    { name: "site-1", endpoint: "20.45.41.89:9000", current: false },
+    { name: "site-alpha", endpoint: "72.145.11.191:9000", current: true },
+    { name: "site-2", endpoint: "20.97.122.44:9000", current: false },
   ];
 
   return (
-    <IllustrationFrame label="Set up site replication">
-      <div className="grid w-full max-w-lg gap-3 border border-border bg-background shadow-[0_12px_40px_-24px_rgba(0,0,0,0.45)] sm:grid-cols-[0.95fr_1.05fr]">
-        <div className="border-b border-border p-3 sm:border-b-0 sm:border-r">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="border border-brand/50 bg-brand/10 px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-brand">
-              first-time setup
-            </span>
-            <span className="border border-border bg-card px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
-              4 sites
-            </span>
+    <IllustrationFrame label="Site replication console">
+      <div className="w-full max-w-lg border border-border bg-background shadow-[0_12px_40px_-24px_rgba(0,0,0,0.45)]">
+        <div className="flex items-center justify-between border-b border-border px-3 py-2.5">
+          <div className="flex items-center gap-2">
+            <GitBranchIcon className="size-3.5 text-brand" />
+            <span className="text-[11px] font-semibold text-foreground">Site Replication</span>
           </div>
-          <p className="mt-3 text-xs font-semibold text-foreground">Replication group</p>
-          <p className="mt-1 text-[10px] leading-4 text-muted-foreground">
-            Current site is detected. Add remotes with admin credentials for the join handshake.
-          </p>
+          <span className="inline-flex items-center gap-1 border border-foreground/80 bg-foreground px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-background">
+            <PlusIcon className="size-2.5" />
+            add site
+          </span>
+        </div>
 
-          <div className="mt-3 space-y-2">
-            {[
-              { icon: LayersIcon, title: "Topology", detail: "current + peers" },
-              { icon: Link2Icon, title: "Handshake", detail: "admin-to-admin" },
-              { icon: KeyRoundIcon, title: "Credentials", detail: "service account auto" },
-            ].map(({ icon: Icon, title, detail }, index) => (
-              <Reveal key={title} delay={index * 0.08}>
-                <div className="flex items-start gap-2 border border-border bg-card px-2 py-1.5">
-                  <Icon className="mt-0.5 size-3 shrink-0 text-brand" />
-                  <div>
-                    <p className="text-[10px] font-semibold text-foreground">{title}</p>
-                    <p className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">{detail}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="mt-3 flex items-center justify-between border border-border bg-card px-2 py-1.5">
-            <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">replicate ilm expiry</span>
-            <span className="relative h-3.5 w-6 rounded-full bg-muted-foreground/25">
-              <span className="absolute left-0.5 top-0.5 size-2.5 rounded-full bg-background" />
-            </span>
-          </div>
+        <div className="grid grid-cols-2 gap-2 border-b border-border p-3 sm:grid-cols-4">
+          {[
+            { label: "Current site", value: "site-alpha", detail: ":9000" },
+            { label: "Status", value: "Enabled", detail: "3 sites", accent: true },
+            { label: "Scope", value: "4 buckets", detail: "8 policies" },
+            { label: "ILM expiry", value: "Off", detail: "optional" },
+          ].map((card, index) => (
+            <Reveal key={card.label} delay={index * 0.06}>
+              <div className="border border-border bg-card p-2">
+                <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">{card.label}</span>
+                <p className={cn("mt-1 truncate text-[11px] font-semibold", card.accent ? "text-brand" : "text-foreground")}>
+                  {card.value}
+                </p>
+                <p className="mt-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">{card.detail}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
 
         <div className="p-3">
           <div className="flex items-center justify-between">
-            <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">remote sites</span>
-            <span className="inline-flex items-center gap-1 border border-border bg-card px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-foreground">
-              <PlusIcon className="size-2.5" />
-              add site
-            </span>
+            <span className="text-[11px] font-semibold text-foreground">Peer Sites</span>
+            <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">membership · sync</span>
           </div>
 
-          <Reveal>
-            <div className="mt-2 border border-brand/60 bg-brand/5 p-2.5">
-              <div className="flex items-center gap-2">
-                <ServerIcon className="size-3.5 text-brand" />
-                <span className="text-[11px] font-semibold text-foreground">this-site</span>
-                <span className="ml-auto font-mono text-[7px] uppercase tracking-[0.12em] text-brand">current</span>
-              </div>
-              <p className="mt-1 font-mono text-[8px] text-muted-foreground">auto-detected local identity</p>
+          <div className="mt-2 overflow-hidden border border-border">
+            <div className="grid grid-cols-[1.1fr_1.2fr_0.7fr] gap-1 border-b border-border bg-card px-2 py-1.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+              <span>Site</span>
+              <span>Endpoint</span>
+              <span className="text-right">Sync</span>
             </div>
-          </Reveal>
-
-          <div className="mt-2 grid gap-1.5">
-            {remotes.map((site, index) => (
-              <Reveal key={site.name} delay={0.1 + index * 0.1}>
-                <div className="flex items-center gap-2 border border-border bg-card px-2 py-1.5">
-                  <GlobeIcon className="size-3 shrink-0 text-muted-foreground" />
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-[11px] font-semibold text-foreground">{site.name}</p>
-                    <p className="truncate font-mono text-[7px] text-muted-foreground">{site.endpoint}</p>
+            {peers.map((peer, index) => (
+              <Reveal key={peer.name} delay={0.12 + index * 0.08}>
+                <div
+                  className={cn(
+                    "grid grid-cols-[1.1fr_1.2fr_0.7fr] items-center gap-1 border-b border-border px-2 py-2 last:border-b-0",
+                    peer.current && "bg-brand/5"
+                  )}
+                >
+                  <div className="flex min-w-0 items-center gap-1.5">
+                    <ServerIcon className={cn("size-3 shrink-0", peer.current ? "text-brand" : "text-muted-foreground")} />
+                    <span className="truncate text-[10px] font-semibold text-foreground">{peer.name}</span>
+                    {peer.current ? (
+                      <span className="shrink-0 border border-border bg-background px-1 py-px font-mono text-[6px] uppercase tracking-[0.1em] text-muted-foreground">
+                        current
+                      </span>
+                    ) : null}
                   </div>
-                  <span
-                    className={cn(
-                      "shrink-0 font-mono text-[7px] uppercase tracking-[0.12em]",
-                      site.status === "joined" ? "text-brand" : "text-muted-foreground"
-                    )}
-                  >
-                    {site.status}
+                  <span className="truncate font-mono text-[8px] text-muted-foreground">{peer.endpoint}</span>
+                  <span className="justify-self-end border border-foreground/80 bg-foreground px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-background">
+                    enabled
                   </span>
                 </div>
               </Reveal>
             ))}
           </div>
 
-          <div className="mt-3 flex items-center justify-between border border-border bg-card/70 px-2 py-1.5 font-mono text-[7px] uppercase tracking-[0.14em] text-muted-foreground">
-            <span>full mesh · bidirectional</span>
-            <motion.span
-              className="text-brand"
-              animate={{ opacity: [0.45, 1, 0.45] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            >
-              syncing
-            </motion.span>
+          <div className="mt-2 flex items-center justify-between font-mono text-[7px] uppercase tracking-[0.14em] text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5">
+              <Link2Icon className="size-3 text-brand" />
+              full mesh · bidirectional
+            </span>
+            <span className="text-brand">service account auto</span>
           </div>
         </div>
       </div>
