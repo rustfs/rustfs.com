@@ -110,12 +110,6 @@ const sections: FeaturePageSection[] = [
           </>
         ),
       },
-      {
-        title: "Status monitoring",
-        description:
-          "Inspect site replication status for operational insight across buckets, IAM resources, and related metrics. Confirm the objects and identities you expect on every site.",
-        href: "https://docs.rustfs.com/en/operations/high-availability/site-replication",
-      },
     ],
   },
 ];
@@ -140,9 +134,9 @@ export default function ReplicationPage() {
             "Replicate whole buckets or filtered prefixes and tags. Use sync or async bucket replication to match the RPO your workload needs.",
         },
         {
-          title: "Operate with Console, CLI, and status insight",
+          title: "Operate with Console and CLI",
           description:
-            "Configure replication in the Web Console or with rc, then monitor status so operators can see how site and bucket replication are progressing.",
+            "Configure site and bucket replication in the Web Console or with the rc CLI, keeping administration credentials on a secured host.",
         },
       ]}
       links={[
