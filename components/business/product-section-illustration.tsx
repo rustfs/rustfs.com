@@ -12,6 +12,7 @@ import KafkaLogo from "@/public/svgs/softwares/kafka.svg";
 import PrometheusMark from "@/public/svgs/softwares/prometheus-mark.svg";
 import {
   ActivityIcon,
+  ArrowRightLeftIcon,
   BlocksIcon,
   BoxIcon,
   CheckIcon,
@@ -21,14 +22,20 @@ import {
   FileTextIcon,
   FingerprintIcon,
   FolderKeyIcon,
+  GitBranchIcon,
+  GlobeIcon,
   KeyRoundIcon,
+  LayersIcon,
+  Link2Icon,
   LockKeyholeIcon,
+  PlusIcon,
   RadioTowerIcon,
   RefreshCwIcon,
   ServerIcon,
   ShieldCheckIcon,
   SquareTerminalIcon,
   TablePropertiesIcon,
+  TagsIcon,
   UserRoundCheckIcon,
   UsersIcon,
   type LucideIcon,
@@ -641,34 +648,92 @@ function MtlsVisual() {
 
 function BucketMultiTargetVisual() {
   const targets = [
-    { label: "Remote site A", detail: "full bucket" },
-    { label: "Remote site B", detail: "prefix filter" },
-    { label: "Remote site C", detail: "tag filter" },
+    { label: "dr-east", detail: "full · async", accent: true },
+    { label: "archive", detail: "logs/ · prefix", accent: false },
+    { label: "analytics", detail: "env=prod · tags", accent: false },
   ];
 
   return (
-    <IllustrationFrame label="Bucket multi-target">
-      <div className="grid w-full max-w-lg gap-4">
-        <Reveal>
-          <Tile icon={DatabaseIcon} label="Source bucket" detail="versioned · sync / async" accent />
-        </Reveal>
-        <div className="flex items-center gap-3">
-          <DataFlowLine direction="horizontal" className="flex-1" />
-          <span className="shrink-0 border border-border bg-background px-2 py-1 font-mono text-[8px] uppercase tracking-[0.12em] text-muted-foreground">
-            full · prefix · tags
+    <IllustrationFrame label="Add replication rule">
+      <div className="w-full max-w-lg border border-border bg-background shadow-[0_12px_40px_-24px_rgba(0,0,0,0.45)]">
+        <div className="flex items-center justify-between border-b border-border px-3 py-2.5">
+          <div className="flex items-center gap-2">
+            <GitBranchIcon className="size-3.5 text-brand" />
+            <span className="text-[11px] font-semibold text-foreground">Bucket: invoices</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="border border-border bg-card px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+              priority 1
+            </span>
+            <span className="border border-brand/50 bg-brand/10 px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-brand">
+              asynchronous
+            </span>
+          </div>
+        </div>
+
+        <div className="grid gap-3 p-3 sm:grid-cols-[0.9fr_auto_1.1fr] sm:items-center">
+          <Reveal>
+            <div className="border border-brand/60 bg-brand/5 p-3">
+              <div className="flex items-center gap-2">
+                <DatabaseIcon className="size-4 text-brand" />
+                <span className="text-xs font-semibold text-foreground">Source</span>
+              </div>
+              <p className="mt-2 font-mono text-[9px] text-muted-foreground">invoices · versioned</p>
+              <div className="mt-3 flex flex-wrap gap-1">
+                {["existing objects", "delete markers"].map((chip) => (
+                  <span
+                    key={chip}
+                    className="inline-flex items-center gap-1 border border-brand/40 bg-background px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-brand"
+                  >
+                    <CheckIcon className="size-2.5" />
+                    {chip}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <div className="hidden flex-col items-center gap-2 sm:flex">
+            <DataFlowLine direction="horizontal" className="w-8" />
+            <div className="flex flex-col items-center gap-1">
+              <span className="border border-border bg-card px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+                prefix
+              </span>
+              <TagsIcon className="size-3 text-muted-foreground" />
+              <span className="border border-border bg-card px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+                tags
+              </span>
+            </div>
+            <DataFlowLine direction="horizontal" className="w-8" />
+          </div>
+
+          <div className="grid gap-2">
+            {targets.map((target, index) => (
+              <Reveal key={target.label} delay={index * 0.12}>
+                <div
+                  className={cn(
+                    "flex items-center gap-2 border px-2.5 py-2",
+                    target.accent ? "border-brand/50 bg-brand/5" : "border-border bg-card"
+                  )}
+                >
+                  <GlobeIcon className={cn("size-3.5 shrink-0", target.accent ? "text-brand" : "text-muted-foreground")} />
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-[11px] font-semibold text-foreground">{target.label}</p>
+                    <p className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">{target.detail}</p>
+                  </div>
+                  <ArrowRightLeftIcon className="size-3 shrink-0 text-brand/80" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between border-t border-border bg-card/60 px-3 py-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
+          <span className="inline-flex items-center gap-1.5">
+            <LayersIcon className="size-3 text-brand" />
+            one rule · many remotes
           </span>
-          <DataFlowLine direction="horizontal" className="flex-1" />
-        </div>
-        <div className="grid grid-cols-3 gap-2 sm:gap-3">
-          {targets.map((target, index) => (
-            <Reveal key={target.label} delay={index * 0.1}>
-              <Tile icon={DatabaseIcon} label={target.label} detail={target.detail} />
-            </Reveal>
-          ))}
-        </div>
-        <div className="flex items-center justify-between border border-border bg-background px-3 py-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
-          <span>one source → many remotes</span>
-          <span className="text-brand">rpo choice</span>
+          <span className="text-brand">rpo by mode</span>
         </div>
       </div>
     </IllustrationFrame>
@@ -676,47 +741,106 @@ function BucketMultiTargetVisual() {
 }
 
 function FourSiteMeshVisual() {
-  const sites = ["site-a", "site-b", "site-c", "site-d"];
+  const remotes = [
+    { name: "eu-west", endpoint: "eu.rustfs.internal", status: "joined" },
+    { name: "us-east", endpoint: "us.rustfs.internal", status: "joined" },
+    { name: "ap-south", endpoint: "ap.rustfs.internal", status: "joining" },
+  ];
 
   return (
-    <IllustrationFrame label="Four-site mesh">
-      <div className="w-full max-w-lg">
-        <div className="grid grid-cols-2 gap-2 sm:gap-3">
-          {sites.map((site, index) => (
-            <Reveal key={site} delay={index * 0.1}>
-              <div
-                className={cn(
-                  "border bg-background p-3",
-                  index === 0 ? "border-brand/60 bg-brand/5" : "border-border"
-                )}
-              >
-                <ServerIcon className={cn("size-4", index === 0 ? "text-brand" : "text-muted-foreground")} />
-                <p className="mt-3 text-xs font-semibold text-foreground">{site}</p>
-                <div className="mt-3 grid grid-cols-3 gap-1">
-                  {["D1", "D2", "V"].map((shard) => (
-                    <span
-                      key={shard}
-                      className={cn(
-                        "grid h-6 place-items-center border font-mono text-[8px]",
-                        shard === "V" ? "border-brand/60 bg-brand/15 text-brand" : "border-border text-muted-foreground"
-                      )}
-                    >
-                      {shard}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <div className="mt-4 grid gap-2">
-          <div className="flex items-center justify-center gap-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
-            <span className="border border-border bg-background px-2 py-1">a ↔ b ↔ c ↔ d</span>
-            <span className="text-brand">bidirectional</span>
+    <IllustrationFrame label="Set up site replication">
+      <div className="grid w-full max-w-lg gap-3 border border-border bg-background shadow-[0_12px_40px_-24px_rgba(0,0,0,0.45)] sm:grid-cols-[0.95fr_1.05fr]">
+        <div className="border-b border-border p-3 sm:border-b-0 sm:border-r">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="border border-brand/50 bg-brand/10 px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-brand">
+              first-time setup
+            </span>
+            <span className="border border-border bg-card px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+              4 sites
+            </span>
           </div>
-          <div className="flex items-center justify-between border border-border bg-background px-3 py-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
-            <span>full mesh site sync</span>
-            <span className="text-brand">async</span>
+          <p className="mt-3 text-xs font-semibold text-foreground">Replication group</p>
+          <p className="mt-1 text-[10px] leading-4 text-muted-foreground">
+            Current site is detected. Add remotes with admin credentials for the join handshake.
+          </p>
+
+          <div className="mt-3 space-y-2">
+            {[
+              { icon: LayersIcon, title: "Topology", detail: "current + peers" },
+              { icon: Link2Icon, title: "Handshake", detail: "admin-to-admin" },
+              { icon: KeyRoundIcon, title: "Credentials", detail: "service account auto" },
+            ].map(({ icon: Icon, title, detail }, index) => (
+              <Reveal key={title} delay={index * 0.08}>
+                <div className="flex items-start gap-2 border border-border bg-card px-2 py-1.5">
+                  <Icon className="mt-0.5 size-3 shrink-0 text-brand" />
+                  <div>
+                    <p className="text-[10px] font-semibold text-foreground">{title}</p>
+                    <p className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">{detail}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-3 flex items-center justify-between border border-border bg-card px-2 py-1.5">
+            <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">replicate ilm expiry</span>
+            <span className="relative h-3.5 w-6 rounded-full bg-muted-foreground/25">
+              <span className="absolute left-0.5 top-0.5 size-2.5 rounded-full bg-background" />
+            </span>
+          </div>
+        </div>
+
+        <div className="p-3">
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">remote sites</span>
+            <span className="inline-flex items-center gap-1 border border-border bg-card px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-foreground">
+              <PlusIcon className="size-2.5" />
+              add site
+            </span>
+          </div>
+
+          <Reveal>
+            <div className="mt-2 border border-brand/60 bg-brand/5 p-2.5">
+              <div className="flex items-center gap-2">
+                <ServerIcon className="size-3.5 text-brand" />
+                <span className="text-[11px] font-semibold text-foreground">this-site</span>
+                <span className="ml-auto font-mono text-[7px] uppercase tracking-[0.12em] text-brand">current</span>
+              </div>
+              <p className="mt-1 font-mono text-[8px] text-muted-foreground">auto-detected local identity</p>
+            </div>
+          </Reveal>
+
+          <div className="mt-2 grid gap-1.5">
+            {remotes.map((site, index) => (
+              <Reveal key={site.name} delay={0.1 + index * 0.1}>
+                <div className="flex items-center gap-2 border border-border bg-card px-2 py-1.5">
+                  <GlobeIcon className="size-3 shrink-0 text-muted-foreground" />
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-[11px] font-semibold text-foreground">{site.name}</p>
+                    <p className="truncate font-mono text-[7px] text-muted-foreground">{site.endpoint}</p>
+                  </div>
+                  <span
+                    className={cn(
+                      "shrink-0 font-mono text-[7px] uppercase tracking-[0.12em]",
+                      site.status === "joined" ? "text-brand" : "text-muted-foreground"
+                    )}
+                  >
+                    {site.status}
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-3 flex items-center justify-between border border-border bg-card/70 px-2 py-1.5 font-mono text-[7px] uppercase tracking-[0.14em] text-muted-foreground">
+            <span>full mesh · bidirectional</span>
+            <motion.span
+              className="text-brand"
+              animate={{ opacity: [0.45, 1, 0.45] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              syncing
+            </motion.span>
           </div>
         </div>
       </div>
