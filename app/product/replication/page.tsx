@@ -135,16 +135,7 @@ export default function ReplicationPage() {
       ]}
       links={[
         { label: "Talk to us", href: "/contact-us/" },
-        {
-          label: "Bucket replication docs",
-          href: "https://docs.rustfs.com/en/administration/data/bucket/replication",
-          variant: "outline",
-        },
-        {
-          label: "Site replication docs",
-          href: "https://docs.rustfs.com/en/operations/high-availability/site-replication",
-          variant: "outline",
-        },
+        { label: "Download", href: "/download", variant: "outline" },
       ]}
     />
   );
