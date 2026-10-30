@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 
 import { SITE_CONFIG } from "@/app.config";
+import Link from "next/link";
+
 import FeaturePage, { type FeaturePageSection } from "@/components/business/feature-page";
 
 const title = "Replication | RustFS";
@@ -95,9 +97,18 @@ const sections: FeaturePageSection[] = [
       },
       {
         title: "Convenient ops",
-        description:
-          "Set up and manage site replication from the Web Console or the rc CLI. Keep administration credentials on a secured host.",
-        href: "/download/cli",
+        description: (
+          <>
+            Set up and manage site replication from the Web Console or the{" "}
+            <Link
+              href="/download/cli"
+              className="font-medium text-foreground underline-offset-4 hover:text-brand hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            >
+              rc CLI
+            </Link>
+            . Keep administration credentials on a secured host.
+          </>
+        ),
       },
       {
         title: "Status monitoring",

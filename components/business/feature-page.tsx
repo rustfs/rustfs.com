@@ -37,7 +37,7 @@ export interface FeaturePageSection {
   description?: ReactNode;
   items?: {
     title: string;
-    description: string;
+    description: ReactNode;
     href?: string;
   }[];
 }
