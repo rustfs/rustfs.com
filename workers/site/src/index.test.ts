@@ -101,7 +101,7 @@ test("does not forward visitor cookies to GitHub", async () => {
   assert.equal(response.status, 200);
 });
 
-test("permanently redirects thin locale pages and the duplicate contact URL", async () => {
+test("permanently redirects locale, duplicate contact, and legacy replication URLs", async () => {
   const env = assetsEnv(() => {
     throw new Error("redirects must not fall through to assets");
   });
@@ -113,6 +113,10 @@ test("permanently redirects thin locale pages and the duplicate contact URL", as
     ["https://rustfs.com/contact", "https://rustfs.com/contact-us/"],
     ["https://rustfs.com/contact/", "https://rustfs.com/contact-us/"],
     ["https://www.rustfs.com/contact/", "https://www.rustfs.com/contact-us/"],
+    ["https://rustfs.com/product/site-replication", "https://rustfs.com/product/replication/"],
+    ["https://rustfs.com/product/replication", "https://rustfs.com/product/replication/"],
+    ["https://rustfs.com/product/site-replication/", "https://rustfs.com/product/replication/"],
+    ["https://www.rustfs.com/product/site-replication/", "https://www.rustfs.com/product/replication/"],
   ] as const;
 
   for (const [requestUrl, location] of cases) {

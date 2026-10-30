@@ -12,6 +12,7 @@ import KafkaLogo from "@/public/svgs/softwares/kafka.svg";
 import PrometheusMark from "@/public/svgs/softwares/prometheus-mark.svg";
 import {
   ActivityIcon,
+  ArrowRightIcon,
   BlocksIcon,
   BoxIcon,
   CheckIcon,
@@ -21,8 +22,11 @@ import {
   FileTextIcon,
   FingerprintIcon,
   FolderKeyIcon,
+  GitBranchIcon,
   KeyRoundIcon,
+  Link2Icon,
   LockKeyholeIcon,
+  PlusIcon,
   RadioTowerIcon,
   RefreshCwIcon,
   ServerIcon,
@@ -37,7 +41,7 @@ import { MotionConfig, motion } from "motion/react";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
-type ProductIllustrationVariant = "data" | "scale" | "ops" | "security";
+type ProductIllustrationVariant = "data" | "scale" | "ops" | "security" | "replication";
 
 interface ProductSectionIllustrationProps {
   variant: ProductIllustrationVariant;
@@ -639,6 +643,257 @@ function MtlsVisual() {
   );
 }
 
+function BucketMultiTargetVisual() {
+  const toggles = [
+    { label: "Use TLS", on: true },
+    { label: "Existing objects", on: true },
+    { label: "Delete markers", on: true },
+    { label: "Replicate delete", on: true },
+  ];
+
+  return (
+    <IllustrationFrame label="Bucket replication rule">
+      <div className="w-full max-w-lg border border-border bg-background shadow-[0_12px_40px_-24px_rgba(0,0,0,0.45)]">
+        <div className="flex items-center justify-between border-b border-border px-3 py-2.5">
+          <div className="flex items-center gap-2">
+            <GitBranchIcon className="size-3.5 text-brand" />
+            <span className="text-[11px] font-semibold text-foreground">Add Replication Rule</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="border border-border bg-card px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+              priority 1
+            </span>
+            <span className="border border-brand/50 bg-brand/10 px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-brand">
+              asynchronous
+            </span>
+          </div>
+        </div>
+
+        <div className="grid gap-2 border-b border-border p-3 sm:grid-cols-[1fr_auto_1fr] sm:items-stretch">
+          <Reveal>
+            <div className="flex h-full flex-col border border-brand/60 bg-brand/5 p-3">
+              <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-brand">Source bucket</span>
+              <div className="mt-2 flex items-center gap-2">
+                <DatabaseIcon className="size-4 text-brand" />
+                <span className="text-xs font-semibold text-foreground">source-bucket</span>
+              </div>
+              <p className="mt-2 font-mono text-[8px] uppercase tracking-[0.1em] text-muted-foreground">
+                versioned · local
+              </p>
+              <div className="mt-auto flex flex-wrap gap-1 pt-3">
+                <span className="border border-border bg-background px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">
+                  prefix logs/
+                </span>
+                <span className="border border-border bg-background px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">
+                  tag env=prod
+                </span>
+              </div>
+            </div>
+          </Reveal>
+
+          <div className="hidden flex-col items-center justify-center gap-1 sm:flex">
+            <DataFlowLine direction="horizontal" className="w-8" />
+            <ArrowRightIcon className="size-3.5 text-brand" />
+            <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">replicate</span>
+          </div>
+
+          <Reveal delay={0.1}>
+            <div className="flex h-full flex-col border border-border bg-card p-3">
+              <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+                Destination bucket
+              </span>
+              <div className="mt-2 flex items-center gap-2">
+                <DatabaseIcon className="size-4 text-muted-foreground" />
+                <span className="text-xs font-semibold text-foreground">dest-bucket</span>
+              </div>
+              <p className="mt-2 truncate font-mono text-[8px] text-muted-foreground">
+                https://site2.rustfs.com
+              </p>
+              <p className="mt-auto pt-3 font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">
+                region us-east-1 · standard
+              </p>
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="grid gap-3 p-3 sm:grid-cols-2">
+          <div>
+            <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">Options</span>
+            <div className="mt-2 space-y-1.5">
+              {toggles.map((item, index) => (
+                <Reveal key={item.label} delay={0.12 + index * 0.05}>
+                  <div className="flex items-center justify-between border border-border bg-card px-2 py-1.5">
+                    <span className="text-[10px] font-medium text-foreground">{item.label}</span>
+                    <span
+                      className={cn(
+                        "relative h-3.5 w-6 rounded-full",
+                        item.on ? "bg-foreground" : "bg-muted-foreground/25"
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "absolute top-0.5 size-2.5 rounded-full bg-background",
+                          item.on ? "right-0.5" : "left-0.5"
+                        )}
+                      />
+                    </span>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">Limits</span>
+            <div className="mt-2 grid gap-2">
+              <Reveal delay={0.2}>
+                <div className="border border-border bg-card p-2.5">
+                  <p className="font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">
+                    Health check interval
+                  </p>
+                  <p className="mt-1 text-[12px] font-semibold text-foreground">
+                    60 <span className="font-mono text-[8px] font-normal text-muted-foreground">seconds</span>
+                  </p>
+                </div>
+              </Reveal>
+              <Reveal delay={0.28}>
+                <div className="border border-border bg-card p-2.5">
+                  <p className="font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">Bandwidth limit</p>
+                  <p className="mt-1 text-[12px] font-semibold text-foreground">
+                    100 <span className="font-mono text-[8px] font-normal text-muted-foreground">GiB/s</span>
+                  </p>
+                </div>
+              </Reveal>
+              <div className="flex items-center justify-between px-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+                <span>multi-target ready</span>
+                <span className="text-brand">monitor replication</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </IllustrationFrame>
+  );
+}
+
+function FourSiteMeshVisual() {
+  const peers = [
+    { name: "Site 1", endpoint: "https://site1.rustfs.com", current: true },
+    { name: "Site 2", endpoint: "https://site2.rustfs.com", current: false },
+    { name: "Site 3", endpoint: "https://site3.rustfs.com", current: false },
+  ];
+
+  return (
+    <IllustrationFrame label="Site replication console">
+      <div className="w-full max-w-lg border border-border bg-background shadow-[0_12px_40px_-24px_rgba(0,0,0,0.45)]">
+        <div className="flex items-center justify-between border-b border-border px-3 py-2.5">
+          <div className="flex items-center gap-2">
+            <GitBranchIcon className="size-3.5 text-brand" />
+            <span className="text-[11px] font-semibold text-foreground">Site Replication</span>
+          </div>
+          <span className="inline-flex items-center gap-1 border border-foreground/80 bg-foreground px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-background">
+            <PlusIcon className="size-2.5" />
+            add site
+          </span>
+        </div>
+
+        <div className="grid gap-2 border-b border-border p-3 sm:grid-cols-2">
+          <Reveal>
+            <div className="border border-brand/50 bg-brand/5 p-3">
+              <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+                Replication summary
+              </span>
+              <div className="mt-3 grid grid-cols-2 gap-x-2 gap-y-2.5">
+                {[
+                  ["Status", "Enabled"],
+                  ["Sites", "3"],
+                  ["Objects", "13"],
+                  ["Size", "40.9 MiB"],
+                ].map(([label, value]) => (
+                  <div key={label}>
+                    <p className="text-[12px] font-semibold text-foreground">{value}</p>
+                    <p className="font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">{label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            <div className="border border-border bg-card p-3">
+              <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+                Replicated scope
+              </span>
+              <div className="mt-3 grid grid-cols-2 gap-x-2 gap-y-2.5 sm:grid-cols-3">
+                {[
+                  ["Buckets", "4"],
+                  ["Policies", "8"],
+                  ["Users", "0"],
+                  ["Groups", "0"],
+                  ["ILM rules", "0"],
+                  ["ILM expiry", "Off"],
+                ].map(([label, value]) => (
+                  <div key={label}>
+                    <p className="text-[12px] font-semibold text-foreground">{value}</p>
+                    <p className="font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">{label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="p-3">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-semibold text-foreground">Peer Sites</span>
+            <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">membership · sync</span>
+          </div>
+
+          <div className="mt-2 overflow-hidden border border-border">
+            <div className="grid grid-cols-[1.15fr_1.25fr_0.6fr] gap-1 border-b border-border bg-card px-2 py-1.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+              <span>Site</span>
+              <span>Endpoint</span>
+              <span className="text-right">Sync</span>
+            </div>
+            {peers.map((peer, index) => (
+              <Reveal key={peer.endpoint} delay={0.12 + index * 0.08}>
+                <div
+                  className={cn(
+                    "grid grid-cols-[1.15fr_1.25fr_0.6fr] items-center gap-1 border-b border-border px-2 py-2 last:border-b-0",
+                    peer.current && "bg-brand/5"
+                  )}
+                >
+                  <div className="flex min-w-0 items-center gap-1.5">
+                    <ServerIcon className={cn("size-3 shrink-0", peer.current ? "text-brand" : "text-muted-foreground")} />
+                    <span className="truncate text-[10px] font-semibold text-foreground">{peer.name}</span>
+                    {peer.current ? (
+                      <span className="shrink-0 border border-border bg-background px-1 py-px font-mono text-[6px] uppercase tracking-[0.1em] text-muted-foreground">
+                        current
+                      </span>
+                    ) : null}
+                  </div>
+                  <span className="truncate font-mono text-[8px] text-muted-foreground">{peer.endpoint}</span>
+                  <span className="justify-self-end border border-foreground/80 bg-foreground px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-background">
+                    enabled
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-2 flex items-center justify-between font-mono text-[7px] uppercase tracking-[0.14em] text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5">
+              <Link2Icon className="size-3 text-brand" />
+              full mesh · bidirectional
+            </span>
+            <span className="text-brand">service account auto</span>
+          </div>
+        </div>
+      </div>
+    </IllustrationFrame>
+  );
+}
+
 const illustrations: Record<ProductIllustrationVariant, ((props: { sectionIndex: number }) => ReactNode)> = {
   data: ({ sectionIndex }) => (sectionIndex === 0 ? <S3ManagementVisual /> : <S3TablesVisual />),
   scale: ({ sectionIndex }) => {
@@ -647,7 +902,6 @@ const illustrations: Record<ProductIllustrationVariant, ((props: { sectionIndex:
       <ErasureCodingVisual key="ec" />,
       <ScalingVisual key="scaling" />,
       <HealingVisual key="healing" />,
-      <DistributedVisual key="site-replication" entityLabel="Site" />,
     ];
     return visuals[sectionIndex] ?? visuals[0];
   },
@@ -663,6 +917,13 @@ const illustrations: Record<ProductIllustrationVariant, ((props: { sectionIndex:
   },
   security: ({ sectionIndex }) => {
     const visuals = [<IamVisual key="iam" />, <EncryptionVisual key="encryption" />, <AuditVisual key="audit" />, <AuthenticationVisual key="authentication" />, <MtlsVisual key="mtls" />];
+    return visuals[sectionIndex] ?? visuals[0];
+  },
+  replication: ({ sectionIndex }) => {
+    const visuals = [
+      <BucketMultiTargetVisual key="bucket-multi-target" />,
+      <FourSiteMeshVisual key="four-site-mesh" />,
+    ];
     return visuals[sectionIndex] ?? visuals[0];
   },
 };

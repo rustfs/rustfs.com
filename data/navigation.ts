@@ -7,6 +7,12 @@ export interface NavigationItem {
 
 export const productNavigation: NavigationItem[] = [
   {
+    title: "Replication",
+    href: "/product/replication",
+    description: "Site and bucket replication for remote data copies and recovery planning.",
+    items: ["Sites", "Buckets", "Sync"],
+  },
+  {
     title: "Multi-protocol access",
     href: "/product/multiple-protocol-access",
     description: "S3 is primary. WebDAV, Swift, FTP/FTPS, and MCP need the setup in the docs.",
@@ -36,6 +42,7 @@ export const productNavigation: NavigationItem[] = [
     description: "Cluster management, OTEL signals, and rc operations.",
     items: ["Cluster management", "OTEL", "rc"],
   },
+
 ];
 
 export const resourceNavigation: NavigationItem[] = [
@@ -75,6 +82,7 @@ export const footerNavigation = [
   {
     title: "Product",
     links: [
+      { title: "Replication", href: "/product/replication" },
       { title: "S3-compatible", href: "/product/multiple-protocol-access#s3-api-compatibility" },
       { title: "S3 Tables", href: "/product/data-management#s3-tables" },
       { title: "Multi-protocol access", href: "/product/multiple-protocol-access" },
@@ -83,6 +91,7 @@ export const footerNavigation = [
       { title: "Operations & observability", href: "/product/operational-observability" },
       { title: "Multi-tenant management", href: "/product/operational-observability#multi-tenant-management" },
       { title: "Security & Compliance", href: "/product/security-compliance" },
+
     ],
   },
   {

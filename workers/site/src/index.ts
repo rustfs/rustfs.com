@@ -108,6 +108,9 @@ export const PERMANENT_REDIRECTS: Record<string, string> = {
   "/zh/": "https://rustfs.com.cn/",
   "/contact": "/contact-us/",
   "/contact/": "/contact-us/",
+  "/product/site-replication": "/product/replication/",
+  "/product/site-replication/": "/product/replication/",
+  "/product/replication": "/product/replication/",
 };
 
 export function permanentRedirect(pathname: string, requestUrl: string): Response | null {

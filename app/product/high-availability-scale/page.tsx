@@ -103,26 +103,6 @@ const sections: FeaturePageSection[] = [
       },
     ],
   },
-  {
-    title: "Site Replication",
-    items: [
-      {
-        title: "Multi-site replication",
-        description:
-          "Adds reliability and disaster recovery across sites.",
-      },
-      {
-        title: "Bidirectional synchronization",
-        description:
-          "Keeps data consistent across distributed sites.",
-      },
-      {
-        title: "Location-aware routing",
-        description:
-          "Routes requests for lower access latency.",
-      },
-    ],
-  },
 ];
 
 export default function HighAvailabilityScalePage() {

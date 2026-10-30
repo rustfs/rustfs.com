@@ -16,6 +16,7 @@ RustFS supports distributed deployment, erasure coding, data management, identit
 - [Multiple protocol access](https://rustfs.com/product/multiple-protocol-access/): S3, WebDAV, Swift, FTP(S), and MCP access.
 - [Data management](https://rustfs.com/product/data-management/): Buckets, lifecycle rules, Object Lock, versioning, multipart uploads, and S3 Tables.
 - [High availability and scale](https://rustfs.com/product/high-availability-scale/): Distributed topology, erasure coding, pool orchestration, rebalancing, and self-healing.
+- [Replication](https://rustfs.com/product/replication/): Site replication across independent RustFS deployments and directional bucket replication with sync or async modes, prefix/tag filters, and multi-target copies. Plan DNS, traffic routing, and application failover separately.
 - [Security and compliance](https://rustfs.com/product/security-compliance/): IAM, OIDC, mTLS, encryption, KMS, audit, and event handling.
 - [Operations and observability](https://rustfs.com/product/operational-observability/): Cluster management, OpenTelemetry signals, and rc operations.
 
