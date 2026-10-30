@@ -97,6 +97,7 @@ const sections: FeaturePageSection[] = [
         title: "Convenient ops",
         description:
           "Set up and manage site replication from the Web Console or the rc CLI. Keep administration credentials on a secured host.",
+        href: "/download/cli",
       },
       {
         title: "Status monitoring",
