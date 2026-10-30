@@ -17,3 +17,4 @@
 # Site replication is covered by the combined replication product page.
 /product/site-replication /product/replication/ 301
 /product/site-replication/ /product/replication/ 301
+/product/replication /product/replication/ 301

@@ -146,12 +146,6 @@ export default function ReplicationPage() {
         { label: "Talk to us", href: "/contact-us/" },
         { label: "Download", href: "/download", variant: "outline" },
       ]}
-    >
-      <p className="text-base leading-8 text-muted-foreground">
-        Replication complements backup; it does not replace it. Configured deletions and unwanted changes
-        can propagate. Combine replication with versioning, Object Lock where supported, access isolation,
-        and tested recovery procedures.
-      </p>
-    </FeaturePage>
+    />
   );
 }

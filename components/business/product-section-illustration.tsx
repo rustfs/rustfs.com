@@ -902,7 +902,6 @@ const illustrations: Record<ProductIllustrationVariant, ((props: { sectionIndex:
       <ErasureCodingVisual key="ec" />,
       <ScalingVisual key="scaling" />,
       <HealingVisual key="healing" />,
-      <DistributedVisual key="site-replication" entityLabel="Site" />,
     ];
     return visuals[sectionIndex] ?? visuals[0];
   },

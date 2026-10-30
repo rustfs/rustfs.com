@@ -110,6 +110,7 @@ export const PERMANENT_REDIRECTS: Record<string, string> = {
   "/contact/": "/contact-us/",
   "/product/site-replication": "/product/replication/",
   "/product/site-replication/": "/product/replication/",
+  "/product/replication": "/product/replication/",
 };
 
 export function permanentRedirect(pathname: string, requestUrl: string): Response | null {

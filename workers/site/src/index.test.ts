@@ -114,6 +114,7 @@ test("permanently redirects locale, duplicate contact, and legacy replication UR
     ["https://rustfs.com/contact/", "https://rustfs.com/contact-us/"],
     ["https://www.rustfs.com/contact/", "https://www.rustfs.com/contact-us/"],
     ["https://rustfs.com/product/site-replication", "https://rustfs.com/product/replication/"],
+    ["https://rustfs.com/product/replication", "https://rustfs.com/product/replication/"],
     ["https://rustfs.com/product/site-replication/", "https://rustfs.com/product/replication/"],
     ["https://www.rustfs.com/product/site-replication/", "https://www.rustfs.com/product/replication/"],
   ] as const;

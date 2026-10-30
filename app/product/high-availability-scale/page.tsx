@@ -103,28 +103,6 @@ const sections: FeaturePageSection[] = [
       },
     ],
   },
-  {
-    title: "Replication",
-    items: [
-      {
-        title: "Multi-site and bucket replication",
-        description:
-          "Align data across independent RustFS sites, or copy selected buckets with sync or async rules. See the Replication product page.",
-        href: "/product/replication",
-      },
-      {
-        title: "Asynchronous copies",
-        description:
-          "A successful write confirms only the site that accepted it. Measure replication lag under your workload.",
-        href: "https://docs.rustfs.com/en/operations/high-availability/site-replication",
-      },
-      {
-        title: "Recovery planned separately",
-        description:
-          "DNS failover, traffic routing, and application recovery stay outside replication.",
-      },
-    ],
-  },
 ];
 
 export default function HighAvailabilityScalePage() {
