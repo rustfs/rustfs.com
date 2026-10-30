@@ -742,9 +742,9 @@ function BucketMultiTargetVisual() {
 
 function FourSiteMeshVisual() {
   const peers = [
-    { name: "site1.rustfs.com", endpoint: "https://site1.rustfs.com", current: false },
-    { name: "Current site", endpoint: "https://site2.rustfs.com", current: true },
-    { name: "site3.rustfs.com", endpoint: "https://site3.rustfs.com", current: false },
+    { name: "Site 1", endpoint: "https://site1.rustfs.com", current: true },
+    { name: "Site 2", endpoint: "https://site2.rustfs.com", current: false },
+    { name: "Site 3", endpoint: "https://site3.rustfs.com", current: false },
   ];
 
   return (
@@ -764,23 +764,19 @@ function FourSiteMeshVisual() {
         <div className="grid gap-2 border-b border-border p-3 sm:grid-cols-2">
           <Reveal>
             <div className="border border-brand/50 bg-brand/5 p-3">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
-                  Replication summary
-                </span>
-                <span className="border border-foreground/80 bg-foreground px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-background">
-                  enabled
-                </span>
-              </div>
-              <div className="mt-3 grid grid-cols-3 gap-2">
+              <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+                Replication summary
+              </span>
+              <div className="mt-3 grid grid-cols-2 gap-x-2 gap-y-2.5">
                 {[
+                  ["Status", "Enabled"],
                   ["Sites", "3"],
                   ["Objects", "13"],
                   ["Size", "40.9 MiB"],
                 ].map(([label, value]) => (
                   <div key={label}>
-                    <p className="text-sm font-semibold tracking-tight text-foreground">{value}</p>
-                    <p className="mt-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">{label}</p>
+                    <p className="text-[12px] font-semibold text-foreground">{value}</p>
+                    <p className="font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">{label}</p>
                   </div>
                 ))}
               </div>
@@ -792,7 +788,7 @@ function FourSiteMeshVisual() {
               <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
                 Replicated scope
               </span>
-              <div className="mt-3 grid grid-cols-3 gap-x-2 gap-y-2.5">
+              <div className="mt-3 grid grid-cols-2 gap-x-2 gap-y-2.5 sm:grid-cols-3">
                 {[
                   ["Buckets", "4"],
                   ["Policies", "8"],
@@ -834,6 +830,11 @@ function FourSiteMeshVisual() {
                   <div className="flex min-w-0 items-center gap-1.5">
                     <ServerIcon className={cn("size-3 shrink-0", peer.current ? "text-brand" : "text-muted-foreground")} />
                     <span className="truncate text-[10px] font-semibold text-foreground">{peer.name}</span>
+                    {peer.current ? (
+                      <span className="shrink-0 border border-border bg-background px-1 py-px font-mono text-[6px] uppercase tracking-[0.1em] text-muted-foreground">
+                        current
+                      </span>
+                    ) : null}
                   </div>
                   <span className="truncate font-mono text-[8px] text-muted-foreground">{peer.endpoint}</span>
                   <span className="justify-self-end border border-foreground/80 bg-foreground px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-background">
