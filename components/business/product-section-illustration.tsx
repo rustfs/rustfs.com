@@ -647,19 +647,20 @@ function MtlsVisual() {
 }
 
 function BucketMultiTargetVisual() {
-  const targets = [
-    { label: "dr-east", detail: "full · async", accent: true },
-    { label: "archive", detail: "logs/ · prefix", accent: false },
-    { label: "analytics", detail: "env=prod · tags", accent: false },
+  const toggles = [
+    { label: "Use TLS", on: false },
+    { label: "Existing objects", on: true },
+    { label: "Delete markers", on: true },
+    { label: "Replicate delete", on: true },
   ];
 
   return (
-    <IllustrationFrame label="Add replication rule">
+    <IllustrationFrame label="Bucket replication rule">
       <div className="w-full max-w-lg border border-border bg-background shadow-[0_12px_40px_-24px_rgba(0,0,0,0.45)]">
         <div className="flex items-center justify-between border-b border-border px-3 py-2.5">
           <div className="flex items-center gap-2">
             <GitBranchIcon className="size-3.5 text-brand" />
-            <span className="text-[11px] font-semibold text-foreground">Bucket: invoices</span>
+            <span className="text-[11px] font-semibold text-foreground">Add Replication Rule</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="border border-border bg-card px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
@@ -671,69 +672,107 @@ function BucketMultiTargetVisual() {
           </div>
         </div>
 
-        <div className="grid gap-3 p-3 sm:grid-cols-[0.9fr_auto_1.1fr] sm:items-center">
+        <div className="grid gap-2 border-b border-border p-3 sm:grid-cols-[1fr_auto_1fr] sm:items-stretch">
           <Reveal>
-            <div className="border border-brand/60 bg-brand/5 p-3">
-              <div className="flex items-center gap-2">
+            <div className="flex h-full flex-col border border-brand/60 bg-brand/5 p-3">
+              <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-brand">Source bucket</span>
+              <div className="mt-2 flex items-center gap-2">
                 <DatabaseIcon className="size-4 text-brand" />
-                <span className="text-xs font-semibold text-foreground">Source</span>
+                <span className="text-xs font-semibold text-foreground">invoices</span>
               </div>
-              <p className="mt-2 font-mono text-[9px] text-muted-foreground">invoices · versioned</p>
-              <div className="mt-3 flex flex-wrap gap-1">
-                {["existing objects", "delete markers"].map((chip) => (
-                  <span
-                    key={chip}
-                    className="inline-flex items-center gap-1 border border-brand/40 bg-background px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-brand"
-                  >
-                    <CheckIcon className="size-2.5" />
-                    {chip}
-                  </span>
-                ))}
+              <p className="mt-2 font-mono text-[8px] uppercase tracking-[0.1em] text-muted-foreground">
+                versioned · local
+              </p>
+              <div className="mt-auto flex flex-wrap gap-1 pt-3">
+                <span className="border border-border bg-background px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">
+                  prefix logs/
+                </span>
+                <span className="border border-border bg-background px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">
+                  tag env=prod
+                </span>
               </div>
             </div>
           </Reveal>
 
-          <div className="hidden flex-col items-center gap-2 sm:flex">
+          <div className="hidden flex-col items-center justify-center gap-1 sm:flex">
             <DataFlowLine direction="horizontal" className="w-8" />
-            <div className="flex flex-col items-center gap-1">
-              <span className="border border-border bg-card px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
-                prefix
-              </span>
-              <TagsIcon className="size-3 text-muted-foreground" />
-              <span className="border border-border bg-card px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
-                tags
-              </span>
-            </div>
-            <DataFlowLine direction="horizontal" className="w-8" />
+            <ArrowRightLeftIcon className="size-3.5 text-brand" />
+            <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">replicate</span>
           </div>
 
-          <div className="grid gap-2">
-            {targets.map((target, index) => (
-              <Reveal key={target.label} delay={index * 0.12}>
-                <div
-                  className={cn(
-                    "flex items-center gap-2 border px-2.5 py-2",
-                    target.accent ? "border-brand/50 bg-brand/5" : "border-border bg-card"
-                  )}
-                >
-                  <GlobeIcon className={cn("size-3.5 shrink-0", target.accent ? "text-brand" : "text-muted-foreground")} />
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-[11px] font-semibold text-foreground">{target.label}</p>
-                    <p className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">{target.detail}</p>
-                  </div>
-                  <ArrowRightLeftIcon className="size-3 shrink-0 text-brand/80" />
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal delay={0.1}>
+            <div className="flex h-full flex-col border border-border bg-card p-3">
+              <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+                Destination bucket
+              </span>
+              <div className="mt-2 flex items-center gap-2">
+                <DatabaseIcon className="size-4 text-muted-foreground" />
+                <span className="text-xs font-semibold text-foreground">invoices-dr</span>
+              </div>
+              <p className="mt-2 truncate font-mono text-[8px] text-muted-foreground">
+                https://site2.rustfs.com
+              </p>
+              <p className="mt-auto pt-3 font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">
+                region us-east-1 · standard
+              </p>
+            </div>
+          </Reveal>
         </div>
 
-        <div className="flex items-center justify-between border-t border-border bg-card/60 px-3 py-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
-          <span className="inline-flex items-center gap-1.5">
-            <LayersIcon className="size-3 text-brand" />
-            one rule · many remotes
-          </span>
-          <span className="text-brand">rpo by mode</span>
+        <div className="grid gap-3 p-3 sm:grid-cols-2">
+          <div>
+            <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">Options</span>
+            <div className="mt-2 space-y-1.5">
+              {toggles.map((item, index) => (
+                <Reveal key={item.label} delay={0.12 + index * 0.05}>
+                  <div className="flex items-center justify-between border border-border bg-card px-2 py-1.5">
+                    <span className="text-[10px] font-medium text-foreground">{item.label}</span>
+                    <span
+                      className={cn(
+                        "relative h-3.5 w-6 rounded-full",
+                        item.on ? "bg-foreground" : "bg-muted-foreground/25"
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "absolute top-0.5 size-2.5 rounded-full bg-background",
+                          item.on ? "right-0.5" : "left-0.5"
+                        )}
+                      />
+                    </span>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">Limits</span>
+            <div className="mt-2 grid gap-2">
+              <Reveal delay={0.2}>
+                <div className="border border-border bg-card p-2.5">
+                  <p className="font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">
+                    Health check interval
+                  </p>
+                  <p className="mt-1 text-[12px] font-semibold text-foreground">
+                    60 <span className="font-mono text-[8px] font-normal text-muted-foreground">seconds</span>
+                  </p>
+                </div>
+              </Reveal>
+              <Reveal delay={0.28}>
+                <div className="border border-border bg-card p-2.5">
+                  <p className="font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">Bandwidth limit</p>
+                  <p className="mt-1 text-[12px] font-semibold text-foreground">
+                    100 <span className="font-mono text-[8px] font-normal text-muted-foreground">GiB/s</span>
+                  </p>
+                </div>
+              </Reveal>
+              <div className="flex items-center justify-between px-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+                <span>multi-target ready</span>
+                <span className="text-brand">rpo by mode</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </IllustrationFrame>
