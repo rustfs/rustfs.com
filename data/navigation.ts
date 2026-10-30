@@ -25,10 +25,10 @@ export const productNavigation: NavigationItem[] = [
     items: ["EC", "Rebalance", "Healing"],
   },
   {
-    title: "Site Replication",
-    href: "/product/site-replication",
-    description: "Link independent RustFS deployments. Sync buckets, versions, and supported IAM data.",
-    items: ["Sites", "Buckets", "IAM"],
+    title: "Replication",
+    href: "/product/replication",
+    description: "Site and bucket replication for multi-site sync and selective copies with sync or async RPO choice.",
+    items: ["Sites", "Buckets", "Sync"],
   },
   {
     title: "Security & Compliance",
@@ -86,7 +86,7 @@ export const footerNavigation = [
       { title: "Multi-protocol access", href: "/product/multiple-protocol-access" },
       { title: "Data Management", href: "/product/data-management" },
       { title: "High Availability & Scale", href: "/product/high-availability-scale" },
-      { title: "Site Replication", href: "/product/site-replication" },
+      { title: "Replication", href: "/product/replication" },
       { title: "Operations & observability", href: "/product/operational-observability" },
       { title: "Multi-tenant management", href: "/product/operational-observability#multi-tenant-management" },
       { title: "Security & Compliance", href: "/product/security-compliance" },

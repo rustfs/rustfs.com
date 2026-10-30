@@ -639,17 +639,58 @@ function MtlsVisual() {
   );
 }
 
-function SiteRelationshipVisual() {
-  const sites = ["site-a", "site-b", "site-c"];
+function BucketMultiTargetVisual() {
+  const targets = [
+    { label: "Remote site A", detail: "full bucket" },
+    { label: "Remote site B", detail: "prefix filter" },
+    { label: "Remote site C", detail: "tag filter" },
+  ];
 
   return (
-    <IllustrationFrame label="Linked deployments">
-      <div className="w-full max-w-lg">
+    <IllustrationFrame label="Bucket multi-target">
+      <div className="grid w-full max-w-lg gap-4">
+        <Reveal>
+          <Tile icon={DatabaseIcon} label="Source bucket" detail="versioned · sync / async" accent />
+        </Reveal>
+        <div className="flex items-center gap-3">
+          <DataFlowLine direction="horizontal" className="flex-1" />
+          <span className="shrink-0 border border-border bg-background px-2 py-1 font-mono text-[8px] uppercase tracking-[0.12em] text-muted-foreground">
+            full · prefix · tags
+          </span>
+          <DataFlowLine direction="horizontal" className="flex-1" />
+        </div>
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
+          {targets.map((target, index) => (
+            <Reveal key={target.label} delay={index * 0.1}>
+              <Tile icon={DatabaseIcon} label={target.label} detail={target.detail} />
+            </Reveal>
+          ))}
+        </div>
+        <div className="flex items-center justify-between border border-border bg-background px-3 py-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
+          <span>one source → many remotes</span>
+          <span className="text-brand">rpo choice</span>
+        </div>
+      </div>
+    </IllustrationFrame>
+  );
+}
+
+function FourSiteMeshVisual() {
+  const sites = ["site-a", "site-b", "site-c", "site-d"];
+
+  return (
+    <IllustrationFrame label="Four-site mesh">
+      <div className="w-full max-w-lg">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
           {sites.map((site, index) => (
             <Reveal key={site} delay={index * 0.1}>
-              <div className={cn("border bg-background p-3", index === 1 ? "border-brand/60 bg-brand/5" : "border-border")}>
-                <ServerIcon className={cn("size-4", index === 1 ? "text-brand" : "text-muted-foreground")} />
+              <div
+                className={cn(
+                  "border bg-background p-3",
+                  index === 0 ? "border-brand/60 bg-brand/5" : "border-border"
+                )}
+              >
+                <ServerIcon className={cn("size-4", index === 0 ? "text-brand" : "text-muted-foreground")} />
                 <p className="mt-3 text-xs font-semibold text-foreground">{site}</p>
                 <div className="mt-3 grid grid-cols-3 gap-1">
                   {["D1", "D2", "V"].map((shard) => (
@@ -668,88 +709,15 @@ function SiteRelationshipVisual() {
             </Reveal>
           ))}
         </div>
-        <div className="mt-4 flex items-center justify-between border border-border bg-background px-3 py-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
-          <span>one replicate add</span>
-          <span className="text-brand">async</span>
-        </div>
-      </div>
-    </IllustrationFrame>
-  );
-}
-
-function ReplicatedResourcesVisual() {
-  const resources = [
-    { icon: DatabaseIcon, label: "Buckets and versions", detail: "object versions" },
-    { icon: FileTextIcon, label: "Delete markers", detail: "versioned deletes" },
-    { icon: UsersIcon, label: "Supported IAM", detail: "users groups policies" },
-  ];
-
-  return (
-    <IllustrationFrame label="Replicated resources">
-      <div className="grid w-full max-w-lg gap-2">
-        {resources.map((resource, index) => (
-          <Reveal key={resource.label} delay={index * 0.1}>
-            <Tile icon={resource.icon} label={resource.label} detail={resource.detail} accent={index === 0} />
-          </Reveal>
-        ))}
-        <div className="mt-2 grid grid-cols-8 gap-1">
-          {Array.from({ length: 8 }).map((_, index) => (
-            <span
-              key={index}
-              className={cn("h-4 border", index > 5 ? "border-brand/60 bg-brand/20" : "border-border bg-background")}
-            />
-          ))}
-        </div>
-        <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">versioning required on every site</p>
-      </div>
-    </IllustrationFrame>
-  );
-}
-
-function BucketRuleVisual() {
-  return (
-    <IllustrationFrame label="Bucket rule">
-      <div className="grid w-full max-w-lg grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3">
-        <Tile icon={DatabaseIcon} label="Source bucket" detail="versioned" />
-        <div className="flex flex-col items-center gap-2">
-          <DataFlowLine direction="horizontal" className="w-8 sm:w-10" />
-          <span className="border border-border bg-background px-2 py-2 text-center font-mono text-[8px] uppercase tracking-[0.12em] text-muted-foreground">
-            prefix / tags
-          </span>
-          <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-brand">async</span>
-        </div>
-        <Tile icon={DatabaseIcon} label="Target bucket" detail="s3-compatible" accent />
-      </div>
-    </IllustrationFrame>
-  );
-}
-
-function ReplicationStatusVisual() {
-  const rows = [
-    ["buckets", "per site"],
-    ["iam", "users policies"],
-    ["metrics", "sample lag"],
-  ];
-
-  return (
-    <IllustrationFrame label="Replication status">
-      <div className="w-full max-w-lg border border-border bg-muted/60 p-4">
-        <div className="flex items-center gap-2 font-mono text-[10px] text-muted-foreground">
-          <span className="text-brand">$</span>
-          <span className="truncate">rc admin replicate status site1</span>
-        </div>
         <div className="mt-4 grid gap-2">
-          {rows.map(([label, detail], index) => (
-            <Reveal key={label} delay={index * 0.1}>
-              <div className="flex items-center justify-between border border-border bg-background px-3 py-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
-                <span>{label}</span>
-                <span className="text-brand">{detail}</span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <div className="mt-4 border border-border bg-background px-3 py-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
-          resync status is a saved snapshot
+          <div className="flex items-center justify-center gap-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
+            <span className="border border-border bg-background px-2 py-1">a ↔ b ↔ c ↔ d</span>
+            <span className="text-brand">bidirectional</span>
+          </div>
+          <div className="flex items-center justify-between border border-border bg-background px-3 py-2 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
+            <span>full mesh site sync</span>
+            <span className="text-brand">async</span>
+          </div>
         </div>
       </div>
     </IllustrationFrame>
@@ -784,10 +752,8 @@ const illustrations: Record<ProductIllustrationVariant, ((props: { sectionIndex:
   },
   replication: ({ sectionIndex }) => {
     const visuals = [
-      <SiteRelationshipVisual key="site-relationship" />,
-      <ReplicatedResourcesVisual key="replicated-resources" />,
-      <BucketRuleVisual key="bucket-rule" />,
-      <ReplicationStatusVisual key="replication-status" />,
+      <BucketMultiTargetVisual key="bucket-multi-target" />,
+      <FourSiteMeshVisual key="four-site-mesh" />,
     ];
     return visuals[sectionIndex] ?? visuals[0];
   },

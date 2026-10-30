@@ -104,13 +104,13 @@ const sections: FeaturePageSection[] = [
     ],
   },
   {
-    title: "Site Replication",
+    title: "Replication",
     items: [
       {
-        title: "Multi-site replication",
+        title: "Multi-site and bucket replication",
         description:
-          "Links independent RustFS deployments and synchronizes buckets, object versions, delete markers, and supported IAM data.",
-        href: "/product/site-replication",
+          "Align data across independent RustFS sites, or copy selected buckets with sync or async rules. See the Replication product page.",
+        href: "/product/replication",
       },
       {
         title: "Asynchronous copies",
@@ -121,7 +121,7 @@ const sections: FeaturePageSection[] = [
       {
         title: "Recovery planned separately",
         description:
-          "DNS failover, traffic routing, and application recovery stay outside site replication.",
+          "DNS failover, traffic routing, and application recovery stay outside replication.",
       },
     ],
   },
