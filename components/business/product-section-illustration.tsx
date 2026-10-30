@@ -742,9 +742,9 @@ function BucketMultiTargetVisual() {
 
 function FourSiteMeshVisual() {
   const peers = [
-    { name: "site-1", endpoint: "20.45.41.89:9000", current: false },
-    { name: "site-alpha", endpoint: "72.145.11.191:9000", current: true },
-    { name: "site-2", endpoint: "20.97.122.44:9000", current: false },
+    { name: "site1.rustfs.com", endpoint: "https://site1.rustfs.com", current: false },
+    { name: "Current site", endpoint: "https://site2.rustfs.com", current: true },
+    { name: "site3.rustfs.com", endpoint: "https://site3.rustfs.com", current: false },
   ];
 
   return (
@@ -761,23 +761,54 @@ function FourSiteMeshVisual() {
           </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 border-b border-border p-3 sm:grid-cols-4">
-          {[
-            { label: "Current site", value: "site-alpha", detail: ":9000" },
-            { label: "Status", value: "Enabled", detail: "3 sites", accent: true },
-            { label: "Scope", value: "4 buckets", detail: "8 policies" },
-            { label: "ILM expiry", value: "Off", detail: "optional" },
-          ].map((card, index) => (
-            <Reveal key={card.label} delay={index * 0.06}>
-              <div className="border border-border bg-card p-2">
-                <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">{card.label}</span>
-                <p className={cn("mt-1 truncate text-[11px] font-semibold", card.accent ? "text-brand" : "text-foreground")}>
-                  {card.value}
-                </p>
-                <p className="mt-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">{card.detail}</p>
+        <div className="grid gap-2 border-b border-border p-3 sm:grid-cols-2">
+          <Reveal>
+            <div className="border border-brand/50 bg-brand/5 p-3">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+                  Replication summary
+                </span>
+                <span className="border border-foreground/80 bg-foreground px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-background">
+                  enabled
+                </span>
               </div>
-            </Reveal>
-          ))}
+              <div className="mt-3 grid grid-cols-3 gap-2">
+                {[
+                  ["Sites", "3"],
+                  ["Objects", "13"],
+                  ["Size", "40.9 MiB"],
+                ].map(([label, value]) => (
+                  <div key={label}>
+                    <p className="text-sm font-semibold tracking-tight text-foreground">{value}</p>
+                    <p className="mt-0.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">{label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            <div className="border border-border bg-card p-3">
+              <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+                Replicated scope
+              </span>
+              <div className="mt-3 grid grid-cols-3 gap-x-2 gap-y-2.5">
+                {[
+                  ["Buckets", "4"],
+                  ["Policies", "8"],
+                  ["Users", "0"],
+                  ["Groups", "0"],
+                  ["ILM rules", "0"],
+                  ["ILM expiry", "Off"],
+                ].map(([label, value]) => (
+                  <div key={label}>
+                    <p className="text-[12px] font-semibold text-foreground">{value}</p>
+                    <p className="font-mono text-[7px] uppercase tracking-[0.1em] text-muted-foreground">{label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
 
         <div className="p-3">
@@ -787,27 +818,22 @@ function FourSiteMeshVisual() {
           </div>
 
           <div className="mt-2 overflow-hidden border border-border">
-            <div className="grid grid-cols-[1.1fr_1.2fr_0.7fr] gap-1 border-b border-border bg-card px-2 py-1.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
+            <div className="grid grid-cols-[1.15fr_1.25fr_0.6fr] gap-1 border-b border-border bg-card px-2 py-1.5 font-mono text-[7px] uppercase tracking-[0.12em] text-muted-foreground">
               <span>Site</span>
               <span>Endpoint</span>
               <span className="text-right">Sync</span>
             </div>
             {peers.map((peer, index) => (
-              <Reveal key={peer.name} delay={0.12 + index * 0.08}>
+              <Reveal key={peer.endpoint} delay={0.12 + index * 0.08}>
                 <div
                   className={cn(
-                    "grid grid-cols-[1.1fr_1.2fr_0.7fr] items-center gap-1 border-b border-border px-2 py-2 last:border-b-0",
+                    "grid grid-cols-[1.15fr_1.25fr_0.6fr] items-center gap-1 border-b border-border px-2 py-2 last:border-b-0",
                     peer.current && "bg-brand/5"
                   )}
                 >
                   <div className="flex min-w-0 items-center gap-1.5">
                     <ServerIcon className={cn("size-3 shrink-0", peer.current ? "text-brand" : "text-muted-foreground")} />
                     <span className="truncate text-[10px] font-semibold text-foreground">{peer.name}</span>
-                    {peer.current ? (
-                      <span className="shrink-0 border border-border bg-background px-1 py-px font-mono text-[6px] uppercase tracking-[0.1em] text-muted-foreground">
-                        current
-                      </span>
-                    ) : null}
                   </div>
                   <span className="truncate font-mono text-[8px] text-muted-foreground">{peer.endpoint}</span>
                   <span className="justify-self-end border border-foreground/80 bg-foreground px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.1em] text-background">
