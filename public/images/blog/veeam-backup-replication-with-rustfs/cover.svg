@@ -11,12 +11,12 @@
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
   <g font-family="Helvetica, Arial, sans-serif">
-    <text x="600" y="150" text-anchor="middle" fill="#e5e7eb" font-size="30" letter-spacing="6">INTEGRATION VALIDATED</text>
+    <text x="600" y="150" text-anchor="middle" fill="#e5e7eb" font-size="30" letter-spacing="6">LAB BACKUP &amp; FILE RECOVERY</text>
     <text x="600" y="250" text-anchor="middle" fill="#ffffff" font-size="64" font-weight="bold">Veeam Backup &amp; Replication 13</text>
     <text x="600" y="330" text-anchor="middle" fill="url(#accent)" font-size="52" font-weight="bold">× RustFS</text>
     <g font-size="24" fill="#9ca3af">
       <rect x="150" y="420" width="260" height="80" rx="10" fill="#1f2937" stroke="#374151"/>
-      <text x="280" y="468" text-anchor="middle" fill="#e5e7eb">Veeam Backup &amp; Replication</text>
+      <text x="280" y="468" text-anchor="middle" fill="#e5e7eb">Windows Agent backup</text>
       <rect x="470" y="420" width="260" height="80" rx="10" fill="#1f2937" stroke="#374151"/>
       <text x="600" y="468" text-anchor="middle" fill="#e5e7eb">S3 API over HTTPS</text>
       <rect x="790" y="420" width="260" height="80" rx="10" fill="#1f2937" stroke="#374151"/>
@@ -24,6 +24,6 @@
       <line x1="410" y1="460" x2="470" y2="460" stroke="url(#accent)" stroke-width="3"/>
       <line x1="730" y1="460" x2="790" y2="460" stroke="url(#accent)" stroke-width="3"/>
     </g>
-    <text x="600" y="565" text-anchor="middle" fill="#6b7280" font-size="22">87.4 GB processed · 63 GB stored · 0 errors · file-level restore verified</text>
+    <text x="600" y="565" text-anchor="middle" fill="#9ca3af" font-size="22">87.4 GB processed · 63 GB transferred · one file restored</text>
   </g>
 </svg>

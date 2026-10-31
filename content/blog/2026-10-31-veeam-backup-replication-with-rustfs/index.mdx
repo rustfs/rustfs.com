@@ -1,10 +1,9 @@
 ---
-title: 'Veeam Backup & Replication 13 × RustFS: Zero-Error Backups to S3-Compatible Storage'
+title: 'Veeam with RustFS: S3 Backup and Restore Validation'
 slug: veeam-backup-replication-with-rustfs
 description: >-
-  We validated RustFS as an S3-compatible backup repository for Veeam Backup &
-  Replication 13 end to end: 87.4 GB processed, 63 GB stored in RustFS with zero
-  errors, and a file-level restore verified against the same bucket.
+  See how Veeam Backup & Replication 13 backed up a Windows machine to RustFS S3
+  storage, including licensing, setup pitfalls, and file recovery.
 date: '2026-10-31T02:00:00.000Z'
 tags:
   - RustFS
@@ -12,45 +11,51 @@ tags:
   - Backup
   - Veeam
   - Tutorial
-image: /images/blog/veeam-backup-replication-with-rustfs/cover.svg
+image: /images/blog/veeam-backup-replication-with-rustfs/cover.png
 ---
 
-Backup is the killer workload for S3-compatible object storage: petabytes of mostly-cold data, written sequentially in large streams, read back rarely but urgently. Veeam Backup & Replication is one of the most widely deployed backup platforms, and since v13 it runs natively on both Windows and a hardened Linux appliance. RustFS is an S3-compatible object store built in Rust. The question we set out to answer is simple: **can Veeam use RustFS as a backup repository, end to end, without any special-casing on either side?**
+Backup repositories need to accept sustained writes and make recovery data available when it matters. Veeam Backup & Replication (VBR) supports S3-compatible object storage as a backup destination. RustFS is a self-hosted object store built in Rust, with [S3-compatible data management](/product/data-management/). We tested a practical question: **could a Windows Agent backup job write to RustFS and recover a file from that backup?**
 
-We ran the full loop — deploy, configure, back up an entire Windows machine, verify the bytes in RustFS, then restore a file from RustFS. Here is what worked, what tripped us up, and the numbers.
+We configured the repository, backed up a Windows machine, inspected the stored objects, and restored one file. The backup job reported zero errors. This is a lab integration result, not a Veeam Ready certification, a storage performance benchmark, or a guarantee for every Veeam workload.
 
 ## The setup
 
-We kept the stack deliberately boring and reproducible:
+The test environment used:
 
 - **RustFS 1.0.1** running on k3s, with its data directory on a dedicated 200 GB data disk
 - **Traefik** (bundled with k3s) terminating TLS in front of RustFS, with a self-signed certificate whose SANs cover the endpoint hostname
 - **Veeam Backup & Replication 13.1.2.57** on a Windows VM, with the Veeam Agent protecting the machine itself
-- A bucket `veeam-repo` with **versioning + Object Lock enabled**, and a least-privilege IAM user scoped to that single bucket
+- A bucket `veeam-repo` with **versioning + Object Lock enabled**, and an IAM user scoped to that bucket
 
-Two bucket-side details matter more than they look. Versioning plus Object Lock lets Veeam offer its immutability feature — retention periods on backup blocks, ransomware protection at the storage layer. And the IAM user deliberately omits `s3:CreateBucket`: when Veeam's wizard offers "automatic bucket provisioning" and gets an access-denied, clicking *disable automatic provisioning and proceed* is the right answer, because the bucket already exists and the backup account has no business creating buckets.
+Versioning and Object Lock provide the storage capabilities needed for immutable backups, but enabling them on a bucket does not automatically protect every backup object. The screenshot below has **Make backups immutable** unchecked; this run did not validate retention enforcement or deletion protection.
 
-Registering the repository in VBR is a five-field wizard — service point, region, credentials, bucket, folder:
+The lab policy omitted `s3:CreateBucket`, so we disabled automatic bucket provisioning when the wizard reported Access Denied: the bucket already existed. It was not a proven minimum-permission policy and included legal-hold management and governance-retention bypass. Review and remove unnecessary privileges before production; a credential with `s3:BypassGovernanceRetention` can bypass governance-mode protection. RustFS's [IAM and transport security controls](/product/security-compliance/) require explicit configuration.
 
-![Adding the RustFS repository in VBR: bucket veeam-repo with versioning and Object Lock](/images/blog/veeam-backup-replication-with-rustfs/repository-wizard.png)
+Repository setup specifies the service point, region, credentials, bucket, folder, and connection mode. Create an object under the intended prefix if a new bucket's Folder picker is empty:
 
-Once added, the repository shows up as **S3-compatible** with the stored bytes counted — 64 GB, matching what landed in the bucket:
+![VBR repository wizard: veeam-repo selected, Folder empty, immutable backups unchecked](/images/blog/veeam-backup-replication-with-rustfs/repository-wizard.webp)
 
-![RustFS repository added: S3-compatible, Direct, 64 GB used space](/images/blog/veeam-backup-replication-with-rustfs/repository-added.png)
+The repository was configured as **Direct**, but Agent data access also depends on **Set Access Permissions → Security**. Veeam's default **Provided by the backup server** uses a gateway or mount server, even when the repository says Direct. Actual direct Agent access requires a compatible IAM/STS workflow or shared repository credentials; sharing credentials exposes them to protected machines and is less secure. The lab record does not identify the Security selection, so it does not prove a gateway-free data path. See [Veeam's repository access settings](https://helpcenter.veeam.com/docs/vbr/userguide/access_permissions.html?ver=13).
+
+The transferring Agent or gateway, as well as VBR, needs network access and certificate trust for the HTTPS endpoint. The self-signed certificate was a lab choice, not a production recommendation. Use a trusted certificate chain, or distribute the issuing private CA's root certificate to the relevant hosts, and keep hostname verification enabled.
+
+Once added, the repository appeared as **S3-compatible**. Veeam displayed 64 GB Used Space; this is its usage report, not an independent measurement of RustFS capacity:
+
+![RustFS repository added: S3-compatible, Direct, 64 GB used space](/images/blog/veeam-backup-replication-with-rustfs/repository-added.webp)
 
 ## The wall we hit: licensing
 
-Here is the thing worth knowing before you start: **backup to object storage is an Enterprise-tier Veeam feature.** VBR's free Community Edition will happily add the S3 repository, validate the connection, list the bucket, check versioning — and then refuse to run the job with "Backup to object storage requires a valid Enterprise edition license."
+**S3 object storage backup is an enterprise feature of Veeam.** In this configuration, Community Edition could add the repository but refused to run the backup job with "Backup to object storage requires a valid Enterprise edition license."
 
-That is not a RustFS limitation; it is Veeam's licensing gate. The remedy is the free 30-day evaluation key (Veeam Data Platform Trial), which unlocks the full feature set. If you are evaluating *Veeam + your-S3-vendor-of-choice*, budget for the trial key from day one.
+Download the software from the [official Veeam download page](https://www.veeam.com/products/downloads.html). For production, purchase a Veeam Enterprise license or another paid license that includes object storage backup. For a proof of concept (POC), [request a free 30-day Veeam Data Platform trial license](https://www.veeam.com/products/data-platform-trial.html) and install it before running the job. Downloading or installing VBR alone does not enable the feature; an evaluation license is not a long-term production license.
 
 ## Enrollment: agents don't install themselves
 
 The second stumbling block is agent deployment. Creating an Agent Backup Job and adding "localhost" registers the machine but does not install the agent — the job fails with "backup agent is missing." The intended flow is a **protection group** (Inventory → Physical and Cloud Infrastructure), which push-installs the agent over the admin share.
 
-That push, in turn, hits a Windows classic: local admin tokens are filtered over the network by UAC, so the installation fails with access denied until `LocalAccountTokenFilterPolicy` is set to `1` on the target. Also use the machine's real hostname with `HOSTNAME\user` credentials — `localhost` makes the wizard's bookkeeping grumpy. One reboot later, the agent column flips from "Reboot required" to installed, and the job runs.
+In this lab, local-account UAC remote filtering also blocked agent installation. Check the hostname, credentials, connectivity, and firewall before attributing an access-denied error to UAC. Use the machine's actual hostname with `HOSTNAME\user` credentials.
 
-None of this is RustFS-specific — it is the standard Veeam agent onboarding dance — but it is exactly the kind of thing that costs an afternoon if you have never done it.
+Only for confirmed local-account remote filtering should an administrator consider setting `LocalAccountTokenFilterPolicy` to `1`. This allows elevated remote tokens for local administrators, not just Veeam. Restrict access to a trusted management network, record the previous setting, and restore it when no longer needed while checking that Agent management still works. See [Microsoft's UAC remote restrictions](https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/user-account-control-and-remote-restriction). We rebooted when Veeam showed **Reboot required**.
 
 ## The numbers
 
@@ -59,37 +64,47 @@ With the plumbing done, we backed up an entire Windows 11 VM (the VBR server its
 | Metric | Value |
 | --- | --- |
 | Data processed | 87.4 GB (100%) |
-| Stored after dedupe/compression (1.2x) | 63 GB |
+| Data read, reported by Veeam | 78.7 GB |
+| Data transferred, reported by Veeam | 63 GB (Veeam displayed 1.2x) |
 | Objects in the bucket | 81,076 |
+| Object-listing total, reported by RustFS CLI | 64.03 GiB |
 | Duration | 23 min 15 s |
-| Processing rate | 102 MB/s average, 165 MB/s peak |
+| Veeam-reported processing rate | 102 MB/s average, 165 MB/s peak |
 | Errors / warnings | 0 / 0 |
 
-The result, as Veeam sees it — job **Success**, target RustFS, and one restore point waiting under Backups → Object Storage:
+The processed, transferred, repository-usage, and object-listing values have different scopes and units; they are not interchangeable capacity measurements. The processing rate is a Veeam job metric, not measured RustFS write throughput. This was one run, and Veeam reported the source as the bottleneck.
 
-![Backup job success against the RustFS repository](/images/blog/veeam-backup-replication-with-rustfs/job-success.png)
+Veeam showed job **Success** with RustFS as the target. The lab report also recorded a restore point under Backups → Object Storage:
 
-On the RustFS side, the bucket fills with the familiar Veeam layout — `Veeam/Backup/veeam/Clients/{agent-id}/…/CloudStg/Data/…` — ~1 MiB blocks named by content hash, each carrying an ETag and a version ID (versioning doing its job). Veeam exercised the full S3 surface it cares about: SigV4 signing, multipart uploads, bucket versioning queries, Object Lock detection, and long bursts of concurrent sequential writes. No RustFS-side changes, no special flags.
+![Windows Agent backup job with Last Result Success and target RustFS](/images/blog/veeam-backup-replication-with-rustfs/job-success.webp)
+
+The object listing showed data under `Veeam/Backup/veeam/Clients/{agent-id}/…/CloudStg/Data/…`, including blocks of roughly 1 MiB. That is an observation from this run, not a fixed block-size guarantee. Successful backup and recovery demonstrate this tested workflow, not complete S3 API coverage. We did not record a per-request trace proving every multipart, retention, or read operation.
 
 ## Restore: the part that actually matters
 
-A backup you cannot restore is a tarball of regrets. So we ran a file-level restore from the restore point: browse the backup, pick a small file, restore it.
+Job success alone is not enough. We opened the restore point in Backup Browser, selected a small file, and restored it.
 
-![File-level restore from the RustFS-backed backup: browsing the image and restoring a file, Success 1 / Errors 0](/images/blog/veeam-backup-replication-with-rustfs/restore-complete.png)
+![File-level restore from the RustFS-backed backup: Success 1, Errors 0, 1.2 KB transferred](/images/blog/veeam-backup-replication-with-rustfs/restore-complete.webp)
 
-Veeam fetched only the ~1 MiB blocks containing that file from RustFS (`GetObject` random point reads, the mirror image of the backup's sequential streams), reassembled the filesystem image, and extracted the file — completed successfully in two seconds with zero errors. Write path and read path: both verified against the same bucket.
+The restore dialog reported **Success: 1**, **Errors: 0**, **1.2 KB transferred**, and **00:00:01** elapsed. The lab report records checking the recovered file against the original. This validates backup-to-file-recovery for that file; it does not prove all restore points are recoverable or establish the exact S3 requests used.
 
-## One gap, already closed upstream
+We did not test bare-metal recovery, other Veeam workloads, retention expiry, or deletion protection. An immutable-backup POC should separately verify retention mode and expiry and confirm that protected versions cannot be deleted during retention using controlled test data. Do not run destructive checks against production backups.
 
-One cosmetic observation: VBR showed the repository's capacity as **N/A**. That is Veeam's SOSAPI (Smart Object Storage API) — a vendor extension where the storage system serves two well-known virtual XML documents describing its capabilities, so VBR can show real capacity and mark the repository as "S3-integrated."
+## Capacity reporting: merged code, not yet a released result
 
-RustFS tracks this as [issue #1511](https://github.com/rustfs/rustfs/issues/1511), and the implementation ([PR #9007](https://github.com/rustfs/rustfs/pull/9007)) is already merged: the two virtual keys now serve generated `system.xml`/`capacity.xml` matching what Veeam's parser expects. It has not shipped in a release yet (releases through 1.0.4 return `NoSuchKey` for these keys — we checked), so expect the capacity display to light up in the next release. Crucially, SOSAPI is a reporting nicety — backup and restore work fully without it, as this test demonstrates.
+VBR showed repository capacity as **N/A**. Veeam's SOSAPI (Smart Object Storage API) allows a storage system to advertise integration capabilities and capacity through two well-known XML resources.
+
+As of October 31, 2026, [rustfs/rustfs#9007](https://github.com/rustfs/rustfs/pull/9007), tracking [rustfs/rustfs#1511](https://github.com/rustfs/rustfs/issues/1511), is merged into main. It serves generated `system.xml` and `capacity.xml` at the SOSAPI keys. The latest published release, 1.0.4, predates that merge. Validate reporting with a release that includes the implementation; this test did not validate the new capacity display. Backup and the selected file restore succeeded without SOSAPI capacity reporting.
 
 ## Takeaways
 
-1. **RustFS is a viable Veeam backup target today.** The S3 implementation withstood Veeam's repository validation, a 63 GB / 81k-object write storm, and random-read restores — zero errors, no RustFS patches.
-2. **Plan for the Veeam license.** Object storage backup needs Enterprise or a trial key; Community Edition alone will not run the job.
-3. **Immutability comes for free.** Bucket-level Object Lock + versioning maps directly onto Veeam's immutable-backup feature — worth enabling for ransomware resilience.
-4. **The deployment is boring in the best way.** Kubernetes + ingress + a bucket and an IAM user; everything on the storage side fits in a handful of YAML lines and `rc` commands.
+1. **The tested integration worked.** VBR 13.1.2.57 and RustFS 1.0.1 completed a Windows Agent backup and one file restore without backup errors.
+2. **Plan for licensing and access mode.** Obtain an eligible production or POC license and validate the actual Agent or gateway path.
+3. **Configure and test immutability separately.** Bucket capabilities alone do not prove backup deletion protection.
+4. **Size and operate for production.** Follow [Veeam's version-specific system requirements](https://helpcenter.veeam.com/docs/vbr/userguide/system_requirements_backup_server.html?ver=13), monitor capacity, and schedule recovery tests.
+
+For a production storage design, review RustFS's [distributed deployment and erasure-coded resilience](/product/high-availability-scale/); this lab did not test cluster fault tolerance. Keep lifecycle expiration and transition rules off the dedicated Veeam backup bucket and let Veeam manage backup retention.
+
+If you also need remote copies, review [bucket and site replication](/product/replication/) as a separate design decision. This run did not validate replication of a Veeam repository, destination restore, or disaster-recovery failover; replication is not a substitute for backup and recovery testing.
 
 If you are running Veeam and looking for a self-hosted, Rust-powered S3 target for your backup tier, the complete step-by-step guide — including every troubleshooting entry we hit — is in the [RustFS documentation](https://docs.rustfs.com/en/developer/integration/backup/veeam).
