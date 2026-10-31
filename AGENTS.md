@@ -97,6 +97,7 @@ pnpm run lint
 
 ### Component Development
 
+- ✅ Follow the [RustFS Design System](https://design.rustfs.com/) for all UI design and implementation
 - ✅ Use `cn()` function to merge class names
 - ✅ Support dark mode and responsive design
 - ✅ Follow shadcn/ui component standards
