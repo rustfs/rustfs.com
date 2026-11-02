@@ -21,7 +21,7 @@ Bucket replication is a separate feature. It pushes object versions from a RustF
 
 The walkthrough below uses Cloudflare R2 as the worked example. The same Console sequence applies to every provider in the list. Only the endpoint, credential, and bucket fields change. The lab used Console v1.0.3 on port `9001`. Figures later in this post are what that run reported. They are not a throughput or capacity claim.
 
-Field notes and the rest of the screenshots are in the documentation: [On-demand migration](https://docs.rustfs.com/en/administration/data/bucket/on-demand-migration) ([Chinese](https://docs.rustfs.com/zh/administration/data/bucket/on-demand-migration)).
+Field notes and the rest of the screenshots are in the [On-demand migration](https://docs.rustfs.com/en/administration/data/bucket/on-demand-migration) documentation.
 
 ## Which path to use
 
@@ -48,8 +48,6 @@ Do not select a bucket that is already a replication target of this local bucket
 6. Google Cloud Storage (HMAC)
 7. Azure Blob Storage (Native)
 8. Google Cloud Storage (Native)
-
-![RustFS Console Provider menu for on-demand migration, listing Amazon S3, S3-compatible storage, MinIO, RustFS, Cloudflare R2, Google Cloud Storage (HMAC), Azure Blob Storage (Native), and Google Cloud Storage (Native)](/images/blog/on-demand-migration-from-external-object-storage/source-providers.png)
 
 If you need a provider that is not in this list, open a pull request in the [RustFS repository](https://github.com/rustfs/rustfs) for official review.
 
@@ -165,7 +163,7 @@ In this walkthrough the runtime panel showed **Migrated data** 8.1 GiB and **Mig
 
 ## Further reading
 
-- [On-demand migration](https://docs.rustfs.com/en/administration/data/bucket/on-demand-migration) ([Chinese](https://docs.rustfs.com/zh/administration/data/bucket/on-demand-migration))
+- [On-demand migration](https://docs.rustfs.com/en/administration/data/bucket/on-demand-migration)
 - [Linux quick start](https://docs.rustfs.com/en/installation/linux/quick-start)
 - [CLI client (`rc`)](https://docs.rustfs.com/en/operations/rc)
 - [Bucket replication](https://docs.rustfs.com/en/administration/data/bucket/replication)
