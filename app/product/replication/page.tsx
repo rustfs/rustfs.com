@@ -120,7 +120,7 @@ const sections: FeaturePageSection[] = [
 export default function ReplicationPage() {
   return (
     <FeaturePage
-      title="Object Storage Replication"
+      title="Replication"
       description={heroDescription}
       sections={sections}
       variant="replication"
