@@ -411,7 +411,7 @@ function FeatureSection({
                     item.title
                   )}
                 </h3>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                <p className="mt-2 text-base leading-7 text-muted-foreground">
                   {item.description}
                 </p>
               </div>
@@ -439,7 +439,7 @@ function ProductionReview({ variant }: { variant: FeaturePageVariant }) {
           <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
             Plan your RustFS deployment
           </h2>
-          <p className="mt-3 text-sm leading-7 text-muted-foreground">
+          <p className="mt-3 text-base leading-7 text-muted-foreground">
             Share your topology, identity model, and operations constraints with the RustFS team.
           </p>
         </div>
@@ -485,7 +485,7 @@ export default function FeaturePage({
                   className="border border-border bg-card p-5 sm:p-6"
                 >
                   <dt className="font-semibold text-foreground">{highlight.title}</dt>
-                  <dd className="mt-3 text-sm leading-7 text-muted-foreground">
+                  <dd className="mt-3 text-base leading-7 text-muted-foreground">
                     {highlight.description}
                   </dd>
                 </div>

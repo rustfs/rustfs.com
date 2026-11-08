@@ -343,7 +343,7 @@ export default function HomeFeatures() {
               <h3 className="mt-6 text-2xl font-bold text-foreground md:text-3xl">
                 {activeFeature.title}
               </h3>
-              <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
+              <p className="mt-4 max-w-xl text-base leading-7 text-muted-foreground">
                 {activeFeature.featureDescription}
               </p>
             </div>

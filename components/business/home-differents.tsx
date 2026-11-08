@@ -57,13 +57,13 @@ export default function HomeDifferents() {
                   <span className="flex items-center justify-center border-r border-border">
                     <XIcon className="size-4" aria-hidden="true" />
                   </span>
-                  <span className="px-5 py-4 text-sm leading-6">{row.other}</span>
+                  <span className="px-5 py-4 text-base leading-7">{row.other}</span>
                 </div>
                 <div className="grid grid-cols-[3rem_1fr] text-foreground">
                   <span className="flex items-center justify-center border-r border-border text-brand">
                     <CheckIcon className="size-4" aria-hidden="true" />
                   </span>
-                  <span className="px-5 py-4 text-sm font-medium leading-6">
+                  <span className="px-5 py-4 text-base font-medium leading-7">
                     {row.rustfs}
                   </span>
                 </div>
