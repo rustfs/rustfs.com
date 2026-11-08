@@ -23,6 +23,7 @@ import {
 } from 'lucide-react'
 import { useState, type ComponentType, type KeyboardEvent, type ReactNode } from 'react'
 import CodeBlock from './code-block'
+import Note from './common/note'
 import InstallationTopology from './installation-topology'
 
 interface ServerDownloadPageProps {
@@ -198,7 +199,6 @@ type ServerInstallPath = {
   Icon: ComponentType<{ className?: string }>;
   commandTitle: string;
   command: string[];
-  commands?: InstallCommand[];
   chips: string[];
   actions?: {
     href: string;
@@ -207,50 +207,244 @@ type ServerInstallPath = {
   }[];
 };
 
-type InstallCommand = {
-  id: string;
-  label: string;
+type ReleaseDownloadAsset = ReturnType<typeof findReleaseAsset>;
+
+const linuxInstallScript = [
+  'curl -O https://rustfs.com/install_rustfs.sh && bash install_rustfs.sh',
+];
+
+function ServerPackageCard({
+  title,
+  arch,
+  asset,
+}: {
   title: string;
-  command: string[];
+  arch: string;
+  asset: ReleaseDownloadAsset;
+}) {
+  return (
+    <a
+      href={asset.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${title} package: ${asset.filename}`}
+      title={asset.filename}
+      onClick={() => trackDownloadClick(asset.url, title, "server_package")}
+      className="motion-card group flex min-h-24 min-w-0 items-center justify-between gap-4 border border-border bg-card p-5 transition-colors hover:border-foreground/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+    >
+      <div className="min-w-0">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{arch}</p>
+        <h3 className="mt-2 truncate text-base font-semibold text-foreground">{title}</h3>
+      </div>
+      {asset.isDirect ? (
+        <DownloadIcon className="motion-arrow size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
+      ) : (
+        <ArrowUpRightIcon className="motion-arrow size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
+      )}
+    </a>
+  );
+}
+
+function ServerInstallCommandCard({
+  title,
+  summary,
+  code,
+}: {
+  title: string;
+  summary: string;
+  code: string[];
+}) {
+  return (
+    <div className="border border-border bg-background/50 p-5 sm:p-6">
+      <h3 className="text-base font-semibold text-foreground">{title}</h3>
+      <p className="mt-2 text-sm leading-7 text-muted-foreground">{summary}</p>
+      <CodeBlock code={code} title={title} className="mt-5" />
+    </div>
+  );
+}
+
+type LinuxServerMethod = {
+  id: 'binary' | 'rpm' | 'deb';
+  label: string;
 };
 
-function InstallCommandTabs({
-  commands,
-}: {
-  commands: InstallCommand[];
-}) {
-  const [activeCommandId, setActiveCommandId] = useState(commands[0].id);
-  const activeCommand =
-    commands.find((command) => command.id === activeCommandId) ?? commands[0];
+function gnuPackageFallback(arch: 'x86_64' | 'aarch64', extension: 'deb' | 'rpm', release: GitHubRelease | null) {
+  const tag = release?.tag_name.replace(/^v/, '');
+  const versionLabel = tag ? `v${tag}` : 'latest';
+  return `rustfs-linux-${arch}-gnu-${versionLabel}.${extension}`;
+}
+
+function LinuxServerInstall({ release }: { release: GitHubRelease | null }) {
+  const x86Musl = findReleaseAsset(release, [/rustfs-linux-x86_64-musl.*\.zip/i], 'rustfs-linux-x86_64-musl-latest.zip');
+  const x86Gnu = findReleaseAsset(release, [/rustfs-linux-x86_64-gnu.*\.zip/i], 'rustfs-linux-x86_64-gnu-latest.zip');
+  const armMusl = findReleaseAsset(release, [/rustfs-linux-aarch64-musl.*\.zip/i], 'rustfs-linux-aarch64-musl-latest.zip');
+  const armGnu = findReleaseAsset(release, [/rustfs-linux-aarch64-gnu.*\.zip/i], 'rustfs-linux-aarch64-gnu-latest.zip');
+  const debAmd64 = findReleaseAsset(
+    release,
+    [/rustfs-linux-x86_64-gnu.*\.deb$/i],
+    gnuPackageFallback('x86_64', 'deb', release),
+  );
+  const debArm64 = findReleaseAsset(
+    release,
+    [/rustfs-linux-aarch64-gnu.*\.deb$/i],
+    gnuPackageFallback('aarch64', 'deb', release),
+  );
+  const rpmX86 = findReleaseAsset(
+    release,
+    [/rustfs-linux-x86_64-gnu.*\.rpm$/i],
+    gnuPackageFallback('x86_64', 'rpm', release),
+  );
+  const rpmArm64 = findReleaseAsset(
+    release,
+    [/rustfs-linux-aarch64-gnu.*\.rpm$/i],
+    gnuPackageFallback('aarch64', 'rpm', release),
+  );
+  const methods: LinuxServerMethod[] = [
+    { id: 'binary', label: 'Binary' },
+    { id: 'rpm', label: 'RPM' },
+    { id: 'deb', label: 'DEB' },
+  ];
+  const [activeMethodId, setActiveMethodId] = useState<LinuxServerMethod['id']>(methods[0].id);
+  const activeMethod = methods.find((method) => method.id === activeMethodId) ?? methods[0];
+
+  const handleMethodKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    let nextIndex = index;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      nextIndex = (index + 1) % methods.length;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      nextIndex = (index - 1 + methods.length) % methods.length;
+    } else if (event.key === 'Home') {
+      nextIndex = 0;
+    } else if (event.key === 'End') {
+      nextIndex = methods.length - 1;
+    } else {
+      return;
+    }
+
+    event.preventDefault();
+    setActiveMethodId(methods[nextIndex].id);
+    event.currentTarget.parentElement
+      ?.querySelectorAll<HTMLButtonElement>('[role="tab"]')
+      [nextIndex]?.focus();
+  };
 
   return (
     <div>
-      <div className="mb-3 flex border-b border-border" role="tablist" aria-label="Linux install methods">
-        {commands.map((command) => {
-          const isActive = command.id === activeCommand.id;
+      <div className="overflow-x-auto border border-border bg-background/40">
+        <div className="flex min-w-max" role="tablist" aria-label="Linux install methods">
+          {methods.map((method, index) => {
+            const isActive = method.id === activeMethod.id;
 
-          return (
-            <button
-              key={command.id}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              onClick={() => setActiveCommandId(command.id)}
-              className={cn(
-                "border-b-2 border-b-transparent px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground",
-                isActive && "border-b-brand text-brand"
-              )}
-            >
-              {command.label}
-            </button>
-          );
-        })}
+            return (
+              <button
+                key={method.id}
+                type="button"
+                role="tab"
+                id={`server-linux-method-tab-${method.id}`}
+                aria-selected={isActive}
+                aria-controls={`server-linux-method-${method.id}`}
+                onClick={() => setActiveMethodId(method.id)}
+                onKeyDown={(event) => handleMethodKeyDown(event, index)}
+                tabIndex={isActive ? 0 : -1}
+                className={cn(
+                  "flex min-h-12 items-center border-b-2 border-b-transparent px-5 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted/30 hover:text-foreground",
+                  isActive && "border-b-brand bg-brand/10 text-brand"
+                )}
+              >
+                {method.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
-      <CodeBlock
-        title={activeCommand.title}
-        code={activeCommand.command}
-        className="border-brand/60 shadow-[0_0_0_1px_rgba(39,112,246,0.18),0_18px_60px_rgba(39,112,246,0.12)]"
-      />
+
+      <div
+        id={`server-linux-method-${activeMethod.id}`}
+        role="tabpanel"
+        aria-labelledby={`server-linux-method-tab-${activeMethod.id}`}
+        className="mt-6 min-w-0"
+      >
+        {activeMethod.id === 'binary' ? (
+          <div>
+            <ServerInstallCommandCard
+              title="Install script"
+              summary="One-click install for a Linux host. The script selects the build and sets up the RustFS service."
+              code={linuxInstallScript}
+            />
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              <ArtifactButton href={x86Musl.url} label="x86_64 MUSL" icon={<LinuxIcon className="size-4" />} />
+              <ArtifactButton href={x86Gnu.url} label="x86_64 GNU" icon={<LinuxIcon className="size-4" />} />
+              <ArtifactButton href={armMusl.url} label="ARM64 MUSL" icon={<LinuxIcon className="size-4" />} />
+              <ArtifactButton href={armGnu.url} label="ARM64 GNU" icon={<LinuxIcon className="size-4" />} />
+            </div>
+          </div>
+        ) : null}
+
+        {activeMethod.id === 'rpm' ? (
+          <div>
+            <div className="grid gap-4 sm:grid-cols-2 [&>*]:min-w-0">
+              <ServerPackageCard title="RPM x86_64" arch="x86_64 gnu rpm" asset={rpmX86} />
+              <ServerPackageCard title="RPM aarch64" arch="aarch64 gnu rpm" asset={rpmArm64} />
+            </div>
+            <div className="mt-6 grid gap-4 lg:grid-cols-2 [&>*]:min-w-0">
+              <ServerInstallCommandCard
+                title="RPM x86_64"
+                summary="Install the GNU RPM on RHEL, Rocky, AlmaLinux, Fedora, or compatible distributions."
+                code={[
+                  `curl -O ${rpmX86.url}`,
+                  `sudo rpm -ivh ${rpmX86.filename}`,
+                  'rustfs --version',
+                ]}
+              />
+              <ServerInstallCommandCard
+                title="RPM aarch64"
+                summary="Use the aarch64 GNU RPM on 64-bit ARM hosts with glibc."
+                code={[
+                  `curl -O ${rpmArm64.url}`,
+                  `sudo rpm -ivh ${rpmArm64.filename}`,
+                  'rustfs --version',
+                ]}
+              />
+            </div>
+          </div>
+        ) : null}
+
+        {activeMethod.id === 'deb' ? (
+          <div>
+            <div className="grid gap-4 sm:grid-cols-2 [&>*]:min-w-0">
+              <ServerPackageCard title="DEB amd64" arch="amd64 gnu deb" asset={debAmd64} />
+              <ServerPackageCard title="DEB arm64" arch="arm64 gnu deb" asset={debArm64} />
+            </div>
+            <div className="mt-6 grid gap-4 lg:grid-cols-2 [&>*]:min-w-0">
+              <ServerInstallCommandCard
+                title="DEB amd64"
+                summary="Install the GNU deb package on Debian, Ubuntu, and other deb-based distributions."
+                code={[
+                  `curl -O ${debAmd64.url}`,
+                  `sudo dpkg -i ${debAmd64.filename}`,
+                  'rustfs --version',
+                ]}
+              />
+              <ServerInstallCommandCard
+                title="DEB arm64"
+                summary="Use the arm64 GNU deb package on Debian or Ubuntu systems running 64-bit ARM."
+                code={[
+                  `curl -O ${debArm64.url}`,
+                  `sudo dpkg -i ${debArm64.filename}`,
+                  'rustfs --version',
+                ]}
+              />
+            </div>
+          </div>
+        ) : null}
+
+        <div className="mt-8">
+          <Note type="info">
+            DEB and RPM install paths use the GNU packages from the current GitHub release. If a package is missing, the link opens the release page.
+          </Note>
+        </div>
+      </div>
     </div>
   );
 }
@@ -314,22 +508,6 @@ function KubernetesInstallCommands() {
 }
 
 function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
-  const x86Musl = findReleaseAsset(release, [/rustfs-linux-x86_64-musl.*\.zip/i], 'rustfs-linux-x86_64-musl-latest.zip');
-  const x86Gnu = findReleaseAsset(release, [/rustfs-linux-x86_64-gnu.*\.zip/i], 'rustfs-linux-x86_64-gnu-latest.zip');
-  const armMusl = findReleaseAsset(release, [/rustfs-linux-aarch64-musl.*\.zip/i], 'rustfs-linux-aarch64-musl-latest.zip');
-  const armGnu = findReleaseAsset(release, [/rustfs-linux-aarch64-gnu.*\.zip/i], 'rustfs-linux-aarch64-gnu-latest.zip');
-
-  // DEB/RPM native packages from R2
-  const R2_PKG_BASE = 'https://dl.rustfs.com/artifacts/rustfs/packages/release';
-  const tagName = release?.tag_name ?? '';
-  const debVersion = tagName.replace('-', '~'); // 1.0.0-rc.1 -> 1.0.0~rc.1
-  const rpmVersion = tagName.replace('-', '_'); // 1.0.0-rc.1 -> 1.0.0_rc.1
-  const debAmd64Url = tagName ? `${R2_PKG_BASE}/rustfs_${debVersion}_amd64.deb` : '';
-  const debArm64Url = tagName ? `${R2_PKG_BASE}/rustfs_${debVersion}_arm64.deb` : '';
-  const rpmX86Url = tagName ? `${R2_PKG_BASE}/rustfs-${rpmVersion}-1.x86_64.rpm` : '';
-  const rpmArm64Url = tagName ? `${R2_PKG_BASE}/rustfs-${rpmVersion}-1.aarch64.rpm` : '';
-  const debAmd64Filename = debAmd64Url.split('/').pop() ?? '';
-  const rpmX86Filename = rpmX86Url.split('/').pop() ?? '';
   const macArmUrl = release
     ? getDownloadUrlForPlatform(release, 'macos', 'aarch64')
     : null;
@@ -349,58 +527,8 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
       bestFor: 'Production hosts, bare metal, VMs',
       Icon: LinuxIcon,
       commandTitle: 'Fast validation',
-      command: [
-        'curl -O https://rustfs.com/install_rustfs.sh && bash install_rustfs.sh',
-      ],
-      commands: [
-        {
-          id: 'script',
-          label: 'Script',
-          title: 'Fast validation',
-          command: [
-            'curl -O https://rustfs.com/install_rustfs.sh && bash install_rustfs.sh',
-          ],
-        },
-        ...(debAmd64Url
-          ? [
-              {
-                id: 'deb',
-                label: 'DEB',
-                title: 'Debian / Ubuntu package',
-                command: [
-                  `curl -O ${debAmd64Url}`,
-                  `sudo dpkg -i ${debAmd64Filename}`,
-                  'rustfs --version',
-                ],
-              },
-            ]
-          : []),
-        ...(rpmX86Url
-          ? [
-              {
-                id: 'rpm',
-                label: 'RPM',
-                title: 'RHEL / Fedora package',
-                command: [
-                  `curl -O ${rpmX86Url}`,
-                  `sudo rpm -ivh ${rpmX86Filename}`,
-                  'rustfs --version',
-                ],
-              },
-            ]
-          : []),
-      ],
+      command: linuxInstallScript,
       chips: ['MUSL / GNU', 'DEB / RPM', 'x86_64 / ARM64', 'system service'],
-      actions: [
-        { href: x86Musl.url, label: 'x86_64 MUSL', icon: <LinuxIcon className="size-4" /> },
-        { href: x86Gnu.url, label: 'x86_64 GNU', icon: <LinuxIcon className="size-4" /> },
-        { href: armMusl.url, label: 'ARM64 MUSL', icon: <LinuxIcon className="size-4" /> },
-        { href: armGnu.url, label: 'ARM64 GNU', icon: <LinuxIcon className="size-4" /> },
-        ...(debAmd64Url ? [{ href: debAmd64Url, label: 'DEB amd64', icon: <LinuxIcon className="size-4" /> }] : []),
-        ...(debArm64Url ? [{ href: debArm64Url, label: 'DEB arm64', icon: <LinuxIcon className="size-4" /> }] : []),
-        ...(rpmX86Url ? [{ href: rpmX86Url, label: 'RPM x86_64', icon: <LinuxIcon className="size-4" /> }] : []),
-        ...(rpmArm64Url ? [{ href: rpmArm64Url, label: 'RPM aarch64', icon: <LinuxIcon className="size-4" /> }] : []),
-      ],
     },
     {
       id: 'docker',
@@ -554,8 +682,8 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
         </div>
 
         <div className="grid gap-5 p-5 sm:p-6">
-          {activePath.commands ? (
-            <InstallCommandTabs commands={activePath.commands} />
+          {activePath.id === 'linux' ? (
+            <LinuxServerInstall release={release} />
           ) : activePath.id === 'kubernetes' ? (
             <KubernetesInstallCommands />
           ) : (
