@@ -30,19 +30,24 @@ interface ServerDownloadPageProps {
   release: GitHubRelease | null;
 }
 
+const linuxZipDownloadBase = 'https://dl.rustfs.com/artifacts/rustfs/release';
+const linuxPackageDownloadBase = 'https://dl.rustfs.com/artifacts/rustfs/packages/release';
+
 function findReleaseAsset(
   release: GitHubRelease | null,
   patterns: RegExp[],
   fallbackName: string,
+  downloadBase: string,
 ) {
   const asset = release?.assets.find((candidate) =>
     patterns.some((pattern) => pattern.test(candidate.name))
   );
+  const filename = asset?.name ?? fallbackName;
 
   return {
-    url: asset?.browser_download_url ?? release?.html_url ?? 'https://github.com/rustfs/rustfs/releases/latest',
-    filename: asset?.name ?? fallbackName,
-    isDirect: Boolean(asset),
+    url: `${downloadBase}/${filename}`,
+    filename,
+    isDirect: true,
   };
 }
 
@@ -275,29 +280,53 @@ function gnuPackageFallback(arch: 'x86_64' | 'aarch64', extension: 'deb' | 'rpm'
 }
 
 function LinuxServerInstall({ release }: { release: GitHubRelease | null }) {
-  const x86Musl = findReleaseAsset(release, [/rustfs-linux-x86_64-musl.*\.zip/i], 'rustfs-linux-x86_64-musl-latest.zip');
-  const x86Gnu = findReleaseAsset(release, [/rustfs-linux-x86_64-gnu.*\.zip/i], 'rustfs-linux-x86_64-gnu-latest.zip');
-  const armMusl = findReleaseAsset(release, [/rustfs-linux-aarch64-musl.*\.zip/i], 'rustfs-linux-aarch64-musl-latest.zip');
-  const armGnu = findReleaseAsset(release, [/rustfs-linux-aarch64-gnu.*\.zip/i], 'rustfs-linux-aarch64-gnu-latest.zip');
+  const x86Musl = findReleaseAsset(
+    release,
+    [/rustfs-linux-x86_64-musl.*\.zip/i],
+    'rustfs-linux-x86_64-musl-latest.zip',
+    linuxZipDownloadBase,
+  );
+  const x86Gnu = findReleaseAsset(
+    release,
+    [/rustfs-linux-x86_64-gnu.*\.zip/i],
+    'rustfs-linux-x86_64-gnu-latest.zip',
+    linuxZipDownloadBase,
+  );
+  const armMusl = findReleaseAsset(
+    release,
+    [/rustfs-linux-aarch64-musl.*\.zip/i],
+    'rustfs-linux-aarch64-musl-latest.zip',
+    linuxZipDownloadBase,
+  );
+  const armGnu = findReleaseAsset(
+    release,
+    [/rustfs-linux-aarch64-gnu.*\.zip/i],
+    'rustfs-linux-aarch64-gnu-latest.zip',
+    linuxZipDownloadBase,
+  );
   const debAmd64 = findReleaseAsset(
     release,
     [/rustfs-linux-x86_64-gnu.*\.deb$/i],
     gnuPackageFallback('x86_64', 'deb', release),
+    linuxPackageDownloadBase,
   );
   const debArm64 = findReleaseAsset(
     release,
     [/rustfs-linux-aarch64-gnu.*\.deb$/i],
     gnuPackageFallback('aarch64', 'deb', release),
+    linuxPackageDownloadBase,
   );
   const rpmX86 = findReleaseAsset(
     release,
     [/rustfs-linux-x86_64-gnu.*\.rpm$/i],
     gnuPackageFallback('x86_64', 'rpm', release),
+    linuxPackageDownloadBase,
   );
   const rpmArm64 = findReleaseAsset(
     release,
     [/rustfs-linux-aarch64-gnu.*\.rpm$/i],
     gnuPackageFallback('aarch64', 'rpm', release),
+    linuxPackageDownloadBase,
   );
   const methods: LinuxServerMethod[] = [
     { id: 'binary', label: 'Binary' },
@@ -441,7 +470,7 @@ function LinuxServerInstall({ release }: { release: GitHubRelease | null }) {
 
         <div className="mt-8">
           <Note type="info">
-            DEB and RPM install paths use the GNU packages from the current GitHub release. If a package is missing, the link opens the release page.
+            Linux binaries and GNU DEB/RPM packages download from dl.rustfs.com. Filenames come from the current release.
           </Note>
         </div>
       </div>
