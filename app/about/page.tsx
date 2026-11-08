@@ -96,7 +96,7 @@ export default async function AboutPage() {
     <main className="relative z-10 flex-1 text-foreground">
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div>
-          <h1 className="font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
+          <h1 className="font-display text-5xl font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
             Object storage built for <span className="whitespace-nowrap">Rust-native</span>{" "}
             infrastructure
           </h1>

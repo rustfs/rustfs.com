@@ -373,7 +373,7 @@ function FeatureSection({
       className="scroll-mt-24 border-t border-border py-16 sm:py-20"
     >
       <div>
-        <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
           {section.title}
         </h2>
         {section.description ? (
@@ -464,17 +464,17 @@ export default function FeaturePage({
   return (
     <main className="relative z-10 flex-1 text-foreground">
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
-        <h1 className="font-display text-5xl font-extrabold leading-tight text-foreground sm:text-6xl">
+        <h1 className="font-display text-5xl font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
           {title}
         </h1>
-        <p className="mt-6 text-base leading-8 text-muted-foreground">
+        <p className="mt-6 max-w-3xl text-base leading-8 text-muted-foreground md:text-lg">
           {description}
         </p>
         <ProductLinks links={links} />
         {highlights?.length ? (
           <div className="mt-12">
             {highlightsTitle ? (
-              <h2 className="text-center text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                 {highlightsTitle}
               </h2>
             ) : null}

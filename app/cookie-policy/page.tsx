@@ -22,7 +22,7 @@ export default function CookiePolicyPage() {
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
               Legal
             </p>
-            <h1 className="mt-5 text-4xl font-semibold tracking-[-0.035em] text-foreground sm:text-5xl">
+            <h1 className="mt-5 font-display text-5xl font-semibold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
               Cookie Policy
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-8 text-muted-foreground">

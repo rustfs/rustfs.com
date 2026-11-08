@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 
 import { SITE_CONFIG, SITE_METADATA } from '@/app.config';
 import AppFooter from '@/components/business/app-footer';
@@ -21,14 +21,26 @@ const OG_IMAGE = {
   alt: "RustFS — High-Performance S3 Object Storage",
 } as const;
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const archivo = localFont({
+  src: "../assets/fonts/archivo-variable.ttf",
+  variable: "--font-archivo",
+  weight: "100 900",
+  display: "swap",
+  declarations: [{ prop: "font-stretch", value: "62% 125%" }],
 });
 
-const geistMono = Geist_Mono({
+const geistSans = localFont({
+  src: "../assets/fonts/geist-variable.ttf",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+  display: "swap",
+});
+
+const geistMono = localFont({
+  src: "../assets/fonts/geist-mono-variable.ttf",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: "100 900",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -96,7 +108,7 @@ export default async function RootLayout({
         <link rel="alternate" hrefLang="x-default" href={SITE_CONFIG.primaryDomain} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} flex h-full flex-col overflow-x-clip antialiased`}
+        className={`${archivo.variable} ${geistSans.variable} ${geistMono.variable} flex h-full flex-col overflow-x-clip antialiased`}
       >
         <CookieConsentProvider>
           <ThemeProvider enableSystem attribute="class">

@@ -33,7 +33,7 @@ export default async function BlogIndex({ requestedTag }: { requestedTag?: strin
                 <span className="h-1 w-24 bg-brand" />
                 <span>RustFS journal</span>
               </div>
-              <h1 className="max-w-4xl font-display text-5xl font-semibold tracking-tight text-foreground sm:text-7xl">
+              <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl lg:text-7xl">
                 {listing?.h1 ?? BLOG_INDEX_H1}
               </h1>
               <p className="mt-6 max-w-2xl text-sm leading-7 text-muted-foreground">
@@ -119,7 +119,7 @@ function FeaturedPost({ post }: { post: BlogPostMeta }) {
             <span className="h-px flex-1 bg-border" aria-hidden="true" />
             <span>{formatShortDate(post.date)}</span>
           </div>
-          <h2 className="mt-8 max-w-4xl text-2xl font-semibold leading-tight text-foreground sm:text-4xl">
+          <h2 className="mt-8 max-w-4xl font-display text-2xl font-semibold leading-tight text-foreground sm:text-4xl">
             {post.title}
           </h2>
           <PostMeta post={post} className="mt-5" />
