@@ -113,7 +113,7 @@ export default function HomeStats() {
               <h3 className="text-2xl font-semibold text-foreground">
                 {reasons[0].title}
               </h3>
-              <p className="mt-4 text-sm leading-7 text-muted-foreground">
+              <p className="mt-4 text-base leading-7 text-muted-foreground">
                 {reasons[0].description}
               </p>
               <div className="mt-8 border border-border bg-background p-4">
@@ -142,7 +142,7 @@ mode = "distributed"`}</code>
                     </span>
                     <div>
                       <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                      <p className="mt-2 text-base leading-7 text-muted-foreground">{item.description}</p>
                     </div>
                     <code className="w-fit text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
                       {item.token}
@@ -157,13 +157,13 @@ mode = "distributed"`}</code>
             <div className="border-b border-border p-6 lg:border-b-0 lg:border-r">
               <code className="text-[10px] uppercase tracking-[0.14em] text-brand">{reasons[5].token}</code>
               <h3 className="mt-3 text-xl font-semibold text-foreground">{reasons[5].title}</h3>
-              <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">{reasons[5].description}</p>
+              <p className="mt-2 max-w-md text-base leading-7 text-muted-foreground">{reasons[5].description}</p>
             </div>
             {compatibilityRows.map((item) => (
               <div key={item.title} className="border-b border-border p-6 last:border-b-0 lg:border-b-0 lg:border-r lg:last:border-r-0">
                 <code className="text-[10px] font-semibold uppercase tracking-[0.14em] text-brand">{item.meta}</code>
                 <h4 className="mt-3 text-base font-semibold text-foreground">{item.title}</h4>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.detail}</p>
+                <p className="mt-2 text-base leading-7 text-muted-foreground">{item.detail}</p>
               </div>
             ))}
           </article>
