@@ -66,7 +66,7 @@ export default function DemoPage() {
               </div>
 
               <div className="pt-10">
-                <h1 className="max-w-3xl text-4xl font-bold leading-[1.04] tracking-[-0.04em] text-foreground sm:text-5xl lg:text-6xl">
+                <h1 className="max-w-3xl font-display text-5xl font-bold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
                   A quick note before you enter.
                 </h1>
                 <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">

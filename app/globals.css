@@ -10,6 +10,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-archivo), "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -51,8 +52,31 @@
   --radius-md: 0rem;
   --radius-lg: 0rem;
   --radius-xl: 0rem;
-  --text-sm: 1rem;
-  --text-sm--line-height: 1.75rem;
+  /* MinIO-aligned type scale (16px root). Archivo=display, Geist=sans. */
+  --text-xs: 0.75rem;            /* 12px — caption / tags */
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;           /* 14px — nav / buttons / UI chrome */
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;             /* 16px — body-s */
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.125rem;           /* 18px — subtitle / lead */
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;            /* 20px — body / h6 */
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem;            /* 24px — h4 / h6 desktop */
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 1.875rem;          /* 30px — h3 / h5 desktop */
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl: 2.25rem;           /* 36px — h2 mobile / h4 desktop */
+  --text-4xl--line-height: 2.5rem;
+  --text-5xl: 2.625rem;          /* 42px — h1 mobile / h3 desktop */
+  --text-5xl--line-height: 1.1;
+  --text-6xl: 3.5rem;            /* 56px — h2 desktop / page H1 lg */
+  --text-6xl--line-height: 1.05;
+  --text-7xl: 4.5rem;            /* 72px — h1 / hero mid */
+  --text-7xl--line-height: 1;
+  --text-8xl: 6rem;              /* 96px — hero desktop */
+  --text-8xl--line-height: 1;
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
 

@@ -640,7 +640,7 @@ export default function DownloadPageClient() {
       <section className="pt-20 pb-12 sm:pt-28 sm:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="w-full font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
+            <h1 className="w-full font-display text-5xl font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
               Download RustFS
             </h1>
             <p className="mt-5 w-full text-sm leading-7 text-muted-foreground">
@@ -697,7 +697,7 @@ export function ServerDownloadPage({ release }: ServerDownloadPageProps) {
           </Link>
 
           <div className="mx-auto mt-10 max-w-4xl text-center">
-            <h1 className="font-display text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
+            <h1 className="font-display text-5xl font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
               RustFS Server
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-lg font-semibold leading-8 text-foreground sm:text-xl">

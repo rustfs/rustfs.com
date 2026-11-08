@@ -80,7 +80,7 @@ export default async function KnowledgeArticlePage({ params }: KnowledgeArticleP
             </Link>
 
             <div className="mt-8 max-w-5xl">
-              <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-6xl">
+              <h1 className="font-display text-5xl font-semibold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
                 {article.title}
               </h1>
               <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">

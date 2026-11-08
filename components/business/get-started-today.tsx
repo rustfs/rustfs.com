@@ -21,7 +21,7 @@ export default function GetStartedToday() {
         <div className="motion-card group relative overflow-hidden border border-brand bg-brand text-brand-foreground">
           <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-center">
             <div className="p-6 sm:p-8 lg:p-10">
-              <h2 className="w-full text-3xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
+              <h2 className="w-full font-display text-3xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
                 <span className="sm:whitespace-nowrap">Deploy RustFS locally.</span>{" "}
                 <span className="sm:whitespace-nowrap">Keep the same path to production.</span>
               </h2>

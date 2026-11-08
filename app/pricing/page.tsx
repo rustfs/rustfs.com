@@ -89,7 +89,7 @@ export default function PricingPage() {
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Pricing</p>
-          <h1 className="mt-5 w-full font-display text-4xl font-extrabold leading-tight text-foreground sm:text-6xl">
+          <h1 className="mt-5 w-full font-display text-5xl font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
             RustFS Pricing and Enterprise Support
           </h1>
           <div className="mt-6 flex flex-col items-start gap-6">
