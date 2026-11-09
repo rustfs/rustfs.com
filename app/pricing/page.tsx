@@ -41,7 +41,7 @@ function PricingCard({
     >
       <div className="relative flex flex-1 flex-col border-b border-border p-6">
         <p className="relative text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">{label}</p>
-        <h2 className="relative mt-4 font-display text-3xl font-semibold text-foreground">{title}</h2>
+        <h2 className="relative mt-4 type-headline-md text-foreground">{title}</h2>
         <div className="relative mt-5 flex flex-wrap gap-2">
           {chips.map((chip) => (
             <Badge
@@ -89,7 +89,7 @@ export default function PricingPage() {
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Pricing</p>
-          <h1 className="mt-5 w-full font-display text-5xl font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
+          <h1 className="mt-5 w-full type-display-md sm:type-display-lg text-foreground">
             RustFS Pricing and Enterprise Support
           </h1>
           <div className="mt-6 flex flex-col items-start gap-6">

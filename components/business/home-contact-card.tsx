@@ -21,7 +21,7 @@ export default function HomeContactCard() {
           className="motion-card group relative block overflow-hidden border border-brand bg-brand text-left text-brand-foreground transition-colors hover:bg-brand/95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
         >
           <div className="relative p-6 pr-24 sm:p-8 sm:pr-28 lg:p-10 lg:pr-32">
-            <h3 className="relative w-full font-display text-2xl font-semibold leading-tight text-brand-foreground sm:text-4xl">
+            <h3 className="relative w-full type-headline-sm sm:type-headline-lg text-brand-foreground">
               Talk to the RustFS team.
             </h3>
             <p className="relative mt-4 w-full text-sm leading-7 text-brand-foreground/75">

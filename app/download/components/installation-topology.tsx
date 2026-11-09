@@ -168,7 +168,7 @@ export default function InstallationTopology() {
         <div>
           <div className="mb-10">
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">Deployment topology</p>
-            <h2 className="mt-4 w-full font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
+            <h2 className="mt-4 w-full type-headline-md sm:type-headline-lg text-foreground">
               Pick topology after you know the failure domain.
             </h2>
             <p className="mt-4 w-full text-sm leading-7 text-muted-foreground">

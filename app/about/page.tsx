@@ -96,11 +96,11 @@ export default async function AboutPage() {
     <main className="relative z-10 flex-1 text-foreground">
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div>
-          <h1 className="font-display text-5xl font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
+          <h1 className="type-display-md sm:type-display-lg text-foreground">
             Object storage built for <span className="whitespace-nowrap">Rust-native</span>{" "}
             infrastructure
           </h1>
-          <p className="mt-6 text-base leading-8 text-muted-foreground">
+          <p className="type-body-lg mt-6 text-muted-foreground">
             RustFS is a next-generation Apache 2.0 distributed object storage system built in Rust for S3-compatible and AI data center workloads.
           </p>
           <p className="mt-4 text-base leading-8 text-muted-foreground">
@@ -131,7 +131,7 @@ export default async function AboutPage() {
             <span className="flex h-14 w-48 items-center">
               <RustFSLogo className="h-auto w-full" />
             </span>
-            <h2 className="mt-10 max-w-xl text-3xl font-semibold leading-tight text-foreground">
+            <h2 className="type-headline-md mt-10 max-w-xl text-foreground">
               A storage foundation that stays open, self-hosted, and programmable
             </h2>
             <p className="mt-5 text-sm leading-7 text-muted-foreground">
@@ -175,7 +175,7 @@ export default async function AboutPage() {
       <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[0.42fr_1fr]">
           <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-foreground">
+            <h2 className="type-headline-md text-foreground">
               Project timeline
             </h2>
             <p className="mt-4 text-sm leading-7 text-muted-foreground">
@@ -212,7 +212,7 @@ export default async function AboutPage() {
           <div className="grid gap-8 border border-border bg-card p-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">RustFS</p>
-              <h2 className="mt-4 text-3xl font-semibold text-foreground">Contact</h2>
+              <h2 className="type-headline-md mt-4 text-foreground">Contact</h2>
               <address className="mt-5 text-base not-italic leading-8 text-muted-foreground">
                 3550 Lenox Road<br />
                 NE Atlanta, Georgia 30326

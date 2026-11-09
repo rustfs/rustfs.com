@@ -70,7 +70,7 @@ export default function HomeMultiClouds() {
               className="absolute inset-0 opacity-0 transition-[opacity,background-position] duration-500 [background-image:repeating-linear-gradient(135deg,transparent_0_20px,var(--border)_20px_21px,transparent_21px_40px)] group-hover:bg-[position:32px_0] group-hover:opacity-45"
             />
             <div className="relative flex h-60 shrink-0 items-center p-8 sm:p-10">
-              <p className="text-4xl font-semibold tracking-[-0.04em] text-foreground sm:text-5xl">
+              <p className="type-display-md text-foreground">
                 S3 Migration
               </p>
             </div>
@@ -116,15 +116,15 @@ function StoryContent({
 }) {
   return (
     <div className={`relative flex flex-1 flex-col p-6 sm:p-8 ${className}`}>
-      <div className="flex items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+      <div className="type-label-sm flex items-center gap-3 text-muted-foreground">
         <span className="text-brand">{story.label}</span>
         <span className="h-px flex-1 bg-border" />
         <code>{story.token}</code>
       </div>
-      <h3 className="mt-7 max-w-xl text-2xl font-semibold leading-tight text-foreground sm:text-3xl">
+      <h3 className="type-headline-sm mt-7 max-w-xl text-foreground sm:type-headline-md">
         {story.title}
       </h3>
-      <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
+      <p className="type-body-sm mt-4 max-w-2xl text-muted-foreground">
         {story.description}
       </p>
       <ArrowUpRightIcon className="motion-arrow mt-auto size-5 self-end text-brand" />

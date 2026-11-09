@@ -27,7 +27,7 @@ export default function Subscribe() {
       <div className="mx-auto flex max-w-[85rem] flex-col justify-center px-4 sm:px-6 lg:px-8">
         {/* Title */}
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-          <h2 className="font-display text-2xl font-bold md:text-4xl md:leading-tight text-primary">
+          <h2 className="type-headline-sm md:type-headline-lg text-primary">
             Subscribe
           </h2>
           <p className="mt-4 text-muted-foreground">

@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 }
 
 const sectionClassName = 'border-t border-border pt-8 first:border-t-0 first:pt-0'
-const headingClassName = 'text-2xl font-semibold tracking-tight text-foreground sm:text-3xl'
-const subheadingClassName = 'text-lg font-semibold text-foreground'
-const paragraphClassName = 'text-base leading-8 text-muted-foreground'
+const headingClassName = 'type-headline-sm text-foreground sm:type-headline-md'
+const subheadingClassName = 'type-title text-foreground'
+const paragraphClassName = 'type-body-md text-muted-foreground'
 
 export default function CookiePolicyPage() {
   return (
@@ -22,7 +22,7 @@ export default function CookiePolicyPage() {
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
               Legal
             </p>
-            <h1 className="mt-5 font-display text-5xl font-semibold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
+            <h1 className="mt-5 type-display-md sm:type-display-lg text-foreground">
               Cookie Policy
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-8 text-muted-foreground">

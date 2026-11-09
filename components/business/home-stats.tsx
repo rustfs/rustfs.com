@@ -110,14 +110,14 @@ export default function HomeStats() {
             </div>
 
             <div className="p-6 sm:p-8">
-              <h3 className="text-2xl font-semibold text-foreground">
+              <h3 className="type-headline-sm text-foreground">
                 {reasons[0].title}
               </h3>
-              <p className="mt-4 text-base leading-7 text-muted-foreground">
+              <p className="type-body-md mt-4 text-muted-foreground">
                 {reasons[0].description}
               </p>
               <div className="mt-8 border border-border bg-background p-4">
-                <pre className="overflow-x-auto text-xs leading-6 text-muted-foreground">
+                <pre className="type-code overflow-x-auto text-muted-foreground">
                   <code>{`[rustfs]
 runtime = "memory-safe"
 io = "low-overhead"
