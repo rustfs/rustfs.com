@@ -66,10 +66,10 @@ export default function DemoPage() {
               </div>
 
               <div className="pt-10">
-                <h1 className="max-w-3xl font-display text-5xl font-bold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
+                <h1 className="max-w-3xl type-display-md sm:type-display-lg text-foreground">
                   A quick note before you enter.
                 </h1>
-                <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
+                <p className="type-body-lg mt-6 max-w-2xl text-muted-foreground">
                   Explore the RustFS Console in a live sandbox. Please review the
                   access details and data policy before continuing.
                 </p>

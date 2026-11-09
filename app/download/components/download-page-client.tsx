@@ -64,7 +64,7 @@ function SectionHeader({
     <div>
       <div className="mb-8 max-w-4xl">
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">{eyebrow}</p>
-        <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
+        <h2 className="mt-4 max-w-3xl type-headline-md sm:type-headline-lg text-foreground">
           {title}
         </h2>
         <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
@@ -99,7 +99,7 @@ function ProductDownloadLink({
       <div className="flex items-start justify-between gap-6">
         <div>
           <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-brand">{eyebrow}</p>
-          <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">{title}</h2>
+          <h2 className="mt-4 type-headline-md sm:type-headline-lg text-foreground">{title}</h2>
         </div>
         <span className="motion-icon-tile flex size-11 shrink-0 items-center justify-center text-brand">
           <Icon className="size-6" />
@@ -146,7 +146,7 @@ function ReleasePanel({ release }: { release: GitHubRelease | null }) {
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="font-display text-4xl font-semibold leading-none text-foreground sm:text-5xl">
+            <p className="type-display-md text-foreground">
               {version}
             </p>
             <p className="mt-3 text-sm text-muted-foreground">
@@ -697,7 +697,7 @@ function ServerInstallTabs({ release }: { release: GitHubRelease | null }) {
               </span>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">{activePath.label}</p>
             </div>
-            <h3 className="mt-6 text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">{activePath.title}</h3>
+            <h3 className="type-headline-md mt-6 text-foreground sm:type-headline-lg">{activePath.title}</h3>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">{activePath.summary}</p>
             <p className="mt-3 text-xs leading-5 text-muted-foreground">{activePath.bestFor}</p>
           </div>
@@ -797,7 +797,7 @@ export default function DownloadPageClient() {
       <section className="pt-20 pb-12 sm:pt-28 sm:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="w-full font-display text-5xl font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
+            <h1 className="w-full type-display-md sm:type-display-lg text-foreground">
               Download RustFS
             </h1>
             <p className="mt-5 w-full text-sm leading-7 text-muted-foreground">
@@ -854,7 +854,7 @@ export function ServerDownloadPage({ release }: ServerDownloadPageProps) {
           </Link>
 
           <div className="mx-auto mt-10 max-w-4xl text-center">
-            <h1 className="font-display text-5xl font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
+            <h1 className="type-display-md sm:type-display-lg text-foreground">
               RustFS Server
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-lg font-semibold leading-8 text-foreground sm:text-xl">

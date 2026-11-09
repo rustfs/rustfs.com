@@ -81,7 +81,7 @@ export default function IntegrationPage() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
               Integration ecosystem
             </p>
-            <h1 className="mt-5 font-display text-5xl font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
+            <h1 className="mt-5 type-display-md sm:type-display-lg text-foreground">
               Connect RustFS to the tools you already run.
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-8 text-muted-foreground">
@@ -158,7 +158,7 @@ export default function IntegrationPage() {
               <span className="shrink-0">Integration directory</span>
               <span className="h-px min-w-8 flex-1 bg-border" aria-hidden="true" />
             </div>
-            <h2 className="font-display text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-foreground md:text-5xl">
+            <h2 className="type-headline-lg md:type-display-md text-foreground">
               Find your integration path.
             </h2>
             <p className="mt-5 text-base leading-7 text-muted-foreground">

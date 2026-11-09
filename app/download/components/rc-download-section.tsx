@@ -473,7 +473,7 @@ export default function RcDownloadSection({ cliRelease }: RcDownloadSectionProps
           </Link>
 
           <div className="mt-10">
-            <h1 className="w-full font-display text-5xl font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
+            <h1 className="w-full type-display-md sm:type-display-lg text-foreground">
               RustFS CLI Client (rc)
             </h1>
             <p className="mt-4 w-full text-lg font-semibold leading-8 text-foreground sm:text-xl">

@@ -77,14 +77,14 @@ export default function StatsStrip({
             key={label}
             className="flex min-h-24 flex-col justify-end border-b border-border/80 px-3 py-4 [&:nth-child(n+3)]:border-b-0 [&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0 sm:p-5"
           >
-            <dt className="order-2 mt-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <dt className="type-label-sm order-2 mt-3 text-muted-foreground">
               {label}
             </dt>
-            <dd className="order-1 text-[clamp(1.25rem,5.5vw,2rem)] font-semibold tabular-nums tracking-[-0.035em] text-foreground sm:text-4xl">
+            <dd className="type-headline-sm order-1 text-foreground tabular-nums sm:type-headline-md lg:type-headline-lg">
               {typeof value === "number" ? (
                 <NumberTicker
                   value={value}
-                  className="tracking-[-0.035em] text-foreground"
+                  className="text-foreground"
                 />
               ) : (
                 <span>{text}</span>

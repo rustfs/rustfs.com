@@ -373,7 +373,7 @@ function FeatureSection({
       className="scroll-mt-24 border-t border-border py-16 sm:py-20"
     >
       <div>
-        <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <h2 className="type-headline-md sm:type-headline-lg text-foreground">
           {section.title}
         </h2>
         {section.description ? (
@@ -399,7 +399,7 @@ function FeatureSection({
                 <CheckIcon className="size-4" />
               </span>
               <div>
-                <h3 className="text-lg font-semibold tracking-tight text-foreground">
+                <h3 className="type-title text-foreground">
                   {item.href ? (
                     <Link
                       href={item.href}
@@ -411,7 +411,7 @@ function FeatureSection({
                     item.title
                   )}
                 </h3>
-                <p className="mt-2 text-base leading-7 text-muted-foreground">
+                <p className="type-body-md mt-2 text-muted-foreground">
                   {item.description}
                 </p>
               </div>
@@ -436,7 +436,7 @@ function ProductionReview({ variant }: { variant: FeaturePageVariant }) {
           <Icon className="size-5" />
         </span>
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+          <h2 className="type-headline-sm text-foreground sm:type-headline-md">
             Plan your RustFS deployment
           </h2>
           <p className="mt-3 text-base leading-7 text-muted-foreground">
@@ -464,17 +464,17 @@ export default function FeaturePage({
   return (
     <main className="relative z-10 flex-1 text-foreground">
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
-        <h1 className="font-display text-5xl font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
+        <h1 className="type-display-md sm:type-display-lg text-foreground">
           {title}
         </h1>
-        <p className="mt-6 max-w-3xl text-base leading-8 text-muted-foreground md:text-lg">
+        <p className="type-body-lg mt-6 max-w-3xl text-muted-foreground">
           {description}
         </p>
         <ProductLinks links={links} />
         {highlights?.length ? (
           <div className="mt-12">
             {highlightsTitle ? (
-              <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              <h2 className="text-center type-headline-md sm:type-headline-lg text-foreground">
                 {highlightsTitle}
               </h2>
             ) : null}

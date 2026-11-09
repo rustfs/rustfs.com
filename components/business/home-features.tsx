@@ -336,14 +336,14 @@ export default function HomeFeatures() {
                 <span className="motion-icon-tile flex size-12 items-center justify-center border border-brand bg-brand text-brand-foreground">
                   <activeFeature.icon className="size-6" />
                 </span>
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+                <span className="type-label-md text-brand">
                   {activeFeature.plane}
                 </span>
               </div>
-              <h3 className="mt-6 text-2xl font-bold text-foreground md:text-3xl">
+              <h3 className="type-headline-sm mt-6 text-foreground md:type-headline-md">
                 {activeFeature.title}
               </h3>
-              <p className="mt-4 max-w-xl text-base leading-7 text-muted-foreground">
+              <p className="type-body-md mt-4 max-w-xl text-muted-foreground">
                 {activeFeature.featureDescription}
               </p>
             </div>

@@ -445,7 +445,7 @@ export default function ErasureCodeCalculator() {
     <div className="relative z-10 py-16 text-foreground sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div>
-          <h1 className="font-display text-5xl font-semibold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
+          <h1 className="type-display-md sm:type-display-lg text-foreground">
             Size a RustFS erasure set before you deploy
           </h1>
           <p className="mt-6 text-sm leading-7 text-muted-foreground">

@@ -48,12 +48,12 @@ export default async function HomeBlog({ className }: HomeBlogProps) {
             ) : null}
 
             <div className="flex flex-1 flex-col p-6 sm:p-8">
-              <div className="flex items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              <div className="type-label-sm flex items-center gap-3 text-muted-foreground">
                 <span className="text-brand">Featured post</span>
                 <span className="h-px flex-1 bg-border" />
                 <PostDate date={featuredPost.date} />
               </div>
-              <h3 className="mt-6 max-w-2xl text-2xl font-semibold leading-tight text-foreground sm:text-3xl">
+              <h3 className="type-headline-sm mt-6 max-w-2xl text-foreground sm:type-headline-md">
                 {featuredPost.title}
               </h3>
               <div className="mt-auto flex items-end justify-between gap-5 pt-8">

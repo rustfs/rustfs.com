@@ -79,7 +79,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </Link>
 
             <div className="mt-8 max-w-5xl">
-              <h1 className="font-display text-5xl font-semibold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-6xl">
+              <h1 className="type-display-md sm:type-display-lg text-foreground">
                 {post.title}
               </h1>
               {post.slug === HISTORICAL_MINIO_MIGRATION_SLUG ? <HistoricalMigrationBanner /> : null}

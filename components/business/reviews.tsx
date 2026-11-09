@@ -51,7 +51,7 @@ export default function HomeReviews() {
     <section className="relative overflow-hidden py-32">
       <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-          <h2 className="font-display text-2xl tracking-wide font-bold md:text-4xl md:leading-tight text-primary">
+          <h2 className="type-headline-sm md:type-headline-lg text-primary">
             {'What customers say about RustFS'}
           </h2>
           <p className="mt-4 text-muted-foreground">
