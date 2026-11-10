@@ -30,10 +30,10 @@ export default function HomeHero({ dockerPulls, metrics }: HomeHeroProps) {
               Rust-native object storage
             </p>
             <h1 className="type-headline-lg w-full text-primary sm:type-display-md xl:type-display-lg">
-              High-Performance, S3-Compatible Object Storage for AI Data Centers
+              Storage Built for the AI Era
             </h1>
             <p className="type-body-md mt-6 w-full text-muted-foreground md:type-body-lg">
-              RustFS is a fast-growing open-source distributed object storage system. Built in Rust and licensed under Apache 2.0, it is a production-ready, S3-compatible object store for AI workloads.
+              RustFS is AI-native object storage — open source, built in Rust, and licensed under Apache 2.0. Production-ready and S3-compatible, it is designed for modern AI workloads.
             </p>
 
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 text-sm xl:grid-cols-4">
