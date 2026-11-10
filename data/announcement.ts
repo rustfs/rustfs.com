@@ -1,7 +1,7 @@
 export const homeAnnouncement = {
   enabled: true,
   badge: 'New',
-  message: 'RustFS 1.0.4 is now available! Please',
+  message: 'RustFS 1.0.5 is now available! Please',
   linkText: 'upgrade and try',
   href: '/download',
 } as const
