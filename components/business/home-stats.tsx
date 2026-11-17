@@ -44,8 +44,8 @@ const compatibilityRows = [
     meta: "S3 API",
   },
   {
-    title: "MinIO tools",
-    detail: "Reuse familiar migration and admin workflows.",
+    title: "S3 clients",
+    detail: "Reuse familiar mc and CLI workflows for migration and admin tasks.",
     meta: "MC / CLI",
   },
   {

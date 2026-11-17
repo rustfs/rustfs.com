@@ -16,11 +16,11 @@ const stories = [
     linkText: "Read the story",
   },
   {
-    title: "MinIO to RustFS migration",
+    title: "Copy onto RustFS 1.0",
     token: "s3 copy",
     label: "Migration path",
     description:
-      "Copy buckets onto a current RustFS 1.0 release, verify object data, and keep the MinIO source available for rollback.",
+      "Copy buckets onto a current RustFS 1.0 release, verify object data, and keep the original deployment available for rollback.",
     href: "/blog/migrating-from-minio-to-rustfs-a-technical-guide/",
     linkText: "Read the migration guide",
   },
@@ -33,7 +33,7 @@ export default function HomeMultiClouds() {
         <HomeSectionHeader
           eyebrow="From the blog"
           title="Built for the next generation of object storage"
-          description="RustFS combines Rust-native engineering, Apache 2.0 licensing, and S3 compatibility for AI infrastructure and common MinIO migration workflows."
+          description="RustFS combines Rust-native engineering, Apache 2.0 licensing, and S3 compatibility for AI infrastructure and common S3 migration workflows."
         />
 
         <div className="grid border border-border lg:grid-cols-2">
