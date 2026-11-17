@@ -17,7 +17,6 @@ export const metadata: Metadata = {
     "MCP AI",
     "data silos",
     "legacy modernization",
-    "MinIO",
   ],
 };
 
@@ -59,7 +58,7 @@ const protocolRows = [
 const sections: FeaturePageSection[] = [
   {
     title: "S3 API compatibility",
-    description: "The primary object-storage API. It covers common bucket, object, listing, multipart, and access-control workflows, and it is not identical to every AWS S3 or MinIO API.",
+    description: "The primary object-storage API. It covers common bucket, object, listing, multipart, and access-control workflows, and it is not identical to every AWS S3 API.",
     items: [
       {
         title: "Common S3 workflows",
@@ -71,7 +70,7 @@ const sections: FeaturePageSection[] = [
         description: "The S3 API starts with the server. Clients still need an endpoint, region, credentials, and addressing style. Path-style is the default.",
       },
       {
-        title: "MinIO migration notes",
+        title: "S3 migration notes",
         description: "Use familiar S3 SDKs, point them at the RustFS endpoint, and validate the operations your application uses. The linked guide is the recommended copy path onto a current 1.0 release.",
         href: "/blog/migrating-from-minio-to-rustfs-a-technical-guide/",
       },

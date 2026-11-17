@@ -144,7 +144,7 @@ export default async function AboutPage() {
               >
                 S3 API compatibility for common object-storage workflows
               </a>
-              . It is not identical to every AWS S3 or MinIO API. Configure the endpoint and validate the operations you depend on.
+              . It is not identical to every AWS S3 API. Configure the endpoint and validate the operations you depend on.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">

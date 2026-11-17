@@ -13,7 +13,7 @@ import { getGitHubMetrics } from "@/lib/github";
 import type { Metadata } from "next";
 
 const HOME_TITLE = "RustFS | High-Performance S3 Object Storage for AI & Cloud-Native";
-const HOME_DESCRIPTION = "RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, S3-compatible object store and drop-in MinIO alternative engineered for AI workloads.";
+const HOME_DESCRIPTION = "RustFS is an open-source, Apache 2.0-licensed distributed object storage system built in Rust. A high-performance, S3-compatible object store engineered for AI workloads.";
 const OG_IMAGE_URL = `${SITE_CONFIG.primaryDomain}${SITE_CONFIG.ogImagePath}`;
 
 export const metadata: Metadata = {
