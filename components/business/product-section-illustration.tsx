@@ -182,6 +182,42 @@ function S3TablesVisual() {
   );
 }
 
+function OnDemandMigrationVisual() {
+  return (
+    <IllustrationFrame label="On-demand migration">
+      <div className="grid w-full max-w-lg grid-cols-[minmax(0,0.85fr)_auto_minmax(0,1.15fr)] items-center gap-3">
+        <Tile icon={DatabaseIcon} label="External source" detail="s3 compatible" />
+        <div className="flex flex-col items-center gap-2">
+          <DataFlowLine direction="horizontal" className="w-8 sm:w-10" />
+          <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            prefix
+          </span>
+        </div>
+        <div className="border border-brand/60 bg-brand/5 p-4">
+          <div className="flex items-center gap-3">
+            <DatabaseIcon className="size-5 text-brand" />
+            <div>
+              <p className="text-sm font-semibold text-foreground">RustFS</p>
+              <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">stored locally</p>
+            </div>
+          </div>
+          <div className="mt-5 grid grid-cols-2 gap-2">
+            {["Listed", "Pulled"].map((status, index) => (
+              <Reveal key={status} delay={index * 0.12}>
+                <div className="border border-border bg-background px-2 py-3 text-center">
+                  <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                    {status}
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </IllustrationFrame>
+  );
+}
+
 function DistributedVisual({
   entityLabel = "Node",
 }: {
@@ -895,7 +931,14 @@ function FourSiteMeshVisual() {
 }
 
 const illustrations: Record<ProductIllustrationVariant, ((props: { sectionIndex: number }) => ReactNode)> = {
-  data: ({ sectionIndex }) => (sectionIndex === 0 ? <S3ManagementVisual /> : <S3TablesVisual />),
+  data: ({ sectionIndex }) =>
+    sectionIndex === 0 ? (
+      <S3ManagementVisual />
+    ) : sectionIndex === 1 ? (
+      <S3TablesVisual />
+    ) : (
+      <OnDemandMigrationVisual />
+    ),
   scale: ({ sectionIndex }) => {
     const visuals = [
       <DistributedVisual key="distributed" />,

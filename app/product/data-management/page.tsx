@@ -1,6 +1,5 @@
 import FeaturePage, { type FeaturePageSection } from "@/components/business/feature-page";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   alternates: { canonical: "product/data-management/" },
@@ -60,29 +59,6 @@ const sections: FeaturePageSection[] = [
   {
     id: "on-demand-migration",
     title: "On-demand migration",
-    description: (
-      <>
-        RustFS pulls objects from a configured external source only when they are read or backfilled, and stores them locally. New PUT and DELETE operations in RustFS are not synchronized to the source, and later source changes do not update local copies. Steps are in the{" "}
-        <Link
-          href="https://docs.rustfs.com/en/administration/data/bucket/on-demand-migration"
-          className="text-brand underline decoration-brand/40 underline-offset-4 transition-colors hover:decoration-brand"
-          target="_blank"
-          rel="noreferrer"
-        >
-          on-demand migration guide
-        </Link>
-        .
-      </>
-    ),
-    image: {
-      src: "/images/product/on-demand-migration-console.png",
-      alt: "Sample RustFS Console view of On-demand migration. Configuration shows a Cloudflare R2 source with a placeholder endpoint. Runtime status and the completed background backfill show the counts from that documented run.",
-      width: 1920,
-      height: 1113,
-      label: "Sample Console view",
-      caption:
-        "Sample data. The endpoint is a placeholder, and the counters are one documented run, not a capacity claim.",
-    },
     items: [
       {
         title: "Multi-provider support",

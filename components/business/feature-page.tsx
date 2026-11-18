@@ -28,7 +28,6 @@ import {
   WrenchIcon,
   type LucideIcon,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -36,14 +35,6 @@ export interface FeaturePageSection {
   id?: string;
   title: string;
   description?: ReactNode;
-  image?: {
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
-    label: string;
-    caption?: string;
-  };
   footnote?: ReactNode;
   items?: {
     title: string;
@@ -365,35 +356,6 @@ function SectionIllustration({
   return <ProductSectionIllustration variant={variant} sectionIndex={sectionIndex} />;
 }
 
-function SectionScreenshot({
-  image,
-}: {
-  image: NonNullable<FeaturePageSection["image"]>;
-}) {
-  return (
-    <figure className="flex h-full min-h-80 flex-col overflow-hidden border border-border bg-card p-5 sm:p-7">
-      <div className="flex h-full min-h-64 flex-col">
-        <figcaption className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-          {image.label}
-        </figcaption>
-        <div className="mt-5 border border-border bg-background">
-          <Image
-            src={image.src}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            unoptimized
-            className="h-auto w-full"
-          />
-        </div>
-        {image.caption ? (
-          <p className="type-caption mt-4 text-muted-foreground">{image.caption}</p>
-        ) : null}
-      </div>
-    </figure>
-  );
-}
-
 function FeatureSection({
   section,
   sectionIndex,
@@ -405,7 +367,6 @@ function FeatureSection({
 }) {
   const items = section.items ?? [];
   const reverse = sectionIndex % 2 === 1;
-  const screenshot = section.image;
 
   return (
     <section
@@ -423,29 +384,16 @@ function FeatureSection({
         ) : null}
       </div>
 
-      <div
-        className={cn(
-          "mt-10 grid gap-8 lg:items-stretch lg:gap-12",
-          screenshot ? "lg:grid-cols-1" : "lg:grid-cols-2",
-        )}
-      >
-        {screenshot ? null : (
-          <div className={cn("h-full", reverse && "lg:order-2")}>
-            <SectionIllustration
-              variant={variant}
-              sectionIndex={sectionIndex}
-              section={section}
-            />
-          </div>
-        )}
+      <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-12">
+        <div className={cn("h-full", reverse && "lg:order-2")}>
+          <SectionIllustration
+            variant={variant}
+            sectionIndex={sectionIndex}
+            section={section}
+          />
+        </div>
 
-        <div
-          className={cn(
-            "h-full divide-y divide-border border border-border bg-card",
-            !screenshot && reverse && "lg:order-1",
-            screenshot && "lg:max-w-2xl",
-          )}
-        >
+        <div className={cn("h-full divide-y divide-border border border-border bg-card", reverse && "lg:order-1")}>
           {items.map((item) => (
             <article key={item.title} className="grid gap-4 p-6 sm:grid-cols-[2.5rem_1fr]">
               <span className="flex size-9 items-center justify-center bg-background text-brand">
@@ -471,7 +419,6 @@ function FeatureSection({
             </article>
           ))}
         </div>
-        {screenshot ? <SectionScreenshot image={screenshot} /> : null}
       </div>
       {section.footnote ? (
         <p className="type-caption mt-6 max-w-3xl text-muted-foreground" role="note">
