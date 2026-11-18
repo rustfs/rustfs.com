@@ -35,7 +35,6 @@ export interface FeaturePageSection {
   id?: string;
   title: string;
   description?: ReactNode;
-  footnote?: ReactNode;
   items?: {
     title: string;
     description: ReactNode;
@@ -420,11 +419,6 @@ function FeatureSection({
           ))}
         </div>
       </div>
-      {section.footnote ? (
-        <p className="type-caption mt-6 max-w-3xl text-muted-foreground" role="note">
-          {section.footnote}
-        </p>
-      ) : null}
     </section>
   );
 }

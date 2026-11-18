@@ -40,8 +40,6 @@ const sections: FeaturePageSection[] = [
         description: "Multiple buckets can be migrated at the same time, which speeds up the transfer.",
       },
     ],
-    footnote:
-      "Amazon S3 is a trademark of Amazon.com, Inc. or its affiliates. Cloudflare and R2 are trademarks of Cloudflare, Inc. Google Cloud Storage is a trademark of Google LLC. Azure is a trademark of Microsoft Corporation. MinIO is a registered trademark of MinIO, Inc. RustFS is not affiliated with, endorsed by, or sponsored by those companies.",
   },
   {
     title: "S3",
