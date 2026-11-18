@@ -15,7 +15,7 @@ export default function DownloadLink({ className }: {
     <Link
       href={`/download`}
       onClick={() => trackDownloadClick("/download/", "Download", pathname || "/")}
-      className={cn('motion-button group inline-flex h-12 items-center justify-center px-6 py-0 text-sm font-semibold leading-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-primary text-primary-foreground focus-visible:outline-secondary transition-colors', className)}
+      className={cn('motion-button group inline-flex h-12 items-center justify-center px-6 py-0 text-sm font-semibold leading-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-[#0062FF] text-white transition-colors hover:bg-[#014FDD] hover:text-white active:bg-[#014FDD] active:text-white focus-visible:outline-[#0062FF]', className)}
     >
       <span className="mr-2">{'Download'}</span>
       <ArrowDownToLineIcon className="motion-arrow size-4 flex-none" strokeWidth={2.5} />

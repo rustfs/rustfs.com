@@ -72,7 +72,7 @@ export default function LinuxDownloadSection({ platform, release, className }: L
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackDownloadClick(finalX86_64Url, "Download", "linux_x86_64")}
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+              className="inline-flex items-center space-x-2 px-4 py-2 rounded-none bg-[#0062FF] text-white hover:bg-[#014FDD] hover:text-white transition-colors">
               <DownloadIcon className="w-4 h-4" />
               <span>{'Download'}</span>
             </a>
@@ -108,7 +108,7 @@ export default function LinuxDownloadSection({ platform, release, className }: L
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackDownloadClick(finalAarch64Url, "Download", "linux_aarch64")}
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+              className="inline-flex items-center space-x-2 px-4 py-2 rounded-none bg-[#0062FF] text-white hover:bg-[#014FDD] hover:text-white transition-colors">
               <DownloadIcon className="w-4 h-4" />
               <span>{'Download'}</span>
             </a>

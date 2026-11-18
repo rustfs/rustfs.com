@@ -22,6 +22,28 @@ export const metadata: Metadata = {
 
 const sections: FeaturePageSection[] = [
   {
+    id: "on-demand-migration",
+    title: "On-demand migration",
+    items: [
+      {
+        title: "Multi-provider support",
+        description:
+          "Connect a source on AWS S3, Cloudflare R2, MinIO, Google Cloud Storage, Azure Blob Storage, or another S3-compatible system.",
+      },
+      {
+        title: "Prefix-based selection",
+        description:
+          "Set a prefix so only matching objects are migrated. With no prefix, the configured source namespace is included.",
+      },
+      {
+        title: "Parallel migration",
+        description: "Multiple buckets can be migrated at the same time, which speeds up the transfer.",
+      },
+    ],
+    footnote:
+      "Amazon S3 is a trademark of Amazon.com, Inc. or its affiliates. Cloudflare and R2 are trademarks of Cloudflare, Inc. Google Cloud Storage is a trademark of Google LLC. Azure is a trademark of Microsoft Corporation. MinIO is a registered trademark of MinIO, Inc. RustFS is not affiliated with, endorsed by, or sponsored by those companies.",
+  },
+  {
     title: "S3",
     items: [
       {
@@ -55,29 +77,6 @@ const sections: FeaturePageSection[] = [
         description: "Native connections to leading big data and AI ecosystems.",
       },
     ],
-  },
-  {
-    id: "on-demand-migration",
-    title: "On-demand migration",
-    items: [
-      {
-        title: "Multi-provider support",
-        description:
-          "Connect a source on AWS S3, Cloudflare R2, MinIO, Google Cloud Storage, Azure Blob Storage, or another S3-compatible system.",
-      },
-      {
-        title: "Prefix-based selection",
-        description:
-          "Set a prefix so only matching objects are migrated. With no prefix, the configured source namespace is included.",
-      },
-      {
-        title: "Progress tracking",
-        description:
-          "Watch migration progress in the Console while it runs. Live counters show migrated data, migrated objects, and in-flight pulls. A backfill shows how many objects were listed, pulled, skipped, and failed. It does not show a completion percentage while the source scan is still running.",
-      },
-    ],
-    footnote:
-      "Amazon S3 is a trademark of Amazon.com, Inc. or its affiliates. Cloudflare and R2 are trademarks of Cloudflare, Inc. Google Cloud Storage is a trademark of Google LLC. Azure is a trademark of Microsoft Corporation. MinIO is a registered trademark of MinIO, Inc. RustFS is not affiliated with, endorsed by, or sponsored by those companies.",
   },
 ];
 

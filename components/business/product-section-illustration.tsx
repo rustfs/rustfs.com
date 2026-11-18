@@ -183,31 +183,67 @@ function S3TablesVisual() {
 }
 
 function OnDemandMigrationVisual() {
+  const runtime = [
+    { label: "Source-hit ratio", value: "—" },
+    { label: "Migrated data", value: "31.7 MiB" },
+    { label: "Migrated objects", value: "1,000" },
+    { label: "In-flight pulls", value: "0" },
+    { label: "Queue depth", value: "0" },
+    { label: "Circuit breaker", value: "Closed" },
+  ];
+  const backfill = [
+    { label: "Listed", value: "1,000" },
+    { label: "Pulled", value: "1,000" },
+    { label: "Skipped", value: "0" },
+    { label: "Failed objects", value: "0" },
+    { label: "Data", value: "31.7 MiB" },
+    { label: "Updated", value: "2026-11-17" },
+  ];
+
   return (
-    <IllustrationFrame label="On-demand migration">
-      <div className="grid w-full max-w-lg grid-cols-[minmax(0,0.85fr)_auto_minmax(0,1.15fr)] items-center gap-3">
-        <Tile icon={DatabaseIcon} label="External source" detail="s3 compatible" />
-        <div className="flex flex-col items-center gap-2">
-          <DataFlowLine direction="horizontal" className="w-8 sm:w-10" />
-          <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-            prefix
-          </span>
-        </div>
-        <div className="border border-brand/60 bg-brand/5 p-4">
-          <div className="flex items-center gap-3">
-            <DatabaseIcon className="size-5 text-brand" />
-            <div>
-              <p className="text-sm font-semibold text-foreground">RustFS</p>
-              <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">stored locally</p>
-            </div>
+    <IllustrationFrame label="Sample">
+      <div className="grid w-full max-w-lg gap-3">
+        <div className="border border-border bg-background p-3">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-xs font-semibold text-foreground">Runtime status</p>
+            <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
+              live counters
+            </span>
           </div>
-          <div className="mt-5 grid grid-cols-2 gap-2">
-            {["Listed", "Pulled"].map((status, index) => (
-              <Reveal key={status} delay={index * 0.12}>
-                <div className="border border-border bg-background px-2 py-3 text-center">
-                  <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                    {status}
-                  </span>
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {runtime.map((item, index) => (
+              <Reveal key={item.label} delay={index * 0.05}>
+                <div className="border border-border bg-card px-2 py-2">
+                  <p className="font-mono text-[7px] font-semibold uppercase leading-tight tracking-[0.1em] text-muted-foreground">
+                    {item.label}
+                  </p>
+                  <p className="mt-1 text-sm font-semibold tabular-nums text-foreground">{item.value}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+        <span aria-hidden="true" className="mx-auto block h-px w-10 bg-border" />
+        <div className="border border-[#0062FF]/60 bg-[#0062FF]/5 p-3">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className="text-xs font-semibold text-foreground">Background backfill</p>
+              <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
+                latest job
+              </p>
+            </div>
+            <span className="border border-[#0062FF]/60 bg-background px-2 py-1 font-mono text-[8px] font-semibold uppercase tracking-[0.12em] text-[#0062FF]">
+              completed
+            </span>
+          </div>
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {backfill.map((item, index) => (
+              <Reveal key={item.label} delay={0.2 + index * 0.05}>
+                <div className="border border-border bg-background px-2 py-2">
+                  <p className="font-mono text-[7px] font-semibold uppercase leading-tight tracking-[0.1em] text-muted-foreground">
+                    {item.label}
+                  </p>
+                  <p className="mt-1 text-sm font-semibold tabular-nums text-foreground">{item.value}</p>
                 </div>
               </Reveal>
             ))}
@@ -933,11 +969,11 @@ function FourSiteMeshVisual() {
 const illustrations: Record<ProductIllustrationVariant, ((props: { sectionIndex: number }) => ReactNode)> = {
   data: ({ sectionIndex }) =>
     sectionIndex === 0 ? (
-      <S3ManagementVisual />
-    ) : sectionIndex === 1 ? (
-      <S3TablesVisual />
-    ) : (
       <OnDemandMigrationVisual />
+    ) : sectionIndex === 1 ? (
+      <S3ManagementVisual />
+    ) : (
+      <S3TablesVisual />
     ),
   scale: ({ sectionIndex }) => {
     const visuals = [
