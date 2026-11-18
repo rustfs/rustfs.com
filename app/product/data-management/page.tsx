@@ -5,12 +5,13 @@ export const metadata: Metadata = {
   alternates: { canonical: "product/data-management/" },
   title: "Data Management & S3 Tables | RustFS High-Performance Storage",
   description:
-    "Manage buckets, lifecycle rules, and S3 Tables on RustFS. S3 API compatibility covers common object-storage workflows. See the S3 protocol docs before depending on advanced S3 behavior.",
+    "Manage buckets, lifecycle rules, and S3 Tables on RustFS. On-demand migration pulls missing objects from an external source when they are read or backfilled. S3 API compatibility covers common object-storage workflows. See the S3 protocol docs before depending on advanced S3 behavior.",
   keywords: [
     "RustFS",
     "data management",
     "object storage",
     "S3 compatibility",
+    "on-demand migration",
     "S3 Tables",
     "Apache Iceberg",
     "bucket quota",
@@ -20,6 +21,26 @@ export const metadata: Metadata = {
 };
 
 const sections: FeaturePageSection[] = [
+  {
+    id: "on-demand-migration",
+    title: "On-demand migration",
+    items: [
+      {
+        title: "Multi-provider support",
+        description:
+          "Connect a source on AWS S3, Cloudflare R2, MinIO, Google Cloud Storage, Azure Blob Storage, or another S3-compatible system.",
+      },
+      {
+        title: "Prefix-based selection",
+        description:
+          "Set a prefix so only matching objects are migrated. With no prefix, the configured source namespace is included.",
+      },
+      {
+        title: "Parallel migration",
+        description: "Multiple buckets can be migrated at the same time, which speeds up the transfer.",
+      },
+    ],
+  },
   {
     title: "S3",
     items: [
@@ -61,7 +82,7 @@ export default function DataManagementPage() {
   return (
     <FeaturePage
       title="Data Management"
-      description="Lifecycle management for bucket quotas, Object Lock, and versioning. Native S3 compatibility helps you migrate from any S3-compatible system to RustFS."
+      description="Lifecycle management for bucket quotas, Object Lock, and versioning. Native S3 compatibility helps you migrate from any S3-compatible system to RustFS. On-demand migration pulls missing objects from an external source when they are read or backfilled."
       sections={sections}
       variant="data"
       highlightsTitle="Resilience & Durability"

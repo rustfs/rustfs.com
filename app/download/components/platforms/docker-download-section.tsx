@@ -52,7 +52,7 @@ export default function DockerDownloadSection({ platform, release, className }: 
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackDownloadClick("https://hub.docker.com/r/rustfs/rustfs", "Download", "docker_hub")}
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+              className="inline-flex items-center space-x-2 px-4 py-2 rounded-none bg-[#0062FF] text-white hover:bg-[#014FDD] hover:text-white transition-colors">
               <DownloadIcon className="w-4 h-4" />
               <span>{'Download'}</span>
             </a>
@@ -86,7 +86,7 @@ export default function DockerDownloadSection({ platform, release, className }: 
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackDownloadClick("https://rustfs.com/docker-compose.yml", "View Compose File", "docker_compose")}
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+              className="inline-flex items-center space-x-2 px-4 py-2 rounded-none bg-[#0062FF] text-white hover:bg-[#014FDD] hover:text-white transition-colors">
               <ExternalLinkIcon className="w-4 h-4" />
               <span>{'View Compose File'}</span>
             </a>
@@ -115,7 +115,7 @@ export default function DockerDownloadSection({ platform, release, className }: 
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackDownloadClick("https://charts.rustfs.com", "View Charts", "helm_charts")}
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+              className="inline-flex items-center space-x-2 px-4 py-2 rounded-none bg-[#0062FF] text-white hover:bg-[#014FDD] hover:text-white transition-colors">
               <ExternalLinkIcon className="w-4 h-4" />
               <span>{'View Charts'}</span>
             </a>

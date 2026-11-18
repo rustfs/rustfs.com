@@ -80,7 +80,7 @@ export default function DownloadAuto({ className }: { className?: string }) {
     <div className={cn("relative inline-flex", className)}>
       {/* 主下载按钮 */}
       <button
-        className="motion-button group inline-flex h-12 items-center justify-center bg-primary pl-6 pr-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 hover:text-primary-foreground/90 active:bg-primary/80 active:text-primary-foreground/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className="motion-button group inline-flex h-12 items-center justify-center bg-[#0062FF] pl-6 pr-4 text-sm font-semibold text-white transition-colors hover:bg-[#014FDD] hover:text-white active:bg-[#014FDD] active:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0062FF]"
         onClick={handleDownload}
       >
         <span className="mr-2">{buttonText}</span>
@@ -91,7 +91,7 @@ export default function DownloadAuto({ className }: { className?: string }) {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button
-            className="motion-button inline-flex size-12 items-center justify-center border-l border-primary-foreground/20 bg-primary text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="motion-button inline-flex size-12 items-center justify-center border-l border-white/20 bg-[#0062FF] text-sm font-semibold text-white transition-colors hover:bg-[#014FDD] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0062FF]"
             aria-label={"选择版本"}
           >
             <ChevronDownIcon className="size-4" />

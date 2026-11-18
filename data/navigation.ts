@@ -21,7 +21,7 @@ export const productNavigation: NavigationItem[] = [
   {
     title: "Data Management",
     href: "/product/data-management",
-    description: "Buckets, lifecycle, Object Lock, versioning, multipart upload, and S3 Tables.",
+    description: "Buckets, lifecycle, Object Lock, versioning, multipart upload, S3 Tables, and on-demand migration.",
     items: ["Lifecycle", "Versioning", "S3 Tables"],
   },
   {
@@ -85,6 +85,7 @@ export const footerNavigation = [
       { title: "Replication", href: "/product/replication" },
       { title: "S3-compatible", href: "/product/multiple-protocol-access#s3-api-compatibility" },
       { title: "S3 Tables", href: "/product/data-management#s3-tables" },
+      { title: "On-demand migration", href: "/product/data-management#on-demand-migration" },
       { title: "Multi-protocol access", href: "/product/multiple-protocol-access" },
       { title: "Data Management", href: "/product/data-management" },
       { title: "High Availability & Scale", href: "/product/high-availability-scale" },
