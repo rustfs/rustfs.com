@@ -1,48 +1,80 @@
+export interface NavigationFeature {
+  title: string;
+  href: string;
+  items?: {
+    title: string;
+    href: string;
+  }[];
+}
+
 export interface NavigationItem {
   title: string;
   href: string;
   description?: string;
-  items?: string[];
+  features?: NavigationFeature[];
 }
 
 export const productNavigation: NavigationItem[] = [
   {
     title: "Replication",
     href: "/product/replication",
-    description: "Site and bucket replication for remote data copies and recovery planning.",
-    items: ["Sites", "Buckets", "Sync"],
+    features: [
+      { title: "Bucket Replication", href: "/product/replication#bucket-replication" },
+      { title: "Site Replication", href: "/product/replication#site-replication" },
+    ],
   },
   {
     title: "Multi-protocol access",
     href: "/product/multiple-protocol-access",
-    description: "S3 is primary. WebDAV, Swift, FTP/FTPS, and MCP need the setup in the docs.",
-    items: ["S3", "WebDAV", "Swift", "FTP/FTPS", "MCP"],
+    features: [
+      { title: "S3 API compatibility", href: "/product/multiple-protocol-access#s3-api-compatibility" },
+      { title: "WebDAV", href: "/product/multiple-protocol-access#webdav" },
+      { title: "Swift API", href: "/product/multiple-protocol-access#swift-api" },
+      { title: "FTP/FTPS", href: "/product/multiple-protocol-access#ftp-ftps" },
+      { title: "MCP", href: "/product/multiple-protocol-access#mcp" },
+    ],
   },
   {
     title: "Data Management",
     href: "/product/data-management",
-    description: "Buckets, lifecycle, Object Lock, versioning, multipart upload, S3 Tables, and on-demand migration.",
-    items: ["Lifecycle", "Versioning", "S3 Tables"],
+    features: [
+      { title: "On-demand migration", href: "/product/data-management#on-demand-migration" },
+      { title: "S3", href: "/product/data-management#s3" },
+      { title: "S3 Tables", href: "/product/data-management#s3-tables" },
+    ],
   },
   {
     title: "High Availability & Scale",
     href: "/product/high-availability-scale",
-    description: "Distributed topology, Erasure Coding, pool orchestration, and self-healing.",
-    items: ["EC", "Rebalance", "Healing"],
+    features: [
+      { title: "Distributed deployment", href: "/product/high-availability-scale#distributed-deployment" },
+      { title: "EC configuration", href: "/product/high-availability-scale#ec-configuration" },
+      { title: "Elastic scaling", href: "/product/high-availability-scale#elastic-scaling" },
+      { title: "Node healing", href: "/product/high-availability-scale#node-healing" },
+    ],
   },
   {
     title: "Security & Compliance",
     href: "/product/security-compliance",
-    description: "Identity, OIDC, mTLS, encryption, KMS, audit, and event handling.",
-    items: ["IAM", "OIDC", "mTLS", "SSE/KMS"],
+    features: [
+      { title: "Identity and access management", href: "/product/security-compliance#identity-and-access-management" },
+      { title: "Data encryption", href: "/product/security-compliance#data-encryption" },
+      { title: "Security audit", href: "/product/security-compliance#security-audit" },
+      { title: "Authentication", href: "/product/security-compliance#authentication" },
+      { title: "mTLS", href: "/product/security-compliance#mtls" },
+    ],
   },
   {
     title: "Operations & observability",
     href: "/product/operational-observability",
-    description: "Cluster management, OTEL signals, and rc operations.",
-    items: ["Cluster management", "OTEL", "rc"],
+    features: [
+      { title: "Multi-tenant management", href: "/product/operational-observability#multi-tenant-management" },
+      { title: "Console operations", href: "/product/operational-observability#console-operations" },
+      { title: "OTEL support", href: "/product/operational-observability#otel-support" },
+      { title: "Cluster insights", href: "/product/operational-observability#cluster-insights" },
+      { title: "RustFS client CLI (rc)", href: "/product/operational-observability#rustfs-client-cli" },
+    ],
   },
-
 ];
 
 export const resourceNavigation: NavigationItem[] = [

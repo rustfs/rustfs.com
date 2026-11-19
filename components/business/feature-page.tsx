@@ -63,7 +63,7 @@ export type FeaturePageVariant = "protocol" | "data" | "scale" | "ops" | "securi
 
 interface FeaturePageProps {
   title: string;
-  description: string;
+  description?: string;
   sections: FeaturePageSection[];
   links?: FeaturePageLink[];
   variant?: FeaturePageVariant;
@@ -467,9 +467,11 @@ export default function FeaturePage({
         <h1 className="type-display-md sm:type-display-lg text-foreground">
           {title}
         </h1>
-        <p className="type-body-lg mt-6 max-w-3xl text-muted-foreground">
-          {description}
-        </p>
+        {description ? (
+          <p className="type-body-lg mt-6 max-w-3xl text-muted-foreground">
+            {description}
+          </p>
+        ) : null}
         <ProductLinks links={links} />
         {highlights?.length ? (
           <div className="mt-12">
