@@ -19,24 +19,8 @@ export const productNavigation: NavigationItem[] = [
     title: "Replication",
     href: "/product/replication",
     features: [
-      {
-        title: "Bucket Replication",
-        href: "/product/replication#bucket-replication",
-        items: [
-          { title: "Sync and async modes", href: "/product/replication#bucket-replication" },
-          { title: "Flexible rules", href: "/product/replication#bucket-replication" },
-          { title: "Multi-target", href: "/product/replication#bucket-replication" },
-        ],
-      },
-      {
-        title: "Site Replication",
-        href: "/product/replication#site-replication",
-        items: [
-          { title: "Bidirectional sync between sites", href: "/product/replication#site-replication" },
-          { title: "Multi-site configuration", href: "/product/replication#site-replication" },
-          { title: "Convenient ops", href: "/product/replication#site-replication" },
-        ],
-      },
+      { title: "Bucket Replication", href: "/product/replication#bucket-replication" },
+      { title: "Site Replication", href: "/product/replication#site-replication" },
     ],
   },
   {
@@ -55,24 +39,8 @@ export const productNavigation: NavigationItem[] = [
     href: "/product/data-management",
     features: [
       { title: "On-demand migration", href: "/product/data-management#on-demand-migration" },
-      {
-        title: "S3",
-        href: "/product/data-management#s3",
-        items: [
-          { title: "Bucket & Object", href: "/product/data-management#s3" },
-          { title: "Lifecycle Management", href: "/product/data-management#s3" },
-          { title: "Multipart Upload", href: "/product/data-management#s3" },
-        ],
-      },
-      {
-        title: "S3 Tables",
-        href: "/product/data-management#s3-tables",
-        items: [
-          { title: "Automated Small File Management", href: "/product/data-management#s3-tables" },
-          { title: "Performance Acceleration", href: "/product/data-management#s3-tables" },
-          { title: "Native Iceberg Support", href: "/product/data-management#s3-tables" },
-        ],
-      },
+      { title: "S3", href: "/product/data-management#s3" },
+      { title: "S3 Tables", href: "/product/data-management#s3-tables" },
     ],
   },
   {

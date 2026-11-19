@@ -888,10 +888,10 @@ export default function RustfsConfigGenerator() {
               rustfs config output
             </h2>
             <div className="mt-3 border border-[#1A2030] bg-[#0B0E14] text-[#F4F6FA]">
-              <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-2.5" aria-hidden="true">
-                <span className="size-2 bg-[#0062FF]" />
-                <span className="size-2 bg-[#0062FF]/40" />
-                <span className="size-2 bg-white/20" />
+              <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3" aria-hidden="true">
+                <span className="size-3 shrink-0 bg-[#FF5F57] [border-radius:9999px]" />
+                <span className="size-3 shrink-0 bg-[#FEBC2E] [border-radius:9999px]" />
+                <span className="size-3 shrink-0 bg-[#28C840] [border-radius:9999px]" />
               </div>
               <pre className="max-h-[32rem] overflow-auto px-5 py-5 font-mono text-[13px] leading-7">
                 <code className="block min-w-max">
