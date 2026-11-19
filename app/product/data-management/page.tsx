@@ -82,8 +82,24 @@ export default function DataManagementPage() {
   return (
     <FeaturePage
       title="Data Management"
+      description="Lifecycle management for bucket quotas, Object Lock, and versioning. Native S3 compatibility helps you migrate from any S3-compatible system to RustFS. On-demand migration pulls missing objects from an external source when they are read or backfilled."
       sections={sections}
       variant="data"
+      highlightsTitle="Resilience & Durability"
+      highlights={[
+        {
+          title: "S3 compatibility",
+          description: "Native S3 protocol support for efficient object management.",
+        },
+        {
+          title: "Unified management",
+          description: "S3 Tables keep structured and unstructured data in one object store.",
+        },
+        {
+          title: "Cost efficiency",
+          description: "Fine-grained lifecycle policies reduce enterprise storage costs.",
+        },
+      ]}
       links={[
         { label: "Plan data workflows", href: "/contact-us/" },
         { label: "Read docs", href: "/docs", variant: "outline" },

@@ -188,8 +188,24 @@ export default function MultipleProtocolAccessPage() {
   return (
     <FeaturePage
       title="Multi-protocol access"
+      description="S3 is the primary object-storage API. WebDAV and FTP/FTPS are built-in gateways that stay disabled until you enable them. Swift requires an optional build. MCP is a separate server you point at the S3 endpoint. No separate third-party protocol gateway is required for the built-in WebDAV and FTP/FTPS gateways. Configure the endpoint, credentials, and protocol switch, then validate the operations your application uses."
       sections={sections}
       variant="protocol"
+      highlightsTitle="S3 first"
+      highlights={[
+        {
+          title: "Primary API",
+          description: "The S3 API is on the main listener. Other protocols need the enablement, build, or separate server documented for that protocol.",
+        },
+        {
+          title: "Built-in gateways",
+          description: "WebDAV and FTP/FTPS ship in the standard binary as gateways. They are off by default. Swift is not in the default build.",
+        },
+        {
+          title: "Validate the client",
+          description: "Point a familiar SDK or client at the RustFS endpoint and test the operations you depend on. Compatibility is scoped to the documented workflows.",
+        },
+      ]}
       links={[
         { label: "Download", href: "/download" },
         { label: "S3 protocol docs", href: "https://docs.rustfs.com/en/administration/protocols/s3", variant: "outline" },
