@@ -109,24 +109,8 @@ export default function HighAvailabilityScalePage() {
   return (
     <FeaturePage
       title="High Availability & Scale"
-      description="Distributed deployment and erasure coding keep object storage available while a set still meets read and write quorum. Scale-out adds pools. It does not promise unlimited fault tolerance or zero-downtime expansion."
       sections={sections}
       variant="scale"
-      highlightsTitle="Reliability & Efficiency"
-      highlights={[
-        {
-          title: "Enterprise Solution",
-          description: "Built for enterprise requirements for high availability and reliability at large scale.",
-        },
-        {
-          title: "Cost efficiency",
-          description: "Strong cost efficiency, with lower storage cost and less operational work.",
-        },
-        {
-          title: "High Flexibility",
-          description: "Adapts object management to different workloads and data scales.",
-        },
-      ]}
       links={[
         { label: "Download", href: "/download" },
         { label: "Plan scaling", href: "/contact-us/", variant: "outline" },

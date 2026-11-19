@@ -129,24 +129,8 @@ export default function OperationalObservabilityPage() {
   return (
     <FeaturePage
       title="Operations & observability"
-      description="RustFS gives operators practical control over storage operations with console workflows, OpenTelemetry support, cluster insights, and rc CLI automation."
       sections={sections}
       variant="ops"
-      highlightsTitle="Enterprise insights"
-      highlights={[
-        {
-          title: "Real-time insights",
-          description: "Visibility into node health, disk status, capacity metrics, and object or bucket counts.",
-        },
-        {
-          title: "Operational flexibility",
-          description: "Deployment across operating systems and installation methods, including source, binary, Docker, and Kubernetes.",
-        },
-        {
-          title: "Simplified administration",
-          description: "Comprehensive console and CLI controls for full-lifecycle bucket management and granular IAM security.",
-        },
-      ]}
       links={[
         { label: "Download", href: "/download" },
         { label: "Read docs", href: "/docs", variant: "outline" },

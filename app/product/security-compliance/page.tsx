@@ -104,24 +104,8 @@ export default function SecurityCompliancePage() {
   return (
     <FeaturePage
       title="Security & Compliance"
-      description="RustFS ships identity, encryption, audit, and transport controls. Built-in does not mean already configured for production. Change default credentials, define IAM policies, enable TLS, and turn on encryption or audit targets before you expose a cluster. The controls on this page are product features, not SOC 2, ISO, or HIPAA certifications."
       sections={sections}
       variant="security"
-      highlightsTitle="Configure before production"
-      highlights={[
-        {
-          title: "Least privilege",
-          description: "IAM can model least privilege. Root credentials bypass identity policies until you create users and attach policies.",
-        },
-        {
-          title: "Separate controls",
-          description: "Access, encryption, audit delivery, and TLS are configured separately. Enabling one does not enable the others.",
-        },
-        {
-          title: "Not a certification",
-          description: "These controls can support a review. RustFS does not claim SOC 2, ISO, or HIPAA certification on this page.",
-        },
-      ]}
       links={[
         { label: "Download", href: "/download" },
         { label: "Security checklist", href: "https://docs.rustfs.com/en/installation/requirement/checklists/security-checklists", variant: "outline" },

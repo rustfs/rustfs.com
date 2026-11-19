@@ -8,8 +8,6 @@ import FeaturePage, { type FeaturePageSection } from "@/components/business/feat
 const title = "S3 Bucket & Site Replication | RustFS";
 const description =
   "Replicate S3 object data across RustFS sites or selected buckets. Plan recovery with versioned copies, prefix and tag filters, and multi-target rules.";
-const heroDescription =
-  "Build remote copies of S3-compatible object data to support disaster recovery and business continuity. Link independent RustFS sites or replicate selected bucket data. Plan DNS, traffic routing, and application failover separately.";
 
 export const metadata: Metadata = {
   alternates: { canonical: "product/replication/" },
@@ -121,27 +119,8 @@ export default function ReplicationPage() {
   return (
     <FeaturePage
       title="Replication"
-      description={heroDescription}
       sections={sections}
       variant="replication"
-      highlightsTitle="Why replication"
-      highlights={[
-        {
-          title: "Reduce single-site failure exposure",
-          description:
-            "Maintain another copy of object data in an independent location, reducing reliance on a single site when infrastructure or a location becomes unavailable.",
-        },
-        {
-          title: "Prepare for recovery and business continuity",
-          description:
-            "Build a secondary dataset for recovery workflows. Validate replication completeness and rehearse application and traffic cutover against your recovery objectives.",
-        },
-        {
-          title: "Protect the datasets that matter",
-          description:
-            "Replicate selected prefixes and object tags to prioritize critical data and control cross-site transfer and storage costs.",
-        },
-      ]}
       links={[
         { label: "Talk to us", href: "/contact-us/" },
         { label: "Download", href: "/download", variant: "outline" },

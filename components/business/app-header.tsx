@@ -49,9 +49,60 @@ function ClosePopoverOnOutsideClick({
   return null;
 }
 
+const menuLinkClassName =
+  "rounded-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
+
+function ProductFeatureMenu({ item }: { item: NavigationItem }) {
+  return (
+    <div className="p-3">
+      <a
+        href={item.href}
+        className={cn("block text-sm font-semibold text-foreground hover:text-brand", menuLinkClassName)}
+      >
+        {item.title}
+      </a>
+      {item.features?.length ? (
+        <ul className="mt-2 space-y-2">
+          {item.features.map((feature) => (
+            <li key={feature.title}>
+              <a
+                href={feature.href}
+                className={cn(
+                  "block text-xs font-medium leading-5 text-foreground/85 hover:text-brand",
+                  menuLinkClassName,
+                )}
+              >
+                {feature.title}
+              </a>
+              {feature.items?.length ? (
+                <ul className="mt-1 space-y-0.5 border-l border-border pl-3">
+                  {feature.items.map((child) => (
+                    <li key={child.title}>
+                      <a
+                        href={child.href}
+                        className={cn(
+                          "block text-xs leading-5 text-muted-foreground hover:text-brand",
+                          menuLinkClassName,
+                        )}
+                      >
+                        {child.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
+
 function NavigationMenu({ label, items, wide = false }: { label: string; items: NavigationItem[]; wide?: boolean }) {
   const popoverRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
+  const hasFeatures = items.some((item) => item.features?.length);
 
   return (
     <Popover ref={popoverRef} className="relative">
@@ -73,24 +124,33 @@ function NavigationMenu({ label, items, wide = false }: { label: string; items: 
           >
             <Popover.Panel
               className={cn(
-                "absolute left-0 top-full z-50 mt-3 border border-border bg-popover p-2 text-popover-foreground shadow-xl",
-                wide ? "w-[34rem] lg:w-[42rem]" : "w-96",
+                "absolute left-0 top-full z-50 mt-3 overflow-y-auto border border-border bg-popover p-2 text-popover-foreground shadow-xl",
+                hasFeatures
+                  ? "max-h-[calc(100dvh-10rem)] w-[min(44rem,calc(100vw-2rem))] xl:w-[58rem]"
+                  : wide
+                    ? "max-h-[calc(100dvh-6rem)] w-[34rem] lg:w-[42rem]"
+                    : "max-h-[calc(100dvh-6rem)] w-96",
               )}
             >
-              <div className={cn("space-y-1", wide && "grid grid-cols-2 gap-1 space-y-0")}>
-                {items.map((item) => (
-                  <a key={item.title} href={item.href} className="block p-3 hover:bg-muted/60">
-                    <span className="text-sm font-semibold text-foreground">{item.title}</span>
-                    {item.description && (
-                      <span className="mt-1 block text-xs leading-5 text-muted-foreground">{item.description}</span>
-                    )}
-                    {item.items && (
-                      <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
-                        {item.items.join(" / ")}
-                      </span>
-                    )}
-                  </a>
-                ))}
+              <div
+                className={cn(
+                  "space-y-1",
+                  hasFeatures && "grid grid-cols-2 items-start gap-x-4 gap-y-2 space-y-0 xl:grid-cols-3",
+                  !hasFeatures && wide && "grid grid-cols-2 gap-1 space-y-0",
+                )}
+              >
+                {items.map((item) =>
+                  item.features?.length ? (
+                    <ProductFeatureMenu key={item.title} item={item} />
+                  ) : (
+                    <a key={item.title} href={item.href} className={cn("block p-3 hover:bg-muted/60", menuLinkClassName)}>
+                      <span className="text-sm font-semibold text-foreground">{item.title}</span>
+                      {item.description && (
+                        <span className="mt-1 block text-xs leading-5 text-muted-foreground">{item.description}</span>
+                      )}
+                    </a>
+                  ),
+                )}
               </div>
             </Popover.Panel>
           </Transition>
@@ -219,7 +279,17 @@ export default function AppHeader() {
                   >
                     <div className="px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Product</div>
                     {productNavigation.map((item) => (
-                      <a key={item.title} className="block w-full p-2 text-base hover:bg-muted/50" href={item.href}>{item.title}</a>
+                      <div key={item.title} className="pb-2">
+                        <a className="block w-full p-2 text-base font-semibold hover:bg-muted/50" href={item.href}>{item.title}</a>
+                        {item.features?.map((feature) => (
+                          <div key={feature.title} className="pl-4">
+                            <a className="block px-2 py-1 text-sm text-foreground/85 hover:bg-muted/50" href={feature.href}>{feature.title}</a>
+                            {feature.items?.map((child) => (
+                              <a key={child.title} className="block px-4 py-1 text-sm text-muted-foreground hover:bg-muted/50" href={child.href}>{child.title}</a>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
                     ))}
                     <div className="mt-3 px-2 pb-2 text-xs font-semibold uppercase text-muted-foreground">Resources</div>
                     {resourceNavigation.map((item) => (
