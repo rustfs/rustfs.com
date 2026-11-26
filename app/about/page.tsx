@@ -7,12 +7,12 @@ import RustFSLogo from "@/public/rustfs.logo.svg"
 import { CpuIcon, DatabaseIcon, GitBranchIcon, ShieldCheckIcon } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "next/link"
-import type { ComponentType } from "react"
+import type { ComponentType, ReactNode } from "react"
 
 export const metadata: Metadata = {
   alternates: { canonical: "about/" },
   title: "About RustFS | Next-Generation Distributed Object Storage for AI",
-  description: "Learn about RustFS, an Apache 2.0 open-source distributed object storage system built in Rust. Powering AI data centers with native RDMA and DPU acceleration.",
+  description: "Learn about RustFS, an Apache 2.0 open-source distributed object storage system built in Rust for S3-compatible and AI data center workloads.",
   keywords: "about RustFS, RustFS project, open source object storage, distributed object storage, Rust infrastructure, NVIDIA Inception, RDMA storage, DPU hardware acceleration",
 };
 
@@ -61,7 +61,7 @@ function ValueCard({
 }: {
   icon: ComponentType<{ className?: string }>;
   title: string;
-  description: string;
+  description: ReactNode;
 }) {
   return (
     <article className="border border-border bg-card p-6">
@@ -161,7 +161,14 @@ export default async function AboutPage() {
             <ValueCard
               icon={CpuIcon}
               title="AI infrastructure path"
-              description="Native RDMA, DPU acceleration, and hardware encryption are core directions for future data center workloads."
+              description={
+                <>
+                  <Link href="/product/rdma/" className={docLinkClassName}>
+                    S3 Over RDMA
+                  </Link>{" "}
+                  is an optional enterprise-kernel path for object bytes and stays off by default. DPU acceleration and hardware encryption remain separate directions for data center workloads.
+                </>
+              }
             />
             <ValueCard
               icon={GitBranchIcon}

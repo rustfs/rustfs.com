@@ -35,6 +35,16 @@ export const productNavigation: NavigationItem[] = [
     ],
   },
   {
+    title: "S3 Over RDMA",
+    href: "/product/rdma",
+    features: [
+      { title: "S3 HTTPS and RDMA", href: "/product/rdma#s3-over-rdma" },
+      { title: "Last-hop transports", href: "/product/rdma#last-hop-transports" },
+      { title: "I/O flow", href: "/product/rdma#io-flow" },
+      { title: "Laboratory results", href: "/product/rdma#laboratory-performance" },
+    ],
+  },
+  {
     title: "Data Management",
     href: "/product/data-management",
     features: [
@@ -119,6 +129,7 @@ export const footerNavigation = [
       { title: "S3 Tables", href: "/product/data-management#s3-tables" },
       { title: "On-demand migration", href: "/product/data-management#on-demand-migration" },
       { title: "Multi-protocol access", href: "/product/multiple-protocol-access" },
+      { title: "S3 Over RDMA", href: "/product/rdma" },
       { title: "Data Management", href: "/product/data-management" },
       { title: "High Availability & Scale", href: "/product/high-availability-scale" },
       { title: "Operations & observability", href: "/product/operational-observability" },
