@@ -14,6 +14,7 @@ RustFS supports distributed deployment, erasure coding, data management, identit
 
 - [Product overview](https://rustfs.com/): Overview of RustFS and its primary use cases.
 - [Multiple protocol access](https://rustfs.com/product/multiple-protocol-access/): S3, WebDAV, Swift, FTP(S), and MCP access.
+- [S3 Over RDMA](https://rustfs.com/product/rdma/): Optional one-sided RDMA for object bytes. S3 HTTPS keeps authentication, authorization, and object selection. NIXL/UCX and cuObject are enterprise-kernel transports and stay off by default.
 - [Data management](https://rustfs.com/product/data-management/): Buckets, lifecycle rules, Object Lock, versioning, multipart uploads, and S3 Tables.
 - [High availability and scale](https://rustfs.com/product/high-availability-scale/): Distributed topology, erasure coding, pool orchestration, rebalancing, and self-healing.
 - [Replication](https://rustfs.com/product/replication/): Site replication across independent RustFS deployments and directional bucket replication with sync or async modes, prefix/tag filters, and multi-target copies. Plan DNS, traffic routing, and application failover separately.

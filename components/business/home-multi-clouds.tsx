@@ -11,7 +11,7 @@ const stories = [
     token: "rdma+dpu",
     label: "AI infrastructure",
     description:
-      "RustFS has joined the NVIDIA Inception Program. Native RDMA support is in progress, along with offload of erasure coding and encryption to DPUs.",
+      "RustFS has joined the NVIDIA Inception Program. S3 Over RDMA is an optional enterprise-kernel path and stays off by default. DPU offload of erasure coding and encryption is separate from that path.",
     href: "/blog/big-news-rustfs-joins-the-nvidia-inception-program",
     linkText: "Read the story",
   },
